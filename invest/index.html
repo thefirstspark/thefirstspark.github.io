@@ -584,7 +584,7 @@
             formData.append('_subject', 'NEW INVESTMENT INTENT - The First Spark');
             formData.append('_template', 'table');
             
-            // Send to Google Sheet
+            // Send to Google Sheet via iframe (bypasses CORS)
             const sheetData = {
                 investorName: formData.get('investorName'),
                 investorEmail: formData.get('investorEmail'),
@@ -592,13 +592,13 @@
                 investorAddress: formData.get('investorAddress'),
                 investmentAmount: formData.get('investmentAmount'),
                 signature: hasSignature,
-                termsAgreed: formData.get('termsAgreed') === 'on'
+                termsAgreed: document.getElementById('termsAgree').checked
             };
-            fetch('https://script.google.com/macros/s/AKfycbzH8y1Ff0rsGX8eSE24HDmWnftby-Lf8E59LvNc6YrenUc4m8qtgG9sWbwiVVuBZ2ew/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                body: JSON.stringify(sheetData)
-            }).catch(() => {});
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = 'https://script.google.com/macros/s/AKfycbzH8y1Ff0rsGX8eSE24HDmWnftby-Lf8E59LvNc6YrenUc4m8qtgG9sWbwiVVuBZ2ew/exec?data=' + encodeURIComponent(JSON.stringify(sheetData));
+            document.body.appendChild(iframe);
+            setTimeout(() => iframe.remove(), 5000);
             
             try {
                 const response = await fetch('https://formsubmit.co/ajax/kjpthefirstspark@gmail.com', { method: 'POST', body: formData });
