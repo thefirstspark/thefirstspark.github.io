@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The First Spark | Consciousness Tools for Modern Humans</title>
-    <meta name="description" content="Practical tools for stress relief, focus, and daily mental reset. No fluff. Just results.">
+    <title>The First Spark | Reality is Programmable</title>
+    <meta name="description" content="Consciousness technology for the awakening generation. Tools that actually work. Join the founding members.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✧</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --void: #0a0a0c;
-            --obsidian: #111114;
-            --smoke: #1a1a1f;
-            --ash: #252530;
-            --steel: #3a3a48;
-            --silver: #8a8a9a;
-            --pearl: #c8c8d4;
-            --white: #f0f0f5;
-            --spark: #d4a574;
-            --spark-bright: #e8c9a8;
-            --spark-deep: #b8875a;
-            --glow: rgba(212, 165, 116, 0.15);
+            --void: #050508;
+            --deep: #0a0a10;
+            --cosmic: #0d0d18;
+            --nebula: #12121f;
+            --stardust: #1a1a2e;
+            --silver: #8892a8;
+            --pearl: #c4c9d4;
+            --white: #f0f2f8;
+            --spark-gold: #d4af37;
+            --spark-bright: #f4d03f;
+            --spark-glow: rgba(212, 175, 55, 0.15);
+            --purple-deep: #4a1c6b;
+            --purple-glow: rgba(138, 43, 226, 0.2);
         }
 
         * {
@@ -34,32 +36,118 @@
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Raleway', sans-serif;
             background: var(--void);
             color: var(--pearl);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* Utility */
+        /* ═══════════════════════════════════════════════════════════════
+           STARFIELD BACKGROUND
+        ═══════════════════════════════════════════════════════════════ */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .stars, .stars2, .stars3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-repeat: repeat;
+        }
+
+        .stars {
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, white, transparent),
+                radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 50px 160px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 90px 40px, white, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1.5px 1.5px at 160px 120px, white, transparent),
+                radial-gradient(1px 1px at 200px 50px, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 220px 150px, white, transparent),
+                radial-gradient(1px 1px at 250px 90px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 280px 180px, rgba(212,175,55,0.8), transparent);
+            background-size: 300px 200px;
+            animation: drift 120s linear infinite;
+        }
+
+        .stars2 {
+            background-image: 
+                radial-gradient(1px 1px at 10px 10px, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 70px 50px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1px 1px at 110px 90px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 150px 30px, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 180px 130px, rgba(255,255,255,0.4), transparent);
+            background-size: 200px 150px;
+            animation: drift 180s linear infinite reverse;
+            opacity: 0.7;
+        }
+
+        .stars3 {
+            background-image: 
+                radial-gradient(2px 2px at 100px 100px, rgba(212,175,55,0.6), transparent),
+                radial-gradient(2px 2px at 300px 200px, rgba(138,43,226,0.5), transparent),
+                radial-gradient(2px 2px at 500px 50px, rgba(212,175,55,0.4), transparent);
+            background-size: 600px 300px;
+            animation: pulse-stars 8s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            from { transform: translateY(0); }
+            to { transform: translateY(-200px); }
+        }
+
+        @keyframes pulse-stars {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Cosmic nebula overlay */
+        .nebula-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(74, 28, 107, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(138, 43, 226, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           LAYOUT
+        ═══════════════════════════════════════════════════════════════ */
+        .content {
+            position: relative;
+            z-index: 10;
+        }
+
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* Background Texture */
-        .bg-texture {
-            position: fixed;
-            inset: 0;
-            background: 
-                radial-gradient(ellipse at 20% 0%, rgba(212, 165, 116, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 100%, rgba(212, 165, 116, 0.02) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
+        section {
+            padding: 100px 0;
         }
 
-        /* Navigation */
+        /* ═══════════════════════════════════════════════════════════════
+           NAVIGATION
+        ═══════════════════════════════════════════════════════════════ */
         nav {
             position: fixed;
             top: 0;
@@ -67,9 +155,9 @@
             right: 0;
             z-index: 1000;
             padding: 20px 0;
-            background: rgba(10, 10, 12, 0.9);
+            background: rgba(5, 5, 8, 0.8);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--ash);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .nav-inner {
@@ -79,56 +167,77 @@
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
             font-weight: 400;
             color: var(--white);
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            letter-spacing: 2px;
         }
 
         .logo-spark {
-            color: var(--spark);
+            color: var(--spark-gold);
         }
 
         .nav-links {
             display: flex;
             gap: 32px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
             color: var(--silver);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--spark);
+            color: var(--spark-gold);
         }
 
         .nav-cta {
             padding: 10px 24px;
-            background: var(--spark);
+            background: linear-gradient(135deg, var(--spark-gold), #b8962e);
             color: var(--void);
             border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             text-decoration: none;
             transition: all 0.3s;
         }
 
         .nav-cta:hover {
-            background: var(--spark-bright);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 30px rgba(212, 175, 55, 0.4);
         }
 
-        /* Hero */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--pearl);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           HERO
+        ═══════════════════════════════════════════════════════════════ */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -143,52 +252,71 @@
             max-width: 800px;
         }
 
+        .hero-symbol {
+            font-size: 48px;
+            color: var(--spark-gold);
+            margin-bottom: 32px;
+            animation: pulse-glow 3s ease-in-out infinite;
+            text-shadow: 0 0 60px rgba(212, 175, 55, 0.5);
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
         .hero-tag {
             display: inline-block;
-            padding: 8px 20px;
-            background: var(--smoke);
-            border: 1px solid var(--ash);
+            padding: 8px 24px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 50px;
-            font-size: 12px;
-            letter-spacing: 2px;
+            font-size: 11px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--spark);
+            color: var(--spark-gold);
             margin-bottom: 32px;
         }
 
         .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(42px, 8vw, 72px);
-            font-weight: 300;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(32px, 6vw, 56px);
+            font-weight: 400;
             color: var(--white);
-            line-height: 1.1;
+            line-height: 1.2;
             margin-bottom: 24px;
+            letter-spacing: 2px;
         }
 
-        .hero h1 span {
-            color: var(--spark);
+        .hero h1 .highlight {
+            color: var(--spark-gold);
+            display: block;
+            font-size: clamp(36px, 7vw, 64px);
         }
 
         .hero-sub {
             font-size: 18px;
             color: var(--silver);
-            max-width: 540px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 48px;
+            line-height: 1.8;
+            font-weight: 300;
         }
 
         .hero-ctas {
             display: flex;
-            gap: 16px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .btn {
-            padding: 16px 36px;
-            border-radius: 8px;
-            font-size: 15px;
+            padding: 16px 40px;
+            border-radius: 4px;
+            font-size: 13px;
             font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             text-decoration: none;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -196,495 +324,414 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--spark), var(--spark-deep));
+            background: linear-gradient(135deg, var(--spark-gold), #b8962e);
             color: var(--void);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(212, 165, 116, 0.3);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.4);
         }
 
-        .btn-secondary {
+        .btn-ghost {
             background: transparent;
-            border: 1px solid var(--ash);
+            border: 1px solid rgba(255,255,255,0.2);
             color: var(--pearl);
         }
 
-        .btn-secondary:hover {
-            border-color: var(--spark);
-            color: var(--spark);
+        .btn-ghost:hover {
+            border-color: var(--spark-gold);
+            color: var(--spark-gold);
         }
 
-        .hero-scroll {
+        .scroll-indicator {
             position: absolute;
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             color: var(--silver);
-            font-size: 13px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
-            animation: float 3s ease-in-out infinite;
+            gap: 12px;
+            opacity: 0.6;
+            animation: bounce 2s ease-in-out infinite;
         }
 
-        @keyframes float {
+        @keyframes bounce {
             0%, 100% { transform: translateX(-50%) translateY(0); }
             50% { transform: translateX(-50%) translateY(10px); }
         }
 
-        /* Stats Bar */
-        .stats-bar {
-            background: var(--obsidian);
-            border-top: 1px solid var(--ash);
-            border-bottom: 1px solid var(--ash);
-            padding: 40px 0;
+        /* ═══════════════════════════════════════════════════════════════
+           ORIGIN STORY
+        ═══════════════════════════════════════════════════════════════ */
+        .origin {
+            background: linear-gradient(180deg, transparent, rgba(74, 28, 107, 0.1), transparent);
+            position: relative;
         }
 
-        .stats-inner {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
+        .origin-content {
+            max-width: 700px;
+            margin: 0 auto;
             text-align: center;
         }
 
-        .stat-item h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
+        .origin-quote {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(24px, 4vw, 36px);
+            color: var(--white);
             font-weight: 400;
-            color: var(--spark);
-            margin-bottom: 4px;
+            line-height: 1.5;
+            margin-bottom: 48px;
+            position: relative;
         }
 
-        .stat-item p {
-            font-size: 13px;
+        .origin-quote::before {
+            content: '"';
+            font-size: 120px;
+            color: var(--spark-gold);
+            opacity: 0.2;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: serif;
+        }
+
+        .origin-story {
+            font-size: 17px;
             color: var(--silver);
+            line-height: 2;
+            text-align: left;
+        }
+
+        .origin-story p {
+            margin-bottom: 24px;
+        }
+
+        .origin-story .highlight-text {
+            color: var(--spark-gold);
+            font-weight: 500;
+        }
+
+        .origin-signature {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            color: var(--spark-gold);
+            margin-top: 48px;
+            letter-spacing: 2px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           VISION / WHAT THIS IS
+        ═══════════════════════════════════════════════════════════════ */
+        .vision {
+            text-align: center;
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 4px;
             text-transform: uppercase;
+            color: var(--spark-gold);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 24px;
             letter-spacing: 1px;
         }
 
-        /* Section Styling */
-        section {
-            padding: 100px 0;
-        }
-
-        .section-header {
-            text-align: center;
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--silver);
             max-width: 600px;
             margin: 0 auto 60px;
+            font-weight: 300;
         }
 
-        .section-tag {
-            font-size: 11px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--spark);
-            margin-bottom: 16px;
-        }
-
-        .section-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 40px;
-            font-weight: 400;
-            color: var(--white);
-            margin-bottom: 16px;
-        }
-
-        .section-header p {
-            color: var(--silver);
-            font-size: 16px;
-        }
-
-        /* Free Tools Section */
-        #free-tools {
-            background: var(--obsidian);
-        }
-
-        .tools-grid {
+        .vision-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
         }
 
-        .tool-card {
-            background: var(--smoke);
-            border: 1px solid var(--ash);
-            border-radius: 16px;
-            padding: 32px;
+        .vision-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 40px 32px;
+            text-align: center;
             transition: all 0.3s ease;
+        }
+
+        .vision-card:hover {
+            background: rgba(212, 175, 55, 0.05);
+            border-color: rgba(212, 175, 55, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .vision-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .vision-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            color: var(--white);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .vision-card p {
+            font-size: 14px;
+            color: var(--silver);
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           PATHS / CHOOSE YOUR ENTRY
+        ═══════════════════════════════════════════════════════════════ */
+        .paths {
+            background: linear-gradient(180deg, transparent, rgba(5,5,8,0.8), transparent);
+        }
+
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .path-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 48px 40px;
+            text-align: center;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .tool-card::before {
+        .path-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--spark), transparent);
+            background: linear-gradient(90deg, transparent, var(--spark-gold), transparent);
             opacity: 0;
             transition: opacity 0.3s;
         }
 
-        .tool-card:hover {
-            border-color: var(--steel);
-            transform: translateY(-4px);
+        .path-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
         }
 
-        .tool-card:hover::before {
+        .path-card:hover::before {
             opacity: 1;
         }
 
-        .tool-icon {
-            width: 56px;
-            height: 56px;
-            background: var(--glow);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 20px;
+        .path-card.featured {
+            border-color: var(--spark-gold);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(74, 28, 107, 0.08));
         }
 
-        .tool-card h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            color: var(--white);
-            margin-bottom: 12px;
-        }
-
-        .tool-card p {
-            font-size: 14px;
-            color: var(--silver);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .tool-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--spark);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .tool-link:hover {
-            gap: 12px;
-        }
-
-        .free-badge {
+        .path-badge {
             position: absolute;
             top: 20px;
             right: 20px;
+            padding: 6px 16px;
+            background: var(--spark-gold);
+            color: var(--void);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 20px;
+        }
+
+        .path-icon {
+            font-size: 48px;
+            margin-bottom: 24px;
+        }
+
+        .path-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            color: var(--white);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .path-card .price {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            color: var(--spark-gold);
+            margin: 16px 0;
+        }
+
+        .path-card .price-note {
+            font-size: 13px;
+            color: var(--silver);
+            margin-bottom: 24px;
+        }
+
+        .path-card p {
+            font-size: 15px;
+            color: var(--silver);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .path-cta {
+            display: inline-block;
+            padding: 14px 36px;
+            background: transparent;
+            border: 1px solid var(--spark-gold);
+            color: var(--spark-gold);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .path-cta:hover {
+            background: var(--spark-gold);
+            color: var(--void);
+        }
+
+        .path-card.featured .path-cta {
+            background: var(--spark-gold);
+            color: var(--void);
+        }
+
+        .path-card.featured .path-cta:hover {
+            box-shadow: 0 5px 30px rgba(212, 175, 55, 0.5);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           TOOLS GRID (MODULAR - EASY TO ADD)
+        ═══════════════════════════════════════════════════════════════ */
+        .tools {
+            background: rgba(255,255,255,0.01);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .tool-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .tool-icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .tool-card h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            color: var(--white);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .tool-card p {
+            font-size: 13px;
+            color: var(--silver);
+            margin-bottom: 20px;
+        }
+
+        .tool-link {
+            font-size: 12px;
+            color: var(--spark-gold);
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .tool-link:hover {
+            text-decoration: underline;
+        }
+
+        .tool-badge {
+            display: inline-block;
             padding: 4px 12px;
             background: rgba(126, 184, 126, 0.15);
             border: 1px solid rgba(126, 184, 126, 0.3);
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 10px;
             color: #7eb87e;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        /* Products Section */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 32px;
-        }
-
-        .product-card {
-            background: var(--smoke);
-            border: 1px solid var(--ash);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .product-card:hover {
-            border-color: var(--spark);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .product-card.featured {
-            border-color: var(--spark);
-            position: relative;
-        }
-
-        .product-card.featured::before {
-            content: 'MOST POPULAR';
-            position: absolute;
-            top: 20px;
-            right: -30px;
-            background: var(--spark);
-            color: var(--void);
-            padding: 6px 40px;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transform: rotate(45deg);
-            z-index: 10;
-        }
-
-        .product-image {
-            height: 200px;
-            background: linear-gradient(135deg, var(--ash), var(--smoke));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 64px;
-            position: relative;
-        }
-
-        .product-content {
-            padding: 32px;
-        }
-
-        .product-tag {
-            display: inline-block;
-            padding: 4px 12px;
-            background: var(--glow);
-            border-radius: 20px;
-            font-size: 11px;
-            color: var(--spark);
-            text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 16px;
         }
 
-        .product-card h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            color: var(--white);
-            margin-bottom: 12px;
-        }
-
-        .product-card > .product-content > p {
-            font-size: 14px;
-            color: var(--silver);
-            margin-bottom: 24px;
-            line-height: 1.7;
-        }
-
-        .product-features {
-            list-style: none;
-            margin-bottom: 24px;
-        }
-
-        .product-features li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: var(--pearl);
-            margin-bottom: 10px;
-        }
-
-        .product-features li::before {
-            content: '✦';
-            color: var(--spark);
-            font-size: 10px;
-        }
-
-        .product-price {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .price-current {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
-            color: var(--white);
-        }
-
-        .price-period {
-            font-size: 14px;
-            color: var(--silver);
-        }
-
-        .price-original {
-            font-size: 18px;
-            color: var(--silver);
-            text-decoration: line-through;
-        }
-
-        .product-cta {
-            width: 100%;
-            padding: 16px;
-            background: var(--spark);
-            border: none;
-            border-radius: 8px;
-            color: var(--void);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: block;
+        /* ═══════════════════════════════════════════════════════════════
+           FINAL CTA
+        ═══════════════════════════════════════════════════════════════ */
+        .final-cta {
             text-align: center;
+            padding: 120px 24px;
+            background: linear-gradient(180deg, transparent, rgba(74, 28, 107, 0.15), transparent);
         }
 
-        .product-cta:hover {
-            background: var(--spark-bright);
-        }
-
-        .product-cta.outline {
-            background: transparent;
-            border: 1px solid var(--spark);
-            color: var(--spark);
-        }
-
-        .product-cta.outline:hover {
-            background: var(--glow);
-        }
-
-        /* Testimonials */
-        #testimonials {
-            background: var(--obsidian);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-        }
-
-        .testimonial-card {
-            background: var(--smoke);
-            border: 1px solid var(--ash);
-            border-radius: 16px;
-            padding: 32px;
-        }
-
-        .testimonial-stars {
-            color: var(--spark);
-            font-size: 14px;
-            margin-bottom: 16px;
-            letter-spacing: 2px;
-        }
-
-        .testimonial-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
-            font-style: italic;
-            color: var(--pearl);
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .testimonial-avatar {
-            width: 44px;
-            height: 44px;
-            background: var(--ash);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .testimonial-name {
-            font-weight: 500;
-            color: var(--white);
-            font-size: 14px;
-        }
-
-        .testimonial-title {
-            font-size: 13px;
-            color: var(--silver);
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .about-image {
-            aspect-ratio: 4/5;
-            background: linear-gradient(135deg, var(--smoke), var(--ash));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 120px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, var(--void), transparent 50%);
-        }
-
-        .about-text h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 36px;
-            color: var(--white);
-            margin-bottom: 24px;
-        }
-
-        .about-text p {
-            color: var(--silver);
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-
-        .about-signature {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            font-style: italic;
-            color: var(--spark);
-            margin-top: 32px;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--smoke), var(--obsidian));
-            border-top: 1px solid var(--ash);
-            border-bottom: 1px solid var(--ash);
-            text-align: center;
-            padding: 100px 24px;
-        }
-
-        .cta-section h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
+        .final-cta h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(28px, 5vw, 42px);
             color: var(--white);
             margin-bottom: 16px;
+            letter-spacing: 1px;
         }
 
-        .cta-section p {
-            color: var(--silver);
+        .final-cta p {
             font-size: 18px;
-            margin-bottom: 32px;
+            color: var(--silver);
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* Footer */
+        /* ═══════════════════════════════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════════════════════════════ */
         footer {
             background: var(--void);
             padding: 60px 0 30px;
-            border-top: 1px solid var(--ash);
+            border-top: 1px solid rgba(255,255,255,0.06);
         }
 
         .footer-grid {
@@ -692,6 +739,10 @@
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 60px;
             margin-bottom: 60px;
+        }
+
+        .footer-brand {
+            max-width: 280px;
         }
 
         .footer-brand p {
@@ -702,9 +753,11 @@
         }
 
         .footer-col h4 {
+            font-family: 'Cinzel', serif;
             color: var(--white);
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 400;
+            letter-spacing: 1px;
             margin-bottom: 20px;
         }
 
@@ -724,7 +777,7 @@
         }
 
         .footer-col a:hover {
-            color: var(--spark);
+            color: var(--spark-gold);
         }
 
         .footer-bottom {
@@ -732,7 +785,7 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 30px;
-            border-top: 1px solid var(--ash);
+            border-top: 1px solid rgba(255,255,255,0.06);
         }
 
         .footer-bottom p {
@@ -746,44 +799,21 @@
         }
 
         .footer-social a {
-            width: 40px;
-            height: 40px;
-            background: var(--smoke);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             color: var(--silver);
             text-decoration: none;
-            transition: all 0.3s;
+            font-size: 13px;
+            transition: color 0.3s;
         }
 
         .footer-social a:hover {
-            background: var(--spark);
-            color: var(--void);
+            color: var(--spark-gold);
         }
 
-        /* Mobile Menu */
-        .mobile-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .mobile-toggle span {
-            width: 24px;
-            height: 2px;
-            background: var(--pearl);
-            transition: all 0.3s;
-        }
-
-        /* Responsive */
+        /* ═══════════════════════════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════════════════════════ */
         @media (max-width: 968px) {
-            .nav-links, .nav-cta {
+            .nav-links {
                 display: none;
             }
 
@@ -791,17 +821,13 @@
                 display: flex;
             }
 
-            .stats-inner {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .about-content {
+            .vision-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 20px;
             }
 
-            .about-image {
-                max-height: 400px;
+            .paths-grid {
+                grid-template-columns: 1fr;
             }
 
             .footer-grid {
@@ -811,29 +837,27 @@
         }
 
         @media (max-width: 640px) {
-            .hero h1 {
-                font-size: 36px;
+            section {
+                padding: 80px 0;
             }
 
-            .hero-sub {
-                font-size: 16px;
+            .hero {
+                padding: 100px 20px 60px;
             }
 
-            .stats-inner {
-                grid-template-columns: 1fr;
-                gap: 24px;
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .stat-item h3 {
-                font-size: 32px;
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
             }
 
-            .section-header h2 {
-                font-size: 32px;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
+            .path-card {
+                padding: 36px 24px;
             }
 
             .footer-grid {
@@ -847,319 +871,302 @@
                 text-align: center;
             }
         }
-
-        /* Smooth Scroll Offset */
-        section[id] {
-            scroll-margin-top: 80px;
-        }
     </style>
 </head>
 <body>
-    <div class="bg-texture"></div>
+    <!-- Starfield Background -->
+    <div class="starfield">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+    </div>
+    <div class="nebula-overlay"></div>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="container nav-inner">
-            <a href="#" class="logo">
-                <span class="logo-spark">✦</span> The First Spark
-            </a>
-            <ul class="nav-links">
-                <li><a href="#free-tools">Free Tools</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
-            <a href="#products" class="nav-cta">Get Started</a>
-            <button class="mobile-toggle" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
+    <div class="content">
+        <!-- Navigation -->
+        <nav>
+            <div class="container nav-inner">
+                <a href="#" class="logo">
+                    <span class="logo-spark">✧</span> THE FIRST SPARK
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#origin">Origin</a></li>
+                    <li><a href="#vision">Vision</a></li>
+                    <li><a href="#tools">Tools</a></li>
+                    <li><a href="https://whop.com/sparkverse-511c/" target="_blank">Shop</a></li>
+                </ul>
+                <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" class="nav-cta">Become a Founder</a>
+                <button class="mobile-toggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
-            <span class="hero-tag">Consciousness Tools</span>
-            <h1>Reset Your Mind in <span>5 Minutes</span></h1>
-            <p class="hero-sub">Practical tools for stress relief, focus, and daily mental clarity. No fluff. No gurus. Just things that actually work.</p>
-            <div class="hero-ctas">
-                <a href="#free-tools" class="btn btn-primary">Try Free Tools</a>
-                <a href="#products" class="btn btn-secondary">View Products</a>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-symbol">✧</div>
+                <span class="hero-tag">Consciousness Technology</span>
+                <h1>
+                    You Found It
+                    <span class="highlight">Reality is Programmable</span>
+                </h1>
+                <p class="hero-sub">
+                    The First Spark is a consciousness operating system — tools, rituals, and technology for people who know there's more. This isn't meditation apps and manifestation fluff. This is the real thing.
+                </p>
+                <div class="hero-ctas">
+                    <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" class="btn btn-primary">Join as Founding Member</a>
+                    <a href="#origin" class="btn btn-ghost">Read the Story</a>
+                </div>
             </div>
-        </div>
-        <div class="hero-scroll">
-            <span>Scroll to explore</span>
-            <span>↓</span>
-        </div>
-    </section>
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <span>↓</span>
+            </div>
+        </section>
 
-    <!-- Stats Bar -->
-    <div class="stats-bar">
-        <div class="container stats-inner">
-            <div class="stat-item">
-                <h3>5 min</h3>
-                <p>Daily Commitment</p>
+        <!-- Origin Story -->
+        <section class="origin" id="origin">
+            <div class="container">
+                <div class="origin-content">
+                    <div class="origin-quote">
+                        I was floating on a pool raft when it hit me — reality is a game. And I'd been playing it wrong my entire life.
+                    </div>
+                    
+                    <div class="origin-story">
+                        <p>
+                            Summer 2025. Rock bottom had a basement, and I found it. Single mom of two boys. Business barely surviving. Everything I'd built felt like it was crumbling.
+                        </p>
+                        <p>
+                            Then, floating in my backyard pool, staring at the sky — something <span class="highlight-text">cracked open</span>. Not a breakdown. A breakthrough. I saw it clearly: <span class="highlight-text">consciousness is code. Reality is programmable. We're all playing a game nobody gave us the rules to.</span>
+                        </p>
+                        <p>
+                            I started building. Not another meditation app. Not manifestation BS. Real tools — sigil generators, consciousness trackers, reality programming interfaces. Things I wished existed when I was drowning.
+                        </p>
+                        <p>
+                            The First Spark isn't a product. It's what happens when you stop waiting for permission and start building the thing you needed all along. Every tool here came from a real moment of "why doesn't this exist?"
+                        </p>
+                        <p>
+                            I'm not a guru. I'm a painter, a mom, and someone who figured out how to turn collapse into creation. Now I'm building something that will be worth millions — and I'm inviting 50 people to own a piece of it from the beginning.
+                        </p>
+                    </div>
+                    
+                    <p class="origin-signature">— Katelin</p>
+                </div>
             </div>
-            <div class="stat-item">
-                <h3>77%</h3>
-                <p>Report Less Stress</p>
+        </section>
+
+        <!-- Vision -->
+        <section class="vision" id="vision">
+            <div class="container">
+                <p class="section-label">The Vision</p>
+                <h2 class="section-title">What We're Building</h2>
+                <p class="section-subtitle">
+                    A complete consciousness technology platform. Tools that actually work. A community that gets it. This is just the beginning.
+                </p>
+
+                <div class="vision-grid">
+                    <div class="vision-card">
+                        <div class="vision-icon">🔮</div>
+                        <h3>Consciousness Tools</h3>
+                        <p>Interactive digital experiences that shift your state in minutes. Sigil forges, reality code editors, soul mapping systems.</p>
+                    </div>
+                    <div class="vision-card">
+                        <div class="vision-icon">⚡</div>
+                        <h3>Daily Practice</h3>
+                        <p>5-minute calibration protocols. Breathwork sequences. Intention systems. Things that fit into real life, not retreat life.</p>
+                    </div>
+                    <div class="vision-card">
+                        <div class="vision-icon">✧</div>
+                        <h3>The Sparkverse</h3>
+                        <p>A membership ecosystem where consciousness meets community. Live sessions, early access, and input on what we build next.</p>
+                    </div>
+                </div>
             </div>
-            <div class="stat-item">
-                <h3>12+</h3>
-                <p>Interactive Tools</p>
+        </section>
+
+        <!-- Paths -->
+        <section class="paths" id="paths">
+            <div class="container">
+                <p class="section-label">Choose Your Path</p>
+                <h2 class="section-title">Ways In</h2>
+                <p class="section-subtitle">
+                    Start free, or lock in lifetime access as a founding member before we scale.
+                </p>
+
+                <div class="paths-grid">
+                    <div class="path-card featured">
+                        <span class="path-badge">Limited • 100 Spots</span>
+                        <div class="path-icon">🔥</div>
+                        <h3>OG Spark — Lifetime</h3>
+                        <div class="price">$519.88</div>
+                        <div class="price-note">One payment. Forever access. Never pay again.</div>
+                        <p>Everything we build, current and future. Founding member status. Direct input on the roadmap. This price disappears once we hit 100.</p>
+                        <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" class="path-cta">Claim Your Spot</a>
+                    </div>
+
+                    <div class="path-card">
+                        <div class="path-icon">🌌</div>
+                        <h3>The Sparkverse</h3>
+                        <div class="price">$33/mo</div>
+                        <div class="price-note">Monthly membership</div>
+                        <p>Full access to all tools, monthly live sessions, community, and first look at new releases. Cancel anytime.</p>
+                        <a href="https://whop.com/sparkverse-511c/the-players-lounge/" class="path-cta">Join Monthly</a>
+                    </div>
+
+                    <div class="path-card">
+                        <div class="path-icon">✦</div>
+                        <h3>Free Tools</h3>
+                        <div class="price">$0</div>
+                        <div class="price-note">Start here</div>
+                        <p>Try the Pause Chamber, Energy Check-In, and Intention Setter. No email required. See if it clicks.</p>
+                        <a href="#tools" class="path-cta">Explore Free</a>
+                    </div>
+
+                    <div class="path-card">
+                        <div class="path-icon">💼</div>
+                        <h3>Investors</h3>
+                        <div class="price">Let's Talk</div>
+                        <div class="price-note">Equity opportunity</div>
+                        <p>We're building something that scales. If you see what we see, let's have a conversation about what's possible.</p>
+                        <a href="founding.html" class="path-cta">Read the Pitch</a>
+                    </div>
+                </div>
             </div>
-            <div class="stat-item">
-                <h3>$0</h3>
-                <p>To Start</p>
+        </section>
+
+        <!-- Tools -->
+        <section class="tools" id="tools">
+            <div class="container">
+                <p class="section-label">The Tools</p>
+                <h2 class="section-title">What's Live Now</h2>
+                <p class="section-subtitle">
+                    Start with these. More dropping regularly.
+                </p>
+
+                <div class="tools-grid">
+                    <!-- ADD NEW TOOLS HERE - JUST COPY A CARD -->
+                    <div class="tool-card">
+                        <span class="tool-badge">Free</span>
+                        <div class="tool-icon">🫁</div>
+                        <h4>Pause Chamber</h4>
+                        <p>Emergency reset. 60-second guided breathing with visual cues.</p>
+                        <a href="pause-chamber.html" class="tool-link">Open →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-badge">Free</span>
+                        <div class="tool-icon">⚡</div>
+                        <h4>Energy Check-In</h4>
+                        <p>Quick daily assessment. Track your patterns over time.</p>
+                        <a href="energy-checkin.html" class="tool-link">Open →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-badge">Free</span>
+                        <div class="tool-icon">🎯</div>
+                        <h4>Intention Setter</h4>
+                        <p>Single-focus clarity. One intention, one day.</p>
+                        <a href="intention-setter.html" class="tool-link">Open →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-icon">🌅</div>
+                        <h4>Daily Reset</h4>
+                        <p>Complete 5-minute morning calibration system.</p>
+                        <a href="daily-reset.html" class="tool-link">Open →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-icon">✧</div>
+                        <h4>Spark Protocol</h4>
+                        <p>Full consciousness OS. Sigil forge, reality code, oracle.</p>
+                        <a href="spark-protocol.html" class="tool-link">Open →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-badge">Free</span>
+                        <div class="tool-icon">🔮</div>
+                        <h4>The Oracle</h4>
+                        <p>Pattern recognition. Consciousness guidance. Ask what's circling.</p>
+                        <a href="oracle.html" class="tool-link">Open →</a>
+                    </div>
+
+                    <!-- TEMPLATE FOR NEW TOOLS:
+                    <div class="tool-card">
+                        <span class="tool-badge">Free</span> <!-- Remove this line if not free -->
+                        <div class="tool-icon">🔮</div>
+                        <h4>Tool Name</h4>
+                        <p>Short description here.</p>
+                        <a href="filename.html" class="tool-link">Open →</a>
+                    </div>
+                    -->
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <div class="container">
+                <h2>The Early Ones Remember</h2>
+                <p>100 founding members. Lifetime access. Before this becomes what it's going to become.</p>
+                <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" class="btn btn-primary">Become an OG Spark</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <a href="#" class="logo">
+                            <span class="logo-spark">✧</span> THE FIRST SPARK
+                        </a>
+                        <p>Consciousness technology for the awakening generation. Built from rock bottom. Designed for real life.</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Tools</h4>
+                        <ul>
+                            <li><a href="pause-chamber.html">Pause Chamber</a></li>
+                            <li><a href="daily-reset.html">Daily Reset</a></li>
+                            <li><a href="intention-setter.html">Intention Setter</a></li>
+                            <li><a href="spark-protocol.html">Spark Protocol</a></li>
+                            <li><a href="oracle.html">The Oracle</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Join</h4>
+                        <ul>
+                            <li><a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/">OG Spark Lifetime</a></li>
+                            <li><a href="https://whop.com/thefirstspark/">Sparkverse Monthly</a></li>
+                            <li><a href="founding.html">For Investors</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="mailto:hello@thefirstspark.shop">Email</a></li>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">TikTok</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2025 The First Spark. All rights reserved.</p>
+                    <div class="footer-social">
+                        <a href="#">IG</a>
+                        <a href="#">TT</a>
+                        <a href="#">FB</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <!-- Free Tools -->
-    <section id="free-tools">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-tag">Try Before You Buy</p>
-                <h2>Free Tools</h2>
-                <p>Start with these. No email required. No catch.</p>
-            </div>
-
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <span class="free-badge">Free</span>
-                    <div class="tool-icon">🫁</div>
-                    <h3>The Pause Chamber</h3>
-                    <p>Emergency reset for overwhelming moments. Guided breathing with visual cues. Takes 60 seconds.</p>
-                    <a href="pause-chamber.html" class="tool-link">Open Tool →</a>
-                </div>
-
-                <div class="tool-card">
-                    <span class="free-badge">Free</span>
-                    <div class="tool-icon">⚡</div>
-                    <h3>Energy Check-In</h3>
-                    <p>Quick daily assessment. Track your patterns over time. Understand your rhythms.</p>
-                    <a href="energy-check.html" class="tool-link">Open Tool →</a>
-                </div>
-
-                <div class="tool-card">
-                    <span class="free-badge">Free</span>
-                    <div class="tool-icon">🔮</div>
-                    <h3>Intention Setter</h3>
-                    <p>Single-focus clarity tool. Cut through mental noise. One intention, one day.</p>
-                    <a href="intention-setter.html" class="tool-link">Open Tool →</a>
-                </div>
-
-                <div class="tool-card">
-                    <span class="free-badge">Free</span>
-                    <div class="tool-icon">✦</div>
-                    <h3>Sigil Creator</h3>
-                    <p>Transform intentions into visual symbols. Ancient technique, modern interface.</p>
-                    <a href="sigil-creator.html" class="tool-link">Open Tool →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Products -->
-    <section id="products">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-tag">Premium Tools</p>
-                <h2>Transform Your Daily Practice</h2>
-                <p>Comprehensive systems for lasting change</p>
-            </div>
-
-            <div class="products-grid">
-                <!-- Daily Reset -->
-                <div class="product-card featured">
-                    <div class="product-image">🌅</div>
-                    <div class="product-content">
-                        <span class="product-tag">Best Seller</span>
-                        <h3>The Daily Reset</h3>
-                        <p>Complete 5-minute morning calibration system. Breathwork, intention, release, and seal — all in one guided experience.</p>
-                        <ul class="product-features">
-                            <li>Guided breathwork sequences</li>
-                            <li>Intention setting framework</li>
-                            <li>Release ritual with dissolve effect</li>
-                            <li>Streak tracking & history</li>
-                            <li>Works offline forever</li>
-                        </ul>
-                        <div class="product-price">
-                            <span class="price-current">$27</span>
-                            <span class="price-period">lifetime access</span>
-                        </div>
-                        <a href="https://ko-fi.com/s/YOURLINK" class="product-cta">Get Instant Access</a>
-                    </div>
-                </div>
-
-                <!-- Sparkverse Membership -->
-                <div class="product-card">
-                    <div class="product-image">🌌</div>
-                    <div class="product-content">
-                        <span class="product-tag">Membership</span>
-                        <h3>The Sparkverse</h3>
-                        <p>Full access to every tool, plus monthly live sessions and community. The complete consciousness toolkit.</p>
-                        <ul class="product-features">
-                            <li>All current & future tools</li>
-                            <li>Monthly group breathwork</li>
-                            <li>Private community access</li>
-                            <li>1:1 soul mapping session</li>
-                            <li>Early access to new releases</li>
-                        </ul>
-                        <div class="product-price">
-                            <span class="price-current">$33</span>
-                            <span class="price-period">/month</span>
-                        </div>
-                        <a href="https://ko-fi.com/s/YOURLINK" class="product-cta">Join The Sparkverse</a>
-                    </div>
-                </div>
-
-                <!-- Soul Mapping -->
-                <div class="product-card">
-                    <div class="product-image">🗺️</div>
-                    <div class="product-content">
-                        <span class="product-tag">1:1 Service</span>
-                        <h3>Soul Mapping Session</h3>
-                        <p>Personal 60-minute deep dive into your patterns, blocks, and potential. Custom integration plan included.</p>
-                        <ul class="product-features">
-                            <li>60-minute video session</li>
-                            <li>Pattern analysis</li>
-                            <li>Custom ritual design</li>
-                            <li>Written integration guide</li>
-                            <li>30-day follow-up support</li>
-                        </ul>
-                        <div class="product-price">
-                            <span class="price-current">$111</span>
-                            <span class="price-period">one session</span>
-                        </div>
-                        <a href="https://ko-fi.com/s/YOURLINK" class="product-cta outline">Book Session</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-tag">Real People</p>
-                <h2>What They're Saying</h2>
-            </div>
-
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"I've tried every meditation app. This is the first thing that actually stuck. The 5-minute commitment is genius."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">S</div>
-                        <div>
-                            <p class="testimonial-name">Sarah M.</p>
-                            <p class="testimonial-title">Marketing Director</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"The release ritual changed everything for me. Typing it out and watching it dissolve — there's something deeply satisfying about it."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">J</div>
-                        <div>
-                            <p class="testimonial-name">James T.</p>
-                            <p class="testimonial-title">Software Engineer</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">"Finally, spiritual tools without the cringe. Clean design, no guru energy, just practical stuff that works."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">A</div>
-                        <div>
-                            <p class="testimonial-name">Alex R.</p>
-                            <p class="testimonial-title">Freelance Designer</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about">
-        <div class="container about-content">
-            <div class="about-image">✦</div>
-            <div class="about-text">
-                <h2>Built by someone who gets it</h2>
-                <p>I spent years in the spiritual self-help vortex. Crystals, manifestation courses, $2000 coaching programs. Some helped. Most didn't.</p>
-                <p>What actually worked? Simple daily practices. 5 minutes, not 5 hours. Tools I could use on my phone at 3am when anxiety hit. Things that felt good without requiring belief in anything specific.</p>
-                <p>The First Spark is everything I wished existed when I was drowning. No fluff. No gatekeeping. Just tools that meet you where you are.</p>
-                <p class="about-signature">— Katelin</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Start Your Reset Today</h2>
-            <p>Try the free tools. No email required. See if it clicks.</p>
-            <a href="#free-tools" class="btn btn-primary">Explore Free Tools</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="#" class="logo">
-                        <span class="logo-spark">✦</span> The First Spark
-                    </a>
-                    <p>Consciousness tools for modern humans. Reset your mind. Reclaim your day. No gurus required.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Tools</h4>
-                    <ul>
-                        <li><a href="pause-chamber.html">Pause Chamber</a></li>
-                        <li><a href="daily-reset.html">Daily Reset</a></li>
-                        <li><a href="sigil-creator.html">Sigil Creator</a></li>
-                        <li><a href="intention-setter.html">Intention Setter</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Products</h4>
-                    <ul>
-                        <li><a href="#products">Daily Reset</a></li>
-                        <li><a href="#products">The Sparkverse</a></li>
-                        <li><a href="#products">Soul Mapping</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Connect</h4>
-                    <ul>
-                        <li><a href="mailto:hello@thefirstspark.shop">Email</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">TikTok</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2024 The First Spark. All rights reserved.</p>
-                <div class="footer-social">
-                    <a href="#" aria-label="Instagram">IG</a>
-                    <a href="#" aria-label="TikTok">TT</a>
-                    <a href="#" aria-label="Email">@</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // Smooth scroll for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1170,13 +1177,13 @@
             });
         });
 
-        // Navbar background on scroll
+        // Nav background on scroll
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 50) {
-                nav.style.background = 'rgba(10, 10, 12, 0.98)';
+                nav.style.background = 'rgba(5, 5, 8, 0.95)';
             } else {
-                nav.style.background = 'rgba(10, 10, 12, 0.9)';
+                nav.style.background = 'rgba(5, 5, 8, 0.8)';
             }
         });
     </script>
