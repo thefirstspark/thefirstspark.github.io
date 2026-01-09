@@ -255,34 +255,55 @@
         /* CTA */
         .cta-section {
             text-align: center;
-            padding: 40px;
+            padding: 48px 40px;
             background: var(--bg-secondary);
             border-radius: 4px;
             margin-top: 40px;
         }
 
-        .cta-section p {
+        .cta-section .price {
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .cta-section .price-note {
+            font-size: 0.85rem;
             color: var(--text-secondary);
             margin-bottom: 24px;
-            font-size: 0.95rem;
+        }
+
+        .cta-section .includes {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.8;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 16px 40px;
-            background: transparent;
-            border: 1px solid var(--text-secondary);
-            color: var(--text-primary);
+            padding: 18px 48px;
+            background: var(--text-primary);
+            border: 1px solid var(--text-primary);
+            color: var(--bg-primary);
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         .cta-button:hover {
-            background: var(--text-primary);
-            color: var(--bg-primary);
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .cta-section .guarantee {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
         }
     </style>
 </head>
@@ -451,8 +472,15 @@
 
         <!-- CTA -->
         <div class="cta-section">
-            <p>Download the full Players Lounge™ Operating System</p>
-            <a href="#" class="cta-button">Get Access</a>
+            <p class="price">$22</p>
+            <p class="price-note">One-time access. Lifetime use.</p>
+            <p class="includes">
+                Private Notion workspace with the full operating system<br>
+                Downloadable HTML version for offline use<br>
+                The Between-Moves journaling framework
+            </p>
+            <a href="https://whop.com/thefirstspark/" class="cta-button">Enter The Lounge</a>
+            <p class="guarantee">Instant access after purchase.</p>
         </div>
 
         <p class="trademark">Players Lounge™ · A First Spark Creation</p>
