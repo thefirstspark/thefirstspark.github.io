@@ -16,11 +16,7 @@
             background: #000000;
             color: #e0e6ff;
             font-family: 'Space Grotesk', sans-serif;
-            overflow: hidden;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             min-height: 100vh;
         }
 
@@ -73,7 +69,12 @@
             z-index: 10;
             text-align: center;
             max-width: 800px;
-            padding: 60px;
+            padding: 100px 60px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .logo {
@@ -202,6 +203,186 @@
             text-shadow: 0 0 30px rgba(0, 217, 255, 1);
             color: #a5f3fc;
         }
+
+        /* Shop Section */
+        .shop-section {
+            position: relative;
+            z-index: 10;
+            padding: 100px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #a5f3fc 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            margin-bottom: 60px;
+            opacity: 0.8;
+        }
+
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .path-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .path-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .path-card:hover::before {
+            opacity: 1;
+        }
+
+        .path-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 217, 255, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
+        }
+
+        .path-card.featured {
+            border-color: #d4af37;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .path-card.featured:hover {
+            border-color: #ffd700;
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+        }
+
+        .path-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .path-icon {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .path-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #a5f3fc;
+        }
+
+        .path-price {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #00d9ff;
+        }
+
+        .path-desc {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .path-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .path-features li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05em;
+        }
+
+        .path-features li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #00d9ff;
+        }
+
+        .path-cta {
+            display: block;
+            text-align: center;
+            padding: 18px;
+            background: rgba(0, 217, 255, 0.1);
+            border: 2px solid rgba(0, 217, 255, 0.4);
+            border-radius: 12px;
+            color: #00d9ff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .path-cta:hover {
+            background: rgba(0, 217, 255, 0.2);
+            border-color: rgba(0, 217, 255, 0.8);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.4);
+            transform: scale(1.02);
+        }
+
+        .path-card.featured .path-cta {
+            background: linear-gradient(135deg, #d4af37, #ffd700);
+            border-color: #ffd700;
+            color: #000;
+        }
+
+        .path-card.featured .path-cta:hover {
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .paths-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .shop-section {
+                padding: 60px 30px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -225,11 +406,79 @@
         </div>
 
         <div class="links">
+            <a href="#join" class="secondary-link">Join the Sparkverse</a>
             <a href="#about" class="secondary-link">About</a>
-            <a href="#contact" class="secondary-link">Contact</a>
             <a href="https://github.com/thefirstspark" class="secondary-link" target="_blank">GitHub</a>
         </div>
     </div>
+
+    <!-- Shop/Membership Section -->
+    <section class="shop-section" id="join">
+        <h2 class="section-title">✦ JOIN THE SPARKVERSE ✦</h2>
+        <p class="section-subtitle">
+            Choose your path into the reciprocity engine. Start free or become a founding member.
+        </p>
+
+        <div class="paths-grid">
+            <!-- Free Explorer Path -->
+            <div class="path-card">
+                <span class="path-icon">◇</span>
+                <h3>Explorer</h3>
+                <div class="path-price">Free</div>
+                <p class="path-desc">
+                    Try the public tools. Experience consciousness technology firsthand.
+                </p>
+                <ul class="path-features">
+                    <li>Access to free tools</li>
+                    <li>View the presentation</li>
+                    <li>Community access</li>
+                    <li>Daily protocols</li>
+                </ul>
+                <a href="#tools" class="path-cta">Start Exploring</a>
+            </div>
+
+            <!-- Founding Member Path -->
+            <div class="path-card featured">
+                <div class="path-badge">FOUNDING MEMBER</div>
+                <span class="path-icon">✦</span>
+                <h3>Spark Founder</h3>
+                <div class="path-price">$497</div>
+                <p class="path-desc">
+                    Lifetime access to the Sparkverse. Lock in founding member pricing before we scale.
+                </p>
+                <ul class="path-features">
+                    <li>Lifetime access to all tools</li>
+                    <li>50+ consciousness tools</li>
+                    <li>Private community</li>
+                    <li>Founding member badge</li>
+                    <li>Early access to new features</li>
+                    <li>Direct line to builders</li>
+                </ul>
+                <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" class="path-cta" target="_blank">
+                    Become a Founder
+                </a>
+            </div>
+
+            <!-- Monthly Access Path -->
+            <div class="path-card">
+                <span class="path-icon">◆</span>
+                <h3>Spark Member</h3>
+                <div class="path-price">$47<span style="font-size: 0.5em; opacity: 0.7;">/mo</span></div>
+                <p class="path-desc">
+                    Full Sparkverse access with monthly flexibility.
+                </p>
+                <ul class="path-features">
+                    <li>All tools & features</li>
+                    <li>Community access</li>
+                    <li>Monthly updates</li>
+                    <li>Cancel anytime</li>
+                </ul>
+                <a href="https://whop.com/sparkverse-511c/" class="path-cta" target="_blank">
+                    Join Monthly
+                </a>
+            </div>
+        </div>
+    </section>
 
     <script>
         // Starfield generator
