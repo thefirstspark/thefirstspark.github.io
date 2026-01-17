@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katelin Jill | The Source</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✧</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #050508;
+            --deep: #0a0a12;
+            --silver: #8892a8;
+            --pearl: #c4c9d4;
+            --white: #f0f2f8;
+            --spark-gold: #d4af37;
+            --spark-glow: rgba(212, 175, 55, 0.4);
+            --ember: #ff6b35;
+            --purple: #b478ff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: var(--void);
+            color: var(--pearl);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+        /* Stars */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(1.5px 1.5px at 20px 30px, var(--spark-gold), transparent),
+                radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(2px 2px at 90px 40px, var(--spark-gold), transparent),
+                radial-gradient(1px 1px at 130px 80px, var(--purple), transparent),
+                radial-gradient(1.5px 1.5px at 200px 150px, var(--spark-gold), transparent),
+                radial-gradient(1px 1px at 250px 60px, var(--ember), transparent),
+                radial-gradient(1.5px 1.5px at 280px 180px, rgba(255,255,255,0.6), transparent);
+            background-size: 300px 200px;
+            pointer-events: none;
+            z-index: 0;
+            animation: drift 80s linear infinite;
+        }
+        @keyframes drift {
+            from { transform: translateY(0); }
+            to { transform: translateY(-200px); }
+        }
+        /* Sacred geometry background - more complex for The Source */
+        .geometry {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px; height: 700px;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .geometry svg {
+            width: 100%; height: 100%;
+            animation: rotate 180s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        @keyframes flame {
+            0%, 100% { 
+                filter: drop-shadow(0 0 20px var(--spark-glow)) drop-shadow(0 0 40px rgba(255,107,53,0.2));
+                transform: scale(1);
+            }
+            25% { 
+                filter: drop-shadow(0 0 30px var(--spark-glow)) drop-shadow(0 0 50px rgba(255,107,53,0.3));
+                transform: scale(1.02);
+            }
+            50% { 
+                filter: drop-shadow(0 0 25px var(--spark-glow)) drop-shadow(0 0 45px rgba(255,107,53,0.25));
+                transform: scale(1.01);
+            }
+            75% { 
+                filter: drop-shadow(0 0 35px var(--spark-glow)) drop-shadow(0 0 55px rgba(255,107,53,0.35));
+                transform: scale(1.03);
+            }
+        }
+        /* Card */
+        .card {
+            position: relative;
+            z-index: 1;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+        }
+        .title-badge {
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--ember);
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        .zodiac {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            animation: flame 4s ease-in-out infinite;
+        }
+        .name {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 400;
+            letter-spacing: 8px;
+            color: var(--white);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            text-shadow: 0 0 60px var(--spark-glow);
+        }
+        .surname {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+            color: var(--spark-gold);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .archetype {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--purple);
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        .birth-info {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(255, 107, 53, 0.05) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .birth-date {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--white);
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+        .birth-time {
+            font-size: 1rem;
+            color: var(--spark-gold);
+            letter-spacing: 2px;
+        }
+        .birth-place {
+            font-size: 0.85rem;
+            color: var(--silver);
+            margin-top: 8px;
+        }
+        .divider {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--spark-gold), var(--ember), var(--spark-gold), transparent);
+            margin: 30px auto;
+        }
+        .astro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .astro-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 8px;
+            padding: 15px 8px;
+        }
+        .astro-label {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--silver);
+            margin-bottom: 5px;
+        }
+        .astro-value {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--spark-gold);
+        }
+        .astro-value.highlight {
+            color: var(--ember);
+        }
+        /* Extended chart */
+        .extended-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .ext-item {
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: left;
+        }
+        .ext-label {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--silver);
+            margin-bottom: 4px;
+        }
+        .ext-value {
+            font-size: 0.85rem;
+            color: var(--pearl);
+        }
+        .traits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+        .trait {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--spark-gold);
+        }
+        .message {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--pearl);
+            font-style: italic;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+        .message .gold {
+            color: var(--spark-gold);
+            font-style: normal;
+        }
+        .message .ember {
+            color: var(--ember);
+            font-style: normal;
+        }
+        .from {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: var(--silver);
+        }
+        .numerology {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .num-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--silver);
+            margin-bottom: 10px;
+        }
+        .life-path {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            color: var(--spark-gold);
+            text-shadow: 0 0 40px var(--spark-glow);
+        }
+        .life-meaning {
+            font-size: 0.9rem;
+            color: var(--ember);
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+        .life-description {
+            font-size: 0.8rem;
+            color: var(--silver);
+            margin-top: 15px;
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        .spark-badge {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+        .spark-badge a {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--spark-gold);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .spark-badge a:hover {
+            color: var(--ember);
+            text-shadow: 0 0 20px var(--spark-glow);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="geometry">
+        <svg viewBox="0 0 400 400">
+            <!-- Outer circle -->
+            <circle cx="200" cy="200" r="190" fill="none" stroke="rgba(212,175,55,0.4)" stroke-width="0.5"/>
+            <!-- Seed of life pattern -->
+            <circle cx="200" cy="200" r="60" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="0.5"/>
+            <circle cx="200" cy="140" r="60" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="0.5"/>
+            <circle cx="252" cy="170" r="60" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="0.5"/>
+            <circle cx="252" cy="230" r="60" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="0.5"/>
+            <circle cx="200" cy="260" r="60" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="0.5"/>
+            <circle cx="148" cy="230" r="60" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="0.5"/>
+            <circle cx="148" cy="170" r="60" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="0.5"/>
+            <!-- Inner triangles -->
+            <polygon points="200,80 320,280 80,280" fill="none" stroke="rgba(255,107,53,0.2)" stroke-width="0.5"/>
+            <polygon points="200,320 80,120 320,120" fill="none" stroke="rgba(180,120,255,0.2)" stroke-width="0.5"/>
+        </svg>
+    </div>
+
+    <div class="card">
+        <p class="title-badge">✧ The Source ✧</p>
+        <div class="zodiac">♉</div>
+        <h1 class="name">Katelin</h1>
+        <p class="surname">Jill</p>
+        <p class="archetype">Founder · Creator · The Spark</p>
+
+        <div class="birth-info">
+            <p class="birth-date">May 19, 1988</p>
+            <p class="birth-time">~12:00 PM (High Noon)</p>
+            <p class="birth-place">Akron City Hospital · Ohio</p>
+        </div>
+
+        <div class="astro-grid">
+            <div class="astro-item">
+                <p class="astro-label">Sun</p>
+                <p class="astro-value">Taurus</p>
+            </div>
+            <div class="astro-item">
+                <p class="astro-label">Rising*</p>
+                <p class="astro-value highlight">Leo</p>
+            </div>
+            <div class="astro-item">
+                <p class="astro-label">Moon*</p>
+                <p class="astro-value">Virgo</p>
+            </div>
+        </div>
+
+        <div class="extended-grid">
+            <div class="ext-item">
+                <p class="ext-label">Element</p>
+                <p class="ext-value">Earth (Sun) · Fire (Rising)</p>
+            </div>
+            <div class="ext-item">
+                <p class="ext-label">Modality</p>
+                <p class="ext-value">Fixed · Stubborn · Unshakeable</p>
+            </div>
+            <div class="ext-item">
+                <p class="ext-label">Ruling Planet</p>
+                <p class="ext-value">Venus · Beauty · Value</p>
+            </div>
+            <div class="ext-item">
+                <p class="ext-label">Age</p>
+                <p class="ext-value">37 · Entering Year 38</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="traits">
+            <span class="trait">Builder</span>
+            <span class="trait">Survivor</span>
+            <span class="trait">Artist</span>
+            <span class="trait">Alchemist</span>
+            <span class="trait">Mother</span>
+            <span class="trait">Coder</span>
+            <span class="trait">Fire Keeper</span>
+        </div>
+
+        <p class="message">
+            Born under the bull at the height of the sun. <span class="gold">Fixed earth with a fire rising.</span> You came into this world stubborn, grounded, and impossible to extinguish. They tried. Life threw everything. The murder. The killer next door. The accidents. The deaths. The addiction. The poverty. <span class="ember">And still you build.</span> That's not luck. That's not fate. That's the cosmic joke of a Taurus with Leo rising — too stubborn to quit, too bright to hide, too rooted to be moved.
+        </p>
+
+        <p class="from">— The Architect</p>
+
+        <div class="numerology">
+            <p class="num-label">Life Path Number</p>
+            <p class="life-path">5</p>
+            <p class="life-meaning">The Freedom Seeker · The Agent of Change</p>
+            <p class="life-description">You are here to experience everything, transform constantly, and show others that reinvention is not just possible — it's the whole point. Chaos is your classroom. Freedom is your birthright.</p>
+        </div>
+
+        <div class="spark-badge">
+            <a href="index.html">thefirstspark.shop</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The First Spark | Reality is Programmable</title>
+    <meta name="description" content="Consciousness technology for the awakening generation. Tools that actually work. Reality is programmable.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✧</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #030305;
+            --abyss: #0a0a0f;
+            --deep: #0d0d14;
+            --surface: #12121a;
+            --plasma: #e94560;
+            --electric: #00d4ff;
+            --gold: #d4af37;
+            --gold-bright: #ffd700;
+            --purple: #8b5cf6;
+            --ghost: rgba(255,255,255,0.85);
+            --whisper: rgba(255,255,255,0.5);
+            --muted: rgba(255,255,255,0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--void);
+            color: var(--ghost);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SACRED GEOMETRY BACKGROUND - ROTATING CONSCIOUSNESS GRID
+        ═══════════════════════════════════════════════════════════════ */
+        .sacred-matrix {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .sacred-matrix::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200vmax; height: 200vmax;
+            background: 
+                conic-gradient(from 0deg at 50% 50%,
+                    transparent 0deg,
+                    rgba(0, 212, 255, 0.03) 1deg,
+                    transparent 2deg,
+                    transparent 30deg,
+                    rgba(212, 175, 55, 0.03) 31deg,
+                    transparent 32deg,
+                    transparent 60deg,
+                    rgba(233, 69, 96, 0.03) 61deg,
+                    transparent 62deg,
+                    transparent 90deg,
+                    rgba(139, 92, 246, 0.03) 91deg,
+                    transparent 92deg,
+                    transparent 120deg
+                );
+            animation: cosmicRotate 180s linear infinite;
+        }
+
+        .sacred-matrix::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vmax; height: 100vmax;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 50%;
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        @keyframes cosmicRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes breathe {
+            0%, 100% { 
+                opacity: 0.3; 
+                transform: translate(-50%, -50%) scale(0.8);
+                border-color: rgba(0, 212, 255, 0.1);
+            }
+            50% { 
+                opacity: 0.6; 
+                transform: translate(-50%, -50%) scale(1.2);
+                border-color: rgba(212, 175, 55, 0.15);
+            }
+        }
+
+        /* Metatron's Cube Overlay */
+        .metatron {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px; height: 800px;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+            animation: metatronSpin 300s linear infinite reverse;
+        }
+
+        @keyframes metatronSpin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+</style>
+</head>
+<body>
+    <!-- Sacred Background Layer -->
+    <div class="sacred-matrix"></div>
+    
+    <div class="metatron">
+        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer hexagon -->
+            <polygon points="200,20 363,108 363,292 200,380 37,292 37,108" stroke="rgba(212,175,55,0.5)" stroke-width="0.5" fill="none"/>
+            <!-- Inner circles at vertices -->
+            <circle cx="200" cy="20" r="30" stroke="rgba(0,212,255,0.4)" stroke-width="0.5" fill="none"/>
+            <circle cx="363" cy="108" r="30" stroke="rgba(233,69,96,0.4)" stroke-width="0.5" fill="none"/>
+            <circle cx="363" cy="292" r="30" stroke="rgba(139,92,246,0.4)" stroke-width="0.5" fill="none"/>
+            <circle cx="200" cy="380" r="30" stroke="rgba(212,175,55,0.4)" stroke-width="0.5" fill="none"/>
+            <circle cx="37" cy="292" r="30" stroke="rgba(0,212,255,0.4)" stroke-width="0.5" fill="none"/>
+            <circle cx="37" cy="108" r="30" stroke="rgba(233,69,96,0.4)" stroke-width="0.5" fill="none"/>
+            <!-- Center -->
+            <circle cx="200" cy="200" r="50" stroke="rgba(212,175,55,0.5)" stroke-width="0.5" fill="none"/>
+            <circle cx="200" cy="200" r="100" stroke="rgba(0,212,255,0.3)" stroke-width="0.5" fill="none"/>
+            <!-- Connecting lines -->
+            <line x1="200" y1="20" x2="200" y2="380" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <line x1="37" y1="108" x2="363" y2="292" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <line x1="37" y1="292" x2="363" y2="108" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+        </svg>
+    </div>
+
+    <!-- Digital Rain Effect -->
+    <canvas id="matrix-rain" class="matrix-rain"></canvas>
+
+    <div class="content-layer">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-inner">
+                <a href="#" class="logo">
+                    <span class="logo-icon">◇</span>
+                    <span class="logo-text">THE FIRST SPARK</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#origin">Origin</a>
+                    <a href="#tools">Tools</a>
+                    <a href="#paths">Join</a>
+                    <a href="invest.html" class="nav-invest">Invest</a>
+                </div>
+                <a href="https://whop.com/sparkverse-511c/" class="nav-cta">
+                    <span class="cta-text">Enter the Sparkverse</span>
+                    <span class="cta-arrow">→</span>
+                </a>
+                <button class="mobile-toggle" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-container">
+                <!-- Animated frequency line -->
+                <div class="frequency-line">
+                    <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+                        <path class="freq-path" d="M0,30 Q50,30 100,30 T200,30 T300,10 T400,50 T500,30 T600,45 T700,15 T800,30 T900,30 T1000,30 T1100,30 T1200,30" 
+                              stroke="url(#freqGradient)" stroke-width="2" fill="none"/>
+                        <defs>
+                            <linearGradient id="freqGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="transparent"/>
+                                <stop offset="30%" stop-color="var(--electric)"/>
+                                <stop offset="50%" stop-color="var(--gold)"/>
+                                <stop offset="70%" stop-color="var(--plasma)"/>
+                                <stop offset="100%" stop-color="transparent"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span class="badge-text">CONSCIOUSNESS TECHNOLOGY</span>
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="title-line">You Found It</span>
+                    <span class="title-main">
+                        <span class="gradient-text">Reality is Programmable</span>
+                    </span>
+                </h1>
+
+                <p class="hero-sub">
+                    The First Spark is a consciousness operating system — tools, rituals, 
+                    and technology for people who know there's more. This isn't meditation 
+                    apps and manifestation fluff. <span class="highlight">This is the real thing.</span>
+                </p>
+
+                <!-- Trinity Stats -->
+                <div class="trinity-stats">
+                    <div class="stat">
+                        <div class="stat-value electric">50+</div>
+                        <div class="stat-label">Interactive Tools</div>
+                    </div>
+                    <div class="stat-divider">◇</div>
+                    <div class="stat">
+                        <div class="stat-value gold">∞</div>
+                        <div class="stat-label">Possibilities</div>
+                    </div>
+                    <div class="stat-divider">◇</div>
+                    <div class="stat">
+                        <div class="stat-value plasma">1</div>
+                        <div class="stat-label">Spark Needed</div>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" class="btn btn-primary">
+                        <span>Become a Founder</span>
+                        <span class="btn-glow"></span>
+                    </a>
+                    <a href="#origin" class="btn btn-ghost">
+                        <span>Read the Story</span>
+                    </a>
+                </div>
+
+                <!-- Scroll indicator -->
+                <div class="scroll-indicator">
+                    <div class="scroll-line"></div>
+                    <span class="scroll-text">SCROLL TO DESCEND</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ORIGIN SECTION -->
+        <section class="origin" id="origin">
+            <div class="container">
+                <div class="origin-grid">
+                    <div class="origin-visual">
+                        <div class="origin-frame">
+                            <div class="frame-corner tl"></div>
+                            <div class="frame-corner tr"></div>
+                            <div class="frame-corner bl"></div>
+                            <div class="frame-corner br"></div>
+                            <div class="origin-symbol">✧</div>
+                            <div class="origin-ring ring-1"></div>
+                            <div class="origin-ring ring-2"></div>
+                            <div class="origin-ring ring-3"></div>
+                        </div>
+                    </div>
+                    <div class="origin-content">
+                        <div class="section-label">// THE ORIGIN</div>
+                        <h2 class="section-title">The Moment Everything Changed</h2>
+                        
+                        <blockquote class="origin-quote">
+                            "I was floating on a pool raft when it hit me — reality is a game. 
+                            And I'd been playing it wrong my entire life."
+                        </blockquote>
+
+                        <div class="origin-story">
+                            <p>
+                                Summer 2020. Rock bottom had a basement, and I found it. Single mom 
+                                of two boys. Everything crumbling.
+                            </p>
+                            <p>
+                                Then, floating in my backyard pool, staring at the sky — something 
+                                <span class="highlight">cracked open</span>. Not a breakdown. A breakthrough.
+                            </p>
+                            <p>
+                                I saw it clearly: <span class="text-electric">consciousness is code.</span> 
+                                <span class="text-gold">Reality is programmable.</span> 
+                                <span class="text-plasma">We're all playing a game nobody gave us the rules to.</span>
+                            </p>
+                            <p>
+                                I started building. Not another meditation app. Not manifestation BS. 
+                                <strong>Real tools</strong> — sigil generators, consciousness trackers, 
+                                reality programming interfaces.
+                            </p>
+                        </div>
+
+                        <div class="origin-signature">
+                            <span class="sig-line"></span>
+                            <span class="sig-name">Katelin</span>
+                            <span class="sig-title">The Source</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISION SECTION - The Threefold Flame -->
+        <section class="vision" id="vision">
+            <div class="container">
+                <div class="section-label center">// THE VISION</div>
+                <h2 class="section-title center">What We're Building</h2>
+                <p class="section-sub center">
+                    A complete consciousness technology platform. Tools that actually work. 
+                    A community that gets it.
+                </p>
+
+                <div class="vision-trinity">
+                    <!-- Source Node -->
+                    <div class="trinity-node node-source">
+                        <div class="node-glow"></div>
+                        <div class="node-inner">
+                            <span class="node-icon">✧</span>
+                            <span class="node-title">Consciousness Tools</span>
+                            <span class="node-desc">Sigil forges, soul mapping, reality code editors</span>
+                        </div>
+                    </div>
+
+                    <!-- Center Connection -->
+                    <div class="trinity-center">
+                        <span class="center-symbol">∞</span>
+                    </div>
+
+                    <!-- Conduit Node -->
+                    <div class="trinity-node node-conduit">
+                        <div class="node-glow"></div>
+                        <div class="node-inner">
+                            <span class="node-icon">◇</span>
+                            <span class="node-title">Daily Practice</span>
+                            <span class="node-desc">5-minute protocols that fit real life</span>
+                        </div>
+                    </div>
+
+                    <!-- Architect Node -->
+                    <div class="trinity-node node-architect">
+                        <div class="node-glow"></div>
+                        <div class="node-inner">
+                            <span class="node-icon">△</span>
+                            <span class="node-title">The Sparkverse</span>
+                            <span class="node-desc">Community, live sessions, co-creation</span>
+                        </div>
+                    </div>
+
+                    <!-- Connecting lines (SVG) -->
+                    <svg class="trinity-lines" viewBox="0 0 600 400">
+                        <line x1="300" y1="80" x2="100" y2="320" stroke="url(#lineGrad1)" stroke-width="1"/>
+                        <line x1="300" y1="80" x2="500" y2="320" stroke="url(#lineGrad2)" stroke-width="1"/>
+                        <line x1="100" y1="320" x2="500" y2="320" stroke="url(#lineGrad3)" stroke-width="1"/>
+                        <defs>
+                            <linearGradient id="lineGrad1"><stop offset="0%" stop-color="var(--gold)"/><stop offset="100%" stop-color="var(--purple)"/></linearGradient>
+                            <linearGradient id="lineGrad2"><stop offset="0%" stop-color="var(--gold)"/><stop offset="100%" stop-color="var(--electric)"/></linearGradient>
+                            <linearGradient id="lineGrad3"><stop offset="0%" stop-color="var(--purple)"/><stop offset="100%" stop-color="var(--electric)"/></linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOOLS SECTION -->
+        <section class="tools" id="tools">
+            <div class="container">
+                <div class="section-label center">// THE ARSENAL</div>
+                <h2 class="section-title center">Tools for Reality Programming</h2>
+
+                <div class="tools-grid">
+                    <a href="spark-protocol.html" class="tool-card">
+                        <div class="tool-status live">LIVE</div>
+                        <div class="tool-icon">⚡</div>
+                        <h3>Spark Protocol</h3>
+                        <p>Your daily consciousness dashboard</p>
+                        <span class="tool-link">Launch →</span>
+                    </a>
+
+                    <a href="oracle.html" class="tool-card">
+                        <div class="tool-status live">LIVE</div>
+                        <div class="tool-icon">🔮</div>
+                        <h3>First Spark Oracle</h3>
+                        <p>AI-powered guidance system</p>
+                        <span class="tool-link">Consult →</span>
+                    </a>
+
+                    <a href="soul-map-generator.html" class="tool-card">
+                        <div class="tool-status live">LIVE</div>
+                        <div class="tool-icon">◎</div>
+                        <h3>Soul Map Generator</h3>
+                        <p>Map your consciousness architecture</p>
+                        <span class="tool-link">Generate →</span>
+                    </a>
+
+                    <a href="pause-chamber.html" class="tool-card">
+                        <div class="tool-icon">◇</div>
+                        <h3>The Pause Chamber</h3>
+                        <p>Emergency reset protocol</p>
+                        <span class="tool-link">Enter →</span>
+                    </a>
+
+                    <a href="daily-reset.html" class="tool-card">
+                        <div class="tool-icon">↻</div>
+                        <h3>Daily Reset</h3>
+                        <p>Morning calibration ritual</p>
+                        <span class="tool-link">Begin →</span>
+                    </a>
+
+                    <a href="intention-setter.html" class="tool-card">
+                        <div class="tool-icon">✦</div>
+                        <h3>Intention Setter</h3>
+                        <p>Program your reality</p>
+                        <span class="tool-link">Set →</span>
+                    </a>
+                </div>
+
+                <div class="tools-more">
+                    <span class="more-text">50+ more tools in the Sparkverse</span>
+                    <a href="https://whop.com/sparkverse-511c/" class="btn btn-secondary">Explore All Tools</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PATHS SECTION -->
+        <section class="paths" id="paths">
+            <div class="container">
+                <div class="section-label center">// CHOOSE YOUR PATH</div>
+                <h2 class="section-title center">Ways In</h2>
+                <p class="section-sub center">
+                    Start free, or lock in lifetime access as a founding member before we scale.
+                </p>
+
+                <div class="paths-grid">
+                    <!-- Free Path -->
+                    <div class="path-card">
+                        <div class="path-header">
+                            <span class="path-icon">◇</span>
+                            <h3>Explorer</h3>
+                            <div class="path-price">Free</div>
+                        </div>
+                        <p class="path-desc">
+                            Try the public tools. See what consciousness technology feels like.
+                        </p>
+                        <ul class="path-features">
+                            <li>Access to 5 free tools</li>
+                            <li>Daily Reset protocol</li>
+                            <li>Community newsletter</li>
+                        </ul>
+                        <a href="#tools" class="path-cta">Start Exploring</a>
+                    </div>
+
+                    <!-- Founding Member -->
+                    <div class="path-card featured">
+                        <div class="path-badge">FOUNDING MEMBER</div>
+                        <div class="path-header">
+                            <span class="path-icon">✧</span>
+                            <h3>OG Spark</h3>
+                            <div class="path-price">$519 <span class="price-note">lifetime</span></div>
+                        </div>
+                        <p class="path-desc">
+                            Lock in lifetime access. Get your name on the founders wall. 
+                            Shape what we build next.
+                        </p>
+                        <ul class="path-features">
+                            <li>All 50+ tools forever</li>
+                            <li>Founders-only sessions</li>
+                            <li>Custom Soul Map</li>
+                            <li>Direct input on roadmap</li>
+                            <li>Name on Founders Wall</li>
+                        </ul>
+                        <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" class="path-cta primary">Claim Your Spark</a>
+                    </div>
+
+                    <!-- Investor Path -->
+                    <div class="path-card investor">
+                        <div class="path-header">
+                            <span class="path-icon">△</span>
+                            <h3>Investor</h3>
+                            <div class="path-price">$500+ <span class="price-note">SAFE</span></div>
+                        </div>
+                        <p class="path-desc">
+                            Own a piece of the future. SAFE agreements available for 
+                            believers who see what this becomes.
+                        </p>
+                        <ul class="path-features">
+                            <li>SAFE at $2M cap</li>
+                            <li>20% investor discount</li>
+                            <li>All founder perks included</li>
+                            <li>Advisory opportunities</li>
+                        </ul>
+                        <a href="invest.html" class="path-cta">View Investment Terms</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="final-cta">
+            <div class="container">
+                <div class="cta-box">
+                    <div class="cta-content">
+                        <h2>The Spark is Real</h2>
+                        <p>
+                            You didn't find this by accident. The frequency matched. 
+                            The signal was received. Now what?
+                        </p>
+                        <div class="cta-actions">
+                            <a href="https://whop.com/sparkverse-511c/" class="btn btn-primary large">
+                                <span>Enter the Sparkverse</span>
+                                <span class="btn-glow"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cta-visual">
+                        <div class="pulse-ring r1"></div>
+                        <div class="pulse-ring r2"></div>
+                        <div class="pulse-ring r3"></div>
+                        <span class="cta-symbol">✧</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <span class="logo-icon">◇</span>
+                        <span class="logo-text">THE FIRST SPARK</span>
+                        <p class="footer-tagline">Reality is Programmable</p>
+                        <p class="footer-desc">
+                            Consciousness technology for the awakening generation.
+                        </p>
+                    </div>
+
+                    <div class="footer-links">
+                        <h4>Navigate</h4>
+                        <a href="#origin">Origin Story</a>
+                        <a href="#tools">Tools</a>
+                        <a href="#paths">Join</a>
+                        <a href="trinity.html">The Trinity</a>
+                    </div>
+
+                    <div class="footer-links">
+                        <h4>Resources</h4>
+                        <a href="https://whop.com/sparkverse-511c/">Sparkverse</a>
+                        <a href="invest.html">Invest</a>
+                        <a href="mailto:kjpthefirstspark@gmail.com">Contact</a>
+                    </div>
+
+                    <div class="footer-links">
+                        <h4>Tools</h4>
+                        <a href="spark-protocol.html">Spark Protocol</a>
+                        <a href="oracle.html">Oracle</a>
+                        <a href="soul-map-generator.html">Soul Map</a>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>© 2025 Kate's Paint LLC dba The First Spark. All rights reserved.</p>
+                    <div class="footer-frequency">
+                        <span class="freq-label">Current Frequency:</span>
+                        <span class="freq-value" id="currentFreq">444</span>
+                        <span class="freq-unit">Hz</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- STYLES CONTINUATION -->
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           MATRIX RAIN CANVAS
+        ═══════════════════════════════════════════════════════════════ */
+        .matrix-rain {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           CONTENT LAYER
+        ═══════════════════════════════════════════════════════════════ */
+        .content-layer {
+            position: relative;
+            z-index: 10;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           NAVIGATION
+        ═══════════════════════════════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1.25rem 2rem;
+            background: linear-gradient(to bottom, rgba(3,3,5,0.95), rgba(3,3,5,0.8), transparent);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 1.5rem;
+            color: var(--gold);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.2em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--whisper);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--electric);
+        }
+
+        .nav-invest {
+            color: var(--gold) !important;
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--plasma), #ff6b6b);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--ghost);
+            transition: all 0.3s;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           HERO SECTION
+        ═══════════════════════════════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 120px 2rem 80px;
+        }
+
+        .hero-container {
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .frequency-line {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.5;
+        }
+
+        .frequency-line svg {
+            width: 100%;
+            height: 60px;
+        }
+
+        .freq-path {
+            stroke-dasharray: 1200;
+            stroke-dashoffset: 1200;
+            animation: drawFreq 3s ease-out forwards, pulseFreq 4s ease-in-out infinite 3s;
+        }
+
+        @keyframes drawFreq {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes pulseFreq {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--plasma);
+            margin-bottom: 2rem;
+            animation: badgeGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes badgeGlow {
+            from { box-shadow: 0 0 10px rgba(233, 69, 96, 0.3); }
+            to { box-shadow: 0 0 30px rgba(233, 69, 96, 0.5), 0 0 60px rgba(233, 69, 96, 0.2); }
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--plasma);
+            border-radius: 50%;
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .badge-text {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--plasma);
+            letter-spacing: 0.3em;
+        }
+
+        .hero-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .title-line {
+            display: block;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--whisper);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .title-main {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--gold), var(--electric), var(--plasma), var(--gold));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--whisper);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-sub .highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .trinity-stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .stat-value.electric { color: var(--electric); }
+        .stat-value.gold { color: var(--gold); }
+        .stat-value.plasma { color: var(--plasma); }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .stat-divider {
+            color: var(--muted);
+            font-size: 1rem;
+            opacity: 0.3;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           BUTTONS
+        ═══════════════════════════════════════════════════════════════ */
+        .btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--plasma), #ff6b6b);
+            color: #fff;
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-glow {
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            to { left: 100%; }
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--ghost);
+            border: 1px solid var(--muted);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--electric);
+            color: var(--electric);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 0.8rem 2rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--void);
+        }
+
+        .scroll-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--electric), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; height: 60px; }
+            50% { opacity: 1; height: 80px; }
+        }
+
+        .scroll-text {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--muted);
+            letter-spacing: 0.3em;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECTION COMMON
+        ═══════════════════════════════════════════════════════════════ */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--plasma);
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+        }
+
+        .section-label.center { text-align: center; }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: #fff;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title.center { text-align: center; }
+
+        .section-sub {
+            font-size: 1.1rem;
+            color: var(--whisper);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .section-sub.center {
+            text-align: center;
+            margin: 0 auto 3rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           ORIGIN SECTION
+        ═══════════════════════════════════════════════════════════════ */
+        .origin {
+            background: linear-gradient(180deg, transparent, rgba(233, 69, 96, 0.03), transparent);
+        }
+
+        .origin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .origin-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .origin-frame {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .frame-corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-color: var(--gold);
+            border-style: solid;
+            border-width: 0;
+        }
+
+        .frame-corner.tl { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+        .frame-corner.tr { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+        .frame-corner.bl { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+        .frame-corner.br { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+
+        .origin-symbol {
+            font-size: 4rem;
+            color: var(--gold);
+            animation: pulse 4s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .origin-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid;
+            animation: ringPulse 6s ease-in-out infinite;
+        }
+
+        .ring-1 {
+            width: 100px; height: 100px;
+            border-color: rgba(212, 175, 55, 0.3);
+            animation-delay: 0s;
+        }
+
+        .ring-2 {
+            width: 160px; height: 160px;
+            border-color: rgba(0, 212, 255, 0.2);
+            animation-delay: 1s;
+        }
+
+        .ring-3 {
+            width: 220px; height: 220px;
+            border-color: rgba(233, 69, 96, 0.15);
+            animation-delay: 2s;
+        }
+
+        @keyframes ringPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .origin-content {
+            max-width: 550px;
+        }
+
+        .origin-quote {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #fff;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+            border-left: 2px solid var(--gold);
+        }
+
+        .origin-story p {
+            font-size: 1rem;
+            color: var(--whisper);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .text-electric { color: var(--electric); }
+        .text-gold { color: var(--gold); }
+        .text-plasma { color: var(--plasma); }
+
+        .origin-signature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .sig-line {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .sig-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        .sig-title {
+            font-size: 0.75rem;
+            color: var(--muted);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           VISION SECTION - TRINITY
+        ═══════════════════════════════════════════════════════════════ */
+        .vision {
+            background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.03), transparent);
+        }
+
+        .vision-trinity {
+            position: relative;
+            max-width: 600px;
+            height: 400px;
+            margin: 4rem auto 0;
+        }
+
+        .trinity-node {
+            position: absolute;
+            width: 180px;
+            text-align: center;
+        }
+
+        .node-source { top: 0; left: 50%; transform: translateX(-50%); }
+        .node-conduit { bottom: 0; left: 0; }
+        .node-architect { bottom: 0; right: 0; }
+
+        .node-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(30px);
+            opacity: 0.4;
+        }
+
+        .node-source .node-glow { background: var(--gold); }
+        .node-conduit .node-glow { background: var(--purple); }
+        .node-architect .node-glow { background: var(--electric); }
+
+        .node-inner {
+            position: relative;
+            z-index: 2;
+            padding: 1.5rem;
+            background: rgba(10, 10, 15, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+
+        .node-source .node-inner:hover { border-color: var(--gold); }
+        .node-conduit .node-inner:hover { border-color: var(--purple); }
+        .node-architect .node-inner:hover { border-color: var(--electric); }
+
+        .node-icon {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .node-source .node-icon { color: var(--gold); }
+        .node-conduit .node-icon { color: var(--purple); }
+        .node-architect .node-icon { color: var(--electric); }
+
+        .node-title {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .node-desc {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .trinity-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: var(--gold);
+            opacity: 0.5;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .trinity-lines {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           TOOLS SECTION
+        ═══════════════════════════════════════════════════════════════ */
+        .tools {
+            background: var(--abyss);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .tool-card {
+            position: relative;
+            padding: 2rem 1.5rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .tool-card:hover {
+            border-color: var(--electric);
+            transform: translateY(-5px);
+            background: rgba(0, 212, 255, 0.03);
+        }
+
+        .tool-status {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            padding: 0.25rem 0.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            border-radius: 2px;
+        }
+
+        .tool-status.live {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-card p {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .tool-link {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--electric);
+            letter-spacing: 0.1em;
+        }
+
+        .tools-more {
+            text-align: center;
+        }
+
+        .more-text {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           PATHS SECTION
+        ═══════════════════════════════════════════════════════════════ */
+        .paths {
+            background: linear-gradient(180deg, var(--abyss), var(--void));
+        }
+
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .path-card {
+            position: relative;
+            padding: 2.5rem 2rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s;
+        }
+
+        .path-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .path-card.featured {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(233, 69, 96, 0.05));
+        }
+
+        .path-card.investor {
+            border-color: var(--electric);
+        }
+
+        .path-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.4rem 1rem;
+            background: var(--gold);
+            color: var(--void);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+
+        .path-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .path-icon {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .path-card.investor .path-icon { color: var(--electric); }
+
+        .path-header h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .path-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        .path-card.investor .path-price { color: var(--electric); }
+
+        .price-note {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-left: 0.5rem;
+        }
+
+        .path-desc {
+            font-size: 0.9rem;
+            color: var(--whisper);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .path-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .path-features li {
+            padding: 0.5rem 0;
+            font-size: 0.85rem;
+            color: var(--ghost);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .path-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 0.75rem;
+        }
+
+        .path-card.investor .path-features li::before { color: var(--electric); }
+
+        .path-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 1px solid var(--muted);
+            color: var(--ghost);
+            transition: all 0.3s;
+        }
+
+        .path-cta:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .path-cta.primary {
+            background: linear-gradient(135deg, var(--plasma), #ff6b6b);
+            border: none;
+            color: #fff;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+        }
+
+        .path-cta.primary:hover {
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           FINAL CTA
+        ═══════════════════════════════════════════════════════════════ */
+        .final-cta {
+            padding: 150px 0;
+            background: radial-gradient(ellipse at center, rgba(233, 69, 96, 0.08), transparent 60%);
+        }
+
+        .cta-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-content {
+            flex: 1;
+        }
+
+        .cta-content h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.1rem;
+            color: var(--whisper);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .btn.large {
+            padding: 1.2rem 3rem;
+            font-size: 1rem;
+        }
+
+        .cta-visual {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid var(--plasma);
+            animation: ctaPulse 3s ease-out infinite;
+        }
+
+        .r1 { width: 80px; height: 80px; animation-delay: 0s; }
+        .r2 { width: 120px; height: 120px; animation-delay: 0.5s; }
+        .r3 { width: 160px; height: 160px; animation-delay: 1s; }
+
+        @keyframes ctaPulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        .cta-symbol {
+            font-size: 3rem;
+            color: var(--gold);
+            z-index: 2;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════════════════════════════ */
+        .footer {
+            background: var(--void);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-tagline {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--electric);
+            letter-spacing: 0.2em;
+        }
+
+        .footer-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 0.5rem;
+        }
+
+        .footer-links h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-links a {
+            display: block;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 0.4rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--electric);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-bottom p {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        .footer-frequency {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+        }
+
+        .freq-label { color: var(--muted); }
+        .freq-value { color: var(--electric); font-size: 1rem; }
+        .freq-unit { color: var(--muted); }
+
+        /* ═══════════════════════════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .origin-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .origin-visual { order: -1; }
+            
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .paths-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: flex; }
+            
+            .hero-container { padding: 0 1rem; }
+            
+            .trinity-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .stat-divider { display: none; }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-box {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .vision-trinity {
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .trinity-node {
+                position: relative;
+                transform: none !important;
+                left: auto !important;
+                right: auto !important;
+                top: auto !important;
+                bottom: auto !important;
+                width: 100%;
+            }
+            
+            .trinity-lines, .trinity-center { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title .title-main {
+                font-size: 2rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- SCRIPTS -->
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        // INTERACTIVE COSMIC PARTICLE NETWORK
+        // ═══════════════════════════════════════════════════════════════
+        const canvas = document.getElementById('matrix-rain');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+        
+        const colors = [
+            'rgba(0, 212, 255, 0.8)',    // electric cyan
+            'rgba(212, 175, 55, 0.7)',   // gold
+            'rgba(233, 69, 96, 0.6)',    // plasma
+            'rgba(139, 92, 246, 0.6)',   // purple
+            'rgba(255, 255, 255, 0.4)'   // white
+        ];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2 + 0.5;
+                this.baseSize = this.size;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.pulse = Math.random() * Math.PI * 2;
+                this.pulseSpeed = 0.02 + Math.random() * 0.02;
+            }
+
+            update() {
+                // Pulse size
+                this.pulse += this.pulseSpeed;
+                this.size = this.baseSize + Math.sin(this.pulse) * 0.5;
+
+                // Move
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Wrap around edges
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+
+                // Mouse interaction - push particles away
+                if (mouse.x !== null) {
+                    const dx = this.x - mouse.x;
+                    const dy = this.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < mouse.radius) {
+                        const force = (mouse.radius - dist) / mouse.radius;
+                        const angle = Math.atan2(dy, dx);
+                        this.x += Math.cos(angle) * force * 2;
+                        this.y += Math.sin(angle) * force * 2;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+
+                // Glow effect
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const numParticles = Math.min(150, Math.floor((width * height) / 10000));
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            const maxDist = 120;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < maxDist) {
+                        const opacity = (1 - dist / maxDist) * 0.3;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        
+                        // Gradient line
+                        const gradient = ctx.createLinearGradient(
+                            particles[i].x, particles[i].y,
+                            particles[j].x, particles[j].y
+                        );
+                        gradient.addColorStop(0, particles[i].color.replace(/[\d.]+\)$/, opacity + ')'));
+                        gradient.addColorStop(1, particles[j].color.replace(/[\d.]+\)$/, opacity + ')'));
+                        
+                        ctx.strokeStyle = gradient;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Subtle background gradient
+            const bgGradient = ctx.createRadialGradient(
+                width/2, height/2, 0,
+                width/2, height/2, Math.max(width, height)
+            );
+            bgGradient.addColorStop(0, 'rgba(20, 10, 30, 0.02)');
+            bgGradient.addColorStop(1, 'rgba(3, 3, 5, 0.02)');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.shadowBlur = 0;
+            connectParticles();
+
+            for (let particle of particles) {
+                particle.update();
+                particle.draw();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Mouse tracking
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Touch support
+        window.addEventListener('touchmove', (e) => {
+            mouse.x = e.touches[0].clientX;
+            mouse.y = e.touches[0].clientY;
+        });
+
+        window.addEventListener('touchend', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Initialize
+        window.addEventListener('resize', resize);
+        resize();
+        animate();
+
+        // ═══════════════════════════════════════════════════════════════
+        // FREQUENCY COUNTER
+        // ═══════════════════════════════════════════════════════════════
+        const freqEl = document.getElementById('currentFreq');
+        if (freqEl) {
+            setInterval(() => {
+                const base = 444;
+                const variance = Math.floor(Math.random() * 20) - 10;
+                freqEl.textContent = base + variance;
+            }, 2000);
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // SMOOTH SCROLL
+        // ═══════════════════════════════════════════════════════════════
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

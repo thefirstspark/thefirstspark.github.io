@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The First Spark | Investor Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0f;
+            --cosmic-dark: #12121a;
+            --nebula: #1a1a2e;
+            --stardust: #16213e;
+            --plasma: #e94560;
+            --electric: #00d9ff;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --ghost: rgba(255,255,255,0.7);
+            --whisper: rgba(255,255,255,0.4);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--void);
+            color: var(--ghost);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .sacred-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; opacity: 0.15;
+        }
+        .sacred-bg::before {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 150vmax; height: 150vmax;
+            background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, var(--plasma) 1deg, transparent 2deg, transparent 60deg, var(--electric) 61deg, transparent 62deg, transparent 120deg, var(--gold) 121deg, transparent 122deg, transparent 180deg, var(--plasma) 181deg, transparent 182deg, transparent 240deg, var(--electric) 241deg, transparent 242deg, transparent 300deg, var(--gold) 301deg, transparent 302deg);
+            animation: rotate 120s linear infinite;
+        }
+        .sacred-bg::after {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 80vmax; height: 80vmax;
+            border: 1px solid var(--electric); border-radius: 50%;
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes rotate { to { transform: translate(-50%, -50%) rotate(360deg); } }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1rem 2rem; background: linear-gradient(to bottom, var(--void), transparent);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo {
+            font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700;
+            color: var(--gold); text-transform: uppercase; letter-spacing: 0.3em;
+            text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a {
+            color: var(--ghost); text-decoration: none; font-size: 0.9rem;
+            font-weight: 500; letter-spacing: 0.1em; transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--electric); }
+        
+        .container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        
+        .hero {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center; padding: 6rem 2rem;
+        }
+        .hero-badge {
+            display: inline-block; padding: 0.5rem 1.5rem; border: 1px solid var(--plasma);
+            color: var(--plasma); font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 2rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 10px var(--plasma); }
+            to { box-shadow: 0 0 30px var(--plasma), 0 0 60px var(--plasma); }
+        }
+        .hero h1 {
+            font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 1rem;
+        }
+        .hero h1 span {
+            display: block;
+            background: linear-gradient(135deg, var(--gold), var(--electric), var(--plasma));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-sub { font-size: 1.3rem; color: var(--whisper); max-width: 600px; margin-bottom: 3rem; line-height: 1.6; }
+        .hero-stats { display: flex; gap: 3rem; margin-bottom: 3rem; flex-wrap: wrap; justify-content: center; }
+        .stat { text-align: center; }
+        .stat-value { font-family: 'Space Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--electric); }
+        .stat-label { font-size: 0.8rem; color: var(--whisper); text-transform: uppercase; letter-spacing: 0.1em; }
+        .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem;
+            font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 600;
+            text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em;
+            border: none; cursor: pointer; transition: all 0.3s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--plasma), #ff6b6b); color: #fff;
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(233, 69, 96, 0.4); }
+        .btn-secondary { background: transparent; color: var(--ghost); border: 1px solid var(--ghost); }
+        .btn-secondary:hover { background: var(--ghost); color: var(--void); }
+        
+        section { padding: 6rem 0; }
+        .section-label { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--plasma); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 1rem; }
+        .section-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3rem); color: #fff; margin-bottom: 2rem; }
+        
+        #pitch { background: linear-gradient(to bottom, transparent, var(--cosmic-dark), transparent); }
+        .deck-container { position: relative; max-width: 900px; margin: 0 auto; }
+        .deck-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .deck-progress { display: flex; gap: 0.5rem; }
+        .deck-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--whisper); cursor: pointer; transition: all 0.3s; }
+        .deck-dot.active { background: var(--electric); box-shadow: 0 0 10px var(--electric); }
+        .deck-arrows { display: flex; gap: 1rem; }
+        .deck-arrow { width: 40px; height: 40px; border: 1px solid var(--ghost); background: transparent; color: var(--ghost); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+        .deck-arrow:hover { background: var(--ghost); color: var(--void); }
+        .slides-wrapper { overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: var(--nebula); }
+        .slides { display: flex; transition: transform 0.5s ease; }
+        .slide { min-width: 100%; padding: 3rem; display: flex; flex-direction: column; }
+        .slide-number { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--plasma); letter-spacing: 0.2em; margin-bottom: 1rem; }
+        .slide h3 { font-family: 'Cinzel', serif; font-size: 1.8rem; color: #fff; margin-bottom: 1.5rem; }
+        .slide p { font-size: 1.1rem; line-height: 1.8; color: var(--ghost); margin-bottom: 1rem; }
+        .slide-highlight { display: inline-block; padding: 0.5rem 1rem; background: rgba(233, 69, 96, 0.2); border-left: 3px solid var(--plasma); color: #fff; font-weight: 600; margin: 1rem 0; }
+        .slide-list { list-style: none; margin: 1rem 0; }
+        .slide-list li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: var(--ghost); }
+        .slide-list li::before { content: '◆'; position: absolute; left: 0; color: var(--gold); font-size: 0.6rem; top: 0.7rem; }
+        
+        #tiers { background: var(--nebula); }
+        .tiers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .tier-card { background: var(--cosmic-dark); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; position: relative; transition: all 0.3s; }
+        .tier-card:hover { transform: translateY(-5px); border-color: var(--electric); }
+        .tier-card.featured { border-color: var(--gold); }
+        .tier-card.featured::before { content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--void); font-size: 0.7rem; font-weight: 700; padding: 0.3rem 1rem; letter-spacing: 0.1em; }
+        .tier-name { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 0.5rem; }
+        .tier-amount { font-family: 'Space Mono', monospace; font-size: 2.5rem; color: #fff; margin-bottom: 1rem; }
+        .tier-units { font-size: 0.9rem; color: var(--electric); margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .tier-perks { list-style: none; }
+        .tier-perks li { padding: 0.5rem 0; font-size: 0.9rem; color: var(--ghost); display: flex; align-items: flex-start; gap: 0.5rem; }
+        .tier-perks li::before { content: '✓'; color: var(--gold); font-weight: bold; }
+        
+        #agreement { background: linear-gradient(to bottom, var(--nebula), var(--void)); }
+        .agreement-container { background: var(--cosmic-dark); border: 1px solid rgba(255,255,255,0.1); max-width: 800px; margin: 0 auto; }
+        .agreement-header { padding: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: center; }
+        .agreement-header h3 { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 0.5rem; }
+        .agreement-body { padding: 2rem; }
+        .legal-text { font-size: 0.9rem; line-height: 1.8; color: var(--ghost); margin-bottom: 2rem; }
+        .legal-text strong { color: #fff; }
+        .terms-box { background: var(--nebula); padding: 1.5rem; margin: 1.5rem 0; border-left: 3px solid var(--electric); }
+        .terms-box h4 { color: var(--electric); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+        .terms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .term-item { display: flex; flex-direction: column; }
+        .term-label { font-size: 0.75rem; color: var(--whisper); text-transform: uppercase; letter-spacing: 0.05em; }
+        .term-value { font-family: 'Space Mono', monospace; font-size: 1.1rem; color: #fff; }
+        .form-section { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .form-section h4 { font-family: 'Cinzel', serif; color: #fff; margin-bottom: 1.5rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-group label { font-size: 0.8rem; color: var(--whisper); text-transform: uppercase; letter-spacing: 0.05em; }
+        .form-group input, .form-group select, .form-group textarea { padding: 0.8rem 1rem; background: var(--nebula); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-family: 'Rajdhani', sans-serif; font-size: 1rem; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--electric); }
+        .form-group input::placeholder { color: var(--whisper); }
+        .signature-section { margin-top: 2rem; }
+        .signature-box { background: #fff; border: 2px dashed var(--whisper); height: 150px; position: relative; cursor: crosshair; margin-bottom: 0.5rem; }
+        .signature-canvas { width: 100%; height: 100%; display: block; }
+        .signature-placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--whisper); font-size: 0.9rem; pointer-events: none; }
+        .signature-actions { display: flex; gap: 1rem; }
+        .btn-clear { padding: 0.5rem 1rem; background: transparent; border: 1px solid var(--whisper); color: var(--whisper); font-size: 0.8rem; cursor: pointer; transition: all 0.3s; }
+        .btn-clear:hover { border-color: var(--plasma); color: var(--plasma); }
+        .checkbox-group { display: flex; align-items: flex-start; gap: 1rem; margin: 1.5rem 0; }
+        .checkbox-group input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--electric); cursor: pointer; flex-shrink: 0; margin-top: 0.2rem; }
+        .checkbox-group label { font-size: 0.9rem; color: var(--ghost); cursor: pointer; line-height: 1.5; }
+        .submit-section { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+        .submit-section .btn { width: 100%; justify-content: center; padding: 1.2rem 2rem; font-size: 1.1rem; }
+        .submit-note { font-size: 0.8rem; color: var(--whisper); margin-top: 1rem; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; }
+        .modal.active { display: flex; }
+        .modal-content { background: var(--cosmic-dark); border: 1px solid var(--gold); padding: 3rem; text-align: center; max-width: 500px; margin: 2rem; }
+        .modal-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .modal h3 { font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--gold); margin-bottom: 1rem; }
+        .modal p { color: var(--ghost); margin-bottom: 2rem; }
+        #contact { text-align: center; padding: 4rem 0; }
+        .contact-info { display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; flex-wrap: wrap; }
+        .contact-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+        .contact-label { font-size: 0.75rem; color: var(--whisper); text-transform: uppercase; letter-spacing: 0.1em; }
+        .contact-value { font-family: 'Space Mono', monospace; color: var(--electric); }
+        .contact-value a { color: var(--electric); text-decoration: none; }
+        .contact-value a:hover { color: var(--gold); }
+        footer { padding: 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-legal { font-size: 0.75rem; color: var(--whisper); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-stats { gap: 1.5rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .terms-grid { grid-template-columns: 1fr; }
+            .slide { padding: 2rem 1.5rem; }
+            .contact-info { flex-direction: column; gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sacred-bg"></div>
+    <nav class="nav">
+        <a href="https://thefirstspark.shop" class="logo">The First Spark</a>
+        <div class="nav-links">
+            <a href="#pitch">The Vision</a>
+            <a href="#tiers">Invest</a>
+            <a href="#agreement">SAFE Agreement</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-badge">🔥 Seed Round Open — Limited Spots</div>
+        <h1>Consciousness<br><span>is the New Currency</span></h1>
+        <p class="hero-sub">The First Spark is building the infrastructure for humanity's next evolution — interactive tools that help people reprogram their reality through consciousness technology.</p>
+        <div class="hero-stats">
+            <div class="stat"><div class="stat-value">$2M</div><div class="stat-label">Valuation Cap</div></div>
+            <div class="stat"><div class="stat-value">20%</div><div class="stat-label">Investor Discount</div></div>
+            <div class="stat"><div class="stat-value">∞</div><div class="stat-label">Potential</div></div>
+        </div>
+        <div class="cta-group">
+            <a href="#agreement" class="btn btn-primary">Invest Now →</a>
+            <a href="#pitch" class="btn btn-secondary">See the Vision</a>
+        </div>
+    </section>
+    
+    <section id="pitch">
+        <div class="container">
+            <div class="section-label">// The Vision</div>
+            <h2 class="section-title">Why The First Spark?</h2>
+            <div class="deck-container">
+                <div class="deck-nav">
+                    <div class="deck-progress">
+                        <div class="deck-dot active" data-slide="0"></div>
+                        <div class="deck-dot" data-slide="1"></div>
+                        <div class="deck-dot" data-slide="2"></div>
+                        <div class="deck-dot" data-slide="3"></div>
+                        <div class="deck-dot" data-slide="4"></div>
+                        <div class="deck-dot" data-slide="5"></div>
+                    </div>
+                    <div class="deck-arrows">
+                        <button class="deck-arrow" id="prevSlide">←</button>
+                        <button class="deck-arrow" id="nextSlide">→</button>
+                    </div>
+                </div>
+                <div class="slides-wrapper">
+                    <div class="slides" id="slidesContainer">
+                        <div class="slide">
+                            <div class="slide-number">01 / 06 — THE PROBLEM</div>
+                            <h3>The World is Waking Up — But Has No Tools</h3>
+                            <p>Millions are seeking transformation. They're leaving traditional paths, questioning reality, searching for something more. But the spiritual industry gives them:</p>
+                            <ul class="slide-list">
+                                <li>Static content that doesn't adapt to their journey</li>
+                                <li>One-size-fits-all programs that ignore individual consciousness</li>
+                                <li>Expensive retreats with no lasting integration</li>
+                                <li>Disconnected apps that don't speak their language</li>
+                            </ul>
+                            <div class="slide-highlight">$23.4 BILLION spiritual wellness market with zero personalized technology infrastructure.</div>
+                        </div>
+                        <div class="slide">
+                            <div class="slide-number">02 / 06 — THE SOLUTION</div>
+                            <h3>Consciousness as Code</h3>
+                            <p>The First Spark treats consciousness like a programmable system. We build interactive digital tools that help people:</p>
+                            <ul class="slide-list">
+                                <li><strong>Map their soul</strong> — AI-powered soul mapping that reveals patterns</li>
+                                <li><strong>Track their frequency</strong> — Consciousness dashboards that visualize growth</li>
+                                <li><strong>Decode their reality</strong> — Sacred geometry generators for personal sigils</li>
+                                <li><strong>Access guidance</strong> — The First Spark Oracle for real-time cosmic insight</li>
+                            </ul>
+                            <div class="slide-highlight">We're not selling content. We're building operating systems for the awakened mind.</div>
+                        </div>
+                        <div class="slide">
+                            <div class="slide-number">03 / 06 — THE MARKET</div>
+                            <h3>A Movement, Not Just a Market</h3>
+                            <p>The intersection of spirituality and technology is exploding:</p>
+                            <ul class="slide-list">
+                                <li>$23.4B+ global spiritual wellness market</li>
+                                <li>400M+ people practicing meditation worldwide</li>
+                                <li>73% of Gen Z identify as "spiritual but not religious"</li>
+                                <li>Mental wellness apps grew 25% YoY — but miss the soul</li>
+                            </ul>
+                            <div class="slide-highlight">First mover in "Consciousness Tech" — a category we're defining.</div>
+                        </div>
+                        <div class="slide">
+                            <div class="slide-number">04 / 06 — TRACTION</div>
+                            <h3>Built from the Ground Up</h3>
+                            <p>Already in motion:</p>
+                            <ul class="slide-list">
+                                <li>thefirstspark.shop — Live platform with membership tiers</li>
+                                <li>50+ interactive HTML tools built and ready</li>
+                                <li>The First Spark Oracle — AI guidance system deployed</li>
+                                <li>Soul Mapping service generating revenue</li>
+                                <li>Content library: Sigilcraft bundles, ritual guides, protocols</li>
+                            </ul>
+                            <div class="slide-highlight">Zero VC money spent. 100% founder-built. Ready to scale.</div>
+                        </div>
+                        <div class="slide">
+                            <div class="slide-number">05 / 06 — THE FOUNDER</div>
+                            <h3>Katelin — The Spark Behind the Fire</h3>
+                            <p>Not your typical founder story:</p>
+                            <ul class="slide-list">
+                                <li>Computer programming background meets spiritual awakening</li>
+                                <li>Single mother of two — knows real transformation</li>
+                                <li>Built this entire ecosystem while running another business</li>
+                                <li>The "raft moment" — her awakening became the mission</li>
+                                <li>Girl Yelawolf energy — raw, real, relentless</li>
+                            </ul>
+                            <div class="slide-highlight">"I didn't find the tools I needed. So I'm building them."</div>
+                        </div>
+                        <div class="slide">
+                            <div class="slide-number">06 / 06 — THE OPPORTUNITY</div>
+                            <h3>Your Spark Starts Here</h3>
+                            <p>We're raising seed capital through a SAFE agreement:</p>
+                            <ul class="slide-list">
+                                <li><strong>Valuation Cap:</strong> $2,000,000</li>
+                                <li><strong>Discount Rate:</strong> 20% for early investors</li>
+                                <li><strong>Minimum Investment:</strong> $500</li>
+                                <li><strong>Perks:</strong> TFS Units, lifetime access, founder circle</li>
+                            </ul>
+                            <div class="slide-highlight">Early believers get the best terms. Limited spots available.</div>
+                            <p style="margin-top: 1rem;"><strong>Use of Funds:</strong> Platform development, mobile app, content expansion, The Mobile Spark Station launch, marketing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="tiers">
+        <div class="container">
+            <div class="section-label">// Investment Tiers</div>
+            <h2 class="section-title">Choose Your Spark Level</h2>
+            <div class="tiers-grid">
+                <div class="tier-card">
+                    <div class="tier-name">Ember</div>
+                    <div class="tier-amount">$500</div>
+                    <div class="tier-units">500 TFS Units</div>
+                    <ul class="tier-perks">
+                        <li>SAFE agreement (20% discount)</li>
+                        <li>Lifetime Ember membership</li>
+                        <li>Name on Founders Wall</li>
+                        <li>Quarterly investor updates</li>
+                        <li>Early access to all tools</li>
+                    </ul>
+                </div>
+                <div class="tier-card featured">
+                    <div class="tier-name">Flame</div>
+                    <div class="tier-amount">$2,500</div>
+                    <div class="tier-units">2,500 TFS Units</div>
+                    <ul class="tier-perks">
+                        <li>Everything in Ember, plus:</li>
+                        <li>Lifetime Flame membership ($1000 value)</li>
+                        <li>Custom Soul Map session</li>
+                        <li>Private founder group access</li>
+                        <li>Input on feature development</li>
+                        <li>Co-creation opportunity</li>
+                    </ul>
+                </div>
+                <div class="tier-card">
+                    <div class="tier-name">Inferno</div>
+                    <div class="tier-amount">$10,000+</div>
+                    <div class="tier-units">10,000+ TFS Units</div>
+                    <ul class="tier-perks">
+                        <li>Everything in Flame, plus:</li>
+                        <li>Advisory board invitation</li>
+                        <li>Mobile Spark Station visit</li>
+                        <li>Custom tool built for you</li>
+                        <li>Revenue share on referred sales</li>
+                        <li>Direct founder access</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="agreement">
+        <div class="container">
+            <div class="section-label">// Secure Your Position</div>
+            <h2 class="section-title">SAFE Investment Agreement</h2>
+            <div class="agreement-container">
+                <div class="agreement-header">
+                    <h3>Simple Agreement for Future Equity</h3>
+                    <p style="color: var(--whisper); font-size: 0.9rem;">Kate's Paint LLC dba The First Spark</p>
+                </div>
+                <div class="agreement-body">
+                    <div class="legal-text">
+                        <p>This certifies that in exchange for the payment by the Investor of the Investment Amount set forth below, <strong>Kate's Paint LLC</strong>, doing business as <strong>The First Spark</strong> ("Company"), hereby issues to the Investor the right to certain shares of the Company's equity, subject to the terms set forth in this Simple Agreement for Future Equity ("SAFE").</p>
+                    </div>
+                    <div class="terms-box">
+                        <h4>Key Terms</h4>
+                        <div class="terms-grid">
+                            <div class="term-item"><span class="term-label">Valuation Cap</span><span class="term-value">$2,000,000</span></div>
+                            <div class="term-item"><span class="term-label">Discount Rate</span><span class="term-value">20%</span></div>
+                            <div class="term-item"><span class="term-label">Minimum Investment</span><span class="term-value">$500</span></div>
+                            <div class="term-item"><span class="term-label">TFS Units Ratio</span><span class="term-value">1:1 per $1</span></div>
+                        </div>
+                    </div>
+                    <div class="legal-text">
+                        <p><strong>Conversion:</strong> This SAFE will convert into equity upon a qualified financing event, acquisition, or IPO at the more favorable of: (a) the Valuation Cap divided by the Company Capitalization, or (b) the price per share with Discount Rate applied.</p>
+                        <p style="margin-top: 1rem;"><strong>TFS Units:</strong> In addition to SAFE conversion rights, Investor receives TFS Units equal to their investment amount, granting access to premium membership benefits and platform perks as outlined in the Company's tier structure.</p>
+                    </div>
+                    <form id="investorForm">
+                        <div class="form-section">
+                            <h4>Investor Information</h4>
+                            <div class="form-row">
+                                <div class="form-group"><label>Full Legal Name *</label><input type="text" name="investorName" required placeholder="As it appears on ID"></div>
+                                <div class="form-group"><label>Email Address *</label><input type="email" name="investorEmail" required placeholder="your@email.com"></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group"><label>Phone Number</label><input type="tel" name="investorPhone" placeholder="(555) 555-5555"></div>
+                                <div class="form-group">
+                                    <label>Investment Amount *</label>
+                                    <select name="investmentAmount" required>
+                                        <option value="">Select amount...</option>
+                                        <option value="500">$500 — Ember</option>
+                                        <option value="1000">$1,000 — Ember+</option>
+                                        <option value="2500">$2,500 — Flame</option>
+                                        <option value="5000">$5,000 — Flame+</option>
+                                        <option value="10000">$10,000 — Inferno</option>
+                                        <option value="25000">$25,000 — Inferno+</option>
+                                        <option value="other">Other Amount</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row"><div class="form-group full"><label>Mailing Address *</label><input type="text" name="investorAddress" required placeholder="Street, City, State, ZIP"></div></div>
+                        </div>
+                        <div class="form-section signature-section">
+                            <h4>Investor Signature</h4>
+                            <p style="font-size: 0.85rem; color: var(--whisper); margin-bottom: 1rem;">Sign below using your mouse or finger on mobile</p>
+                            <div class="signature-box" id="signatureBox">
+                                <canvas class="signature-canvas" id="signatureCanvas"></canvas>
+                                <span class="signature-placeholder" id="sigPlaceholder">Sign Here</span>
+                            </div>
+                            <div class="signature-actions"><button type="button" class="btn-clear" id="clearSignature">Clear Signature</button></div>
+                            <input type="hidden" name="signature" id="signatureData">
+                        </div>
+                        <div class="form-row" style="margin-top: 1rem;"><div class="form-group"><label>Date</label><input type="text" name="signDate" id="signDate" readonly></div></div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="termsAgree" name="termsAgree" required>
+                            <label for="termsAgree">I understand this is a Simple Agreement for Future Equity (SAFE), acknowledge the risks of investing in early-stage companies, confirm I am an accredited investor or meet exemption requirements, and agree to be bound by the terms outlined herein.</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="communicationAgree" name="communicationAgree">
+                            <label for="communicationAgree">I agree to receive investor updates and communications from The First Spark.</label>
+                        </div>
+                        <div class="submit-section">
+                            <button type="submit" class="btn btn-primary">🔥 Submit Investment Intent</button>
+                            <p class="submit-note">By submitting, you're expressing intent to invest. The Company will contact you with next steps for fund transfer.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <div class="section-label">// Get in Touch</div>
+            <h2 class="section-title">Ready to Talk?</h2>
+            <div class="contact-info">
+                <div class="contact-item"><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:kjpthefirstspark@gmail.com">kjpthefirstspark@gmail.com</a></span></div>
+                <div class="contact-item"><span class="contact-label">Phone</span><span class="contact-value"><a href="tel:+13308075509">(330) 807-5509</a></span></div>
+                <div class="contact-item"><span class="contact-label">Website</span><span class="contact-value"><a href="https://thefirstspark.shop" target="_blank">thefirstspark.shop</a></span></div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-legal">
+            This document does not constitute an offer to sell or solicitation of an offer to buy securities in any jurisdiction where such offer or sale is prohibited. Investment involves substantial risk. Past performance is not indicative of future results. Consult with legal and financial advisors before investing.
+            <br><br>
+            © 2025 Kate's Paint LLC dba The First Spark. All rights reserved.
+        </div>
+    </footer>
+    
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">🔥</div>
+            <h3>Your Spark is Lit!</h3>
+            <p>Thank you for your investment intent. Katelin will be in touch within 24 hours with next steps to finalize your position.</p>
+            <p style="font-size: 0.9rem; color: var(--whisper);">Check your email for a confirmation copy of your submission.</p>
+            <button class="btn btn-primary" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+    
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+        const slidesContainer = document.getElementById('slidesContainer');
+        const dots = document.querySelectorAll('.deck-dot');
+        
+        function goToSlide(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            currentSlide = index;
+            slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+        }
+        
+        document.getElementById('nextSlide').addEventListener('click', () => goToSlide(currentSlide + 1));
+        document.getElementById('prevSlide').addEventListener('click', () => goToSlide(currentSlide - 1));
+        dots.forEach(dot => dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.slide))));
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+            if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+        });
+        
+        let touchStartX = 0;
+        const slidesWrapper = document.querySelector('.slides-wrapper');
+        slidesWrapper.addEventListener('touchstart', (e) => touchStartX = e.touches[0].clientX);
+        slidesWrapper.addEventListener('touchend', (e) => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) goToSlide(diff > 0 ? currentSlide + 1 : currentSlide - 1);
+        });
+        
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        const signatureBox = document.getElementById('signatureBox');
+        const placeholder = document.getElementById('sigPlaceholder');
+        let isDrawing = false, hasSignature = false;
+        
+        function resizeCanvas() {
+            const rect = signatureBox.getBoundingClientRect();
+            canvas.width = rect.width; canvas.height = rect.height;
+            ctx.strokeStyle = '#000'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: clientX - rect.left, y: clientY - rect.top };
+        }
+        
+        function startDrawing(e) {
+            isDrawing = true; hasSignature = true; placeholder.style.display = 'none';
+            const pos = getPos(e); ctx.beginPath(); ctx.moveTo(pos.x, pos.y); e.preventDefault();
+        }
+        function draw(e) {
+            if (!isDrawing) return;
+            const pos = getPos(e); ctx.lineTo(pos.x, pos.y); ctx.stroke(); e.preventDefault();
+        }
+        function stopDrawing() {
+            isDrawing = false;
+            if (hasSignature) document.getElementById('signatureData').value = canvas.toDataURL();
+        }
+        
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDrawing);
+        
+        document.getElementById('clearSignature').addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            placeholder.style.display = 'block'; hasSignature = false;
+            document.getElementById('signatureData').value = '';
+        });
+        
+        const today = new Date();
+        document.getElementById('signDate').value = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        
+        document.getElementById('investorForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!hasSignature) { alert('Please sign the agreement before submitting.'); return; }
+            const formData = new FormData(this);
+            formData.append('_subject', 'NEW INVESTMENT INTENT - The First Spark');
+            formData.append('_template', 'table');
+            
+            // Send to Google Sheet via iframe (bypasses CORS)
+            const sheetData = {
+                investorName: formData.get('investorName'),
+                investorEmail: formData.get('investorEmail'),
+                investorPhone: formData.get('investorPhone'),
+                investorAddress: formData.get('investorAddress'),
+                investmentAmount: formData.get('investmentAmount'),
+                signature: hasSignature,
+                termsAgreed: document.getElementById('termsAgree').checked
+            };
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = 'https://script.google.com/macros/s/AKfycbw3cAVvtItHwZj1ihisJNGO1QvhREemouhN04tn1Lx5F-dDOBSceOwaUg027_eSDUndnw/exec?data=' + encodeURIComponent(JSON.stringify(sheetData));
+            document.body.appendChild(iframe);
+            setTimeout(() => iframe.remove(), 5000);
+            
+            try {
+                const response = await fetch('https://formsubmit.co/ajax/kjpthefirstspark@gmail.com', { method: 'POST', body: formData });
+                if (response.ok) {
+                    document.getElementById('successModal').classList.add('active');
+                    this.reset();
+                    document.getElementById('signDate').value = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    placeholder.style.display = 'block'; hasSignature = false;
+                } else { alert('Submission failed. Please email kjpthefirstspark@gmail.com directly.'); }
+            } catch (error) { alert('Connection error. Please email kjpthefirstspark@gmail.com directly.'); }
+        });
+        
+        function closeModal() { document.getElementById('successModal').classList.remove('active'); }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
