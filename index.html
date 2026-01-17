@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✦ THE FIRST SPARK ✦ Cosmic Reciprocity Engine</title>
+    <title>✦ THE FIRST SPARK ✦ Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -15,9 +15,13 @@
         body {
             background: #000000;
             color: #e0e6ff;
-            font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             overflow: hidden;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
 
         /* Cosmic animated background */
@@ -64,96 +68,52 @@
             50% { opacity: 1; }
         }
 
-        .deck-container {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .container {
             position: relative;
-            z-index: 2;
+            z-index: 10;
+            text-align: center;
+            max-width: 800px;
+            padding: 60px;
         }
 
-        .slide {
-            display: none;
-            width: 100%;
-            height: 100%;
-            padding: 80px 100px;
-            animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-            flex-direction: column;
-            justify-content: space-between;
-            z-index: 2;
-        }
-
-        .slide.active {
-            display: flex;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(80px) scale(0.95);
-                filter: blur(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0) scale(1);
-                filter: blur(0);
-            }
-        }
-
-        /* Slide backgrounds with nebula effects */
-        .slide-1 {
-            background:
-                radial-gradient(ellipse at 10% 20%, rgba(255, 20, 147, 0.2) 0%, transparent 40%),
-                radial-gradient(ellipse at 90% 80%, rgba(138, 43, 226, 0.2) 0%, transparent 40%),
-                linear-gradient(135deg, #0a0015 0%, #1a0a2e 50%, #0a0015 100%);
-        }
-        .slide-2 {
-            background:
-                radial-gradient(ellipse at 20% 80%, rgba(0, 191, 255, 0.2) 0%, transparent 40%),
-                radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.2) 0%, transparent 40%),
-                linear-gradient(135deg, #0a0015 0%, #0f1f2e 50%, #0a0015 100%);
-        }
-        .slide-3 {
-            background:
-                radial-gradient(ellipse at 50% 50%, rgba(124, 58, 237, 0.25) 0%, transparent 50%),
-                radial-gradient(ellipse at 0% 100%, rgba(6, 182, 212, 0.2) 0%, transparent 40%),
-                linear-gradient(135deg, #0a0015 0%, #16092e 50%, #0a0015 100%);
-        }
-
-        h1 {
+        .logo {
             font-family: 'Orbitron', monospace;
-            font-size: 5em;
+            font-size: 4em;
             font-weight: 900;
-            margin-bottom: 30px;
-            letter-spacing: 4px;
-            line-height: 1.1;
-            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 40px;
             background: linear-gradient(135deg, #fff 0%, #a5f3fc 50%, #c084fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 40px rgba(165, 243, 252, 0.5);
+            text-shadow: 0 0 60px rgba(165, 243, 252, 0.8);
             animation: glowPulse 3s ease-in-out infinite;
             position: relative;
         }
 
-        h1::after {
+        .logo::before {
             content: '✦';
             position: absolute;
-            right: -60px;
+            left: -80px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 0.5em;
+            font-size: 0.6em;
             animation: spinStar 4s linear infinite;
         }
 
+        .logo::after {
+            content: '✦';
+            position: absolute;
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.6em;
+            animation: spinStar 4s linear infinite reverse;
+        }
+
         @keyframes glowPulse {
-            0%, 100% { text-shadow: 0 0 40px rgba(165, 243, 252, 0.5); }
-            50% { text-shadow: 0 0 60px rgba(165, 243, 252, 0.8), 0 0 80px rgba(192, 132, 252, 0.4); }
+            0%, 100% { text-shadow: 0 0 60px rgba(165, 243, 252, 0.8); }
+            50% { text-shadow: 0 0 100px rgba(165, 243, 252, 1), 0 0 120px rgba(192, 132, 252, 0.6); }
         }
 
         @keyframes spinStar {
@@ -161,323 +121,32 @@
             to { transform: translateY(-50%) rotate(360deg); }
         }
 
-        h2 {
+        h1 {
             font-family: 'Orbitron', monospace;
-            font-size: 3.2em;
-            font-weight: 700;
-            margin-bottom: 50px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #a5f3fc;
+            text-shadow: 0 0 30px rgba(165, 243, 252, 0.5);
         }
 
         p {
             font-size: 1.4em;
-            line-height: 1.7;
-            margin-bottom: 25px;
-            max-width: 1000px;
-        }
-
-        .subtitle {
-            font-size: 1.8em;
+            line-height: 1.8;
+            margin-bottom: 50px;
             opacity: 0.9;
-            font-weight: 400;
-            margin-top: 40px;
-            font-style: italic;
-            color: #a5f3fc;
-            text-shadow: 0 0 20px rgba(165, 243, 252, 0.3);
         }
 
-        .highlight-red {
-            color: #ff1f7a;
-            font-weight: 700;
-            text-shadow: 0 0 20px rgba(255, 31, 122, 0.6);
-            font-family: 'Orbitron', monospace;
-            letter-spacing: 1px;
-        }
-
-        .highlight-green {
-            color: #00ff88;
-            font-weight: 700;
-            text-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
-            font-family: 'Orbitron', monospace;
-            letter-spacing: 1px;
-        }
-
-        .highlight-cyan {
-            color: #00d9ff;
-            font-weight: 700;
-            text-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
-            font-family: 'Orbitron', monospace;
-            letter-spacing: 1px;
-        }
-
-        .game-box {
-            display: flex;
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .game-column {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-left: 4px solid;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .game-column::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .game-column:hover::before {
-            opacity: 1;
-        }
-
-        .game-column:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .game-column.extraction {
-            border-left-color: #ff1f7a;
-            box-shadow: 0 0 30px rgba(255, 31, 122, 0.2);
-        }
-
-        .game-column.reciprocity {
-            border-left-color: #00ff88;
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
-        }
-
-        .game-column h3 {
-            font-size: 1.6em;
-            margin-bottom: 30px;
-        }
-
-        .game-column p {
-            font-size: 1.1em;
-            margin-bottom: 20px;
-        }
-
-        .flow {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .flow-box {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 20px 30px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.2em;
-            border: 2px solid rgba(165, 243, 252, 0.3);
-            min-width: 160px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(165, 243, 252, 0.15);
-            transition: all 0.3s ease;
-        }
-
-        .flow-box:hover {
-            transform: scale(1.05);
-            border-color: rgba(165, 243, 252, 0.6);
-            box-shadow: 0 0 30px rgba(165, 243, 252, 0.4);
-        }
-
-        .flow-arrow {
-            font-size: 2em;
-            opacity: 0.7;
-        }
-
-        canvas {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .controls {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            z-index: 1000;
-        }
-
-        button {
-            background: rgba(0, 217, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(0, 217, 255, 0.4);
-            color: #00d9ff;
-            padding: 14px 32px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-family: 'Orbitron', monospace;
-            font-size: 1em;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(0, 217, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.5s, height 0.5s;
-        }
-
-        button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        button:hover {
-            background: rgba(0, 217, 255, 0.2);
-            border-color: rgba(0, 217, 255, 0.8);
-            box-shadow: 0 0 40px rgba(0, 217, 255, 0.5);
-            transform: scale(1.05);
-        }
-
-        button span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .slide-counter {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            font-size: 1.1em;
-            opacity: 0.7;
-        }
-
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #ff1f7a 0%, #00d9ff 50%, #00ff88 100%);
-            width: 0%;
-            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
-            z-index: 9999;
-        }
-
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8));
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100px); }
-            100% { transform: translateX(100px); }
-        }
-
-        .engine-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .engine-cell {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 16px;
-            border: 2px solid rgba(192, 132, 252, 0.3);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(192, 132, 252, 0.1);
-        }
-
-        .engine-cell::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(192, 132, 252, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .engine-cell:hover::before {
-            opacity: 1;
-            animation: rotate 4s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .engine-cell:hover {
-            transform: translateY(-5px);
-            border-color: rgba(192, 132, 252, 0.6);
-            box-shadow: 0 10px 40px rgba(192, 132, 252, 0.3);
-        }
-
-        .engine-cell h4 {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            color: #c084fc;
-            text-shadow: 0 0 15px rgba(192, 132, 252, 0.5);
-            position: relative;
-            z-index: 1;
-        }
-
-        .engine-cell p {
-            font-size: 1em;
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        .cta {
+        .cta-button {
             background: linear-gradient(135deg, #7c3aed 0%, #c084fc 50%, #00d9ff 100%);
-            padding: 28px 60px;
+            padding: 25px 60px;
             border-radius: 16px;
             font-family: 'Orbitron', monospace;
-            font-size: 1.5em;
-            margin-top: 60px;
+            font-size: 1.4em;
             border: 3px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             font-weight: 700;
             color: white;
+            text-decoration: none;
             display: inline-block;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -485,9 +154,10 @@
             overflow: hidden;
             transition: all 0.3s ease;
             box-shadow: 0 0 40px rgba(124, 58, 237, 0.6);
+            margin: 15px;
         }
 
-        .cta::before {
+        .cta-button::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -503,71 +173,34 @@
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
-        .cta:hover {
+        .cta-button:hover {
             transform: scale(1.08);
             box-shadow: 0 20px 60px rgba(124, 58, 237, 0.8), 0 0 80px rgba(0, 217, 255, 0.4);
             border-color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Cosmic Brand Mark */
-        .brand-mark {
-            position: fixed;
-            top: 40px;
-            left: 40px;
-            z-index: 1000;
-            font-family: 'Orbitron', monospace;
-            font-size: 1.8em;
-            font-weight: 900;
-            letter-spacing: 3px;
-            color: #fff;
-            text-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
-            animation: brandPulse 4s ease-in-out infinite;
+        .cta-button span {
+            position: relative;
+            z-index: 1;
         }
 
-        .brand-mark::before {
-            content: '✦ ';
+        .links {
+            margin-top: 60px;
+        }
+
+        .secondary-link {
             color: #00d9ff;
-            animation: spinSlow 8s linear infinite;
-            display: inline-block;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin: 0 20px;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
         }
 
-        @keyframes brandPulse {
-            0%, 100% {
-                text-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
-                transform: scale(1);
-            }
-            50% {
-                text-shadow: 0 0 50px rgba(0, 217, 255, 1), 0 0 70px rgba(192, 132, 252, 0.6);
-                transform: scale(1.02);
-            }
-        }
-
-        @keyframes spinSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Particle effects on hover */
-        .particle {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, rgba(0, 217, 255, 1), transparent);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: particleFloat 3s ease-out forwards;
-            z-index: 9999;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100px) scale(0);
-            }
+        .secondary-link:hover {
+            text-shadow: 0 0 30px rgba(0, 217, 255, 1);
+            color: #a5f3fc;
         }
     </style>
 </head>
@@ -575,180 +208,30 @@
     <!-- Starfield Background -->
     <div class="starfield" id="starfield"></div>
 
-    <!-- Brand Mark -->
-    <div class="brand-mark">FIRST SPARK</div>
+    <div class="container">
+        <div class="logo">THE FIRST SPARK</div>
 
-    <div class="progress-bar" id="progressBar"></div>
+        <h1>Cosmic Reciprocity Engine</h1>
 
-    <!-- SLIDE 1: THE OLD GAME -->
-    <div class="slide slide-1 active">
-        <div>
-            <h1>The Old Game</h1>
-            <p class="subtitle">How Every Consciousness Platform Extracts Value</p>
-        </div>
-
-        <div class="game-box">
-            <div class="game-column extraction">
-                <h3><span class="highlight-red">Abstraction</span></h3>
-                <p>Hide the real mechanism in language, concepts, methodology.</p>
-                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
-                    "Spiritual wisdom" instead of "here's what I profit from"
-                </p>
-            </div>
-            <div class="game-column extraction">
-                <h3><span class="highlight-red">Distance</span></h3>
-                <p>Separate parties so the cost becomes invisible.</p>
-                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
-                    You pay for teaching, never see where money goes
-                </p>
-            </div>
-            <div class="game-column extraction">
-                <h3><span class="highlight-red">Extraction</span></h3>
-                <p>Take without reciprocity, repeat infinitely.</p>
-                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
-                    Guru keeps profit. You keep questions.
-                </p>
-            </div>
-        </div>
-
-        <div>
-            <p style="margin-top: 80px; font-size: 1.2em; opacity: 0.8;">
-                This pattern is <strong>not accidental.</strong> It is <strong>structural.</strong> It works because it is invisible.
-            </p>
-        </div>
-    </div>
-
-    <!-- SLIDE 2: THE NEW GAME -->
-    <div class="slide slide-2">
-        <div>
-            <h1>The New Game</h1>
-            <p class="subtitle">The Inverse Architecture</p>
-        </div>
-
-        <div class="game-box">
-            <div class="game-column reciprocity">
-                <h3><span class="highlight-green">Transparency</span></h3>
-                <p>Mechanism is visible. The box is clear.</p>
-                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
-                    You see how consciousness tools work. You understand the code.
-                </p>
-            </div>
-            <div class="game-column reciprocity">
-                <h3><span class="highlight-green">Proximity</span></h3>
-                <p>Both parties can see the exchange happening.</p>
-                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
-                    No distance to hide in. No gap for extraction.
-                </p>
-            </div>
-            <div class="game-column reciprocity">
-                <h3><span class="highlight-green">Reciprocity</span></h3>
-                <p>Value flows both directions, or the system breaks.</p>
-                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
-                    You contribute. You receive. Both are visible.
-                </p>
-            </div>
-        </div>
-
-        <div>
-            <p style="margin-top: 80px; font-size: 1.2em; opacity: 0.8;">
-                This isn't ethics. <strong>This is physics.</strong> Once transparency and proximity exist, extraction becomes structurally impossible.
-            </p>
-        </div>
-    </div>
-
-    <!-- SLIDE 3: THE ENGINE -->
-    <div class="slide slide-3">
-        <div>
-            <h1>The Compounding Engine</h1>
-            <p class="subtitle">How The First Spark Turns Reciprocity Into Sustainable Growth</p>
-        </div>
-
-        <div class="engine-grid">
-            <div class="engine-cell">
-                <h4>→ Members Get Artifacts</h4>
-                <p>Tangible proof: tools, guides, rituals, templates, community.</p>
-            </div>
-            <div class="engine-cell">
-                <h4>→ Artifacts Create Proof</h4>
-                <p>Visible value. They can touch it. They can share it.</p>
-            </div>
-            <div class="engine-cell">
-                <h4>→ Proof Builds Trust</h4>
-                <p>No faith required. Geometry compels belief.</p>
-            </div>
-        </div>
-
-        <div class="engine-grid">
-            <div class="engine-cell">
-                <h4>→ Trust Attracts Capital</h4>
-                <p>Investors fund systems, not visions. This is a system.</p>
-            </div>
-            <div class="engine-cell">
-                <h4>→ Capital Attracts Creators</h4>
-                <p>Sustainable model. Visible value share. People want in.</p>
-            </div>
-            <div class="engine-cell">
-                <h4>→ Creators Generate Artifacts</h4>
-                <p>Loop continues. Value compounds. No extraction point.</p>
-            </div>
-        </div>
-
-        <div style="margin-top: 50px; background: rgba(6, 182, 212, 0.15); padding: 30px; border-radius: 12px; border-left: 4px solid #06b6d4;">
-            <p style="margin: 0; font-size: 1.1em;">
-                <strong>In the old game:</strong> Trust erodes, extraction accelerates, system collapses.
-            </p>
-            <p style="margin-top: 20px; margin-bottom: 0; font-size: 1.1em;">
-                <strong>In the new game:</strong> Trust compounds, reciprocity accelerates, system scales.
-            </p>
-        </div>
-
-        <p style="margin-top: 60px; font-size: 1.2em; opacity: 0.8;">
-            This is not a spiritual platform. <strong>This is a reciprocity-based economy architecture.</strong>
+        <p>
+            Where transparency meets the universe. A new architecture for consciousness platforms
+            built on reciprocity, not extraction.
         </p>
-    </div>
 
-    <!-- Controls -->
-    <div class="controls">
-        <button onclick="previousSlide()"><span>← Previous</span></button>
-        <button onclick="nextSlide()"><span>Next →</span></button>
-    </div>
-    <div class="slide-counter">
-        <span id="currentSlide">1</span> / 3
+        <div>
+            <a href="presentation.html" class="cta-button">
+                <span>View Presentation →</span>
+            </a>
+        </div>
+
+        <div class="links">
+            <a href="#about" class="secondary-link">About</a>
+            <a href="#contact" class="secondary-link">Contact</a>
+            <a href="https://github.com/thefirstspark" class="secondary-link" target="_blank">GitHub</a>
+        </div>
     </div>
 
     <script>
-        let currentSlide = 1;
-        const totalSlides = 3;
-
-        function showSlide(n) {
-            const slides = document.querySelectorAll('.slide');
-            
-            if (n > totalSlides) currentSlide = totalSlides;
-            if (n < 1) currentSlide = 1;
-            
-            slides.forEach(slide => slide.classList.remove('active'));
-            slides[currentSlide - 1].classList.add('active');
-            
-            document.getElementById('currentSlide').textContent = currentSlide;
-            document.getElementById('progressBar').style.width = (currentSlide / totalSlides * 100) + '%';
-        }
-
-        function nextSlide() {
-            currentSlide++;
-            showSlide(currentSlide);
-        }
-
-        function previousSlide() {
-            currentSlide--;
-            showSlide(currentSlide);
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') nextSlide();
-            if (e.key === 'ArrowLeft') previousSlide();
-        });
-
         // Starfield generator
         function createStarfield() {
             const starfield = document.getElementById('starfield');
@@ -775,35 +258,7 @@
             }
         }
 
-        // Particle effects on interactive elements
-        function createParticle(x, y) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = x + 'px';
-            particle.style.top = y + 'px';
-            document.body.appendChild(particle);
-
-            setTimeout(() => {
-                particle.remove();
-            }, 3000);
-        }
-
-        // Add particle effects to buttons and interactive elements
-        document.addEventListener('mousemove', (e) => {
-            const isOverInteractive = e.target.closest('button, .game-column, .engine-cell, .flow-box, h1');
-            if (isOverInteractive && Math.random() > 0.95) {
-                createParticle(e.clientX, e.clientY);
-            }
-        });
-
-        // Initialize
-        showSlide(currentSlide);
         createStarfield();
-
-        // Add cosmic entrance animation
-        setTimeout(() => {
-            document.querySelector('.slide.active').style.animation = 'slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
-        }, 100);
     </script>
 </body>
 </html>
