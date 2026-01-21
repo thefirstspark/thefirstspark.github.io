@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✦ THE FIRST SPARK ✦ Cosmic Reciprocity Engine - Presentation</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="The First Spark presentation: Discover the architecture of reciprocity vs extraction. See how the cosmic reciprocity engine creates sustainable value.">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>✦</text></svg>">
+
+    <!-- Performance: DNS prefetch and preconnect -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Optimized font loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Analytics 4 (GA4) -->
+    <!-- Replace 'G-XXXXXXXXXX' with your actual GA4 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            'page_title': 'Presentation',
+            'page_path': '/presentation.html'
+        });
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            color: #e0e6ff;
+            font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Home button */
+        .home-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 1000;
+            background: rgba(0, 217, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: #00d9ff;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .home-btn:hover {
+            background: rgba(0, 217, 255, 0.2);
+            border-color: rgba(0, 217, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+        }
+
+        /* Cosmic animated background - Optimized */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(0, 191, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 20, 147, 0.1) 0%, transparent 50%);
+            animation: cosmicPulse 15s ease-in-out infinite;
+            z-index: 0;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        @keyframes cosmicPulse {
+            0%, 100% { opacity: 0.6; transform: scale3d(1, 1, 1); }
+            50% { opacity: 0.9; transform: scale3d(1.1, 1.1, 1); }
+        }
+
+        /* Starfield - Canvas optimized */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #starCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .deck-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 80px 100px;
+            animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 2;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(80px) scale(0.95);
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        /* Slide backgrounds with nebula effects */
+        .slide-1 {
+            background:
+                radial-gradient(ellipse at 10% 20%, rgba(255, 20, 147, 0.2) 0%, transparent 40%),
+                radial-gradient(ellipse at 90% 80%, rgba(138, 43, 226, 0.2) 0%, transparent 40%),
+                linear-gradient(135deg, #0a0015 0%, #1a0a2e 50%, #0a0015 100%);
+        }
+        .slide-2 {
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(0, 191, 255, 0.2) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.2) 0%, transparent 40%),
+                linear-gradient(135deg, #0a0015 0%, #0f1f2e 50%, #0a0015 100%);
+        }
+        .slide-3 {
+            background:
+                radial-gradient(ellipse at 50% 50%, rgba(124, 58, 237, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 0% 100%, rgba(6, 182, 212, 0.2) 0%, transparent 40%),
+                linear-gradient(135deg, #0a0015 0%, #16092e 50%, #0a0015 100%);
+        }
+
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 5em;
+            font-weight: 900;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #fff 0%, #a5f3fc 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(165, 243, 252, 0.5);
+            animation: glowPulse 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        h1::after {
+            content: '✦';
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.5em;
+            animation: spinStar 4s linear infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 40px rgba(165, 243, 252, 0.5); }
+            50% { text-shadow: 0 0 60px rgba(165, 243, 252, 0.8), 0 0 80px rgba(192, 132, 252, 0.4); }
+        }
+
+        @keyframes spinStar {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.2em;
+            font-weight: 700;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 1.4em;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            max-width: 1000px;
+        }
+
+        .subtitle {
+            font-size: 1.8em;
+            opacity: 0.9;
+            font-weight: 400;
+            margin-top: 40px;
+            font-style: italic;
+            color: #a5f3fc;
+            text-shadow: 0 0 20px rgba(165, 243, 252, 0.3);
+        }
+
+        .highlight-red {
+            color: #ff1f7a;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(255, 31, 122, 0.6);
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 1px;
+        }
+
+        .highlight-green {
+            color: #00ff88;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 1px;
+        }
+
+        .highlight-cyan {
+            color: #00d9ff;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 1px;
+        }
+
+        .game-box {
+            display: flex;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .game-column {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .game-column::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .game-column:hover::before {
+            opacity: 1;
+        }
+
+        .game-column:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-column.extraction {
+            border-left-color: #ff1f7a;
+            box-shadow: 0 0 30px rgba(255, 31, 122, 0.2);
+        }
+
+        .game-column.reciprocity {
+            border-left-color: #00ff88;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .game-column h3 {
+            font-size: 1.6em;
+            margin-bottom: 30px;
+        }
+
+        .game-column p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .flow-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.2em;
+            border: 2px solid rgba(165, 243, 252, 0.3);
+            min-width: 160px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(165, 243, 252, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .flow-box:hover {
+            transform: scale(1.05);
+            border-color: rgba(165, 243, 252, 0.6);
+            box-shadow: 0 0 30px rgba(165, 243, 252, 0.4);
+        }
+
+        .flow-arrow {
+            font-size: 2em;
+            opacity: 0.7;
+        }
+
+        canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        button {
+            background: rgba(0, 217, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 217, 255, 0.4);
+            color: #00d9ff;
+            padding: 14px 32px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            font-size: 1em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(0, 217, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        button:hover {
+            background: rgba(0, 217, 255, 0.2);
+            border-color: rgba(0, 217, 255, 0.8);
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            font-size: 1.1em;
+            opacity: 0.7;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff1f7a 0%, #00d9ff 50%, #00ff88 100%);
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+            z-index: 9999;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8));
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(100px); }
+        }
+
+        .engine-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .engine-cell {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 16px;
+            border: 2px solid rgba(192, 132, 252, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(192, 132, 252, 0.1);
+        }
+
+        .engine-cell::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(192, 132, 252, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .engine-cell:hover::before {
+            opacity: 1;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .engine-cell:hover {
+            transform: translateY(-5px);
+            border-color: rgba(192, 132, 252, 0.6);
+            box-shadow: 0 10px 40px rgba(192, 132, 252, 0.3);
+        }
+
+        .engine-cell h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #c084fc;
+            text-shadow: 0 0 15px rgba(192, 132, 252, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .engine-cell p {
+            font-size: 1em;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #7c3aed 0%, #c084fc 50%, #00d9ff 100%);
+            padding: 28px 60px;
+            border-radius: 16px;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5em;
+            margin-top: 60px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            font-weight: 700;
+            color: white;
+            display: inline-block;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 40px rgba(124, 58, 237, 0.6);
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: ctaShine 3s infinite;
+        }
+
+        @keyframes ctaShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .cta:hover {
+            transform: scale(1.08);
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.8), 0 0 80px rgba(0, 217, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Cosmic Brand Mark */
+        .brand-mark {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 1000;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8em;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
+            animation: brandPulse 4s ease-in-out infinite;
+        }
+
+        .brand-mark::before {
+            content: '✦ ';
+            color: #00d9ff;
+            animation: spinSlow 8s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes brandPulse {
+            0%, 100% {
+                text-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
+                transform: scale(1);
+            }
+            50% {
+                text-shadow: 0 0 50px rgba(0, 217, 255, 1), 0 0 70px rgba(192, 132, 252, 0.6);
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Particle effects on hover */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(0, 217, 255, 1), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleFloat 3s ease-out forwards;
+            z-index: 9999;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .home-btn {
+                top: 20px;
+                left: 20px;
+                padding: 10px 20px;
+                font-size: 0.8em;
+            }
+
+            .slide {
+                padding: 60px 30px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h1::after {
+                right: -30px;
+            }
+
+            .subtitle {
+                font-size: 1.2em;
+            }
+
+            .game-columns {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .engine-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .slide-nav button {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+
+            .brand-mark {
+                font-size: 0.7em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Home Button -->
+    <a href="index.html" class="home-btn">← HOME</a>
+
+    <!-- Starfield Background - Canvas Optimized -->
+    <div class="starfield">
+        <canvas id="starCanvas"></canvas>
+    </div>
+
+    <!-- Brand Mark -->
+    <div class="brand-mark">FIRST SPARK</div>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- SLIDE 1: THE OLD GAME -->
+    <div class="slide slide-1 active">
+        <div>
+            <h1>The Old Game</h1>
+            <p class="subtitle">How Every Consciousness Platform Extracts Value</p>
+        </div>
+
+        <div class="game-box">
+            <div class="game-column extraction">
+                <h3><span class="highlight-red">Abstraction</span></h3>
+                <p>Hide the real mechanism in language, concepts, methodology.</p>
+                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
+                    "Spiritual wisdom" instead of "here's what I profit from"
+                </p>
+            </div>
+            <div class="game-column extraction">
+                <h3><span class="highlight-red">Distance</span></h3>
+                <p>Separate parties so the cost becomes invisible.</p>
+                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
+                    You pay for teaching, never see where money goes
+                </p>
+            </div>
+            <div class="game-column extraction">
+                <h3><span class="highlight-red">Extraction</span></h3>
+                <p>Take without reciprocity, repeat infinitely.</p>
+                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
+                    Guru keeps profit. You keep questions.
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <p style="margin-top: 80px; font-size: 1.2em; opacity: 0.8;">
+                This pattern is <strong>not accidental.</strong> It is <strong>structural.</strong> It works because it is invisible.
+            </p>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: THE NEW GAME -->
+    <div class="slide slide-2">
+        <div>
+            <h1>The New Game</h1>
+            <p class="subtitle">The Inverse Architecture</p>
+        </div>
+
+        <div class="game-box">
+            <div class="game-column reciprocity">
+                <h3><span class="highlight-green">Transparency</span></h3>
+                <p>Mechanism is visible. The box is clear.</p>
+                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
+                    You see how consciousness tools work. You understand the code.
+                </p>
+            </div>
+            <div class="game-column reciprocity">
+                <h3><span class="highlight-green">Proximity</span></h3>
+                <p>Both parties can see the exchange happening.</p>
+                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
+                    No distance to hide in. No gap for extraction.
+                </p>
+            </div>
+            <div class="game-column reciprocity">
+                <h3><span class="highlight-green">Reciprocity</span></h3>
+                <p>Value flows both directions, or the system breaks.</p>
+                <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">
+                    You contribute. You receive. Both are visible.
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <p style="margin-top: 80px; font-size: 1.2em; opacity: 0.8;">
+                This isn't ethics. <strong>This is physics.</strong> Once transparency and proximity exist, extraction becomes structurally impossible.
+            </p>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: THE ENGINE -->
+    <div class="slide slide-3">
+        <div>
+            <h1>The Compounding Engine</h1>
+            <p class="subtitle">How The First Spark Turns Reciprocity Into Sustainable Growth</p>
+        </div>
+
+        <div class="engine-grid">
+            <div class="engine-cell">
+                <h4>→ Members Get Artifacts</h4>
+                <p>Tangible proof: tools, guides, rituals, templates, community.</p>
+            </div>
+            <div class="engine-cell">
+                <h4>→ Artifacts Create Proof</h4>
+                <p>Visible value. They can touch it. They can share it.</p>
+            </div>
+            <div class="engine-cell">
+                <h4>→ Proof Builds Trust</h4>
+                <p>No faith required. Geometry compels belief.</p>
+            </div>
+        </div>
+
+        <div class="engine-grid">
+            <div class="engine-cell">
+                <h4>→ Trust Attracts Capital</h4>
+                <p>Investors fund systems, not visions. This is a system.</p>
+            </div>
+            <div class="engine-cell">
+                <h4>→ Capital Attracts Creators</h4>
+                <p>Sustainable model. Visible value share. People want in.</p>
+            </div>
+            <div class="engine-cell">
+                <h4>→ Creators Generate Artifacts</h4>
+                <p>Loop continues. Value compounds. No extraction point.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px; background: rgba(6, 182, 212, 0.15); padding: 30px; border-radius: 12px; border-left: 4px solid #06b6d4;">
+            <p style="margin: 0; font-size: 1.1em;">
+                <strong>In the old game:</strong> Trust erodes, extraction accelerates, system collapses.
+            </p>
+            <p style="margin-top: 20px; margin-bottom: 0; font-size: 1.1em;">
+                <strong>In the new game:</strong> Trust compounds, reciprocity accelerates, system scales.
+            </p>
+        </div>
+
+        <p style="margin-top: 60px; font-size: 1.2em; opacity: 0.8;">
+            This is not a spiritual platform. <strong>This is a reciprocity-based economy architecture.</strong>
+        </p>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls" id="controls">
+        <button onclick="previousSlide()"><span>← Previous</span></button>
+        <button onclick="nextSlide()" id="nextBtn"><span>Next →</span></button>
+    </div>
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / 3
+    </div>
+
+    <script>
+        // Analytics tracking helper
+        function trackEvent(eventName, eventParams = {}) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, eventParams);
+            }
+        }
+
+        let currentSlide = 1;
+        const totalSlides = 3;
+
+        function updateControls() {
+            const nextBtn = document.getElementById('nextBtn');
+
+            if (currentSlide === totalSlides) {
+                // On last slide, replace Next button with Back to Home
+                nextBtn.innerHTML = '<span>✦ Back to Home</span>';
+                nextBtn.onclick = () => window.location.href = 'index.html';
+            } else {
+                // On other slides, show Next button
+                nextBtn.innerHTML = '<span>Next →</span>';
+                nextBtn.onclick = nextSlide;
+            }
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+
+            if (n > totalSlides) currentSlide = totalSlides;
+            if (n < 1) currentSlide = 1;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+
+            document.getElementById('currentSlide').textContent = currentSlide;
+            document.getElementById('progressBar').style.width = (currentSlide / totalSlides * 100) + '%';
+
+            updateControls();
+
+            // Track slide view
+            const slideNames = ['The Old Game', 'The New Game', 'The Compounding Engine'];
+            trackEvent('slide_view', {
+                'event_category': 'Presentation',
+                'event_label': `Slide ${currentSlide}: ${slideNames[currentSlide - 1]}`,
+                'slide_number': currentSlide,
+                'slide_name': slideNames[currentSlide - 1]
+            });
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+
+            trackEvent('slide_navigation', {
+                'event_category': 'Presentation',
+                'event_label': 'Next',
+                'direction': 'forward',
+                'to_slide': currentSlide
+            });
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+
+            trackEvent('slide_navigation', {
+                'event_category': 'Presentation',
+                'event_label': 'Previous',
+                'direction': 'backward',
+                'to_slide': currentSlide
+            });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+                trackEvent('keyboard_navigation', {
+                    'event_category': 'Presentation',
+                    'event_label': 'Arrow Right'
+                });
+            }
+            if (e.key === 'ArrowLeft') {
+                previousSlide();
+                trackEvent('keyboard_navigation', {
+                    'event_category': 'Presentation',
+                    'event_label': 'Arrow Left'
+                });
+            }
+        });
+
+        // Canvas-based starfield - Much more performant than 200 DOM elements
+        function createStarfield() {
+            const canvas = document.getElementById('starCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Set canvas size
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            // Star configuration
+            const starCount = 200;
+            const stars = [];
+
+            // Initialize stars
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 3,
+                    opacity: Math.random(),
+                    phase: Math.random() * Math.PI * 2,
+                    speed: 2 + Math.random() * 2
+                });
+            }
+
+            // Animation loop
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const time = Date.now() * 0.001;
+
+                stars.forEach(star => {
+                    // Calculate twinkle effect
+                    const twinkle = (Math.sin(time * star.speed + star.phase) + 1) / 2;
+                    const opacity = 0.3 + (twinkle * 0.7);
+
+                    // Draw star
+                    ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+
+        // Particle effects on interactive elements
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 3000);
+        }
+
+        // Add particle effects to buttons and interactive elements
+        document.addEventListener('mousemove', (e) => {
+            const isOverInteractive = e.target.closest('button, .game-column, .engine-cell, .flow-box, h1');
+            if (isOverInteractive && Math.random() > 0.95) {
+                createParticle(e.clientX, e.clientY);
+            }
+        });
+
+        // Track time spent on slides
+        let slideStartTime = Date.now();
+        const originalShowSlide = showSlide;
+        showSlide = function(n) {
+            // Track time on previous slide
+            if (currentSlide >= 1 && currentSlide <= totalSlides) {
+                const timeSpent = Math.round((Date.now() - slideStartTime) / 1000);
+                if (timeSpent > 1) { // Only track if spent more than 1 second
+                    const slideNames = ['The Old Game', 'The New Game', 'The Compounding Engine'];
+                    trackEvent('slide_time_spent', {
+                        'event_category': 'Engagement',
+                        'event_label': `Slide ${currentSlide}: ${slideNames[currentSlide - 1]}`,
+                        'value': timeSpent,
+                        'slide_number': currentSlide
+                    });
+                }
+            }
+
+            // Reset timer for new slide
+            slideStartTime = Date.now();
+
+            // Call original function
+            originalShowSlide(n);
+        };
+
+        // Track CTA clicks on slides
+        function setupPresentationAnalytics() {
+            // Track home button click
+            const homeBtn = document.querySelector('.home-btn');
+            if (homeBtn) {
+                homeBtn.addEventListener('click', () => {
+                    trackEvent('home_button_click', {
+                        'event_category': 'Navigation',
+                        'event_label': 'From Presentation',
+                        'from_slide': currentSlide
+                    });
+                });
+            }
+
+            // Track CTA button clicks on slides
+            document.querySelectorAll('a[href*="whop.com"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const ctaText = e.target.textContent.trim();
+                    trackEvent('presentation_cta_click', {
+                        'event_category': 'Conversion',
+                        'event_label': ctaText,
+                        'from_slide': currentSlide,
+                        'url': e.target.href
+                    });
+                });
+            });
+
+            // Track when user completes presentation (reaches last slide)
+            const originalNextSlide = nextSlide;
+            window.nextSlide = function() {
+                if (currentSlide === totalSlides - 1) {
+                    trackEvent('presentation_completed', {
+                        'event_category': 'Engagement',
+                        'event_label': 'Reached Final Slide'
+                    });
+                }
+                originalNextSlide();
+            };
+        }
+
+        // Initialize
+        showSlide(currentSlide);
+        createStarfield();
+        setupPresentationAnalytics();
+
+        // Add cosmic entrance animation
+        setTimeout(() => {
+            document.querySelector('.slide.active').style.animation = 'slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
+        }, 100);
+    </script>
+</body>
+</html>
