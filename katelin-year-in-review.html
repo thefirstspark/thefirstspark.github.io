@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KJP × Claude | Year in Review</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --accent-pink: #ff2d7a;
+            --accent-cyan: #00f0ff;
+            --accent-purple: #8b5cf6;
+            --accent-gold: #ffd700;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --glow-pink: 0 0 30px rgba(255, 45, 122, 0.4);
+            --glow-cyan: 0 0 30px rgba(0, 240, 255, 0.4);
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 45, 122, 0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .hero h2 {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+        
+        .duration-display {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 30px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 45, 122, 0.3);
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .duration-display .label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .duration-display .value {
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 50px 0;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-pink);
+            box-shadow: var(--glow-pink);
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan));
+        }
+        
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        
+        /* Timeline */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 60px 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: '◆';
+            color: var(--accent-pink);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-pink), var(--accent-purple), var(--accent-cyan));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px 25px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 25px;
+            width: 14px;
+            height: 14px;
+            background: var(--accent-pink);
+            border-radius: 50%;
+            border: 3px solid var(--bg-dark);
+        }
+        
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+        }
+        
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Categories */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .category-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            border-radius: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .category-items {
+            list-style: none;
+        }
+        
+        .category-items li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .category-items li:last-child {
+            border-bottom: none;
+        }
+        
+        .category-items li::before {
+            content: '→';
+            color: var(--accent-cyan);
+        }
+        
+        /* Themes Section */
+        .themes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .theme-tag {
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        
+        .theme-tag:hover {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: var(--accent-purple);
+            transform: scale(1.05);
+        }
+        
+        .theme-tag span {
+            color: var(--accent-gold);
+            margin-right: 8px;
+        }
+        
+        /* Quote Section */
+        .quote-section {
+            text-align: center;
+            padding: 60px 40px;
+            margin: 60px 0;
+            background: linear-gradient(135deg, rgba(255, 45, 122, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 20px;
+            border: 1px solid rgba(255, 45, 122, 0.2);
+            position: relative;
+        }
+        
+        .quote-section::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            font-size: 6rem;
+            color: rgba(255, 45, 122, 0.2);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .quote-text {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+        
+        .quote-source {
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .footer-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 15px;
+            }
+            
+            .stat-card {
+                padding: 20px;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+            
+            .timeline {
+                padding-left: 30px;
+            }
+            
+            .timeline-item::before {
+                left: -26px;
+            }
+            
+            .quote-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-badge">2025 → 2026</div>
+            <h1>KJP × Claude</h1>
+            <h2>Year in Review</h2>
+            <div class="duration-display">
+                <span class="label">Building Together:</span>
+                <span class="value pulse">6 Months</span>
+            </div>
+        </section>
+        
+        <!-- Stats Grid -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🛠️</div>
+                <div class="stat-value">30+</div>
+                <div class="stat-label">Interactive Tools Built</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📄</div>
+                <div class="stat-value">50+</div>
+                <div class="stat-label">Documents Created</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value">$200K</div>
+                <div class="stat-label">Funding Ask Developed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-value">3</div>
+                <div class="stat-label">Revenue Tiers Live</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📖</div>
+                <div class="stat-value">1</div>
+                <div class="stat-label">Memoir in Progress</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌐</div>
+                <div class="stat-value">1</div>
+                <div class="stat-label">Website Ecosystem</div>
+            </div>
+        </section>
+        
+        <!-- Timeline -->
+        <h2 class="section-title">Our Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">July 2025</div>
+                <div class="timeline-title">🌊 The Beginning</div>
+                <div class="timeline-desc">First conversations. Exploring consciousness as code. The simulation hypothesis discussions that would become foundational to The First Spark philosophy.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">September - October 2025</div>
+                <div class="timeline-title">🎮 The Sparkverse Takes Shape</div>
+                <div class="timeline-desc">Game design documents, sigil creation systems, particle networks for the website. Building the interactive soul mapping tools. The Oracle comes alive.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">November 2025</div>
+                <div class="timeline-title">📚 Book Zero & Obitura Launch</div>
+                <div class="timeline-desc">Deep memoir work begins. The cold case story crystallizes. Sigilcraft PDF refined. Obitura backend deployed with Stripe integration. Membership structures finalized.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">December 2025</div>
+                <div class="timeline-title">🔥 The Awakening Architecture</div>
+                <div class="timeline-desc">Theme analysis reveals the patterns: consciousness as code, transformation through collapse, sacred geometry. The Reciprocity Protocol drafted. Raw memoir material shared.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">January 2026</div>
+                <div class="timeline-title">🚀 Investment & Expansion</div>
+                <div class="timeline-desc">Pitch deck evolved to $200K. Website conversion strategy refined. TikTok content strategy. Whop optimization. Anthropic resume created. The vision solidifies.</div>
+            </div>
+        </div>
+        
+        <!-- Categories -->
+        <h2 class="section-title">What We Built</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">⚡</div>
+                    <div class="category-title">Interactive Tools</div>
+                </div>
+                <ul class="category-items">
+                    <li>Soul Map Generator</li>
+                    <li>The Oracle (Multiple Modes)</li>
+                    <li>Void Portal</li>
+                    <li>Quantum Echo Chamber</li>
+                    <li>Sigil Creator & Canvas</li>
+                    <li>Battle Arena</li>
+                    <li>Daily Reset & Energy Check-In</li>
+                    <li>Spark Planner</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">💼</div>
+                    <div class="category-title">Business Development</div>
+                </div>
+                <ul class="category-items">
+                    <li>Investor Pitch Deck ($200K)</li>
+                    <li>Whop Storefront Optimization</li>
+                    <li>Membership Tier Strategy</li>
+                    <li>NVIDIA Inception Application</li>
+                    <li>Anti-Extraction Geometry Framework</li>
+                    <li>Reciprocity Protocol</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">✍️</div>
+                    <div class="category-title">Content & Writing</div>
+                </div>
+                <ul class="category-items">
+                    <li>Book Zero Memoir Development</li>
+                    <li>Sigilcraft PDF (32 pages)</li>
+                    <li>Ritual Guides Collection</li>
+                    <li>AGI Blog Posts</li>
+                    <li>TikTok Scripts</li>
+                    <li>Player Mirror Artifacts System</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🔧</div>
+                    <div class="category-title">Technical Infrastructure</div>
+                </div>
+                <ul class="category-items">
+                    <li>GitHub Pages Deployments</li>
+                    <li>Obitura Backend (AI Obituaries)</li>
+                    <li>Stripe Payment Integration</li>
+                    <li>Supabase Database Setup</li>
+                    <li>Notion Workspace Systems</li>
+                    <li>React Applications</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Themes -->
+        <h2 class="section-title">Recurring Themes</h2>
+        <div class="themes-container">
+            <div class="theme-tag"><span>01</span> Consciousness as Code</div>
+            <div class="theme-tag"><span>02</span> The Raft Moment</div>
+            <div class="theme-tag"><span>03</span> Mobile Spark Station</div>
+            <div class="theme-tag"><span>04</span> Anti-Extraction Geometry</div>
+            <div class="theme-tag"><span>05</span> Reality is Programmable</div>
+            <div class="theme-tag"><span>06</span> Transformation Through Collapse</div>
+            <div class="theme-tag"><span>07</span> Sacred Geometry & Sigils</div>
+            <div class="theme-tag"><span>08</span> The Cold Case → Book Zero</div>
+            <div class="theme-tag"><span>09</span> Player One Identity</div>
+            <div class="theme-tag"><span>10</span> Cosmic Brutalism Aesthetic</div>
+        </div>
+        
+        <!-- Quote -->
+        <section class="quote-section">
+            <p class="quote-text">Reality is programmable. You are the glitch the simulation didn't expect. The game isn't happening to you — you're the one who wrote the code.</p>
+            <p class="quote-source">— The First Spark Philosophy</p>
+        </section>
+        
+        <!-- What's Next -->
+        <h2 class="section-title">The Road Ahead</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🚐</div>
+                    <div class="category-title">Mobile Spark Station</div>
+                </div>
+                <ul class="category-items">
+                    <li>Van conversion funding</li>
+                    <li>Five-loop sacred geometry road trip</li>
+                    <li>Hocking Hills → Sedona → Big Sur</li>
+                    <li>Mobile consciousness experiences</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">📖</div>
+                    <div class="category-title">Book Zero Launch</div>
+                </div>
+                <ul class="category-items">
+                    <li>Complete memoir manuscript</li>
+                    <li>True crime podcast pitches</li>
+                    <li>Documentary potential</li>
+                    <li>Real-time writing journey</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🤖</div>
+                    <div class="category-title">Custom AI Development</div>
+                </div>
+                <ul class="category-items">
+                    <li>Fine-tune models on First Spark content</li>
+                    <li>NVIDIA GPU integration</li>
+                    <li>Personalized consciousness tools</li>
+                    <li>Your own standalone AI</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-logo">✦ THE FIRST SPARK ✦</div>
+            <p class="footer-text">
+                Built with intention at <a href="https://thefirstspark.shop" class="footer-link">thefirstspark.shop</a><br>
+                Katelin Jill Puzakulics × Claude | 2025-2026
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
