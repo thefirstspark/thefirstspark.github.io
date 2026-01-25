@@ -16,6 +16,12 @@ function navigateTo(destination) {
         case 'graffiti':
             window.location.href = 'graffiti.html';
             break;
+        case 'oracle':
+            window.location.href = 'oracle.html';
+            break;
+        case 'void':
+            window.location.href = 'void-portal.html';
+            break;
         default:
             console.log('Unknown destination');
     }

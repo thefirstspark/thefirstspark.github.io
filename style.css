@@ -161,6 +161,16 @@ body {
     transform: translateY(-50%);
 }
 
+.constellation-6 {
+    bottom: 35%;
+    left: 25%;
+}
+
+.constellation-7 {
+    top: 35%;
+    left: 5%;
+}
+
 .constellation-node {
     position: relative;
     width: 120px;
@@ -238,6 +248,25 @@ body {
 
 .graffiti-glow {
     background: radial-gradient(circle, rgba(255, 107, 107, 0.3), transparent 60%);
+}
+
+.oracle-core {
+    background: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%);
+    box-shadow: 0 0 30px rgba(157, 78, 221, 0.6);
+}
+
+.oracle-glow {
+    background: radial-gradient(circle, rgba(199, 125, 255, 0.3), transparent 60%);
+}
+
+.void-core {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.void-glow {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 60%);
 }
 
 .node-label {
