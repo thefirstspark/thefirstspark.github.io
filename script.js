@@ -176,3 +176,51 @@ function hideTooltip() {
     const tooltip = document.getElementById('tooltip');
     if (tooltip) tooltip.remove();
 }
+
+
+// Mobile Menu Toggle
+function toggleMobileMenu() {
+    const mobileNav = document.getElementById('mobileNav');
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    
+    mobileNav.classList.toggle('active');
+    menuBtn.classList.toggle('active');
+    
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+}
+
+// Close mobile menu when clicking a link
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileLinks = document.querySelectorAll('.mobile-nav a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const mobileNav = document.getElementById('mobileNav');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            // Small delay to allow navigation
+            setTimeout(() => {
+                mobileNav.classList.remove('active');
+                menuBtn.classList.remove('active');
+                document.body.style.overflow = '';
+            }, 100);
+        });
+    });
+});
+
+// Track signup clicks for analytics
+const originalSignup = signup;
+signup = function(tier) {
+    console.log(`[Sparkverse] Signup clicked: ${tier} tier`);
+    console.log(`[Sparkverse] Timestamp: ${new Date().toISOString()}`);
+    
+    // Track with Google Analytics if available
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'signup_click', {
+            'tier': tier,
+            'page': window.location.pathname
+        });
+    }
+    
+    originalSignup(tier);
+};
