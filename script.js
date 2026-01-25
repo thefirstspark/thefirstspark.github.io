@@ -22,6 +22,9 @@ function navigateTo(destination) {
         case 'void':
             window.location.href = 'void-portal.html';
             break;
+        case 'consciousness':
+            window.location.href = 'consciousness-playground.html';
+            break;
         default:
             console.log('Unknown destination');
     }

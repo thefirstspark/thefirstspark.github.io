@@ -171,6 +171,11 @@ body {
     left: 5%;
 }
 
+.constellation-8 {
+    bottom: 45%;
+    right: 25%;
+}
+
 .constellation-node {
     position: relative;
     width: 120px;
@@ -267,6 +272,15 @@ body {
 
 .void-glow {
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 60%);
+}
+
+.consciousness-core {
+    background: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+}
+
+.consciousness-glow {
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.3), transparent 60%);
 }
 
 .node-label {
