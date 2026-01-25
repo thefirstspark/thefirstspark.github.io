@@ -25,6 +25,9 @@ function navigateTo(destination) {
         case 'consciousness':
             window.location.href = 'consciousness-playground.html';
             break;
+        case 'wall':
+            window.location.href = 'the-wall-deluxe.html';
+            break;
         default:
             console.log('Unknown destination');
     }
