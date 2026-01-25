@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <!-- Black background -->
+  <rect width="500" height="500" fill="#000000"/>
+
+  <!-- Electric blue diamond -->
+  <path d="M 250 50 L 450 250 L 250 450 L 50 250 Z"
+        fill="none"
+        stroke="#00d4ff"
+        stroke-width="8"/>
+
+  <!-- Inner diamond -->
+  <path d="M 250 125 L 375 250 L 250 375 L 125 250 Z"
+        fill="none"
+        stroke="#00ffff"
+        stroke-width="6"/>
+
+  <!-- Center spark -->
+  <circle cx="250" cy="250" r="20" fill="#00d4ff"/>
+  <circle cx="250" cy="250" r="10" fill="#00ffff"/>
+</svg>

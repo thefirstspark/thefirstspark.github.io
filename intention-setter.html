@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intention Setter</title>
+    <title>Intention Setter | Sparkverse</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P8B1ERP8ML"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-P8B1ERP8ML');
+    </script>
+
     <style>
         * {
             margin: 0;
@@ -14,33 +24,91 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Sparkverse Star Background */
+        .stars, .twinkling {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stars {
+            background: #000 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAE0lEQVQIW2NkYGD4z8DAwMgABAAAfgABAXLGvAAAAABJRU5ErkJggg==) repeat;
+            z-index: 0;
+        }
+
+        .twinkling {
+            background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAE0lEQVQIW2NkYGD4z8DAwMgABAAAfgABAXLGvAAAAABJRU5ErkJggg==) repeat;
+            z-index: 1;
+            animation: move-twink-back 200s linear infinite;
+        }
+
+        @keyframes move-twink-back {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(-5px);
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 30px;
             padding: 40px;
             max-width: 600px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+            position: relative;
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: #fff;
             margin-bottom: 10px;
             font-size: 2em;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .subtitle {
             text-align: center;
-            color: #666;
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 40px;
             font-size: 0.95em;
         }
@@ -75,22 +143,25 @@
         .category-card {
             padding: 25px;
             border-radius: 20px;
-            border: 3px solid transparent;
+            border: 3px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
         }
 
         .category-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(168, 237, 234, 0.3);
+            border-color: rgba(168, 237, 234, 0.5);
         }
 
         .category-card.selected {
-            border-color: #f5576c;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-color: #a8edea;
+            background: rgba(168, 237, 234, 0.15);
             transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(168, 237, 234, 0.4);
         }
 
         .category-icon {
@@ -100,13 +171,13 @@
 
         .category-title {
             font-weight: 600;
-            color: #333;
+            color: #fff;
             margin-bottom: 5px;
         }
 
         .category-desc {
             font-size: 0.85em;
-            color: #666;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .input-group {
@@ -115,7 +186,7 @@
 
         label {
             display: block;
-            color: #555;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 10px;
             font-weight: 500;
             font-size: 1.05em;
@@ -125,17 +196,29 @@
         textarea {
             width: 100%;
             padding: 15px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 15px;
             font-family: inherit;
             font-size: 1em;
             transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
         }
 
         input[type="text"]:focus,
         textarea:focus {
             outline: none;
-            border-color: #f5576c;
+            border-color: #a8edea;
+            box-shadow: 0 0 20px rgba(168, 237, 234, 0.3);
+        }
+
+        input[type="text"]::placeholder,
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        small {
+            color: rgba(255, 255, 255, 0.5) !important;
         }
 
         textarea {
@@ -154,24 +237,25 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #000;
             width: 100%;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+            box-shadow: 0 10px 30px rgba(168, 237, 234, 0.6);
         }
 
         .btn-secondary {
-            background: #e0e0e0;
-            color: #666;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
             margin-right: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .btn-secondary:hover {
-            background: #d0d0d0;
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .button-group {
@@ -181,11 +265,12 @@
         }
 
         .intention-card {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            background: linear-gradient(135deg, rgba(168, 237, 234, 0.2) 0%, rgba(254, 214, 227, 0.2) 100%);
             padding: 30px;
             border-radius: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(168, 237, 234, 0.3);
         }
 
         .intention-header {
@@ -201,36 +286,36 @@
 
         .intention-category {
             font-size: 0.9em;
-            color: #666;
+            color: rgba(255, 255, 255, 0.7);
             font-weight: 500;
         }
 
         .intention-text {
             font-size: 1.4em;
-            color: #333;
+            color: #fff;
             font-weight: 600;
             margin-bottom: 15px;
             line-height: 1.4;
         }
 
         .intention-why {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.1);
             padding: 15px;
             border-radius: 10px;
-            color: #555;
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.6;
             margin-bottom: 15px;
         }
 
         .intention-actions {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.1);
             padding: 15px;
             border-radius: 10px;
         }
 
         .action-title {
             font-weight: 600;
-            color: #333;
+            color: #fff;
             margin-bottom: 10px;
         }
 
@@ -240,8 +325,8 @@
 
         .action-list li {
             padding: 8px 0;
-            color: #555;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .action-list li:last-child {
@@ -250,27 +335,28 @@
 
         .action-list li::before {
             content: "✓ ";
-            color: #f5576c;
+            color: #a8edea;
             font-weight: bold;
             margin-right: 8px;
         }
 
         .affirmation {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            background: linear-gradient(135deg, rgba(168, 237, 234, 0.3) 0%, rgba(254, 214, 227, 0.3) 100%);
             padding: 20px;
             border-radius: 15px;
             text-align: center;
             font-size: 1.1em;
-            color: #333;
+            color: #fff;
             font-style: italic;
             margin-top: 20px;
             line-height: 1.6;
+            border: 1px solid rgba(168, 237, 234, 0.3);
         }
 
         .progress-bar {
             width: 100%;
             height: 8px;
-            background: #e0e0e0;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             margin-bottom: 30px;
             overflow: hidden;
@@ -278,13 +364,21 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
             transition: width 0.3s ease;
             border-radius: 10px;
+        }
+
+        h2 {
+            color: rgba(255, 255, 255, 0.8);
         }
     </style>
 </head>
 <body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <a href="index.html" class="back-btn">← Back to Universe</a>
+
     <div class="container">
         <h1>🎯 Set Your Intention</h1>
         <p class="subtitle">What do you want to manifest today?</p>
@@ -295,7 +389,7 @@
 
         <!-- Step 1: Choose Category -->
         <div class="step active" id="step1">
-            <h2 style="margin-bottom: 20px; color: #555;">Choose a focus area:</h2>
+            <h2 style="margin-bottom: 20px; color: rgba(255, 255, 255, 0.9);">Choose a focus area:</h2>
             <div class="category-grid">
                 <div class="category-card" data-category="health">
                     <div class="category-icon">💪</div>

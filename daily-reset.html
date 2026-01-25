@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Daily Reset | Your 5-Minute Consciousness Calibration</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P8B1ERP8ML"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-P8B1ERP8ML');
+    </script>
+
     <style>
         :root {
             --void: #0a0a0c;
@@ -37,11 +47,61 @@
 
         body {
             font-family: 'DM Sans', sans-serif;
-            background: var(--void);
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
             color: var(--pearl);
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+        }
+
+        /* Sparkverse Star Background */
+        .stars, .twinkling {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stars {
+            background: #000 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAE0lEQVQIW2NkYGD4z8DAwMgABAAAfgABAXLGvAAAAABJRU5ErkJggg==) repeat;
+            z-index: 0;
+        }
+
+        .twinkling {
+            background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAE0lEQVQIW2NkYGD4z8DAwMgABAAAfgABAXLGvAAAAABJRU5ErkJggg==) repeat;
+            z-index: 1;
+            animation: move-twink-back 200s linear infinite;
+        }
+
+        @keyframes move-twink-back {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
+        }
+
+        /* Back Button */
+        .back-to-universe {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 14px;
+        }
+
+        .back-to-universe:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(-5px);
         }
 
         /* Main Container */
@@ -52,6 +112,7 @@
             max-height: 900px;
             position: relative;
             overflow: hidden;
+            z-index: 10;
         }
 
         /* Background Effects */
@@ -805,6 +866,10 @@
     </style>
 </head>
 <body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <a href="index.html" class="back-to-universe">← Back to Universe</a>
+
     <div class="reset-container">
         <!-- Background Effects -->
         <div class="ambient-layer"></div>

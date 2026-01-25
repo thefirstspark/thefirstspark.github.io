@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Energy Check-In</title>
+    <title>Energy Check-In | Sparkverse</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P8B1ERP8ML"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-P8B1ERP8ML');
+    </script>
+
     <style>
         * {
             margin: 0;
@@ -14,33 +24,91 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Sparkverse Star Background */
+        .stars, .twinkling {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stars {
+            background: #000 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAE0lEQVQIW2NkYGD4z8DAwMgABAAAfgABAXLGvAAAAABJRU5ErkJggg==) repeat;
+            z-index: 0;
+        }
+
+        .twinkling {
+            background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAE0lEQVQIW2NkYGD4z8DAwMgABAAAfgABAXLGvAAAAABJRU5ErkJggg==) repeat;
+            z-index: 1;
+            animation: move-twink-back 200s linear infinite;
+        }
+
+        @keyframes move-twink-back {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(-5px);
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 30px;
             padding: 40px;
             max-width: 500px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+            position: relative;
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: #fff;
             margin-bottom: 10px;
             font-size: 2em;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .subtitle {
             text-align: center;
-            color: #666;
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 40px;
             font-size: 0.95em;
         }
@@ -58,14 +126,14 @@
 
         .energy-btn {
             aspect-ratio: 1;
-            border: none;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 15px;
             font-size: 2em;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: #f0f0f0;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
         .energy-btn:hover {
@@ -74,7 +142,8 @@
 
         .energy-btn.selected {
             transform: scale(1.15);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6);
+            border-color: #4facfe;
         }
 
         .energy-btn.selected::after {
@@ -95,7 +164,7 @@
 
         .energy-label {
             text-align: center;
-            color: #555;
+            color: rgba(255, 255, 255, 0.6);
             font-weight: 500;
             margin-top: 10px;
             transition: all 0.3s ease;
@@ -107,7 +176,7 @@
 
         label {
             display: block;
-            color: #555;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 10px;
             font-weight: 500;
         }
@@ -116,23 +185,30 @@
             width: 100%;
             min-height: 100px;
             padding: 15px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 15px;
             font-family: inherit;
             font-size: 1em;
             resize: vertical;
             transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
         }
 
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #4facfe;
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+        }
+
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
         }
 
         .submit-btn {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
             border: none;
             border-radius: 15px;
@@ -145,7 +221,7 @@
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.6);
         }
 
         .submit-btn:active {
@@ -155,11 +231,13 @@
         .result {
             margin-top: 30px;
             padding: 20px;
-            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            background: linear-gradient(135deg, rgba(132, 250, 176, 0.2) 0%, rgba(143, 211, 244, 0.2) 100%);
+            border: 2px solid rgba(79, 172, 254, 0.5);
             border-radius: 15px;
             text-align: center;
             display: none;
             animation: slideIn 0.5s ease;
+            backdrop-filter: blur(10px);
         }
 
         @keyframes slideIn {
@@ -174,12 +252,12 @@
         }
 
         .result h2 {
-            color: #333;
+            color: #4facfe;
             margin-bottom: 10px;
         }
 
         .result p {
-            color: #555;
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.6;
         }
 
@@ -196,6 +274,10 @@
     </style>
 </head>
 <body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <a href="index.html" class="back-btn">← Back to Universe</a>
+
     <div class="container">
         <h1>⚡ Energy Check-In</h1>
         <p class="subtitle">How's your energy today?</p>
@@ -279,7 +361,7 @@
                 btn.classList.add('selected');
                 selectedLevel = btn.dataset.level;
                 energyLabel.textContent = labels[selectedLevel];
-                energyLabel.style.color = '#667eea';
+                energyLabel.style.color = '#4facfe';
                 energyLabel.style.fontSize = '1.1em';
             });
         });
