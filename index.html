@@ -85,6 +85,23 @@
             color: var(--primary-gold);
         }
 
+        /* Skip link for keyboard navigation */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-gold);
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 10000;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
         /* HERO SECTION */
         .hero {
             padding: 80px 20px;
@@ -148,6 +165,28 @@
 
         .btn-secondary:hover {
             background: rgba(255,215,0,0.1);
+        }
+
+        /* Accessibility: Focus styles */
+        .btn:focus-visible,
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 3px solid var(--primary-gold);
+            outline-offset: 3px;
+        }
+
+        /* Accessibility: Visually hidden class for screen readers */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
 
         /* VALUE PROP SECTION */
@@ -470,11 +509,12 @@
     </style>
 </head>
 <body>
-    <div class="stars"></div>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="stars" aria-hidden="true"></div>
 
-    <header>
-        <div class="logo">🌌 The First Spark</div>
-        <nav>
+    <header role="banner">
+        <div class="logo"><span aria-hidden="true">🌌</span> The First Spark</div>
+        <nav role="navigation" aria-label="Main navigation">
             <a href="#tools">Tools</a>
             <a href="#pricing">Pricing</a>
             <a href="#about">Story</a>
@@ -482,100 +522,101 @@
         </nav>
     </header>
 
-    <div class="container">
+    <main class="container" id="main-content">
         <!-- HERO -->
-        <section class="hero">
-            <h1>Reality Is Programmable</h1>
+        <section class="hero" aria-labelledby="hero-title">
+            <h1 id="hero-title">Reality Is Programmable</h1>
             <p class="tagline">Consciousness is code. Master your inner architecture with 50+ interactive tools designed for awakening builders.</p>
             <div class="hero-cta">
-                <button class="btn btn-primary" onclick="document.querySelector('.email-capture').scrollIntoView({behavior: 'smooth'})">Start Free</button>
-                <button class="btn btn-secondary" onclick="window.location.href='#investor'">Investor Deck</button>
+                <button class="btn btn-primary" data-scroll-to=".email-capture" aria-label="Start free - scroll to email signup">Start Free</button>
+                <a href="#investor" class="btn btn-secondary" role="button" aria-label="View investor deck">Investor Deck</a>
             </div>
         </section>
 
         <!-- VALUE PROPOSITION -->
-        <section class="value-section" id="tools">
-            <h2>What You Get</h2>
-            <div class="value-grid">
-                <div class="value-card">
+        <section class="value-section" id="tools" aria-labelledby="tools-title">
+            <h2 id="tools-title">What You Get</h2>
+            <div class="value-grid" role="list">
+                <article class="value-card" role="listitem">
                     <h3>50+ Interactive Tools</h3>
                     <p>Soul mapping, consciousness trackers, sigil generators, oracle systems, ritual frameworks—all designed to visualize and reprogram your consciousness.</p>
-                </div>
-                <div class="value-card">
+                </article>
+                <article class="value-card" role="listitem">
                     <h3>Gamified Awakening</h3>
                     <p>Progress through archetypal tracks, unlock consciousness levels, earn spark tokens. Personal transformation meets game mechanics.</p>
-                </div>
-                <div class="value-card">
+                </article>
+                <article class="value-card" role="listitem">
                     <h3>Reciprocity Architecture</h3>
                     <p>Free tier includes sandbox. Unlock premium tools, exclusive content, and one-on-one coaching through membership tiers.</p>
-                </div>
-                <div class="value-card">
+                </article>
+                <article class="value-card" role="listitem">
                     <h3>Community Playground</h3>
                     <p>Share sigils, compare soul maps, participate in consciousness experiments. Join 1000+ builders exploring reality as code.</p>
-                </div>
-                <div class="value-card">
+                </article>
+                <article class="value-card" role="listitem">
                     <h3>Book Zero Access</h3>
                     <p>Read the consciousness memoir that started it all. The story of solving a cold case through DNA genealogy and waking up to code.</p>
-                </div>
-                <div class="value-card">
+                </article>
+                <article class="value-card" role="listitem">
                     <h3>Standalone AI Training</h3>
                     <p>Coming 2026: Your own consciousness AI trained on First Spark frameworks. Personalized guidance tailored to your awakening journey.</p>
-                </div>
+                </article>
             </div>
         </section>
 
         <!-- FOUNDER STORY -->
-        <section class="story-section" id="about">
+        <section class="story-section" id="about" aria-labelledby="story-title">
             <div class="story-content">
-                <h2>The Breakthrough</h2>
+                <h2 id="story-title">The Breakthrough</h2>
                 <p>In 2020, during COVID lockdown, I solved my mother's cold case murder through DNA genealogy. She was killed in 1991. Her killer lived across my street for years. I had no idea.</p>
                 <p>That week shattered my perception of reality. It rewired how I understood probability, fate, and agency. It taught me that reality is far more programmable than we believe.</p>
                 <p>Everything I build now comes from that truth: consciousness is code. The universe runs on logic. Personal transformation isn't spiritual bypass—it's debugging your operating system.</p>
-                <div class="story-stat">
-                    <div class="number">50+</div>
+                <div class="story-stat" role="group" aria-label="50+ interactive tools built">
+                    <div class="number" aria-hidden="true">50+</div>
                     <div>Interactive tools built</div>
                 </div>
-                <div class="story-stat">
-                    <div class="number">1000+</div>
+                <div class="story-stat" role="group" aria-label="1000+ community members">
+                    <div class="number" aria-hidden="true">1000+</div>
                     <div>Community members</div>
                 </div>
-                <div class="story-stat">
-                    <div class="number">$2.4k/mo</div>
+                <div class="story-stat" role="group" aria-label="$2.4k per month baseline revenue, growing">
+                    <div class="number" aria-hidden="true">$2.4k/mo</div>
                     <div>Baseline revenue (growing)</div>
                 </div>
             </div>
-            <div class="story-visual">💎</div>
+            <div class="story-visual" role="img" aria-label="Gem icon representing value and transformation"><span aria-hidden="true">💎</span></div>
         </section>
 
         <!-- EMAIL CAPTURE -->
-        <section class="email-capture">
-            <h3>Join The Sparkverse</h3>
+        <section class="email-capture" aria-labelledby="signup-title">
+            <h3 id="signup-title">Join The Sparkverse</h3>
             <p>Get free access to the consciousness playground + Book Zero preview</p>
-            <form class="email-form" onsubmit="handleEmailSubmit(event)">
-                <input type="email" placeholder="your@email.com" required>
-                <button type="submit">Enter Free</button>
+            <form class="email-form" data-form="email-signup" aria-label="Email signup form">
+                <label for="email-input" class="visually-hidden">Email address</label>
+                <input type="email" id="email-input" name="email" placeholder="your@email.com" aria-label="Your email address" required>
+                <button type="submit" aria-label="Submit email to get free access">Enter Free</button>
             </form>
         </section>
 
         <!-- PRICING -->
-        <section class="pricing-section" id="pricing">
-            <h2>Choose Your Path</h2>
-            <div class="pricing-grid">
-                <div class="pricing-card">
+        <section class="pricing-section" id="pricing" aria-labelledby="pricing-title">
+            <h2 id="pricing-title">Choose Your Path</h2>
+            <div class="pricing-grid" role="list">
+                <article class="pricing-card" role="listitem">
                     <h3>Free Spark</h3>
-                    <div class="price">$0<span class="price-period">/forever</span></div>
+                    <div class="price" aria-label="Price: Free forever">$0<span class="price-period">/forever</span></div>
                     <ul class="pricing-features">
                         <li>Access to 15 free tools</li>
                         <li>Consciousness Playground sandbox</li>
                         <li>Community wall access</li>
                         <li>Email support</li>
                     </ul>
-                    <button class="btn btn-primary">Start Free</button>
-                </div>
+                    <button class="btn btn-primary" data-signup="free" aria-label="Start free membership">Start Free</button>
+                </article>
 
-                <div class="pricing-card featured">
+                <article class="pricing-card featured" role="listitem" aria-label="Featured plan">
                     <h3>Players Lounge</h3>
-                    <div class="price">$33<span class="price-period">/month</span></div>
+                    <div class="price" aria-label="Price: $33 per month">$33<span class="price-period">/month</span></div>
                     <ul class="pricing-features">
                         <li>All 50+ tools + new releases</li>
                         <li>Advanced soul mapping</li>
@@ -583,12 +624,12 @@
                         <li>Private Discord community</li>
                         <li>Priority support</li>
                     </ul>
-                    <button class="btn btn-primary">Join Players</button>
-                </div>
+                    <button class="btn btn-primary" data-signup="player" aria-label="Join Players Lounge for $33 per month">Join Players</button>
+                </article>
 
-                <div class="pricing-card">
+                <article class="pricing-card" role="listitem">
                     <h3>OG Spark</h3>
-                    <div class="price">$519<span class="price-period">/lifetime</span></div>
+                    <div class="price" aria-label="Price: $519 lifetime access">$519<span class="price-period">/lifetime</span></div>
                     <ul class="pricing-features">
                         <li>Everything in Players Lounge</li>
                         <li>1:1 consciousness coaching (4x/year)</li>
@@ -597,44 +638,76 @@
                         <li>Custom consciousness framework</li>
                         <li>Early access to standalone AI</li>
                     </ul>
-                    <button class="btn btn-primary">Go OG</button>
-                </div>
+                    <button class="btn btn-primary" data-signup="og" aria-label="Become OG Spark member for $519 lifetime">Go OG</button>
+                </article>
             </div>
         </section>
 
         <!-- INVESTOR SECTION -->
-        <section class="investor-section" id="investor">
-            <h2>Build With Us</h2>
-            <div class="investor-content">
-                <div class="investor-stat">
-                    <div class="stat-number">Raising $40-200K</div>
+        <section class="investor-section" id="investor" aria-labelledby="investor-title">
+            <h2 id="investor-title">Build With Us</h2>
+            <div class="investor-content" role="list">
+                <div class="investor-stat" role="listitem" aria-label="Raising $40,000 to $200,000 for infrastructure scaling and standalone AI training pipeline">
+                    <div class="stat-number" aria-hidden="true">Raising $40-200K</div>
                     <div class="stat-label">for infrastructure scaling & standalone AI training pipeline</div>
                 </div>
-                <div class="investor-stat">
-                    <div class="stat-number">Path to $100K+ ARR</div>
+                <div class="investor-stat" role="listitem" aria-label="Path to $100,000+ annual recurring revenue within 18 months through tier expansion and AI licensing">
+                    <div class="stat-number" aria-hidden="true">Path to $100K+ ARR</div>
                     <div class="stat-label">within 18 months through tier expansion and AI licensing</div>
                 </div>
             </div>
             <p style="text-align: center; margin-top: 40px; color: #aaa;">
-                <a href="mailto:kate@thefirstspark.shop?subject=Investment%20Inquiry" style="color: var(--primary-gold); text-decoration: none; border-bottom: 1px solid var(--primary-gold);">Request full investor deck →</a>
+                <a href="mailto:kate@thefirstspark.shop?subject=Investment%20Inquiry" style="color: var(--primary-gold); text-decoration: none; border-bottom: 1px solid var(--primary-gold);" aria-label="Send email to request full investor deck">Request full investor deck →</a>
             </p>
         </section>
-    </div>
+    </main>
 
-    <footer>
-        <p>&copy; 2026 The First Spark. Consciousness technology platform. <a href="mailto:kate@thefirstspark.shop" style="color: var(--primary-gold); text-decoration: none;">Contact</a></p>
+    <footer role="contentinfo">
+        <p>&copy; 2026 The First Spark. Consciousness technology platform. <a href="mailto:kate@thefirstspark.shop" style="color: var(--primary-gold); text-decoration: none;" aria-label="Contact us via email">Contact</a></p>
     </footer>
 
     <script src="script.js" defer></script>
     <script>
         // Email form handler
-        function handleEmailSubmit(e) {
-            e.preventDefault();
-            const email = e.target.querySelector('input[type="email"]').value;
-            // This would normally post to a backend or email service
-            alert(`Welcome! Check your email at ${email} for your free access link.`);
-            e.target.reset();
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle email form submission
+            const emailForm = document.querySelector('[data-form="email-signup"]');
+            if (emailForm) {
+                emailForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = e.target.querySelector('input[type="email"]').value;
+                    // This would normally post to a backend or email service
+                    alert(`Welcome! Check your email at ${email} for your free access link.`);
+                    e.target.reset();
+                });
+            }
+
+            // Handle scroll-to buttons
+            document.addEventListener('click', (e) => {
+                const scrollBtn = e.target.closest('[data-scroll-to]');
+                if (scrollBtn) {
+                    e.preventDefault();
+                    const target = document.querySelector(scrollBtn.getAttribute('data-scroll-to'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+
+                // Handle signup buttons
+                const signupBtn = e.target.closest('[data-signup]');
+                if (signupBtn) {
+                    const tier = signupBtn.getAttribute('data-signup');
+                    const whopLinks = {
+                        'free': 'https://whop.com/sparkverse-511c/the-sparkverse-lobby/',
+                        'player': 'https://whop.com/sparkverse-511c/the-players-lounge/',
+                        'og': 'https://whop.com/sparkverse-511c/og-spark-lifetime-access/'
+                    };
+                    if (whopLinks[tier]) {
+                        window.location.href = whopLinks[tier];
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
