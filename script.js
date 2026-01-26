@@ -247,7 +247,7 @@ const originalSignup = signup;
 signup = function(tier) {
     console.log(`[Sparkverse] Signup clicked: ${tier} tier`);
     console.log(`[Sparkverse] Timestamp: ${new Date().toISOString()}`);
-    
+
     // Track with Google Analytics if available
     if (typeof gtag !== 'undefined') {
         gtag('event', 'signup_click', {
@@ -255,6 +255,43 @@ signup = function(tier) {
             'page': window.location.pathname
         });
     }
-    
+
     originalSignup(tier);
 };
+
+// Event Delegation - Handle all clicks with data attributes
+document.addEventListener('click', (e) => {
+    const target = e.target.closest('[data-action], [data-navigate], [data-signup]');
+    if (!target) return;
+
+    // Handle navigation
+    if (target.hasAttribute('data-navigate')) {
+        const destination = target.getAttribute('data-navigate');
+        navigateTo(destination);
+    }
+
+    // Handle actions
+    if (target.hasAttribute('data-action')) {
+        const action = target.getAttribute('data-action');
+        switch(action) {
+            case 'toggle-menu':
+                toggleMobileMenu();
+                break;
+            case 'show-modal':
+                showMembershipModal();
+                break;
+            case 'close-modal':
+                closeMembershipModal();
+                break;
+            case 'toggle-help':
+                toggleHelp();
+                break;
+        }
+    }
+
+    // Handle signup
+    if (target.hasAttribute('data-signup')) {
+        const tier = target.getAttribute('data-signup');
+        signup(tier);
+    }
+});

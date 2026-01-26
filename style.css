@@ -6,9 +6,14 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden;
     background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
     color: #fff;
+    min-height: 100vh;
+}
+
+/* Prevent scrolling only on homepage with universe container */
+body:has(.universe-container) {
+    overflow: hidden;
     height: 100vh;
 }
 

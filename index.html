@@ -616,7 +616,7 @@
                 </div>
             </div>
             <p style="text-align: center; margin-top: 40px; color: #aaa;">
-                <a href="javascript:void(0)" onclick="window.open('mailto:kate@thefirstspark.shop?subject=Investment%20Inquiry','_blank')" style="color: var(--primary-gold); text-decoration: none; border-bottom: 1px solid var(--primary-gold);">Request full investor deck →</a>
+                <a href="mailto:kate@thefirstspark.shop?subject=Investment%20Inquiry" style="color: var(--primary-gold); text-decoration: none; border-bottom: 1px solid var(--primary-gold);">Request full investor deck →</a>
             </p>
         </section>
     </div>
@@ -625,7 +625,9 @@
         <p>&copy; 2026 The First Spark. Consciousness technology platform. <a href="mailto:kate@thefirstspark.shop" style="color: var(--primary-gold); text-decoration: none;">Contact</a></p>
     </footer>
 
+    <script src="script.js" defer></script>
     <script>
+        // Email form handler
         function handleEmailSubmit(e) {
             e.preventDefault();
             const email = e.target.querySelector('input[type="email"]').value;
