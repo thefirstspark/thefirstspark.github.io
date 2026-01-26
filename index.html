@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The First Spark - Consciousness Technology Platform</title>
     <meta name="description" content="Reality is programmable. Consciousness is code. Join 1000+ builders exploring consciousness through interactive tools, soul mapping, and geometric reality frameworks.">
+
+    <!-- Performance: DNS prefetch and preconnect for external resources -->
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://formspree.io">
+    <link rel="dns-prefetch" href="https://formspree.io">
+    <link rel="preconnect" href="https://whop.com">
+
+    <!-- Performance: Preload critical scripts -->
+    <link rel="preload" href="script.js" as="script">
+
     <style>
         * {
             margin: 0;
@@ -579,9 +590,9 @@
                     <div class="number" aria-hidden="true">1000+</div>
                     <div>Community members</div>
                 </div>
-                <div class="story-stat" role="group" aria-label="$2.4k per month baseline revenue, growing">
-                    <div class="number" aria-hidden="true">$2.4k/mo</div>
-                    <div>Baseline revenue (growing)</div>
+                <div class="story-stat" role="group" aria-label="Pre-revenue, launching monetization">
+                    <div class="number" aria-hidden="true">Pre-Revenue</div>
+                    <div>Launching monetization</div>
                 </div>
             </div>
             <div class="story-visual" role="img" aria-label="Gem icon representing value and transformation"><span aria-hidden="true">💎</span></div>
@@ -591,11 +602,18 @@
         <section class="email-capture" aria-labelledby="signup-title">
             <h3 id="signup-title">Join The Sparkverse</h3>
             <p>Get free access to the consciousness playground + Book Zero preview</p>
-            <form class="email-form" data-form="email-signup" aria-label="Email signup form">
+            <form class="email-form"
+                  action="https://formspree.io/f/YOUR_FORM_ID"
+                  method="POST"
+                  data-form="email-signup"
+                  aria-label="Email signup form">
                 <label for="email-input" class="visually-hidden">Email address</label>
                 <input type="email" id="email-input" name="email" placeholder="your@email.com" aria-label="Your email address" required>
+                <input type="hidden" name="_subject" value="New Sparkverse Signup">
+                <input type="hidden" name="_next" value="https://thefirstspark.shop/tools.html">
                 <button type="submit" aria-label="Submit email to get free access">Enter Free</button>
             </form>
+            <div id="signup-message" class="signup-message" style="display: none; margin-top: 20px; padding: 15px; border-radius: 8px;"></div>
         </section>
 
         <!-- PRICING -->
@@ -672,14 +690,75 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Handle email form submission
             const emailForm = document.querySelector('[data-form="email-signup"]');
+            const messageDiv = document.getElementById('signup-message');
+
             if (emailForm) {
-                emailForm.addEventListener('submit', (e) => {
+                emailForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
-                    const email = e.target.querySelector('input[type="email"]').value;
-                    // This would normally post to a backend or email service
-                    alert(`Welcome! Check your email at ${email} for your free access link.`);
-                    e.target.reset();
+
+                    const formAction = emailForm.getAttribute('action');
+
+                    // Check if form service is configured
+                    if (!formAction || formAction.includes('YOUR_FORM_ID')) {
+                        showMessage('⚠️ Email signup not yet configured. Please contact kate@thefirstspark.shop to join!', 'warning');
+                        return;
+                    }
+
+                    const submitBtn = emailForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = 'Sending...';
+                    submitBtn.disabled = true;
+
+                    try {
+                        const formData = new FormData(emailForm);
+                        const response = await fetch(formAction, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            showMessage('✨ Success! Check your email for access link.', 'success');
+                            emailForm.reset();
+
+                            // Track signup with Google Analytics
+                            if (typeof gtag !== 'undefined') {
+                                gtag('event', 'signup', {
+                                    'event_category': 'engagement',
+                                    'event_label': 'email_capture'
+                                });
+                            }
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    } catch (error) {
+                        showMessage('❌ Something went wrong. Please email kate@thefirstspark.shop directly.', 'error');
+                    } finally {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }
                 });
+            }
+
+            function showMessage(text, type) {
+                if (messageDiv) {
+                    messageDiv.textContent = text;
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.background = type === 'success' ? 'rgba(74, 222, 128, 0.2)' :
+                                                  type === 'warning' ? 'rgba(255, 215, 0, 0.2)' :
+                                                  'rgba(239, 68, 68, 0.2)';
+                    messageDiv.style.color = type === 'success' ? '#4ade80' :
+                                            type === 'warning' ? '#ffd700' :
+                                            '#ef4444';
+                    messageDiv.style.border = `1px solid ${messageDiv.style.color}`;
+
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        messageDiv.style.display = 'none';
+                    }, 5000);
+                }
             }
 
             // Handle scroll-to buttons
