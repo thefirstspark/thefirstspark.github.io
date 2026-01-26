@@ -35,25 +35,56 @@ function navigateTo(destination) {
 
 // Modal functions
 function showMembershipModal() {
-    document.getElementById('membershipModal').style.display = 'block';
+    const modal = document.getElementById('membershipModal');
+    modal.style.display = 'block';
+    modal.setAttribute('aria-hidden', 'false');
+
+    // Focus the first button in the modal
+    setTimeout(() => {
+        const firstButton = modal.querySelector('button:not(.close-modal)');
+        if (firstButton) firstButton.focus();
+    }, 100);
 }
 
 function closeMembershipModal() {
-    document.getElementById('membershipModal').style.display = 'none';
+    const modal = document.getElementById('membershipModal');
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
 }
 
 // Close modal when clicking outside
 window.onclick = function(event) {
     const modal = document.getElementById('membershipModal');
     if (event.target == modal) {
-        modal.style.display = 'none';
+        closeMembershipModal();
     }
 }
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('membershipModal');
+        if (modal.style.display === 'block') {
+            closeMembershipModal();
+        }
+
+        const helpPanel = document.getElementById('helpPanel');
+        if (helpPanel.classList.contains('active')) {
+            toggleHelp();
+        }
+    }
+});
 
 // Help panel toggle
 function toggleHelp() {
     const helpPanel = document.getElementById('helpPanel');
-    helpPanel.classList.toggle('active');
+    const helpButton = document.querySelector('.help-icon');
+    const isActive = helpPanel.classList.toggle('active');
+
+    // Update aria-expanded attribute
+    if (helpButton) {
+        helpButton.setAttribute('aria-expanded', isActive.toString());
+    }
 }
 
 // Signup function
@@ -182,12 +213,15 @@ function hideTooltip() {
 function toggleMobileMenu() {
     const mobileNav = document.getElementById('mobileNav');
     const menuBtn = document.querySelector('.mobile-menu-btn');
-    
-    mobileNav.classList.toggle('active');
+
+    const isActive = mobileNav.classList.toggle('active');
     menuBtn.classList.toggle('active');
-    
+
+    // Update aria-expanded attribute
+    menuBtn.setAttribute('aria-expanded', isActive.toString());
+
     // Prevent body scroll when menu is open
-    document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    document.body.style.overflow = isActive ? 'hidden' : '';
 }
 
 // Close mobile menu when clicking a link

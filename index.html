@@ -61,197 +61,197 @@
     <div class="twinkling"></div>
 
     <!-- Mobile Menu Button -->
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
     </button>
 
     <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav">
-        <a href="tools.html" class="free-link">🌌 Tools Galaxy</a>
-        <a href="oracle.html" class="free-link">🔮 Ask the Oracle</a>
-        <a href="void-portal.html" class="free-link">🕳️ Text the Void</a>
-        <a href="consciousness-playground.html" class="free-link">🧠 Consciousness Playground</a>
-        <a href="the-wall-deluxe.html" class="free-link">🎨 The Wall Deluxe</a>
-        <div class="nav-divider"></div>
-        <a href="players.html" class="player-link">⚡ Players Lounge</a>
-        <a href="playground.html">🎮 Cosmic Playground</a>
-        <a href="graffiti.html">✍️ Graffiti Wall</a>
-        <div class="nav-divider"></div>
-        <a href="invest.html" class="og-link">💎 Investor Zone</a>
-        <a href="javascript:showMembershipModal()">✦ Join Sparkverse</a>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Main navigation">
+        <a href="tools.html" class="free-link" aria-label="Tools Galaxy - Browse 50+ consciousness tools"><span aria-hidden="true">🌌</span> Tools Galaxy</a>
+        <a href="oracle.html" class="free-link" aria-label="Ask the Oracle - Free consciousness guidance"><span aria-hidden="true">🔮</span> Ask the Oracle</a>
+        <a href="void-portal.html" class="free-link" aria-label="Text the Void - Anonymous expression portal"><span aria-hidden="true">🕳️</span> Text the Void</a>
+        <a href="consciousness-playground.html" class="free-link" aria-label="Consciousness Playground - Interactive sandbox"><span aria-hidden="true">🧠</span> Consciousness Playground</a>
+        <a href="the-wall-deluxe.html" class="free-link" aria-label="The Wall Deluxe - Free expression canvas"><span aria-hidden="true">🎨</span> The Wall Deluxe</a>
+        <div class="nav-divider" role="separator"></div>
+        <a href="players.html" class="player-link" aria-label="Players Lounge - Premium membership $33/month"><span aria-hidden="true">⚡</span> Players Lounge</a>
+        <a href="playground.html" aria-label="Cosmic Playground - Premium interactive tools"><span aria-hidden="true">🎮</span> Cosmic Playground</a>
+        <a href="graffiti.html" aria-label="Graffiti Wall - Community expression"><span aria-hidden="true">✍️</span> Graffiti Wall</a>
+        <div class="nav-divider" role="separator"></div>
+        <a href="invest.html" class="og-link" aria-label="Investor Zone - Investment opportunity"><span aria-hidden="true">💎</span> Investor Zone</a>
+        <button onclick="showMembershipModal()" class="nav-btn" aria-label="Join Sparkverse - View membership options"><span aria-hidden="true">✦</span> Join Sparkverse</button>
     </nav>
 
-    <div class="universe-container">
+    <main class="universe-container">
         <!-- Central Spark (Sun) -->
-        <div class="spark-sun">
-            <div class="sun-core"></div>
-            <div class="sun-glow"></div>
+        <header class="spark-sun">
+            <div class="sun-core" aria-hidden="true"></div>
+            <div class="sun-glow" aria-hidden="true"></div>
             <div class="sun-text">
                 <h1>SPARKVERSE</h1>
                 <p>Enter the Geometric Universe</p>
-                <button class="join-free-btn" onclick="showMembershipModal()">Join Free</button>
+                <button class="join-free-btn" onclick="showMembershipModal()" aria-label="Join Sparkverse for free">Join Free</button>
             </div>
-        </div>
+        </header>
 
         <!-- Constellation 1: Players Lounge -->
-        <div class="constellation constellation-1" data-name="Players Lounge">
-            <div class="constellation-node" onclick="navigateTo('players')">
-                <div class="node-glow"></div>
-                <div class="node-core"></div>
+        <section class="constellation constellation-1" data-name="Players Lounge" aria-labelledby="players-lounge-title">
+            <button class="constellation-node" onclick="navigateTo('players')" aria-label="Go to Players Lounge - Premium membership $33/month">
+                <div class="node-glow" aria-hidden="true"></div>
+                <div class="node-core" aria-hidden="true"></div>
                 <div class="node-label">
-                    <span class="label-title">PLAYERS LOUNGE</span>
+                    <span class="label-title" id="players-lounge-title">PLAYERS LOUNGE</span>
                     <span class="label-price">$33/month</span>
                 </div>
-            </div>
-            <div class="constellation-lines"></div>
-        </div>
+            </button>
+            <div class="constellation-lines" aria-hidden="true"></div>
+        </section>
 
         <!-- Constellation 2: Investor Zone -->
-        <div class="constellation constellation-2" data-name="Investor Zone">
-            <div class="constellation-node" onclick="navigateTo('invest')">
-                <div class="node-glow investor-glow"></div>
-                <div class="node-core investor-core"></div>
+        <section class="constellation constellation-2" data-name="Investor Zone" aria-labelledby="investor-zone-title">
+            <button class="constellation-node" onclick="navigateTo('invest')" aria-label="Go to Investor Zone - Exclusive investment opportunity">
+                <div class="node-glow investor-glow" aria-hidden="true"></div>
+                <div class="node-core investor-core" aria-hidden="true"></div>
                 <div class="node-label">
-                    <span class="label-title">INVESTOR ZONE</span>
+                    <span class="label-title" id="investor-zone-title">INVESTOR ZONE</span>
                     <span class="label-subtitle">Exclusive Access</span>
                 </div>
-            </div>
-            <div class="sub-nodes">
-                <div class="sub-node" onclick="window.location.href='invest.html'">
+            </button>
+            <nav class="sub-nodes" aria-label="Investor options">
+                <a href="invest.html" class="sub-node" aria-label="View investment details">
                     <span>Invest</span>
-                </div>
-                <div class="sub-node" onclick="window.location.href='presentation.html'">
+                </a>
+                <a href="presentation.html" class="sub-node" aria-label="View investor presentation">
                     <span>Presentation</span>
-                </div>
-            </div>
-        </div>
+                </a>
+            </nav>
+        </section>
 
         <!-- Galaxy 3: Interactive Tools -->
-        <div class="constellation constellation-3" data-name="Tools Galaxy">
-            <div class="constellation-node galaxy-node" onclick="navigateTo('tools')">
-                <div class="node-glow tools-glow"></div>
-                <div class="node-core tools-core"></div>
+        <section class="constellation constellation-3" data-name="Tools Galaxy" aria-labelledby="tools-galaxy-title">
+            <button class="constellation-node galaxy-node" onclick="navigateTo('tools')" aria-label="Go to Tools Galaxy - Browse 50+ interactive consciousness tools">
+                <div class="node-glow tools-glow" aria-hidden="true"></div>
+                <div class="node-core tools-core" aria-hidden="true"></div>
                 <div class="node-label">
-                    <span class="label-title">TOOLS GALAXY</span>
+                    <span class="label-title" id="tools-galaxy-title">TOOLS GALAXY</span>
                     <span class="label-subtitle">Interactive Universe</span>
                 </div>
-            </div>
-            <div class="tool-orbits">
+            </button>
+            <div class="tool-orbits" aria-hidden="true">
                 <div class="orbit orbit-1">
-                    <div class="tool-dot free-tool" data-tooltip="Free Tools"></div>
+                    <div class="tool-dot free-tool" data-tooltip="Free Tools" role="img" aria-label="Free Tools"></div>
                 </div>
                 <div class="orbit orbit-2">
-                    <div class="tool-dot player-tool" data-tooltip="Player Tools"></div>
+                    <div class="tool-dot player-tool" data-tooltip="Player Tools" role="img" aria-label="Player Tools"></div>
                 </div>
                 <div class="orbit orbit-3">
-                    <div class="tool-dot og-tool" data-tooltip="OG Tools"></div>
+                    <div class="tool-dot og-tool" data-tooltip="OG Tools" role="img" aria-label="OG Tools"></div>
                 </div>
                 <div class="orbit orbit-4">
-                    <div class="tool-dot shop-tool" data-tooltip="Shop"></div>
+                    <div class="tool-dot shop-tool" data-tooltip="Shop" role="img" aria-label="Shop"></div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Constellation 4: Cosmic Playground -->
-        <div class="constellation constellation-4" data-name="Cosmic Playground">
-            <div class="constellation-node playground-node" onclick="navigateTo('playground')">
-                <div class="node-glow playground-glow"></div>
-                <div class="node-core playground-core"></div>
+        <section class="constellation constellation-4" data-name="Cosmic Playground" aria-labelledby="cosmic-playground-title">
+            <button class="constellation-node playground-node" onclick="navigateTo('playground')" aria-label="Go to Cosmic Playground - Premium interactive tools">
+                <div class="node-glow playground-glow" aria-hidden="true"></div>
+                <div class="node-core playground-core" aria-hidden="true"></div>
                 <div class="node-label">
-                    <span class="label-title">COSMIC PLAYGROUND</span>
+                    <span class="label-title" id="cosmic-playground-title">COSMIC PLAYGROUND</span>
                     <span class="label-subtitle">Create & Explore</span>
                 </div>
-            </div>
-            <div class="constellation-lines"></div>
-        </div>
+            </button>
+            <div class="constellation-lines" aria-hidden="true"></div>
+        </section>
 
         <!-- Constellation 5: Graffiti Wall -->
-        <div class="constellation constellation-5" data-name="Graffiti Wall">
-            <div class="constellation-node graffiti-node" onclick="navigateTo('graffiti')">
-                <div class="node-glow graffiti-glow"></div>
-                <div class="node-core graffiti-core"></div>
+        <section class="constellation constellation-5" data-name="Graffiti Wall" aria-labelledby="graffiti-wall-title">
+            <button class="constellation-node graffiti-node" onclick="navigateTo('graffiti')" aria-label="Go to Graffiti Wall - Community expression space">
+                <div class="node-glow graffiti-glow" aria-hidden="true"></div>
+                <div class="node-core graffiti-core" aria-hidden="true"></div>
                 <div class="node-label">
-                    <span class="label-title">GRAFFITI WALL</span>
+                    <span class="label-title" id="graffiti-wall-title">GRAFFITI WALL</span>
                     <span class="label-subtitle">Leave Your Mark</span>
                 </div>
-            </div>
-            <div class="constellation-lines"></div>
-        </div>
+            </button>
+            <div class="constellation-lines" aria-hidden="true"></div>
+        </section>
 
         <!-- Constellation 6: Ask the Oracle -->
-        <div class="constellation constellation-6" data-name="Ask the Oracle">
-            <div class="constellation-node oracle-node" onclick="navigateTo('oracle')">
-                <div class="node-glow oracle-glow"></div>
-                <div class="node-core oracle-core"></div>
+        <section class="constellation constellation-6" data-name="Ask the Oracle" aria-labelledby="oracle-title">
+            <button class="constellation-node oracle-node" onclick="navigateTo('oracle')" aria-label="Go to Ask the Oracle - Free consciousness guidance">
+                <div class="node-glow oracle-glow" aria-hidden="true"></div>
+                <div class="node-core oracle-core" aria-hidden="true"></div>
                 <div class="node-label">
-                    <span class="label-title">ASK THE ORACLE</span>
+                    <span class="label-title" id="oracle-title">ASK THE ORACLE</span>
                     <span class="label-subtitle">Free Guidance</span>
                 </div>
-            </div>
-            <div class="constellation-lines"></div>
-        </div>
+            </button>
+            <div class="constellation-lines" aria-hidden="true"></div>
+        </section>
 
         <!-- Constellation 7: Text the Void -->
-        <div class="constellation constellation-7" data-name="Text the Void">
-            <div class="constellation-node void-node" onclick="navigateTo('void')">
-                <div class="node-glow void-glow"></div>
-                <div class="node-core void-core"></div>
+        <section class="constellation constellation-7" data-name="Text the Void" aria-labelledby="void-title">
+            <button class="constellation-node void-node" onclick="navigateTo('void')" aria-label="Go to Text the Void - Anonymous expression portal">
+                <div class="node-glow void-glow" aria-hidden="true"></div>
+                <div class="node-core void-core" aria-hidden="true"></div>
                 <div class="node-label">
-                    <span class="label-title">TEXT THE VOID</span>
+                    <span class="label-title" id="void-title">TEXT THE VOID</span>
                     <span class="label-subtitle">Free Portal</span>
                 </div>
-            </div>
-            <div class="constellation-lines"></div>
-        </div>
+            </button>
+            <div class="constellation-lines" aria-hidden="true"></div>
+        </section>
 
         <!-- Constellation 8: Consciousness Playground -->
-        <div class="constellation constellation-8" data-name="Consciousness Playground">
-            <div class="constellation-node consciousness-node" onclick="navigateTo('consciousness')">
-                <div class="node-glow consciousness-glow"></div>
-                <div class="node-core consciousness-core"></div>
+        <section class="constellation constellation-8" data-name="Consciousness Playground" aria-labelledby="consciousness-playground-title">
+            <button class="constellation-node consciousness-node" onclick="navigateTo('consciousness')" aria-label="Go to Consciousness Playground - Free interactive sandbox">
+                <div class="node-glow consciousness-glow" aria-hidden="true"></div>
+                <div class="node-core consciousness-core" aria-hidden="true"></div>
                 <div class="node-label">
-                    <span class="label-title">CONSCIOUSNESS PLAYGROUND</span>
+                    <span class="label-title" id="consciousness-playground-title">CONSCIOUSNESS PLAYGROUND</span>
                     <span class="label-subtitle">Free Sandbox</span>
                 </div>
-            </div>
-            <div class="constellation-lines"></div>
-        </div>
+            </button>
+            <div class="constellation-lines" aria-hidden="true"></div>
+        </section>
 
         <!-- Constellation 9: The Wall Deluxe -->
-        <div class="constellation constellation-9" data-name="The Wall Deluxe">
-            <div class="constellation-node wall-node" onclick="navigateTo('wall')">
-                <div class="node-glow wall-glow"></div>
-                <div class="node-core wall-core"></div>
+        <section class="constellation constellation-9" data-name="The Wall Deluxe" aria-labelledby="wall-deluxe-title">
+            <button class="constellation-node wall-node" onclick="navigateTo('wall')" aria-label="Go to The Wall Deluxe - Free expression canvas">
+                <div class="node-glow wall-glow" aria-hidden="true"></div>
+                <div class="node-core wall-core" aria-hidden="true"></div>
                 <div class="node-label">
-                    <span class="label-title">THE WALL DELUXE</span>
+                    <span class="label-title" id="wall-deluxe-title">THE WALL DELUXE</span>
                     <span class="label-subtitle">Free Expression</span>
                 </div>
-            </div>
-            <div class="constellation-lines"></div>
-        </div>
+            </button>
+            <div class="constellation-lines" aria-hidden="true"></div>
+        </section>
 
         <!-- Navigation Help -->
-        <div class="nav-help">
-            <div class="help-icon" onclick="toggleHelp()">?</div>
-            <div class="help-panel" id="helpPanel">
-                <h3>Navigate the Sparkverse</h3>
-                <p><span class="help-dot free"></span> Free Access</p>
-                <p><span class="help-dot player"></span> Players ($33/mo)</p>
-                <p><span class="help-dot og"></span> OG Members</p>
-                <p><span class="help-dot investor"></span> Investors</p>
+        <aside class="nav-help">
+            <button class="help-icon" onclick="toggleHelp()" aria-label="Toggle help panel" aria-expanded="false" aria-controls="helpPanel">?</button>
+            <div class="help-panel" id="helpPanel" role="region" aria-labelledby="help-title">
+                <h3 id="help-title">Navigate the Sparkverse</h3>
+                <p><span class="help-dot free" role="img" aria-label="Free tier"></span> Free Access</p>
+                <p><span class="help-dot player" role="img" aria-label="Player tier"></span> Players ($33/mo)</p>
+                <p><span class="help-dot og" role="img" aria-label="OG tier"></span> OG Members</p>
+                <p><span class="help-dot investor" role="img" aria-label="Investor tier"></span> Investors</p>
             </div>
-        </div>
-    </div>
+        </aside>
+    </main>
 
     <!-- Membership Modal -->
-    <div class="modal" id="membershipModal">
+    <div class="modal" id="membershipModal" role="dialog" aria-labelledby="modal-title" aria-modal="true" aria-hidden="true">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeMembershipModal()">&times;</span>
-            <h2>Join the Sparkverse</h2>
+            <button class="close-modal" onclick="closeMembershipModal()" aria-label="Close membership modal">&times;</button>
+            <h2 id="modal-title">Join the Sparkverse</h2>
             <div class="membership-options">
-                <div class="membership-card">
+                <article class="membership-card">
                     <h3>Free Member</h3>
                     <p class="price">$0</p>
                     <ul>
@@ -259,9 +259,9 @@
                         <li>Free Tools</li>
                         <li>Community Access</li>
                     </ul>
-                    <button onclick="signup('free')">Join Free</button>
-                </div>
-                <div class="membership-card featured">
+                    <button onclick="signup('free')" aria-label="Join as free member">Join Free</button>
+                </article>
+                <article class="membership-card featured">
                     <h3>Player</h3>
                     <p class="price">$33<span>/month</span></p>
                     <ul>
@@ -270,9 +270,9 @@
                         <li>Premium Tools</li>
                         <li>Priority Support</li>
                     </ul>
-                    <button onclick="signup('player')">Become a Player</button>
-                </div>
-                <div class="membership-card">
+                    <button onclick="signup('player')" aria-label="Become a Player member for $33 per month">Become a Player</button>
+                </article>
+                <article class="membership-card">
                     <h3>OG Spark</h3>
                     <p class="price">$519<span> one-time</span></p>
                     <ul>
@@ -281,8 +281,8 @@
                         <li>Exclusive OG Tools</li>
                         <li>Beta Access</li>
                     </ul>
-                    <button onclick="signup('og')">Go OG</button>
-                </div>
+                    <button onclick="signup('og')" aria-label="Become an OG Spark member for $519 one-time payment">Go OG</button>
+                </article>
             </div>
         </div>
     </div>
