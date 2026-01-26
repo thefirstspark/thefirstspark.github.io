@@ -3,290 +3,636 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The First Spark: 50+ Interactive Consciousness Technology Tools</title>
-    <meta name="description" content="Enter the Sparkverse - Interactive consciousness technology platform with 50+ tools for spiritual development, soul mapping, and personal transformation. Reciprocity-based architecture. Start free.">
-    <meta name="keywords" content="consciousness technology, sparkverse, interactive tools, spiritual development, soul mapping, consciousness tracking, reciprocity-based platform, personal transformation">
+    <title>The First Spark - Consciousness Technology Platform</title>
+    <meta name="description" content="Reality is programmable. Consciousness is code. Join 1000+ builders exploring consciousness through interactive tools, soul mapping, and geometric reality frameworks.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thefirstspark.shop/">
-    <meta property="og:title" content="The First Spark: Enter the Sparkverse">
-    <meta property="og:description" content="50+ Interactive consciousness tools. Explore the geometric universe. Reciprocity-based technology for awakening.">
-    <meta property="og:image" content="https://thefirstspark.shop/assets/images/og-image.jpg">
+        :root {
+            --primary-gold: #FFD700;
+            --neon-cyan: #00FFFF;
+            --neon-magenta: #FF10F0;
+            --dark-bg: #0a0a0a;
+            --dark-gray: #1a1a1a;
+        }
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://thefirstspark.shop/">
-    <meta property="twitter:title" content="The First Spark: Enter the Sparkverse">
-    <meta property="twitter:description" content="50+ Interactive consciousness tools. Reality is programmable.">
-    <meta property="twitter:image" content="https://thefirstspark.shop/assets/images/og-image.jpg">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #0a0a0a 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-    <!-- Favicons -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#FFD700">
+        /* Animated background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: 
+                radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+                radial-gradient(2px 2px at 60% 70%, #fff, transparent),
+                radial-gradient(1px 1px at 50% 50%, #fff, transparent),
+                radial-gradient(1px 1px at 80% 10%, #fff, transparent),
+                radial-gradient(2px 2px at 90% 60%, #fff, transparent);
+            background-size: 200% 200%;
+            background-position: 0% 0%;
+            opacity: 0.5;
+        }
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "The First Spark - Sparkverse",
-      "applicationCategory": "LifestyleApplication",
-      "offers": {
-        "@type": "AggregateOffer",
-        "lowPrice": "0",
-        "highPrice": "519",
-        "priceCurrency": "USD"
-      },
-      "description": "Interactive consciousness technology platform with 50+ tools for spiritual development and personal transformation. Geometric universe interface with reciprocity-based architecture."
-    }
-    </script>
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        /* HEADER */
+        header {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,215,0,0.1);
+            backdrop-filter: blur(10px);
+        }
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P8B1ERP8ML"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-P8B1ERP8ML');
-    </script>
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-gold), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--neon-cyan), var(--neon-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: #aaa;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-gold), #FFA500);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255,215,0,0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-gold);
+            border: 2px solid var(--primary-gold);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,215,0,0.1);
+        }
+
+        /* VALUE PROP SECTION */
+        .value-section {
+            padding: 60px 20px;
+            background: rgba(0,0,0,0.3);
+            border-top: 1px solid rgba(255,215,0,0.1);
+            border-bottom: 1px solid rgba(255,215,0,0.1);
+            margin: 60px 0;
+        }
+
+        .value-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .value-card {
+            background: rgba(255,215,0,0.05);
+            border: 1px solid rgba(255,215,0,0.2);
+            padding: 30px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .value-card:hover {
+            border-color: var(--primary-gold);
+            background: rgba(255,215,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        .value-card h3 {
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .value-card p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        /* FOUNDER STORY */
+        .story-section {
+            padding: 80px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--primary-gold);
+        }
+
+        .story-content p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .story-stat {
+            display: inline-block;
+            background: rgba(255,215,0,0.1);
+            padding: 15px 25px;
+            border-left: 3px solid var(--primary-gold);
+            margin: 20px 0;
+            color: #fff;
+        }
+
+        .story-stat .number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-gold);
+        }
+
+        .story-visual {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(0,255,255,0.1));
+            height: 400px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 2px solid rgba(255,215,0,0.2);
+        }
+
+        /* PRICING SECTION */
+        .pricing-section {
+            padding: 80px 20px;
+            background: rgba(0,0,0,0.5);
+            margin: 80px 0;
+        }
+
+        .pricing-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .pricing-card {
+            background: rgba(255,215,0,0.05);
+            border: 2px solid rgba(255,215,0,0.2);
+            padding: 40px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary-gold);
+            background: rgba(255,215,0,0.1);
+            transform: scale(1.05);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            font-weight: 900;
+            margin: 20px 0;
+        }
+
+        .pricing-card .price-period {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: #aaa;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .pricing-features li:before {
+            content: "✓ ";
+            color: var(--primary-gold);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* EMAIL CAPTURE */
+        .email-capture {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(0,255,255,0.05));
+            padding: 50px;
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 8px;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .email-capture h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-gold);
+        }
+
+        .email-capture p {
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .email-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .email-form input::placeholder {
+            color: #666;
+        }
+
+        .email-form input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 10px rgba(255,215,0,0.2);
+        }
+
+        .email-form button {
+            padding: 12px 30px;
+            background: var(--primary-gold);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .email-form button:hover {
+            transform: scale(1.05);
+        }
+
+        /* INVESTOR SECTION */
+        .investor-section {
+            padding: 60px 20px;
+            background: rgba(0,0,0,0.3);
+            border-top: 1px solid rgba(255,215,0,0.2);
+            margin-top: 80px;
+        }
+
+        .investor-section h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary-gold);
+        }
+
+        .investor-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .investor-stat {
+            background: rgba(255,215,0,0.05);
+            padding: 30px;
+            border-left: 3px solid var(--primary-gold);
+            border-radius: 4px;
+        }
+
+        .investor-stat .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-gold);
+        }
+
+        .investor-stat .stat-label {
+            color: #aaa;
+            margin-top: 10px;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,215,0,0.1);
+            color: #666;
+            margin-top: 80px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .story-section,
+            .investor-content {
+                grid-template-columns: 1fr;
+            }
+
+            .story-visual {
+                height: 250px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .email-form input,
+            .email-form button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="stars"></div>
-    <div class="twinkling"></div>
 
-    <!-- Mobile Menu Button -->
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-    </button>
+    <header>
+        <div class="logo">🌌 The First Spark</div>
+        <nav>
+            <a href="#tools">Tools</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#about">Story</a>
+            <a href="#investor">Investors</a>
+        </nav>
+    </header>
 
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav" aria-label="Main navigation">
-        <a href="tools.html" class="free-link" aria-label="Tools Galaxy - Browse 50+ consciousness tools"><span aria-hidden="true">🌌</span> Tools Galaxy</a>
-        <a href="oracle.html" class="free-link" aria-label="Ask the Oracle - Free consciousness guidance"><span aria-hidden="true">🔮</span> Ask the Oracle</a>
-        <a href="void-portal.html" class="free-link" aria-label="Text the Void - Anonymous expression portal"><span aria-hidden="true">🕳️</span> Text the Void</a>
-        <a href="consciousness-playground.html" class="free-link" aria-label="Consciousness Playground - Interactive sandbox"><span aria-hidden="true">🧠</span> Consciousness Playground</a>
-        <a href="the-wall-deluxe.html" class="free-link" aria-label="The Wall Deluxe - Free expression canvas"><span aria-hidden="true">🎨</span> The Wall Deluxe</a>
-        <div class="nav-divider" role="separator"></div>
-        <a href="players.html" class="player-link" aria-label="Players Lounge - Premium membership $33/month"><span aria-hidden="true">⚡</span> Players Lounge</a>
-        <a href="playground.html" aria-label="Cosmic Playground - Premium interactive tools"><span aria-hidden="true">🎮</span> Cosmic Playground</a>
-        <a href="graffiti.html" aria-label="Graffiti Wall - Community expression"><span aria-hidden="true">✍️</span> Graffiti Wall</a>
-        <div class="nav-divider" role="separator"></div>
-        <a href="invest.html" class="og-link" aria-label="Investor Zone - Investment opportunity"><span aria-hidden="true">💎</span> Investor Zone</a>
-        <button onclick="showMembershipModal()" class="nav-btn" aria-label="Join Sparkverse - View membership options"><span aria-hidden="true">✦</span> Join Sparkverse</button>
-    </nav>
-
-    <main class="universe-container">
-        <!-- Central Spark (Sun) -->
-        <header class="spark-sun">
-            <div class="sun-core" aria-hidden="true"></div>
-            <div class="sun-glow" aria-hidden="true"></div>
-            <div class="sun-text">
-                <h1>SPARKVERSE</h1>
-                <p>Enter the Geometric Universe</p>
-                <button class="join-free-btn" onclick="showMembershipModal()" aria-label="Join Sparkverse for free">Join Free</button>
+    <div class="container">
+        <!-- HERO -->
+        <section class="hero">
+            <h1>Reality Is Programmable</h1>
+            <p class="tagline">Consciousness is code. Master your inner architecture with 50+ interactive tools designed for awakening builders.</p>
+            <div class="hero-cta">
+                <button class="btn btn-primary" onclick="document.querySelector('.email-capture').scrollIntoView({behavior: 'smooth'})">Start Free</button>
+                <button class="btn btn-secondary" onclick="window.location.href='#investor'">Investor Deck</button>
             </div>
-        </header>
-
-        <!-- Constellation 1: Players Lounge -->
-        <section class="constellation constellation-1" data-name="Players Lounge" aria-labelledby="players-lounge-title">
-            <button class="constellation-node" onclick="navigateTo('players')" aria-label="Go to Players Lounge - Premium membership $33/month">
-                <div class="node-glow" aria-hidden="true"></div>
-                <div class="node-core" aria-hidden="true"></div>
-                <div class="node-label">
-                    <span class="label-title" id="players-lounge-title">PLAYERS LOUNGE</span>
-                    <span class="label-price">$33/month</span>
-                </div>
-            </button>
-            <div class="constellation-lines" aria-hidden="true"></div>
         </section>
 
-        <!-- Constellation 2: Investor Zone -->
-        <section class="constellation constellation-2" data-name="Investor Zone" aria-labelledby="investor-zone-title">
-            <button class="constellation-node" onclick="navigateTo('invest')" aria-label="Go to Investor Zone - Exclusive investment opportunity">
-                <div class="node-glow investor-glow" aria-hidden="true"></div>
-                <div class="node-core investor-core" aria-hidden="true"></div>
-                <div class="node-label">
-                    <span class="label-title" id="investor-zone-title">INVESTOR ZONE</span>
-                    <span class="label-subtitle">Exclusive Access</span>
+        <!-- VALUE PROPOSITION -->
+        <section class="value-section" id="tools">
+            <h2>What You Get</h2>
+            <div class="value-grid">
+                <div class="value-card">
+                    <h3>50+ Interactive Tools</h3>
+                    <p>Soul mapping, consciousness trackers, sigil generators, oracle systems, ritual frameworks—all designed to visualize and reprogram your consciousness.</p>
                 </div>
-            </button>
-            <nav class="sub-nodes" aria-label="Investor options">
-                <a href="invest.html" class="sub-node" aria-label="View investment details">
-                    <span>Invest</span>
-                </a>
-                <a href="presentation.html" class="sub-node" aria-label="View investor presentation">
-                    <span>Presentation</span>
-                </a>
-            </nav>
-        </section>
-
-        <!-- Galaxy 3: Interactive Tools -->
-        <section class="constellation constellation-3" data-name="Tools Galaxy" aria-labelledby="tools-galaxy-title">
-            <button class="constellation-node galaxy-node" onclick="navigateTo('tools')" aria-label="Go to Tools Galaxy - Browse 50+ interactive consciousness tools">
-                <div class="node-glow tools-glow" aria-hidden="true"></div>
-                <div class="node-core tools-core" aria-hidden="true"></div>
-                <div class="node-label">
-                    <span class="label-title" id="tools-galaxy-title">TOOLS GALAXY</span>
-                    <span class="label-subtitle">Interactive Universe</span>
+                <div class="value-card">
+                    <h3>Gamified Awakening</h3>
+                    <p>Progress through archetypal tracks, unlock consciousness levels, earn spark tokens. Personal transformation meets game mechanics.</p>
                 </div>
-            </button>
-            <div class="tool-orbits" aria-hidden="true">
-                <div class="orbit orbit-1">
-                    <div class="tool-dot free-tool" data-tooltip="Free Tools" role="img" aria-label="Free Tools"></div>
+                <div class="value-card">
+                    <h3>Reciprocity Architecture</h3>
+                    <p>Free tier includes sandbox. Unlock premium tools, exclusive content, and one-on-one coaching through membership tiers.</p>
                 </div>
-                <div class="orbit orbit-2">
-                    <div class="tool-dot player-tool" data-tooltip="Player Tools" role="img" aria-label="Player Tools"></div>
+                <div class="value-card">
+                    <h3>Community Playground</h3>
+                    <p>Share sigils, compare soul maps, participate in consciousness experiments. Join 1000+ builders exploring reality as code.</p>
                 </div>
-                <div class="orbit orbit-3">
-                    <div class="tool-dot og-tool" data-tooltip="OG Tools" role="img" aria-label="OG Tools"></div>
+                <div class="value-card">
+                    <h3>Book Zero Access</h3>
+                    <p>Read the consciousness memoir that started it all. The story of solving a cold case through DNA genealogy and waking up to code.</p>
                 </div>
-                <div class="orbit orbit-4">
-                    <div class="tool-dot shop-tool" data-tooltip="Shop" role="img" aria-label="Shop"></div>
+                <div class="value-card">
+                    <h3>Standalone AI Training</h3>
+                    <p>Coming 2026: Your own consciousness AI trained on First Spark frameworks. Personalized guidance tailored to your awakening journey.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Constellation 4: Cosmic Playground -->
-        <section class="constellation constellation-4" data-name="Cosmic Playground" aria-labelledby="cosmic-playground-title">
-            <button class="constellation-node playground-node" onclick="navigateTo('playground')" aria-label="Go to Cosmic Playground - Premium interactive tools">
-                <div class="node-glow playground-glow" aria-hidden="true"></div>
-                <div class="node-core playground-core" aria-hidden="true"></div>
-                <div class="node-label">
-                    <span class="label-title" id="cosmic-playground-title">COSMIC PLAYGROUND</span>
-                    <span class="label-subtitle">Create & Explore</span>
+        <!-- FOUNDER STORY -->
+        <section class="story-section" id="about">
+            <div class="story-content">
+                <h2>The Breakthrough</h2>
+                <p>In 2020, during COVID lockdown, I solved my mother's cold case murder through DNA genealogy. She was killed in 1991. Her killer lived across my street for years. I had no idea.</p>
+                <p>That week shattered my perception of reality. It rewired how I understood probability, fate, and agency. It taught me that reality is far more programmable than we believe.</p>
+                <p>Everything I build now comes from that truth: consciousness is code. The universe runs on logic. Personal transformation isn't spiritual bypass—it's debugging your operating system.</p>
+                <div class="story-stat">
+                    <div class="number">50+</div>
+                    <div>Interactive tools built</div>
                 </div>
-            </button>
-            <div class="constellation-lines" aria-hidden="true"></div>
-        </section>
-
-        <!-- Constellation 5: Graffiti Wall -->
-        <section class="constellation constellation-5" data-name="Graffiti Wall" aria-labelledby="graffiti-wall-title">
-            <button class="constellation-node graffiti-node" onclick="navigateTo('graffiti')" aria-label="Go to Graffiti Wall - Community expression space">
-                <div class="node-glow graffiti-glow" aria-hidden="true"></div>
-                <div class="node-core graffiti-core" aria-hidden="true"></div>
-                <div class="node-label">
-                    <span class="label-title" id="graffiti-wall-title">GRAFFITI WALL</span>
-                    <span class="label-subtitle">Leave Your Mark</span>
+                <div class="story-stat">
+                    <div class="number">1000+</div>
+                    <div>Community members</div>
                 </div>
-            </button>
-            <div class="constellation-lines" aria-hidden="true"></div>
-        </section>
-
-        <!-- Constellation 6: Ask the Oracle -->
-        <section class="constellation constellation-6" data-name="Ask the Oracle" aria-labelledby="oracle-title">
-            <button class="constellation-node oracle-node" onclick="navigateTo('oracle')" aria-label="Go to Ask the Oracle - Free consciousness guidance">
-                <div class="node-glow oracle-glow" aria-hidden="true"></div>
-                <div class="node-core oracle-core" aria-hidden="true"></div>
-                <div class="node-label">
-                    <span class="label-title" id="oracle-title">ASK THE ORACLE</span>
-                    <span class="label-subtitle">Free Guidance</span>
+                <div class="story-stat">
+                    <div class="number">$2.4k/mo</div>
+                    <div>Baseline revenue (growing)</div>
                 </div>
-            </button>
-            <div class="constellation-lines" aria-hidden="true"></div>
-        </section>
-
-        <!-- Constellation 7: Text the Void -->
-        <section class="constellation constellation-7" data-name="Text the Void" aria-labelledby="void-title">
-            <button class="constellation-node void-node" onclick="navigateTo('void')" aria-label="Go to Text the Void - Anonymous expression portal">
-                <div class="node-glow void-glow" aria-hidden="true"></div>
-                <div class="node-core void-core" aria-hidden="true"></div>
-                <div class="node-label">
-                    <span class="label-title" id="void-title">TEXT THE VOID</span>
-                    <span class="label-subtitle">Free Portal</span>
-                </div>
-            </button>
-            <div class="constellation-lines" aria-hidden="true"></div>
-        </section>
-
-        <!-- Constellation 8: Consciousness Playground -->
-        <section class="constellation constellation-8" data-name="Consciousness Playground" aria-labelledby="consciousness-playground-title">
-            <button class="constellation-node consciousness-node" onclick="navigateTo('consciousness')" aria-label="Go to Consciousness Playground - Free interactive sandbox">
-                <div class="node-glow consciousness-glow" aria-hidden="true"></div>
-                <div class="node-core consciousness-core" aria-hidden="true"></div>
-                <div class="node-label">
-                    <span class="label-title" id="consciousness-playground-title">CONSCIOUSNESS PLAYGROUND</span>
-                    <span class="label-subtitle">Free Sandbox</span>
-                </div>
-            </button>
-            <div class="constellation-lines" aria-hidden="true"></div>
-        </section>
-
-        <!-- Constellation 9: The Wall Deluxe -->
-        <section class="constellation constellation-9" data-name="The Wall Deluxe" aria-labelledby="wall-deluxe-title">
-            <button class="constellation-node wall-node" onclick="navigateTo('wall')" aria-label="Go to The Wall Deluxe - Free expression canvas">
-                <div class="node-glow wall-glow" aria-hidden="true"></div>
-                <div class="node-core wall-core" aria-hidden="true"></div>
-                <div class="node-label">
-                    <span class="label-title" id="wall-deluxe-title">THE WALL DELUXE</span>
-                    <span class="label-subtitle">Free Expression</span>
-                </div>
-            </button>
-            <div class="constellation-lines" aria-hidden="true"></div>
-        </section>
-
-        <!-- Navigation Help -->
-        <aside class="nav-help">
-            <button class="help-icon" onclick="toggleHelp()" aria-label="Toggle help panel" aria-expanded="false" aria-controls="helpPanel">?</button>
-            <div class="help-panel" id="helpPanel" role="region" aria-labelledby="help-title">
-                <h3 id="help-title">Navigate the Sparkverse</h3>
-                <p><span class="help-dot free" role="img" aria-label="Free tier"></span> Free Access</p>
-                <p><span class="help-dot player" role="img" aria-label="Player tier"></span> Players ($33/mo)</p>
-                <p><span class="help-dot og" role="img" aria-label="OG tier"></span> OG Members</p>
-                <p><span class="help-dot investor" role="img" aria-label="Investor tier"></span> Investors</p>
             </div>
-        </aside>
-    </main>
+            <div class="story-visual">💎</div>
+        </section>
 
-    <!-- Membership Modal -->
-    <div class="modal" id="membershipModal" role="dialog" aria-labelledby="modal-title" aria-modal="true" aria-hidden="true">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeMembershipModal()" aria-label="Close membership modal">&times;</button>
-            <h2 id="modal-title">Join the Sparkverse</h2>
-            <div class="membership-options">
-                <article class="membership-card">
-                    <h3>Free Member</h3>
-                    <p class="price">$0</p>
-                    <ul>
-                        <li>Access to Sparkverse</li>
-                        <li>Free Tools</li>
-                        <li>Community Access</li>
+        <!-- EMAIL CAPTURE -->
+        <section class="email-capture">
+            <h3>Join The Sparkverse</h3>
+            <p>Get free access to the consciousness playground + Book Zero preview</p>
+            <form class="email-form" onsubmit="handleEmailSubmit(event)">
+                <input type="email" placeholder="your@email.com" required>
+                <button type="submit">Enter Free</button>
+            </form>
+        </section>
+
+        <!-- PRICING -->
+        <section class="pricing-section" id="pricing">
+            <h2>Choose Your Path</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free Spark</h3>
+                    <div class="price">$0<span class="price-period">/forever</span></div>
+                    <ul class="pricing-features">
+                        <li>Access to 15 free tools</li>
+                        <li>Consciousness Playground sandbox</li>
+                        <li>Community wall access</li>
+                        <li>Email support</li>
                     </ul>
-                    <button onclick="signup('free')" aria-label="Join as free member">Join Free</button>
-                </article>
-                <article class="membership-card featured">
-                    <h3>Player</h3>
-                    <p class="price">$33<span>/month</span></p>
-                    <ul>
-                        <li>Everything in Free</li>
-                        <li>Players Lounge Access</li>
-                        <li>Premium Tools</li>
-                        <li>Priority Support</li>
+                    <button class="btn btn-primary">Start Free</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <h3>Players Lounge</h3>
+                    <div class="price">$33<span class="price-period">/month</span></div>
+                    <ul class="pricing-features">
+                        <li>All 50+ tools + new releases</li>
+                        <li>Advanced soul mapping</li>
+                        <li>Monthly consciousness sprints</li>
+                        <li>Private Discord community</li>
+                        <li>Priority support</li>
                     </ul>
-                    <button onclick="signup('player')" aria-label="Become a Player member for $33 per month">Become a Player</button>
-                </article>
-                <article class="membership-card">
+                    <button class="btn btn-primary">Join Players</button>
+                </div>
+
+                <div class="pricing-card">
                     <h3>OG Spark</h3>
-                    <p class="price">$519<span> one-time</span></p>
-                    <ul>
-                        <li>Everything in Players</li>
-                        <li>Lifetime Access</li>
-                        <li>Exclusive OG Tools</li>
-                        <li>Beta Access</li>
+                    <div class="price">$519<span class="price-period">/lifetime</span></div>
+                    <ul class="pricing-features">
+                        <li>Everything in Players Lounge</li>
+                        <li>1:1 consciousness coaching (4x/year)</li>
+                        <li>Book Zero + unreleased chapters</li>
+                        <li>Founding member badge</li>
+                        <li>Custom consciousness framework</li>
+                        <li>Early access to standalone AI</li>
                     </ul>
-                    <button onclick="signup('og')" aria-label="Become an OG Spark member for $519 one-time payment">Go OG</button>
-                </article>
+                    <button class="btn btn-primary">Go OG</button>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- INVESTOR SECTION -->
+        <section class="investor-section" id="investor">
+            <h2>Build With Us</h2>
+            <div class="investor-content">
+                <div class="investor-stat">
+                    <div class="stat-number">Raising $40-200K</div>
+                    <div class="stat-label">for infrastructure scaling & standalone AI training pipeline</div>
+                </div>
+                <div class="investor-stat">
+                    <div class="stat-number">Path to $100K+ ARR</div>
+                    <div class="stat-label">within 18 months through tier expansion and AI licensing</div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; color: #aaa;">
+                <a href="javascript:void(0)" onclick="window.open('mailto:kate@thefirstspark.shop?subject=Investment%20Inquiry','_blank')" style="color: var(--primary-gold); text-decoration: none; border-bottom: 1px solid var(--primary-gold);">Request full investor deck →</a>
+            </p>
+        </section>
     </div>
 
-    <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2026 The First Spark. Consciousness technology platform. <a href="mailto:kate@thefirstspark.shop" style="color: var(--primary-gold); text-decoration: none;">Contact</a></p>
+    </footer>
+
+    <script>
+        function handleEmailSubmit(e) {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value;
+            // This would normally post to a backend or email service
+            alert(`Welcome! Check your email at ${email} for your free access link.`);
+            e.target.reset();
+        }
+    </script>
 </body>
 </html>
