@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The First Spark — Member Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0E0F1A;
+            color: #F7F1E1;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid #FFC857;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #FFC857, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            color: #6FFFE9;
+            font-size: 1.1em;
+        }
+        
+        .status-bar {
+            background: rgba(111, 255, 233, 0.1);
+            border: 1px solid #6FFFE9;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #FFC857;
+        }
+        
+        .stat-label {
+            color: #6FFFE9;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #FFC857;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: rgba(255, 200, 87, 0.05);
+            border: 1px solid rgba(255, 200, 87, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            border-color: #FFC857;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 200, 87, 0.2);
+        }
+        
+        .card-title {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #F7F1E1;
+        }
+        
+        .card-description {
+            color: rgba(247, 241, 225, 0.7);
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+        
+        .card-badge {
+            display: inline-block;
+            background: rgba(111, 255, 233, 0.2);
+            color: #6FFFE9;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #FF6B6B, #FFC857);
+            color: #0E0F1A;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 200, 87, 0.4);
+        }
+        
+        .path-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .path-btn {
+            background: rgba(199, 146, 234, 0.1);
+            border: 2px solid rgba(199, 146, 234, 0.3);
+            color: #C792EA;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .path-btn:hover {
+            border-color: #C792EA;
+            background: rgba(199, 146, 234, 0.2);
+        }
+        
+        .path-btn.active {
+            background: #C792EA;
+            color: #0E0F1A;
+        }
+        
+        .ritual-log {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .ritual-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(247, 241, 225, 0.05);
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .ritual-entry:last-child {
+            margin-bottom: 0;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 2px solid #FFC857;
+            margin-top: 60px;
+            color: rgba(247, 241, 225, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .status-bar {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔥 The First Spark</h1>
+            <p>Member Hub — Your Practice. Your Momentum. Your World.</p>
+        </div>
+        
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="stat">
+                <div class="stat-value" id="xp-count">0</div>
+                <div class="stat-label">XP Earned</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="ritual-count">0</div>
+                <div class="stat-label">Press Starts</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="ship-count">0</div>
+                <div class="stat-label">Save Rings</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="rank">Ember</div>
+                <div class="stat-label">Current Rank</div>
+            </div>
+        </div>
+        
+        <!-- Your Path -->
+        <div class="section">
+            <h2 class="section-title">🗺️ Your Path</h2>
+            <div class="path-selector">
+                <div class="path-btn" data-path="mirror">🪞 Mirror</div>
+                <div class="path-btn" data-path="glitch">⚡ Glitch</div>
+                <div class="path-btn" data-path="fire">🔥 Fire</div>
+                <div class="path-btn" data-path="garden">🌱 Garden</div>
+                <div class="path-btn" data-path="source">🌀 Source</div>
+            </div>
+        </div>
+        
+        <!-- Current Drop -->
+        <div class="section">
+            <h2 class="section-title">🎯 Current Drop</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">⚡ Hidden Spark (Artifact 00)</h3>
+                    <p class="card-description">
+                        Your private, momentum-gated micro-world. Tracks rituals, evolves your sigil, 
+                        unlocks your personal parable after 7 evolutions.
+                    </p>
+                    <span class="card-badge">Live Now</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Core Rituals -->
+        <div class="section">
+            <h2 class="section-title">🛠️ Core Rituals</h2>
+            <div class="cards">
+                <div class="card" onclick="logRitual('press-start')">
+                    <h3 class="card-title">⚡ Press Start</h3>
+                    <p class="card-description">
+                        33 breaths or 1 minute of focused presence. The entry point that anchors everything.
+                    </p>
+                    <button class="btn">Complete Ritual</button>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">🔮 Magnetic Quiet</h3>
+                    <p class="card-description">
+                        11-minute practice to call back scattered energy and stabilize your revenue field.
+                    </p>
+                    <span class="card-badge">Pro33</span>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">💫 Save Ring</h3>
+                    <p class="card-description">
+                        Log what you actually ship. Not plans, not intentions — completed work only.
+                    </p>
+                    <button class="btn" onclick="logShipment()">Log Save Ring</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Artifact Library -->
+        <div class="section">
+            <h2 class="section-title">📦 Your Artifacts</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">🜏 Revenue Circle Sigil</h3>
+                    <p class="card-description">Stabilize revenue and expand the circle. Three variants available.</p>
+                    <span class="card-badge">Free</span>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">📖 Sigilcraft Workbook</h3>
+                    <p class="card-description">Sacred geometry for practical magic. Create your first 10 sigils.</p>
+                    <span class="card-badge">Pro33</span>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">🎮 Core Code Survival Guide</h3>
+                    <p class="card-description">First principles for staying awake in the system.</p>
+                    <span class="card-badge">Free</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Activity -->
+        <div class="section">
+            <h2 class="section-title">📊 Recent Activity</h2>
+            <div class="ritual-log">
+                <div id="activity-log">
+                    <p style="text-align: center; color: rgba(247, 241, 225, 0.5);">
+                        No activity yet. Complete your first Press Start to begin.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="section">
+            <h2 class="section-title">⚡ Quick Actions</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3 class="card-title">🔗 Connect Wallet</h3>
+                    <p class="card-description">Link your wallet to claim NFT drops and on-chain perks.</p>
+                    <button class="btn">Connect</button>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">💬 Join Discord</h3>
+                    <p class="card-description">Connect with other Sparked Ones. Share seals, witness momentum.</p>
+                    <button class="btn">Join Server</button>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">📧 Update Email</h3>
+                    <p class="card-description">Stay updated on new drops, rituals, and community events.</p>
+                    <button class="btn">Update</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>🔥 The First Spark — Turn consciousness into code.</p>
+            <p style="margin-top: 10px;">Remember the signal. Rewrite the system.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize user data from localStorage
+        let userData = JSON.parse(localStorage.getItem('sparkUserData')) || {
+            xp: 0,
+            pressStarts: 0,
+            saveRings: 0,
+            rank: 'Ember',
+            path: null,
+            activity: []
+        };
+        
+        // Update display
+        function updateDisplay() {
+            document.getElementById('xp-count').textContent = userData.xp;
+            document.getElementById('ritual-count').textContent = userData.pressStarts;
+            document.getElementById('ship-count').textContent = userData.saveRings;
+            document.getElementById('rank').textContent = userData.rank;
+            
+            // Update rank based on XP
+            if (userData.xp >= 778) userData.rank = 'Signal';
+            else if (userData.xp >= 334) userData.rank = 'Beacon';
+            else if (userData.xp >= 109) userData.rank = 'Torch';
+            else if (userData.xp >= 34) userData.rank = 'Flame';
+            else userData.rank = 'Ember';
+            
+            // Update activity log
+            const activityLog = document.getElementById('activity-log');
+            if (userData.activity.length > 0) {
+                activityLog.innerHTML = userData.activity.slice(-5).reverse().map(entry => `
+                    <div class="ritual-entry">
+                        <span>${entry.action}</span>
+                        <span style="color: #FFC857;">+${entry.xp} XP</span>
+                    </div>
+                `).join('');
+            }
+            
+            // Highlight selected path
+            document.querySelectorAll('.path-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.path === userData.path) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            localStorage.setItem('sparkUserData', JSON.stringify(userData));
+        }
+        
+        // Log ritual completion
+        function logRitual(type) {
+            userData.pressStarts++;
+            userData.xp += 33;
+            userData.activity.push({
+                action: '⚡ Completed Press Start',
+                xp: 33,
+                timestamp: new Date().toISOString()
+            });
+            updateDisplay();
+            alert('✨ Press Start completed! +33 XP');
+        }
+        
+        // Log shipment
+        function logShipment() {
+            const shipment = prompt('What did you ship?');
+            if (shipment && shipment.trim()) {
+                userData.saveRings++;
+                userData.xp += 55;
+                userData.activity.push({
+                    action: `💫 Shipped: ${shipment.substring(0, 30)}...`,
+                    xp: 55,
+                    timestamp: new Date().toISOString()
+                });
+                updateDisplay();
+                alert('🎉 Save Ring logged! +55 XP');
+            }
+        }
+        
+        // Path selection
+        document.querySelectorAll('.path-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                userData.path = this.dataset.path;
+                updateDisplay();
+            });
+        });
+        
+        // Initialize on load
+        updateDisplay();
+    </script>
+</body>
+</html>

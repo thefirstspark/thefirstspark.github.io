@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invest in The First Spark | Consciousness Technology</title>
+    <meta name="description" content="Investment opportunity in The First Spark - where consciousness meets code. $200K raise for 20% equity.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a12;
+            --bg-card: #0f0f1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --accent-cyan: #00ffff;
+            --accent-magenta: #ff00ff;
+            --accent-gold: #ffd700;
+            --accent-green: #00ff88;
+            --gradient-spark: linear-gradient(135deg, #00ffff 0%, #ff00ff 50%, #ffd700 100%);
+            --glow-cyan: 0 0 20px rgba(0,255,255,0.5);
+            --glow-magenta: 0 0 20px rgba(255,0,255,0.5);
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Matrix-style background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+            animation: gridFloat 20s linear infinite;
+        }
+
+        @keyframes gridFloat {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            animation: float 15s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* HERO SECTION - MAJOR UPGRADE */
+        header {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-wrapper {
+            position: relative;
+        }
+
+        .logo-mark {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 32px;
+            position: relative;
+            filter: drop-shadow(var(--glow-cyan));
+        }
+
+        .logo-mark svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-mark .spark-core {
+            fill: none;
+            stroke: url(#sparkGradient);
+            stroke-width: 2;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); filter: drop-shadow(0 0 5px currentColor); }
+            50% { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 20px currentColor); }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: var(--gradient-spark);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* UNIQUE DIFFERENTIATORS - HERO CALLOUTS */
+        .hero-badges {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .badge {
+            background: rgba(0,255,255,0.05);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+
+        .badge:nth-child(2) {
+            border-color: var(--accent-magenta);
+            color: var(--accent-magenta);
+            box-shadow: var(--glow-magenta);
+            animation-delay: 1s;
+        }
+
+        .badge:nth-child(3) {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(0,255,136,0.5);
+            animation-delay: 2s;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        /* Investment Summary Bar - Enhanced */
+        .invest-bar {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            padding: 48px 32px;
+            margin: 60px 0;
+            background: linear-gradient(135deg, rgba(0,255,255,0.03) 0%, rgba(255,0,255,0.03) 100%);
+            border: 1px solid rgba(0,255,255,0.2);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .invest-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,255,0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        .invest-stat {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .invest-stat .value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-spark);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'JetBrains Mono', monospace;
+            text-shadow: var(--glow-cyan);
+        }
+
+        .invest-stat .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 8px;
+        }
+
+        /* UNIQUE FOUNDER HERO SECTION */
+        .founder-hero {
+            background: linear-gradient(135deg, rgba(0,255,255,0.05) 0%, rgba(255,0,255,0.05) 100%);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta)) 1;
+            padding: 48px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .founder-hero::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            opacity: 0.1;
+            z-index: 0;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+        }
+
+        .founder-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .founder-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+        }
+
+        .founder-hero h2 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            background: var(--gradient-spark);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .founder-hero h2::before {
+            display: none;
+        }
+
+        .unique-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .unique-item {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(0,255,255,0.2);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .unique-item:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-4px);
+        }
+
+        .unique-item .icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .unique-item h3 {
+            font-size: 1.1rem;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+        }
+
+        .unique-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .unique-item .stat-highlight {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-magenta);
+            font-weight: 700;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        h2::before {
+            content: '';
+            width: 5px;
+            height: 32px;
+            background: var(--gradient-spark);
+            border-radius: 3px;
+            box-shadow: var(--glow-cyan);
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        /* Holographic Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(0,255,255,0.02) 0%, rgba(255,0,255,0.02) 100%);
+            border: 1px solid rgba(0,255,255,0.15);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-6px);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--accent-cyan);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .card .stat {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--gradient-spark);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        /* Terminal-style Use of Funds */
+        .funds-list {
+            list-style: none;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(0,255,255,0.2);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .funds-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0,255,255,0.08);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .funds-list li:last-child {
+            border-bottom: none;
+        }
+
+        .funds-list .item-name {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .funds-list .item-amount {
+            color: var(--accent-cyan);
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-shadow: var(--glow-cyan);
+        }
+
+        /* Enhanced Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-magenta), var(--accent-gold));
+            box-shadow: 0 0 10px rgba(0,255,255,0.5);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+            background: rgba(0,255,255,0.02);
+            border: 1px solid rgba(0,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 24px;
+            width: 16px;
+            height: 16px;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: var(--glow-cyan);
+        }
+
+        .timeline-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .timeline-item p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* CTA Section - Enhanced */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(0,255,255,0.05) 0%, rgba(255,0,255,0.05) 100%);
+            border-top: 1px solid rgba(0,255,255,0.2);
+            border-bottom: 1px solid rgba(0,255,255,0.2);
+            position: relative;
+        }
+
+        .cta-section h2 {
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .cta-section h2::before {
+            display: none;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-spark);
+            color: #000;
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0,255,255,0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0,255,255,0.1);
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-4px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-magenta);
+            text-shadow: var(--glow-magenta);
+        }
+
+        /* Highlight box - Enhanced */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0,255,255,0.08) 0%, rgba(255,0,255,0.08) 100%);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta)) 1;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .highlight-box p {
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .invest-bar {
+                gap: 32px;
+                padding: 32px 24px;
+            }
+
+            .invest-stat .value {
+                font-size: 1.8rem;
+            }
+
+            header {
+                padding: 60px 0 40px;
+            }
+
+            .founder-hero {
+                padding: 32px 24px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Special "Consciousness as Code" display */
+        .code-block {
+            background: #000;
+            border: 1px solid var(--accent-cyan);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-green);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .code-block .comment {
+            color: var(--text-secondary);
+        }
+
+        .code-block .keyword {
+            color: var(--accent-magenta);
+        }
+
+        .code-block .string {
+            color: var(--accent-gold);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <div class="particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 4.5s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="hero-wrapper">
+                <div class="logo-mark">
+                    <svg viewBox="0 0 100 100">
+                        <defs>
+                            <linearGradient id="sparkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00ffff"/>
+                                <stop offset="50%" stop-color="#ff00ff"/>
+                                <stop offset="100%" stop-color="#ffd700"/>
+                            </linearGradient>
+                        </defs>
+                        <polygon class="spark-core" points="50,15 85,75 15,75"/>
+                        <circle class="spark-core" cx="50" cy="50" r="8"/>
+                        <circle class="spark-core" cx="50" cy="50" r="20" opacity="0.5"/>
+                    </svg>
+                </div>
+                <h1>The First Spark</h1>
+                <p class="tagline">Where consciousness meets code. Interactive tools for spiritual awakening in the simulation age.</p>
+
+                <div class="hero-badges">
+                    <div class="badge">⚡ TOP 1% AI POWER USER</div>
+                    <div class="badge">🔍 COLD CASE SOLVER</div>
+                    <div class="badge">💻 CONSCIOUSNESS AS CODE</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="invest-bar">
+            <div class="invest-stat">
+                <div class="value">$200K</div>
+                <div class="label">Raising</div>
+            </div>
+            <div class="invest-stat">
+                <div class="value">20%</div>
+                <div class="label">Equity</div>
+            </div>
+            <div class="invest-stat">
+                <div class="value">$800K</div>
+                <div class="label">Pre-Money</div>
+            </div>
+        </div>
+
+        <!-- UNIQUE FOUNDER DIFFERENTIATORS SECTION -->
+        <div class="founder-hero">
+            <div class="founder-hero-content">
+                <div class="founder-eyebrow">/// FOUNDER.UNIQUENESS</div>
+                <h2>Why This Founder Is Different</h2>
+
+                <div class="unique-grid">
+                    <div class="unique-item">
+                        <div class="icon">🧠</div>
+                        <h3>Pattern Recognition at Scale</h3>
+                        <p>Solved her mother's <span class="stat-highlight">1991 cold case murder</span> using advanced pattern recognition and relentless investigation. If she can crack the impossible, she can decode consciousness.</p>
+                    </div>
+
+                    <div class="unique-item">
+                        <div class="icon">🤖</div>
+                        <h3>AI-Native Builder</h3>
+                        <p><span class="stat-highlight">Top 1% of ChatGPT power users globally</span> — proof of deep AI fluency. Building consciousness tech with bleeding-edge AI tools that most founders don't know exist.</p>
+                    </div>
+
+                    <div class="unique-item">
+                        <div class="icon">⚡</div>
+                        <h3>Consciousness as Code</h3>
+                        <p>Self-taught programmer translating ancient spiritual frameworks into <span class="stat-highlight">interactive digital systems</span>. Not theory — deployed, working products.</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+<span class="keyword">class</span> <span style="color: var(--accent-cyan);">KatelinPuzakulics</span> {<br>
+&nbsp;&nbsp;<span class="comment">// Impossible problem solver</span><br>
+&nbsp;&nbsp;<span class="keyword">const</span> coldCaseSolved = <span style="color: var(--accent-gold);">true</span>;<br>
+&nbsp;&nbsp;<span class="keyword">const</span> aiPowerUser = <span class="string">"Top 1% globally"</span>;<br>
+&nbsp;&nbsp;<span class="keyword">const</span> consciousnessFramework = <span class="string">"Built & deployed"</span>;<br>
+&nbsp;&nbsp;<span class="comment">// Result: Tools that didn't exist until now</span><br>
+}
+                </div>
+            </div>
+        </div>
+
+        <section>
+            <h2>The Opportunity</h2>
+            <p>The spiritual wellness market is worth <strong>$1.5 trillion globally</strong>. Yet most digital offerings are passive content — meditation apps, courses, PDFs. The First Spark is different: we build <strong>interactive consciousness technology</strong> that turns ancient practices into living digital experiences.</p>
+
+            <div class="highlight-box">
+                <p><strong>27% of US adults</strong> (50M+ people) identify as "spiritual but not religious" — seeking meaning outside traditional frameworks. They spend $200-600/year on wellness content. We're building the tools they didn't know existed.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>What We've Built</h2>
+            <p>Fully deployed digital infrastructure with multiple interactive tools, membership tiers, and automated payment systems.</p>
+
+            <div class="highlight-box" style="margin-bottom: 32px;">
+                <p style="margin-bottom: 16px;"><strong>See it live →</strong> Our flagship <a href="https://thefirstspark.shop/source" target="_blank" style="color: var(--accent-cyan); text-decoration: none; border-bottom: 1px solid var(--accent-cyan);">Source Architecture</a> system — four interconnected consciousness tools:</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 16px;">
+                    <a href="https://thefirstspark.shop/patterns" target="_blank" style="color: var(--text-secondary); text-decoration: none; padding: 14px; background: rgba(0,0,0,0.5); border-radius: 8px; border: 1px solid rgba(0,255,255,0.2); transition: all 0.3s;">
+                        <span style="color: var(--accent-cyan); font-weight: 600;">Chamber 1:</span> Pattern Recognition
+                    </a>
+                    <a href="https://thefirstspark.shop/collapse" target="_blank" style="color: var(--text-secondary); text-decoration: none; padding: 14px; background: rgba(0,0,0,0.5); border-radius: 8px; border: 1px solid rgba(255,0,255,0.2); transition: all 0.3s;">
+                        <span style="color: var(--accent-magenta); font-weight: 600;">Chamber 2:</span> Collapse Protocol
+                    </a>
+                    <a href="https://thefirstspark.shop/timeline" target="_blank" style="color: var(--text-secondary); text-decoration: none; padding: 14px; background: rgba(0,0,0,0.5); border-radius: 8px; border: 1px solid rgba(255,215,0,0.2); transition: all 0.3s;">
+                        <span style="color: var(--accent-gold); font-weight: 600;">Chamber 3:</span> Timeline Navigator
+                    </a>
+                    <a href="https://thefirstspark.shop/lineage" target="_blank" style="color: var(--text-secondary); text-decoration: none; padding: 14px; background: rgba(0,0,0,0.5); border-radius: 8px; border: 1px solid rgba(0,255,136,0.2); transition: all 0.3s;">
+                        <span style="color: var(--accent-green); font-weight: 600;">Chamber 4:</span> Lineage Debugger
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Soul Map Generator</h3>
+                    <p>4-dimensional consciousness mapping with personalized insights and downloadable results.</p>
+                </div>
+                <div class="card">
+                    <h3>Sigil Craft Engine</h3>
+                    <p>Sacred geometry-based intention tools with generative art outputs unique to each user.</p>
+                </div>
+                <div class="card">
+                    <h3>Integration Dashboard</h3>
+                    <p>Peak experience tracking, pattern recognition, and consciousness level progression.</p>
+                </div>
+                <div class="card">
+                    <h3>Spark Protocol</h3>
+                    <p>Full consciousness operating system — the hub connecting all tools into one experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Traction</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="stat">$2.4K</div>
+                    <h3>Monthly Baseline</h3>
+                    <p>Sustainable income from service business while building digital products.</p>
+                </div>
+                <div class="card">
+                    <div class="stat">Live</div>
+                    <h3>Platform Status</h3>
+                    <p>thefirstspark.shop deployed with Whop integration, Stripe payments, tool delivery.</p>
+                </div>
+                <div class="card">
+                    <div class="stat">$519</div>
+                    <h3>Founding Member Tier</h3>
+                    <p>100 lifetime spots for early believers. Premium positioning proven.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Use of Funds</h2>
+            <ul class="funds-list">
+                <li>
+                    <span class="item-name">Mobile Spark Station (van conversion + tech)</span>
+                    <span class="item-amount">$65,000</span>
+                </li>
+                <li>
+                    <span class="item-name">Customer Acquisition & Content Production</span>
+                    <span class="item-amount">$50,000</span>
+                </li>
+                <li>
+                    <span class="item-name">Book Zero Launch + Marketing</span>
+                    <span class="item-amount">$35,000</span>
+                </li>
+                <li>
+                    <span class="item-name">Product Development & AI Integration</span>
+                    <span class="item-amount">$25,000</span>
+                </li>
+                <li>
+                    <span class="item-name">Operational Runway (12 months)</span>
+                    <span class="item-amount">$25,000</span>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Roadmap</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Year 1-2</h4>
+                    <p>Scale to $5K/month recurring. Launch Book Zero memoir. Build email list to 5,000+. Grow social through Sora video content.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Year 3</h4>
+                    <p>Hit $10K/month. Launch Mobile Spark Station for traveling workshops. Begin Hocking Hills retreat location setup.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Year 4-5</h4>
+                    <p>$25K+/month. Multiple revenue streams: digital, memberships, retreats, facilitator licensing. Physical location operational.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Founder</h2>
+            <div class="highlight-box">
+                <p style="font-size: 1.1rem; margin-bottom: 20px;"><strong>Katelin Jill Puzakulics</strong> — Founder & CEO</p>
+                <p>Self-taught programmer and artist combining spiritual practices with technology. Background in computer programming (University of Akron). Creator of "consciousness as code" framework. <strong>Top 1% of ChatGPT power users globally</strong> — proof of deep AI fluency and the ability to leverage emerging tools at scale.</p>
+                <p>Personal transformation story includes solving her mother's 1991 cold case murder — proof that pattern recognition and persistence unlock impossible answers. Now applying that same relentless focus to building tools for collective awakening.</p>
+                <p style="margin-bottom: 0;">Mother of two. Based in Akron, Ohio. Building the future of consciousness technology.</p>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Let's Talk</h2>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 16px auto 0;">Interested in being part of the spark that lights the fire?</p>
+            <div class="cta-buttons">
+                <a href="mailto:kate@thefirstspark.shop?subject=Investment%20Inquiry" class="btn btn-primary">
+                    Contact Founder
+                </a>
+                <a href="https://thefirstspark.shop" target="_blank" class="btn btn-secondary">
+                    Visit Platform
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 The First Spark · <a href="https://thefirstspark.shop">thefirstspark.shop</a></p>
+            <p style="margin-top: 12px; font-size: 0.75rem; opacity: 0.6;">This is not a public securities offering. Investment discussions are for accredited investors only.</p>
+        </footer>
+    </div>
+</body>
+</html>

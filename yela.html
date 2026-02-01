@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLUMERICAN x THE FIRST SPARK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --void: #030305;
+            --blood: #8B0000;
+            --rust: #722F37;
+            --gold: #d4af37;
+            --electric: #00d4ff;
+            --white: #f0f0f0;
+            --ghost: rgba(255,255,255,0.8);
+        }
+
+        body {
+            background: var(--void);
+            color: var(--white);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* PARTICLE CANVAS */
+        #particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        /* CONTENT */
+        .content {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* COLLAB HEADER */
+        .collab-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .brand {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .brand.slum {
+            color: var(--blood);
+            text-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
+        }
+
+        .brand.spark {
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .x-mark {
+            font-size: 2rem;
+            color: var(--ghost);
+            opacity: 0.5;
+        }
+
+        /* MAIN MESSAGE */
+        .message {
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .headline {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--blood) 0%, var(--gold) 50%, var(--electric) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subline {
+            font-size: 1.1rem;
+            color: var(--ghost);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .subline strong {
+            color: var(--gold);
+        }
+
+        /* STATS ROW */
+        .stats {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--electric);
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--ghost);
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        /* OPTIONS */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            text-align: left;
+            max-width: 500px;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid rgba(139, 0, 0, 0.3);
+            background: rgba(139, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .option-letter {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--blood);
+            min-width: 2rem;
+        }
+
+        .option-text {
+            color: var(--ghost);
+            line-height: 1.6;
+        }
+
+        /* CTA BUTTONS */
+        .ctas {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            text-transform: uppercase;
+            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+            transition: all 0.3s ease;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--blood), var(--rust));
+            color: var(--white);
+        }
+
+        .cta-primary:hover {
+            background: linear-gradient(135deg, var(--gold), #b8962e);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--electric);
+            border: 1px solid var(--electric);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* SIGNATURE */
+        .signature {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .sig-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+        }
+
+        .sig-title {
+            font-size: 0.8rem;
+            color: var(--ghost);
+            opacity: 0.6;
+            margin-top: 0.25rem;
+        }
+
+        .sig-contact {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .sig-contact a {
+            color: var(--electric);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .sig-contact a:hover {
+            color: var(--gold);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .collab-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .brand {
+                font-size: 1.2rem;
+            }
+            .stats {
+                gap: 2rem;
+            }
+            .ctas {
+                flex-direction: column;
+                width: 100%;
+            }
+            .cta {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+
+    <div class="content">
+        <div class="collab-header">
+            <span class="brand slum">SLUMERICAN</span>
+            <span class="x-mark">×</span>
+            <span class="brand spark">THE FIRST SPARK</span>
+        </div>
+
+        <div class="message">
+            <h1 class="headline">REALITY IS PROGRAMMABLE.<br>SO IS THE HUSTLE.</h1>
+            <p class="subline">
+                Built from nothing. No label. No VC. Just tools that work.<br>
+                <strong>Consciousness technology</strong> for people who build their own lane.
+            </p>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-num">50+</div>
+                <div class="stat-label">Tools Built</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">$0</div>
+                <div class="stat-label">VC Money</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">$2M</div>
+                <div class="stat-label">SAFE Open</div>
+            </div>
+        </div>
+
+        <div class="options">
+            <div class="option">
+                <span class="option-letter">A</span>
+                <span class="option-text"><strong>Investment.</strong> Early positioning for artists who see what's coming.</span>
+            </div>
+            <div class="option">
+                <div class="option-letter">B</div>
+                <span class="option-text"><strong>Creative partnership.</strong> Branded tools for Slumerican — soul maps, sigils, interactive experiences.</span>
+            </div>
+            <div class="option">
+                <span class="option-letter">C</span>
+                <span class="option-text"><strong>Both.</strong></span>
+            </div>
+        </div>
+
+        <div class="ctas">
+            <a href="trinity.html" class="cta cta-primary">Enter The Trinity</a>
+            <a href="invest.html" class="cta cta-secondary">See The Raise</a>
+        </div>
+
+        <div class="signature">
+            <div class="sig-name">KJP</div>
+            <div class="sig-title">Founder / The First Spark</div>
+            <div class="sig-contact">
+                <a href="mailto:kjpthefirstspark@gmail.com">kjpthefirstspark@gmail.com</a> · 
+                <a href="tel:+13308075509">(330) 807-5509</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+        let mouse = { x: null, y: null, radius: 120 };
+
+        const colors = [
+            'rgba(139, 0, 0, 0.6)',
+            'rgba(212, 175, 55, 0.5)',
+            'rgba(0, 212, 255, 0.4)',
+            'rgba(255, 255, 255, 0.3)'
+        ];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+
+                if (mouse.x !== null) {
+                    const dx = this.x - mouse.x;
+                    const dy = this.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < mouse.radius) {
+                        const force = (mouse.radius - dist) / mouse.radius;
+                        const angle = Math.atan2(dy, dx);
+                        this.x += Math.cos(angle) * force * 2;
+                        this.y += Math.sin(angle) * force * 2;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const num = Math.min(100, Math.floor((width * height) / 15000));
+            for (let i = 0; i < num; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connect() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(139, 0, 0, ${0.2 * (1 - dist / 100)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            connect();
+            for (let p of particles) {
+                p.update();
+                p.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+        window.addEventListener('resize', resize);
+        resize();
+        animate();
+    </script>
+</body>
+</html>
