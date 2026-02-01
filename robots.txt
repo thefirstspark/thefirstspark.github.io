@@ -1,0 +1,11 @@
+# robots.txt for The First Spark
+# Last updated: January 23, 2025
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://thefirstspark.shop/sitemap.xml
+
+# Crawl-delay (optional, helps with server load)
+Crawl-delay: 1
