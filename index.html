@@ -19,6 +19,105 @@
     <div class="stars"></div>
     <div class="twinkling"></div>
 
+    <!-- Investor Banner -->
+    <div class="investor-banner">
+        <div class="banner-content">
+            <span class="banner-badge">💎 NOW RAISING</span>
+            <span class="banner-text">$200K for 20% Equity</span>
+            <a href="invest.html" class="banner-cta">View Pitch Deck →</a>
+        </div>
+    </div>
+
+    <style>
+        .investor-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(0,255,255,0.15) 0%, rgba(255,0,255,0.15) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,255,255,0.3);
+            z-index: 10000;
+            padding: 12px 0;
+            animation: bannerSlideIn 0.8s ease-out;
+        }
+
+        @keyframes bannerSlideIn {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .banner-badge {
+            background: rgba(0,255,255,0.2);
+            border: 1px solid #00ffff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0,255,255,0.5);
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(0,255,255,0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,255,0.6); }
+        }
+
+        .banner-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .banner-cta {
+            background: linear-gradient(135deg, #00ffff 0%, #ff00ff 50%, #ffd700 100%);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,255,255,0.3);
+        }
+
+        .banner-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0,255,255,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .banner-content {
+                gap: 12px;
+                font-size: 0.9rem;
+            }
+            .banner-badge {
+                font-size: 0.75rem;
+                padding: 4px 10px;
+            }
+            .banner-text {
+                font-size: 0.9rem;
+            }
+            .banner-cta {
+                padding: 6px 16px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+
     <div class="universe-container">
         <!-- Central Spark (Sun) -->
         <div class="spark-sun">
