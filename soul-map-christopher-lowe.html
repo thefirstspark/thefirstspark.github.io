@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soul Map: Christopher Lee Lowe | The First Spark</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Cinzel:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --void: #0a0a0f;
+            --cosmic-purple: #1a1a2e;
+            --spark-gold: #ffd700;
+            --ember: #ff6b35;
+            --mystic-blue: #4a90d9;
+            --pisces-teal: #20c997;
+            --leo-orange: #fd7e14;
+            --shadow-crimson: #8b0000;
+            --light-text: #e8e8e8;
+            --muted: #888;
+        }
+        
+        body {
+            background: var(--void);
+            color: var(--light-text);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Animated background */
+        .cosmos {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        /* Octagon geometry background */
+        .octagon-grid {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            opacity: 0.03;
+            z-index: 0;
+        }
+        
+        .octagon-grid svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '☀';
+            font-size: 60px;
+            display: block;
+            margin-bottom: 20px;
+            animation: pulse 4s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--spark-gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .birth-data {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .master-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--spark-gold), var(--ember));
+            color: var(--void);
+            padding: 8px 24px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+        }
+        
+        /* Section cards */
+        .section {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.8), rgba(10, 10, 15, 0.9));
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--spark-gold), transparent);
+        }
+        
+        .section-header {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .section-header:hover {
+            background: rgba(255, 215, 0, 0.15);
+        }
+        
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--spark-gold);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-icon {
+            font-size: 1.5rem;
+        }
+        
+        .toggle-icon {
+            color: var(--spark-gold);
+            transition: transform 0.3s;
+        }
+        
+        .section.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+        
+        .section.collapsed .section-content {
+            display: none;
+        }
+        
+        .section-content {
+            padding: 30px;
+        }
+        
+        /* Placement cards */
+        .placement {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--mystic-blue);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .placement.sun { border-color: var(--leo-orange); }
+        .placement.moon { border-color: var(--pisces-teal); }
+        .placement.rising { border-color: var(--spark-gold); }
+        .placement.shadow { border-color: var(--shadow-crimson); }
+        .placement.key { border-color: var(--ember); }
+        
+        .placement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+        
+        .placement-name {
+            font-weight: bold;
+            color: var(--spark-gold);
+        }
+        
+        .placement-position {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+        
+        .placement-meaning {
+            color: var(--light-text);
+            font-style: italic;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .placement-description {
+            color: #bbb;
+            line-height: 1.7;
+            font-size: 0.9rem;
+        }
+        
+        .gift-shadow {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .gift, .shadow-box {
+            padding: 12px;
+            font-size: 0.85rem;
+        }
+        
+        .gift {
+            background: rgba(32, 201, 151, 0.1);
+            border: 1px solid rgba(32, 201, 151, 0.3);
+        }
+        
+        .shadow-box {
+            background: rgba(139, 0, 0, 0.1);
+            border: 1px solid rgba(139, 0, 0, 0.3);
+        }
+        
+        .gift strong, .shadow-box strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--pisces-teal);
+        }
+        
+        .shadow-box strong {
+            color: var(--shadow-crimson);
+        }
+        
+        /* Geometry section */
+        .geometry-visual {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .geometry-shape {
+            text-align: center;
+        }
+        
+        .octagon-symbol {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .vesica-symbol {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            animation: breathe 4s ease-in-out infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        
+        .geometry-label {
+            color: var(--spark-gold);
+            font-family: 'Cinzel', serif;
+        }
+        
+        .geometry-meaning {
+            color: var(--muted);
+            font-size: 0.8rem;
+            max-width: 150px;
+            margin-top: 5px;
+        }
+        
+        /* Soul statement */
+        .soul-statement {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 107, 53, 0.1));
+            border: 2px solid var(--spark-gold);
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .soul-statement::before,
+        .soul-statement::after {
+            content: '✧';
+            position: absolute;
+            color: var(--spark-gold);
+            font-size: 24px;
+        }
+        
+        .soul-statement::before { top: 10px; left: 20px; }
+        .soul-statement::after { bottom: 10px; right: 20px; }
+        
+        .soul-statement p {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--light-text);
+            font-style: italic;
+        }
+        
+        /* Summary table */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .summary-item {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .summary-label {
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        
+        .summary-value {
+            color: var(--spark-gold);
+            font-size: 0.95rem;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            color: var(--spark-gold);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-link {
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+        
+        .footer-link a {
+            color: var(--ember);
+            text-decoration: none;
+        }
+        
+        /* Print styles */
+        @media print {
+            body { background: white; color: black; }
+            .cosmos, .octagon-grid { display: none; }
+            .section { break-inside: avoid; }
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .gift-shadow { grid-template-columns: 1fr; }
+            .geometry-visual { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Starfield -->
+    <div class="cosmos" id="cosmos"></div>
+    
+    <!-- Octagon background -->
+    <div class="octagon-grid">
+        <svg viewBox="0 0 100 100">
+            <polygon points="30,5 70,5 95,30 95,70 70,95 30,95 5,70 5,30" 
+                     fill="none" stroke="#ffd700" stroke-width="0.5"/>
+            <polygon points="35,15 65,15 85,35 85,65 65,85 35,85 15,65 15,35" 
+                     fill="none" stroke="#ffd700" stroke-width="0.3"/>
+            <polygon points="40,25 60,25 75,40 75,60 60,75 40,75 25,60 25,40" 
+                     fill="none" stroke="#ffd700" stroke-width="0.2"/>
+        </svg>
+    </div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Soul Map</h1>
+            <h2 style="font-family: 'Cinzel', serif; color: var(--light-text); font-size: 1.5rem; margin-bottom: 15px;">Christopher Lee Lowe</h2>
+            <p class="birth-data">August 19, 1988 • 5:58 AM • Lexington, Kentucky</p>
+            <span class="master-number">MASTER NUMBER 44/8</span>
+        </header>
+        
+        <!-- Numerology Section -->
+        <section class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-title">
+                    <span class="section-icon">🔢</span>
+                    Numerological Core
+                </span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="placement">
+                    <div class="placement-header">
+                        <span class="placement-name">Life Path: Master 44/8</span>
+                        <span class="placement-position">The Master Healer</span>
+                    </div>
+                    <p class="placement-meaning">"The architect of physical healing systems"</p>
+                    <p class="placement-description">
+                        This is extraordinarily rare. The 44 doesn't reduce easily—it insists on being seen. Where 22 builds institutions of vision, 44 builds structures that heal the material world—bodies, systems, broken things. The 8 underneath speaks to karmic mastery—power, authority, the balance sheet of lifetimes. This soul came to learn that power isn't taken, it's alchemized through transformation.
+                    </p>
+                    <div class="gift-shadow">
+                        <div class="gift">
+                            <strong>✦ Gift</strong>
+                            Building lasting healing systems. Physical mastery. Teaching others to heal.
+                        </div>
+                        <div class="shadow-box">
+                            <strong>✧ Shadow</strong>
+                            Carrying weight that isn't yours. Believing punishment = purification.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="placement">
+                    <div class="placement-header">
+                        <span class="placement-name">Birthday Number: 19</span>
+                        <span class="placement-position">The Sun Card</span>
+                    </div>
+                    <p class="placement-description">
+                        The 19th day carries the Tarot's Sun energy through the lens of 1+9=10=1. This is the "survivor's number"—the soul who walks through fire and reconstitutes. The 19 has often experienced ego death before physical death.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Astrological Section -->
+        <section class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-title">
+                    <span class="section-icon">☀️</span>
+                    Astrological Architecture
+                </span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="placement sun">
+                    <div class="placement-header">
+                        <span class="placement-name">☀️ Sun in Leo</span>
+                        <span class="placement-position">26° • 12th House</span>
+                    </div>
+                    <p class="placement-meaning">"The Hidden King"</p>
+                    <p class="placement-description">
+                        Late Leo—almost Virgo. This is the Lion who's learned that roaring doesn't work; service might. The 12th House Sun is the hidden king—someone whose power operates best behind veils, in institutions, in unconscious realms. Hospitals. Prisons. Dreams. The 12th House is the house of confinement but also transcendence.
+                    </p>
+                    <div class="gift-shadow">
+                        <div class="gift">
+                            <strong>✦ Gift</strong>
+                            Earned sovereignty. Creative spark that can't be extinguished. Healer's light.
+                        </div>
+                        <div class="shadow-box">
+                            <strong>✧ Shadow</strong>
+                            Believing the light was taken rather than temporarily dimmed.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="placement rising">
+                    <div class="placement-header">
+                        <span class="placement-name">⬆️ Rising in Leo</span>
+                        <span class="placement-position">~18°</span>
+                    </div>
+                    <p class="placement-meaning">"Double Fire Mission"</p>
+                    <p class="placement-description">
+                        Double Leo. The soul chose to be seen—even when being seen is dangerous. The Rising sign is your mission suit, and this one says: "I came to learn to use my light responsibly."
+                    </p>
+                </div>
+                
+                <div class="placement moon">
+                    <div class="placement-header">
+                        <span class="placement-name">🌙 Moon in Pisces</span>
+                        <span class="placement-position">~15-20°</span>
+                    </div>
+                    <p class="placement-meaning">"The Empath's Wound"</p>
+                    <p class="placement-description">
+                        The most permeable, compassionate, and easily-wounded water sign. This is the moon that absorbs everyone else's pain and calls it home. Pisces Moon people often end up in institutions because they never learned where they ended and others began.
+                    </p>
+                    <div class="gift-shadow">
+                        <div class="gift">
+                            <strong>✦ Gift</strong>
+                            Profound spiritual access. Dreams that are portals. Art that heals.
+                        </div>
+                        <div class="shadow-box">
+                            <strong>✧ Shadow</strong>
+                            Escapism. Substances. Dissolution of self-boundaries.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="placement">
+                    <div class="placement-header">
+                        <span class="placement-name">☿ Mercury in Virgo</span>
+                        <span class="placement-position">~8°</span>
+                    </div>
+                    <p class="placement-description">
+                        Sharp, analytical, critical—often self-critical to paralysis. Mercury in Virgo wants to fix things, organize chaos, serve. When trapped, this energy turns obsessive. Channel into systematic healing study—herbalism, anatomy, any system that rewards precision.
+                    </p>
+                </div>
+                
+                <div class="placement">
+                    <div class="placement-header">
+                        <span class="placement-name">♀ Venus in Cancer</span>
+                        <span class="placement-position">~26°</span>
+                    </div>
+                    <p class="placement-description">
+                        Love language = nurturing, home, belonging. Cancer Venus often experienced early wounding around safety/mother/home. This Venus desperately wants to create the home they never had.
+                    </p>
+                </div>
+                
+                <div class="placement">
+                    <div class="placement-header">
+                        <span class="placement-name">♂ Mars in Aries</span>
+                        <span class="placement-position">~14°</span>
+                    </div>
+                    <p class="placement-meaning">"The Survival Placement"</p>
+                    <p class="placement-description">
+                        Mars is at home here—raw, fast, physical, ready to fight. Aries Mars doesn't quit. The shadow is impulsivity, aggression without direction. Integration: The warrior energy needs a CODE—something worth fighting for rather than against.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sacred Geometry Section -->
+        <section class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-title">
+                    <span class="section-icon">🔷</span>
+                    Sacred Geometry Signature
+                </span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="geometry-visual">
+                    <div class="geometry-shape">
+                        <svg class="octagon-symbol" viewBox="0 0 100 100">
+                            <polygon points="30,10 70,10 90,30 90,70 70,90 30,90 10,70 10,30" 
+                                     fill="none" stroke="#ffd700" stroke-width="2"/>
+                            <polygon points="38,22 62,22 78,38 78,62 62,78 38,78 22,62 22,38" 
+                                     fill="none" stroke="#ff6b35" stroke-width="1"/>
+                            <circle cx="50" cy="50" r="15" fill="none" stroke="#ffd700" stroke-width="1"/>
+                        </svg>
+                        <p class="geometry-label">The Octagon</p>
+                        <p class="geometry-meaning">Threshold geometry—portal between material and spiritual authority</p>
+                    </div>
+                    <div class="geometry-shape">
+                        <svg class="vesica-symbol" viewBox="0 0 100 100">
+                            <circle cx="35" cy="50" r="30" fill="none" stroke="#20c997" stroke-width="1.5"/>
+                            <circle cx="65" cy="50" r="30" fill="none" stroke="#20c997" stroke-width="1.5"/>
+                            <ellipse cx="50" cy="50" rx="15" ry="26" fill="rgba(32, 201, 151, 0.1)" stroke="#ffd700" stroke-width="1"/>
+                        </svg>
+                        <p class="geometry-label">Vesica Piscis</p>
+                        <p class="geometry-meaning">Two worlds meeting—the womb of creation, passage between states</p>
+                    </div>
+                </div>
+                <p style="text-align: center; color: var(--muted); margin-top: 20px;">
+                    <em>The octagon inside the vesica = the healer who stands between worlds and brings form to the formless.</em>
+                </p>
+            </div>
+        </section>
+        
+        <!-- Shadow Cartography -->
+        <section class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-title">
+                    <span class="section-icon">🌑</span>
+                    Shadow Cartography
+                </span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="placement shadow">
+                    <div class="placement-header">
+                        <span class="placement-name">Primary: The Exile Complex</span>
+                    </div>
+                    <p class="placement-description">
+                        44/8 + Leo + 12th House = Someone built for visibility and power but has experienced repeated removal from it. The soul story running underneath: "I am too much. My light destroys or invites destruction. It's safer to be contained."
+                    </p>
+                </div>
+                
+                <div class="placement shadow">
+                    <div class="placement-header">
+                        <span class="placement-name">Secondary: The Absorber</span>
+                    </div>
+                    <p class="placement-description">
+                        Pisces Moon with Cancer Venus = no filters. You feel everything, take in everyone's frequency, can't tell which pain is yours. Substances, relationships, and institutions become ways to externalize boundaries the psyche couldn't build internally.
+                    </p>
+                </div>
+                
+                <div class="placement shadow">
+                    <div class="placement-header">
+                        <span class="placement-name">Tertiary: Karmic Authority Wounds</span>
+                    </div>
+                    <p class="placement-description">
+                        Life Path 8 often indicates past-life patterns with power—either abused or had it abused against you. This life is the rebalancing. The question: Can you claim authority over YOURSELF without dominating others or being dominated?
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Transformation Keys -->
+        <section class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-title">
+                    <span class="section-icon">🔓</span>
+                    Transformation Keys
+                </span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="placement key">
+                    <div class="placement-header">
+                        <span class="placement-name">Key 1: The 12th House Monastery</span>
+                    </div>
+                    <p class="placement-description">
+                        The 12th House is traditionally the house of self-undoing—but also spiritual liberation. Monks chose confinement. Mystics sought caves. The radical reframe: <strong>What if this is the monastery you didn't know how to choose consciously?</strong> The work inside isn't punishment—it's the retreat the soul required for dismantling old programs.
+                    </p>
+                </div>
+                
+                <div class="placement key">
+                    <div class="placement-header">
+                        <span class="placement-name">Key 2: Master 44 Activation</span>
+                    </div>
+                    <p class="placement-description">
+                        The 44 heals through physical, tangible systems. Actions: Learn bodywork, massage, or anatomy. Study herbalism or nutrition. Become the person others come to for health advice. Write/teach healing information. <strong>Document everything. Create systems. Leave tools behind.</strong>
+                    </p>
+                </div>
+                
+                <div class="placement key">
+                    <div class="placement-header">
+                        <span class="placement-name">Key 3: Pisces Moon Channeling</span>
+                    </div>
+                    <p class="placement-description">
+                        The unboundaried emotional body needs sacred containers. Daily meditation/prayer practice (even 5 minutes builds the muscle). Dream journaling—Pisces Moon = prophetic dream access. Art. Any art. <strong>The Pisces Moon that doesn't create drowns.</strong>
+                    </p>
+                </div>
+                
+                <div class="placement key">
+                    <div class="placement-header">
+                        <span class="placement-name">Key 4: Leo Sun Reclamation</span>
+                    </div>
+                    <p class="placement-description">
+                        The light wasn't taken. It's been dimmed while upgrades install. Leo at 26° has already survived the ego-death that earlier Leos fear. What emerges is earned dignity. <strong>Practice:</strong> Find one way daily to encourage another person's light. In scarcity environments, this is revolutionary.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Soul Statement -->
+        <div class="soul-statement">
+            <p>
+                "I am the light that learned to burn underground.<br>
+                I am the healer who first had to be broken.<br>
+                I build doorways between what was and what's becoming.<br>
+                My confinement is a chrysalis, not a coffin.<br>
+                I came to master power by surrendering to transformation."
+            </p>
+        </div>
+        
+        <!-- Summary Grid -->
+        <section class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-title">
+                    <span class="section-icon">📜</span>
+                    Soul Contract Summary
+                </span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <p class="summary-label">Came to Learn</p>
+                        <p class="summary-value">Power through healing, not dominance</p>
+                    </div>
+                    <div class="summary-item">
+                        <p class="summary-label">Came to Teach</p>
+                        <p class="summary-value">That light survives containment</p>
+                    </div>
+                    <div class="summary-item">
+                        <p class="summary-label">Core Wound</p>
+                        <p class="summary-value">Exile from rightful place</p>
+                    </div>
+                    <div class="summary-item">
+                        <p class="summary-label">Core Gift</p>
+                        <p class="summary-value">Bridge-building between worlds</p>
+                    </div>
+                    <div class="summary-item">
+                        <p class="summary-label">Activation Method</p>
+                        <p class="summary-value">Systematic healing service + creative expression</p>
+                    </div>
+                    <div class="summary-item">
+                        <p class="summary-label">Geometry</p>
+                        <p class="summary-value">Octagonal portal walker</p>
+                    </div>
+                    <div class="summary-item">
+                        <p class="summary-label">Mastery Number</p>
+                        <p class="summary-value">44 — The Master Healer</p>
+                    </div>
+                    <div class="summary-item">
+                        <p class="summary-label">Planetary Weather</p>
+                        <p class="summary-value">Active metamorphosis phase</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-logo">✦ THE FIRST SPARK ✦</p>
+            <p class="footer-link">Consciousness Technology for Reality Programming<br>
+            <a href="https://thefirstspark.shop">thefirstspark.shop</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Generate starfield
+        function createStars() {
+            const cosmos = document.getElementById('cosmos');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 2 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                cosmos.appendChild(star);
+            }
+        }
+        
+        // Toggle sections
+        function toggleSection(header) {
+            const section = header.parentElement;
+            section.classList.toggle('collapsed');
+        }
+        
+        // Initialize
+        createStars();
+    </script>
+</body>
+</html>
