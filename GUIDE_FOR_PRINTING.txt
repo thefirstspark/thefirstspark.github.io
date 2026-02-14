@@ -1,0 +1,453 @@
+================================================================================
+THE FIRST SPARK - MEMBERSHIP HUB SETUP GUIDE
+================================================================================
+
+ESTIMATED TIME: 15-20 minutes
+DIFFICULTY: Easy (just copy/paste API keys)
+
+================================================================================
+WHAT YOU'RE BUILDING
+================================================================================
+
+✨ Beautiful mystical membership site
+🔐 Supabase authentication (email/password login)
+💳 Stripe payment integration  
+📊 Member dashboard with content gating
+🌙 Soul map functionality
+⚡ Production-ready Astro + React framework
+
+================================================================================
+YOUR 4 MEMBERSHIP TIERS
+================================================================================
+
+Tier 1: SEEKER
+├─ Price: FREE
+├─ Best for: Curious souls exploring
+└─ Features: Free rituals, community posts, newsletter
+
+Tier 2: IGNITE  
+├─ Price: $33/month
+├─ Best for: Committed practitioners
+└─ Features: Premium rituals, group sessions, private community
+
+Tier 3: SOUL MAP
+├─ Price: $111/month
+├─ Best for: Personalized spiritual guidance
+└─ Features: Custom soul map, astrological analysis, 1:1 sessions
+
+Tier 4: THE FIRST SPARK
+├─ Price: $1,000 (one-time)
+├─ Best for: Complete mastery & lifetime access
+└─ Features: Everything forever, unlimited sessions, inner circle
+
+================================================================================
+SETUP IN 4 STEPS
+================================================================================
+
+STEP 1: SUPABASE SETUP (5 minutes)
+────────────────────────────────────────────────────────────────────────────
+
+1. Go to: supabase.com
+2. Click "Create Free Account"
+3. Sign up with email
+4. Create new project (any region)
+5. Wait for setup (2-3 minutes)
+6. Go to: Settings > API in left menu
+7. Copy these 3 keys to a document:
+
+   KEY 1: Project URL
+   Location: Settings > API > Project URL
+   Copy this entire URL
+   Label it: PUBLIC_SUPABASE_URL
+   
+   KEY 2: Anonymous Key (public)
+   Location: Settings > API > anon
+   Copy this long string
+   Label it: PUBLIC_SUPABASE_ANON_KEY
+   
+   KEY 3: Service Role Key (SECRET - keep safe!)
+   Location: Settings > API > service_role
+   Copy this long string
+   Label it: SUPABASE_SERVICE_ROLE_KEY
+
+8. Click on "SQL Editor" in left menu
+9. Click "New Query"
+10. Copy ALL the SQL code from: SUPABASE_SETUP.sql file
+11. Paste it into the SQL Editor
+12. Click the "RUN" button (green arrow)
+13. Wait for it to complete - you should see "All done!"
+
+✓ CHECKPOINT: Go to "Tables" in left menu. You should see 4 new tables:
+  - profiles
+  - content  
+  - soul_maps
+  - subscriptions
+
+================================================================================
+STEP 2: STRIPE SETUP (5 minutes)
+────────────────────────────────────────────────────────────────────────────
+
+1. Go to: stripe.com
+2. Click "Start now" or "Create account"
+3. Sign up and verify email
+4. Go to: Developers > API Keys (left menu)
+5. Copy these 2 keys:
+
+   KEY 1: Publishable key
+   Starts with: pk_test_
+   Label it: PUBLIC_STRIPE_PUBLIC_KEY
+   
+   KEY 2: Secret key  
+   Starts with: sk_test_
+   Label it: STRIPE_SECRET_KEY
+
+6. Now create 3 Price objects:
+
+   PRICE 1: Ignite ($33/month)
+   ├─ Click "Products" in left menu
+   ├─ Click "Create product"
+   ├─ Name: Ignite
+   ├─ Price: 33
+   ├─ Billing period: Monthly
+   ├─ Click "Create product"
+   ├─ Copy the price ID (starts with price_)
+   ├─ Save it as: IGNITE_PRICE_ID
+   
+   PRICE 2: Soul Map ($111/month)
+   ├─ Repeat steps above
+   ├─ Name: Soul Map
+   ├─ Price: 111
+   ├─ Monthly
+   ├─ Copy price ID
+   ├─ Save it as: SOUL_MAP_PRICE_ID
+   
+   PRICE 3: The First Spark ($1000 one-time)
+   ├─ Click "Create product"
+   ├─ Name: The First Spark
+   ├─ Price: 1000
+   ├─ Billing period: One-time
+   ├─ Click "Create product"
+   ├─ Copy price ID
+   ├─ Save it as: LIFETIME_PRICE_ID
+
+7. Update your code with these IDs:
+   ├─ Open file: src/lib/tiers.js
+   ├─ Find: stripe_price_id: 'price_xxxxx'
+   ├─ Replace price_xxxxx with your actual IDs
+   ├─ Save file
+
+✓ CHECKPOINT: You have 5 Stripe keys/IDs saved
+
+================================================================================
+STEP 3: DEPLOY TO VERCEL (5 minutes)
+────────────────────────────────────────────────────────────────────────────
+
+1. Push your code to GitHub first:
+   ├─ Create GitHub repo if needed
+   ├─ Add the first-spark-hub folder
+   ├─ Commit and push
+   
+2. Go to: vercel.com
+3. Click "Sign up" (or login if you have account)
+4. Click "Import Project"
+5. Select "GitHub" and choose your repo
+6. Click "Import"
+7. You'll see "Environment Variables" section
+8. Add these 5 environment variables:
+
+   Variable 1: PUBLIC_SUPABASE_URL
+   Value: [paste your Supabase URL]
+   
+   Variable 2: PUBLIC_SUPABASE_ANON_KEY
+   Value: [paste your anon key]
+   
+   Variable 3: PUBLIC_STRIPE_PUBLIC_KEY
+   Value: [paste your Stripe publishable key]
+   
+   Variable 4: STRIPE_SECRET_KEY
+   Value: [paste your Stripe secret key]
+   
+   Variable 5: SUPABASE_SERVICE_ROLE_KEY
+   Value: [paste your service role key]
+
+9. Click "Deploy"
+10. Wait 2-3 minutes for build to complete
+11. You'll get a URL like: first-spark-hub-xxxxx.vercel.app
+
+✓ CHECKPOINT: Your site is LIVE! Visit the URL.
+
+================================================================================
+STEP 4: TEST EVERYTHING (3 minutes)
+────────────────────────────────────────────────────────────────────────────
+
+1. Visit your Vercel URL
+2. You should see the beautiful home page
+3. Click "Explore Membership" 
+4. See all 4 pricing tiers
+5. Click "Choose This Path" on any tier
+6. You'll go to Stripe checkout
+7. Use Stripe TEST CARD:
+   ├─ Card Number: 4242 4242 4242 4242
+   ├─ Expiry: Any future date (e.g., 12/25)
+   ├─ CVC: Any 3 digits (e.g., 123)
+   ├─ Click "Pay"
+8. You should see success page
+9. Go back and try signing up
+10. Check your dashboard loads
+
+✓ CHECKPOINT: Everything works! You're LIVE with a membership site.
+
+================================================================================
+WHAT YOU CAN DO NOW
+================================================================================
+
+📊 ADD MEMBERS:
+   ├─ Go to Supabase > Tables > profiles
+   ├─ Click "Insert row"
+   ├─ Add user email and tier
+   └─ They can login and access content
+
+📝 ADD CONTENT:
+   ├─ Go to Supabase > Tables > content
+   ├─ Click "Insert row"
+   ├─ Add title, description, content_html
+   ├─ Set required_tier (free/premium/soul_map/lifetime)
+   └─ It shows in member dashboards
+
+💰 TRACK PAYMENTS:
+   ├─ Go to Stripe Dashboard
+   ├─ See all transactions
+   ├─ Download receipts
+   └─ Track revenue
+
+🎨 EDIT YOUR SITE:
+   ├─ Edit files in your code
+   ├─ Push to GitHub
+   ├─ Vercel auto-deploys (1-2 minutes)
+   └─ Changes live instantly
+
+🌐 ADD CUSTOM DOMAIN:
+   ├─ Buy domain (Namecheap, GoDaddy, etc.)
+   ├─ Go to Vercel > Settings > Domains
+   ├─ Add domain
+   ├─ Update DNS records (Vercel shows instructions)
+   └─ Done!
+
+================================================================================
+QUICK CUSTOMIZATIONS
+================================================================================
+
+CHANGE BRAND COLORS:
+   ├─ Open: src/components/PricingTiers.jsx
+   ├─ Find: #ffc857 (gold)
+   ├─ Replace with your color hex code
+   ├─ Save and redeploy
+   └─ Done!
+
+UPDATE HERO TEXT:
+   ├─ Open: src/pages/index.astro
+   ├─ Find: h1 and p tags in the hero section
+   ├─ Edit text
+   ├─ Save and redeploy
+   └─ Done!
+
+CHANGE TIER NAMES/PRICES:
+   ├─ Open: src/lib/tiers.js
+   ├─ Edit the TIERS object
+   ├─ Update name, price, features
+   ├─ Save and redeploy
+   └─ Done!
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+PROBLEM: "Supabase is undefined" error
+SOLUTION: 
+├─ Check Vercel environment variables
+├─ Make sure all 5 are added
+├─ Redeploy after adding variables
+└─ Wait 2 minutes for changes to take effect
+
+PROBLEM: Stripe checkout shows error
+SOLUTION:
+├─ Check price IDs in src/lib/tiers.js
+├─ Make sure they exist in Stripe Dashboard
+├─ Price IDs start with "price_"
+├─ Redeploy after fixing
+
+PROBLEM: Can't login / "invalid credentials"
+SOLUTION:
+├─ Check you have Supabase email confirmed
+├─ Try creating new test account
+├─ Check Supabase Auth > Users
+└─ Verify email was sent
+
+PROBLEM: Payment test fails
+SOLUTION:
+├─ Use test card: 4242 4242 4242 4242
+├─ Any future expiry date
+├─ Any 3-digit CVC
+└─ Make sure Stripe is in TEST mode (not live)
+
+PROBLEM: Site is very slow
+SOLUTION:
+├─ Vercel free tier is normal speed
+├─ Clear browser cache (Ctrl+Shift+Delete)
+├─ Check Vercel function logs
+├─ Upgrade to Vercel Pro if needed
+
+================================================================================
+YOUR FILE STRUCTURE
+================================================================================
+
+first-spark-hub/
+│
+├── src/
+│   ├── components/
+│   │   ├── AuthForm.jsx           [Login/signup form]
+│   │   ├── PricingTiers.jsx        [Pricing cards display]
+│   │   └── MemberDashboard.jsx     [Member area page]
+│   │
+│   ├── lib/
+│   │   ├── supabase.js             [Database connection]
+│   │   └── tiers.js                [Tier definitions & prices]
+│   │
+│   ├── layouts/
+│   │   └── Layout.astro            [Main page layout]
+│   │
+│   └── pages/
+│       ├── index.astro             [Home page]
+│       ├── pricing.astro           [Pricing page]
+│       ├── auth.astro              [Login page]
+│       ├── dashboard.astro         [Member dashboard]
+│       └── api/
+│           └── checkout.ts         [Stripe payment API]
+│
+├── astro.config.mjs                [Astro configuration]
+├── package.json                    [Dependencies]
+├── .env.example                    [Environment template]
+├── SUPABASE_SETUP.sql              [Database schema]
+├── SETUP_GUIDE.md                  [Detailed guide]
+└── QUICK_START.md                  [Quick checklist]
+
+================================================================================
+IMPORTANT LINKS
+================================================================================
+
+Supabase Dashboard: https://supabase.com/dashboard
+Stripe Dashboard: https://dashboard.stripe.com
+Vercel Dashboard: https://vercel.com/dashboard
+Your Live Site: Check Vercel dashboard for your URL
+
+================================================================================
+NEXT STEPS (When Ready)
+================================================================================
+
+PHASE 1 (THIS WEEK):
+  ☐ Get site live with basic pricing
+  ☐ Add sample content
+  ☐ Create 1-2 test accounts
+  ☐ Process test payments
+  ☐ Share with friends for feedback
+
+PHASE 2 (NEXT 2 WEEKS):
+  ☐ Build soul map creator tool
+  ☐ Add welcome email sequence
+  ☐ Create content library
+  ☐ Build member onboarding flow
+
+PHASE 3 (MONTH 2):
+  ☐ Set up email automation
+  ☐ Create admin panel for content
+  ☐ Build compatibility matching
+  ☐ Launch Discord community
+  ☐ Add analytics
+
+PHASE 4 (MONTH 3+):
+  ☐ Mobile app version
+  ☐ Advanced soul map features
+  ☐ Live group sessions booking
+  ☐ Affiliate program
+  ☐ International payment support
+
+================================================================================
+PRO TIPS
+================================================================================
+
+TIP 1: Use Incognito/Private mode to test signup
+├─ This simulates a fresh user
+├─ Helps catch new signup issues
+└─ Don't use same browser with already-logged-in session
+
+TIP 2: Keep Stripe in TEST mode until ready
+├─ Use test cards (4242...)
+├─ Don't accidentally charge real customers
+├─ Switch to LIVE mode when confident
+
+TIP 3: Back up your environment keys
+├─ Save all 5 env variables somewhere safe
+├─ Use password manager (1Password, Bitwarden, etc.)
+├─ Never commit .env to GitHub
+└─ Never share keys publicly
+
+TIP 4: Monitor Vercel logs if something breaks
+├─ Go to Vercel Dashboard > Function Logs
+├─ Check Recent Deployments tab
+├─ Redeploy if needed
+
+TIP 5: Test on mobile phone
+├─ Your Vercel URL works on any device
+├─ Visit from phone before launching
+├─ Check button sizes, text readability
+└─ Responsive design is built-in
+
+TIP 6: Use GitHub for version control
+├─ Always commit before big changes
+├─ Easy to rollback if something breaks
+├─ Collaborate with others if needed
+└─ Vercel auto-deploys on every push
+
+================================================================================
+SUPPORT RESOURCES
+================================================================================
+
+ASTRO (Website framework):
+├─ Docs: https://docs.astro.build
+├─ Discord: https://astro.build/chat
+└─ GitHub: https://github.com/withastro/astro
+
+SUPABASE (Database & Auth):
+├─ Docs: https://supabase.com/docs
+├─ Dashboard: https://supabase.com/dashboard
+└─ Discord: https://supabase.com/discord
+
+STRIPE (Payments):
+├─ Docs: https://stripe.com/docs
+├─ Dashboard: https://dashboard.stripe.com
+└─ Support: https://support.stripe.com
+
+VERCEL (Hosting):
+├─ Docs: https://vercel.com/docs
+├─ Dashboard: https://vercel.com/dashboard
+└─ Support: https://vercel.com/support
+
+================================================================================
+YOU'RE READY!
+================================================================================
+
+✨ The First Spark membership hub is ready to launch
+🚀 Your beautiful, functional, professional membership site is built
+💰 Ready to process payments and serve members
+📈 Scalable from 1 member to 1 million members
+
+NEXT: Follow the 4 steps above and your site will be LIVE in 20 minutes.
+
+Questions or stuck? Everything is documented in:
+- QUICK_START.md (checklist format)
+- SETUP_GUIDE.md (detailed explanations)
+- This file (comprehensive reference)
+
+Let The First Spark ignite! ✨
+
+================================================================================

@@ -1,0 +1,105 @@
+---
+layout: ../layouts/Layout.astro
+---
+
+<div class="hero">
+  <style>
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 200, 87, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-content {
+      max-width: 600px;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hero h1 {
+      font-size: 64px;
+      margin: 0 0 20px 0;
+      background: linear-gradient(135deg, #ffc857 0%, #ffb744 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+    .hero p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.8);
+      margin: 0 0 30px 0;
+      line-height: 1.6;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-btn {
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      border: none;
+    }
+    .cta-btn.primary {
+      background: #ffc857;
+      color: #1a1a2e;
+    }
+    .cta-btn.primary:hover {
+      background: #ffb744;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 200, 87, 0.3);
+    }
+    .cta-btn.secondary {
+      background: transparent;
+      color: #ffc857;
+      border: 2px solid #ffc857;
+    }
+    .cta-btn.secondary:hover {
+      background: rgba(255, 200, 87, 0.1);
+      transform: translateY(-2px);
+    }
+  </style>
+
+  <div class="hero-content">
+    <h1>The First Spark</h1>
+    <p>Ignite your spiritual awakening. Discover your soul's blueprint. Transform your consciousness.</p>
+    <div class="cta-buttons">
+      <a href="/pricing" class="cta-btn primary">Explore Membership</a>
+      <a href="/about" class="cta-btn secondary">Learn More</a>
+    </div>
+  </div>
+</div>

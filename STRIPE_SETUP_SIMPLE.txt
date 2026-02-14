@@ -1,0 +1,268 @@
+================================================================================
+STRIPE SETUP - SIMPLE VERSION
+================================================================================
+
+WHAT YOU'RE DOING:
+Getting payment keys from Stripe so your site can accept money.
+
+ESTIMATED TIME: 5 minutes
+
+================================================================================
+STEP 1: CREATE STRIPE ACCOUNT
+================================================================================
+
+1. Go to: https://stripe.com
+2. Click "Start now" button (top right)
+3. Enter your email
+4. Create password
+5. Click "Create account"
+6. You'll see: "Verify your email"
+7. Check your email inbox for Stripe verification
+8. Click the link in the email
+9. You're now logged into Stripe dashboard
+
+================================================================================
+STEP 2: GET YOUR 2 KEYS
+================================================================================
+
+You're now in Stripe dashboard. Look at LEFT SIDE MENU.
+
+Click: "Developers" (in left menu)
+├─ You'll see a submenu appear
+
+Click: "API keys" (in the submenu)
+├─ You'll see "Project API keys" section
+├─ Two keys will be visible:
+│   ├─ Publishable key (starts with pk_test_)
+│   └─ Secret key (starts with sk_test_)
+
+Copy KEY 1 - Publishable Key:
+├─ Look for a key starting with: pk_test_
+├─ Click "Copy" button next to it
+├─ Paste into a document as: PUBLIC_STRIPE_PUBLIC_KEY
+├─ Example looks like: pk_test_51234567890abcdefgh
+
+Copy KEY 2 - Secret Key:
+├─ Look for a key starting with: sk_test_
+├─ Click "Copy" button next to it
+├─ Paste into a document as: STRIPE_SECRET_KEY
+├─ Example looks like: sk_test_51234567890abcdefgh
+
+✓ You now have 2 Stripe keys saved.
+
+================================================================================
+STEP 3: CREATE 3 PRICE OBJECTS
+================================================================================
+
+Still in Stripe dashboard. Look at LEFT SIDE MENU.
+
+Click: "Products"
+├─ You'll see a list (probably empty)
+
+Click: "Add product" button (top right)
+├─ A form will appear
+
+CREATING PRICE 1: IGNITE ($33/MONTH)
+────────────────────────────────────────────────────────────────────────────
+
+Fill in the form:
+
+Product name: Ignite
+├─ This is what shows in billing
+
+Description: (optional)
+├─ You can leave blank or write "Premium membership"
+
+Price: 33
+├─ This is in dollars (so $33)
+
+Billing period: Recurring
+├─ Make sure you select RECURRING (not one-time)
+
+Frequency: Monthly
+├─ Should show "Monthly" by default
+
+Then click: "Save product" button
+├─ Wait for page to load
+
+You'll see a new page showing your product with a price ID.
+
+Look for: "price_xxxxxxxxxxxxx" (starts with "price_")
+├─ This is your PRICE ID
+├─ Copy this ID
+├─ Paste into document as: IGNITE_PRICE_ID
+├─ Example: price_1Qs4Z8B6ZcNxjZ4k
+
+================================================================================
+
+CREATING PRICE 2: SOUL MAP ($111/MONTH)
+────────────────────────────────────────────────────────────────────────────
+
+Go back to Products list (click "Products" in left menu)
+
+Click: "Add product" button again
+
+Fill in the form:
+
+Product name: Soul Map
+├─ Required field
+
+Price: 111
+├─ This is $111
+
+Billing period: Recurring
+
+Frequency: Monthly
+
+Click: "Save product"
+
+Copy the price ID (starts with "price_")
+├─ Paste as: SOUL_MAP_PRICE_ID
+
+================================================================================
+
+CREATING PRICE 3: THE FIRST SPARK ($1000 ONE-TIME)
+────────────────────────────────────────────────────────────────────────────
+
+Go back to Products list (click "Products" in left menu)
+
+Click: "Add product" button
+
+Fill in the form:
+
+Product name: The First Spark
+├─ Required field
+
+Price: 1000
+├─ This is $1000
+
+Billing period: One-time
+├─ IMPORTANT: Select ONE-TIME (not recurring)
+├─ This is different from the other 2!
+
+Click: "Save product"
+
+Copy the price ID (starts with "price_")
+├─ Paste as: LIFETIME_PRICE_ID
+
+================================================================================
+STEP 4: UPDATE YOUR CODE WITH PRICE IDS
+================================================================================
+
+You now have 3 price IDs:
+├─ IGNITE_PRICE_ID (price_xxxxx)
+├─ SOUL_MAP_PRICE_ID (price_xxxxx)
+└─ LIFETIME_PRICE_ID (price_xxxxx)
+
+Open your code file: src/lib/tiers.js
+
+Find these lines:
+
+Line around 6:
+  stripe_price_id: 'price_1234567890',  ← For Ignite
+Replace 'price_1234567890' with your IGNITE_PRICE_ID
+
+Line around 18:
+  stripe_price_id: 'price_0987654321',  ← For Soul Map
+Replace 'price_0987654321' with your SOUL_MAP_PRICE_ID
+
+Line around 30:
+  stripe_price_id: 'price_lifetime123',  ← For Lifetime
+Replace 'price_lifetime123' with your LIFETIME_PRICE_ID
+
+Save the file.
+
+================================================================================
+WHAT YOU NOW HAVE
+================================================================================
+
+✓ Stripe account created
+✓ 2 API keys (Publishable + Secret)
+✓ 3 price objects created
+✓ Code updated with price IDs
+
+You're ready for Step 3: Deploy to Vercel!
+
+================================================================================
+YOUR STRIPE KEYS SO FAR
+================================================================================
+
+You should have saved:
+1. PUBLIC_STRIPE_PUBLIC_KEY
+   └─ Starts with: pk_test_
+
+2. STRIPE_SECRET_KEY
+   └─ Starts with: sk_test_
+
+3. IGNITE_PRICE_ID
+   └─ Starts with: price_
+
+4. SOUL_MAP_PRICE_ID
+   └─ Starts with: price_
+
+5. LIFETIME_PRICE_ID
+   └─ Starts with: price_
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+PROBLEM: "Can't find Developers menu"
+SOLUTION:
+├─ Look at BOTTOM of left sidebar
+├─ Should see "Developers" text
+├─ Click it
+└─ Click "API keys" in submenu
+
+PROBLEM: "I only see one key"
+SOLUTION:
+├─ Publishable key shows by default
+├─ Secret key might be hidden
+├─ Look for "Reveal test key" link
+├─ Click it to show the secret key
+└─ Copy both
+
+PROBLEM: "Products button missing"
+SOLUTION:
+├─ In Stripe, click "Products" in left menu
+├─ Should take you to products page
+├─ Click "Add product" to create new
+└─ If you don't see left menu, refresh page
+
+PROBLEM: "Billing period options don't show"
+SOLUTION:
+├─ Make sure you're in the product creation form
+├─ Scroll down, all options are there
+├─ Look for "Recurring" vs "One-time"
+└─ Choose one and continue
+
+PROBLEM: "Can't find the price ID"
+SOLUTION:
+├─ After you create a product, you'll see product details page
+├─ Look for section called "Pricing"
+├─ The price ID starts with "price_"
+├─ It's usually in gray text
+├─ Click copy button next to it
+└─ If still stuck, check the Products list - price ID is shown there
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+Once you have all 3 price IDs in your code:
+
+1. Save your code changes (src/lib/tiers.js)
+2. Push to GitHub (git commit + git push)
+3. Go to Vercel
+4. Add all 5 environment variables
+5. Deploy your site
+6. LIVE!
+
+Your 5 environment variables for Vercel are:
+1. PUBLIC_SUPABASE_URL
+2. PUBLIC_SUPABASE_ANON_KEY
+3. PUBLIC_STRIPE_PUBLIC_KEY
+4. STRIPE_SECRET_KEY
+5. SUPABASE_SERVICE_ROLE_KEY
+
+================================================================================

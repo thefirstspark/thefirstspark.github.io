@@ -1,0 +1,260 @@
+================================================================================
+DEPLOY TO VERCEL - SIMPLE VERSION
+================================================================================
+
+YOUR MEMBER HUB IS READY TO DEPLOY!
+
+You have:
+✓ Supabase database set up
+✓ Authentication ready
+✓ Member dashboard
+✓ Content gating by tier
+✓ Soul map functionality
+
+Payments happen on your Wix site (already handled).
+This member hub just manages your members.
+
+================================================================================
+WHAT YOU NEED
+================================================================================
+
+You should have these 3 Supabase keys saved:
+
+1. PUBLIC_SUPABASE_URL
+   └─ Example: https://xyzabc.supabase.co
+
+2. PUBLIC_SUPABASE_ANON_KEY
+   └─ Example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+3. SUPABASE_SERVICE_ROLE_KEY
+   └─ Example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+That's it! No Stripe keys needed.
+
+================================================================================
+STEP 1: PUSH CODE TO GITHUB
+================================================================================
+
+If you haven't already:
+
+1. Create a GitHub account (github.com)
+2. Create a new repository called "first-spark-hub"
+3. Follow GitHub's instructions to push your code
+4. (Or ask me to help with this step)
+
+================================================================================
+STEP 2: DEPLOY TO VERCEL
+================================================================================
+
+1. Go to: https://vercel.com
+2. Click "Sign up" (use GitHub login is easiest)
+3. Click "Import Project"
+4. Select "GitHub" as source
+5. Find your "first-spark-hub" repository
+6. Click "Import"
+
+You'll see a project setup page.
+
+================================================================================
+STEP 3: ADD ENVIRONMENT VARIABLES
+================================================================================
+
+On the Vercel import page, you'll see "Environment Variables" section.
+
+Add your 3 Supabase keys:
+
+KEY 1:
+├─ Name: PUBLIC_SUPABASE_URL
+├─ Value: [paste your Supabase URL]
+└─ Click "Add"
+
+KEY 2:
+├─ Name: PUBLIC_SUPABASE_ANON_KEY
+├─ Value: [paste your anon key]
+└─ Click "Add"
+
+KEY 3:
+├─ Name: SUPABASE_SERVICE_ROLE_KEY
+├─ Value: [paste your service role key]
+└─ Click "Add"
+
+After adding all 3, click "Deploy"
+
+================================================================================
+STEP 4: WAIT FOR DEPLOYMENT
+================================================================================
+
+Vercel will build your site (takes 2-3 minutes).
+
+You'll see a progress bar.
+
+Once done, you'll get a URL like:
+first-spark-hub-xxxxx.vercel.app
+
+That's your live site!
+
+================================================================================
+STEP 5: TEST YOUR MEMBER HUB
+================================================================================
+
+Visit your new URL and test:
+
+1. Click "Sign Up" → Create test account
+2. Verify email (check inbox for verification link)
+3. Login with test account
+4. You should see the member dashboard
+5. Click around - everything should work
+
+✓ You're live!
+
+================================================================================
+WHAT YOUR MEMBERS SEE
+================================================================================
+
+When members visit your hub:
+
+1. HOME PAGE
+   └─ Shows "The First Spark" hero
+   └─ "Explore Membership" link to pricing
+
+2. PRICING PAGE
+   └─ Shows all 4 tiers
+   └─ Button links to your Wix site for payment
+
+3. AUTH PAGES
+   └─ Sign Up / Login
+   └─ Email verification
+
+4. DASHBOARD (after login)
+   ├─ Their membership tier
+   ├─ Content library (gated by tier)
+   ├─ Soul Map viewer
+   └─ Profile settings
+
+================================================================================
+HOW IT WORKS WITH WIX
+================================================================================
+
+FLOW:
+
+1. Member visits your Wix site
+2. They pay on Wix (your payment flow)
+3. You manually add them to Supabase with tier level
+4. Member goes to member hub
+5. They login with same email they used on Wix
+6. They see content for their tier
+7. Done!
+
+MANUAL STEP: You add members to Supabase after they pay on Wix
+├─ Go to Supabase > Tables > profiles
+├─ Click "Insert row"
+├─ Add their email
+├─ Set their tier (free/premium/soul_map/lifetime)
+└─ They can now login!
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. Deploy this member hub to Vercel ← YOU ARE HERE
+2. Test it with a few member accounts
+3. Add sample content to Supabase
+4. Create sample soul maps
+5. Link from your Wix site to the member hub
+
+Optional:
+- Set up a welcome email sequence
+- Create member onboarding flow
+- Build admin panel for content management
+- Add community features
+
+================================================================================
+YOUR VERCEL URL
+================================================================================
+
+Once deployed, your member hub lives at:
+https://first-spark-hub-xxxxx.vercel.app
+
+Share this with members!
+
+You can also:
+- Add a custom domain in Vercel settings
+- Connect your own domain name
+- Make it yourdomain.com/members or similar
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+PROBLEM: Build failed
+SOLUTION:
+├─ Check that all 3 env variables are added
+├─ Make sure you pushed to GitHub
+├─ Try redeploying in Vercel dashboard
+└─ Check build logs for errors
+
+PROBLEM: "Supabase undefined" error
+SOLUTION:
+├─ Check env variables are spelled correctly
+├─ Verify the values are complete
+├─ Redeploy after fixing
+└─ Wait 2 minutes for changes
+
+PROBLEM: Can't login
+SOLUTION:
+├─ Check Supabase auth is working
+├─ Add a test user manually in Supabase
+├─ Make sure email is verified
+└─ Try different email if still stuck
+
+PROBLEM: Members can't see content
+SOLUTION:
+├─ Check their tier is set in Supabase
+├─ Add sample content to Supabase content table
+├─ Make sure required_tier matches their tier
+└─ Refresh page
+
+================================================================================
+ADMIN TASKS IN SUPABASE
+================================================================================
+
+ADDING MEMBERS:
+1. Go to Supabase Dashboard
+2. Tables > profiles
+3. Click "Insert row"
+4. Email: their email (must match Wix)
+5. tier: free/premium/soul_map/lifetime
+6. tier_name: Seeker/Ignite/Soul Map/The First Spark
+
+ADDING CONTENT:
+1. Tables > content
+2. Click "Insert row"
+3. title: Content name
+4. description: Short summary
+5. content_html: The actual content (or link to it)
+6. required_tier: free/premium/soul_map/lifetime
+7. category: Organization tag (optional)
+
+VIEWING SOUL MAPS:
+1. Tables > soul_maps
+2. See each member's astrological data
+3. Can edit or view
+
+================================================================================
+YOU'RE DONE!
+================================================================================
+
+Your member hub is ready.
+
+QUICK CHECKLIST:
+☐ Supabase is set up
+☐ Have your 3 Supabase keys
+☐ Code pushed to GitHub
+☐ Deployed to Vercel
+☐ Member hub is LIVE
+☐ Tested login and dashboard
+☐ Added test members to Supabase
+
+Next: Share the Vercel URL with your members!
+
+================================================================================

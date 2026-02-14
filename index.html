@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FPHDDHSCWS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FPHDDHSCWS');
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The First Spark - Member Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #0f0f1e 0%, #1a1a2e 100%);
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(15, 15, 30, 0.95);
+            border-bottom: 1px solid rgba(255, 200, 87, 0.2);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffc857;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .navbar-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .navbar-links a:hover {
+            color: #ffc857;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Auth Page */
+        .auth-container {
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 200, 87, 0.3);
+            border-radius: 10px;
+        }
+
+        .auth-form h2 {
+            color: #ffc857;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 200, 87, 0.5);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .auth-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .auth-form button {
+            width: 100%;
+            padding: 12px;
+            background: #ffc857;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .auth-form button:hover {
+            background: #ffb744;
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .auth-toggle button {
+            background: none;
+            border: none;
+            color: #ffc857;
+            cursor: pointer;
+            text-decoration: underline;
+            width: auto;
+            padding: 0;
+        }
+
+        .error {
+            color: #ff6b6b;
+            padding: 10px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .success {
+            color: #51cf66;
+            padding: 10px;
+            background: rgba(81, 207, 102, 0.1);
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(255, 200, 87, 0.1) 0%, transparent 100%);
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            background: linear-gradient(135deg, #ffc857 0%, #ffb744 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #ffc857;
+            color: #1a1a2e;
+        }
+
+        .btn-primary:hover {
+            background: #ffb744;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffc857;
+            border: 2px solid #ffc857;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 200, 87, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .tier-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 200, 87, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .tier-card:hover {
+            border-color: rgba(255, 200, 87, 0.6);
+            transform: translateY(-8px);
+        }
+
+        .tier-card.featured {
+            border-color: #ffc857;
+            background: rgba(255, 200, 87, 0.1);
+            transform: scale(1.05);
+        }
+
+        .tier-name {
+            font-size: 24px;
+            color: #ffc857;
+            margin-bottom: 10px;
+        }
+
+        .tier-price {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        .tier-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .tier-features li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .tier-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffc857;
+            font-weight: bold;
+        }
+
+        /* Dashboard */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 200, 87, 0.1);
+            border-radius: 8px;
+        }
+
+        .dashboard-header h1 {
+            color: #ffc857;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .tier-badge {
+            background: #ffc857;
+            color: #1a1a2e;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 200, 87, 0.2);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn.active {
+            color: #ffc857;
+            border-bottom-color: #ffc857;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 200, 87, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .content-card:hover {
+            border-color: rgba(255, 200, 87, 0.6);
+            transform: translateY(-4px);
+        }
+
+        .content-card h3 {
+            color: #ffc857;
+            margin-bottom: 10px;
+        }
+
+        .content-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .soul-map-section {
+            background: rgba(255, 200, 87, 0.08);
+            border: 2px solid rgba(255, 200, 87, 0.4);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .soul-map-section h2 {
+            color: #ffc857;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: rgba(255, 200, 87, 0.05);
+            border-top: 1px solid rgba(255, 200, 87, 0.2);
+            padding: 40px 20px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            margin-top: 60px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #ffc857;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">✨ The First Spark</div>
+        <ul class="navbar-links" id="nav-links">
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="showPage('pricing')">Pricing</a></li>
+            <li><a onclick="showPage('auth')">Sign In</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page">
+        <div class="container">
+            <div class="hero">
+                <h1>The First Spark</h1>
+                <p>Ignite your spiritual awakening. Discover your soul's blueprint. Transform your consciousness.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="showPage('pricing')">Explore Membership</button>
+                    <button class="btn btn-secondary" onclick="showPage('pricing')">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing Page -->
+    <div id="pricing-page" class="page hidden">
+        <div class="container">
+            <h2 style="text-align: center; color: #ffc857; margin-bottom: 40px; font-size: 36px;">Your Path Awaits</h2>
+            <div class="pricing-grid" id="pricing-grid"></div>
+        </div>
+    </div>
+
+    <!-- Auth Page -->
+    <div id="auth-page" class="page hidden">
+        <div class="auth-container">
+            <form class="auth-form" id="auth-form">
+                <h2 id="auth-title">Sign In</h2>
+                <div id="auth-error"></div>
+                <div id="auth-message"></div>
+                <input type="email" id="auth-email" placeholder="Email" required>
+                <input type="password" id="auth-password" placeholder="Password" required>
+                <button type="submit">Sign In</button>
+                <div class="auth-toggle">
+                    Don't have an account? <button type="button" onclick="toggleAuth()">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page hidden">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>✨ The First Spark</h1>
+                <div class="user-info">
+                    <div class="tier-badge" id="tier-badge">Seeker</div>
+                    <span id="user-email"></span>
+                    <button class="btn btn-secondary" onclick="logout()">Sign Out</button>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('content')">Content Library</button>
+                <button class="tab-btn" onclick="switchTab('soulmap')">Soul Map</button>
+                <button class="tab-btn" onclick="switchTab('profile')">Profile</button>
+            </div>
+
+            <div id="content-tab" class="tab-content active">
+                <h2 style="color: #ffc857; margin-bottom: 20px;">Your Content</h2>
+                <div class="content-grid" id="content-grid">
+                    <p>Loading content...</p>
+                </div>
+            </div>
+
+            <div id="soulmap-tab" class="tab-content hidden">
+                <h2 style="color: #ffc857; margin-bottom: 20px;">Your Soul Map</h2>
+                <div class="soul-map-section" id="soul-map-section">
+                    <h3>Create Your Soul Map</h3>
+                    <p>Discover your astrological blueprint and spiritual essence.</p>
+                    <button class="btn btn-primary" onclick="alert('Soul map creator coming soon!')">Begin Soul Mapping</button>
+                </div>
+            </div>
+
+            <div id="profile-tab" class="tab-content hidden">
+                <h2 style="color: #ffc857; margin-bottom: 20px;">Profile Settings</h2>
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 8px; max-width: 500px;">
+                    <p><strong>Email:</strong> <span id="profile-email"></span></p>
+                    <p><strong>Tier:</strong> <span id="profile-tier"></span></p>
+                    <p><strong>Member Since:</strong> <span id="profile-since"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 The First Spark. All rights reserved. Built with intention and code.</p>
+    </footer>
+
+    <script>
+        // Initialize Supabase
+        const SUPABASE_URL = 'https://zudwxkvlqmhvddvmklta.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp1ZHd4a3ZscW1odmRkdm1rbHRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM5ODUwMTQsImV4cCI6MjA3OTU2MTAxNH0.wLlztGsniWtjTcA1nTixYoNQFOMQYV1cE_TSjRzzOFU';
+        const { createClient } = window.supabase;
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let currentUser = null;
+        let isSignUp = false;
+
+        // Tiers data
+        const TIERS = {
+            free: {
+                name: 'Seeker',
+                price: 0,
+                features: ['Access to free rituals', 'Community posts', 'Monthly newsletter']
+            },
+            premium: {
+                name: 'Ignite',
+                price: 33,
+                features: ['All Seeker features', 'Premium rituals', 'Group sessions', 'Private community']
+            },
+            soul_map: {
+                name: 'Soul Map',
+                price: 111,
+                features: ['All Ignite features', 'Custom soul map', 'Astrological analysis', '1:1 sessions']
+            },
+            lifetime: {
+                name: 'The First Spark',
+                price: 1000,
+                features: ['Everything forever', 'Lifetime access', 'Inner circle', 'Direct mentorship']
+            }
+        };
+
+        // Initialize app
+        async function init() {
+            renderPricing();
+            checkAuth();
+        }
+
+        // Check if user is logged in
+        async function checkAuth() {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                currentUser = user;
+                showPage('dashboard');
+                loadDashboard();
+            } else {
+                showPage('home');
+            }
+        }
+
+        // Show page
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+            document.getElementById(page + '-page').classList.remove('hidden');
+            
+            // Update nav
+            document.querySelectorAll('.navbar-links a').forEach(a => a.style.color = 'rgba(255, 255, 255, 0.8)');
+        }
+
+        // Auth functions
+        function toggleAuth() {
+            isSignUp = !isSignUp;
+            document.getElementById('auth-title').textContent = isSignUp ? 'Sign Up' : 'Sign In';
+            document.querySelector('.auth-toggle button').textContent = isSignUp ? 'Sign In' : 'Sign Up';
+        }
+
+        document.getElementById('auth-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+            const errorEl = document.getElementById('auth-error');
+            const messageEl = document.getElementById('auth-message');
+
+            errorEl.textContent = '';
+            messageEl.textContent = '';
+
+            try {
+                if (isSignUp) {
+                    const { error } = await supabase.auth.signUp({ email, password });
+                    if (error) throw error;
+                    messageEl.textContent = 'Check your email to confirm signup!';
+                    messageEl.className = 'success';
+                } else {
+                    const { error } = await supabase.auth.signInWithPassword({ email, password });
+                    if (error) throw error;
+                    currentUser = await supabase.auth.getUser();
+                    showPage('dashboard');
+                    loadDashboard();
+                }
+            } catch (error) {
+                errorEl.textContent = error.message;
+                errorEl.className = 'error';
+            }
+        });
+
+        // Logout
+        async function logout() {
+            await supabase.auth.signOut();
+            currentUser = null;
+            showPage('home');
+        }
+
+        // Render pricing
+        function renderPricing() {
+            const grid = document.getElementById('pricing-grid');
+            grid.innerHTML = Object.entries(TIERS).map(([key, tier]) => `
+                <div class="tier-card ${key === 'soul_map' ? 'featured' : ''}">
+                    <div class="tier-name">${tier.name}</div>
+                    <div class="tier-price">$${tier.price}${tier.price > 0 ? '/mo' : ''}</div>
+                    <ul class="tier-features">
+                        ${tier.features.map(f => `<li>${f}</li>`).join('')}
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" 
+                        onclick="alert('Go to thefirstspark.shop to purchase')">
+                        Get Started
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Load dashboard
+        async function loadDashboard() {
+            document.getElementById('user-email').textContent = currentUser.email;
+            document.getElementById('profile-email').textContent = currentUser.email;
+            document.getElementById('profile-since').textContent = new Date(currentUser.created_at).toLocaleDateString();
+
+            // Set tier to free for now (in production, get from Supabase)
+            document.getElementById('tier-badge').textContent = 'Seeker';
+            document.getElementById('profile-tier').textContent = 'Seeker (Free)';
+
+            // Load content
+            const { data: content, error } = await supabase
+                .from('content')
+                .select('*')
+                .eq('required_tier', 'free')
+                .limit(3);
+
+            if (content && content.length > 0) {
+                document.getElementById('content-grid').innerHTML = content.map(item => `
+                    <div class="content-card">
+                        <h3>${item.title}</h3>
+                        <p>${item.description || 'Explore this content'}</p>
+                    </div>
+                `).join('');
+            } else {
+                document.getElementById('content-grid').innerHTML = '<p>No content available yet.</p>';
+            }
+        }
+
+        // Switch tabs
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+            document.getElementById(tab + '-tab').classList.remove('hidden');
+            
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Init on load
+        init();
+    </script>
+</body>
+</html>

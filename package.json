@@ -1,0 +1,23 @@
+{
+  "name": "first-spark-hub",
+  "version": "1.0.0",
+  "description": "The First Spark Membership Hub",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "npm run build && vercel --prod"
+  },
+  "dependencies": {
+    "astro": "^4.0.0",
+    "@astrojs/react": "^3.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@supabase/supabase-js": "^2.38.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

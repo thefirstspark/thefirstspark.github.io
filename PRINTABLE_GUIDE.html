@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FPHDDHSCWS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FPHDDHSCWS');
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The First Spark - Membership Hub Setup Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 8.5in;
+            height: 11in;
+            background: white;
+            margin: 20px auto;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+
+        h1 {
+            color: #ffc857;
+            border-bottom: 3px solid #ffc857;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #1a1a2e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-left: 4px solid #ffc857;
+            padding-left: 10px;
+        }
+
+        h3 {
+            color: #16213e;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .checkbox {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #ffc857;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .step {
+            background: #f9f9f9;
+            border-left: 4px solid #ffc857;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+
+        .code-block {
+            background: #1a1a2e;
+            color: #ffc857;
+            padding: 12px;
+            border-radius: 5px;
+            margin: 12px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 12px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #ffc857;
+            color: #1a1a2e;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background: #fffacd;
+            padding: 2px 4px;
+        }
+
+        .page-break {
+            page-break-after: always;
+            margin-bottom: 40px;
+        }
+
+        .print-only {
+            display: none;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+                height: auto;
+                margin: 0;
+                padding: 0.5in;
+                box-shadow: none;
+                page-break-after: always;
+            }
+
+            .print-button {
+                display: none;
+            }
+
+            .print-only {
+                display: block;
+            }
+
+            a {
+                color: #1a1a2e;
+                text-decoration: underline;
+            }
+
+            h1 {
+                page-break-after: avoid;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+
+        .print-button {
+            background: #ffc857;
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            font-size: 16px;
+        }
+
+        .print-button:hover {
+            background: #ffb744;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #999;
+            font-size: 11px;
+            page-break-before: avoid;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="print-button" onclick="handlePrint()">🖨️ PRINT THIS GUIDE</button>
+        <button class="print-button" style="background: #51cf66;" onclick="handleDownloadPDF()">📥 DOWNLOAD AS PDF</button>
+    </div>
+
+    <div class="container">
+        <h1>✨ The First Spark</h1>
+        <h2>Membership Hub - Complete Setup Guide</h2>
+        <p><strong>Last Updated:</strong> 2025</p>
+        <p><strong>Estimated Setup Time:</strong> 15-20 minutes</p>
+
+        <h2>What You're Getting</h2>
+        <ul>
+            <li>✨ Beautiful mystical membership site</li>
+            <li>🔐 Supabase authentication (email/password)</li>
+            <li>💳 Stripe payment integration</li>
+            <li>📊 Member dashboard with content gating</li>
+            <li>🌙 Soul map functionality</li>
+            <li>⚡ Production-ready Astro + React</li>
+        </ul>
+
+        <h2>Your 4 Membership Tiers</h2>
+        <table>
+            <tr>
+                <th>Tier</th>
+                <th>Price</th>
+                <th>Name</th>
+                <th>Best For</th>
+            </tr>
+            <tr>
+                <td>1. Seeker</td>
+                <td>FREE</td>
+                <td>Free</td>
+                <td>Curious souls</td>
+            </tr>
+            <tr>
+                <td>2. Ignite</td>
+                <td>$33/mo</td>
+                <td>Premium</td>
+                <td>Committed practitioners</td>
+            </tr>
+            <tr>
+                <td>3. Soul Map</td>
+                <td>$111/mo</td>
+                <td>Soul Map</td>
+                <td>Personalized guidance</td>
+            </tr>
+            <tr>
+                <td>4. The First Spark</td>
+                <td>$1,000</td>
+                <td>Lifetime</td>
+                <td>Total mastery</td>
+            </tr>
+        </table>
+
+        <h2>⚙️ SETUP IN 4 STEPS</h2>
+
+        <h3>Step 1: Supabase Setup (5 min)</h3>
+        <ol>
+            <li>Go to <code>supabase.com</code> → Create free account</li>
+            <li>Create new project (any region works)</li>
+            <li>Go to <strong>Settings > API</strong></li>
+            <li>Copy these 3 keys to a safe document:
+                <ul>
+                    <li><code>Project URL</code> → Save as <code>PUBLIC_SUPABASE_URL</code></li>
+                    <li><code>anon</code> key → Save as <code>PUBLIC_SUPABASE_ANON_KEY</code></li>
+                    <li><code>service_role</code> key → Save as <code>SUPABASE_SERVICE_ROLE_KEY</code></li>
+                </ul>
+            </li>
+            <li>Go to <strong>SQL Editor</strong> in Supabase</li>
+            <li>Create new query and paste the SQL from <code>SUPABASE_SETUP.sql</code></li>
+            <li>Click <strong>RUN</strong> - this creates your database tables</li>
+        </ol>
+
+        <div class="step">
+            ✓ <strong>Checkpoint:</strong> You should see 4 new tables in Supabase: profiles, content, soul_maps, subscriptions
+        </div>
+
+        <div class="page-break"></div>
+    </div>
+
+    <div class="container">
+        <h3>Step 2: Stripe Setup (5 min)</h3>
+        <ol>
+            <li>Go to <code>stripe.com</code> → Create account</li>
+            <li>Go to <strong>Developers > API Keys</strong></li>
+            <li>Copy these 2 keys:
+                <ul>
+                    <li><code>Publishable key</code> (starts with pk_) → Save as <code>PUBLIC_STRIPE_PUBLIC_KEY</code></li>
+                    <li><code>Secret key</code> (starts with sk_) → Save as <code>STRIPE_SECRET_KEY</code></li>
+                </ul>
+            </li>
+            <li>Create 3 Price objects:
+                <ul>
+                    <li>Click <strong>Products > Create product</strong></li>
+                    <li>Name: "Ignite", Price: $33/month, recurring → Copy price ID (price_xxxxx)</li>
+                    <li>Name: "Soul Map", Price: $111/month, recurring → Copy price ID</li>
+                    <li>Name: "The First Spark", Price: $1000, one-time → Copy price ID</li>
+                </ul>
+            </li>
+            <li>Update these IDs in file: <code>src/lib/tiers.js</code>
+                <div class="code-block">
+stripe_price_id: 'price_1234567890'  ← Replace with real ID
+                </div>
+            </li>
+        </ol>
+
+        <div class="step">
+            ✓ <strong>Checkpoint:</strong> You have 3 price IDs from Stripe and updated tiers.js
+        </div>
+
+        <h3>Step 3: Deploy to Vercel (5 min)</h3>
+        <ol>
+            <li>Push your code to GitHub (create repo if needed)</li>
+            <li>Go to <code>vercel.com</code> → Sign up / Log in</li>
+            <li>Click <strong>Import Project</strong></li>
+            <li>Select your GitHub repo</li>
+            <li>Go to <strong>Environment Variables</strong> and add these 5:
+                <ul>
+                    <li><code>PUBLIC_SUPABASE_URL</code></li>
+                    <li><code>PUBLIC_SUPABASE_ANON_KEY</code></li>
+                    <li><code>PUBLIC_STRIPE_PUBLIC_KEY</code></li>
+                    <li><code>STRIPE_SECRET_KEY</code></li>
+                    <li><code>SUPABASE_SERVICE_ROLE_KEY</code></li>
+                </ul>
+            </li>
+            <li>Click <strong>Deploy</strong></li>
+            <li>Wait 2-3 minutes for build to complete</li>
+        </ol>
+
+        <div class="step">
+            ✓ <strong>Checkpoint:</strong> Your site is LIVE! Vercel gives you a URL like <code>first-spark-hub-xxxxx.vercel.app</code>
+        </div>
+
+        <h3>Step 4: Test Everything (3 min)</h3>
+        <ol>
+            <li>Visit your live URL</li>
+            <li>Click <strong>Sign Up</strong> and create test account</li>
+            <li>Go to <strong>Pricing</strong> and click a tier</li>
+            <li>Use Stripe test card: <code>4242 4242 4242 4242</code> (any future date, any CVC)</li>
+            <li>Check your dashboard loaded</li>
+        </ol>
+
+        <div class="step">
+            ✓ <strong>You're LIVE!</strong> The First Spark membership hub is running
+        </div>
+
+        <h2>📋 What You Can Do Now</h2>
+        <ul>
+            <li><strong>Add Members:</strong> Supabase > profiles table</li>
+            <li><strong>Add Content:</strong> Supabase > content table (new rows)</li>
+            <li><strong>Track Payments:</strong> Stripe Dashboard</li>
+            <li><strong>Edit Code:</strong> Any change to GitHub auto-deploys to Vercel</li>
+            <li><strong>Custom Domain:</strong> Vercel > Settings > Domains</li>
+        </ul>
+
+        <h2>🎨 Quick Customizations</h2>
+        <p><strong>Change Colors:</strong> Edit <code>src/components/*.jsx</code> and update:</p>
+        <div class="code-block">
+#ffc857 = Gold accent
+#1a1a2e = Dark background
+        </div>
+
+        <p><strong>Update Brand Text:</strong> Edit hero section in <code>src/pages/index.astro</code></p>
+
+        <p><strong>Add Tier Features:</strong> Edit <code>src/lib/tiers.js</code></p>
+
+        <div class="page-break"></div>
+    </div>
+
+    <div class="container">
+        <h2>🚨 Troubleshooting</h2>
+        <table>
+            <tr>
+                <th>Problem</th>
+                <th>Solution</th>
+            </tr>
+            <tr>
+                <td>"Supabase is undefined"</td>
+                <td>Check env variables in Vercel match exactly</td>
+            </tr>
+            <tr>
+                <td>Stripe checkout fails</td>
+                <td>Verify price IDs exist in Stripe (they start with price_)</td>
+            </tr>
+            <tr>
+                <td>Can't log in</td>
+                <td>Check email confirmation link from Supabase</td>
+            </tr>
+            <tr>
+                <td>Payment test fails</td>
+                <td>Use test card 4242 4242 4242 4242 with any future date</td>
+            </tr>
+            <tr>
+                <td>Site is slow</td>
+                <td>Vercel free tier is fine for starting; upgrade if needed</td>
+            </tr>
+        </table>
+
+        <h2>📚 Files in Your Project</h2>
+        <div class="code-block">
+first-spark-hub/
+├── src/components/
+│   ├── AuthForm.jsx
+│   ├── PricingTiers.jsx
+│   └── MemberDashboard.jsx
+├── src/lib/
+│   ├── supabase.js
+│   └── tiers.js
+├── src/pages/
+│   ├── index.astro
+│   ├── pricing.astro
+│   ├── auth.astro
+│   ├── dashboard.astro
+│   └── api/checkout.ts
+├── SUPABASE_SETUP.sql
+├── SETUP_GUIDE.md
+└── package.json
+        </div>
+
+        <h2>🔗 Important Links</h2>
+        <ul>
+            <li><strong>Your Site:</strong> Check your Vercel dashboard</li>
+            <li><strong>Supabase Dashboard:</strong> supabase.com/dashboard</li>
+            <li><strong>Stripe Dashboard:</strong> dashboard.stripe.com</li>
+            <li><strong>Vercel Dashboard:</strong> vercel.com/dashboard</li>
+        </ul>
+
+        <h2>🚀 Next Steps (When Ready)</h2>
+        <ul>
+            <li>Add welcome email sequence (SendGrid/Resend)</li>
+            <li>Build soul map creator with step-by-step UI</li>
+            <li>Create content management panel for admins</li>
+            <li>Build soulmate compatibility engine</li>
+            <li>Add Discord community integration</li>
+            <li>Set up analytics (Plausible or Mixpanel)</li>
+            <li>Create mobile app version</li>
+        </ul>
+
+        <h2>💡 Pro Tips</h2>
+        <ul>
+            <li><span class="highlight">Use Incognito Mode</span> to test signup/login fresh</li>
+            <li><span class="highlight">Keep Stripe in TEST mode</span> until ready for real payments</li>
+            <li><span class="highlight">Back up your .env keys</span> in a password manager</li>
+            <li><span class="highlight">Monitor Vercel logs</span> if something breaks</li>
+            <li><span class="highlight">Test on mobile</span> before launching</li>
+        </ul>
+
+        <div class="footer">
+            <p>The First Spark Membership Hub - Setup Guide</p>
+            <p>✨ Built for your spiritual movement with modern technology</p>
+            <p>Questions? Check SETUP_GUIDE.md and QUICK_START.md in your project</p>
+        </div>
+    </div>
+
+    <script>
+        function handlePrint() {
+            window.print();
+        }
+
+        function handleDownloadPDF() {
+            // If you have html2pdf library available
+            const element = document.querySelector('.container');
+            const opt = {
+                margin: 10,
+                filename: 'First_Spark_Setup_Guide.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+            };
+            
+            // Fallback: just use print to PDF
+            alert('Click "Save as PDF" in the print dialog that opens');
+            window.print();
+        }
+
+        // Auto-focus print when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Guide loaded. Click PRINT button to print or print dialog to save as PDF.');
+        });
+    </script>
+</body>
+</html>

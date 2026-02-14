@@ -1,0 +1,148 @@
+================================================================================
+SUPABASE SETUP - CORRECT VERSION
+================================================================================
+
+Supabase DOES NOT have a sign up/login bar in the admin dashboard.
+Here's the RIGHT way to set it up:
+
+================================================================================
+STEP 1: CREATE SUPABASE ACCOUNT (First Time Only)
+================================================================================
+
+1. Go to: https://supabase.com
+2. Click "Start your project" button (top right)
+3. You'll see login options:
+   ├─ Sign up with Email
+   ├─ Sign up with GitHub
+   └─ Sign up with Google
+4. Choose ANY method and create account
+5. Verify your email (check inbox)
+6. You're now logged in to Supabase
+
+================================================================================
+STEP 2: CREATE NEW PROJECT
+================================================================================
+
+Once logged in to Supabase dashboard:
+
+1. Click "New Project" (big button)
+2. Fill in:
+   ├─ Project name: "first-spark" (or whatever you want)
+   ├─ Database password: Create strong password (save it!)
+   └─ Region: Choose closest to you (US East is fine)
+3. Click "Create new project"
+4. WAIT 2-3 MINUTES - it's building your database
+5. You'll see a progress bar
+
+Once ready, you're in the dashboard.
+
+================================================================================
+STEP 3: GET YOUR API KEYS (This is what you need for your site)
+================================================================================
+
+Now in Supabase dashboard, look at LEFT SIDE MENU:
+
+Click: Settings (looks like a gear icon at bottom of left menu)
+├─ This opens project settings
+
+Click: API (in the submenu that appears)
+├─ You'll see "Project API keys"
+
+You'll see 3 keys listed:
+
+KEY 1 - anon (public key - safe to share)
+├─ Copy this key
+├─ Paste into document as: PUBLIC_SUPABASE_ANON_KEY
+└─ Example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+KEY 2 - service_role (SECRET key - DO NOT share!)
+├─ Copy this key
+├─ Paste into document as: SUPABASE_SERVICE_ROLE_KEY
+└─ Keep this VERY SECRET
+
+KEY 3 - Project URL (not exactly a key, but you need it)
+├─ Look at top of same page for "Project URL"
+├─ Copy the full URL
+├─ Paste as: PUBLIC_SUPABASE_URL
+└─ Example: https://xyzabc.supabase.co
+
+================================================================================
+STEP 4: CREATE DATABASE TABLES (This is important!)
+================================================================================
+
+Still in Supabase dashboard:
+
+Left menu → Click "SQL Editor" (looks like {})
+├─ You'll see a blank text area
+
+Click "New Query" button
+├─ Paste ALL the code from: SUPABASE_SETUP.sql
+
+Click the green "Run" arrow button
+├─ Wait for it to complete
+├─ You should see "Success" message
+
+Now look at LEFT MENU → "Tables"
+├─ You should see 4 new tables:
+│   ├─ profiles
+│   ├─ content
+│   ├─ soul_maps
+│   └─ subscriptions
+
+✓ DONE! Your Supabase is ready.
+
+================================================================================
+WHAT YOU NOW HAVE
+================================================================================
+
+In Supabase:
+✓ Database created
+✓ 4 tables ready for data
+✓ Authentication system ready
+✓ 3 API keys to use in your site
+
+These keys go into Vercel environment variables.
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+PROBLEM: "Can't find Settings or API"
+SOLUTION:
+├─ Look at BOTTOM LEFT of screen
+├─ Click gear icon (Settings)
+├─ Then click "API" in submenu
+└─ Keys are there
+
+PROBLEM: "Project is still building"
+SOLUTION:
+├─ Just wait, it takes 2-3 minutes
+├─ Refresh page if stuck
+└─ Don't navigate away
+
+PROBLEM: "I see 'You are not authorized'"
+SOLUTION:
+├─ You need to be logged in
+├─ Sign out and sign back in
+├─ Make sure you created the project (not just signed up)
+└─ Try different browser if needed
+
+PROBLEM: "SQL query won't run"
+SOLUTION:
+├─ Copy entire SQL from SUPABASE_SETUP.sql file
+├─ Paste ALL of it (not just part)
+├─ Click Run button
+├─ Wait for green "Success" message
+└─ If error, check that SQL is copied completely
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+Once you have your 3 keys:
+1. Go to Stripe setup (get Stripe keys)
+2. Go to Vercel (add all 5 keys as environment variables)
+3. Deploy your site
+4. Done!
+
+================================================================================
