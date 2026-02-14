@@ -552,7 +552,7 @@
             <h1 id="hero-title">Reality Is Programmable</h1>
             <p class="tagline">Consciousness is code. Master your inner architecture with 50+ interactive tools designed for awakening builders.</p>
             <div class="hero-cta">
-                <button class="btn btn-primary" data-scroll-to=".email-capture" aria-label="Start free - scroll to email signup">Start Free</button>
+                <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" class="btn btn-primary" role="button" aria-label="Join Sparkverse Lobby - Free">Start Free</a>
                 <a href="#investor" class="btn btn-secondary" role="button" aria-label="View investor deck">Investor Deck</a>
             </div>
         </section>
@@ -611,22 +611,19 @@
             <div class="story-visual" role="img" aria-label="Gem icon representing value and transformation"><span aria-hidden="true">💎</span></div>
         </section>
 
-        <!-- EMAIL CAPTURE -->
+        <!-- JOIN SPARKVERSE -->
         <section class="email-capture" aria-labelledby="signup-title">
-            <h3 id="signup-title">Join The Sparkverse</h3>
-            <p>Get free access to the consciousness playground + Book Zero preview</p>
-            <form class="email-form"
-                  action="https://formspree.io/f/xykjdozp"
-                  method="POST"
-                  data-form="email-signup"
-                  aria-label="Email signup form">
-                <label for="email-input" class="visually-hidden">Email address</label>
-                <input type="email" id="email-input" name="email" placeholder="your@email.com" aria-label="Your email address" required>
-                <input type="hidden" name="_subject" value="New Sparkverse Signup">
-                <input type="hidden" name="_next" value="https://thefirstspark.shop/tools.html">
-                <button type="submit" aria-label="Submit email to get free access">Enter Free</button>
-            </form>
-            <div id="signup-message" class="signup-message" style="display: none; margin-top: 20px; padding: 15px; border-radius: 8px;"></div>
+            <h3 id="signup-title">Join The Sparkverse Lobby</h3>
+            <p>Get free access to the consciousness playground, community, and foundational tools</p>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/"
+                   class="btn btn-primary"
+                   role="button"
+                   style="display: inline-block; padding: 15px 40px; background: var(--primary-gold); color: #000; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s;"
+                   aria-label="Join Sparkverse Lobby - Free Access">
+                    Enter The Lobby - Free
+                </a>
+            </div>
         </section>
 
         <!-- PRICING -->
@@ -700,80 +697,9 @@
 
     <script src="script.js" defer></script>
     <script>
-        // Email form handler
+        // Page interactions
         document.addEventListener('DOMContentLoaded', () => {
-            // Handle email form submission
-            const emailForm = document.querySelector('[data-form="email-signup"]');
-            const messageDiv = document.getElementById('signup-message');
-
-            if (emailForm) {
-                emailForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-
-                    const formAction = emailForm.getAttribute('action');
-
-                    // Check if form service is configured
-                    if (!formAction || formAction.includes('YOUR_FORM_ID')) {
-                        showMessage('⚠️ Email signup not yet configured. Please contact kate@thefirstspark.shop to join!', 'warning');
-                        return;
-                    }
-
-                    const submitBtn = emailForm.querySelector('button[type="submit"]');
-                    const originalText = submitBtn.textContent;
-                    submitBtn.textContent = 'Sending...';
-                    submitBtn.disabled = true;
-
-                    try {
-                        const formData = new FormData(emailForm);
-                        const response = await fetch(formAction, {
-                            method: 'POST',
-                            body: formData,
-                            headers: {
-                                'Accept': 'application/json'
-                            }
-                        });
-
-                        if (response.ok) {
-                            showMessage('✨ Success! Check your email for access link.', 'success');
-                            emailForm.reset();
-
-                            // Track signup with Google Analytics
-                            if (typeof gtag !== 'undefined') {
-                                gtag('event', 'signup', {
-                                    'event_category': 'engagement',
-                                    'event_label': 'email_capture'
-                                });
-                            }
-                        } else {
-                            throw new Error('Form submission failed');
-                        }
-                    } catch (error) {
-                        showMessage('❌ Something went wrong. Please email kate@thefirstspark.shop directly.', 'error');
-                    } finally {
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
-                    }
-                });
-            }
-
-            function showMessage(text, type) {
-                if (messageDiv) {
-                    messageDiv.textContent = text;
-                    messageDiv.style.display = 'block';
-                    messageDiv.style.background = type === 'success' ? 'rgba(74, 222, 128, 0.2)' :
-                                                  type === 'warning' ? 'rgba(255, 215, 0, 0.2)' :
-                                                  'rgba(239, 68, 68, 0.2)';
-                    messageDiv.style.color = type === 'success' ? '#4ade80' :
-                                            type === 'warning' ? '#ffd700' :
-                                            '#ef4444';
-                    messageDiv.style.border = `1px solid ${messageDiv.style.color}`;
-
-                    // Hide message after 5 seconds
-                    setTimeout(() => {
-                        messageDiv.style.display = 'none';
-                    }, 5000);
-                }
-            }
+            // Removed email form handler - now using direct Whop link
 
             // Handle scroll-to buttons
             document.addEventListener('click', (e) => {
