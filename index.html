@@ -46,7 +46,17 @@
             overflow-x: hidden;
         }
 
-        /* Animated background */
+        /* Animated stellar background */
+        #stellarCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(ellipse at center, #1a0033 0%, #0a0a0a 100%);
+        }
+
         .stars {
             position: fixed;
             top: 0;
@@ -54,15 +64,7 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            background: 
-                radial-gradient(2px 2px at 20% 30%, #fff, transparent),
-                radial-gradient(2px 2px at 60% 70%, #fff, transparent),
-                radial-gradient(1px 1px at 50% 50%, #fff, transparent),
-                radial-gradient(1px 1px at 80% 10%, #fff, transparent),
-                radial-gradient(2px 2px at 90% 60%, #fff, transparent);
-            background-size: 200% 200%;
-            background-position: 0% 0%;
-            opacity: 0.5;
+            pointer-events: none;
         }
 
         .container {
@@ -534,7 +536,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <div class="stars" aria-hidden="true"></div>
+    <canvas id="stellarCanvas" aria-hidden="true"></canvas>
 
     <header role="banner">
         <div class="logo"><span aria-hidden="true">🌌</span> The First Spark</div>
@@ -727,6 +729,185 @@
                 }
             });
         });
+
+        // Stellar Interactive Background Animation
+        (function() {
+            const canvas = document.getElementById('stellarCanvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            let width, height, stars = [], shootingStars = [], mouse = { x: 0, y: 0 };
+
+            // Resize canvas
+            function resizeCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+
+            // Star class
+            class Star {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.z = Math.random() * 3; // Depth for parallax
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speed = (3 - this.z) * 0.05;
+                    this.opacity = Math.random() * 0.5 + 0.5;
+                    this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+                    this.twinklePhase = Math.random() * Math.PI * 2;
+                }
+
+                update() {
+                    // Parallax scrolling
+                    this.y += this.speed;
+                    if (this.y > height + 10) {
+                        this.y = -10;
+                        this.x = Math.random() * width;
+                    }
+
+                    // Twinkling effect
+                    this.twinklePhase += this.twinkleSpeed;
+                    this.currentOpacity = this.opacity * (0.7 + Math.sin(this.twinklePhase) * 0.3);
+
+                    // Mouse interaction - stars move away slightly
+                    const dx = this.x - mouse.x;
+                    const dy = this.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        const force = (150 - dist) / 150;
+                        this.x += (dx / dist) * force * 2;
+                        this.y += (dy / dist) * force * 2;
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2);
+
+                    // Color variety
+                    const colors = ['#ffffff', '#aaccff', '#ffddaa', '#ffaacc'];
+                    const color = colors[Math.floor(this.z * 1.3) % colors.length];
+
+                    gradient.addColorStop(0, color);
+                    gradient.addColorStop(1, 'transparent');
+                    ctx.fillStyle = gradient;
+                    ctx.globalAlpha = this.currentOpacity;
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+            }
+
+            // Shooting Star class
+            class ShootingStar {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height * 0.3;
+                    this.length = Math.random() * 80 + 40;
+                    this.speed = Math.random() * 8 + 6;
+                    this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.5;
+                    this.opacity = 1;
+                    this.fadeSpeed = 0.02;
+                }
+
+                update() {
+                    this.x += Math.cos(this.angle) * this.speed;
+                    this.y += Math.sin(this.angle) * this.speed;
+                    this.opacity -= this.fadeSpeed;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    const endX = this.x - Math.cos(this.angle) * this.length;
+                    const endY = this.y - Math.sin(this.angle) * this.length;
+
+                    const gradient = ctx.createLinearGradient(this.x, this.y, endX, endY);
+                    gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
+                    gradient.addColorStop(0.5, `rgba(200, 220, 255, ${this.opacity * 0.5})`);
+                    gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+                    ctx.strokeStyle = gradient;
+                    ctx.lineWidth = 2;
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(endX, endY);
+                    ctx.stroke();
+                }
+
+                isDead() {
+                    return this.opacity <= 0 || this.x > width || this.y > height;
+                }
+            }
+
+            // Initialize stars
+            function init() {
+                resizeCanvas();
+                stars = [];
+                for (let i = 0; i < 400; i++) {
+                    stars.push(new Star());
+                }
+            }
+
+            // Nebula background
+            function drawNebula() {
+                const gradient = ctx.createRadialGradient(width * 0.5, height * 0.3, 0, width * 0.5, height * 0.3, width * 0.8);
+                gradient.addColorStop(0, 'rgba(100, 50, 150, 0.05)');
+                gradient.addColorStop(0.5, 'rgba(50, 20, 80, 0.03)');
+                gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            }
+
+            // Animation loop
+            function animate() {
+                // Clear with fade effect
+                ctx.fillStyle = 'rgba(10, 10, 26, 0.1)';
+                ctx.fillRect(0, 0, width, height);
+
+                // Draw nebula
+                drawNebula();
+
+                // Update and draw stars
+                stars.forEach(star => {
+                    star.update();
+                    star.draw();
+                });
+
+                // Update and draw shooting stars
+                shootingStars = shootingStars.filter(star => {
+                    star.update();
+                    star.draw();
+                    return !star.isDead();
+                });
+
+                // Randomly add shooting stars
+                if (Math.random() < 0.01 && shootingStars.length < 3) {
+                    shootingStars.push(new ShootingStar());
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            // Track mouse position
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            // Handle resize
+            window.addEventListener('resize', resizeCanvas);
+
+            // Start
+            init();
+            animate();
+        })();
     </script>
 </body>
 </html>
