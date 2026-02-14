@@ -40,6 +40,13 @@
 
   <!-- Featured Tools (High Priority) -->
   <url>
+    <loc>https://thefirstspark.shop/lunar-wisdom.html</loc>
+    <lastmod>2026-02-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://thefirstspark.shop/daily-reset.html</loc>
     <lastmod>2025-01-21</lastmod>
     <changefreq>monthly</changefreq>
