@@ -319,6 +319,7 @@
             transform: translateY(-2px);
         }
 
+        .artist-card.prof   { --card-accent: linear-gradient(90deg, #1d4ed8, #60a5fa); }
         .artist-card.caskey { --card-accent: linear-gradient(90deg, #7c3aed, #a78bfa); }
         .artist-card.scruby { --card-accent: linear-gradient(90deg, #ea580c, #fb923c); }
         .artist-card.mot    { --card-accent: linear-gradient(90deg, #15803d, #4ade80); }
@@ -332,6 +333,7 @@
             margin-bottom: 0.25rem;
         }
 
+        .prof   .artist-name { color: #60a5fa; }
         .caskey .artist-name { color: #a78bfa; }
         .scruby .artist-name { color: #fb923c; }
         .mot    .artist-name { color: #4ade80; }
@@ -452,12 +454,27 @@
 
         <div class="roster">
 
-            <div class="artist-card caskey">
-                <div class="artist-name">Prof. Caskey</div>
-                <div class="artist-handle">Independent · Florida · @profcaskey</div>
+            <div class="artist-card prof">
+                <div class="artist-name">Prof</div>
+                <div class="artist-handle">Independent · Minneapolis · @profminneapolis</div>
                 <p class="artist-pitch">
-                    Built a cult following without a major deal, raw as it gets. The First Spark runs the same way —
-                    no label, no VC, just real tools for people building from the ground up.
+                    Built one of the most fiercely loyal fanbases in independent hip-hop through raw authenticity
+                    and relentless touring — no cosign, no compromise. The First Spark speaks that same language.
+                    Tools for people who move on their own frequency.
+                </p>
+                <div class="artist-tags">
+                    <span class="atag">Soul Map</span>
+                    <span class="atag">Fan Tools</span>
+                    <span class="atag">Partnership</span>
+                </div>
+            </div>
+
+            <div class="artist-card caskey">
+                <div class="artist-name">Caskey</div>
+                <div class="artist-handle">Independent · Florida · @caskey</div>
+                <p class="artist-pitch">
+                    Built a cult following without a major deal — raw, real, unfiltered. The First Spark runs the same way:
+                    no label, no VC, just tools that work for people building from the ground up.
                     Caskey's fanbase is exactly who consciousness tech is for: thinkers, hustlers, spiritual realists.
                 </p>
                 <div class="artist-tags">
