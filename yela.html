@@ -257,6 +257,44 @@
             color: var(--gold);
         }
 
+        /* BEAT BUTTON */
+        .beat-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 200;
+            background: rgba(10,0,0,0.85);
+            border: 1px solid rgba(212,175,55,0.5);
+            color: var(--gold);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            padding: 0.8rem 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-transform: uppercase;
+            clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+            transition: all 0.3s;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+        .beat-btn:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(212,175,55,0.3); }
+        .beat-btn.active {
+            background: rgba(139,0,0,0.4);
+            border-color: var(--blood);
+            color: var(--white);
+            box-shadow: 0 0 30px rgba(139,0,0,0.5);
+            animation: beatPulse 0.5s infinite alternate;
+        }
+        @keyframes beatPulse {
+            from { opacity: 0.85; }
+            to   { opacity: 1; }
+        }
+        .beat-icon { font-size: 1.1rem; line-height: 1; }
+        .subline-byline { font-size: 0.95rem; opacity: 0.7; }
+
         /* DIVIDER */
         .wave-divider {
             width: 100%;
@@ -346,6 +384,12 @@
             margin-bottom: 1rem;
             opacity: 0.8;
         }
+        .artist-card.wayne  { --card-accent: linear-gradient(90deg, #7c0000, #ff4444); border-color: rgba(255,68,68,0.2); background: rgba(255,68,68,0.03); }
+        .artist-card.wayne:hover { border-color: rgba(255,68,68,0.4); }
+        .wayne .artist-name { background: linear-gradient(90deg, #ff4444, #ff9900); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.4rem; }
+        .artist-card.crows  { --card-accent: linear-gradient(90deg, #4a3728, #a07850); border-color: rgba(160,120,80,0.2); background: rgba(160,120,80,0.03); }
+        .artist-card.crows:hover { border-color: rgba(160,120,80,0.4); }
+        .crows .artist-name { color: #c8a060; }
         .artist-card.prof   { --card-accent: linear-gradient(90deg, #1d4ed8, #60a5fa); }
         .artist-card.caskey { --card-accent: linear-gradient(90deg, #7c3aed, #a78bfa); }
         .artist-card.scruby { --card-accent: linear-gradient(90deg, #ea580c, #fb923c); }
@@ -423,18 +467,27 @@
 <body>
     <canvas id="particles"></canvas>
 
+    <button type="button" class="beat-btn" id="beatToggle" onclick="toggleBeat()">
+        <span class="beat-icon">▶</span>
+        <span class="beat-label">ACTIVATE BEAT</span>
+    </button>
+
     <div class="content">
         <div class="collab-header">
-            <span class="brand slum">SLUMERICAN</span>
-            <span class="x-mark">×</span>
             <span class="brand spark">THE FIRST SPARK</span>
+            <span class="x-mark">×</span>
+            <span class="brand slum">THE ARTISTS</span>
         </div>
 
         <div class="message">
-            <h1 class="headline">REALITY IS PROGRAMMABLE.<br>SO IS THE HUSTLE.</h1>
+            <h1 class="headline">TO THE ONES WHO<br>MADE ME WANT TO RAP.</h1>
             <p class="subline">
-                Built from nothing. No label. No VC. Just tools that work.<br>
-                <strong>Consciousness technology</strong> for people who build their own lane.
+                I know every lyric. Every bar. Every album cut.<br>
+                You shaped how I think, how I build, how I move.<br>
+                Now I built something — and I want you in it.
+            </p>
+            <p class="subline subline-byline">
+                <strong>KJP · Founder, The First Spark</strong>
             </p>
         </div>
 
@@ -448,29 +501,31 @@
                 <div class="stat-label">VC Money</div>
             </div>
             <div class="stat">
-                <div class="stat-num">$2M</div>
-                <div class="stat-label">SAFE Open</div>
+                <div class="stat-num">$200K</div>
+                <div class="stat-label">Raise Open</div>
             </div>
         </div>
 
         <div class="options">
             <div class="option">
                 <span class="option-letter">A</span>
-                <span class="option-text"><strong>Investment.</strong> Early positioning for artists who see what's coming.</span>
+                <span class="option-text"><strong>Invest.</strong> Early equity in a consciousness tech platform built by someone your music raised.</span>
             </div>
             <div class="option">
                 <div class="option-letter">B</div>
-                <span class="option-text"><strong>Creative partnership.</strong> Branded tools for Slumerican — soul maps, sigils, interactive experiences.</span>
+                <span class="option-text"><strong>Co-found or partner.</strong> Branded tools, interactive fan experiences, soul maps — built around your world.</span>
             </div>
             <div class="option">
                 <span class="option-letter">C</span>
-                <span class="option-text"><strong>Both.</strong></span>
+                <span class="option-text"><strong>Promote.</strong> If you believe in what this is, your word alone changes everything.</span>
             </div>
         </div>
 
         <div class="ctas">
             <a href="trinity.html" class="cta cta-primary">Enter The Trinity</a>
             <a href="invest.html" class="cta cta-secondary">See The Raise</a>
+            <a href="investor-deck-v2.html" class="cta cta-secondary">Investor Deck</a>
+            <a href="OGmap.html" class="cta cta-secondary">Sparkverse Map</a>
         </div>
 
         <!-- FIRST WAVE ROSTER -->
@@ -496,6 +551,42 @@
                     <span class="atag">Soul Map</span>
                     <span class="atag">Brand Tools</span>
                     <span class="atag">Investment</span>
+                </div>
+            </div>
+
+            <div class="artist-card wayne">
+                <div class="artist-name">Lil Wayne</div>
+                <div class="artist-role">The Greatest · Young Money</div>
+                <div class="artist-handle">Icon · New Orleans · @liltunechi</div>
+                <p class="artist-pitch">
+                    I memorized Tha Carter III before I knew what I wanted to do with my life.
+                    Wayne taught me that words could be architecture — that every bar is a world you build.
+                    That's exactly what The First Spark does for consciousness. The tools I built carry
+                    his DNA: layered, unpredictable, and speaking directly to the ones who are paying attention.
+                    If Wayne ever touched this platform, it would change what people think technology can feel like.
+                </p>
+                <div class="artist-tags">
+                    <span class="atag">Dream Collab</span>
+                    <span class="atag">Co-Founder Vision</span>
+                    <span class="atag">Cultural Anchor</span>
+                </div>
+            </div>
+
+            <div class="artist-card crows">
+                <div class="artist-name">Counting Crows</div>
+                <div class="artist-role">The Feeling · Alternative Legends</div>
+                <div class="artist-handle">Band · San Francisco · @countingcrows</div>
+                <p class="artist-pitch">
+                    "Mr. Jones" was the first song that made me feel like art could want something for you.
+                    Adam Duritz writes the way I think — searching, obsessive, alive with meaning.
+                    The First Spark exists for exactly the kind of person who has listened to "A Long December"
+                    and felt understood. An artist like this doesn't just promote — they validate the entire premise
+                    that consciousness technology and art belong together.
+                </p>
+                <div class="artist-tags">
+                    <span class="atag">Emotional Foundation</span>
+                    <span class="atag">Brand Alignment</span>
+                    <span class="atag">Partnership</span>
                 </div>
             </div>
 
@@ -572,56 +663,170 @@
     </div>
 
     <script>
+        // ── CANVAS SETUP ──────────────────────────────────────────────
         const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
+        const ctx    = canvas.getContext('2d');
         let width, height, particles = [];
-        let mouse = { x: null, y: null, radius: 120 };
+        let mouse = { x: null, y: null };
 
-        const colors = [
-            'rgba(139, 0, 0, 0.6)',
-            'rgba(212, 175, 55, 0.5)',
-            'rgba(0, 212, 255, 0.4)',
-            'rgba(255, 255, 255, 0.3)'
-        ];
+        // ── AUDIO ENGINE ──────────────────────────────────────────────
+        let audioCtx = null, analyser = null, masterGain = null;
+        let isPlaying = false, beatStep = 0, beatSchedulerId = null;
+        let nextStepTime = 0;
+        let kickFlash = 0, snareFlash = 0, bassEnergy = 0;
 
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            initParticles();
+        const BPM = 88;
+        const stepTime = 60 / BPM / 4;
+
+        const kickPat  = [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0];
+        const snarePat = [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0];
+        const hihatPat = [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,1];
+        const bassPat  = [1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1];
+        const bassFreq = [41.2,41.2,49.0,41.2,36.7,41.2,43.7,41.2,
+                          41.2,41.2,55.0,41.2,36.7,41.2,49.0,41.2];
+
+        function initAudio() {
+            audioCtx   = new (window.AudioContext || window.webkitAudioContext)();
+            analyser   = audioCtx.createAnalyser();
+            analyser.fftSize = 512;
+            analyser.smoothingTimeConstant = 0.8;
+            masterGain = audioCtx.createGain();
+            masterGain.gain.value = 0.7;
+            masterGain.connect(analyser);
+            analyser.connect(audioCtx.destination);
         }
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.3;
-                this.speedY = (Math.random() - 0.5) * 0.3;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
+        function playKick(t) {
+            const osc = audioCtx.createOscillator();
+            const g   = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(160, t);
+            osc.frequency.exponentialRampToValueAtTime(0.001, t + 0.45);
+            g.gain.setValueAtTime(1.4, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
+            osc.connect(g); g.connect(masterGain);
+            osc.start(t); osc.stop(t + 0.5);
+            kickFlash = 1.0;
+        }
+
+        function playSnare(t) {
+            const buf  = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.25, audioCtx.sampleRate);
+            const data = buf.getChannelData(0);
+            for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+            const src = audioCtx.createBufferSource();
+            src.buffer = buf;
+            const flt = audioCtx.createBiquadFilter();
+            flt.type = 'bandpass'; flt.frequency.value = 1200; flt.Q.value = 0.5;
+            const g = audioCtx.createGain();
+            g.gain.setValueAtTime(0.55, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+            src.connect(flt); flt.connect(g); g.connect(masterGain);
+            src.start(t);
+            snareFlash = 0.6;
+        }
+
+        function playHihat(t, open) {
+            const dur  = open ? 0.25 : 0.04;
+            const buf  = audioCtx.createBuffer(1, audioCtx.sampleRate * dur, audioCtx.sampleRate);
+            const data = buf.getChannelData(0);
+            for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+            const src = audioCtx.createBufferSource();
+            src.buffer = buf;
+            const flt = audioCtx.createBiquadFilter();
+            flt.type = 'highpass'; flt.frequency.value = 7000;
+            const g = audioCtx.createGain();
+            g.gain.setValueAtTime(0.25, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+            src.connect(flt); flt.connect(g); g.connect(masterGain);
+            src.start(t);
+        }
+
+        function playBass(t, freq) {
+            const osc = audioCtx.createOscillator();
+            const flt = audioCtx.createBiquadFilter();
+            const g   = audioCtx.createGain();
+            osc.type = 'sawtooth'; osc.frequency.value = freq;
+            flt.type = 'lowpass';
+            flt.frequency.setValueAtTime(600, t);
+            flt.frequency.exponentialRampToValueAtTime(150, t + stepTime * 3);
+            flt.Q.value = 2;
+            g.gain.setValueAtTime(0.35, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + stepTime * 3.5);
+            osc.connect(flt); flt.connect(g); g.connect(masterGain);
+            osc.start(t); osc.stop(t + stepTime * 4);
+        }
+
+        function scheduleBeat() {
+            while (nextStepTime < audioCtx.currentTime + 0.12) {
+                const s = beatStep % 16;
+                const t = nextStepTime;
+                if (kickPat[s])  playKick(t);
+                if (snarePat[s]) playSnare(t);
+                if (hihatPat[s]) playHihat(t, s === 15);
+                if (bassPat[s])  playBass(t, bassFreq[s]);
+                beatStep++;
+                nextStepTime += stepTime;
             }
+            beatSchedulerId = setTimeout(scheduleBeat, 25);
+        }
 
+        function toggleBeat() {
+            const btn = document.getElementById('beatToggle');
+            if (!audioCtx) initAudio();
+            if (!isPlaying) {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                nextStepTime = audioCtx.currentTime;
+                beatStep = 0;
+                scheduleBeat();
+                isPlaying = true;
+                btn.classList.add('active');
+                btn.querySelector('.beat-label').textContent = 'STOP BEAT';
+                btn.querySelector('.beat-icon').textContent  = '■';
+            } else {
+                clearTimeout(beatSchedulerId);
+                isPlaying = false;
+                btn.classList.remove('active');
+                btn.querySelector('.beat-label').textContent = 'ACTIVATE BEAT';
+                btn.querySelector('.beat-icon').textContent  = '▶';
+            }
+        }
+
+        // ── PARTICLE SYSTEM ───────────────────────────────────────────
+        const COLORS = [
+            'rgba(139,0,0,0.6)', 'rgba(212,175,55,0.5)',
+            'rgba(0,212,255,0.4)', 'rgba(255,255,255,0.3)'
+        ];
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x     = Math.random() * width;
+                this.y     = Math.random() * height;
+                this.base  = Math.random() * 2 + 0.5;
+                this.size  = this.base;
+                this.vx    = (Math.random() - 0.5) * 0.35;
+                this.vy    = (Math.random() - 0.5) * 0.35;
+                this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+            }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
+                const speed = 1 + bassEnergy * 3;
+                this.x += this.vx * speed;
+                this.y += this.vy * speed;
                 if (this.x < 0) this.x = width;
-                if (this.x > width) this.x = 0;
+                if (this.x > width)  this.x = 0;
                 if (this.y < 0) this.y = height;
                 if (this.y > height) this.y = 0;
-
                 if (mouse.x !== null) {
-                    const dx = this.x - mouse.x;
-                    const dy = this.y - mouse.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < mouse.radius) {
-                        const force = (mouse.radius - dist) / mouse.radius;
-                        const angle = Math.atan2(dy, dx);
-                        this.x += Math.cos(angle) * force * 2;
-                        this.y += Math.sin(angle) * force * 2;
+                    const dx = this.x - mouse.x, dy = this.y - mouse.y;
+                    const d  = Math.sqrt(dx*dx + dy*dy);
+                    if (d < 130) {
+                        const f = (130 - d) / 130;
+                        this.x += Math.cos(Math.atan2(dy, dx)) * f * 2.5;
+                        this.y += Math.sin(Math.atan2(dy, dx)) * f * 2.5;
                     }
                 }
+                this.size = this.base + kickFlash * 3;
             }
-
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -632,23 +837,22 @@
 
         function initParticles() {
             particles = [];
-            const num = Math.min(100, Math.floor((width * height) / 15000));
-            for (let i = 0; i < num; i++) {
-                particles.push(new Particle());
-            }
+            const n = Math.min(130, Math.floor((width * height) / 12000));
+            for (let i = 0; i < n; i++) particles.push(new Particle());
         }
 
         function connect() {
+            const maxDist = 100 + bassEnergy * 60;
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 100) {
+                    const d  = Math.sqrt(dx*dx + dy*dy);
+                    if (d < maxDist) {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(139, 0, 0, ${0.2 * (1 - dist / 100)})`;
+                        ctx.strokeStyle = `rgba(139,0,0,${0.25 * (1 - d / maxDist)})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
@@ -656,18 +860,102 @@
             }
         }
 
+        // ── AUDIO VISUALS ─────────────────────────────────────────────
+        function getAudioData() {
+            if (!analyser) {
+                return {
+                    freqData: new Uint8Array(128),
+                    waveData: new Uint8Array(512)
+                };
+            }
+            const freqData = new Uint8Array(analyser.frequencyBinCount);
+            const waveData = new Uint8Array(analyser.fftSize);
+            analyser.getByteFrequencyData(freqData);
+            analyser.getByteTimeDomainData(waveData);
+            return { freqData, waveData };
+        }
+
+        function drawFreqBars(freqData) {
+            const bars = 72;
+            const bw   = width / bars;
+            for (let i = 0; i < bars; i++) {
+                const idx   = Math.floor(i * freqData.length / bars);
+                const val   = freqData[idx] / 255;
+                const bh    = val * height * 0.38;
+                const alpha = val * 0.45;
+                const hue   = i / bars;
+                let r = hue < 0.5 ? 139 + (212-139)*(hue/0.5) : 212*(1-(hue-0.5)/0.5);
+                let g = hue < 0.5 ? 175*(hue/0.5)             : 175*(1-(hue-0.5)/0.5) + 212*((hue-0.5)/0.5);
+                let b = hue < 0.5 ? 0                          : 255*((hue-0.5)/0.5);
+                const col = `rgba(${Math.floor(r)},${Math.floor(g)},${Math.floor(b)},${alpha})`;
+                ctx.fillStyle = col;
+                ctx.fillRect(i * bw, height - bh, bw - 1, bh);
+                ctx.fillStyle = `rgba(${Math.floor(r)},${Math.floor(g)},${Math.floor(b)},${alpha*0.25})`;
+                ctx.fillRect(i * bw, 0, bw - 1, bh * 0.25);
+            }
+        }
+
+        function drawWaveform(waveData) {
+            ctx.beginPath();
+            ctx.lineWidth = 1.5;
+            const grad = ctx.createLinearGradient(0, 0, width, 0);
+            grad.addColorStop(0,   'rgba(139,0,0,0.7)');
+            grad.addColorStop(0.5, 'rgba(212,175,55,0.7)');
+            grad.addColorStop(1,   'rgba(0,212,255,0.7)');
+            ctx.strokeStyle = grad;
+            const sw = width / waveData.length;
+            for (let i = 0; i < waveData.length; i++) {
+                const y = (height / 2) + ((waveData[i] / 128) - 1) * height * 0.18;
+                if (i === 0) ctx.moveTo(0, y);
+                else         ctx.lineTo(i * sw, y);
+            }
+            ctx.stroke();
+        }
+
+        function drawFlash() {
+            if (kickFlash > 0.01) {
+                const g = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.8);
+                g.addColorStop(0, `rgba(139,0,0,${kickFlash * 0.14})`);
+                g.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = g;
+                ctx.fillRect(0, 0, width, height);
+                kickFlash *= 0.83;
+            }
+            if (snareFlash > 0.01) {
+                const g = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.55);
+                g.addColorStop(0, `rgba(212,175,55,${snareFlash * 0.09})`);
+                g.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = g;
+                ctx.fillRect(0, 0, width, height);
+                snareFlash *= 0.78;
+            }
+        }
+
+        // ── MAIN LOOP ─────────────────────────────────────────────────
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initParticles();
+        }
+
         function animate() {
             ctx.clearRect(0, 0, width, height);
+            const { freqData, waveData } = getAudioData();
+
+            let bassSum = 0;
+            for (let i = 0; i < 8; i++) bassSum += freqData[i] / 255;
+            bassEnergy = bassSum / 8;
+
+            drawFreqBars(freqData);
+            drawFlash();
             connect();
-            for (let p of particles) {
-                p.update();
-                p.draw();
-            }
+            for (const p of particles) { p.update(); p.draw(); }
+            drawWaveform(waveData);
             requestAnimationFrame(animate);
         }
 
         window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+        window.addEventListener('mouseout',  () => { mouse.x = null; mouse.y = null; });
         window.addEventListener('resize', resize);
         resize();
         animate();
