@@ -257,6 +257,117 @@
             color: var(--gold);
         }
 
+        /* DIVIDER */
+        .wave-divider {
+            width: 100%;
+            max-width: 700px;
+            margin: 4rem auto 3rem;
+            text-align: center;
+        }
+
+        .wave-label {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: var(--ghost);
+            opacity: 0.5;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .wave-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            letter-spacing: 0.15em;
+        }
+
+        /* ARTIST CARDS */
+        .roster {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 680px;
+            width: 100%;
+            margin-bottom: 4rem;
+        }
+
+        .artist-card {
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            padding: 2rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .artist-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--card-accent);
+            opacity: 0.7;
+        }
+
+        .artist-card:hover {
+            border-color: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.04);
+            transform: translateY(-2px);
+        }
+
+        .artist-card.caskey { --card-accent: linear-gradient(90deg, #7c3aed, #a78bfa); }
+        .artist-card.scruby { --card-accent: linear-gradient(90deg, #ea580c, #fb923c); }
+        .artist-card.mot    { --card-accent: linear-gradient(90deg, #15803d, #4ade80); }
+
+        .artist-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .caskey .artist-name { color: #a78bfa; }
+        .scruby .artist-name { color: #fb923c; }
+        .mot    .artist-name { color: #4ade80; }
+
+        .artist-handle {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .artist-pitch {
+            font-size: 0.9rem;
+            color: var(--ghost);
+            line-height: 1.7;
+            opacity: 0.85;
+        }
+
+        .artist-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .atag {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: var(--ghost);
+            opacity: 0.7;
+        }
+
         /* RESPONSIVE */
         @media (max-width: 600px) {
             .collab-header {
@@ -331,6 +442,61 @@
         <div class="ctas">
             <a href="trinity.html" class="cta cta-primary">Enter The Trinity</a>
             <a href="invest.html" class="cta cta-secondary">See The Raise</a>
+        </div>
+
+        <!-- FIRST WAVE ROSTER -->
+        <div class="wave-divider">
+            <div class="wave-label">Beyond Slumerican</div>
+            <div class="wave-title">FIRST WAVE COLLABS</div>
+        </div>
+
+        <div class="roster">
+
+            <div class="artist-card caskey">
+                <div class="artist-name">Prof. Caskey</div>
+                <div class="artist-handle">Independent · Florida · @profcaskey</div>
+                <p class="artist-pitch">
+                    Built a cult following without a major deal, raw as it gets. The First Spark runs the same way —
+                    no label, no VC, just real tools for people building from the ground up.
+                    Caskey's fanbase is exactly who consciousness tech is for: thinkers, hustlers, spiritual realists.
+                </p>
+                <div class="artist-tags">
+                    <span class="atag">Creative Tools</span>
+                    <span class="atag">Soul Map</span>
+                    <span class="atag">Investment</span>
+                </div>
+            </div>
+
+            <div class="artist-card scruby">
+                <div class="artist-name">Cal Scruby</div>
+                <div class="artist-handle">Independent · Cincinnati · @calscruby</div>
+                <p class="artist-pitch">
+                    One of the most consistent grinders in independent rap — built his lane through relentless execution.
+                    That's the TFS ethos exactly. A collab here isn't a sponsorship, it's a shared operating system
+                    for artists who refuse to wait for a cosign.
+                </p>
+                <div class="artist-tags">
+                    <span class="atag">Spark Planner</span>
+                    <span class="atag">Brand Tools</span>
+                    <span class="atag">Partnership</span>
+                </div>
+            </div>
+
+            <div class="artist-card mot">
+                <div class="artist-name">Mexican OT</div>
+                <div class="artist-handle">Independent · Texas · @mexicanotofficial</div>
+                <p class="artist-pitch">
+                    On a historic run right now — stadium energy without a major label infrastructure.
+                    The First Spark can be the behind-the-scenes architecture: fan engagement tools, interactive drops,
+                    consciousness-layer experiences for a fanbase that's fully locked in.
+                </p>
+                <div class="artist-tags">
+                    <span class="atag">Fan Experience</span>
+                    <span class="atag">Interactive Drops</span>
+                    <span class="atag">Investment</span>
+                </div>
+            </div>
+
         </div>
 
         <div class="signature">
