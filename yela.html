@@ -9,13 +9,18 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            --void: #030305;
-            --blood: #8B0000;
-            --rust: #722F37;
-            --gold: #d4af37;
-            --electric: #00d4ff;
-            --white: #f0f0f0;
-            --ghost: rgba(255,255,255,0.8);
+            --void:    #000000;
+            --deep:    #0d0a08;
+            --card:    #161210;
+            --border:  #2e1e14;
+            --blood:   #c41a00;
+            --rust:    #8b3818;
+            --gold:    #e8560a;
+            --electric: #ddd4c4;
+            --white:   #ede8e0;
+            --ghost:   rgba(237,232,224,0.85);
+            --bone:    #b8a890;
+            --dim:     #6a5a4a;
         }
 
         body {
@@ -577,10 +582,10 @@
     </div>
 
     <script>
-        // ── CANVAS SETUP ──────────────────────────────────────────────
+        // ── CANVAS ────────────────────────────────────────────────────
         const canvas = document.getElementById('particles');
         const ctx    = canvas.getContext('2d');
-        let width, height, particles = [];
+        let width, height, embers = [], grainCanvas, grainCtx;
         let mouse = { x: null, y: null };
 
         // ── AUDIO ENGINE ──────────────────────────────────────────────
@@ -589,95 +594,99 @@
         let nextStepTime = 0;
         let kickFlash = 0, snareFlash = 0, bassEnergy = 0;
 
-        const BPM = 88;
+        // Trap / Slumerican beat — 95 BPM, syncopated kick, rolling hats
+        const BPM      = 95;
         const stepTime = 60 / BPM / 4;
 
-        const kickPat  = [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0];
+        const kickPat  = [1,0,0,0, 0,0,1,0, 1,0,0,1, 0,0,0,0];
         const snarePat = [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0];
-        const hihatPat = [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,1];
-        const bassPat  = [1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1];
-        const bassFreq = [41.2,41.2,49.0,41.2,36.7,41.2,43.7,41.2,
-                          41.2,41.2,55.0,41.2,36.7,41.2,49.0,41.2];
+        const hihatPat = [1,1,0,1, 1,1,0,1, 1,1,1,1, 1,0,1,1]; // trap roll feel
+        const bassPat  = [1,0,0,0, 0,0,0,1, 1,0,0,0, 0,1,0,0];
+        // 808-style bass note frequencies (E minor / dark)
+        const bassFreq = [41.2,41.2,41.2,41.2, 36.7,36.7,36.7,41.2,
+                          43.7,43.7,43.7,43.7, 38.9,38.9,41.2,41.2];
 
         function initAudio() {
             audioCtx   = new (window.AudioContext || window.webkitAudioContext)();
             analyser   = audioCtx.createAnalyser();
             analyser.fftSize = 512;
-            analyser.smoothingTimeConstant = 0.8;
+            analyser.smoothingTimeConstant = 0.75;
             masterGain = audioCtx.createGain();
-            masterGain.gain.value = 0.7;
+            masterGain.gain.value = 0.75;
             masterGain.connect(analyser);
             analyser.connect(audioCtx.destination);
         }
 
-        function playKick(t) {
+        function play808(t, freq) {
+            // 808 kick — sine pitch-drop with long sub tail
             const osc = audioCtx.createOscillator();
             const g   = audioCtx.createGain();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(160, t);
-            osc.frequency.exponentialRampToValueAtTime(0.001, t + 0.45);
-            g.gain.setValueAtTime(1.4, t);
-            g.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
+            osc.frequency.setValueAtTime(freq * 2.5, t);
+            osc.frequency.exponentialRampToValueAtTime(freq, t + 0.08);
+            osc.frequency.exponentialRampToValueAtTime(freq * 0.5, t + 0.6);
+            g.gain.setValueAtTime(1.6, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.8);
             osc.connect(g); g.connect(masterGain);
-            osc.start(t); osc.stop(t + 0.5);
+            osc.start(t); osc.stop(t + 0.8);
             kickFlash = 1.0;
         }
 
-        function playSnare(t) {
-            const buf  = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.25, audioCtx.sampleRate);
-            const data = buf.getChannelData(0);
-            for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
-            const src = audioCtx.createBufferSource();
-            src.buffer = buf;
-            const flt = audioCtx.createBiquadFilter();
-            flt.type = 'bandpass'; flt.frequency.value = 1200; flt.Q.value = 0.5;
-            const g = audioCtx.createGain();
-            g.gain.setValueAtTime(0.55, t);
-            g.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
-            src.connect(flt); flt.connect(g); g.connect(masterGain);
-            src.start(t);
-            snareFlash = 0.6;
+        function playKick(t) {
+            // Hard punch layer on top of 808
+            const osc = audioCtx.createOscillator();
+            const g   = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(180, t);
+            osc.frequency.exponentialRampToValueAtTime(40, t + 0.08);
+            g.gain.setValueAtTime(2.0, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+            osc.connect(g); g.connect(masterGain);
+            osc.start(t); osc.stop(t + 0.15);
         }
 
-        function playHihat(t, open) {
-            const dur  = open ? 0.25 : 0.04;
-            const buf  = audioCtx.createBuffer(1, audioCtx.sampleRate * dur, audioCtx.sampleRate);
+        function playSnare(t) {
+            const len  = audioCtx.sampleRate * 0.18;
+            const buf  = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
             const data = buf.getChannelData(0);
-            for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+            for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
             const src = audioCtx.createBufferSource();
             src.buffer = buf;
             const flt = audioCtx.createBiquadFilter();
-            flt.type = 'highpass'; flt.frequency.value = 7000;
+            flt.type = 'bandpass'; flt.frequency.value = 1400; flt.Q.value = 0.8;
             const g = audioCtx.createGain();
-            g.gain.setValueAtTime(0.25, t);
+            g.gain.setValueAtTime(0.9, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+            src.connect(flt); flt.connect(g); g.connect(masterGain);
+            src.start(t);
+            snareFlash = 0.8;
+        }
+
+        function playHihat(t, vol) {
+            const dur  = vol > 0.15 ? 0.06 : 0.025;
+            const len  = Math.floor(audioCtx.sampleRate * dur);
+            const buf  = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+            const data = buf.getChannelData(0);
+            for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+            const src = audioCtx.createBufferSource();
+            src.buffer = buf;
+            const flt = audioCtx.createBiquadFilter();
+            flt.type = 'highpass'; flt.frequency.value = 8000;
+            const g = audioCtx.createGain();
+            g.gain.setValueAtTime(vol, t);
             g.gain.exponentialRampToValueAtTime(0.001, t + dur);
             src.connect(flt); flt.connect(g); g.connect(masterGain);
             src.start(t);
         }
 
-        function playBass(t, freq) {
-            const osc = audioCtx.createOscillator();
-            const flt = audioCtx.createBiquadFilter();
-            const g   = audioCtx.createGain();
-            osc.type = 'sawtooth'; osc.frequency.value = freq;
-            flt.type = 'lowpass';
-            flt.frequency.setValueAtTime(600, t);
-            flt.frequency.exponentialRampToValueAtTime(150, t + stepTime * 3);
-            flt.Q.value = 2;
-            g.gain.setValueAtTime(0.35, t);
-            g.gain.exponentialRampToValueAtTime(0.001, t + stepTime * 3.5);
-            osc.connect(flt); flt.connect(g); g.connect(masterGain);
-            osc.start(t); osc.stop(t + stepTime * 4);
-        }
-
         function scheduleBeat() {
-            while (nextStepTime < audioCtx.currentTime + 0.12) {
-                const s = beatStep % 16;
-                const t = nextStepTime;
-                if (kickPat[s])  playKick(t);
+            while (nextStepTime < audioCtx.currentTime + 0.15) {
+                const s   = beatStep % 16;
+                const t   = nextStepTime;
+                const vol = (s % 2 === 0) ? 0.22 : 0.12; // accent on even steps
+                if (kickPat[s])  { play808(t, bassFreq[s]); playKick(t); }
                 if (snarePat[s]) playSnare(t);
-                if (hihatPat[s]) playHihat(t, s === 15);
-                if (bassPat[s])  playBass(t, bassFreq[s]);
+                if (hihatPat[s]) playHihat(t, vol);
                 beatStep++;
                 nextStepTime += stepTime;
             }
@@ -705,83 +714,99 @@
             }
         }
 
-        // ── PARTICLE SYSTEM ───────────────────────────────────────────
-        const COLORS = [
-            'rgba(139,0,0,0.6)', 'rgba(212,175,55,0.5)',
-            'rgba(0,212,255,0.4)', 'rgba(255,255,255,0.3)'
-        ];
-
-        class Particle {
-            constructor() { this.reset(); }
-            reset() {
-                this.x     = Math.random() * width;
-                this.y     = Math.random() * height;
-                this.base  = Math.random() * 2 + 0.5;
-                this.size  = this.base;
-                this.vx    = (Math.random() - 0.5) * 0.35;
-                this.vy    = (Math.random() - 0.5) * 0.35;
-                this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        // ── EMBER PARTICLES ───────────────────────────────────────────
+        class Ember {
+            constructor(fromKick) { this.spawn(fromKick); }
+            spawn(fromKick) {
+                this.x    = Math.random() * width;
+                this.y    = height + Math.random() * 20;
+                this.size = fromKick
+                    ? Math.random() * 4 + 2
+                    : Math.random() * 2 + 0.5;
+                this.vx   = (Math.random() - 0.5) * (fromKick ? 3 : 1);
+                this.vy   = -(Math.random() * (fromKick ? 3 : 1.5) + 0.5);
+                this.life = 1.0;
+                this.decay = fromKick
+                    ? Math.random() * 0.012 + 0.006
+                    : Math.random() * 0.006 + 0.002;
+                // Red → orange → bone gradient based on size
+                const hot = this.size > 2;
+                this.r = hot ? 196 + Math.random() * 40 : 180;
+                this.g = hot ? Math.random() * 80       : Math.random() * 60 + 60;
+                this.b = hot ? 0                         : Math.random() * 30;
             }
             update() {
-                const speed = 1 + bassEnergy * 3;
-                this.x += this.vx * speed;
-                this.y += this.vy * speed;
-                if (this.x < 0) this.x = width;
-                if (this.x > width)  this.x = 0;
-                if (this.y < 0) this.y = height;
-                if (this.y > height) this.y = 0;
+                this.x   += this.vx + (Math.random() - 0.5) * 0.4;
+                this.vy  -= 0.02; // drift up
+                this.y   += this.vy * (1 + bassEnergy * 2);
+                this.life -= this.decay * (1 + bassEnergy);
+                this.size *= 0.995;
                 if (mouse.x !== null) {
                     const dx = this.x - mouse.x, dy = this.y - mouse.y;
                     const d  = Math.sqrt(dx*dx + dy*dy);
-                    if (d < 130) {
-                        const f = (130 - d) / 130;
-                        this.x += Math.cos(Math.atan2(dy, dx)) * f * 2.5;
-                        this.y += Math.sin(Math.atan2(dy, dx)) * f * 2.5;
+                    if (d < 100) {
+                        const f = (100 - d) / 100;
+                        this.x += (dx / d) * f * 3;
+                        this.y += (dy / d) * f * 3;
                     }
                 }
-                this.size = this.base + kickFlash * 3;
             }
             draw() {
+                const alpha = this.life * 0.85;
+                // Glow halo
+                const grd = ctx.createRadialGradient(
+                    this.x, this.y, 0,
+                    this.x, this.y, this.size * 3
+                );
+                grd.addColorStop(0, `rgba(${this.r},${this.g},${this.b},${alpha})`);
+                grd.addColorStop(1, `rgba(${this.r},${Math.floor(this.g*0.3)},0,0)`);
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                ctx.fillStyle = grd;
+                ctx.fill();
+                // Core
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
+                ctx.fillStyle = `rgba(255,${Math.floor(this.g + 80)},${this.b},${alpha})`;
                 ctx.fill();
             }
+            get dead() { return this.life <= 0 || this.y < -20; }
         }
 
-        function initParticles() {
-            particles = [];
-            const n = Math.min(130, Math.floor((width * height) / 12000));
-            for (let i = 0; i < n; i++) particles.push(new Particle());
+        function spawnEmbers(count, fromKick) {
+            for (let i = 0; i < count; i++) embers.push(new Ember(fromKick));
         }
 
-        function connect() {
-            const maxDist = 100 + bassEnergy * 60;
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const d  = Math.sqrt(dx*dx + dy*dy);
-                    if (d < maxDist) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(139,0,0,${0.25 * (1 - d / maxDist)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
+        // ── FILM GRAIN ────────────────────────────────────────────────
+        function buildGrain() {
+            grainCanvas = document.createElement('canvas');
+            grainCanvas.width  = 256;
+            grainCanvas.height = 256;
+            grainCtx = grainCanvas.getContext('2d');
+        }
+
+        function drawGrain() {
+            const imgData = grainCtx.createImageData(256, 256);
+            const d = imgData.data;
+            for (let i = 0; i < d.length; i += 4) {
+                const v = Math.random() * 40;
+                d[i] = d[i+1] = d[i+2] = v;
+                d[i+3] = 18;
             }
+            grainCtx.putImageData(imgData, 0, 0);
+            ctx.globalAlpha = 0.35;
+            const pat = ctx.createPattern(grainCanvas, 'repeat');
+            ctx.fillStyle = pat;
+            ctx.fillRect(0, 0, width, height);
+            ctx.globalAlpha = 1;
         }
 
         // ── AUDIO VISUALS ─────────────────────────────────────────────
         function getAudioData() {
-            if (!analyser) {
-                return {
-                    freqData: new Uint8Array(128),
-                    waveData: new Uint8Array(512)
-                };
-            }
+            if (!analyser) return {
+                freqData: new Uint8Array(128),
+                waveData: new Uint8Array(512)
+            };
             const freqData = new Uint8Array(analyser.frequencyBinCount);
             const waveData = new Uint8Array(analyser.fftSize);
             analyser.getByteFrequencyData(freqData);
@@ -790,22 +815,24 @@
         }
 
         function drawFreqBars(freqData) {
-            const bars = 72;
+            const bars = 60;
             const bw   = width / bars;
             for (let i = 0; i < bars; i++) {
                 const idx   = Math.floor(i * freqData.length / bars);
                 const val   = freqData[idx] / 255;
-                const bh    = val * height * 0.38;
-                const alpha = val * 0.45;
-                const hue   = i / bars;
-                let r = hue < 0.5 ? 139 + (212-139)*(hue/0.5) : 212*(1-(hue-0.5)/0.5);
-                let g = hue < 0.5 ? 175*(hue/0.5)             : 175*(1-(hue-0.5)/0.5) + 212*((hue-0.5)/0.5);
-                let b = hue < 0.5 ? 0                          : 255*((hue-0.5)/0.5);
-                const col = `rgba(${Math.floor(r)},${Math.floor(g)},${Math.floor(b)},${alpha})`;
-                ctx.fillStyle = col;
-                ctx.fillRect(i * bw, height - bh, bw - 1, bh);
-                ctx.fillStyle = `rgba(${Math.floor(r)},${Math.floor(g)},${Math.floor(b)},${alpha*0.25})`;
-                ctx.fillRect(i * bw, 0, bw - 1, bh * 0.25);
+                const jitter = (Math.random() - 0.5) * 4; // rough/gritty jitter
+                const bh    = val * height * 0.45 + jitter;
+                const alpha = val * 0.5;
+                // Blood red → rust → orange based on position
+                const t = i / bars;
+                const r = Math.floor(196 + t * 30);
+                const g = Math.floor(t * 86);
+                const b = 0;
+                ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+                ctx.fillRect(i * bw, height - bh, bw - 2, bh);
+                // Dim mirror top
+                ctx.fillStyle = `rgba(${r},${g},${b},${alpha * 0.15})`;
+                ctx.fillRect(i * bw, 0, bw - 2, bh * 0.2);
             }
         }
 
@@ -813,64 +840,89 @@
             ctx.beginPath();
             ctx.lineWidth = 1.5;
             const grad = ctx.createLinearGradient(0, 0, width, 0);
-            grad.addColorStop(0,   'rgba(139,0,0,0.7)');
-            grad.addColorStop(0.5, 'rgba(212,175,55,0.7)');
-            grad.addColorStop(1,   'rgba(0,212,255,0.7)');
+            grad.addColorStop(0,    'rgba(196,26,0,0.8)');
+            grad.addColorStop(0.5,  'rgba(232,86,10,0.8)');
+            grad.addColorStop(1,    'rgba(184,168,144,0.6)');
             ctx.strokeStyle = grad;
             const sw = width / waveData.length;
             for (let i = 0; i < waveData.length; i++) {
-                const y = (height / 2) + ((waveData[i] / 128) - 1) * height * 0.18;
+                const y = (height / 2) + ((waveData[i] / 128) - 1) * height * 0.15;
                 if (i === 0) ctx.moveTo(0, y);
                 else         ctx.lineTo(i * sw, y);
             }
             ctx.stroke();
         }
 
-        function drawFlash() {
+        function drawFlame() {
+            // Ambient ember glow at bottom
+            const g = ctx.createLinearGradient(0, height * 0.7, 0, height);
+            g.addColorStop(0, 'rgba(0,0,0,0)');
+            g.addColorStop(1, `rgba(100,10,0,${0.15 + bassEnergy * 0.25})`);
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, width, height);
+
             if (kickFlash > 0.01) {
-                const g = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.8);
-                g.addColorStop(0, `rgba(139,0,0,${kickFlash * 0.14})`);
-                g.addColorStop(1, 'rgba(0,0,0,0)');
-                ctx.fillStyle = g;
+                const gr = ctx.createRadialGradient(width/2, height, 0, width/2, height * 0.3, width * 0.9);
+                gr.addColorStop(0, `rgba(196,26,0,${kickFlash * 0.18})`);
+                gr.addColorStop(0.5, `rgba(232,86,10,${kickFlash * 0.07})`);
+                gr.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = gr;
                 ctx.fillRect(0, 0, width, height);
-                kickFlash *= 0.83;
+                kickFlash *= 0.80;
+                spawnEmbers(6, true);
             }
             if (snareFlash > 0.01) {
-                const g = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.55);
-                g.addColorStop(0, `rgba(212,175,55,${snareFlash * 0.09})`);
-                g.addColorStop(1, 'rgba(0,0,0,0)');
-                ctx.fillStyle = g;
+                const gr = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.5);
+                gr.addColorStop(0, `rgba(220,120,40,${snareFlash * 0.12})`);
+                gr.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = gr;
                 ctx.fillRect(0, 0, width, height);
-                snareFlash *= 0.78;
+                snareFlash *= 0.75;
             }
         }
 
         // ── MAIN LOOP ─────────────────────────────────────────────────
         function resize() {
-            width = canvas.width = window.innerWidth;
+            width  = canvas.width  = window.innerWidth;
             height = canvas.height = window.innerHeight;
-            initParticles();
+            embers = [];
         }
 
         function animate() {
-            ctx.clearRect(0, 0, width, height);
+            // Fade trail instead of full clear — burn-in effect
+            ctx.fillStyle = 'rgba(0,0,0,0.82)';
+            ctx.fillRect(0, 0, width, height);
+
             const { freqData, waveData } = getAudioData();
 
             let bassSum = 0;
-            for (let i = 0; i < 8; i++) bassSum += freqData[i] / 255;
-            bassEnergy = bassSum / 8;
+            for (let i = 0; i < 10; i++) bassSum += freqData[i] / 255;
+            bassEnergy = bassSum / 10;
+
+            // Passive ember spawn
+            if (Math.random() < 0.3 + bassEnergy * 0.7) spawnEmbers(1, false);
 
             drawFreqBars(freqData);
-            drawFlash();
-            connect();
-            for (const p of particles) { p.update(); p.draw(); }
+            drawFlame();
+
+            // Update & draw embers
+            for (let i = embers.length - 1; i >= 0; i--) {
+                embers[i].update();
+                embers[i].draw();
+                if (embers[i].dead) embers.splice(i, 1);
+            }
+            // Cap ember count
+            if (embers.length > 300) embers.splice(0, embers.length - 300);
+
             drawWaveform(waveData);
+            drawGrain();
             requestAnimationFrame(animate);
         }
 
         window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
         window.addEventListener('mouseout',  () => { mouse.x = null; mouse.y = null; });
         window.addEventListener('resize', resize);
+        buildGrain();
         resize();
         animate();
     </script>
