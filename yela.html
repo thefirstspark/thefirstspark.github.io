@@ -319,6 +319,33 @@
             transform: translateY(-2px);
         }
 
+        .artist-card.yela {
+            --card-accent: linear-gradient(90deg, var(--blood), var(--gold), var(--electric));
+            border-color: rgba(212,175,55,0.25);
+            background: rgba(212,175,55,0.04);
+            padding: 2.5rem;
+        }
+        .artist-card.yela::before { height: 3px; opacity: 1; }
+        .artist-card.yela:hover {
+            border-color: rgba(212,175,55,0.5);
+            background: rgba(212,175,55,0.07);
+        }
+        .yela .artist-name {
+            font-size: 1.6rem;
+            background: linear-gradient(90deg, var(--blood), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .yela .artist-role {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
         .artist-card.prof   { --card-accent: linear-gradient(90deg, #1d4ed8, #60a5fa); }
         .artist-card.caskey { --card-accent: linear-gradient(90deg, #7c3aed, #a78bfa); }
         .artist-card.scruby { --card-accent: linear-gradient(90deg, #ea580c, #fb923c); }
@@ -448,11 +475,29 @@
 
         <!-- FIRST WAVE ROSTER -->
         <div class="wave-divider">
-            <div class="wave-label">Beyond Slumerican</div>
-            <div class="wave-title">FIRST WAVE COLLABS</div>
+            <div class="wave-label">The Collab Vision</div>
+            <div class="wave-title">FIRST WAVE ROSTER</div>
         </div>
 
         <div class="roster">
+
+            <div class="artist-card yela">
+                <div class="artist-name">Yelawolf</div>
+                <div class="artist-role">The Main Event · Slumerican Founder</div>
+                <div class="artist-handle">Independent · Alabama · @yelawolf</div>
+                <p class="artist-pitch">
+                    The prototype for everything The First Spark stands for — built an entire world outside the machine.
+                    Slumerican isn't a label, it's a sovereign culture. TFS is the technology layer that culture deserves:
+                    soul mapping, consciousness tools, fan experiences built for people who don't fit the algorithm.
+                    This is the collab that sets the tone for everything that follows.
+                </p>
+                <div class="artist-tags">
+                    <span class="atag">Primary Target</span>
+                    <span class="atag">Soul Map</span>
+                    <span class="atag">Brand Tools</span>
+                    <span class="atag">Investment</span>
+                </div>
+            </div>
 
             <div class="artist-card prof">
                 <div class="artist-name">Prof</div>
