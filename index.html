@@ -472,7 +472,8 @@
                 <div class="soul-map-section" id="soul-map-section">
                     <h3>Create Your Soul Map</h3>
                     <p>Discover your astrological blueprint and spiritual essence.</p>
-                    <button class="btn btn-primary" onclick="alert('Soul map creator coming soon!')">Begin Soul Mapping</button>
+                    <p style="margin:10px 0; font-size:.9em; color:#f59e0b; font-weight:bold;">$22 · One-time</p>
+                    <button class="btn btn-primary" type="button" id="hub-soul-map-btn">Get Your Soul Map — $22</button>
                 </div>
             </div>
 
@@ -654,5 +655,29 @@
         // Init on load
         init();
     </script>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const hubStripe = Stripe('pk_live_51Sn0uHRtKwZqPK6C0t8A53x1iu4gSAllwzSSu0YLLiSc9LF2y5yMTBUxMRk4ROn5jSH7FSwPxIF7YCM726OBZLRl00NHmeGDe5');
+    const hubBtn = document.getElementById('hub-soul-map-btn');
+    if (hubBtn) {
+        hubBtn.addEventListener('click', function () {
+            hubBtn.disabled = true;
+            hubBtn.textContent = '⟳  Opening secure checkout…';
+            hubStripe.redirectToCheckout({
+                lineItems: [{ price: 'price_1T78SfRtKwZqPK6C0jqyZ2pd', quantity: 1 }],
+                mode: 'payment',
+                successUrl: 'https://thefirstspark.github.io/soul-maps/success.html',
+                cancelUrl: window.location.href
+            }).then(function (result) {
+                if (result.error) {
+                    hubBtn.disabled = false;
+                    hubBtn.textContent = 'Get Your Soul Map — $22';
+                    alert(result.error.message);
+                }
+            });
+        });
+    }
+</script>
 </body>
 </html>
