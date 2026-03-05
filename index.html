@@ -434,6 +434,27 @@
         .cat-nebula .cat-cta { color: var(--nebula); }
         .cat-cyan   .cat-cta { color: var(--cyan);   }
         .cat-rose   .cat-cta { color: var(--rose);   }
+        .cat-green  .cat-cta { color: var(--green);  }
+        .cat-blue   .cat-cta { color: var(--blue);   }
+        .cat-flame  .cat-cta { color: var(--flame);  }
+        .cat-earth  .cat-cta { color: #a3e635;       }
+
+        .cat-green::before  { background: var(--green); }
+        .cat-blue::before   { background: var(--blue);  }
+        .cat-flame::before  { background: var(--flame); }
+        .cat-earth::before  { background: #a3e635;      }
+
+        .cat-green  .cat-niche { color: var(--green); }
+        .cat-blue   .cat-niche { color: var(--blue);  }
+        .cat-flame  .cat-niche { color: var(--flame); }
+        .cat-earth  .cat-niche { color: #a3e635;      }
+
+        .cat-green  .pill { border-color: rgba(132,204,22,.4);  color: var(--green); }
+        .cat-blue   .pill { border-color: rgba(59,130,246,.4);  color: var(--blue);  }
+        .cat-flame  .pill { border-color: rgba(249,115,22,.4);  color: var(--flame); }
+        .cat-earth  .pill { border-color: rgba(163,230,53,.4);  color: #a3e635;      }
+
+        .cat-grid { grid-template-columns: repeat(3, 1fr); }
 
         /* ─── SOUL MAPS ─── */
         #soul-maps {
@@ -811,7 +832,8 @@
         /* ─── RESPONSIVE ─── */
         @media (max-width: 900px) {
             .origin-grid, .invest-grid, .sm-grid { grid-template-columns: 1fr; gap: 40px; }
-            .cat-grid, .price-grid { grid-template-columns: 1fr; }
+            .cat-grid  { grid-template-columns: 1fr !important; }
+        .price-grid { grid-template-columns: 1fr; }
             .tract-grid { grid-template-columns: repeat(2, 1fr); }
             .pn-row { grid-template-columns: repeat(3, 1fr); }
         }
@@ -933,57 +955,79 @@
         <p class="sec-label">◈ The Platform</p>
         <h2 class="sec-title">Everything We Build,<br>Categorized</h2>
         <p class="platform-intro">
-            The First Spark is not one thing. It is a constellation — tools, maps, community,
-            and emerging AI built across four distinct niches. Find yours.
+            The First Spark is not one thing. It is a constellation — eight distinct niches
+            spanning digital tools, sacred cartography, live community, physical land, Web3,
+            and emerging AI. Find where you belong.
         </p>
 
         <div class="cat-grid">
 
+            <!-- 01 · Sparkverse -->
             <div class="cat cat-spark">
                 <div class="cat-niche">Niche 01 · Consciousness Technology</div>
                 <span class="cat-icon">⚡</span>
                 <div class="cat-title">The Sparkverse</div>
                 <div class="cat-desc">
-                    50+ interactive tools for people who understand that reality is programmable.
-                    Soul trackers. Pattern recognizers. Oracle systems. Sigil generators.
-                    Gamified awakening with protocol frameworks and sovereignty builders.
-                    This is not another meditation app.
+                    50+ interactive tools for reality programmers. Soul trackers, pattern recognizers,
+                    oracle systems, sigil generators, sovereignty builders, and gamified awakening
+                    frameworks. Not another meditation app — an operating system for consciousness.
                 </div>
                 <div class="tag-row">
                     <span class="pill">50+ Tools</span>
                     <span class="pill">Interactive</span>
-                    <span class="pill">Reality Programming</span>
                     <span class="pill">Gamified</span>
+                    <span class="pill">Reality Programming</span>
                 </div>
                 <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" class="cat-cta">Enter the Sparkverse →</a>
             </div>
 
+            <!-- 02 · Soul Maps -->
             <a href="#soul-maps" class="cat cat-nebula">
                 <div class="cat-niche">Niche 02 · Soul Cartography</div>
                 <span class="cat-icon">🗺</span>
                 <div class="cat-title">Soul Maps</div>
                 <div class="cat-desc">
-                    Personalized soul maps decoded by hand — your birthdate, full name,
-                    astrology, Chinese zodiac, and personal year cycle. Life Path. Expression.
-                    Soul Urge. Personality. The numbers know. Created by KJP, the First Spark herself.
+                    Personalized numerological blueprints decoded by hand by KJP — delivered on
+                    your own personal URL. Life Path, Expression, Soul Urge, Personality,
+                    Personal Year, astrology, and Chinese zodiac. The numbers know.
                 </div>
                 <div class="tag-row">
-                    <span class="pill">Numerology</span>
-                    <span class="pill">Astrology</span>
-                    <span class="pill">Personalized</span>
                     <span class="pill">$22</span>
+                    <span class="pill">Personal URL</span>
+                    <span class="pill">Numerology</span>
+                    <span class="pill">Hand-Decoded</span>
                 </div>
                 <span class="cat-cta">Get Your Soul Map →</span>
             </a>
 
-            <a href="https://whop.com/sparkverse-511c/the-players-lounge/" target="_blank" class="cat cat-cyan">
-                <div class="cat-niche">Niche 03 · Community &amp; Protocol</div>
+            <!-- 03 · Notion Member Hub -->
+            <div class="cat cat-cyan">
+                <div class="cat-niche">Niche 03 · Knowledge &amp; Practice</div>
+                <span class="cat-icon">◈</span>
+                <div class="cat-title">Notion Member Hub</div>
+                <div class="cat-desc">
+                    The full First Spark knowledge library inside Notion — ebooks, ritual guides,
+                    consciousness protocols, and a growing archive of content built for seekers
+                    who want depth. Your home base between tools and community.
+                </div>
+                <div class="tag-row">
+                    <span class="pill">Ebooks</span>
+                    <span class="pill">Rituals</span>
+                    <span class="pill">Protocols</span>
+                    <span class="pill">Deep Archive</span>
+                </div>
+                <span class="cat-cta">Access the Hub →</span>
+            </div>
+
+            <!-- 04 · Community -->
+            <a href="https://whop.com/sparkverse-511c/the-players-lounge/" target="_blank" class="cat cat-green">
+                <div class="cat-niche">Niche 04 · Community &amp; Protocol</div>
                 <span class="cat-icon">◇</span>
                 <div class="cat-title">Players Lounge</div>
                 <div class="cat-desc">
-                    The private community for builders doing the actual work. Daily protocols.
-                    Consciousness sprints. Shared soul maps. Discord access. 1,000+ members.
-                    This is not a passive community — it is an operating system for transformation.
+                    The private community for builders doing the actual work. Daily consciousness
+                    protocols, sprints, shared soul maps, and Discord access. 1,000+ members
+                    who chose this over a thousand other platforms.
                 </div>
                 <div class="tag-row">
                     <span class="pill">$33/mo</span>
@@ -994,20 +1038,79 @@
                 <span class="cat-cta">Join the Players Lounge →</span>
             </a>
 
+            <!-- 05 · NFTs -->
+            <div class="cat cat-blue">
+                <div class="cat-niche">Niche 05 · Digital Assets · Web3</div>
+                <span class="cat-icon">◆</span>
+                <div class="cat-title">First Spark NFTs</div>
+                <div class="cat-desc">
+                    Consciousness-encoded digital collectibles from the First Spark universe.
+                    Sigils, soul map art, and genesis artifacts — each one carrying the frequency
+                    of the moment it was made. Ownership is a transmission.
+                </div>
+                <div class="tag-row">
+                    <span class="pill">NFTs</span>
+                    <span class="pill">Sigil Art</span>
+                    <span class="pill">Soul Map Collectibles</span>
+                    <span class="pill">Web3</span>
+                </div>
+                <span class="cat-cta">Explore NFTs →</span>
+            </div>
+
+            <!-- 06 · Mobile Sparkstation -->
+            <div class="cat cat-flame">
+                <div class="cat-niche">Niche 06 · Mobile Experience</div>
+                <span class="cat-icon">✦</span>
+                <div class="cat-title">Mobile Sparkstation</div>
+                <div class="cat-desc">
+                    The First Spark in your pocket. The Sparkstation brings consciousness tools,
+                    daily check-ins, soul map access, and oracle pulls to mobile — designed for
+                    the seeker who is always moving.
+                </div>
+                <div class="tag-row">
+                    <span class="pill">Mobile</span>
+                    <span class="pill">Daily Check-Ins</span>
+                    <span class="pill">On-the-Go</span>
+                    <span class="pill">Coming Soon</span>
+                </div>
+                <span class="cat-cta">Get Notified →</span>
+            </div>
+
+            <!-- 07 · Earthship Community -->
+            <div class="cat cat-earth">
+                <div class="cat-niche">Niche 07 · Physical Community · Land</div>
+                <span class="cat-icon">🌿</span>
+                <div class="cat-title">Hocking Hills Earthship</div>
+                <div class="cat-desc">
+                    Where the digital meets the dirt. The First Spark's physical home base —
+                    an earthship community in Hocking Hills, Ohio. Retreats, gatherings, and
+                    land-based consciousness work for people ready to go beyond the screen.
+                </div>
+                <div class="tag-row">
+                    <span class="pill">Earthship</span>
+                    <span class="pill">Hocking Hills</span>
+                    <span class="pill">Retreats</span>
+                    <span class="pill">Land-Based</span>
+                </div>
+                <span class="cat-cta">Learn More →</span>
+            </div>
+
+            <!-- 08 · AI -->
             <div class="cat cat-rose">
-                <div class="cat-niche">Niche 04 · AI Consciousness · Coming 2026</div>
+                <div class="cat-niche">Niche 08 · AI Consciousness · Coming 2026</div>
                 <span class="cat-icon">🤖</span>
                 <div class="cat-title">Consciousness AI</div>
                 <div class="cat-desc">
-                    A standalone AI trained exclusively on First Spark frameworks. Not ChatGPT
+                    A standalone AI trained exclusively on First Spark frameworks — not ChatGPT
                     with a spiritual hat. Personalized soul map analysis, pattern recognition for
-                    your specific journey. This is what the $200K raise builds.
+                    your specific journey, and guidance built from the ground up for awakening.
+                    This is what the $200K raise builds.
                 </div>
                 <div class="tag-row">
                     <span class="pill">Standalone AI</span>
                     <span class="pill">Soul Map Analysis</span>
-                    <span class="pill">Coming 2026</span>
                     <span class="pill">$200K Raise</span>
+                    <span class="pill">Coming 2026</span>
                 </div>
                 <a href="#invest" class="cat-cta">Learn About the Raise →</a>
             </div>
