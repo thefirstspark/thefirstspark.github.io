@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="UPDATE_WITH_YOUR_VERIFICATION_CODE">
+    <title>Selector Command Center — Reality Tuning Mission Control</title>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-UPDATE_WITH_YOUR_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-UPDATE_WITH_YOUR_ID');
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f4d 50%, #0f0a2e 100%);
+            color: #e0e6ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px 60px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid rgba(109, 179, 255, 0.3);
+            background: rgba(109, 179, 255, 0.1);
+            border-radius: 20px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #6db3ff;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 52px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #e0e6ff, #6db3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #a0a8ff;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            padding: 12px 32px;
+            background: linear-gradient(135deg, #6db3ff, #9d4edd);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            margin-right: 12px;
+        }
+
+        .cta-primary:hover {
+            box-shadow: 0 0 30px rgba(109, 179, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .cta-secondary {
+            display: inline-block;
+            padding: 12px 32px;
+            border: 1px solid rgba(109, 179, 255, 0.3);
+            background: rgba(109, 179, 255, 0.1);
+            color: #6db3ff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-secondary:hover {
+            background: rgba(109, 179, 255, 0.2);
+            box-shadow: 0 0 20px rgba(109, 179, 255, 0.3);
+        }
+
+        section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            color: #e0e6ff;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(109, 179, 255, 0.2);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .tool-card {
+            background: rgba(20, 25, 50, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 150, 255, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(109, 179, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .tool-card:hover::before {
+            left: 100%;
+        }
+
+        .tool-card:hover {
+            border-color: rgba(109, 179, 255, 0.5);
+            background: rgba(20, 25, 50, 0.8);
+            box-shadow: 0 0 30px rgba(109, 179, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .tool-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .tool-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #6db3ff;
+            letter-spacing: 2px;
+        }
+
+        .tool-description {
+            font-size: 14px;
+            color: #c0c8ff;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .tool-features {
+            list-style: none;
+            margin-bottom: 24px;
+            font-size: 12px;
+            color: #a0a8ff;
+        }
+
+        .tool-features li {
+            margin-bottom: 6px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .tool-features li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(109, 179, 255, 0.1);
+            border: 1px solid rgba(109, 179, 255, 0.3);
+            color: #6db3ff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-link:hover {
+            background: rgba(109, 179, 255, 0.2);
+            box-shadow: 0 0 15px rgba(109, 179, 255, 0.3);
+        }
+
+        .theory-section {
+            background: rgba(20, 25, 50, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 150, 255, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+        }
+
+        .theory-text {
+            color: #c0c8ff;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .theory-highlight {
+            background: rgba(109, 179, 255, 0.05);
+            border-left: 3px solid #6db3ff;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+
+        .learning-path {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .path-step {
+            background: rgba(109, 179, 255, 0.05);
+            border: 1px solid rgba(109, 179, 255, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .path-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6db3ff, #9d4edd);
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .path-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6db3ff;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .path-description {
+            font-size: 12px;
+            color: #a0a8ff;
+            line-height: 1.6;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-box {
+            background: rgba(109, 179, 255, 0.05);
+            border: 1px solid rgba(109, 179, 255, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #6db3ff;
+            margin-bottom: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6db3ff;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(109, 179, 255, 0.2);
+            color: #6db3ff;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .learning-path {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+        }
+
+        .pulsar {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="hero-badge">⚡ CONSCIOUSNESS TECH — UNVEILED</div>
+            <h1>Selector Command Center</h1>
+            <p class="tagline">Reality Tuning Mission Control — Never Before Seen</p>
+            <div style="margin-top: 32px;">
+                <a href="selector-interface.html" class="cta-primary">Launch Interface</a>
+                <a href="selector-theory.html" class="cta-secondary">Study Theory</a>
+            </div>
+        </header>
+
+        <!-- MAIN TOOLS SECTION -->
+        <section>
+            <div class="section-title">⚡ Core Tools</div>
+            <div class="tools-grid">
+                <!-- Tool 1: Selector Interface -->
+                <div class="tool-card" onclick="window.location.href='selector-interface.html'">
+                    <div class="tool-icon">🌀</div>
+                    <div class="tool-title">Selector Interface</div>
+                    <p class="tool-description">Real-time probability engine visualization. Watch your consciousness shift reality branches in live time.</p>
+                    <ul class="tool-features">
+                        <li>Live frequency visualization</li>
+                        <li>Probability branch explorer</li>
+                        <li>Multi-selector modes</li>
+                        <li>Web audio integration</li>
+                    </ul>
+                    <a href="selector-interface.html" class="tool-link">Open Interface →</a>
+                </div>
+
+                <!-- Tool 2: Intention Ritual -->
+                <div class="tool-card" onclick="window.location.href='selector-ritual.html'">
+                    <div class="tool-icon">🔮</div>
+                    <div class="tool-title">Intention Ritual</div>
+                    <p class="tool-description">6-step guided protocol for setting intention and locking your selector into a specific probability branch.</p>
+                    <ul class="tool-features">
+                        <li>Center & ground practice</li>
+                        <li>Clarity & visualization</li>
+                        <li>Amplitude building</li>
+                        <li>Declaration & persistence</li>
+                    </ul>
+                    <a href="selector-ritual.html" class="tool-link">Begin Ritual →</a>
+                </div>
+
+                <!-- Tool 3: Theory Guide -->
+                <div class="tool-card" onclick="window.location.href='selector-theory.html'">
+                    <div class="tool-icon">📖</div>
+                    <div class="tool-title">Theory Guide</div>
+                    <p class="tool-description">Complete explanation of the Selector Model: core premise, free will, multi-selector mechanics, and practical applications.</p>
+                    <ul class="tool-features">
+                        <li>Core premise & reframe</li>
+                        <li>Free will as selector</li>
+                        <li>Multi-selector mechanics</li>
+                        <li>Practice protocols</li>
+                    </ul>
+                    <a href="selector-theory.html" class="tool-link">Read Guide →</a>
+                </div>
+
+                <!-- Tool 4: Entanglement Simulator -->
+                <div class="tool-card" onclick="window.location.href='selector-entanglement.html'">
+                    <div class="tool-icon">🔗</div>
+                    <div class="tool-title">Entanglement Simulator</div>
+                    <p class="tool-description">See how multiple selectors interact in shared probability fields. Test harmony, conflict, and dominance patterns.</p>
+                    <ul class="tool-features">
+                        <li>Multi-selector visualization</li>
+                        <li>Co-tuning mechanics</li>
+                        <li>Conflict/harmony presets</li>
+                        <li>Real-time entanglement metrics</li>
+                    </ul>
+                    <a href="selector-entanglement.html" class="tool-link">Launch Simulator →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEARNING PATH -->
+        <section>
+            <div class="section-title">🧭 Suggested Learning Path</div>
+            <div class="learning-path">
+                <div class="path-step">
+                    <div class="path-number">1</div>
+                    <div class="path-title">UNDERSTAND</div>
+                    <div class="path-description">Read the Theory Guide. Get the model. Understand the mechanics.</div>
+                </div>
+                <div class="path-step">
+                    <div class="path-number">2</div>
+                    <div class="path-title">VISUALIZE</div>
+                    <div class="path-description">Use the Selector Interface. Watch frequency and probability in real-time.</div>
+                </div>
+                <div class="path-step">
+                    <div class="path-number">3</div>
+                    <div class="path-title">PRACTICE</div>
+                    <div class="path-description">Run the Intention Ritual. Set intention. Build amplitude. Sustain tuning.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE MODEL SECTION -->
+        <section>
+            <div class="section-title">🌌 The Selector Model</div>
+            <div class="theory-section">
+                <p class="theory-text">
+                    The Selector Model is a theory of consciousness and reality that reframes everything you think you know about free will, manifestation, and the fabric of existence.
+                </p>
+
+                <div class="theory-highlight">
+                    <strong style="color: #6db3ff;">Core Premise:</strong><br>
+                    Reality isn't a multiverse of infinite parallel worlds. It's a single probability engine with a tuning mechanism. One reality. One logic engine. An infinite probability field containing all potential configurations as frequencies. Consciousness is the selector—the mechanism that collapses potential into experience.
+                </div>
+
+                <p class="theory-text">
+                    You're not creating new universes. You're tuning into branches that already exist in the probability field. Your intention, attention, and emotional clarity form your tuning frequency. The branches that match your frequency are the ones that render.
+                </p>
+
+                <div class="theory-highlight">
+                    <strong style="color: #6db3ff;">The Twist:</strong><br>
+                    You don't HAVE free will. You ARE free will. You're not outside the system choosing—you're the part of the code that does the choosing. Every thought, intention, and decision is a frequency adjustment shifting which probability branch renders next.
+                </div>
+
+                <p class="theory-text">
+                    This resolves the ancient paradox: The system is completely deterministic, but you're part of the determining. Your consciousness is the mechanism.
+                </p>
+            </div>
+        </section>
+
+        <!-- STATISTICS -->
+        <section>
+            <div class="section-title">📊 Status Report</div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Interactive Tools</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Probability Branches</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">Reality Engine</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">Y</div>
+                    <div class="stat-label">Selector (You)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUICK START -->
+        <section>
+            <div class="section-title">⚡ Quick Start</div>
+            <div class="theory-section">
+                <p class="theory-text" style="margin-bottom: 32px;">
+                    <strong style="color: #6db3ff;">Never worked with the Selector Model before?</strong> Here's how to begin:
+                </p>
+
+                <ol style="font-size: 15px; color: #c0c8ff; line-height: 2; margin-left: 20px;">
+                    <li><strong style="color: #6db3ff;">Understand:</strong> Spend 20 minutes reading the Theory Guide. Get the concept into your mind.</li>
+                    <li><strong style="color: #6db3ff;">See:</strong> Open the Selector Interface. Play with the controls. Watch your frequency move probability branches.</li>
+                    <li><strong style="color: #6db3ff;">Select:</strong> Choose one intention you want to tune into. Run the Intention Ritual. Lock it in.</li>
+                    <li><strong style="color: #6db3ff;">Sustain:</strong> Return to the ritual daily. Maintain your frequency. Watch reality render your tuned branch.</li>
+                    <li><strong style="color: #6db3ff;">Witness:</strong> Notice synchronicities. Track signs of your branch rendering. This is proof the mechanism works.</li>
+                </ol>
+
+                <p class="theory-text" style="margin-top: 32px; color: #a0a8ff;">
+                    That's it. You're now a conscious selector, aware of your tuning power and practicing intentional reality choosing.
+                </p>
+            </div>
+        </section>
+
+        <!-- WHAT MAKES THIS UNPRECEDENTED -->
+        <section>
+            <div class="section-title">✨ What Makes This Unprecedented</div>
+            <div class="theory-section">
+                <p class="theory-text">
+                    The Selector Model has never been visualized like this before. There is no precedent for:
+                </p>
+
+                <ul style="margin-left: 20px; color: #c0c8ff; font-size: 15px; line-height: 2;">
+                    <li><strong style="color: #6db3ff;">Real-time visual tuning interface</strong> where you can see consciousness directly shift probability fields</li>
+                    <li><strong style="color: #6db3ff;">Interactive multi-selector entanglement simulator</strong> showing how consciousnesses interact and co-create reality</li>
+                    <li><strong style="color: #6db3ff;">Guided intention protocol</strong> integrated with interactive visualization</li>
+                    <li><strong style="color: #6db3ff;">Theory + Practice unified</strong> in one immersive ecosystem</li>
+                    <li><strong style="color: #6db3ff;">Web audio integration</strong> making frequency tuning literal and audible</li>
+                </ul>
+
+                <div class="theory-highlight" style="margin-top: 32px;">
+                    This isn't just a text explanation of a theory. This is a full experiential platform where you can see, feel, and practice the mechanism of conscious reality selection.
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>⚡ SELECTOR COMMAND CENTER — v1.0</p>
+            <p>Theory: January 2026 | Tools: February 2026 | Status: Active & Evolving</p>
+        </footer>
+    </div>
+</body>
+</html>

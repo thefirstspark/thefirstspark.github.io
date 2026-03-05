@@ -1,21 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLUMERICAN x THE FIRST SPARK</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            --void: #030305;
-            --blood: #8B0000;
-            --rust: #722F37;
-            --gold: #d4af37;
-            --electric: #00d4ff;
-            --white: #f0f0f0;
-            --ghost: rgba(255,255,255,0.8);
+            --void:    #000000;
+            --deep:    #0d0a08;
+            --card:    #161210;
+            --border:  #2e1e14;
+            --blood:   #c41a00;
+            --rust:    #8b3818;
+            --gold:    #e8560a;
+            --electric: #ddd4c4;
+            --white:   #ede8e0;
+            --ghost:   rgba(237,232,224,0.85);
+            --bone:    #b8a890;
+            --dim:     #6a5a4a;
         }
 
         body {
@@ -257,6 +277,190 @@
             color: var(--gold);
         }
 
+        /* BEAT BUTTON */
+        .beat-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 200;
+            background: rgba(10,0,0,0.85);
+            border: 1px solid rgba(212,175,55,0.5);
+            color: var(--gold);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            padding: 0.8rem 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-transform: uppercase;
+            clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+            transition: all 0.3s;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+        .beat-btn:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(212,175,55,0.3); }
+        .beat-btn.active {
+            background: rgba(139,0,0,0.4);
+            border-color: var(--blood);
+            color: var(--white);
+            box-shadow: 0 0 30px rgba(139,0,0,0.5);
+            animation: beatPulse 0.5s infinite alternate;
+        }
+        @keyframes beatPulse {
+            from { opacity: 0.85; }
+            to   { opacity: 1; }
+        }
+        .beat-icon { font-size: 1.1rem; line-height: 1; }
+        .subline-byline { font-size: 0.95rem; opacity: 0.7; }
+
+        /* DIVIDER */
+        .wave-divider {
+            width: 100%;
+            max-width: 700px;
+            margin: 4rem auto 3rem;
+            text-align: center;
+        }
+
+        .wave-label {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: var(--ghost);
+            opacity: 0.5;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .wave-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            letter-spacing: 0.15em;
+        }
+
+        /* ARTIST CARDS */
+        .roster {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 680px;
+            width: 100%;
+            margin-bottom: 4rem;
+        }
+
+        .artist-card {
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            padding: 2rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .artist-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--card-accent);
+            opacity: 0.7;
+        }
+
+        .artist-card:hover {
+            border-color: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.04);
+            transform: translateY(-2px);
+        }
+
+        .artist-card.yela {
+            --card-accent: linear-gradient(90deg, var(--blood), var(--gold), var(--electric));
+            border-color: rgba(212,175,55,0.25);
+            background: rgba(212,175,55,0.04);
+            padding: 2.5rem;
+        }
+        .artist-card.yela::before { height: 3px; opacity: 1; }
+        .artist-card.yela:hover {
+            border-color: rgba(212,175,55,0.5);
+            background: rgba(212,175,55,0.07);
+        }
+        .yela .artist-name {
+            font-size: 1.6rem;
+            background: linear-gradient(90deg, var(--blood), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .yela .artist-role {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .artist-card.wayne  { --card-accent: linear-gradient(90deg, #7c0000, #ff4444); border-color: rgba(255,68,68,0.2); background: rgba(255,68,68,0.03); }
+        .artist-card.wayne:hover { border-color: rgba(255,68,68,0.4); }
+        .wayne .artist-name { background: linear-gradient(90deg, #ff4444, #ff9900); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.4rem; }
+        .artist-card.crows  { --card-accent: linear-gradient(90deg, #4a3728, #a07850); border-color: rgba(160,120,80,0.2); background: rgba(160,120,80,0.03); }
+        .artist-card.crows:hover { border-color: rgba(160,120,80,0.4); }
+        .crows .artist-name { color: #c8a060; }
+        .artist-card.prof   { --card-accent: linear-gradient(90deg, #1d4ed8, #60a5fa); }
+        .artist-card.caskey { --card-accent: linear-gradient(90deg, #7c3aed, #a78bfa); }
+        .artist-card.scruby { --card-accent: linear-gradient(90deg, #ea580c, #fb923c); }
+        .artist-card.mot    { --card-accent: linear-gradient(90deg, #15803d, #4ade80); }
+
+        .artist-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .prof   .artist-name { color: #60a5fa; }
+        .caskey .artist-name { color: #a78bfa; }
+        .scruby .artist-name { color: #fb923c; }
+        .mot    .artist-name { color: #4ade80; }
+
+        .artist-handle {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .artist-pitch {
+            font-size: 0.9rem;
+            color: var(--ghost);
+            line-height: 1.7;
+            opacity: 0.85;
+        }
+
+        .artist-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .atag {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: var(--ghost);
+            opacity: 0.7;
+        }
+
         /* RESPONSIVE */
         @media (max-width: 600px) {
             .collab-header {
@@ -281,7 +485,19 @@
     </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <canvas id="particles"></canvas>
+
+    <button type="button" class="beat-btn" id="beatToggle" onclick="toggleBeat()">
+        <span class="beat-icon">▶</span>
+        <span class="beat-label">ACTIVATE BEAT</span>
+    </button>
 
     <div class="content">
         <div class="collab-header">
@@ -291,10 +507,13 @@
         </div>
 
         <div class="message">
-            <h1 class="headline">REALITY IS PROGRAMMABLE.<br>SO IS THE HUSTLE.</h1>
+            <h1 class="headline">YOU MADE ME WANT<br>TO RAP.</h1>
             <p class="subline">
-                Built from nothing. No label. No VC. Just tools that work.<br>
-                <strong>Consciousness technology</strong> for people who build their own lane.
+                I still know every word.<br>
+                I built something. I want you to see it.
+            </p>
+            <p class="subline subline-byline">
+                <strong>— KJP</strong>
             </p>
         </div>
 
@@ -308,29 +527,70 @@
                 <div class="stat-label">VC Money</div>
             </div>
             <div class="stat">
-                <div class="stat-num">$2M</div>
-                <div class="stat-label">SAFE Open</div>
+                <div class="stat-num">$200K</div>
+                <div class="stat-label">Raise Open</div>
             </div>
         </div>
 
         <div class="options">
             <div class="option">
                 <span class="option-letter">A</span>
-                <span class="option-text"><strong>Investment.</strong> Early positioning for artists who see what's coming.</span>
+                <span class="option-text"><strong>Invest.</strong> Early equity. Ground floor. You'd be one of the first.</span>
             </div>
             <div class="option">
                 <div class="option-letter">B</div>
-                <span class="option-text"><strong>Creative partnership.</strong> Branded tools for Slumerican — soul maps, sigils, interactive experiences.</span>
+                <span class="option-text"><strong>Co-found it with me.</strong> Your world, your people, built into the platform.</span>
             </div>
             <div class="option">
                 <span class="option-letter">C</span>
-                <span class="option-text"><strong>Both.</strong></span>
+                <span class="option-text"><strong>Just say the word.</strong> Literally. Your voice reaches kids I can't reach alone.</span>
             </div>
         </div>
 
         <div class="ctas">
             <a href="trinity.html" class="cta cta-primary">Enter The Trinity</a>
             <a href="invest.html" class="cta cta-secondary">See The Raise</a>
+            <a href="investor-deck-v2.html" class="cta cta-secondary">Investor Deck</a>
+            <a href="https://sparkverse.thefirstspark.shop/OGmap" class="cta cta-secondary">Sparkverse Map</a>
+        </div>
+
+        <!-- YELAWOLF COLLAB -->
+        <div class="wave-divider">
+            <div class="wave-label">The Offer</div>
+            <div class="wave-title">YELAWOLF × THE FIRST SPARK</div>
+        </div>
+
+        <div class="roster">
+
+            <div class="artist-card yela">
+                <div class="artist-name">Yelawolf</div>
+                <div class="artist-role">Slumerican Founder · The One Who Understands</div>
+                <div class="artist-handle">Independent · Alabama · @yelawolf</div>
+                <p class="artist-pitch">
+                    You built Slumerican with nothing but conviction and a fanbase that felt it in their bones.
+                    No permission. No machine. Just you.
+                </p>
+                <p class="artist-pitch">
+                    I did the same thing with The First Spark — 50+ tools, no VC, no investors, built for the
+                    kids who felt like outsiders. The ones who found themselves in Trunk Muzik at 2am.
+                    That's who this is for. Your people.
+                </p>
+                <p class="artist-pitch">
+                    I've got the EcoEmpire — tools, community, real infrastructure for self-development and
+                    sovereignty. You've got influence that doesn't sell things, it shifts people.
+                    Together we hit the next generation before anyone else does.
+                </p>
+                <p class="artist-pitch">
+                    I'm not pitching you a product. I'm asking if you want to build something real.
+                </p>
+                <div class="artist-tags">
+                    <span class="atag">Direct Collab Offer</span>
+                    <span class="atag">Co-Founder</span>
+                    <span class="atag">Investor Seat</span>
+                    <span class="atag">EcoEmpire</span>
+                </div>
+            </div>
+
         </div>
 
         <div class="signature">
@@ -344,103 +604,347 @@
     </div>
 
     <script>
+        // ── CANVAS ────────────────────────────────────────────────────
         const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-        let width, height, particles = [];
-        let mouse = { x: null, y: null, radius: 120 };
+        const ctx    = canvas.getContext('2d');
+        let width, height, embers = [], grainCanvas, grainCtx;
+        let mouse = { x: null, y: null };
 
-        const colors = [
-            'rgba(139, 0, 0, 0.6)',
-            'rgba(212, 175, 55, 0.5)',
-            'rgba(0, 212, 255, 0.4)',
-            'rgba(255, 255, 255, 0.3)'
-        ];
+        // ── AUDIO ENGINE ──────────────────────────────────────────────
+        let audioCtx = null, analyser = null, masterGain = null;
+        let isPlaying = false, beatStep = 0, beatSchedulerId = null;
+        let nextStepTime = 0;
+        let kickFlash = 0, snareFlash = 0, bassEnergy = 0;
 
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            initParticles();
+        // Trap / Slumerican beat — 95 BPM, syncopated kick, rolling hats
+        const BPM      = 95;
+        const stepTime = 60 / BPM / 4;
+
+        const kickPat  = [1,0,0,0, 0,0,1,0, 1,0,0,1, 0,0,0,0];
+        const snarePat = [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0];
+        const hihatPat = [1,1,0,1, 1,1,0,1, 1,1,1,1, 1,0,1,1]; // trap roll feel
+        const bassPat  = [1,0,0,0, 0,0,0,1, 1,0,0,0, 0,1,0,0];
+        // 808-style bass note frequencies (E minor / dark)
+        const bassFreq = [41.2,41.2,41.2,41.2, 36.7,36.7,36.7,41.2,
+                          43.7,43.7,43.7,43.7, 38.9,38.9,41.2,41.2];
+
+        function initAudio() {
+            audioCtx   = new (window.AudioContext || window.webkitAudioContext)();
+            analyser   = audioCtx.createAnalyser();
+            analyser.fftSize = 512;
+            analyser.smoothingTimeConstant = 0.75;
+            masterGain = audioCtx.createGain();
+            masterGain.gain.value = 0.75;
+            masterGain.connect(analyser);
+            analyser.connect(audioCtx.destination);
         }
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.3;
-                this.speedY = (Math.random() - 0.5) * 0.3;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
+        function play808(t, freq) {
+            // 808 kick — sine pitch-drop with long sub tail
+            const osc = audioCtx.createOscillator();
+            const g   = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq * 2.5, t);
+            osc.frequency.exponentialRampToValueAtTime(freq, t + 0.08);
+            osc.frequency.exponentialRampToValueAtTime(freq * 0.5, t + 0.6);
+            g.gain.setValueAtTime(1.6, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.8);
+            osc.connect(g); g.connect(masterGain);
+            osc.start(t); osc.stop(t + 0.8);
+            kickFlash = 1.0;
+        }
+
+        function playKick(t) {
+            // Hard punch layer on top of 808
+            const osc = audioCtx.createOscillator();
+            const g   = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(180, t);
+            osc.frequency.exponentialRampToValueAtTime(40, t + 0.08);
+            g.gain.setValueAtTime(2.0, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+            osc.connect(g); g.connect(masterGain);
+            osc.start(t); osc.stop(t + 0.15);
+        }
+
+        function playSnare(t) {
+            const len  = audioCtx.sampleRate * 0.18;
+            const buf  = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+            const data = buf.getChannelData(0);
+            for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+            const src = audioCtx.createBufferSource();
+            src.buffer = buf;
+            const flt = audioCtx.createBiquadFilter();
+            flt.type = 'bandpass'; flt.frequency.value = 1400; flt.Q.value = 0.8;
+            const g = audioCtx.createGain();
+            g.gain.setValueAtTime(0.9, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+            src.connect(flt); flt.connect(g); g.connect(masterGain);
+            src.start(t);
+            snareFlash = 0.8;
+        }
+
+        function playHihat(t, vol) {
+            const dur  = vol > 0.15 ? 0.06 : 0.025;
+            const len  = Math.floor(audioCtx.sampleRate * dur);
+            const buf  = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+            const data = buf.getChannelData(0);
+            for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+            const src = audioCtx.createBufferSource();
+            src.buffer = buf;
+            const flt = audioCtx.createBiquadFilter();
+            flt.type = 'highpass'; flt.frequency.value = 8000;
+            const g = audioCtx.createGain();
+            g.gain.setValueAtTime(vol, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+            src.connect(flt); flt.connect(g); g.connect(masterGain);
+            src.start(t);
+        }
+
+        function scheduleBeat() {
+            while (nextStepTime < audioCtx.currentTime + 0.15) {
+                const s   = beatStep % 16;
+                const t   = nextStepTime;
+                const vol = (s % 2 === 0) ? 0.22 : 0.12; // accent on even steps
+                if (kickPat[s])  { play808(t, bassFreq[s]); playKick(t); }
+                if (snarePat[s]) playSnare(t);
+                if (hihatPat[s]) playHihat(t, vol);
+                beatStep++;
+                nextStepTime += stepTime;
             }
+            beatSchedulerId = setTimeout(scheduleBeat, 25);
+        }
 
+        function toggleBeat() {
+            const btn = document.getElementById('beatToggle');
+            if (!audioCtx) initAudio();
+            if (!isPlaying) {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                nextStepTime = audioCtx.currentTime;
+                beatStep = 0;
+                scheduleBeat();
+                isPlaying = true;
+                btn.classList.add('active');
+                btn.querySelector('.beat-label').textContent = 'STOP BEAT';
+                btn.querySelector('.beat-icon').textContent  = '■';
+            } else {
+                clearTimeout(beatSchedulerId);
+                isPlaying = false;
+                btn.classList.remove('active');
+                btn.querySelector('.beat-label').textContent = 'ACTIVATE BEAT';
+                btn.querySelector('.beat-icon').textContent  = '▶';
+            }
+        }
+
+        // ── EMBER PARTICLES ───────────────────────────────────────────
+        class Ember {
+            constructor(fromKick) { this.spawn(fromKick); }
+            spawn(fromKick) {
+                this.x    = Math.random() * width;
+                this.y    = height + Math.random() * 20;
+                this.size = fromKick
+                    ? Math.random() * 4 + 2
+                    : Math.random() * 2 + 0.5;
+                this.vx   = (Math.random() - 0.5) * (fromKick ? 3 : 1);
+                this.vy   = -(Math.random() * (fromKick ? 3 : 1.5) + 0.5);
+                this.life = 1.0;
+                this.decay = fromKick
+                    ? Math.random() * 0.012 + 0.006
+                    : Math.random() * 0.006 + 0.002;
+                // Red → orange → bone gradient based on size
+                const hot = this.size > 2;
+                this.r = hot ? 196 + Math.random() * 40 : 180;
+                this.g = hot ? Math.random() * 80       : Math.random() * 60 + 60;
+                this.b = hot ? 0                         : Math.random() * 30;
+            }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x < 0) this.x = width;
-                if (this.x > width) this.x = 0;
-                if (this.y < 0) this.y = height;
-                if (this.y > height) this.y = 0;
-
+                this.x   += this.vx + (Math.random() - 0.5) * 0.4;
+                this.vy  -= 0.02; // drift up
+                this.y   += this.vy * (1 + bassEnergy * 2);
+                this.life -= this.decay * (1 + bassEnergy);
+                this.size *= 0.995;
                 if (mouse.x !== null) {
-                    const dx = this.x - mouse.x;
-                    const dy = this.y - mouse.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < mouse.radius) {
-                        const force = (mouse.radius - dist) / mouse.radius;
-                        const angle = Math.atan2(dy, dx);
-                        this.x += Math.cos(angle) * force * 2;
-                        this.y += Math.sin(angle) * force * 2;
+                    const dx = this.x - mouse.x, dy = this.y - mouse.y;
+                    const d  = Math.sqrt(dx*dx + dy*dy);
+                    if (d < 100) {
+                        const f = (100 - d) / 100;
+                        this.x += (dx / d) * f * 3;
+                        this.y += (dy / d) * f * 3;
                     }
                 }
             }
-
             draw() {
+                const alpha = this.life * 0.85;
+                // Glow halo
+                const grd = ctx.createRadialGradient(
+                    this.x, this.y, 0,
+                    this.x, this.y, this.size * 3
+                );
+                grd.addColorStop(0, `rgba(${this.r},${this.g},${this.b},${alpha})`);
+                grd.addColorStop(1, `rgba(${this.r},${Math.floor(this.g*0.3)},0,0)`);
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                ctx.fillStyle = grd;
+                ctx.fill();
+                // Core
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
+                ctx.fillStyle = `rgba(255,${Math.floor(this.g + 80)},${this.b},${alpha})`;
                 ctx.fill();
             }
+            get dead() { return this.life <= 0 || this.y < -20; }
         }
 
-        function initParticles() {
-            particles = [];
-            const num = Math.min(100, Math.floor((width * height) / 15000));
-            for (let i = 0; i < num; i++) {
-                particles.push(new Particle());
+        function spawnEmbers(count, fromKick) {
+            for (let i = 0; i < count; i++) embers.push(new Ember(fromKick));
+        }
+
+        // ── FILM GRAIN ────────────────────────────────────────────────
+        function buildGrain() {
+            grainCanvas = document.createElement('canvas');
+            grainCanvas.width  = 256;
+            grainCanvas.height = 256;
+            grainCtx = grainCanvas.getContext('2d');
+        }
+
+        function drawGrain() {
+            const imgData = grainCtx.createImageData(256, 256);
+            const d = imgData.data;
+            for (let i = 0; i < d.length; i += 4) {
+                const v = Math.random() * 40;
+                d[i] = d[i+1] = d[i+2] = v;
+                d[i+3] = 18;
+            }
+            grainCtx.putImageData(imgData, 0, 0);
+            ctx.globalAlpha = 0.35;
+            const pat = ctx.createPattern(grainCanvas, 'repeat');
+            ctx.fillStyle = pat;
+            ctx.fillRect(0, 0, width, height);
+            ctx.globalAlpha = 1;
+        }
+
+        // ── AUDIO VISUALS ─────────────────────────────────────────────
+        function getAudioData() {
+            if (!analyser) return {
+                freqData: new Uint8Array(128),
+                waveData: new Uint8Array(512)
+            };
+            const freqData = new Uint8Array(analyser.frequencyBinCount);
+            const waveData = new Uint8Array(analyser.fftSize);
+            analyser.getByteFrequencyData(freqData);
+            analyser.getByteTimeDomainData(waveData);
+            return { freqData, waveData };
+        }
+
+        function drawFreqBars(freqData) {
+            const bars = 60;
+            const bw   = width / bars;
+            for (let i = 0; i < bars; i++) {
+                const idx   = Math.floor(i * freqData.length / bars);
+                const val   = freqData[idx] / 255;
+                const jitter = (Math.random() - 0.5) * 4; // rough/gritty jitter
+                const bh    = val * height * 0.45 + jitter;
+                const alpha = val * 0.5;
+                // Blood red → rust → orange based on position
+                const t = i / bars;
+                const r = Math.floor(196 + t * 30);
+                const g = Math.floor(t * 86);
+                const b = 0;
+                ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+                ctx.fillRect(i * bw, height - bh, bw - 2, bh);
+                // Dim mirror top
+                ctx.fillStyle = `rgba(${r},${g},${b},${alpha * 0.15})`;
+                ctx.fillRect(i * bw, 0, bw - 2, bh * 0.2);
             }
         }
 
-        function connect() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 100) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(139, 0, 0, ${0.2 * (1 - dist / 100)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
+        function drawWaveform(waveData) {
+            ctx.beginPath();
+            ctx.lineWidth = 1.5;
+            const grad = ctx.createLinearGradient(0, 0, width, 0);
+            grad.addColorStop(0,    'rgba(196,26,0,0.8)');
+            grad.addColorStop(0.5,  'rgba(232,86,10,0.8)');
+            grad.addColorStop(1,    'rgba(184,168,144,0.6)');
+            ctx.strokeStyle = grad;
+            const sw = width / waveData.length;
+            for (let i = 0; i < waveData.length; i++) {
+                const y = (height / 2) + ((waveData[i] / 128) - 1) * height * 0.15;
+                if (i === 0) ctx.moveTo(0, y);
+                else         ctx.lineTo(i * sw, y);
             }
+            ctx.stroke();
+        }
+
+        function drawFlame() {
+            // Ambient ember glow at bottom
+            const g = ctx.createLinearGradient(0, height * 0.7, 0, height);
+            g.addColorStop(0, 'rgba(0,0,0,0)');
+            g.addColorStop(1, `rgba(100,10,0,${0.15 + bassEnergy * 0.25})`);
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, width, height);
+
+            if (kickFlash > 0.01) {
+                const gr = ctx.createRadialGradient(width/2, height, 0, width/2, height * 0.3, width * 0.9);
+                gr.addColorStop(0, `rgba(196,26,0,${kickFlash * 0.18})`);
+                gr.addColorStop(0.5, `rgba(232,86,10,${kickFlash * 0.07})`);
+                gr.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = gr;
+                ctx.fillRect(0, 0, width, height);
+                kickFlash *= 0.80;
+                spawnEmbers(6, true);
+            }
+            if (snareFlash > 0.01) {
+                const gr = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.5);
+                gr.addColorStop(0, `rgba(220,120,40,${snareFlash * 0.12})`);
+                gr.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = gr;
+                ctx.fillRect(0, 0, width, height);
+                snareFlash *= 0.75;
+            }
+        }
+
+        // ── MAIN LOOP ─────────────────────────────────────────────────
+        function resize() {
+            width  = canvas.width  = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            embers = [];
         }
 
         function animate() {
-            ctx.clearRect(0, 0, width, height);
-            connect();
-            for (let p of particles) {
-                p.update();
-                p.draw();
+            // Fade trail instead of full clear — burn-in effect
+            ctx.fillStyle = 'rgba(0,0,0,0.82)';
+            ctx.fillRect(0, 0, width, height);
+
+            const { freqData, waveData } = getAudioData();
+
+            let bassSum = 0;
+            for (let i = 0; i < 10; i++) bassSum += freqData[i] / 255;
+            bassEnergy = bassSum / 10;
+
+            // Passive ember spawn
+            if (Math.random() < 0.3 + bassEnergy * 0.7) spawnEmbers(1, false);
+
+            drawFreqBars(freqData);
+            drawFlame();
+
+            // Update & draw embers
+            for (let i = embers.length - 1; i >= 0; i--) {
+                embers[i].update();
+                embers[i].draw();
+                if (embers[i].dead) embers.splice(i, 1);
             }
+            // Cap ember count
+            if (embers.length > 300) embers.splice(0, embers.length - 300);
+
+            drawWaveform(waveData);
+            drawGrain();
             requestAnimationFrame(animate);
         }
 
         window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+        window.addEventListener('mouseout',  () => { mouse.x = null; mouse.y = null; });
         window.addEventListener('resize', resize);
+        buildGrain();
         resize();
         animate();
     </script>

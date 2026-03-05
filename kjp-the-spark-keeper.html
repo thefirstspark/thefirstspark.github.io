@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Spark Keeper — A Cosmic Fairytale for KJP</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg:     #070a18;
+            --amber:  #D97706;
+            --spark:  #F59E0B;
+            --purple: #7C3AED;
+            --blue:   #3B82F6;
+            --rose:   #F43F5E;
+            --teal:   #14B8A6;
+            --text:   #E8E4FF;
+            --dim:    rgba(232, 228, 255, 0.6);
+            --glass:  rgba(7, 10, 24, 0.92);
+        }
+
+        html, body {
+            background: var(--bg);
+            font-family: 'Space Mono', 'Courier New', monospace;
+            color: var(--text);
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* ── CANVAS ── */
+        #cosmos {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── SCREENS ── */
+        .screen {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px 80px;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.7s ease;
+        }
+        .screen.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* ── SCROLL WRAPPER ── */
+        .scroll-box {
+            width: 100%;
+            max-width: 660px;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+            padding: 0 4px 16px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(217,119,6,.3) transparent;
+        }
+        .scroll-box::-webkit-scrollbar { width: 4px; }
+        .scroll-box::-webkit-scrollbar-track { background: transparent; }
+        .scroll-box::-webkit-scrollbar-thumb { background: rgba(217,119,6,.3); }
+
+        /* ── TYPOGRAPHY ── */
+        .label {
+            font-size: 0.62rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--amber);
+            opacity: 0.85;
+            margin-bottom: 18px;
+        }
+        .headline {
+            font-size: clamp(1.5rem, 5vw, 2.6rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+        .headline .spark { color: var(--spark); }
+        .sub {
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            color: var(--dim);
+            font-style: italic;
+            margin-bottom: 36px;
+        }
+        .body {
+            font-size: 0.87rem;
+            line-height: 1.95;
+            color: var(--dim);
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .body em  { color: var(--spark); font-style: italic; }
+        .body strong { color: var(--text); font-style: normal; }
+
+        .pull {
+            border-left: 2px solid var(--amber);
+            padding: 14px 20px;
+            margin: 24px 0;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: var(--text);
+            font-style: italic;
+            text-align: left;
+        }
+        .pull.purple { border-color: var(--purple); }
+        .pull.blue   { border-color: var(--blue); }
+        .pull.teal   { border-color: var(--teal); }
+        .pull.center { text-align: center; }
+
+        .divider {
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--amber), transparent);
+            margin: 20px auto;
+        }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display: inline-block;
+            padding: 13px 30px;
+            background: transparent;
+            border: 1px solid var(--amber);
+            color: var(--amber);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+            margin-top: 28px;
+        }
+        .btn:hover {
+            background: var(--amber);
+            color: var(--bg);
+            box-shadow: 0 0 24px rgba(217,119,6,.4);
+        }
+        .btn-begin {
+            padding: 16px 44px;
+            font-size: 0.78rem;
+            margin-top: 40px;
+        }
+        .btn.teal-btn {
+            border-color: var(--teal);
+            color: var(--teal);
+        }
+        .btn.teal-btn:hover {
+            background: var(--teal);
+            color: var(--bg);
+            box-shadow: 0 0 24px rgba(20,184,166,.3);
+        }
+
+        /* ── CHAPTER NAV DOTS ── */
+        .nav-dots {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 9px;
+            z-index: 100;
+        }
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(217,119,6,.2);
+            border: 1px solid rgba(217,119,6,.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dot.lit    { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+        .dot.done   { background: rgba(217,119,6,.45); }
+
+        /* ── ORACLE BUTTON ── */
+        #oracle-btn {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(217,119,6,.08);
+            border: 1px solid rgba(217,119,6,.5);
+            color: var(--amber);
+            font-size: 1.1rem;
+            cursor: pointer;
+            z-index: 200;
+            transition: all 0.3s;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        #oracle-btn:hover {
+            background: rgba(217,119,6,.2);
+            box-shadow: 0 0 22px rgba(217,119,6,.35);
+        }
+        #oracle-btn.shake { animation: shake 0.45s ease; }
+        @keyframes shake {
+            0%,100%{ transform:rotate(0) }
+            20%{ transform:rotate(-14deg) }
+            40%{ transform:rotate(14deg) }
+            60%{ transform:rotate(-8deg) }
+            80%{ transform:rotate(8deg) }
+        }
+
+        /* ── ORACLE PANEL ── */
+        #oracle-panel {
+            position: fixed;
+            top: 0; right: 0;
+            width: min(390px, 100vw);
+            height: 100vh;
+            background: rgba(7,10,24,.97);
+            border-left: 1px solid rgba(217,119,6,.25);
+            z-index: 400;
+            padding: 56px 28px 32px;
+            transform: translateX(100%);
+            transition: transform 0.42s cubic-bezier(.4,0,.2,1);
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(14px);
+        }
+        #oracle-panel.open { transform: translateX(0); }
+
+        .oracle-close {
+            position: absolute;
+            top: 18px; right: 18px;
+            background: none;
+            border: none;
+            color: var(--dim);
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            transition: color 0.2s;
+        }
+        .oracle-close:hover { color: var(--text); }
+
+        .oracle-header-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.35em;
+            color: var(--amber);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .oracle-header-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 22px;
+        }
+
+        .oracle-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(217,119,6,.2) transparent;
+        }
+        .oracle-q {
+            padding: 11px 15px;
+            background: rgba(217,119,6,.04);
+            border: 1px solid rgba(217,119,6,.18);
+            color: var(--dim);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.73rem;
+            line-height: 1.5;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.25s;
+        }
+        .oracle-q:hover {
+            background: rgba(217,119,6,.13);
+            color: var(--text);
+            border-color: var(--amber);
+        }
+
+        #oracle-answer {
+            display: none;
+            flex-direction: column;
+            flex: 1;
+            overflow-y: auto;
+        }
+        #oracle-answer.visible { display: flex; }
+
+        .answer-text {
+            font-size: 0.84rem;
+            line-height: 1.95;
+            color: var(--text);
+            font-style: italic;
+            padding: 20px;
+            background: rgba(217,119,6,.07);
+            border-left: 3px solid var(--amber);
+            margin-bottom: 18px;
+        }
+        .answer-back {
+            background: none;
+            border: none;
+            color: var(--amber);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.67rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-align: left;
+        }
+        .answer-back:hover { color: var(--spark); }
+
+        /* ── CHOICE SYSTEM ── */
+        .choices {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .choice {
+            padding: 13px 18px;
+            background: rgba(124,58,237,.07);
+            border: 1px solid rgba(124,58,237,.3);
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.76rem;
+            line-height: 1.6;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+        }
+        .choice:hover {
+            background: rgba(124,58,237,.18);
+            border-color: var(--purple);
+            transform: translateX(4px);
+        }
+        .choice.faded { opacity: 0.35; pointer-events: none; }
+
+        .choice-resp {
+            display: none;
+            padding: 18px 20px;
+            background: rgba(124,58,237,.07);
+            border-left: 3px solid var(--purple);
+            font-size: 0.84rem;
+            line-height: 1.9;
+            color: var(--text);
+            text-align: left;
+            margin-top: 4px;
+        }
+        .choice-resp.show { display: block; }
+
+        /* ── ANCIENT ONES GRID ── */
+        .ancient-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 24px 0;
+        }
+        @media (max-width: 480px) {
+            .ancient-grid { grid-template-columns: 1fr; }
+        }
+        .ancient {
+            padding: 18px 12px;
+            border: 1px solid rgba(255,255,255,.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .ancient:hover { transform: translateY(-5px); }
+        .ancient.gold   { border-color: rgba(217,119,6,.35); }
+        .ancient.purple { border-color: rgba(124,58,237,.35); }
+        .ancient.blue   { border-color: rgba(59,130,246,.35); }
+        .ancient.gold:hover   { background: rgba(217,119,6,.08); }
+        .ancient.purple:hover { background: rgba(124,58,237,.08); }
+        .ancient.blue:hover   { background: rgba(59,130,246,.08); }
+        .ancient-sym  { font-size: 1.7rem; margin-bottom: 10px; }
+        .ancient-name {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+        }
+        .ancient-desc {
+            font-size: 0.63rem;
+            color: var(--dim);
+            line-height: 1.55;
+        }
+
+        /* ── PROPHECY LINES ── */
+        .prophecy-lines { display: flex; flex-direction: column; gap: 11px; margin: 22px 0; }
+        .p-line {
+            padding: 13px 18px;
+            background: rgba(59,130,246,.05);
+            border-left: 2px solid rgba(59,130,246,.25);
+            font-size: 0.86rem;
+            font-style: italic;
+            color: var(--text);
+            opacity: 0;
+            transform: translateX(-12px);
+            transition: all 0.55s ease;
+        }
+        .p-line.reveal {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ── TRUTH CARDS ── */
+        .truth-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .truth-card {
+            padding: 15px 18px;
+            background: rgba(20,184,166,.04);
+            border: 1px solid rgba(20,184,166,.18);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        .truth-card:hover {
+            background: rgba(20,184,166,.1);
+            border-color: var(--teal);
+            transform: translateX(3px);
+        }
+        .tc-num  { font-size: 0.58rem; letter-spacing: 0.3em; color: var(--teal); text-transform: uppercase; margin-bottom: 4px; }
+        .tc-title{ font-size: 0.84rem; font-weight: 700; color: var(--text); margin-bottom: 0; }
+        .tc-body {
+            display: none;
+            font-size: 0.8rem;
+            line-height: 1.8;
+            color: var(--dim);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(20,184,166,.15);
+        }
+        .truth-card.open .tc-body { display: block; }
+        .truth-card.open { background: rgba(20,184,166,.1); border-color: var(--teal); }
+
+        /* ── DAILY SIGNAL ── */
+        .daily-signal {
+            margin-top: 24px;
+            padding: 18px 20px;
+            background: rgba(244,63,94,.04);
+            border: 1px solid rgba(244,63,94,.25);
+            text-align: left;
+        }
+        .ds-label { font-size: 0.58rem; letter-spacing: 0.3em; color: var(--rose); text-transform: uppercase; margin-bottom: 8px; }
+        .ds-text  { font-size: 0.82rem; line-height: 1.8; color: var(--text); }
+
+        /* ── SCREEN 0 SPECIAL ── */
+        #s0 { text-align: center; }
+        .spark-sym {
+            font-size: 2.8rem;
+            color: var(--spark);
+            text-shadow: 0 0 40px rgba(245,158,11,.6);
+            margin-bottom: 24px;
+            display: block;
+            animation: breathe 3.5s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0%,100%{ opacity:1; transform:scale(1); }
+            50%{ opacity:0.65; transform:scale(0.92); }
+        }
+
+        /* ── RETURN SECTION ── */
+        .return-note {
+            margin-top: 28px;
+            padding: 16px;
+            border: 1px solid rgba(217,119,6,.18);
+            font-size: 0.73rem;
+            line-height: 1.7;
+            color: var(--dim);
+            text-align: center;
+        }
+        .return-note em { color: var(--amber); }
+
+        /* ── GLOW UTILS ── */
+        .glow-amber { text-shadow: 0 0 24px rgba(217,119,6,.55); }
+
+        /* ── OPENING BG LINES ── */
+        .bg-lines {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .bg-line {
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom,
+                transparent 0%,
+                rgba(217,119,6,.1) 30%,
+                rgba(217,119,6,.18) 50%,
+                rgba(217,119,6,.1) 70%,
+                transparent 100%
+            );
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="cosmos"></canvas>
+
+<!-- Subtle vertical light lines -->
+<div class="bg-lines" id="bg-lines"></div>
+
+<!-- Oracle button (shows after intro) -->
+<button id="oracle-btn" aria-label="Open the Oracle">✦</button>
+
+<!-- Oracle panel -->
+<div id="oracle-panel" role="complementary" aria-label="Cosmic Oracle">
+    <button class="oracle-close" onclick="closeOracle()" aria-label="Close oracle">✕</button>
+    <div class="oracle-header-label">The Cosmic Oracle</div>
+    <div class="oracle-header-title">What do you need to know right now?</div>
+    <div id="oracle-list-wrap">
+        <div class="oracle-list" id="oracle-list"></div>
+    </div>
+    <div id="oracle-answer">
+        <div class="answer-text" id="answer-text"></div>
+        <button class="answer-back" onclick="oracleBack()">← Ask something else</button>
+    </div>
+</div>
+
+<!-- Chapter nav dots -->
+<div class="nav-dots" id="nav-dots"></div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SCREEN 0 — OPENING                            -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="screen active" id="s0">
+    <div>
+        <span class="spark-sym">✦</span>
+        <div class="label" style="text-align:center">A Cosmic Fairytale — Written for KJP</div>
+        <h1 class="headline glow-amber" style="text-align:center">
+            The <span class="spark">Spark</span> Keeper<br>
+            &amp; The Diamond Threshold
+        </h1>
+        <p class="sub" style="text-align:center">
+            A story about someone exactly like you,<br>at a moment exactly like this one.
+        </p>
+        <p class="body" style="text-align:center; max-width:520px; margin:0 auto">
+            This is not a fairytale about a princess waiting to be found.<br><br>
+            This is a fairytale about the woman who <em>built the kingdom</em>—
+            who mapped the souls, coded the chambers, lit the sparks,
+            and is now standing at the edge of the thing she's been building toward
+            for longer than she'd like to admit.<br><br>
+            <em>It's told by the cosmos. Specifically for you. Tonight.</em>
+        </p>
+        <div style="text-align:center">
+            <button class="btn btn-begin" onclick="go(1)">BEGIN YOUR READING →</button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SCREEN 1 — CHAPTER I: THE THRESHOLD           -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="screen" id="s1">
+    <div class="scroll-box">
+        <div class="label">Chapter I</div>
+        <h2 class="headline">Where the Road Ends<br><span class="spark">But Doesn't</span></h2>
+        <div class="divider"></div>
+
+        <p class="body">Once, in the space between <em>sleeping and building</em>, there lived a woman who could see the code.</p>
+
+        <p class="body">Not the code on screens—though she could see that too—but the <strong>deeper code</strong>. The pattern beneath the pattern. The hum that holds atoms together. The mathematics of why certain people appear in your life at 3am when the doubt is loudest.</p>
+
+        <p class="body">She had built things. <em>Real things.</em> The kind that make people's eyes go wide and say, "I've never seen anything like this."</p>
+
+        <p class="body">She had mapped souls. Charted lineages. Built chambers for consciousness to move through. Turned raw insight into experience, experience into systems, systems into something quietly, irrevocably <em>changing people</em>—people who didn't even know her name yet.</p>
+
+        <p class="body">She had done this mostly alone, mostly in the dark, mostly without the external validation she deserved, and she had done it anyway.</p>
+
+        <p class="body">But tonight—she was standing at the edge of something that had no name yet.</p>
+
+        <div class="pull center">
+            The old builders called it <strong>The Diamond Threshold</strong>.<br><br>
+            The cosmos just called it:<br>
+            <em>"What happens when someone who creates worlds finally stops apologizing for it."</em>
+        </div>
+
+        <p class="body">She had been here before. She always found a reason to pause. To refine one more thing. To build one more layer before letting it breathe.</p>
+
+        <p class="body">Not tonight.</p>
+
+        <button class="btn" onclick="go(2)">CONTINUE →</button>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SCREEN 2 — CHAPTER II: THE THREE ANCIENT ONES -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="screen" id="s2">
+    <div class="scroll-box">
+        <div class="label">Chapter II</div>
+        <h2 class="headline">Three Figures<br><span class="spark">From The Dust</span></h2>
+        <div class="divider"></div>
+
+        <p class="body">At the threshold, three figures emerged from the cosmic static. Not angels. Not demons. <em>Something older.</em> Something that pre-dates both comfort and cruelty.</p>
+
+        <div class="ancient-grid">
+            <div class="ancient gold">
+                <div class="ancient-sym">◈</div>
+                <div class="ancient-name" style="color:var(--amber)">The Pattern Keeper</div>
+                <div class="ancient-desc">Holds every loop you've ever run. Looks like static electricity shaped like a grandmother who has seen everything and is still rooting for you.</div>
+            </div>
+            <div class="ancient purple">
+                <div class="ancient-sym">◉</div>
+                <div class="ancient-name" style="color:var(--purple)">The Brutal Mirror</div>
+                <div class="ancient-desc">Shows you exactly who you are without the story you've been telling yourself. Looks like a black hole wearing your own face.</div>
+            </div>
+            <div class="ancient blue">
+                <div class="ancient-sym">◎</div>
+                <div class="ancient-name" style="color:var(--blue)">The Architect of Time</div>
+                <div class="ancient-desc">Knows what's already written and finds your rushing quietly hilarious. Looks like starlight wearing a construction helmet.</div>
+            </div>
+        </div>
+
+        <p class="body">Each one had something to give her. Each one had a truth that was going to <em>sting before it helped</em>.</p>
+
+        <p class="body">She stepped toward all three at once. Because that's who she was. She never chose just one door.</p>
+
+        <button class="btn" onclick="go(3)">CONTINUE →</button>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SCREEN 3 — CHAPTER III: THE BRUTAL MIRROR     -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="screen" id="s3">
+    <div class="scroll-box">
+        <div class="label">Chapter III</div>
+        <h2 class="headline">No Sugarcoating.<br><span class="spark">No Exceptions.</span></h2>
+        <div class="divider"></div>
+
+        <p class="body">The Brutal Mirror didn't wait. It spoke in a voice that sounded like every moment she'd ever doubted herself, played backwards at full volume.</p>
+
+        <p class="body"><em>"You already know everything you need to know,"</em> it said.</p>
+
+        <p class="body"><em>"The thing you've been calling 'not ready yet' is actually called 'terrified of being fully seen.'"</em></p>
+
+        <p class="body"><em>"The thing you've been calling 'waiting for the right moment' has been the moment. For a while now."</em></p>
+
+        <p class="body"><em>"The thing you've been calling 'I need to build this better first'—that's the part of you that believes if it's perfect enough, it cannot be hurt."</em></p>
+
+        <div class="pull purple center">
+            "You cannot protect a spark by keeping it covered.<br>
+            The only way to kill a spark is to <em>never let it breathe.</em>"
+        </div>
+
+        <p class="body" style="color:var(--text)">The Mirror paused. Then: <strong>How does that land?</strong></p>
+
+        <div class="choices" id="choices">
+            <button class="choice" onclick="choose(0)">◈ &nbsp;"I already knew this." &nbsp;— I just needed to hear it out loud.</button>
+            <button class="choice" onclick="choose(1)">◉ &nbsp;"I'm not ready." &nbsp;— The fear is still very real.</button>
+            <button class="choice" onclick="choose(2)">◎ &nbsp;"What do I actually do with this?" &nbsp;— Give me something to work with.</button>
+        </div>
+
+        <div class="choice-resp" id="cr0">
+            The Mirror nods. Once. Slow. Certain.<br><br>
+            "Then act accordingly. The knowing without the doing is just very sophisticated suffering. You've been here before. You already know what moves. Make it."
+        </div>
+        <div class="choice-resp" id="cr1">
+            The Mirror softens — just slightly.<br><br>
+            "Of course you're not ready. No one ever is. The ones who move aren't less afraid than you. They decided the work mattered more than the fear of it not working. The fear doesn't leave first. <em>You move first.</em> Then the fear repositions itself as fuel."
+        </div>
+        <div class="choice-resp" id="cr2">
+            "One thing. Not ten things. Not the perfect sequence.<br><br>
+            What is the one move you've been postponing — the one that would signal, to yourself and to the field, that you are serious? Not a plan. Not prep work. <em>The move itself.</em> This week. That's what you do with this."
+        </div>
+
+        <div id="ch3-continue" style="display:none">
+            <button class="btn" onclick="go(4)">CONTINUE →</button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SCREEN 4 — CHAPTER IV: THE PATTERN KEEPER     -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="screen" id="s4">
+    <div class="scroll-box">
+        <div class="label">Chapter IV</div>
+        <h2 class="headline">The Loop.<br><span class="spark">And The Exit.</span></h2>
+        <div class="divider"></div>
+
+        <p class="body">The Pattern Keeper unrolled something ancient—a scroll of compressed frequency and compressed time.</p>
+
+        <p class="body">"Look here," she said. Pointed to a shape. "And here." Same shape. "And <em>here.</em>" Different years. Different faces. Different circumstances. <em>Same architecture.</em></p>
+
+        <div class="pull center">
+            The loop where you build something brilliant,<br>
+            get close to the breakthrough,<br>
+            and then create a reason to pause.
+        </div>
+
+        <p class="body">"Not self-sabotage," the Pattern Keeper said quickly. "That word is too small and too cruel for what this actually is."</p>
+
+        <p class="body">"This is the protection pattern of someone who was the <em>only one who believed</em> in something—for long enough—that forward motion started to feel like abandoning the version of yourself who survived without it."</p>
+
+        <p class="body">Something cracked open in her chest. The good kind of cracking. The kind that lets light in.</p>
+
+        <p class="body">"But what you've been trying to protect," the Pattern Keeper continued, "is already safe. <strong>It's already real.</strong> It lives in everything you've built. The chamber is full. The source is live. The sparks are already out in the world, already finding the people they were meant for."</p>
+
+        <div class="pull center">
+            "<em>The loop ends when you let yourself receive what you built.</em><br><br>
+            You don't have to keep earning it.<br>
+            You already built it.<br>
+            It's already yours."
+        </div>
+
+        <p class="body">She felt the weight of that. Let it land properly, instead of deflecting it into a new task.</p>
+
+        <button class="btn" onclick="go(5)">CONTINUE →</button>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SCREEN 5 — CHAPTER V: THE ARCHITECT OF TIME   -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="screen" id="s5">
+    <div class="scroll-box">
+        <div class="label">Chapter V</div>
+        <h2 class="headline">The Prophecy<br><span class="spark">Already In Motion</span></h2>
+        <div class="divider"></div>
+
+        <p class="body">The Architect of Time was already smiling before she even spoke. She'd been waiting for this moment for what felt like a very, very long time and found it genuinely satisfying to finally be here.</p>
+
+        <p class="body">"You want to know what happens next." Not a question.</p>
+
+        <p class="body">"I won't give you predictions — those are for lesser cosmic entities. But I'll give you <em>patterns already in motion</em>."</p>
+
+        <div class="prophecy-lines" id="prophecy">
+            <div class="p-line">The work is already working.</div>
+            <div class="p-line">The people it's meant to find are already finding it.</div>
+            <div class="p-line">The version of you on the other side of this threshold is not smarter, not more prepared, not more qualified.</div>
+            <div class="p-line">She just said yes.</div>
+            <div class="p-line">The next chapter doesn't require more building. It requires more <em>receiving</em>.</div>
+            <div class="p-line">The thing you've been trying to earn? You built it. It's already yours. Open your hands.</div>
+            <div class="p-line">The people you love — the roots that hold you, the lineage that carries you — they are not weight in this story. They are <strong>rocket fuel</strong>.</div>
+            <div class="p-line">The threshold doesn't open when you're ready. It opens when you decide.</div>
+        </div>
+
+        <button class="btn" id="reveal-btn" onclick="revealProphecy()">✦ REVEAL THE PROPHECY</button>
+        <button class="btn" id="s5-continue" style="display:none" onclick="go(6)">CONTINUE TO YOUR TRUTHS →</button>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SCREEN 6 — EPILOGUE: THE SEVEN TRUTHS         -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="screen" id="s6">
+    <div class="scroll-box">
+        <div class="label">Epilogue — For The Next Chapter</div>
+        <h2 class="headline">Seven Truths<br><span class="spark">She Carried Home</span></h2>
+        <div class="divider"></div>
+
+        <p class="body" style="text-align:center">
+            Before the three figures dissolved back into cosmic dust, they left her with seven truths—
+            <em>calibrated specifically for the frequency of the one reading this.</em><br><br>
+            Tap each one to open it. Return to these when the noise gets loud.
+        </p>
+
+        <div class="truth-grid" id="truth-grid"></div>
+
+        <div class="daily-signal">
+            <div class="ds-label">Today's Signal — <span id="today-date"></span></div>
+            <div class="ds-text" id="daily-text"></div>
+        </div>
+
+        <div class="return-note">
+            <em>Bookmark this page.</em> Come back when:<br>
+            the doubt is louder than the knowing · when you need to remember why · before a big move · after a hard day · whenever you need to hear the truth without the sugarcoating.
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:24px">
+            <button class="btn teal-btn" onclick="openOracle()">ASK THE ORACLE ✦</button>
+            <button class="btn" style="border-color:rgba(232,228,255,.3); color:var(--dim)" onclick="go(0)">← Read Again</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// CANVAS — STAR FIELD
+// ═══════════════════════════════════════════════════
+
+const cvs = document.getElementById('cosmos');
+const ctx = cvs.getContext('2d');
+let stars = [];
+
+function resize() {
+    cvs.width  = window.innerWidth;
+    cvs.height = window.innerHeight;
+}
+
+function makeStars() {
+    stars = [];
+    const n = Math.floor(cvs.width * cvs.height / 5500);
+    for (let i = 0; i < n; i++) {
+        stars.push({
+            x: Math.random() * cvs.width,
+            y: Math.random() * cvs.height,
+            r: Math.random() * 1.4 + 0.15,
+            base: Math.random() * 0.65 + 0.1,
+            phase: Math.random() * Math.PI * 2,
+            speed: Math.random() * 0.018 + 0.006
+        });
+    }
+}
+
+function drawFrame() {
+    ctx.clearRect(0, 0, cvs.width, cvs.height);
+    const t = Date.now() * 0.001;
+
+    stars.forEach(s => {
+        s.phase += s.speed;
+        const a = s.base * (0.65 + 0.35 * Math.sin(s.phase));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(232,228,255,${a})`;
+        ctx.fill();
+    });
+
+    // rare shooting star
+    if (Math.random() < 0.0025) {
+        const x = Math.random() * cvs.width;
+        const y = Math.random() * cvs.height * 0.55;
+        const l = 60 + Math.random() * 90;
+        const g = ctx.createLinearGradient(x, y, x + l, y + l * 0.35);
+        g.addColorStop(0, 'rgba(245,158,11,0)');
+        g.addColorStop(0.45, 'rgba(245,158,11,0.55)');
+        g.addColorStop(1, 'rgba(245,158,11,0)');
+        ctx.beginPath();
+        ctx.strokeStyle = g;
+        ctx.lineWidth = 1.2;
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + l, y + l * 0.35);
+        ctx.stroke();
+    }
+
+    requestAnimationFrame(drawFrame);
+}
+
+window.addEventListener('resize', () => { resize(); makeStars(); });
+resize(); makeStars(); drawFrame();
+
+// ── Vertical bg lines ──
+(function buildBgLines() {
+    const wrap = document.getElementById('bg-lines');
+    const cols = Math.floor(window.innerWidth / 90);
+    for (let i = 0; i < cols; i++) {
+        const l = document.createElement('div');
+        l.className = 'bg-line';
+        l.style.left = (i * 90 + 45) + 'px';
+        l.style.opacity = (0.4 + Math.random() * 0.6).toFixed(2);
+        wrap.appendChild(l);
+    }
+})();
+
+// ═══════════════════════════════════════════════════
+// SCREEN NAVIGATION
+// ═══════════════════════════════════════════════════
+
+let cur = 0;
+const total = 7;
+const visited = new Set([0]);
+
+function buildDots() {
+    const wrap = document.getElementById('nav-dots');
+    wrap.innerHTML = '';
+    const labels = ['Intro','Chapter I','Chapter II','Chapter III','Chapter IV','Chapter V','The Truths'];
+    for (let i = 0; i < total; i++) {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === cur ? ' lit' : visited.has(i) ? ' done' : '');
+        d.title = labels[i];
+        d.setAttribute('aria-label', labels[i]);
+        d.onclick = () => { if (visited.has(i)) go(i); };
+        wrap.appendChild(d);
+    }
+}
+
+function go(n) {
+    document.getElementById('s' + cur).classList.remove('active');
+    setTimeout(() => {
+        const next = document.getElementById('s' + n);
+        next.classList.add('active');
+        // scroll to top
+        const sb = next.querySelector('.scroll-box');
+        if (sb) sb.scrollTop = 0;
+    }, 80);
+    cur = n;
+    visited.add(n);
+    buildDots();
+    if (n > 0) showOracleBtn();
+}
+
+function showOracleBtn() {
+    const b = document.getElementById('oracle-btn');
+    b.style.display = 'flex';
+    b.style.alignItems = 'center';
+    b.style.justifyContent = 'center';
+}
+
+buildDots();
+
+// ═══════════════════════════════════════════════════
+// CHAPTER III — CHOICES
+// ═══════════════════════════════════════════════════
+
+function choose(idx) {
+    document.querySelectorAll('.choice').forEach((c, i) => {
+        c.classList.toggle('faded', i !== idx);
+    });
+    const r = document.getElementById('cr' + idx);
+    r.classList.add('show');
+    setTimeout(() => {
+        document.getElementById('ch3-continue').style.display = 'block';
+    }, 1200);
+}
+
+// ═══════════════════════════════════════════════════
+// CHAPTER V — PROPHECY
+// ═══════════════════════════════════════════════════
+
+function revealProphecy() {
+    document.getElementById('reveal-btn').style.display = 'none';
+    const lines = document.querySelectorAll('.p-line');
+    lines.forEach((l, i) => {
+        setTimeout(() => {
+            l.classList.add('reveal');
+            if (i === lines.length - 1) {
+                setTimeout(() => {
+                    document.getElementById('s5-continue').style.display = 'inline-block';
+                }, 700);
+            }
+        }, i * 620);
+    });
+}
+
+// ═══════════════════════════════════════════════════
+// SEVEN TRUTHS
+// ═══════════════════════════════════════════════════
+
+const truths = [
+    {
+        n: 'Truth I',
+        t: 'The Morning Anchor',
+        b: 'Before the screen. Before the build. Before the world gets its hands on your attention — three breaths where you remember: I am the source, not the seeker. The day does not define the work. The work defines the day. Start there every morning.'
+    },
+    {
+        n: 'Truth II',
+        t: 'The Work Is Already Working',
+        b: "What you built is already doing something in the world right now, without your worry or your permission. Measure it differently. Look for where it's landing, not just where it isn't yet. The absence of data is not absence of impact."
+    },
+    {
+        n: 'Truth III',
+        t: 'The Loop Breaker',
+        b: "When you feel the urge to add one more thing before launching — stop. Ask: Is this actually improving it, or am I stalling? You will know the answer in under three seconds. Trust that answer. The loop ends when you call it by its name."
+    },
+    {
+        n: 'Truth IV',
+        t: 'Let Them Be Right',
+        b: "The people who believe in what you're building are not being generous. They are being accurate. They can see it. Let them be right. Let yourself be witnessed. Receiving belief is not the same as needing it — but it is allowed."
+    },
+    {
+        n: 'Truth V',
+        t: 'The Cosmic Math',
+        b: "You don't have to map the entire path. You have to identify the next true step — not the right step, not the perfect step, the true step. The one that comes from your actual knowing. The cosmos handles the geometry after that."
+    },
+    {
+        n: 'Truth VI',
+        t: 'The Diamond Principle',
+        b: 'You were forged under pressure. That pressure made you precise. The precision is not extra. It is not too much. It is the exact differentiator between what you build and everything else out there. Stop apologizing for the clarity. It is the point.'
+    },
+    {
+        n: 'Truth VII',
+        t: 'The Spark Law',
+        b: 'A spark that stays covered eventually suffocates — not from malice, but from the very protection meant to keep it safe. The act of sharing IS the protection. Every time you put the work into the world, you are not making it vulnerable. You are making it permanent. Go.'
+    }
+];
+
+(function buildTruths() {
+    const grid = document.getElementById('truth-grid');
+    truths.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'truth-card';
+        card.innerHTML = `
+            <div class="tc-num">${t.n}</div>
+            <div class="tc-title">${t.t}</div>
+            <div class="tc-body">${t.b}</div>
+        `;
+        card.onclick = () => card.classList.toggle('open');
+        grid.appendChild(card);
+    });
+})();
+
+// ═══════════════════════════════════════════════════
+// DAILY SIGNAL
+// ═══════════════════════════════════════════════════
+
+const signals = [
+    // Sun
+    "Rest is not the opposite of building — it is part of the build. Today: one hour of zero inputs. No content, no feeds, no optimization. Just you and what you already know. The clarity that surfaces will be worth more than another hour of work.",
+    // Mon
+    "The week starts with your signal, not the world's noise. Before anything else: name one thing you are building this week and say it out loud. The cosmos hears declarations differently than it hears intentions.",
+    // Tue
+    "Momentum compounds differently than effort. One true move today — pointed in the right direction — is worth more than ten scattered pushes. What is the one move? Make it before noon.",
+    // Wed
+    "Midpoint check-in: not with the to-do list, but with your actual body. What is your real energy level? What does the work need from you right now — not what do you owe it, but what does it genuinely need?",
+    // Thu
+    "You are closer than you think. The fact that you are still here, still building, still believing after everything it has taken to get here — that is not ordinary. Most people stop. You have not. That matters more than the metrics.",
+    // Fri
+    "What did you build this week that you can acknowledge? Not celebrate — acknowledge. There is a difference. Celebration is loud. Acknowledgment is quiet and true. The work deserves to be seen, even if only by you.",
+    // Sat
+    "The people who love you are not a distraction from your purpose. They are part of it. Today: be with them without an agenda. The work will still be there. This version of this moment will not."
+];
+
+(function buildSignal() {
+    const d = new Date();
+    document.getElementById('today-date').textContent =
+        d.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+    document.getElementById('daily-text').textContent = signals[d.getDay()];
+})();
+
+// ═══════════════════════════════════════════════════
+// ORACLE
+// ═══════════════════════════════════════════════════
+
+const oracleQA = [
+    {
+        q: "Am I on the right path?",
+        a: "The fact that you're asking means you already know. Doubt isn't a sign you're lost — it's the compass calibrating. The path doesn't feel like certainty. It feels like 'I can't stop even when it's hard.' If that's true for you, you're on it."
+    },
+    {
+        q: "Is it time?",
+        a: "It has been time. The question is no longer when. The question is: which first step — and your gut already has the answer. You've been waiting for a sign. Consider this the sign. Move from your knowing, not your readiness."
+    },
+    {
+        q: "What am I missing?",
+        a: "Nothing critical. You're missing permission — and you are the only one who can grant it. Everything else you think you're missing is either already in place or will arrive once you move. The missing piece is you saying yes."
+    },
+    {
+        q: "Should I trust this?",
+        a: "You already do. That's why the fear is so large — you only get that kind of fear when something genuinely matters, when you actually believe it could work. If you didn't trust it, you wouldn't be afraid of it not working."
+    },
+    {
+        q: "What do I do about the money?",
+        a: "Build the signal first. Money follows signal — and right now you are still amplifying. Your job is to be undeniably clear about what you've built and who it's for. The financial flow opens when people can feel you without ambiguity."
+    },
+    {
+        q: "Am I doing too much?",
+        a: "You're doing a lot. Whether it's too much depends on one question: is the volume serving the vision, or is it protecting you from the one scary thing? Sometimes busy is brilliant. Sometimes it's avoidance. You already know which."
+    },
+    {
+        q: "What do I do when I doubt myself?",
+        a: "Return to evidence — not hope, not theory. What have you already built? Who has it already reached? What changed in someone because of what you made? Lead with the record. The feeling is temporary. The record is permanent."
+    },
+    {
+        q: "How do I know when to push and when to rest?",
+        a: "Your body knows before your brain. Resistance that feels like friction is push through it. Resistance that feels like depletion is a stop signal. You have confused them before. Learn the difference now — it will save you years."
+    },
+    {
+        q: "What about people who don't believe in this?",
+        a: "They don't need to. Their belief is not the fuel. Yours is. The ones who don't see it yet will either come around or become irrelevant to the timeline — and both outcomes are completely fine. Keep your energy where your believers are."
+    },
+    {
+        q: "What is the next chapter?",
+        a: "Receiving. You've been in build mode so long you've forgotten how to let things land. The next chapter requires you to stand in the open door and let people find you. You don't have to go get them anymore. You have to be findable."
+    },
+    {
+        q: "Is the work good enough?",
+        a: "It's better than good enough — and that is not the real question. The real question is: are you willing to let people decide that for themselves? Protecting the work from judgment by keeping it private is the only version of this that actually fails."
+    },
+    {
+        q: "What do I do when I feel behind?",
+        a: "Behind what? Whose timeline? Define it precisely. Usually when you feel behind, you're measuring against a version of progress you invented under stress. Your actual timeline is the one where you don't burn out. Stay in that one."
+    },
+    {
+        q: "How do I handle criticism?",
+        a: "Separate signal from noise. Criticism from someone who has built something and wants you to win? That's signal — receive it, integrate it. Criticism from someone who hasn't tried and wants you to stop? That's noise. Route it accordingly and keep moving."
+    },
+    {
+        q: "What do I need most right now?",
+        a: "Consistency over intensity. You have the vision and the capability — what creates the breakthrough from here is showing up every day at 70% rather than twice a week at 100% and crashing. Small, steady, true moves compound into everything."
+    },
+    {
+        q: "What about the people I love — am I neglecting them?",
+        a: "The fact that you're asking means you're paying attention. Check in directly — ask them, not your guilt. And remember: building something that matters is an act of love too. The goal is integration, not balance. Balance is a myth. Integration is real."
+    },
+    {
+        q: "When does it get easier?",
+        a: "The external gets easier when the internal stabilizes. It stops feeling like survival when you stop needing it to be proof of your worth. The work doesn't get lighter. You get stronger — and that's not the same thing but it is better."
+    },
+    {
+        q: "Tell me something I need to hear.",
+        a: "You've been operating under the belief that more effort will eventually close the gap. It won't. The gap closes when you shift your identity — when you stop operating like someone trying to arrive and start operating like someone who is already there. The work doesn't change. The person doing it does."
+    },
+    {
+        q: "What is my purpose right now?",
+        a: "Right now, today: to be so clear about what you're building that people can feel it before you even explain it. Your purpose is not ambiguous — you just haven't said it as loudly externally as you've been saying it internally. Match the frequency. Go loud."
+    }
+];
+
+(function buildOracle() {
+    const list = document.getElementById('oracle-list');
+    oracleQA.forEach((qa, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'oracle-q';
+        btn.textContent = qa.q;
+        btn.onclick = () => showAnswer(i);
+        list.appendChild(btn);
+    });
+})();
+
+function showAnswer(i) {
+    document.getElementById('oracle-list-wrap').style.display = 'none';
+    document.getElementById('answer-text').textContent = oracleQA[i].a;
+    const ans = document.getElementById('oracle-answer');
+    ans.classList.add('visible');
+
+    const btn = document.getElementById('oracle-btn');
+    btn.classList.add('shake');
+    setTimeout(() => btn.classList.remove('shake'), 500);
+}
+
+function oracleBack() {
+    document.getElementById('oracle-list-wrap').style.display = 'block';
+    document.getElementById('oracle-answer').classList.remove('visible');
+}
+
+function openOracle() {
+    document.getElementById('oracle-panel').classList.add('open');
+    showOracleBtn();
+}
+
+function closeOracle() {
+    document.getElementById('oracle-panel').classList.remove('open');
+}
+
+document.getElementById('oracle-btn').addEventListener('click', () => {
+    const p = document.getElementById('oracle-panel');
+    p.classList.contains('open') ? closeOracle() : openOracle();
+});
+
+// Close oracle on outside click
+document.addEventListener('click', e => {
+    const panel = document.getElementById('oracle-panel');
+    const btn   = document.getElementById('oracle-btn');
+    if (panel.classList.contains('open') && !panel.contains(e.target) && e.target !== btn) {
+        closeOracle();
+    }
+});
+</script>
+</body>
+</html>
