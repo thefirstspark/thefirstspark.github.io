@@ -456,6 +456,111 @@
 
         .cat-grid { grid-template-columns: repeat(3, 1fr); }
 
+        /* ─── PROTOTYPE CALLOUT ─── */
+        .proto-wrap {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            padding: 0 28px;
+        }
+
+        .proto-box {
+            max-width: 1100px;
+            margin: 0 auto;
+            border: 1px solid rgba(34,211,238,.35);
+            background: linear-gradient(135deg,
+                rgba(34,211,238,.04) 0%,
+                rgba(139,92,246,.06) 50%,
+                rgba(251,191,36,.04) 100%);
+            padding: 44px 48px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .proto-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--nebula), var(--spark), var(--cyan));
+            background-size: 200% 100%;
+            animation: protoLine 4s linear infinite;
+        }
+        @keyframes protoLine {
+            0%   { background-position: 0% 0%;   }
+            100% { background-position: 200% 0%; }
+        }
+
+        .proto-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .55em;
+            letter-spacing: .35em;
+            text-transform: uppercase;
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            padding: 4px 14px;
+            margin-bottom: 14px;
+        }
+
+        .proto-dot {
+            width: 6px; height: 6px;
+            background: var(--cyan);
+            border-radius: 50%;
+            animation: protoBlink 1.2s ease-in-out infinite;
+        }
+        @keyframes protoBlink { 0%,100%{opacity:1;} 50%{opacity:.2;} }
+
+        .proto-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 900;
+            letter-spacing: .08em;
+            color: var(--white);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .proto-title span { color: var(--cyan); }
+
+        .proto-desc {
+            font-size: .82em;
+            color: var(--dim);
+            line-height: 1.85;
+            max-width: 580px;
+        }
+
+        .proto-desc strong { color: var(--white); }
+
+        .proto-cta {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            padding: 16px 30px;
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background .2s, color .2s, box-shadow .2s;
+            display: inline-block;
+        }
+        .proto-cta:hover {
+            background: var(--cyan);
+            color: var(--void);
+            box-shadow: 0 0 28px rgba(34,211,238,.5);
+        }
+
+        @media (max-width: 760px) {
+            .proto-box { grid-template-columns: 1fr; gap: 24px; padding: 30px 24px; }
+        }
+
         /* ─── SOUL MAPS ─── */
         #soul-maps {
             border-top: 1px solid rgba(139,92,246,.2);
@@ -860,6 +965,7 @@
             <li><a href="#platform">Platform</a></li>
             <li><a href="#soul-maps">Soul Maps</a></li>
             <li><a href="#invest">Invest</a></li>
+            <li><a href="https://sparkverse.thefirstspark.shop" target="_blank" style="color:var(--cyan);">Prototype ✦</a></li>
         </ul>
     </nav>
     <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" class="nav-cta">Enter Sparkverse →</a>
@@ -1119,6 +1225,37 @@
     </div>
 </section>
 
+<!-- ═══ SPARKVERSE PROTOTYPE CALLOUT ═══ -->
+<div class="proto-wrap" style="padding-top:2px; padding-bottom:2px;">
+    <div class="proto-box">
+        <div>
+            <div class="proto-badge">
+                <span class="proto-dot"></span>
+                Live Prototype
+            </div>
+            <div class="proto-title">
+                <span>sparkverse.thefirstspark.shop</span><br>
+                is Already Running.
+            </div>
+            <p class="proto-desc">
+                This is not a mockup. This is not a pitch deck slide.
+                The Sparkverse is <strong>live, interactive, and operating right now</strong>
+                as a working prototype — soul maps, consciousness tools, orbital interfaces,
+                and community infrastructure all in one place.
+                <br><br>
+                What you're seeing is the prototype. <strong>What it becomes with the $200K raise
+                will change how humans understand themselves.</strong> A full consciousness technology
+                platform with standalone AI, NFT identity layers, mobile integration, and a
+                physical community to anchor it all. The foundation is built.
+                The world just hasn't caught up yet.
+            </p>
+        </div>
+        <a href="https://sparkverse.thefirstspark.shop" target="_blank" class="proto-cta">
+            View the Prototype →
+        </a>
+    </div>
+</div>
+
 <div class="divider-line"></div>
 
 <!-- ═══ SOUL MAPS FEATURE ═══ -->
@@ -1317,6 +1454,7 @@
     <div class="footer-tag">Reality is programmable. You are the first spark.</div>
     <div class="footer-links">
         <a href="/sparkverse.html">Sparkverse</a>
+        <a href="https://sparkverse.thefirstspark.shop" target="_blank" style="color:var(--cyan);">Live Prototype</a>
         <a href="#soul-maps">Soul Maps</a>
         <a href="https://thefirstspark.shop/investor-deck-v2.html">Investor Deck</a>
         <a href="mailto:kate@thefirstspark.shop">Contact</a>
