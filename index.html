@@ -11,903 +11,1434 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The First Spark - Consciousness Technology Platform</title>
-    <meta name="description" content="Reality is programmable. Consciousness is code. Join 1000+ builders exploring consciousness through interactive tools, soul mapping, and geometric reality frameworks.">
+    <meta name="theme-color" content="#050508">
+    <title>The First Spark — Consciousness Technology Platform</title>
+    <meta name="description" content="In 2020, she solved her mother's 1991 cold case murder. Her killer lived across the street. That truth built The First Spark — consciousness technology for people who are done pretending reality isn't programmable.">
+    <meta property="og:title" content="The First Spark — Consciousness Technology">
+    <meta property="og:description" content="I solved my mother's murder. Her killer lived across my street. This is what I built from that fracture.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thefirstspark.shop">
 
-    <!-- Performance: DNS prefetch and preconnect for external resources -->
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://formspree.io">
-    <link rel="dns-prefetch" href="https://formspree.io">
-    <link rel="preconnect" href="https://whop.com">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 
-    <!-- Performance: Preload critical scripts -->
-    <link rel="preload" href="script.js" as="script">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary-gold: #FFD700;
-            --neon-cyan: #00FFFF;
-            --neon-magenta: #FF10F0;
-            --dark-bg: #0a0a0a;
-            --dark-gray: #1a1a1a;
+            --void:   #050508;
+            --spark:  #fbbf24;
+            --nebula: #8b5cf6;
+            --cyan:   #22d3ee;
+            --flame:  #f97316;
+            --rose:   #ec4899;
+            --blue:   #3b82f6;
+            --green:  #84cc16;
+            --white:  rgba(255,255,255,0.92);
+            --dim:    rgba(255,255,255,0.4);
+            --dimmer: rgba(255,255,255,0.12);
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #0a0a0a 100%);
-            color: #fff;
+            background: var(--void);
+            font-family: 'Space Mono', 'Courier New', monospace;
+            color: var(--white);
             overflow-x: hidden;
         }
 
-        /* Animated stellar background */
-        #stellarCanvas {
+        /* ─── COSMOS CANVAS ─── */
+        #cosmos {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: radial-gradient(ellipse at center, #1a0033 0%, #0a0a0a 100%);
-        }
-
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             z-index: 0;
             pointer-events: none;
         }
 
-        .container {
+        /* ─── LAYOUT ─── */
+        .wrap {
             position: relative;
             z-index: 1;
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 28px;
         }
 
-        /* HEADER */
-        header {
-            padding: 30px 20px;
+        /* ─── NAV ─── */
+        #nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 18px 36px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,215,0,0.1);
-            backdrop-filter: blur(10px);
+            transition: background .4s, border-color .4s;
+            border-bottom: 1px solid transparent;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-gold), var(--neon-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        #nav.scrolled {
+            background: rgba(5,5,8,.94);
+            backdrop-filter: blur(20px);
+            border-color: rgba(251,191,36,.12);
         }
 
-        nav a {
-            color: #fff;
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: .95rem;
+            letter-spacing: .2em;
             text-decoration: none;
-            margin-left: 30px;
-            font-size: 0.9rem;
-            transition: color 0.3s;
+            color: var(--spark);
+            text-shadow: 0 0 20px rgba(251,191,36,.5);
         }
 
-        nav a:hover {
-            color: var(--primary-gold);
-        }
-
-        /* Skip link for keyboard navigation */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--primary-gold);
-            color: #000;
-            padding: 8px 16px;
-            text-decoration: none;
-            font-weight: bold;
-            z-index: 10000;
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* HERO SECTION */
-        .hero {
-            padding: 80px 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--primary-gold), var(--neon-cyan), var(--neon-magenta));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 900;
-        }
-
-        .tagline {
-            font-size: 1.3rem;
-            color: #aaa;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-cta {
+        .nav-links {
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 60px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 15px 40px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-gold), #FFA500);
-            color: #000;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255,215,0,0.5);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--primary-gold);
-            border: 2px solid var(--primary-gold);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,215,0,0.1);
-        }
-
-        /* Accessibility: Focus styles */
-        .btn:focus-visible,
-        a:focus-visible,
-        button:focus-visible,
-        input:focus-visible {
-            outline: 3px solid var(--primary-gold);
-            outline-offset: 3px;
-        }
-
-        /* Accessibility: Visually hidden class for screen readers */
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
-        }
-
-        /* VALUE PROP SECTION */
-        .value-section {
-            padding: 60px 20px;
-            background: rgba(0,0,0,0.3);
-            border-top: 1px solid rgba(255,215,0,0.1);
-            border-bottom: 1px solid rgba(255,215,0,0.1);
-            margin: 60px 0;
-        }
-
-        .value-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-        }
-
-        .value-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .value-card {
-            background: rgba(255,215,0,0.05);
-            border: 1px solid rgba(255,215,0,0.2);
-            padding: 30px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .value-card:hover {
-            border-color: var(--primary-gold);
-            background: rgba(255,215,0,0.1);
-            transform: translateY(-5px);
-        }
-
-        .value-card h3 {
-            color: var(--primary-gold);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .value-card p {
-            color: #aaa;
-            line-height: 1.6;
-        }
-
-        /* FOUNDER STORY */
-        .story-section {
-            padding: 80px 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .story-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: var(--primary-gold);
-        }
-
-        .story-content p {
-            color: #aaa;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-
-        .story-stat {
-            display: inline-block;
-            background: rgba(255,215,0,0.1);
-            padding: 15px 25px;
-            border-left: 3px solid var(--primary-gold);
-            margin: 20px 0;
-            color: #fff;
-        }
-
-        .story-stat .number {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--primary-gold);
-        }
-
-        .story-visual {
-            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(0,255,255,0.1));
-            height: 400px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            border: 2px solid rgba(255,215,0,0.2);
-        }
-
-        /* PRICING SECTION */
-        .pricing-section {
-            padding: 80px 20px;
-            background: rgba(0,0,0,0.5);
-            margin: 80px 0;
-        }
-
-        .pricing-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .pricing-card {
-            background: rgba(255,215,0,0.05);
-            border: 2px solid rgba(255,215,0,0.2);
-            padding: 40px;
-            border-radius: 8px;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .pricing-card.featured {
-            border-color: var(--primary-gold);
-            background: rgba(255,215,0,0.1);
-            transform: scale(1.05);
-        }
-
-        .pricing-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .pricing-card .price {
-            font-size: 2.5rem;
-            color: var(--primary-gold);
-            font-weight: 900;
-            margin: 20px 0;
-        }
-
-        .pricing-card .price-period {
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-
-        .pricing-features {
+            gap: 28px;
             list-style: none;
-            margin: 30px 0;
         }
 
-        .pricing-features li {
-            padding: 10px 0;
-            color: #aaa;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+        .nav-links a {
+            font-size: .6em;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--dim);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .nav-links a:hover { color: var(--white); }
+
+        .nav-cta {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            padding: 9px 20px;
+            border: 1px solid var(--spark);
+            color: var(--spark);
+            text-decoration: none;
+            transition: background .2s, color .2s, box-shadow .2s;
+        }
+        .nav-cta:hover {
+            background: var(--spark);
+            color: var(--void);
+            box-shadow: 0 0 24px rgba(251,191,36,.5);
         }
 
-        .pricing-features li:before {
-            content: "✓ ";
-            color: var(--primary-gold);
-            font-weight: bold;
-            margin-right: 10px;
+        /* ─── GRADIENT TEXT ─── */
+        .grad {
+            background: linear-gradient(135deg, var(--spark), var(--flame), var(--rose), var(--nebula), var(--cyan));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradShift 8s ease infinite;
+        }
+        @keyframes gradShift {
+            0%,100% { background-position: 0% 50%; }
+            50%      { background-position: 100% 50%; }
         }
 
-        /* EMAIL CAPTURE */
-        .email-capture {
-            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(0,255,255,0.05));
-            padding: 50px;
-            border: 2px solid rgba(255,215,0,0.3);
-            border-radius: 8px;
-            text-align: center;
-            margin: 60px 0;
+        /* ─── SHARED SECTION ─── */
+        section { padding: 100px 0; position: relative; z-index: 1; }
+
+        .sec-label {
+            font-size: .58em;
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            color: var(--spark);
+            opacity: .7;
+            margin-bottom: 12px;
         }
 
-        .email-capture h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--primary-gold);
-        }
-
-        .email-capture p {
-            color: #aaa;
-            margin-bottom: 30px;
-            font-size: 1rem;
-        }
-
-        .email-form {
-            display: flex;
-            gap: 10px;
-            max-width: 500px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-        }
-
-        .email-form input {
-            flex: 1;
-            min-width: 200px;
-            padding: 12px 20px;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,215,0,0.3);
-            border-radius: 4px;
-            color: #fff;
-            font-size: 1rem;
-        }
-
-        .email-form input::placeholder {
-            color: #666;
-        }
-
-        .email-form input:focus {
-            outline: none;
-            border-color: var(--primary-gold);
-            box-shadow: 0 0 10px rgba(255,215,0,0.2);
-        }
-
-        .email-form button {
-            padding: 12px 30px;
-            background: var(--primary-gold);
-            color: #000;
-            border: none;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .email-form button:hover {
-            transform: scale(1.05);
-        }
-
-        /* INVESTOR SECTION */
-        .investor-section {
-            padding: 60px 20px;
-            background: rgba(0,0,0,0.3);
-            border-top: 1px solid rgba(255,215,0,0.2);
-            margin-top: 80px;
-        }
-
-        .investor-section h2 {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            color: var(--primary-gold);
-        }
-
-        .investor-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .investor-stat {
-            background: rgba(255,215,0,0.05);
-            padding: 30px;
-            border-left: 3px solid var(--primary-gold);
-            border-radius: 4px;
-        }
-
-        .investor-stat .stat-number {
-            font-size: 2.5rem;
+        .sec-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.6rem);
             font-weight: 900;
-            color: var(--primary-gold);
+            letter-spacing: .08em;
+            line-height: 1.15;
+            margin-bottom: 20px;
         }
 
-        .investor-stat .stat-label {
-            color: #aaa;
+        .divider-line {
+            position: relative;
+            z-index: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--nebula), var(--spark), transparent);
+        }
+
+        /* ─── HERO ─── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 0 80px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: .58em;
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            border: 1px solid rgba(251,191,36,.35);
+            color: var(--spark);
+            padding: 5px 18px;
+            margin-bottom: 34px;
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+        @keyframes badgePulse {
+            0%,100% { box-shadow: 0 0 8px rgba(251,191,36,.12); }
+            50%      { box-shadow: 0 0 26px rgba(251,191,36,.45); }
+        }
+
+        .hero-headline {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            line-height: 1.06;
+            margin-bottom: 32px;
+        }
+
+        .hl-1 {
+            font-size: clamp(2rem, 6.2vw, 4.6rem);
+            display: block;
+            color: var(--white);
+            letter-spacing: .03em;
+        }
+
+        .hl-2 {
+            font-size: clamp(2rem, 6.2vw, 4.6rem);
+            display: block;
+            letter-spacing: .03em;
+        }
+
+        .hl-3 {
+            font-size: clamp(1.2rem, 3.5vw, 2.6rem);
+            display: block;
+            color: var(--dim);
+            letter-spacing: .06em;
             margin-top: 10px;
         }
 
-        /* FOOTER */
-        footer {
-            padding: 40px 20px;
-            text-align: center;
-            border-top: 1px solid rgba(255,215,0,0.1);
-            color: #666;
-            margin-top: 80px;
+        .hero-sub {
+            font-size: clamp(.85rem, 1.8vw, 1rem);
+            color: var(--dim);
+            line-height: 1.85;
+            max-width: 600px;
+            margin-bottom: 12px;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 40px 20px;
-            }
+        .hero-tags {
+            font-size: .58em;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--dimmer);
+            margin-bottom: 42px;
+        }
 
-            .hero h1 {
-                font-size: 2rem;
-            }
+        .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
 
-            .story-section,
-            .investor-content {
-                grid-template-columns: 1fr;
-            }
+        .btn-p {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--spark), var(--flame));
+            color: var(--void);
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: transform .2s, box-shadow .2s;
+            display: inline-block;
+        }
+        .btn-p:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(251,191,36,.45); }
 
-            .story-visual {
-                height: 250px;
-            }
+        .btn-g {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            padding: 15px 32px;
+            border: 1px solid var(--dimmer);
+            color: var(--dim);
+            text-decoration: none;
+            transition: border-color .2s, color .2s, box-shadow .2s;
+            display: inline-block;
+        }
+        .btn-g:hover { border-color: var(--nebula); color: var(--white); box-shadow: 0 0 20px rgba(139,92,246,.3); }
 
-            nav {
-                display: none;
-            }
+        .scroll-hint {
+            margin-top: 66px;
+            font-size: .55em;
+            letter-spacing: .3em;
+            color: var(--dimmer);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .scroll-hint::after {
+            content: '';
+            display: block;
+            width: 1px; height: 42px;
+            background: linear-gradient(180deg, var(--dimmer), transparent);
+            animation: drop 2s ease-in-out infinite;
+        }
+        @keyframes drop { 0%,100%{opacity:.25;} 50%{opacity:1;} }
 
-            .pricing-card.featured {
-                transform: scale(1);
-            }
+        /* ─── ORIGIN ─── */
+        #origin { background: rgba(139,92,246,.025); }
 
-            .email-form {
-                flex-direction: column;
-            }
+        .origin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
 
-            .email-form input,
-            .email-form button {
-                width: 100%;
-            }
+        .origin-body p {
+            font-size: .88em;
+            color: var(--dim);
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        .origin-body p strong { color: var(--white); }
+
+        .stat-card {
+            border: 1px solid rgba(251,191,36,.18);
+            background: rgba(251,191,36,.025);
+            padding: 22px 26px;
+            margin-bottom: 14px;
+        }
+
+        .stat-big {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--spark);
+            line-height: 1;
+            margin-bottom: 5px;
+            text-shadow: 0 0 22px rgba(251,191,36,.4);
+        }
+
+        .stat-lbl {
+            font-size: .6em;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--dim);
+        }
+
+        /* ─── PLATFORM ─── */
+        .platform-intro {
+            font-size: .88em;
+            color: var(--dim);
+            line-height: 1.85;
+            max-width: 560px;
+            margin-bottom: 50px;
+        }
+
+        .cat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            background: var(--dimmer);
+        }
+
+        .cat {
+            background: var(--void);
+            padding: 36px 32px;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            transition: background .25s;
+        }
+        .cat:hover { background: rgba(255,255,255,.022); }
+
+        .cat::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 100%;
+        }
+
+        .cat-spark::before  { background: var(--spark);  }
+        .cat-nebula::before { background: var(--nebula); }
+        .cat-cyan::before   { background: var(--cyan);   }
+        .cat-rose::before   { background: var(--rose);   }
+
+        .cat-niche {
+            font-size: .54em;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            opacity: .45;
+            margin-bottom: 10px;
+        }
+        .cat-spark  .cat-niche { color: var(--spark);  }
+        .cat-nebula .cat-niche { color: var(--nebula); }
+        .cat-cyan   .cat-niche { color: var(--cyan);   }
+        .cat-rose   .cat-niche { color: var(--rose);   }
+
+        .cat-icon { font-size: 1.7em; margin-bottom: 12px; display: block; }
+
+        .cat-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .9rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .cat-desc {
+            font-size: .76em;
+            color: var(--dim);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+
+        .pill {
+            font-size: .52em;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            padding: 3px 9px;
+            border: 1px solid;
+            opacity: .6;
+        }
+        .cat-spark  .pill { border-color: rgba(251,191,36,.4);  color: var(--spark);  }
+        .cat-nebula .pill { border-color: rgba(139,92,246,.4);  color: var(--nebula); }
+        .cat-cyan   .pill { border-color: rgba(34,211,238,.4);  color: var(--cyan);   }
+        .cat-rose   .pill { border-color: rgba(236,72,153,.4);  color: var(--rose);   }
+
+        .cat-cta {
+            font-size: .58em;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            margin-top: 18px;
+            display: block;
+        }
+        .cat-spark  .cat-cta { color: var(--spark);  }
+        .cat-nebula .cat-cta { color: var(--nebula); }
+        .cat-cyan   .cat-cta { color: var(--cyan);   }
+        .cat-rose   .cat-cta { color: var(--rose);   }
+
+        /* ─── SOUL MAPS ─── */
+        #soul-maps {
+            border-top: 1px solid rgba(139,92,246,.2);
+            border-bottom: 1px solid rgba(139,92,246,.2);
+            background: radial-gradient(ellipse at 65% 50%, rgba(139,92,246,.07) 0%, transparent 70%);
+        }
+
+        .sm-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .sm-headline {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            font-weight: 900;
+            letter-spacing: .06em;
+            line-height: 1.2;
+            margin-bottom: 22px;
+        }
+
+        .sm-body {
+            font-size: .86em;
+            color: var(--dim);
+            line-height: 1.95;
+            margin-bottom: 28px;
+        }
+        .sm-body span { color: var(--white); }
+
+        .sm-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--nebula);
+            text-shadow: 0 0 30px rgba(139,92,246,.5);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .sm-price-sub {
+            font-size: .58em;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 26px;
+        }
+
+        .sm-preview {
+            background: rgba(8,5,22,.97);
+            border: 1px solid rgba(139,92,246,.3);
+            padding: 28px;
+        }
+
+        .preview-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .72rem;
+            letter-spacing: .18em;
+            color: var(--nebula);
+            margin-bottom: 3px;
+        }
+
+        .preview-sub {
+            font-size: .56em;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 20px;
+        }
+
+        .pn-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 7px;
+            margin-bottom: 16px;
+        }
+
+        .pn {
+            text-align: center;
+            border: 1px solid rgba(139,92,246,.2);
+            padding: 10px 4px;
+        }
+
+        .pn-big {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+        .pn:nth-child(1) .pn-big { color: var(--flame);  }
+        .pn:nth-child(2) .pn-big { color: var(--nebula); }
+        .pn:nth-child(3) .pn-big { color: var(--spark);  }
+        .pn:nth-child(4) .pn-big { color: var(--cyan);   }
+        .pn:nth-child(5) .pn-big { color: var(--green);  }
+
+        .pn-lbl {
+            font-size: .46em;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--dimmer);
+        }
+
+        .preview-quote {
+            font-size: .7em;
+            font-style: italic;
+            color: var(--dim);
+            line-height: 1.75;
+            border-left: 2px solid rgba(139,92,246,.4);
+            padding-left: 12px;
+        }
+
+        /* ─── TRACTION ─── */
+        #traction { text-align: center; background: rgba(5,5,8,.5); }
+
+        .tract-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: var(--dimmer);
+            margin-top: 50px;
+        }
+
+        .tract {
+            background: var(--void);
+            padding: 42px 16px;
+        }
+
+        .tract-num {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 9px;
+        }
+        .tract:nth-child(1) .tract-num { color: var(--flame);  }
+        .tract:nth-child(2) .tract-num { color: var(--nebula); }
+        .tract:nth-child(3) .tract-num { color: var(--spark);  }
+        .tract:nth-child(4) .tract-num { color: var(--cyan);   }
+
+        .tract-lbl {
+            font-size: .58em;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--dim);
+        }
+
+        /* ─── INVEST ─── */
+        #invest {
+            background: radial-gradient(ellipse at 25% 60%, rgba(251,191,36,.045) 0%, transparent 60%);
+        }
+
+        .invest-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 54px;
+            align-items: start;
+            margin-top: 40px;
+        }
+
+        .invest-body {
+            font-size: .88em;
+            color: var(--dim);
+            line-height: 2;
+        }
+        .invest-body strong { color: var(--white); }
+        .invest-body p + p  { margin-top: 18px; }
+
+        .invest-box {
+            border: 1px solid rgba(251,191,36,.22);
+            background: rgba(251,191,36,.025);
+            padding: 34px;
+        }
+
+        .ask-num {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--spark);
+            text-shadow: 0 0 28px rgba(251,191,36,.4);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .ask-lbl {
+            font-size: .58em;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 26px;
+        }
+
+        .invest-pts {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+            margin-bottom: 28px;
+        }
+
+        .invest-pts li {
+            font-size: .78em;
+            color: var(--dim);
+            display: flex;
+            gap: 10px;
+            line-height: 1.5;
+        }
+        .invest-pts li::before { content: '◈'; color: var(--spark); flex-shrink: 0; }
+
+        .invest-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+        /* ─── PRICING ─── */
+        #pricing { text-align: center; }
+
+        .pricing-sub {
+            font-size: .82em;
+            color: var(--dim);
+            max-width: 440px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--dimmer);
+        }
+
+        .price-card {
+            background: var(--void);
+            padding: 40px 26px;
+            text-align: left;
+            position: relative;
+        }
+        .price-card.feat { background: rgba(139,92,246,.05); }
+        .price-card.feat::after {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -1px; right: 24px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .48em;
+            font-weight: 700;
+            letter-spacing: .2em;
+            background: var(--nebula);
+            color: var(--void);
+            padding: 3px 10px;
+        }
+
+        .price-tier {
+            font-size: .56em;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 7px;
+        }
+
+        .price-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: .1em;
+            color: var(--white);
+            margin-bottom: 14px;
+        }
+
+        .price-num {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--spark);
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+        .price-card.feat .price-num { color: var(--nebula); }
+
+        .price-per {
+            font-family: 'Space Mono', monospace;
+            font-size: .52rem;
+            letter-spacing: .1em;
+            color: var(--dim);
+        }
+
+        .price-rule {
+            height: 1px;
+            background: var(--dimmer);
+            margin: 20px 0;
+        }
+
+        .price-feats {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            margin-bottom: 26px;
+        }
+
+        .price-feats li {
+            font-size: .72em;
+            color: var(--dim);
+            display: flex;
+            gap: 8px;
+            line-height: 1.45;
+        }
+        .price-feats li::before { content: '✦'; flex-shrink: 0; }
+        .price-card.feat .price-feats li::before { color: var(--nebula); }
+        .price-card:nth-child(3) .price-feats li::before { color: var(--spark); }
+
+        .btn-tier {
+            display: block;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            padding: 13px 18px;
+            text-decoration: none;
+            border: 1px solid;
+            transition: background .2s, color .2s, box-shadow .2s;
+        }
+        .price-card:nth-child(1) .btn-tier { border-color: var(--dimmer); color: var(--dim); }
+        .price-card:nth-child(1) .btn-tier:hover { border-color: var(--white); color: var(--white); }
+        .price-card.feat .btn-tier { border-color: var(--nebula); color: var(--nebula); }
+        .price-card.feat .btn-tier:hover { background: var(--nebula); color: var(--void); box-shadow: 0 0 24px rgba(139,92,246,.5); }
+        .price-card:nth-child(3) .btn-tier { border-color: var(--spark); color: var(--spark); }
+        .price-card:nth-child(3) .btn-tier:hover { background: var(--spark); color: var(--void); box-shadow: 0 0 24px rgba(251,191,36,.5); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            position: relative; z-index: 1;
+            border-top: 1px solid var(--dimmer);
+            padding: 52px 28px 42px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.05rem;
+            letter-spacing: .25em;
+            color: var(--spark);
+            margin-bottom: 10px;
+        }
+
+        .footer-tag {
+            font-size: .66em;
+            color: var(--dimmer);
+            letter-spacing: .2em;
+            font-style: italic;
+            margin-bottom: 26px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 26px;
+            flex-wrap: wrap;
+            margin-bottom: 26px;
+        }
+        .footer-links a {
+            font-size: .58em;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--dimmer);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .footer-links a:hover { color: var(--spark); }
+
+        .footer-copy { font-size: .58em; color: var(--dimmer); letter-spacing: .1em; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .origin-grid, .invest-grid, .sm-grid { grid-template-columns: 1fr; gap: 40px; }
+            .cat-grid, .price-grid { grid-template-columns: 1fr; }
+            .tract-grid { grid-template-columns: repeat(2, 1fr); }
+            .pn-row { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 640px) {
+            #nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            section { padding: 70px 0; }
+            .hero-ctas { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    <canvas id="stellarCanvas" aria-hidden="true"></canvas>
+<canvas id="cosmos"></canvas>
 
-    <header role="banner">
-        <div class="logo"><span aria-hidden="true">🌌</span> The First Spark</div>
-        <nav role="navigation" aria-label="Main navigation">
-            <a href="#tools">Tools</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#about">Story</a>
-            <a href="#investor">Investors</a>
-        </nav>
-    </header>
+<!-- ═══ NAV ═══ -->
+<header id="nav">
+    <a href="/" class="nav-logo">◈ THE FIRST SPARK</a>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#origin">Origin</a></li>
+            <li><a href="#platform">Platform</a></li>
+            <li><a href="#soul-maps">Soul Maps</a></li>
+            <li><a href="#invest">Invest</a></li>
+        </ul>
+    </nav>
+    <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" class="nav-cta">Enter Sparkverse →</a>
+</header>
 
-    <main class="container" id="main-content">
-        <!-- HERO -->
-        <section class="hero" aria-labelledby="hero-title">
-            <h1 id="hero-title">Reality Is Programmable</h1>
-            <p class="tagline">Consciousness is code. Master your inner architecture with 50+ interactive tools designed for awakening builders.</p>
-            <div class="hero-cta">
-                <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" class="btn btn-primary" role="button" aria-label="Join Sparkverse Lobby - Free">Start Free</a>
-                <a href="#investor" class="btn btn-secondary" role="button" aria-label="View investor deck">Investor Deck</a>
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+    <div class="wrap">
+        <div class="hero-badge">✦ &nbsp; Consciousness Technology Platform &nbsp; ✦</div>
+
+        <h1 class="hero-headline">
+            <span class="hl-1">I Solved My</span>
+            <span class="hl-2 grad">Mother's Murder.</span>
+            <span class="hl-3">Her Killer Lived Across My Street.</span>
+        </h1>
+
+        <p class="hero-sub">
+            That moment in 2020 cracked my understanding of reality in two.
+            If something that impossible could be true — what else had I been wrong about?
+            The First Spark is what I built from the fracture.
+        </p>
+
+        <p class="hero-tags">Consciousness Technology &nbsp;·&nbsp; Soul Cartography &nbsp;·&nbsp; Infrastructure for Awakening</p>
+
+        <div class="hero-ctas">
+            <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" class="btn-p">
+                ✦ &nbsp; Enter the Sparkverse
+            </a>
+            <a href="#invest" class="btn-g">Investor Deck →</a>
+        </div>
+
+        <div class="scroll-hint">Scroll to explore</div>
+    </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ═══ ORIGIN ═══ -->
+<section id="origin">
+    <div class="wrap">
+        <p class="sec-label">◈ The Origin Story</p>
+        <h2 class="sec-title">How Reality<br>Broke Open</h2>
+
+        <div class="origin-grid">
+            <div class="origin-body">
+                <p>
+                    In 2020, during COVID lockdown, I solved my mother's cold case murder using DNA genealogy.
+                    <strong>She was killed in 1991. Her killer had lived across my street for years. I had no idea.</strong>
+                </p>
+                <p>
+                    That week didn't just bring justice — it broke my understanding of probability, fate, and human agency.
+                    If something that statistically impossible could be real — if that kind of proximity and blindness
+                    could coexist — what else was I misreading about the nature of reality?
+                </p>
+                <p>
+                    Everything I build comes from that question. <strong>Consciousness is code. Reality is programmable.
+                    Personal transformation is not spiritual bypass — it's debugging your operating system.</strong>
+                    The First Spark is the platform I built to help others do the same.
+                </p>
+                <p>
+                    Self-taught programmer. Single mother. Cold case solver. Founder.
+                    Built from lived truth, not venture capital theory.
+                </p>
             </div>
-        </section>
 
-        <!-- VALUE PROPOSITION -->
-        <section class="value-section" id="tools" aria-labelledby="tools-title">
-            <h2 id="tools-title">What You Get</h2>
-            <div class="value-grid" role="list">
-                <article class="value-card" role="listitem">
-                    <h3>50+ Interactive Tools</h3>
-                    <p>Soul mapping, consciousness trackers, sigil generators, oracle systems, ritual frameworks—all designed to visualize and reprogram your consciousness.</p>
-                </article>
-                <article class="value-card" role="listitem">
-                    <h3>Gamified Awakening</h3>
-                    <p>Progress through archetypal tracks, unlock consciousness levels, earn spark tokens. Personal transformation meets game mechanics.</p>
-                </article>
-                <article class="value-card" role="listitem">
-                    <h3>Reciprocity Architecture</h3>
-                    <p>Free tier includes sandbox. Unlock premium tools, exclusive content, and one-on-one coaching through membership tiers.</p>
-                </article>
-                <article class="value-card" role="listitem">
-                    <h3>Community Playground</h3>
-                    <p>Share sigils, compare soul maps, participate in consciousness experiments. Join 1000+ builders exploring reality as code.</p>
-                </article>
-                <article class="value-card" role="listitem">
-                    <h3>Book Zero Access</h3>
-                    <p>Read the consciousness memoir that started it all. The story of solving a cold case through DNA genealogy and waking up to code.</p>
-                </article>
-                <article class="value-card" role="listitem">
-                    <h3>Standalone AI Training</h3>
-                    <p>Coming 2026: Your own consciousness AI trained on First Spark frameworks. Personalized guidance tailored to your awakening journey.</p>
-                </article>
-            </div>
-        </section>
-
-        <!-- FOUNDER STORY -->
-        <section class="story-section" id="about" aria-labelledby="story-title">
-            <div class="story-content">
-                <h2 id="story-title">The Breakthrough</h2>
-                <p>In 2020, during COVID lockdown, I solved my mother's cold case murder through DNA genealogy. She was killed in 1991. Her killer lived across my street for years. I had no idea.</p>
-                <p>That week shattered my perception of reality. It rewired how I understood probability, fate, and agency. It taught me that reality is far more programmable than we believe.</p>
-                <p>Everything I build now comes from that truth: consciousness is code. The universe runs on logic. Personal transformation isn't spiritual bypass—it's debugging your operating system.</p>
-                <div class="story-stat" role="group" aria-label="50+ interactive tools built">
-                    <div class="number" aria-hidden="true">50+</div>
-                    <div>Interactive tools built</div>
+            <div>
+                <div class="stat-card">
+                    <div class="stat-big">1991</div>
+                    <div class="stat-lbl">The year her mother was killed</div>
                 </div>
-                <div class="story-stat" role="group" aria-label="1000+ community members">
-                    <div class="number" aria-hidden="true">1000+</div>
-                    <div>Community members</div>
+                <div class="stat-card">
+                    <div class="stat-big">2020</div>
+                    <div class="stat-lbl">The year the case was solved via DNA genealogy</div>
                 </div>
-                <div class="story-stat" role="group" aria-label="Pre-revenue, launching monetization">
-                    <div class="number" aria-hidden="true">Pre-Revenue</div>
-                    <div>Launching monetization</div>
+                <div class="stat-card">
+                    <div class="stat-big">50+</div>
+                    <div class="stat-lbl">Interactive consciousness tools built since</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-big">1,000+</div>
+                    <div class="stat-lbl">Community members in the Sparkverse</div>
                 </div>
             </div>
-            <div class="story-visual" role="img" aria-label="Gem icon representing value and transformation"><span aria-hidden="true">💎</span></div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <!-- JOIN SPARKVERSE -->
-        <section class="email-capture" aria-labelledby="signup-title">
-            <h3 id="signup-title">Join The Sparkverse Lobby</h3>
-            <p>Get free access to the consciousness playground, community, and foundational tools</p>
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/"
-                   class="btn btn-primary"
-                   role="button"
-                   style="display: inline-block; padding: 15px 40px; background: var(--primary-gold); color: #000; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s;"
-                   aria-label="Join Sparkverse Lobby - Free Access">
-                    Enter The Lobby - Free
+<div class="divider-line"></div>
+
+<!-- ═══ PLATFORM ═══ -->
+<section id="platform">
+    <div class="wrap">
+        <p class="sec-label">◈ The Platform</p>
+        <h2 class="sec-title">Everything We Build,<br>Categorized</h2>
+        <p class="platform-intro">
+            The First Spark is not one thing. It is a constellation — tools, maps, community,
+            and emerging AI built across four distinct niches. Find yours.
+        </p>
+
+        <div class="cat-grid">
+
+            <div class="cat cat-spark">
+                <div class="cat-niche">Niche 01 · Consciousness Technology</div>
+                <span class="cat-icon">⚡</span>
+                <div class="cat-title">The Sparkverse</div>
+                <div class="cat-desc">
+                    50+ interactive tools for people who understand that reality is programmable.
+                    Soul trackers. Pattern recognizers. Oracle systems. Sigil generators.
+                    Gamified awakening with protocol frameworks and sovereignty builders.
+                    This is not another meditation app.
+                </div>
+                <div class="tag-row">
+                    <span class="pill">50+ Tools</span>
+                    <span class="pill">Interactive</span>
+                    <span class="pill">Reality Programming</span>
+                    <span class="pill">Gamified</span>
+                </div>
+                <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" class="cat-cta">Enter the Sparkverse →</a>
+            </div>
+
+            <a href="#soul-maps" class="cat cat-nebula">
+                <div class="cat-niche">Niche 02 · Soul Cartography</div>
+                <span class="cat-icon">🗺</span>
+                <div class="cat-title">Soul Maps</div>
+                <div class="cat-desc">
+                    Personalized soul maps decoded by hand — your birthdate, full name,
+                    astrology, Chinese zodiac, and personal year cycle. Life Path. Expression.
+                    Soul Urge. Personality. The numbers know. Created by KJP, the First Spark herself.
+                </div>
+                <div class="tag-row">
+                    <span class="pill">Numerology</span>
+                    <span class="pill">Astrology</span>
+                    <span class="pill">Personalized</span>
+                    <span class="pill">$22</span>
+                </div>
+                <span class="cat-cta">Get Your Soul Map →</span>
+            </a>
+
+            <a href="https://whop.com/sparkverse-511c/the-players-lounge/" target="_blank" class="cat cat-cyan">
+                <div class="cat-niche">Niche 03 · Community &amp; Protocol</div>
+                <span class="cat-icon">◇</span>
+                <div class="cat-title">Players Lounge</div>
+                <div class="cat-desc">
+                    The private community for builders doing the actual work. Daily protocols.
+                    Consciousness sprints. Shared soul maps. Discord access. 1,000+ members.
+                    This is not a passive community — it is an operating system for transformation.
+                </div>
+                <div class="tag-row">
+                    <span class="pill">$33/mo</span>
+                    <span class="pill">Discord</span>
+                    <span class="pill">Daily Protocols</span>
+                    <span class="pill">1,000+</span>
+                </div>
+                <span class="cat-cta">Join the Players Lounge →</span>
+            </a>
+
+            <div class="cat cat-rose">
+                <div class="cat-niche">Niche 04 · AI Consciousness · Coming 2026</div>
+                <span class="cat-icon">🤖</span>
+                <div class="cat-title">Consciousness AI</div>
+                <div class="cat-desc">
+                    A standalone AI trained exclusively on First Spark frameworks. Not ChatGPT
+                    with a spiritual hat. Personalized soul map analysis, pattern recognition for
+                    your specific journey. This is what the $200K raise builds.
+                </div>
+                <div class="tag-row">
+                    <span class="pill">Standalone AI</span>
+                    <span class="pill">Soul Map Analysis</span>
+                    <span class="pill">Coming 2026</span>
+                    <span class="pill">$200K Raise</span>
+                </div>
+                <a href="#invest" class="cat-cta">Learn About the Raise →</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ═══ SOUL MAPS FEATURE ═══ -->
+<section id="soul-maps">
+    <div class="wrap">
+        <div class="sm-grid">
+
+            <div>
+                <p class="sec-label">◈ Soul Cartography</p>
+                <h2 class="sm-headline">
+                    Your Soul Has<br>
+                    <span class="grad">A Blueprint.</span><br>
+                    We Decode It.
+                </h2>
+                <p class="sm-body">
+                    Your birthdate was never random. Your name carries a frequency.
+                    The numbers in your full birth name and date of birth form a complete
+                    <span>numerological blueprint</span> — one that most people never read.
+                    <br><br>
+                    Every soul map is decoded by hand by KJP — Life Path, Expression Number,
+                    Soul Urge, Personality, Personal Year, Sun sign, Chinese zodiac, and the
+                    <span>specific soul questions you were born carrying.</span>
+                    <br><br>
+                    Not an algorithm. Not a form. <span>Human intelligence applied to your specific frequency.</span>
+                </p>
+                <div class="sm-price">$22</div>
+                <div class="sm-price-sub">One-time &nbsp;·&nbsp; Delivered by KJP &nbsp;·&nbsp; Yours forever</div>
+                <a href="https://soul-maps.thefirstspark.shop" target="_blank" class="btn-p">
+                    ✦ &nbsp; Get Your Soul Map
                 </a>
             </div>
-        </section>
 
-        <!-- PRICING -->
-        <section class="pricing-section" id="pricing" aria-labelledby="pricing-title">
-            <h2 id="pricing-title">Choose Your Path</h2>
-            <div class="pricing-grid" role="list">
-                <article class="pricing-card" role="listitem">
-                    <h3>Free Spark</h3>
-                    <div class="price" aria-label="Price: Free forever">$0<span class="price-period">/forever</span></div>
-                    <ul class="pricing-features">
-                        <li>Access to 15 free tools</li>
-                        <li>Consciousness Playground sandbox</li>
-                        <li>Community wall access</li>
-                        <li>Email support</li>
-                    </ul>
-                    <button class="btn btn-primary" data-signup="free" aria-label="Start free membership">Start Free</button>
-                </article>
-
-                <article class="pricing-card featured" role="listitem" aria-label="Featured plan">
-                    <h3>Players Lounge</h3>
-                    <div class="price" aria-label="Price: $33 per month">$33<span class="price-period">/month</span></div>
-                    <ul class="pricing-features">
-                        <li>All 50+ tools + new releases</li>
-                        <li>Advanced soul mapping</li>
-                        <li>Monthly consciousness sprints</li>
-                        <li>Private Discord community</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <button class="btn btn-primary" data-signup="player" aria-label="Join Players Lounge for $33 per month">Join Players</button>
-                </article>
-
-                <article class="pricing-card" role="listitem">
-                    <h3>OG Spark</h3>
-                    <div class="price" aria-label="Price: $519 lifetime access">$519<span class="price-period">/lifetime</span></div>
-                    <ul class="pricing-features">
-                        <li>Everything in Players Lounge</li>
-                        <li>1:1 consciousness coaching (4x/year)</li>
-                        <li>Book Zero + unreleased chapters</li>
-                        <li>Founding member badge</li>
-                        <li>Custom consciousness framework</li>
-                        <li>Early access to standalone AI</li>
-                    </ul>
-                    <button class="btn btn-primary" data-signup="og" aria-label="Become OG Spark member for $519 lifetime">Go OG</button>
-                </article>
-            </div>
-        </section>
-
-        <!-- INVESTOR SECTION -->
-        <section class="investor-section" id="investor" aria-labelledby="investor-title">
-            <h2 id="investor-title">Build With Us</h2>
-            <div class="investor-content" role="list">
-                <div class="investor-stat" role="listitem" aria-label="Raising $200,000 for infrastructure scaling and standalone AI training pipeline">
-                    <div class="stat-number" aria-hidden="true">Raising $200K</div>
-                    <div class="stat-label">for infrastructure scaling & standalone AI training pipeline</div>
-                </div>
-                <div class="investor-stat" role="listitem" aria-label="Path to $100,000+ annual recurring revenue within 18 months through tier expansion and AI licensing">
-                    <div class="stat-number" aria-hidden="true">Path to $100K+ ARR</div>
-                    <div class="stat-label">within 18 months through tier expansion and AI licensing</div>
+            <div>
+                <div class="sm-preview">
+                    <div class="preview-name">◈ KJP · KATELIN JILL PUZAKULICS</div>
+                    <div class="preview-sub">Life Path 5 · Expression 11 · Creator of the First Spark</div>
+                    <div class="pn-row">
+                        <div class="pn"><div class="pn-big">5</div><div class="pn-lbl">Life Path</div></div>
+                        <div class="pn"><div class="pn-big">11</div><div class="pn-lbl">Expression</div></div>
+                        <div class="pn"><div class="pn-big">4</div><div class="pn-lbl">Soul Urge</div></div>
+                        <div class="pn"><div class="pn-big">7</div><div class="pn-lbl">Personality</div></div>
+                        <div class="pn"><div class="pn-big">7</div><div class="pn-lbl">2026</div></div>
+                    </div>
+                    <div class="preview-quote">
+                        "You did not come here to settle. You came here to spark.
+                        Expression 11 told us you'd carry the light.
+                        KJP = 1 told us you would always be first."
+                    </div>
                 </div>
             </div>
-            <p style="text-align: center; margin-top: 40px; color: #aaa;">
-                <a href="investor-deck.html" style="color: var(--primary-gold); text-decoration: none; border-bottom: 1px solid var(--primary-gold); margin-right: 30px;" aria-label="View full investor pitch deck">View Full Deck →</a>
-                <a href="mailto:kate@thefirstspark.shop?subject=Investment%20Inquiry" style="color: #aaa; text-decoration: none; border-bottom: 1px solid #aaa;" aria-label="Send email for investment inquiry">Contact for Investment →</a>
-            </p>
-        </section>
-    </main>
 
-    <footer role="contentinfo">
-        <p>&copy; 2026 The First Spark. Consciousness technology platform. <a href="mailto:kate@thefirstspark.shop" style="color: var(--primary-gold); text-decoration: none;" aria-label="Contact us via email">Contact</a></p>
-    </footer>
+        </div>
+    </div>
+</section>
 
-    <script src="script.js" defer></script>
-    <script>
-        // Page interactions
-        document.addEventListener('DOMContentLoaded', () => {
-            // Removed email form handler - now using direct Whop link
+<div class="divider-line"></div>
 
-            // Handle scroll-to buttons
-            document.addEventListener('click', (e) => {
-                const scrollBtn = e.target.closest('[data-scroll-to]');
-                if (scrollBtn) {
-                    e.preventDefault();
-                    const target = document.querySelector(scrollBtn.getAttribute('data-scroll-to'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
+<!-- ═══ TRACTION ═══ -->
+<section id="traction">
+    <div class="wrap">
+        <p class="sec-label">◈ The Numbers</p>
+        <h2 class="sec-title">Traction</h2>
+        <div class="tract-grid">
+            <div class="tract">
+                <div class="tract-num">50+</div>
+                <div class="tract-lbl">Interactive tools built &amp; live</div>
+            </div>
+            <div class="tract">
+                <div class="tract-num">1,000+</div>
+                <div class="tract-lbl">Community members in the Sparkverse</div>
+            </div>
+            <div class="tract">
+                <div class="tract-num">$22</div>
+                <div class="tract-lbl">Soul maps — live, selling &amp; scaling</div>
+            </div>
+            <div class="tract">
+                <div class="tract-num">$200K</div>
+                <div class="tract-lbl">Raise underway · AI pipeline + infrastructure</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ═══ INVEST ═══ -->
+<section id="invest">
+    <div class="wrap">
+        <p class="sec-label">◈ For Investors</p>
+        <h2 class="sec-title">Build the Future<br>of Consciousness Tech</h2>
+        <div class="invest-grid">
+            <div class="invest-body">
+                <p>
+                    The First Spark sits at the intersection of three massive markets:
+                    <strong>wellness technology ($6T globally)</strong>, <strong>AI personalization</strong>,
+                    and the emerging <strong>consciousness economy</strong>.
+                </p>
+                <p>
+                    What makes this defensible: the origin. No VC-backed startup can replicate a founder
+                    who built a consciousness platform from the wreckage of solving her own mother's murder.
+                    <strong>This story is the moat. The authenticity is the product.</strong>
+                </p>
+                <p>
+                    The Sparkverse has validated product-market fit. 1,000+ members chose this.
+                    Soul Maps are selling. The community is real.
+                    <strong>The AI training pipeline is the next unlock.</strong>
+                </p>
+                <p>
+                    <strong>The vision:</strong> a standalone consciousness AI that knows your soul map,
+                    your patterns, your archetypes — trained exclusively on First Spark frameworks.
+                    Not a feature. The platform.
+                </p>
+            </div>
+
+            <div class="invest-box">
+                <div class="ask-num">$200K</div>
+                <div class="ask-lbl">Current Raise · Seed Round</div>
+                <ul class="invest-pts">
+                    <li>Infrastructure scaling for 10,000+ active users</li>
+                    <li>Standalone consciousness AI training pipeline</li>
+                    <li>Soul Map system automation and expansion</li>
+                    <li>Path to $100K+ ARR within 18 months</li>
+                    <li>Multi-tier revenue: subscriptions + maps + AI licensing</li>
+                    <li>Founding investor access to OG Spark platform</li>
+                </ul>
+                <div class="invest-btns">
+                    <a href="/investor-deck.html" class="btn-p" style="font-size:.62rem; padding:12px 22px;">View Full Deck →</a>
+                    <a href="mailto:kate@thefirstspark.shop?subject=Investment%20Inquiry" class="btn-g" style="font-size:.62rem; padding:11px 22px;">Contact KJP →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing">
+    <div class="wrap">
+        <p class="sec-label">◈ Membership</p>
+        <h2 class="sec-title">Choose Your Path</h2>
+        <p class="pricing-sub">Start free. Upgrade as you grow. No dark patterns. No extraction. You pay for real value.</p>
+
+        <div class="price-grid">
+            <div class="price-card">
+                <div class="price-tier">Tier 01</div>
+                <div class="price-name">Free Spark</div>
+                <div class="price-num">$0 <span class="price-per">/ forever</span></div>
+                <div class="price-rule"></div>
+                <ul class="price-feats">
+                    <li>Access to 15 free tools</li>
+                    <li>Consciousness Playground sandbox</li>
+                    <li>Community wall access</li>
+                    <li>Email support</li>
+                </ul>
+                <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" class="btn-tier">Start Free →</a>
+            </div>
+
+            <div class="price-card feat">
+                <div class="price-tier">Tier 02</div>
+                <div class="price-name">Players Lounge</div>
+                <div class="price-num">$33 <span class="price-per">/ month</span></div>
+                <div class="price-rule"></div>
+                <ul class="price-feats">
+                    <li>All 50+ tools + new releases</li>
+                    <li>Advanced soul mapping suite</li>
+                    <li>Monthly consciousness sprints</li>
+                    <li>Private Discord community</li>
+                    <li>Priority support from KJP</li>
+                </ul>
+                <a href="https://whop.com/sparkverse-511c/the-players-lounge/" target="_blank" class="btn-tier">Join Players →</a>
+            </div>
+
+            <div class="price-card">
+                <div class="price-tier">Tier 03</div>
+                <div class="price-name">OG Spark</div>
+                <div class="price-num">$519 <span class="price-per">/ lifetime</span></div>
+                <div class="price-rule"></div>
+                <ul class="price-feats">
+                    <li>Everything in Players Lounge</li>
+                    <li>1:1 consciousness coaching (4x/year)</li>
+                    <li>Book Zero + unreleased chapters</li>
+                    <li>Founding member badge</li>
+                    <li>Custom consciousness framework</li>
+                    <li>Early access to standalone AI</li>
+                </ul>
+                <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" target="_blank" class="btn-tier">Go OG →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+    <div class="footer-logo">◈ THE FIRST SPARK ◈</div>
+    <div class="footer-tag">Reality is programmable. You are the first spark.</div>
+    <div class="footer-links">
+        <a href="/sparkverse.html">Sparkverse</a>
+        <a href="#soul-maps">Soul Maps</a>
+        <a href="/investor-deck.html">Investor Deck</a>
+        <a href="mailto:kate@thefirstspark.shop">Contact</a>
+        <a href="/privacy-policy.html">Privacy</a>
+    </div>
+    <div class="footer-copy">© 2026 The First Spark · Consciousness Technology Platform · Built by KJP</div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   COSMOS — Interactive Canvas Background
+   Particles · Constellations · Nebulas · Shooting Stars
+   Mouse Repulsion · Click Spark Burst
+══════════════════════════════════════════════════════ */
+(function () {
+    const canvas = document.getElementById('cosmos');
+    const ctx    = canvas.getContext('2d');
+    let W, H;
+
+    function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const COLORS = ['#fbbf24','#8b5cf6','#22d3ee','#ec4899','#f97316','#ffffff','#84cc16'];
+    const mouse  = { x: -999, y: -999 };
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+    /* ─ Particle ─ */
+    class Particle {
+        constructor(x, y, burst) {
+            this.burst = !!burst;
+            this.x     = (x != null) ? x : Math.random() * W;
+            this.y     = (y != null) ? y : Math.random() * H;
+            this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+
+            if (this.burst) {
+                this.size    = Math.random() * 3.2 + .8;
+                const spd    = Math.random() * 5.5 + 1.5;
+                const ang    = Math.random() * Math.PI * 2;
+                this.vx      = Math.cos(ang) * spd;
+                this.vy      = Math.sin(ang) * spd;
+                this.life    = Math.random() * 60 + 20;
+                this.maxLife = this.life;
+            } else {
+                this.size = Math.random() * 2.1 + .4;
+                const spd = Math.random() * .32 + .05;
+                const ang = Math.random() * Math.PI * 2;
+                this.vx   = Math.cos(ang) * spd;
+                this.vy   = Math.sin(ang) * spd;
+            }
+            this.alpha = Math.random() * .55 + .3;
+        }
+
+        update() {
+            if (!this.burst) {
+                const dx   = this.x - mouse.x;
+                const dy   = this.y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 140 && dist > 0) {
+                    const f = (140 - dist) / 140 * .022;
+                    this.vx += (dx / dist) * f;
+                    this.vy += (dy / dist) * f;
                 }
+                this.vx *= .99;
+                this.vy *= .99;
+                this.vx += (Math.random() - .5) * .007;
+                this.vy += (Math.random() - .5) * .007;
+                const spd = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+                if (spd > .85) { this.vx = this.vx / spd * .85; this.vy = this.vy / spd * .85; }
+                if (this.x < -12) this.x = W + 12;
+                if (this.x > W + 12) this.x = -12;
+                if (this.y < -12) this.y = H + 12;
+                if (this.y > H + 12) this.y = -12;
+            } else {
+                this.vx *= .93;
+                this.vy *= .93;
+                this.life--;
+            }
+            this.x += this.vx;
+            this.y += this.vy;
+        }
 
-                // Handle signup buttons
-                const signupBtn = e.target.closest('[data-signup]');
-                if (signupBtn) {
-                    const tier = signupBtn.getAttribute('data-signup');
-                    const whopLinks = {
-                        'free': 'https://whop.com/sparkverse-511c/the-sparkverse-lobby/',
-                        'player': 'https://whop.com/sparkverse-511c/the-players-lounge/',
-                        'og': 'https://whop.com/sparkverse-511c/og-spark-lifetime-access/'
-                    };
-                    if (whopLinks[tier]) {
-                        window.location.href = whopLinks[tier];
-                    }
-                }
-            });
+        draw() {
+            const a = this.burst ? (this.life / this.maxLife) * this.alpha : this.alpha;
+            ctx.save();
+            ctx.globalAlpha = a;
+            ctx.shadowBlur  = this.size * 7;
+            ctx.shadowColor = this.color;
+            ctx.fillStyle   = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        dead() { return this.burst && this.life <= 0; }
+    }
+
+    /* ─ Shooting Star ─ */
+    class Shooter {
+        constructor() { this.reset(); }
+        reset() {
+            this.x     = Math.random() * W * .75;
+            this.y     = Math.random() * H * .3;
+            this.len   = Math.random() * 120 + 55;
+            this.speed = Math.random() * 12 + 7;
+            this.ang   = Math.PI / 6 + (Math.random() - .5) * .5;
+            this.alpha = 1;
+            this.color = COLORS[Math.floor(Math.random() * 3)];
+        }
+        update() {
+            this.x    += Math.cos(this.ang) * this.speed;
+            this.y    += Math.sin(this.ang) * this.speed;
+            this.alpha -= .015;
+        }
+        draw() {
+            const tx = this.x - Math.cos(this.ang) * this.len;
+            const ty = this.y - Math.sin(this.ang) * this.len;
+            const g  = ctx.createLinearGradient(this.x, this.y, tx, ty);
+            g.addColorStop(0,   `rgba(255,255,255,${this.alpha})`);
+            g.addColorStop(.3,  this.color + Math.floor(this.alpha * 170).toString(16).padStart(2,'0'));
+            g.addColorStop(1,   'rgba(255,255,255,0)');
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(tx, ty);
+            ctx.strokeStyle = g;
+            ctx.lineWidth   = 1.8;
+            ctx.shadowBlur  = 8;
+            ctx.shadowColor = this.color;
+            ctx.stroke();
+            ctx.restore();
+        }
+        dead() { return this.alpha <= 0 || this.x > W + 60; }
+    }
+
+    /* ─ Nebula blobs ─ */
+    const nbs = [
+        { rx:.10, ry:.18, c:'139,92,246',  p:0,   s:.00022 },
+        { rx:.90, ry:.75, c:'236,72,153',  p:2.1, s:.00028 },
+        { rx:.50, ry:.50, c:'34,211,238',  p:4.2, s:.00018 },
+        { rx:.20, ry:.82, c:'251,191,36',  p:1.0, s:.00025 },
+        { rx:.78, ry:.22, c:'132,204,22',  p:3.3, s:.00020 },
+    ];
+
+    function nebulas() {
+        nbs.forEach(n => {
+            n.p += n.s;
+            const x = (n.rx + Math.sin(n.p) * .07)       * W;
+            const y = (n.ry + Math.cos(n.p * 1.35) * .05) * H;
+            const r = Math.min(W, H) * .40;
+            const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+            g.addColorStop(0,  `rgba(${n.c},.042)`);
+            g.addColorStop(.5, `rgba(${n.c},.016)`);
+            g.addColorStop(1,  'rgba(0,0,0,0)');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
         });
+    }
 
-        // Stellar Interactive Background Animation
-        (function() {
-            const canvas = document.getElementById('stellarCanvas');
-            if (!canvas) return;
-
-            const ctx = canvas.getContext('2d');
-            let width, height, stars = [], shootingStars = [], mouse = { x: 0, y: 0 };
-
-            // Resize canvas
-            function resizeCanvas() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            }
-
-            // Star class
-            class Star {
-                constructor() {
-                    this.reset();
-                }
-
-                reset() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.z = Math.random() * 3; // Depth for parallax
-                    this.size = Math.random() * 2 + 0.5;
-                    this.speed = (3 - this.z) * 0.05;
-                    this.opacity = Math.random() * 0.5 + 0.5;
-                    this.twinkleSpeed = Math.random() * 0.02 + 0.01;
-                    this.twinklePhase = Math.random() * Math.PI * 2;
-                }
-
-                update() {
-                    // Parallax scrolling
-                    this.y += this.speed;
-                    if (this.y > height + 10) {
-                        this.y = -10;
-                        this.x = Math.random() * width;
-                    }
-
-                    // Twinkling effect
-                    this.twinklePhase += this.twinkleSpeed;
-                    this.currentOpacity = this.opacity * (0.7 + Math.sin(this.twinklePhase) * 0.3);
-
-                    // Mouse interaction - stars move away slightly
-                    const dx = this.x - mouse.x;
-                    const dy = this.y - mouse.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
-                        const force = (150 - dist) / 150;
-                        this.x += (dx / dist) * force * 2;
-                        this.y += (dy / dist) * force * 2;
-                    }
-                }
-
-                draw() {
+    /* ─ Constellation lines ─ */
+    function lines(pts) {
+        const D = 95;
+        for (let i = 0; i < pts.length; i++) {
+            for (let j = i + 1; j < pts.length; j++) {
+                const dx = pts[i].x - pts[j].x;
+                const dy = pts[i].y - pts[j].y;
+                const d2 = dx * dx + dy * dy;
+                if (d2 < D * D) {
+                    const a = (1 - Math.sqrt(d2) / D) * .13;
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2);
-
-                    // Color variety
-                    const colors = ['#ffffff', '#aaccff', '#ffddaa', '#ffaacc'];
-                    const color = colors[Math.floor(this.z * 1.3) % colors.length];
-
-                    gradient.addColorStop(0, color);
-                    gradient.addColorStop(1, 'transparent');
-                    ctx.fillStyle = gradient;
-                    ctx.globalAlpha = this.currentOpacity;
-                    ctx.fill();
-                    ctx.globalAlpha = 1;
-                }
-            }
-
-            // Shooting Star class
-            class ShootingStar {
-                constructor() {
-                    this.reset();
-                }
-
-                reset() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height * 0.3;
-                    this.length = Math.random() * 80 + 40;
-                    this.speed = Math.random() * 8 + 6;
-                    this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.5;
-                    this.opacity = 1;
-                    this.fadeSpeed = 0.02;
-                }
-
-                update() {
-                    this.x += Math.cos(this.angle) * this.speed;
-                    this.y += Math.sin(this.angle) * this.speed;
-                    this.opacity -= this.fadeSpeed;
-                }
-
-                draw() {
-                    ctx.beginPath();
-                    const endX = this.x - Math.cos(this.angle) * this.length;
-                    const endY = this.y - Math.sin(this.angle) * this.length;
-
-                    const gradient = ctx.createLinearGradient(this.x, this.y, endX, endY);
-                    gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
-                    gradient.addColorStop(0.5, `rgba(200, 220, 255, ${this.opacity * 0.5})`);
-                    gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-
-                    ctx.strokeStyle = gradient;
-                    ctx.lineWidth = 2;
-                    ctx.moveTo(this.x, this.y);
-                    ctx.lineTo(endX, endY);
+                    ctx.moveTo(pts[i].x, pts[i].y);
+                    ctx.lineTo(pts[j].x, pts[j].y);
+                    ctx.strokeStyle = `rgba(255,255,255,${a})`;
+                    ctx.lineWidth   = .5;
                     ctx.stroke();
                 }
-
-                isDead() {
-                    return this.opacity <= 0 || this.x > width || this.y > height;
-                }
             }
+        }
+    }
 
-            // Initialize stars
-            function init() {
-                resizeCanvas();
-                stars = [];
-                for (let i = 0; i < 400; i++) {
-                    stars.push(new Star());
-                }
-            }
+    /* ─ Init ─ */
+    const ambient = [];
+    for (let i = 0; i < 130; i++) ambient.push(new Particle());
+    let bursts   = [];
+    let shooters = [];
+    let stTimer  = 0;
 
-            // Nebula background
-            function drawNebula() {
-                const gradient = ctx.createRadialGradient(width * 0.5, height * 0.3, 0, width * 0.5, height * 0.3, width * 0.8);
-                gradient.addColorStop(0, 'rgba(100, 50, 150, 0.05)');
-                gradient.addColorStop(0.5, 'rgba(50, 20, 80, 0.03)');
-                gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, width, height);
-            }
+    /* Click burst */
+    window.addEventListener('click', e => {
+        if (e.target.closest('a,button,input,textarea')) return;
+        for (let i = 0; i < 30; i++) bursts.push(new Particle(e.clientX, e.clientY, true));
+    });
 
-            // Animation loop
-            function animate() {
-                // Clear with fade effect
-                ctx.fillStyle = 'rgba(10, 10, 26, 0.1)';
-                ctx.fillRect(0, 0, width, height);
+    /* ─ Loop ─ */
+    function frame() {
+        ctx.fillStyle = 'rgba(5,5,8,.11)';
+        ctx.fillRect(0, 0, W, H);
 
-                // Draw nebula
-                drawNebula();
+        nebulas();
+        lines([...ambient, ...bursts]);
 
-                // Update and draw stars
-                stars.forEach(star => {
-                    star.update();
-                    star.draw();
-                });
+        ambient.forEach(p => { p.update(); p.draw(); });
+        bursts = bursts.filter(p => { p.update(); p.draw(); return !p.dead(); });
 
-                // Update and draw shooting stars
-                shootingStars = shootingStars.filter(star => {
-                    star.update();
-                    star.draw();
-                    return !star.isDead();
-                });
+        stTimer++;
+        if (stTimer > 210 + Math.random() * 240) {
+            shooters.push(new Shooter());
+            if (Math.random() > .5) shooters.push(new Shooter());
+            stTimer = 0;
+        }
+        shooters = shooters.filter(s => { s.update(); s.draw(); return !s.dead(); });
 
-                // Randomly add shooting stars
-                if (Math.random() < 0.01 && shootingStars.length < 3) {
-                    shootingStars.push(new ShootingStar());
-                }
+        requestAnimationFrame(frame);
+    }
+    frame();
+})();
 
-                requestAnimationFrame(animate);
-            }
-
-            // Track mouse position
-            window.addEventListener('mousemove', (e) => {
-                mouse.x = e.clientX;
-                mouse.y = e.clientY;
-            });
-
-            // Handle resize
-            window.addEventListener('resize', resizeCanvas);
-
-            // Start
-            init();
-            animate();
-        })();
-    </script>
+/* Nav scroll */
+window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+</script>
 </body>
 </html>
