@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:sparkverse.thefirstspark.shop)",
+      "Read(//c/Users/Katel/Documents/GitHub/git//**)",
+      "Read(//c/Users/Katel/Documents/GitHub//**)",
+      "Bash(ls:*)",
+      "Bash(git add:*)",
+      "Read(//c/Users/Katel/Desktop/ALL_HTML_MASTER/sparkverse.thefirstspark.shop//**)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Katel\\Documents\\GitHub\\git\\Sparkverse"
+    ]
+  }
+}
