@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VII. Press Start — The First Spark Mythos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-black: #0a0a0f;
+            --deep-purple: #1a1a2e;
+            --electric-purple: #8b5cf6;
+            --sacred-gold: #d4af37;
+            --cyan-glow: #22d3ee;
+            --soft-white: #f0f0f5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--space-black);
+            color: var(--soft-white);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        canvas#starfield {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        .page-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10vh 2rem 6rem;
+        }
+
+        .chapter-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: rgba(240, 240, 245, 0.25);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 0.5s forwards;
+        }
+
+        .chapter-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: var(--sacred-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 2rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease 1s forwards;
+            text-shadow: 0 0 60px rgba(212, 175, 55, 0.3);
+        }
+
+        .intro-text {
+            max-width: 550px;
+            text-align: center;
+            line-height: 2;
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 1.5s forwards;
+        }
+
+        .intro-text .gold { color: var(--sacred-gold); }
+
+        .gateway-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 2s forwards;
+        }
+
+        @media (min-width: 500px) {
+            .gateway-grid { grid-template-columns: 1fr 1fr; }
+            .gateway-grid .card:last-child:nth-child(odd) {
+                grid-column: 1 / -1;
+                max-width: 50%;
+                justify-self: center;
+            }
+        }
+
+        .card {
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--soft-white);
+            background: rgba(26, 26, 46, 0.4);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .card:hover {
+            border-color: var(--sacred-gold);
+            background: rgba(212, 175, 55, 0.04);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.08);
+        }
+
+        .card .card-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .card .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--sacred-gold);
+            letter-spacing: 0.05em;
+        }
+
+        .card .card-desc {
+            font-size: 0.72rem;
+            color: rgba(240, 240, 245, 0.45);
+            line-height: 1.7;
+        }
+
+        .card .card-price {
+            font-size: 0.7rem;
+            color: var(--electric-purple);
+            letter-spacing: 0.1em;
+        }
+
+        .closing {
+            max-width: 500px;
+            text-align: center;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 2.5s forwards;
+        }
+
+        .closing p {
+            font-size: 0.8rem;
+            color: rgba(240, 240, 245, 0.35);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .closing .closing-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--sacred-gold);
+            font-style: italic;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: rgba(240, 240, 245, 0.3);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            transition: color 0.3s ease;
+        }
+        .social-link:hover { color: var(--sacred-gold); }
+
+        .back-to-start {
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 0.8rem 2.5rem;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            color: rgba(240, 240, 245, 0.4);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeIn 2s ease 3s forwards;
+        }
+
+        .back-to-start:hover {
+            border-color: var(--electric-purple);
+            color: var(--soft-white);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <div class="page-container">
+        <p class="chapter-label">Chapter Seven</p>
+        <h1 class="chapter-title">Press Start</h1>
+
+        <div class="intro-text">
+            <p>You didn't find this by accident. Whatever led you here — a link, a search, a feeling at 2 AM that there had to be more — <span class="gold">trust it</span>.</p>
+            <p>This is the doorway. No pressure. No countdown timer. Just an invitation, standing open for as long as you need it to.</p>
+        </div>
+
+        <div class="gateway-grid">
+            <a href="https://sparkverse.thefirstspark.shop" class="card" target="_blank">
+                <span class="card-icon">&#9737;</span>
+                <span class="card-title">Explore the Sparkverse</span>
+                <span class="card-desc">50+ free interactive consciousness tools. Soul Maps, Sigil Forges, Frequency Tuners, and more.</span>
+                <span class="card-price">FREE</span>
+            </a>
+
+            <a href="https://whop.com/the-first-spark/" class="card" target="_blank">
+                <span class="card-icon">&#9733;</span>
+                <span class="card-title">Players Lounge</span>
+                <span class="card-desc">Join the community of people debugging reality together. Access to all premium tools and community space.</span>
+                <span class="card-price">$33 / MONTH</span>
+            </a>
+
+            <a href="https://whop.com/the-first-spark/" class="card" target="_blank">
+                <span class="card-icon">&#9672;</span>
+                <span class="card-title">OG Spark — Lifetime</span>
+                <span class="card-desc">Permanent access to everything. Past, present, and future. For those who know they're staying.</span>
+                <span class="card-price">$519 ONE-TIME</span>
+            </a>
+
+            <a href="https://thefirstspark.shop" class="card" target="_blank">
+                <span class="card-icon">&#9670;</span>
+                <span class="card-title">The First Spark</span>
+                <span class="card-desc">The main platform. Consciousness technology tools, resources, and the full ecosystem.</span>
+                <span class="card-price">EXPLORE</span>
+            </a>
+
+            <a href="https://x.com/originalglitch" class="card" target="_blank">
+                <span class="card-icon">&#10023;</span>
+                <span class="card-title">Follow the Signal</span>
+                <span class="card-desc">@originalglitch on X. Where the real-time transmissions happen.</span>
+                <span class="card-price">CONNECT</span>
+            </a>
+        </div>
+
+        <div class="closing">
+            <p>The Mythos isn't a sales pitch. It's a signal. If it resonated, the tools are here. If it didn't, no worries — the spark doesn't need your permission to keep burning.</p>
+            <p class="closing-line">"You were never lost. You were just loading."</p>
+        </div>
+
+        <a href="index.html" class="back-to-start">&larr; Back to Mythos</a>
+    </div>
+
+    <script>
+        // Starfield
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function createStars() {
+            stars = [];
+            const count = Math.min(250, Math.floor((canvas.width * canvas.height) / 6000));
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 1.5 + 0.2,
+                    a: Math.random() * 0.8 + 0.2,
+                    speed: 0.003 + Math.random() * 0.01,
+                    color: Math.random() > 0.85
+                        ? (Math.random() > 0.5 ? '212,175,55' : '139,92,246')
+                        : '240,240,245'
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const t = Date.now() * 0.001;
+            stars.forEach(s => {
+                const flicker = 0.6 + 0.4 * Math.sin(t * s.speed * 80 + s.a * 10);
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${s.color}, ${s.a * flicker})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', () => { resize(); createStars(); });
+        resize();
+        createStars();
+        draw();
+    </script>
+</body>
+</html>

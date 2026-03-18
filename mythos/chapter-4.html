@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IV. The Glitch — The First Spark Mythos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-black: #0a0a0f;
+            --deep-purple: #1a1a2e;
+            --electric-purple: #8b5cf6;
+            --sacred-gold: #d4af37;
+            --cyan-glow: #22d3ee;
+            --soft-white: #f0f0f5;
+            --ember-red: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--space-black);
+            color: var(--soft-white);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        canvas#glitchCanvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .scroll-container {
+            position: relative;
+            z-index: 1;
+            padding: 15vh 2rem 20vh;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .chapter-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: rgba(240, 240, 245, 0.25);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease 0.5s forwards;
+        }
+
+        .chapter-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: var(--cyan-glow);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease 1s forwards, glitchText 8s ease-in-out infinite 3s;
+        }
+
+        .chapter-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: rgba(240, 240, 245, 0.3);
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 1.5s forwards;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+        .section.visible { opacity: 1; transform: translateY(0); }
+
+        .section p {
+            line-height: 2;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .glitch-list {
+            list-style: none;
+            padding: 1.5rem 0;
+        }
+
+        .glitch-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            color: rgba(240, 240, 245, 0.7);
+            line-height: 1.8;
+        }
+
+        .glitch-list li::before {
+            content: '//';
+            position: absolute;
+            left: 0;
+            color: var(--cyan-glow);
+            opacity: 0.5;
+        }
+
+        .personal-block {
+            border-left: 2px solid var(--ember-red);
+            padding: 1.5rem;
+            margin: 3rem 0;
+            background: rgba(239, 68, 68, 0.03);
+        }
+
+        .personal-block .label {
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            color: var(--ember-red);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .personal-block p {
+            font-size: 0.85rem;
+            line-height: 2;
+            color: rgba(240, 240, 245, 0.6);
+        }
+
+        .key-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--cyan-glow);
+            font-style: italic;
+            line-height: 1.8;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .dim { color: rgba(240, 240, 245, 0.4); }
+        .cyan { color: var(--cyan-glow); }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--cyan-glow), transparent);
+            margin: 3rem auto;
+        }
+
+        .nav-bar {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(transparent, var(--space-black));
+            z-index: 10;
+        }
+
+        .nav-bar a {
+            color: var(--sacred-gold);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        .nav-bar a:hover { color: var(--cyan-glow); }
+        .nav-bar .chapter-indicator {
+            color: rgba(240, 240, 245, 0.2);
+            font-size: 0.65rem;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes glitchText {
+            0%, 95%, 100% { transform: translate(0); }
+            96% { transform: translate(-2px, 1px); filter: hue-rotate(90deg); }
+            97% { transform: translate(2px, -1px); }
+            98% { transform: translate(-1px, -1px); filter: hue-rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="glitchCanvas"></canvas>
+
+    <div class="scroll-container">
+        <p class="chapter-label">Chapter Four</p>
+        <h1 class="chapter-title">The Glitch</h1>
+        <p class="chapter-subtitle">When the System Breaks</p>
+
+        <div class="section">
+            <p>You've felt it. The skip. The stutter. The moment reality hiccupped and you thought: <span class="cyan">that wasn't supposed to happen.</span></p>
+            <p>Synchronicities too precise to be coincidence. Numbers repeating until you couldn't ignore them. A stranger saying the exact words you needed to hear. A dream that played out the next day.</p>
+        </div>
+
+        <div class="section">
+            <p>These aren't anomalies. They're the system showing its seams.</p>
+            <ul class="glitch-list">
+                <li>Déjà vu — the selector skipping grooves in the probability field</li>
+                <li>Synchronicity — two entangled points rendering the same data</li>
+                <li>Timeline skips — branches briefly overlapping before collapsing</li>
+                <li>Pattern recognition — your awareness noticing the code beneath the surface</li>
+                <li>The 3 AM knowing — amplitude high enough to receive without static</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <p>Trauma cracks the system open too. Not because suffering is holy — it isn't. But because pain can shatter the assumptions that keep the render stable. When everything you believed collapses at once, you can see what's underneath.</p>
+            <p class="dim">Some people see through the crack and tape it shut. Others crawl through.</p>
+        </div>
+
+        <div class="section">
+            <div class="personal-block">
+                <p class="label">// Signal from the field</p>
+                <p>I grew up beside the man who murdered my mother. Bonfires. Birthday parties. Motorcycle rides. For twelve years, the monster hid in plain sight.</p>
+                <p>When DNA genealogy cracked the case in March 2020 — the same week the world shut down — I understood something. Sometimes the system breaks so hard you can finally see through it.</p>
+                <p>The glitch wasn't the tragedy. The glitch was the moment everything rearranged and I could see the code underneath.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <p>The glitch is always an invitation. Not a comfortable one. Not a gentle one. But real.</p>
+            <p>It asks: now that you've seen it, what will you do? Go back to sleep — or follow the fracture home?</p>
+        </div>
+
+        <div class="section">
+            <p class="key-line">"The glitch is not a bug. The glitch is Source tapping on the glass, asking: 'Are you ready to see?'"</p>
+        </div>
+
+        <div class="divider"></div>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="chapter-3.html">&larr; The Fall</a>
+        <span class="chapter-indicator">IV / VII</span>
+        <a href="chapter-5.html">The Remembering &rarr;</a>
+    </nav>
+
+    <script>
+        // Subtle glitch effect
+        const canvas = document.getElementById('glitchCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        function drawGlitch() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (Math.random() > 0.97) {
+                const lines = Math.floor(Math.random() * 5) + 1;
+                for (let i = 0; i < lines; i++) {
+                    const y = Math.random() * canvas.height;
+                    const h = Math.random() * 2 + 0.5;
+                    const offset = (Math.random() - 0.5) * 10;
+                    ctx.fillStyle = `rgba(34, 211, 238, ${Math.random() * 0.04})`;
+                    ctx.fillRect(offset, y, canvas.width, h);
+                }
+            }
+
+            if (Math.random() > 0.99) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                ctx.fillStyle = `rgba(139, 92, 246, 0.03)`;
+                ctx.fillRect(x, y, Math.random() * 100 + 20, Math.random() * 30 + 5);
+            }
+
+            requestAnimationFrame(drawGlitch);
+        }
+        drawGlitch();
+
+        // Scroll reveals
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        sections.forEach(s => observer.observe(s));
+    </script>
+</body>
+</html>

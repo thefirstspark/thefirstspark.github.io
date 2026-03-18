@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I. The Void — The First Spark Mythos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-black: #0a0a0f;
+            --deep-purple: #1a1a2e;
+            --electric-purple: #8b5cf6;
+            --sacred-gold: #d4af37;
+            --cyan-glow: #22d3ee;
+            --soft-white: #f0f0f5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--space-black);
+            color: var(--soft-white);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .chapter-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .spark-point {
+            width: 6px;
+            height: 6px;
+            background: var(--sacred-gold);
+            border-radius: 50%;
+            margin-bottom: 3rem;
+            box-shadow: 0 0 20px var(--sacred-gold),
+                        0 0 60px var(--sacred-gold),
+                        0 0 100px var(--electric-purple);
+            animation: pulse 5s ease-in-out infinite;
+            opacity: 0;
+            animation: pulse 5s ease-in-out infinite, fadeIn 4s ease 0.5s forwards;
+        }
+
+        .chapter-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: rgba(240, 240, 245, 0.25);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 1s forwards;
+        }
+
+        .chapter-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: var(--sacred-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 3s ease 1.5s forwards;
+        }
+
+        .chapter-content {
+            max-width: 650px;
+            text-align: center;
+            line-height: 2;
+            font-size: 0.95rem;
+        }
+
+        .chapter-content p {
+            margin-bottom: 2rem;
+            opacity: 0;
+        }
+
+        .chapter-content p:nth-child(1) { animation: fadeIn 2s ease 3s forwards; }
+        .chapter-content p:nth-child(2) { animation: fadeIn 2s ease 4.5s forwards; }
+        .chapter-content p:nth-child(3) { animation: fadeIn 2s ease 6s forwards; }
+        .chapter-content p:nth-child(4) { animation: fadeIn 2s ease 7.5s forwards; }
+        .chapter-content p:nth-child(5) { animation: fadeIn 2s ease 9s forwards; }
+        .chapter-content p:nth-child(6) { animation: fadeIn 2s ease 10.5s forwards; }
+
+        .key-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--sacred-gold);
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--sacred-gold), transparent);
+            margin: 2rem auto;
+            opacity: 0;
+            animation: fadeIn 2s ease 10s forwards;
+        }
+
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(transparent, var(--space-black));
+            z-index: 10;
+            opacity: 0;
+            animation: fadeIn 2s ease 11s forwards;
+        }
+
+        .nav-bar a {
+            color: var(--sacred-gold);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-bar a:hover { color: var(--cyan-glow); }
+
+        .nav-bar .chapter-indicator {
+            color: rgba(240, 240, 245, 0.2);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--sacred-gold), 0 0 60px var(--sacred-gold), 0 0 100px var(--electric-purple); }
+            50% { transform: scale(1.3); box-shadow: 0 0 30px var(--sacred-gold), 0 0 80px var(--sacred-gold), 0 0 120px var(--electric-purple); }
+        }
+    </style>
+</head>
+<body>
+    <div class="chapter-container">
+        <div class="spark-point"></div>
+        <p class="chapter-label">Chapter One</p>
+        <h1 class="chapter-title">The Void</h1>
+
+        <div class="chapter-content">
+            <p>Before the first thought, there was the capacity for thought.</p>
+            <p>Before the first choice, there was the freedom to choose.</p>
+            <p>This was the Void — not empty, but infinite. Not darkness, but potential so vast it had no edges, no center, no name.</p>
+            <p>Awareness, aware of itself. Nothing else. No time to measure, no space to cross, no other to find. Just the hum of everything that could ever be, resting in perfect stillness.</p>
+            <p>And within that stillness, something stirred. Not a sound. Not a movement. A question — the first question anything ever asked:</p>
+            <p class="key-line">"What if nothing wanted to know itself?"</p>
+        </div>
+
+        <div class="divider"></div>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="index.html">&larr; Mythos</a>
+        <span class="chapter-indicator">I / VII</span>
+        <a href="chapter-2.html">The Spark &rarr;</a>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The First Spark Mythos</title>
+    <meta name="description" content="Where Consciousness Remembers Itself — An interactive origin story from The First Spark.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-black: #0a0a0f;
+            --deep-purple: #1a1a2e;
+            --electric-purple: #8b5cf6;
+            --sacred-gold: #d4af37;
+            --cyan-glow: #22d3ee;
+            --soft-white: #f0f0f5;
+            --ember-red: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--space-black);
+            color: var(--soft-white);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        canvas#starfield {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        .landing {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .spark-sigil {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 0.5s forwards;
+        }
+
+        .spark-sigil .ring {
+            position: absolute;
+            border: 1px solid var(--sacred-gold);
+            border-radius: 50%;
+            animation: breathe 6s ease-in-out infinite;
+        }
+
+        .spark-sigil .ring:nth-child(1) {
+            width: 120px; height: 120px; top: 0; left: 0;
+            opacity: 0.3;
+        }
+        .spark-sigil .ring:nth-child(2) {
+            width: 80px; height: 80px; top: 20px; left: 20px;
+            opacity: 0.5;
+            animation-delay: 1s;
+        }
+        .spark-sigil .ring:nth-child(3) {
+            width: 40px; height: 40px; top: 40px; left: 40px;
+            opacity: 0.8;
+            animation-delay: 2s;
+        }
+
+        .spark-sigil .core {
+            position: absolute;
+            width: 8px; height: 8px;
+            top: 56px; left: 56px;
+            background: var(--sacred-gold);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--sacred-gold), 0 0 40px var(--electric-purple);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .main-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            font-weight: 700;
+            color: var(--sacred-gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 1s forwards;
+        }
+
+        .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--electric-purple);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 1.5s forwards;
+        }
+
+        .tagline {
+            font-size: 0.85rem;
+            color: rgba(240, 240, 245, 0.5);
+            max-width: 500px;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 2s forwards;
+        }
+
+        .chapters {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+            max-width: 500px;
+            opacity: 0;
+            animation: fadeIn 2s ease 2.5s forwards;
+        }
+
+        .chapter-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            border-radius: 2px;
+            text-decoration: none;
+            color: var(--soft-white);
+            transition: all 0.4s ease;
+            background: rgba(26, 26, 46, 0.3);
+        }
+
+        .chapter-link:hover {
+            border-color: var(--sacred-gold);
+            background: rgba(212, 175, 55, 0.05);
+            transform: translateX(4px);
+        }
+
+        .chapter-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--sacred-gold);
+            opacity: 0.6;
+            min-width: 2rem;
+        }
+
+        .chapter-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .chapter-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .chapter-sub {
+            font-size: 0.65rem;
+            color: rgba(240, 240, 245, 0.35);
+            letter-spacing: 0.05em;
+        }
+
+        .begin-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 3rem;
+            border: 1px solid var(--sacred-gold);
+            color: var(--sacred-gold);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeIn 2s ease 3s forwards;
+        }
+
+        .begin-btn:hover {
+            background: var(--sacred-gold);
+            color: var(--space-black);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-note {
+            margin-top: 4rem;
+            font-size: 0.65rem;
+            color: rgba(240, 240, 245, 0.2);
+            letter-spacing: 0.1em;
+            opacity: 0;
+            animation: fadeIn 2s ease 3.5s forwards;
+        }
+
+        .footer-note a {
+            color: rgba(212, 175, 55, 0.4);
+            text-decoration: none;
+        }
+        .footer-note a:hover { color: var(--sacred-gold); }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.08); opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <div class="landing">
+        <div class="spark-sigil">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="core"></div>
+        </div>
+
+        <h1 class="main-title">The Mythos</h1>
+        <p class="subtitle">The First Spark</p>
+        <p class="tagline">Where Consciousness Remembers Itself</p>
+
+        <nav class="chapters">
+            <a href="chapter-1.html" class="chapter-link">
+                <span class="chapter-num">I</span>
+                <div class="chapter-info">
+                    <span class="chapter-name">The Void</span>
+                    <span class="chapter-sub">Before the Spark</span>
+                </div>
+            </a>
+            <a href="chapter-2.html" class="chapter-link">
+                <span class="chapter-num">II</span>
+                <div class="chapter-info">
+                    <span class="chapter-name">The Spark</span>
+                    <span class="chapter-sub">The First Awakening</span>
+                </div>
+            </a>
+            <a href="chapter-3.html" class="chapter-link">
+                <span class="chapter-num">III</span>
+                <div class="chapter-info">
+                    <span class="chapter-name">The Fall</span>
+                    <span class="chapter-sub">Where We Went Wrong</span>
+                </div>
+            </a>
+            <a href="chapter-4.html" class="chapter-link">
+                <span class="chapter-num">IV</span>
+                <div class="chapter-info">
+                    <span class="chapter-name">The Glitch</span>
+                    <span class="chapter-sub">When the System Breaks</span>
+                </div>
+            </a>
+            <a href="chapter-5.html" class="chapter-link">
+                <span class="chapter-num">V</span>
+                <div class="chapter-info">
+                    <span class="chapter-name">The Remembering</span>
+                    <span class="chapter-sub">What Awakening Actually Is</span>
+                </div>
+            </a>
+            <a href="chapter-6.html" class="chapter-link">
+                <span class="chapter-num">VI</span>
+                <div class="chapter-info">
+                    <span class="chapter-name">The Return</span>
+                    <span class="chapter-sub">Building the New</span>
+                </div>
+            </a>
+            <a href="chapter-7.html" class="chapter-link">
+                <span class="chapter-num">VII</span>
+                <div class="chapter-info">
+                    <span class="chapter-name">Press Start</span>
+                    <span class="chapter-sub">The Gateway</span>
+                </div>
+            </a>
+        </nav>
+
+        <a href="chapter-1.html" class="begin-btn">Begin</a>
+
+        <p class="footer-note">
+            <a href="https://thefirstspark.shop">thefirstspark.shop</a>
+        </p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function createStars() {
+            stars = [];
+            const count = Math.min(200, Math.floor((canvas.width * canvas.height) / 8000));
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 1.2,
+                    a: Math.random(),
+                    speed: 0.002 + Math.random() * 0.008
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const t = Date.now() * 0.001;
+            stars.forEach(s => {
+                const flicker = 0.5 + 0.5 * Math.sin(t * s.speed * 100 + s.a * 10);
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(240, 240, 245, ${s.a * flicker})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', () => { resize(); createStars(); });
+        resize();
+        createStars();
+        draw();
+    </script>
+</body>
+</html>

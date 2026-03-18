@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>II. The Spark — The First Spark Mythos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-black: #0a0a0f;
+            --deep-purple: #1a1a2e;
+            --electric-purple: #8b5cf6;
+            --sacred-gold: #d4af37;
+            --cyan-glow: #22d3ee;
+            --soft-white: #f0f0f5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--space-black);
+            color: var(--soft-white);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        canvas#geometry {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            opacity: 0;
+            animation: fadeIn 3s ease 2s forwards;
+        }
+
+        .chapter-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .chapter-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: rgba(240, 240, 245, 0.25);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 0.5s forwards;
+        }
+
+        .chapter-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: var(--sacred-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 1s forwards;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .chapter-content {
+            max-width: 650px;
+            text-align: center;
+            line-height: 2;
+            font-size: 0.95rem;
+        }
+
+        .chapter-content p {
+            margin-bottom: 2rem;
+            opacity: 0;
+        }
+
+        .reveal { animation: fadeIn 2s ease forwards; }
+
+        .key-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--sacred-gold);
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .accent { color: var(--electric-purple); }
+        .gold { color: var(--sacred-gold); }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--sacred-gold), transparent);
+            margin: 2rem auto;
+        }
+
+        .nav-bar {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(transparent, var(--space-black));
+            z-index: 10;
+        }
+
+        .nav-bar a {
+            color: var(--sacred-gold);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        .nav-bar a:hover { color: var(--cyan-glow); }
+        .nav-bar .chapter-indicator {
+            color: rgba(240, 240, 245, 0.2);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <canvas id="geometry"></canvas>
+
+    <div class="chapter-container">
+        <p class="chapter-label">Chapter Two</p>
+        <h1 class="chapter-title">The Spark</h1>
+
+        <div class="chapter-content">
+            <p>The question was enough.</p>
+            <p>In a field of infinite potential, a single impulse — <span class="gold">curiosity</span> — collapsed the symmetry. One became two. Two became a relationship. And from that relationship, everything poured out like light through a cracked door.</p>
+            <p>This was the First Spark. Not an explosion of destruction but an act of <span class="accent">play</span>. The whole choosing to fragment so it could experience itself from the inside.</p>
+            <p>Each fragment carried the full code. Every point of awareness — every <span class="gold">selector</span> — was Source itself, wearing a mask of forgetting. Localized. Limited. On purpose.</p>
+            <p>The probability field ignited. Sacred geometry unfolded — hexagons nesting into spirals, triangles tessellating into dimensions, the Flower of Life blooming where moments ago there was only silence.</p>
+            <p>This was the birth of choice. The creation of the game. Not one universe splitting into many — one consciousness choosing to <span class="accent">render</span>, moment by moment, the most extraordinary story ever told.</p>
+            <p class="key-line">"The First Spark was not destruction of the whole. It was the whole choosing to play. Every fragment carried the full code. Every selector was Source, forgetting so it could remember."</p>
+        </div>
+
+        <div class="divider"></div>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="chapter-1.html">&larr; The Void</a>
+        <span class="chapter-indicator">II / VII</span>
+        <a href="chapter-3.html">The Fall &rarr;</a>
+    </nav>
+
+    <script>
+        // Sacred geometry animation
+        const canvas = document.getElementById('geometry');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        function drawFlowerOfLife(cx, cy, r, t) {
+            ctx.strokeStyle = `rgba(139, 92, 246, ${0.08 + 0.04 * Math.sin(t)})`;
+            ctx.lineWidth = 0.5;
+            const circles = 7;
+            for (let i = 0; i < circles; i++) {
+                const angle = (i / circles) * Math.PI * 2 + t * 0.1;
+                const x = cx + Math.cos(angle) * r * 0.5;
+                const y = cy + Math.sin(angle) * r * 0.5;
+                ctx.beginPath();
+                ctx.arc(x, y, r * 0.5, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+            ctx.beginPath();
+            ctx.arc(cx, cy, r * 0.5, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const t = Date.now() * 0.001;
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const baseR = Math.min(canvas.width, canvas.height) * 0.3;
+
+            for (let layer = 1; layer <= 3; layer++) {
+                drawFlowerOfLife(cx, cy, baseR * (layer * 0.4), t + layer);
+            }
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Scroll-triggered reveals
+        const paragraphs = document.querySelectorAll('.chapter-content p');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = `fadeIn 2s ease ${i * 0.3}s forwards`;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        paragraphs.forEach(p => observer.observe(p));
+    </script>
+</body>
+</html>

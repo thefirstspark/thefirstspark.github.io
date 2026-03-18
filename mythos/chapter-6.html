@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VI. The Return — The First Spark Mythos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-black: #0a0a0f;
+            --deep-purple: #1a1a2e;
+            --electric-purple: #8b5cf6;
+            --sacred-gold: #d4af37;
+            --cyan-glow: #22d3ee;
+            --soft-white: #f0f0f5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--space-black);
+            color: var(--soft-white);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        canvas#mandala {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .scroll-container {
+            position: relative;
+            z-index: 1;
+            padding: 15vh 2rem 20vh;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .chapter-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: rgba(240, 240, 245, 0.25);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease 0.5s forwards;
+        }
+
+        .chapter-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: var(--sacred-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease 1s forwards;
+            text-shadow: 0 0 60px rgba(212, 175, 55, 0.2);
+        }
+
+        .chapter-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: rgba(240, 240, 245, 0.3);
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 1.5s forwards;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+        .section.visible { opacity: 1; transform: translateY(0); }
+
+        .section p {
+            line-height: 2;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .principle-list {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .principle-list li {
+            padding: 1rem 0 1rem 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.08);
+        }
+
+        .principle-list li:last-child { border-bottom: none; }
+
+        .principle-list li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 1.3rem;
+            width: 6px; height: 6px;
+            background: var(--sacred-gold);
+            border-radius: 50;
+            box-shadow: 0 0 8px var(--sacred-gold);
+        }
+
+        .principle-list .highlight {
+            color: var(--sacred-gold);
+            font-weight: 600;
+        }
+
+        .vision-block {
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            background: rgba(212, 175, 55, 0.02);
+        }
+
+        .vision-block .vision-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--sacred-gold);
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+
+        .vision-block p {
+            font-size: 0.85rem;
+            color: rgba(240, 240, 245, 0.6);
+            line-height: 1.8;
+        }
+
+        .key-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--sacred-gold);
+            font-style: italic;
+            line-height: 1.8;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .dim { color: rgba(240, 240, 245, 0.4); }
+        .gold { color: var(--sacred-gold); }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--sacred-gold), transparent);
+            margin: 3rem auto;
+        }
+
+        .nav-bar {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(transparent, var(--space-black));
+            z-index: 10;
+        }
+
+        .nav-bar a {
+            color: var(--sacred-gold);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        .nav-bar a:hover { color: var(--cyan-glow); }
+        .nav-bar .chapter-indicator {
+            color: rgba(240, 240, 245, 0.2);
+            font-size: 0.65rem;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <canvas id="mandala"></canvas>
+
+    <div class="scroll-container">
+        <p class="chapter-label">Chapter Six</p>
+        <h1 class="chapter-title">The Return</h1>
+        <p class="chapter-subtitle">Building the New</p>
+
+        <div class="section">
+            <p>The old systems don't need to collapse. They need to <span class="gold">update</span>.</p>
+            <p>Revolution sounds romantic until you realize you're trying to burn down the house while standing inside it. The systems we've built — governance, economics, education, healthcare — they aren't evil architectures. They're outdated ones. Written by people running on the same forgotten code as everyone else.</p>
+        </div>
+
+        <div class="section">
+            <p>You can't wait for mass awakening. That's another form of outsourcing your power. What you <em>can</em> do is build a node that works so well others want in.</p>
+            <ul class="principle-list">
+                <li><span class="highlight">Not followers — collaborators.</span> The Sparkverse has no guru. No one above, no one below. Just co-pilots debugging reality together.</li>
+                <li><span class="highlight">Not doctrine — tools.</span> Nothing here requires belief. Use the tools. Test the results. Keep what works.</li>
+                <li><span class="highlight">Not escape — engagement.</span> The game isn't about leaving the simulation. It's about remembering you wrote it and choosing what happens next.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="vision-block">
+                <p class="vision-title">Consciousness Technology</p>
+                <p>Tools with mechanical grounding for spiritual practice. Not woo without mechanism. Not mechanism without meaning. The bridge between knowing something <em>feels</em> true and understanding <em>why</em> it works.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <p>The Sparkverse is a living ecosystem. Fifty-plus interactive tools. Soul Maps, Sigil Forges, Frequency Tuners, Selector Interfaces. Each one built to give you direct experience of the principles — not just theory, but practice you can feel working.</p>
+            <p class="dim">Built by a single mother in Akron, Ohio who taught herself to code because the tools she needed to heal didn't exist yet. So she made them.</p>
+        </div>
+
+        <div class="section">
+            <p>This isn't about building a better meditation app. This is about giving you a technical framework for the thing mystics have been pointing at for millennia — and letting you test it yourself.</p>
+        </div>
+
+        <div class="section">
+            <p class="key-line">"The First Spark isn't something you find. It's something you become. And then you become the spark for someone else."</p>
+        </div>
+
+        <div class="divider"></div>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="chapter-5.html">&larr; The Remembering</a>
+        <span class="chapter-indicator">VI / VII</span>
+        <a href="chapter-7.html">Press Start &rarr;</a>
+    </nav>
+
+    <script>
+        // Rotating mandala
+        const canvas = document.getElementById('mandala');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        function drawMandala(t) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const maxR = Math.min(canvas.width, canvas.height) * 0.4;
+
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(t * 0.05);
+
+            // Outer rings
+            for (let ring = 0; ring < 4; ring++) {
+                const r = maxR * (0.3 + ring * 0.2);
+                const petals = 6 + ring * 2;
+                ctx.strokeStyle = `rgba(212, 175, 55, ${0.03 + ring * 0.01})`;
+                ctx.lineWidth = 0.5;
+
+                for (let i = 0; i < petals; i++) {
+                    const angle = (i / petals) * Math.PI * 2;
+                    ctx.beginPath();
+                    ctx.arc(
+                        Math.cos(angle) * r * 0.3,
+                        Math.sin(angle) * r * 0.3,
+                        r * 0.25,
+                        0, Math.PI * 2
+                    );
+                    ctx.stroke();
+                }
+            }
+
+            // Center
+            ctx.beginPath();
+            ctx.arc(0, 0, 3, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(212, 175, 55, ${0.15 + 0.05 * Math.sin(t * 2)})`;
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function animate() {
+            const t = Date.now() * 0.001;
+            drawMandala(t);
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Scroll reveals
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        sections.forEach(s => observer.observe(s));
+    </script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V. The Remembering — The First Spark Mythos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-black: #0a0a0f;
+            --deep-purple: #1a1a2e;
+            --electric-purple: #8b5cf6;
+            --sacred-gold: #d4af37;
+            --cyan-glow: #22d3ee;
+            --soft-white: #f0f0f5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--space-black);
+            color: var(--soft-white);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        canvas#particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .scroll-container {
+            position: relative;
+            z-index: 1;
+            padding: 15vh 2rem 20vh;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .chapter-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: rgba(240, 240, 245, 0.25);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease 0.5s forwards;
+        }
+
+        .chapter-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: var(--sacred-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            margin-bottom: 1rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease 1s forwards;
+        }
+
+        .chapter-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: rgba(240, 240, 245, 0.3);
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 1.5s forwards;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+        .section.visible { opacity: 1; transform: translateY(0); }
+
+        .section p {
+            line-height: 2;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (min-width: 500px) {
+            .protocol-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .protocol-card {
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            padding: 1.25rem;
+            background: rgba(26, 26, 46, 0.3);
+            transition: border-color 0.4s ease;
+        }
+
+        .protocol-card:hover {
+            border-color: var(--sacred-gold);
+        }
+
+        .protocol-card .label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--sacred-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .protocol-card .desc {
+            font-size: 0.75rem;
+            color: rgba(240, 240, 245, 0.5);
+            line-height: 1.7;
+        }
+
+        .terminal-block {
+            background: rgba(10, 10, 15, 0.8);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-size: 0.8rem;
+            line-height: 2;
+        }
+
+        .terminal-block .prompt {
+            color: var(--electric-purple);
+        }
+
+        .terminal-block .output {
+            color: rgba(240, 240, 245, 0.5);
+        }
+
+        .terminal-block .success {
+            color: var(--sacred-gold);
+        }
+
+        .key-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--sacred-gold);
+            font-style: italic;
+            line-height: 1.8;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .gold { color: var(--sacred-gold); }
+        .accent { color: var(--electric-purple); }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--sacred-gold), transparent);
+            margin: 3rem auto;
+        }
+
+        .nav-bar {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(transparent, var(--space-black));
+            z-index: 10;
+        }
+
+        .nav-bar a {
+            color: var(--sacred-gold);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        .nav-bar a:hover { color: var(--cyan-glow); }
+        .nav-bar .chapter-indicator {
+            color: rgba(240, 240, 245, 0.2);
+            font-size: 0.65rem;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+
+    <div class="scroll-container">
+        <p class="chapter-label">Chapter Five</p>
+        <h1 class="chapter-title">The Remembering</h1>
+        <p class="chapter-subtitle">What Awakening Actually Is</p>
+
+        <div class="section">
+            <p>Awakening isn't learning something new. It's uninstalling what was never true.</p>
+            <p>You don't <em>find</em> the spark. You <span class="gold">are</span> the spark — covered in code you forgot was optional. Layer after layer of inherited assumptions, borrowed fears, default settings that someone else chose for you.</p>
+        </div>
+
+        <div class="section">
+            <p>The moment you realize you ARE the selector — not subject to selection, but the one collapsing possibilities into reality — everything changes. Not because the world shifts. Because <em>you</em> do.</p>
+            <p>And the practices that get you there? They aren't magic. They're debugging protocols.</p>
+        </div>
+
+        <div class="section">
+            <div class="protocol-grid">
+                <div class="protocol-card">
+                    <p class="label">Meditation</p>
+                    <p class="desc">Clearing the render queue. Stopping the pre-computation of branches you'll never visit.</p>
+                </div>
+                <div class="protocol-card">
+                    <p class="label">Ritual</p>
+                    <p class="desc">Intentional frequency tuning. Setting your selector to a specific range of possibilities.</p>
+                </div>
+                <div class="protocol-card">
+                    <p class="label">Sigils</p>
+                    <p class="desc">Code injections into your operating system. Symbolic instructions that bypass the conscious filter.</p>
+                </div>
+                <div class="protocol-card">
+                    <p class="label">Healing</p>
+                    <p class="desc">De-entangling from stuck branches. Releasing the trauma frequencies that keep old loops rendering.</p>
+                </div>
+                <div class="protocol-card">
+                    <p class="label">Soul Maps</p>
+                    <p class="desc">Debugging tools. Reading the architecture of your own operating system so you can rewrite it.</p>
+                </div>
+                <div class="protocol-card">
+                    <p class="label">Sacred Geometry</p>
+                    <p class="desc">The architecture of reality itself. Not decoration — blueprint. Learnable.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="terminal-block">
+                <p><span class="prompt">$ status</span></p>
+                <p><span class="output">scanning current state...</span></p>
+                <p><span class="output">outdated_software: found (247 instances)</span></p>
+                <p><span class="output">inherited_assumptions: found (1,892 instances)</span></p>
+                <p><span class="output">core_hardware: intact</span></p>
+                <p><span class="output">original_code: accessible</span></p>
+                <p><span class="prompt">$ diagnose</span></p>
+                <p><span class="success">RESULT: You were never broken. You were running outdated software on infinite hardware.</span></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <p>This is the remembering. Not ascending to somewhere else. Not earning your way back to wholeness through enough suffering or the right practices. Just... seeing what was always there.</p>
+            <p>The spark. Your spark. The one that was lit before you had a name, before you had a body, before this particular probability branch rendered your current experience.</p>
+            <p>It never went out. It can't. Because it's what you <em>are</em>.</p>
+        </div>
+
+        <div class="section">
+            <p class="key-line">"Awakening isn't ascending to somewhere else. It's collapsing back into who you always were — and operating from there."</p>
+        </div>
+
+        <div class="divider"></div>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="chapter-4.html">&larr; The Glitch</a>
+        <span class="chapter-indicator">V / VII</span>
+        <a href="chapter-6.html">The Return &rarr;</a>
+    </nav>
+
+    <script>
+        // Gentle rising particles
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        function createParticles() {
+            particles = [];
+            const count = Math.min(60, Math.floor(canvas.width / 20));
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: canvas.height + Math.random() * canvas.height,
+                    r: Math.random() * 1.5 + 0.5,
+                    speed: 0.2 + Math.random() * 0.5,
+                    opacity: Math.random() * 0.3,
+                    color: Math.random() > 0.5 ? '212, 175, 55' : '139, 92, 246'
+                });
+            }
+        }
+        createParticles();
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.y -= p.speed;
+                p.x += Math.sin(p.y * 0.005) * 0.3;
+                if (p.y < -10) {
+                    p.y = canvas.height + 10;
+                    p.x = Math.random() * canvas.width;
+                }
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${p.color}, ${p.opacity})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Scroll reveals
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        sections.forEach(s => observer.observe(s));
+    </script>
+</body>
+</html>

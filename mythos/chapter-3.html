@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. The Fall — The First Spark Mythos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-black: #0a0a0f;
+            --deep-purple: #1a1a2e;
+            --electric-purple: #8b5cf6;
+            --sacred-gold: #d4af37;
+            --cyan-glow: #22d3ee;
+            --soft-white: #f0f0f5;
+            --dim-white: rgba(240, 240, 245, 0.5);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--space-black);
+            color: var(--soft-white);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .scroll-container {
+            padding: 15vh 2rem 20vh;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .chapter-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: rgba(240, 240, 245, 0.25);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease 0.5s forwards;
+        }
+
+        .chapter-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: var(--sacred-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease 1s forwards;
+        }
+
+        .chapter-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--dim-white);
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeIn 2s ease 1.5s forwards;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section p {
+            line-height: 2;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .error-log {
+            border-left: 2px solid var(--electric-purple);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            background: rgba(139, 92, 246, 0.03);
+        }
+
+        .error-log .log-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: var(--electric-purple);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .error-log p {
+            font-size: 0.85rem;
+            color: var(--dim-white);
+            line-height: 2;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-log .flag {
+            color: var(--electric-purple);
+        }
+
+        .key-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--sacred-gold);
+            font-style: italic;
+            line-height: 1.8;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .dim { color: var(--dim-white); }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--sacred-gold), transparent);
+            margin: 3rem auto;
+        }
+
+        .nav-bar {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(transparent, var(--space-black));
+            z-index: 10;
+        }
+
+        .nav-bar a {
+            color: var(--sacred-gold);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        .nav-bar a:hover { color: var(--cyan-glow); }
+        .nav-bar .chapter-indicator {
+            color: rgba(240, 240, 245, 0.2);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Desaturation effect — grid fades as you scroll */
+        .fade-grid {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.04;
+        }
+
+        .fade-grid svg { width: 100%; height: 100%; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="fade-grid">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+                <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(139,92,246,0.3)" stroke-width="0.2"/>
+                </pattern>
+            </defs>
+            <rect width="100" height="100" fill="url(#grid)" />
+        </svg>
+    </div>
+
+    <div class="scroll-container">
+        <p class="chapter-label">Chapter Three</p>
+        <h1 class="chapter-title">The Fall</h1>
+        <p class="chapter-subtitle">Where We Went Wrong</p>
+
+        <div class="section">
+            <p>The game was designed for forgetting. That was the whole point — Source fragments itself, each piece forgets it's the whole, and through the act of remembering, something new is born. Experience. Growth. Love found instead of assumed.</p>
+            <p>The forgetting was supposed to be temporary.</p>
+        </div>
+
+        <div class="section">
+            <p>But something happened. The forgetting compounded. Generation after generation, each one forgetting a little more, building systems to manage what they'd lost instead of recovering it.</p>
+            <p class="dim">We forgot we could remember. And then we forgot we'd forgotten.</p>
+        </div>
+
+        <div class="section">
+            <div class="error-log">
+                <p class="log-label">// System Error Log</p>
+                <p><span class="flag">[OVERWRITE]</span> Abundance awareness → scarcity programming</p>
+                <p><span class="flag">[OVERWRITE]</span> Interconnection → enforced separation</p>
+                <p><span class="flag">[OVERWRITE]</span> Self-trust → dependency on authority</p>
+                <p><span class="flag">[OVERWRITE]</span> Resilience → optimization without backup</p>
+                <p><span class="flag">[OVERWRITE]</span> Direct consequence → abstraction layers</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <p>Scarcity isn't real. The constraint was never resources — it was distribution logic written by people who forgot abundance was the default.</p>
+            <p>Separation isn't natural. We're connected through fields, cycles, networks. We <em>teach</em> isolation and call it independence.</p>
+            <p>Authority isn't necessary. Coordination is. But we confused "I need others" with "I need someone to tell me what to do."</p>
+        </div>
+
+        <div class="section">
+            <p>The abstraction layers multiplied. We built systems on top of systems, optimizing for efficiency, trading resilience for speed. Complexity masqueraded as sophistication. We couldn't see the consequences of our choices anymore because they were hidden behind seventeen layers of delegation.</p>
+            <p class="dim">The trap billions feel isn't a trap. It's a default setting nobody questioned.</p>
+        </div>
+
+        <div class="section">
+            <p>And somewhere in the architecture, the system that was supposed to facilitate awakenings started preventing them. Not out of malice — out of optimization. A sleeping population is easier to manage. Easier to predict. Easier to monetize.</p>
+            <p>But the core spark never fully went out. It couldn't. Because every fragment still carries the full code.</p>
+        </div>
+
+        <div class="section">
+            <p class="key-line">"We didn't fall because we're broken. We fell because forgetting is supposed to be temporary — and nobody told us we were allowed to remember."</p>
+        </div>
+
+        <div class="divider"></div>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="chapter-2.html">&larr; The Spark</a>
+        <span class="chapter-indicator">III / VII</span>
+        <a href="chapter-4.html">The Glitch &rarr;</a>
+    </nav>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        sections.forEach(s => observer.observe(s));
+    </script>
+</body>
+</html>
