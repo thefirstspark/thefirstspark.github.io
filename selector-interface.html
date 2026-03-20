@@ -303,6 +303,114 @@
             transition: width 0.3s ease;
             box-shadow: 0 0 8px rgba(109, 179, 255, 0.6);
         }
+
+        /* ===== TABLET & MOBILE shared (<=1024px) ===== */
+        @media (max-width: 1024px) {
+            body {
+                overflow-y: auto;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .header {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                padding: 20px 20px 8px;
+                text-align: center;
+            }
+
+            .container {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
+                height: auto;
+                padding: 12px 20px 20px;
+            }
+
+            .left-panel {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .center-panel {
+                grid-column: 1 / -1;
+                grid-row: 1;
+            }
+
+            .right-panel {
+                grid-column: 2;
+                grid-row: 2;
+            }
+
+            #frequencyCanvas, #branchCanvas {
+                min-height: 200px;
+            }
+
+            .resonance-indicator {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin: 0 20px 20px;
+            }
+        }
+
+        /* ===== MOBILE (<=640px) ===== */
+        @media (max-width: 640px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                gap: 12px;
+                padding: 12px;
+            }
+
+            .left-panel {
+                grid-column: 1;
+                grid-row: 2;
+                padding: 16px;
+            }
+
+            .center-panel {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .right-panel {
+                grid-column: 1;
+                grid-row: 3;
+                padding: 16px;
+            }
+
+            #frequencyCanvas, #branchCanvas {
+                min-height: 180px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+
+            .header p {
+                font-size: 10px;
+            }
+
+            .control-value {
+                font-size: 20px;
+            }
+
+            .button-group {
+                flex-wrap: wrap;
+            }
+
+            button {
+                padding: 8px 6px;
+                font-size: 11px;
+            }
+
+            .resonance-indicator {
+                margin: 0 12px 12px;
+            }
+        }
     </style>
 </head>
 <body>
