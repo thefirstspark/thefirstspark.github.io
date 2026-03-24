@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
+<!-- End Google Tag Manager -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The First Spark — Investor Portal</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root {
+  --void: #050508;
+  --deep: #0a0a12;
+  --card: #0f0f1a;
+  --border: #1a1a2e;
+  --orange: #ff6b1a;
+  --gold: #f0c060;
+  --white: #f0ede8;
+  --dim: #8888aa;
+  --green: #4ade80;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--void); color: var(--white); font-family: 'Cormorant Garamond', serif; min-height: 100vh; }
+
+/* TABS */
+.tab-nav { display: flex; background: var(--deep); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+.tab-btn { flex: 1; padding: 14px 8px; background: none; border: none; color: var(--dim); font-family: 'Space Mono', monospace; font-size: 11px; cursor: pointer; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; border-bottom: 2px solid transparent; }
+.tab-btn.active { color: var(--orange); border-bottom-color: var(--orange); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* DECK */
+.deck { max-width: 900px; margin: 0 auto; padding: 20px; }
+.slide { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 50px 60px; margin-bottom: 24px; position: relative; overflow: hidden; }
+.slide::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--gold)); }
+.slide-num { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--dim); letter-spacing: 0.2em; margin-bottom: 16px; }
+.slide h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 12px; }
+.slide h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 300; color: var(--gold); margin-bottom: 20px; }
+.slide h3 { font-size: 1.1rem; font-weight: 600; color: var(--orange); margin-bottom: 10px; letter-spacing: 0.05em; }
+.slide p { font-size: 1.1rem; line-height: 1.7; color: #ccc8e8; margin-bottom: 16px; }
+.spark-name { color: var(--orange); font-style: italic; }
+.gold { color: var(--gold); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.card { background: var(--deep); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+.card h3 { font-size: 0.9rem; }
+.card p { font-size: 0.95rem; margin-bottom: 0; }
+.stat { font-family: 'Space Mono', monospace; font-size: 2rem; color: var(--orange); display: block; margin-bottom: 6px; }
+.tag { display: inline-block; background: rgba(255,107,26,0.15); border: 1px solid rgba(255,107,26,0.3); color: var(--orange); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 20px; margin: 3px; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+/* INVESTMENT TIERS */
+.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-top: 24px; }
+.tier { background: var(--deep); border: 1px solid var(--border); border-radius: 10px; padding: 24px 16px; text-align: center; transition: all 0.3s; position: relative; }
+.tier:hover { border-color: var(--orange); transform: translateY(-4px); }
+.tier.featured { border-color: var(--gold); background: rgba(240,192,96,0.05); }
+.tier.featured::before { content: 'POPULAR'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--void); font-family: 'Space Mono', monospace; font-size: 9px; padding: 3px 10px; border-radius: 10px; font-weight: 700; }
+.tier-name { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
+.tier-amount { font-family: 'Space Mono', monospace; font-size: 1.6rem; color: var(--white); font-weight: 700; }
+.tier-equity { font-size: 0.85rem; color: var(--gold); margin: 6px 0; }
+.tier-perks { font-size: 0.8rem; color: var(--dim); line-height: 1.5; margin: 10px 0; }
+.tier-btn { display: block; margin-top: 14px; padding: 10px 8px; background: linear-gradient(135deg, var(--orange), #cc4400); color: white; text-decoration: none; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; font-weight: 700; transition: opacity 0.2s; }
+.tier-btn:hover { opacity: 0.85; }
+.tier-btn.gold-btn { background: linear-gradient(135deg, var(--gold), #c09040); color: var(--void); }
+
+/* PROJECTIONS TABLE */
+.proj-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95rem; }
+.proj-table th { background: rgba(255,107,26,0.1); color: var(--orange); font-family: 'Space Mono', monospace; font-size: 11px; padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+.proj-table td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc8e8; }
+.proj-table tr:last-child td { color: var(--gold); font-weight: 600; }
+
+/* SAFE */
+.safe-wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px; }
+.safe-doc { background: white; color: #222; padding: 60px; border-radius: 8px; font-family: Georgia, serif; font-size: 14px; line-height: 1.8; }
+.safe-doc h1 { font-size: 1.4rem; text-align: center; margin-bottom: 6px; }
+.safe-doc h2 { font-size: 1.1rem; margin: 28px 0 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+.safe-doc .subtitle { text-align: center; color: #666; font-size: 13px; margin-bottom: 30px; }
+.safe-doc .field { border-bottom: 1px solid #333; display: inline-block; min-width: 200px; margin: 0 4px; }
+.safe-doc .sig-block { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+.safe-doc .sig-line { border-top: 1px solid #333; margin-top: 50px; padding-top: 6px; font-size: 12px; color: #555; }
+.tier-select-row { background: #f9f9f9; border: 1px solid #ddd; border-radius: 6px; padding: 16px 20px; margin: 16px 0; }
+.tier-select-row label { display: flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; }
+
+/* QR */
+.qr-wrap { max-width: 600px; margin: 0 auto; padding: 60px 20px; text-align: center; }
+.qr-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; margin: 30px 0; }
+#qrcode { display: flex; justify-content: center; margin: 20px 0; }
+.qr-url { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--dim); margin-top: 16px; }
+
+@media (max-width: 600px) {
+  .slide { padding: 30px 24px; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .tiers { grid-template-columns: 1fr 1fr; }
+  .safe-doc { padding: 30px 20px; }
+  .safe-doc .sig-block { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .tab-nav, .tab-btn { display: none; }
+  .tab-content { display: block !important; }
+  .safe-doc { box-shadow: none; }
+}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('deck')">⚡ Pitch Deck</button>
+  <button class="tab-btn" onclick="showTab('invest')">💎 Invest Now</button>
+  <button class="tab-btn" onclick="showTab('safe')">📄 SAFE Agreement</button>
+  <button class="tab-btn" onclick="showTab('qr')">🔗 Share</button>
+  <a href="theraise.html" style="padding:14px 16px; color:var(--dim); font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; border:none; background:none; cursor:pointer; transition:all 0.2s; border-bottom:2px solid transparent; text-align:center; display:flex; align-items:center;">📋 The Raise</a>
+</nav>
+
+<!-- PITCH DECK -->
+<div id="deck" class="tab-content active">
+<div class="deck">
+
+  <!-- Slide 1: Cover -->
+  <div class="slide" style="text-align:center; padding: 80px 60px;">
+    <div class="slide-num">01 / 10</div>
+    <div style="font-size:3rem; margin-bottom:20px;">⚡</div>
+    <h1><span class="spark-name">The First Spark</span></h1>
+    <h2 style="font-size:1.8rem; letter-spacing:0.15em; margin-bottom:24px;">CONSCIOUS CODE IN MOTION</h2>
+    <p style="max-width:500px; margin:0 auto 24px;">A digital ecosystem for inner exploration — tools, community, and frameworks for people ready to reprogram their reality.</p>
+    <div>
+      <span class="tag">Seed Round</span>
+      <span class="tag">$200K Raise</span>
+      <span class="tag">20% Equity</span>
+      <span class="tag">$1M Valuation</span>
+    </div>
+    <p style="margin-top:24px; font-size:0.9rem; color: var(--dim);">kate@thefirstspark.shop · (330) 807-5509 · thefirstspark.shop</p>
+  </div>
+
+  <!-- Slide 2: Problem -->
+  <div class="slide">
+    <div class="slide-num">02 / 10</div>
+    <h2>The Problem</h2>
+    <p>Millions of people are waking up — to trauma, to patterns, to the sense that reality is more malleable than they were taught. But the tools available to them are fragmented: self-help books with no interactivity, expensive therapists, shallow wellness apps, or occult communities with no structure.</p>
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card">
+        <h3>No Bridge</h3>
+        <p>Between ancient consciousness wisdom and modern digital tools. Seekers have to choose between depth and accessibility.</p>
+      </div>
+      <div class="card">
+        <h3>No Community</h3>
+        <p>Personal transformation is lonely. Existing platforms don't hold sacred space for real inner work — they optimize for engagement, not evolution.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: Philosophical Bridge -->
+  <div class="slide" style="text-align:center; padding: 80px 60px;">
+    <div class="slide-num">03 / 10</div>
+    <p style="font-size:1.6rem; font-style:italic; color:var(--gold); max-width:600px; margin:0 auto; line-height:1.6;">Reality is programmable.<br>Consciousness is the code.</p>
+    <hr class="divider" style="max-width:100px; margin:30px auto;">
+    <p style="color:var(--dim); font-size:0.95rem;">This isn't metaphor. It's operating system.</p>
+  </div>
+
+  <!-- Slide 4: Solution -->
+  <div class="slide">
+    <div class="slide-num">04 / 10</div>
+    <h2>The Solution</h2>
+    <p><span class="spark-name">The First Spark</span> is a consciousness technology platform — interactive digital tools, guided frameworks, and a living community built around the idea that <em>reality is programmable.</em></p>
+    <div class="grid-3">
+      <div class="card">
+        <h3>🧰 Tools</h3>
+        <p>50+ interactive HTML artifacts: soul mapping, sigil generation, consciousness trackers, ritual frameworks — all built and battle-tested.</p>
+      </div>
+      <div class="card">
+        <h3>🔥 Community</h3>
+        <p>Whop-based membership ecosystem with tiered access, live sessions, and a Discord for Players Lounge members.</p>
+      </div>
+      <div class="card">
+        <h3>📖 Content</h3>
+        <p>Book Zero memoir, TikTok presence (@sparkedone), and the Mobile Spark Station — a traveling consciousness studio.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Traction -->
+  <div class="slide">
+    <div class="slide-num">05 / 10</div>
+    <h2>Traction & Assets</h2>
+    <div class="grid-3">
+      <div class="card" style="text-align:center;">
+        <span class="stat">50+</span>
+        <p>Interactive tools built and deployed</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <span class="stat">1,000+</span>
+        <p>Community members across platforms</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <span class="stat">$0</span>
+        <p>Burn rate. Zero overhead. All hustle.</p>
+      </div>
+    </div>
+    <hr class="divider">
+    <p>Platform infrastructure live across GitHub Pages, Netlify, and Whop. Payment systems operational. Membership tiers defined and ready. The machine is built — we need fuel.</p>
+  </div>
+
+  <!-- Slide 6: Product & Revenue -->
+  <div class="slide">
+    <div class="slide-num">06 / 10</div>
+    <h2>Membership Tiers</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3>🌱 Free — Spark Access</h3>
+        <p>Entry tools, community access, introductory frameworks. Top of funnel.</p>
+      </div>
+      <div class="card" style="border-color: var(--orange);">
+        <h3>🔥 $33/mo — Players Lounge</h3>
+        <p>Full tool library, live sessions, Discord access. Core recurring revenue.</p>
+      </div>
+      <div class="card" style="border-color: var(--gold);">
+        <h3>⚡ $519 — OG Spark (Lifetime)</h3>
+        <p>Permanent access, founding member status, priority everything.</p>
+      </div>
+    </div>
+    <hr class="divider">
+    <p style="font-size:0.95rem; color: var(--dim);">Future: Custom AI assistant fine-tuned on First Spark content, licensing to wellness creators, and white-label tool packages.</p>
+  </div>
+
+  <!-- Slide 7: Founder -->
+  <div class="slide">
+    <div class="slide-num">07 / 10</div>
+    <h2>The Founder</h2>
+    <div class="grid-2">
+      <div>
+        <p><strong style="color:var(--white)">Katelin Jill Puzakulics</strong> is a self-taught developer, consciousness architect, and single mother of two based in Akron, Ohio.</p>
+        <p>Her path through profound early trauma — and the moment she realized <em>"reality is programmable"</em> — is the origin story that makes this platform authentic in a space full of performative wellness.</p>
+        <p>She built every tool, wrote every framework, and established every revenue stream herself. She doesn't just teach consciousness work — she lives it.</p>
+      </div>
+      <div>
+        <div class="card">
+          <h3>Background</h3>
+          <p>Computer programming (University of Akron) · Kate's Paint LLC founder (2021) · consciousness researcher · digital architect</p>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <h3>Vision</h3>
+          <p>Earthship community in Hocking Hills · Custom First Spark AI · International expansion of consciousness tech</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8: Team -->
+  <div class="slide">
+    <div class="slide-num">08 / 10</div>
+    <h2>The Team</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Katelin Jill Puzakulics</h3>
+        <p style="color:var(--orange); margin-bottom:8px;">Founder & CEO</p>
+        <p>Vision, product development, content creation, community building, all operations. Solo founder with complete skin in the game.</p>
+      </div>
+      <div class="card">
+        <h3>Claude (Anthropic)</h3>
+        <p style="color:var(--orange); margin-bottom:8px;">AI Development Partner</p>
+        <p>Technical development, content iteration, strategic reasoning. The 50+ tools were built in partnership with Claude across thousands of development sessions.</p>
+      </div>
+    </div>
+    <hr class="divider">
+    <p style="font-size:0.9rem; color:var(--dim);">Post-funding: Community manager, content producer, and technical advisor roles planned.</p>
+  </div>
+
+  <!-- Slide 9: Projections -->
+  <div class="slide">
+    <div class="slide-num">09 / 10</div>
+    <h2>Financial Projections</h2>
+    <table class="proj-table">
+      <tr><th>Year</th><th>Members</th><th>Revenue</th><th>Key Milestone</th></tr>
+      <tr><td>Year 1</td><td>100 Players + 20 OG</td><td>$40K</td><td>Mobile Spark Station deployed</td></tr>
+      <tr><td>Year 2</td><td>500 members</td><td>$200K</td><td>Book Zero published, licensing launched</td></tr>
+      <tr><td>Year 3</td><td>Ecosystem scale</td><td>$1M+</td><td>Custom AI live, land project begins</td></tr>
+    </table>
+    <hr class="divider">
+    <p style="font-size:0.9rem; color:var(--dim);">Investor receives 20% profit distributions quarterly once revenue exceeds operating costs. Buyout option available at 5× investment or fair market value.</p>
+  </div>
+
+  <!-- Slide 10: The Ask -->
+  <div class="slide" style="text-align:center;">
+    <div class="slide-num">10 / 10</div>
+    <h2>The Investment</h2>
+    <p style="max-width:560px; margin:0 auto 30px;">We're raising <strong class="gold">$200,000</strong> for <strong class="gold">20% permanent equity</strong> at a <strong class="gold">$1M post-money valuation</strong>. Every dollar goes toward building the machine that changes how humans relate to their own consciousness.</p>
+    <div style="margin-top:20px;">
+      <a href="#invest" onclick="showTab('invest')" style="display:inline-block; padding:16px 40px; background:linear-gradient(135deg,var(--orange),#cc4400); color:white; text-decoration:none; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.1em; font-weight:700;">⚡ INVEST NOW</a>
+    </div>
+    <p style="margin-top:30px; font-size:1.1rem; color:var(--gold); font-style:italic;">Conscious Code in Motion.</p>
+    <p style="margin-top:16px; color:var(--dim); font-size:0.9rem;">kate@thefirstspark.shop · (330) 807-5509</p>
+  </div>
+
+</div>
+</div>
+
+<!-- INVEST NOW TAB -->
+<div id="invest" class="tab-content">
+<div class="deck">
+  <div class="slide" style="text-align:center; padding-bottom:30px;">
+    <h2>Choose Your Investment Level</h2>
+    <p>Secure your equity stake in The First Spark. Each tier receives proportional ownership of the 20% investor pool. Payment processed securely via BlueVine.</p>
+  </div>
+  
+  <div class="tiers">
+    <div class="tier">
+      <div class="tier-name">Micro Spark</div>
+      <div class="tier-amount">$100</div>
+      <div class="tier-equity">0.01% equity</div>
+      <div class="tier-perks">Entry-level stake. You're in. Receive quarterly updates and profit distributions.</div>
+      <a class="tier-btn" href="https://pay.bluevine.com/p/52a0b08f11ff4a7db095748245f5ab3b/pay/" target="_blank">INVEST $100 →</a>
+    </div>
+    
+    <div class="tier">
+      <div class="tier-name">Spark Seed</div>
+      <div class="tier-amount">$500</div>
+      <div class="tier-equity">0.05% equity</div>
+      <div class="tier-perks">Founding supporter. Quarterly financials + consultation rights on major decisions.</div>
+      <a class="tier-btn" href="https://pay.bluevine.com/p/2fe4e4d92f1b445581bde0ea95ef3c96/pay/" target="_blank">INVEST $500 →</a>
+    </div>
+    
+    <div class="tier featured">
+      <div class="tier-name">Spark Builder</div>
+      <div class="tier-amount">$2,500</div>
+      <div class="tier-equity">0.25% equity</div>
+      <div class="tier-perks">Meaningful stake. Named in Book Zero acknowledgments. All rights included.</div>
+      <a class="tier-btn gold-btn" href="https://pay.bluevine.com/p/d8a7e794aea14c2e89d459f79adfba05" target="_blank">INVEST $2,500 →</a>
+    </div>
+    
+    <div class="tier">
+      <div class="tier-name">Founding Spark</div>
+      <div class="tier-amount">$10,000</div>
+      <div class="tier-equity">1.0% equity</div>
+      <div class="tier-perks">Serious equity. Direct access to Kate for strategy sessions. Full investor rights.</div>
+      <a class="tier-btn" href="https://pay.bluevine.com/p/ffd1c598b63a4284bf63f611dcfc15c3" target="_blank">INVEST $10,000 →</a>
+    </div>
+    
+    <div class="tier" style="border-color: var(--gold);">
+      <div class="tier-name">Architect Spark</div>
+      <div class="tier-amount">$25,000</div>
+      <div class="tier-equity">2.5% equity</div>
+      <div class="tier-perks">Angel-level stake. Shape the vision. Monthly calls with Kate. Top-tier all rights.</div>
+      <a class="tier-btn gold-btn" href="https://pay.bluevine.com/p/d4276339c34e4633b11af71fa4d33091" target="_blank">INVEST $25,000 →</a>
+    </div>
+  </div>
+
+  <div class="slide" style="margin-top:24px;">
+    <h3>After You Invest</h3>
+    <p>Email <strong>kate@thefirstspark.shop</strong> with your name, investment amount, and payment confirmation. You'll receive your signed SAFE agreement within 48 hours and be added to the investor update list immediately.</p>
+    <hr class="divider">
+    <p style="font-size:0.9rem; color:var(--dim);">Questions? Call or text Kate directly at <strong style="color:var(--white)">(330) 807-5509</strong>. She answers.</p>
+  </div>
+</div>
+</div>
+
+<!-- SAFE AGREEMENT -->
+<div id="safe" class="tab-content">
+<div class="safe-wrap">
+<div class="safe-doc">
+  <h1>SIMPLE AGREEMENT FOR FUTURE EQUITY (SAFE)</h1>
+  <p class="subtitle">The First Spark · Kate's Paint LLC DBA · Akron, Ohio</p>
+
+  <p>This Simple Agreement for Future Equity ("Agreement") is entered into as of <span class="field">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>, 2026, between:</p>
+
+  <p><strong>Company:</strong> Kate's Paint LLC, doing business as The First Spark, an Ohio limited liability company ("Company"), represented by Katelin Puzakulics, Founder and CEO.</p>
+
+  <p><strong>Investor:</strong> <span class="field">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> ("Investor")</p>
+
+  <h2>1. Investment Tier Selection</h2>
+  <p>Investor selects the following investment tier (check one):</p>
+
+  <div class="tier-select-row"><label><input type="radio" name="tier" value="100"> <strong>Micro Spark — $100</strong> · 0.01% permanent equity stake</label></div>
+  <div class="tier-select-row"><label><input type="radio" name="tier" value="500"> <strong>Spark Seed — $500</strong> · 0.05% permanent equity stake</label></div>
+  <div class="tier-select-row"><label><input type="radio" name="tier" value="2500"> <strong>Spark Builder — $2,500</strong> · 0.25% permanent equity stake</label></div>
+  <div class="tier-select-row"><label><input type="radio" name="tier" value="10000"> <strong>Founding Spark — $10,000</strong> · 1.0% permanent equity stake</label></div>
+  <div class="tier-select-row"><label><input type="radio" name="tier" value="25000"> <strong>Architect Spark — $25,000</strong> · 2.5% permanent equity stake</label></div>
+
+  <h2>2. Investment Amount & Equity</h2>
+  <p>Investor agrees to invest the amount specified above ("Investment Amount") in exchange for a permanent, proportional equity stake in Kate's Paint LLC DBA The First Spark, as indicated. Total raise is $200,000 for 20% equity, valuing the Company at $1,000,000 post-money.</p>
+
+  <h2>3. Investor Rights</h2>
+  <p><strong>3.1 Profit Distributions.</strong> Investor shall receive their proportional percentage of net profits, distributed quarterly within 30 days of each quarter end, once operating costs are covered.</p>
+  <p><strong>3.2 Exit Participation.</strong> Upon sale or acquisition of the Company, Investor receives their proportional percentage of proceeds after debt obligations.</p>
+  <p><strong>3.3 Reporting.</strong> Investor receives quarterly financial summaries via email and annual review documents.</p>
+  <p><strong>3.4 Consultation Rights (Founding Spark & Architect Spark tiers only).</strong> Investor may be consulted on strategic decisions and expenditures exceeding $25,000.</p>
+  <p><strong>3.5 Information Access.</strong> Investor may request review of financial records upon reasonable written notice.</p>
+
+  <h2>4. Founder Control</h2>
+  <p>Katelin Puzakulics retains 100% operational and management authority. Investor has no management rights, veto power, board seat, or right to direct day-to-day operations. This is a passive equity investment.</p>
+
+  <h2>5. Buyout Option</h2>
+  <p>The Company may repurchase Investor's equity stake at any time for the greater of: (a) 5× the original Investment Amount, or (b) fair market value of the equity stake as determined by mutual agreement or independent valuation.</p>
+
+  <h2>6. Representations</h2>
+  <p>Investor represents that they are investing with funds they can afford to risk, understand this is an early-stage investment, and have had opportunity to review available materials and ask questions.</p>
+
+  <h2>7. Governing Law</h2>
+  <p>This Agreement shall be governed by the laws of the State of Ohio.</p>
+
+  <div class="sig-block">
+    <div>
+      <p><strong>COMPANY</strong></p>
+      <div class="sig-line">Katelin Puzakulics, Founder & CEO<br>Kate's Paint LLC DBA The First Spark<br>Date: _________________________</div>
+    </div>
+    <div>
+      <p><strong>INVESTOR</strong></p>
+      <div class="sig-line">Signature<br>Printed Name: _________________________<br>Date: _________________________</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- QR / SHARE TAB -->
+<div id="qr" class="tab-content">
+<div class="qr-wrap">
+  <h2 style="color:var(--gold); font-weight:300; font-size:2rem;">Share The First Spark</h2>
+  <p style="color:var(--dim); margin-top:8px;">Send investors directly to your site</p>
+  
+  <div class="qr-box">
+    <div id="qrcode"></div>
+    <p class="qr-url">thefirstspark.shop</p>
+  </div>
+  
+  <div style="margin-top:20px;">
+    <p style="color:var(--dim); font-size:0.9rem; margin-bottom:16px;">Direct invest link to share:</p>
+    <div style="background:var(--deep); border:1px solid var(--border); border-radius:8px; padding:16px; font-family:'Space Mono',monospace; font-size:12px; color:var(--orange); word-break:break-all;">thefirstspark.shop</div>
+  </div>
+
+  <div style="margin-top:30px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <a href="https://pay.bluevine.com/p/52a0b08f11ff4a7db095748245f5ab3b/pay/" target="_blank" style="display:block; padding:12px; background:var(--card); border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$100 Link</a>
+    <a href="https://pay.bluevine.com/p/2fe4e4d92f1b445581bde0ea95ef3c96/pay/" target="_blank" style="display:block; padding:12px; background:var(--card); border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$500 Link</a>
+    <a href="https://pay.bluevine.com/p/d8a7e794aea14c2e89d459f79adfba05" target="_blank" style="display:block; padding:12px; background:var(--card); border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--gold); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$2,500 Link</a>
+    <a href="https://pay.bluevine.com/p/ffd1c598b63a4284bf63f611dcfc15c3" target="_blank" style="display:block; padding:12px; background:var(--card); border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$10,000 Link</a>
+    <a href="https://pay.bluevine.com/p/d4276339c34e4633b11af71fa4d33091" target="_blank" style="display:block; padding:12px; background:var(--card); border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--gold); text-align:center; font-family:'Space Mono',monospace; font-size:11px; grid-column:span 2;">$25,000 Link</a>
+  </div>
+</div>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = ['deck','invest','safe','qr'].indexOf(id);
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// QR Code
+window.onload = function() {
+  new QRCode(document.getElementById("qrcode"), {
+    text: "https://thefirstspark.shop",
+    width: 200,
+    height: 200,
+    colorDark: "#ff6b1a",
+    colorLight: "#0f0f1a",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+};
+</script>
+</body>
+</html>
