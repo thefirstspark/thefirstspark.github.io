@@ -946,7 +946,14 @@
 <body>
     <div class="stars"></div>
     <div class="twinkling"></div>
-    <a href="index.html" class="back-to-universe">← Back to Universe</a>
+    <a id="backLink" href="index.html" class="back-to-universe">← Back to Universe</a>
+    <script>
+        if (document.referrer && document.referrer.includes('starter-kit')) {
+            const bl = document.getElementById('backLink');
+            bl.href = 'starter-kit.html';
+            bl.textContent = '← Back to Starter Kit';
+        }
+    </script>
 
     <div class="reset-container">
         <!-- Background Effects -->
