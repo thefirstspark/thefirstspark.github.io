@@ -42,6 +42,35 @@ function doPost(e) {
 }
 
 function doGet(e) {
+  // Handle data via GET (iframe method to avoid CORS)
+  if (e && e.parameter && e.parameter.data) {
+    try {
+      var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+      var data = JSON.parse(e.parameter.data);
+
+      var archetype = data.archetype || {};
+      var referral = data.referral || {};
+
+      sheet.appendRow([
+        new Date(),
+        data.email || '',
+        archetype.primary || 'not taken',
+        archetype.track || '',
+        data.streak || 0,
+        referral.myCode || '',
+        data.source || 'starter-kit'
+      ]);
+
+      return ContentService
+        .createTextOutput(JSON.stringify({status: 'success'}))
+        .setMimeType(ContentService.MimeType.JSON);
+    } catch(error) {
+      return ContentService
+        .createTextOutput(JSON.stringify({status: 'error', message: error.toString()}))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+
   return ContentService
     .createTextOutput("Starter Kit email capture is active!")
     .setMimeType(ContentService.MimeType.TEXT);

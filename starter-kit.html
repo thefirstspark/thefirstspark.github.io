@@ -541,14 +541,14 @@
             localStorage.setItem('spark_email', email);
             localStorage.setItem('spark_kit_submitted', 'true');
 
-            // Send to Google Apps Script backend
+            // Send to Google Apps Script backend via iframe (avoids CORS)
             try {
-                await fetch('https://script.google.com/macros/s/AKfycbyrBq5WdObdwS23L-t4nhJ5vxD6elsr6voTTFLvIdU-sjehleSeGgb0d0Jdu8Iv41E4/exec', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+                const scriptUrl = 'https://script.google.com/macros/s/AKfycbyrBq5WdObdwS23L-t4nhJ5vxD6elsr6voTTFLvIdU-sjehleSeGgb0d0Jdu8Iv41E4/exec';
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = scriptUrl + '?data=' + encodeURIComponent(JSON.stringify(payload));
+                document.body.appendChild(iframe);
+                setTimeout(() => iframe.remove(), 5000);
             } catch (err) {
                 console.error('Submission error:', err);
             }
