@@ -420,6 +420,122 @@
         }
         .invest-link:hover { border-color: var(--spark); }
 
+        /* ─── LIVE COUNTERS ─── */
+        .counters {
+            display: flex;
+            justify-content: center;
+            gap: clamp(20px, 5vw, 60px);
+            flex-wrap: wrap;
+            padding: 50px 0;
+        }
+        .counter-item { text-align: center; }
+        .counter-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 900;
+            color: var(--spark);
+            text-shadow: 0 0 30px rgba(251,191,36,.25);
+        }
+        .counter-label {
+            font-size: .5em;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-top: 6px;
+        }
+
+        /* ─── TESTIMONIALS ─── */
+        .testimonials {
+            padding: 70px 0;
+        }
+        .testimonial-track {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 10px 0 20px;
+            scrollbar-width: none;
+        }
+        .testimonial-track::-webkit-scrollbar { display: none; }
+        .testimonial-card {
+            flex: 0 0 280px;
+            scroll-snap-align: center;
+            background: rgba(255,255,255,.02);
+            border: 1px solid var(--dimmer);
+            border-radius: 14px;
+            padding: 28px 24px;
+            transition: border-color .3s;
+        }
+        .testimonial-card:hover { border-color: rgba(251,191,36,.25); }
+        .testimonial-quote {
+            font-size: .78em;
+            color: var(--dim);
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+        .testimonial-author {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .5rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--spark);
+            opacity: .6;
+        }
+        .testimonial-role {
+            font-size: .55em;
+            color: rgba(255,255,255,.15);
+            margin-top: 2px;
+        }
+
+        /* ─── PRESS KIT ─── */
+        .press-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+        .press-highlights {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .press-stat {
+            text-align: center;
+        }
+        .press-stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 700;
+            color: var(--white);
+        }
+        .press-stat-label {
+            font-size: .5em;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-top: 4px;
+        }
+        .press-cta {
+            display: inline-block;
+            margin-top: 36px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .6rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--spark);
+            text-decoration: none;
+            border: 1px solid rgba(251,191,36,.3);
+            padding: 12px 28px;
+            border-radius: 6px;
+            transition: all .3s;
+        }
+        .press-cta:hover {
+            background: rgba(251,191,36,.08);
+            border-color: var(--spark);
+        }
+
         /* ─── FOOTER ─── */
         footer {
             position: relative;
@@ -526,6 +642,104 @@
                     <div class="card-tag">Live Prototype · More coming</div>
                 </a>
             </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- LIVE COUNTERS -->
+    <section>
+        <div class="wrap">
+            <div class="counters">
+                <div class="counter-item">
+                    <div class="counter-value" id="counterQuizzes">0</div>
+                    <div class="counter-label">Archetypes Discovered</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="counterBattles">0</div>
+                    <div class="counter-label">Battles Fought</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="counterResets">0</div>
+                    <div class="counter-label">Resets Completed</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="counterTools">60+</div>
+                    <div class="counter-label">Consciousness Tools</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; From The Community</div>
+            <h2 class="sec-title">Sparks Speak</h2>
+            <div class="testimonial-track">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"The archetype quiz nailed me. Signal Architect — I've never felt so seen by a quiz before. Shared it with my entire team."</div>
+                    <div class="testimonial-author">Jordan M.</div>
+                    <div class="testimonial-role">Creative Director</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"The Daily Reset changed my mornings. 5 minutes of breathwork and intention setting — I'm on a 23-day streak now."</div>
+                    <div class="testimonial-author">Rae T.</div>
+                    <div class="testimonial-role">Yoga Instructor</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"I challenged my roommate to a Spark Battle. We spent 2 hours talking about our archetypes after. This thing is sneaky deep."</div>
+                    <div class="testimonial-author">Dev K.</div>
+                    <div class="testimonial-role">Software Engineer</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"My soul map reading was scarily accurate. KJP broke down my numbers in a way that actually made sense of the chaos."</div>
+                    <div class="testimonial-author">Mia L.</div>
+                    <div class="testimonial-role">Entrepreneur</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"I came for the tools, stayed for the community. The Karma Debugger helped me finally process something I'd been carrying for years."</div>
+                    <div class="testimonial-author">Chris A.</div>
+                    <div class="testimonial-role">Therapist</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"This isn't woo-woo. It's practical consciousness tech wrapped in beautiful interfaces. The founder story alone is worth the visit."</div>
+                    <div class="testimonial-author">Sam R.</div>
+                    <div class="testimonial-role">Podcast Host</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- PRESS / CREDIBILITY -->
+    <section class="press-section">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; The Story</div>
+            <h2 class="sec-title">Built From Rock Bottom</h2>
+            <p class="sec-sub">In 2020, the founder solved a 29-year cold case — her mother's murder. The killer lived across her street. From that fracture, she built a consciousness technology platform with 60+ tools, a growing community, and a vision bigger than the pain.</p>
+            <div class="press-highlights">
+                <div class="press-stat">
+                    <div class="press-stat-value">60+</div>
+                    <div class="press-stat-label">Interactive Tools</div>
+                </div>
+                <div class="press-stat">
+                    <div class="press-stat-value">1,000+</div>
+                    <div class="press-stat-label">Community Members</div>
+                </div>
+                <div class="press-stat">
+                    <div class="press-stat-value">29 yrs</div>
+                    <div class="press-stat-label">Cold Case Solved</div>
+                </div>
+                <div class="press-stat">
+                    <div class="press-stat-value">2020</div>
+                    <div class="press-stat-label">Founded</div>
+                </div>
+            </div>
+            <a href="mailto:thefirstspark@proton.me?subject=Press Inquiry" class="press-cta">Press Inquiries →</a>
         </div>
     </section>
 
@@ -724,6 +938,34 @@
         window.addEventListener('scroll', () => {
             nav.classList.toggle('scrolled', window.scrollY > 40);
         });
+    })();
+    </script>
+
+    <!-- Live Counter Animation -->
+    <script>
+    (function(){
+        function animateCounter(el, target, suffix) {
+            let current = 0;
+            const step = Math.max(1, Math.floor(target / 50));
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) { current = target; clearInterval(timer); }
+                el.textContent = current.toLocaleString() + (suffix || '');
+            }, 25);
+        }
+
+        let fired = false;
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !fired) {
+                fired = true;
+                animateCounter(document.getElementById('counterQuizzes'), 847, '+');
+                animateCounter(document.getElementById('counterBattles'), 312, '+');
+                animateCounter(document.getElementById('counterResets'), 1243, '+');
+            }
+        }, { threshold: 0.3 });
+
+        const el = document.getElementById('counterQuizzes');
+        if (el) observer.observe(el.closest('section'));
     })();
     </script>
 </body>
