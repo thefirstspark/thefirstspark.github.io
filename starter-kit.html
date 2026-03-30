@@ -541,17 +541,14 @@
             localStorage.setItem('spark_email', email);
             localStorage.setItem('spark_kit_submitted', 'true');
 
-            // Try to send to backend (Formspree or Google Apps Script)
+            // Send to Google Apps Script backend
             try {
-                // Using Formspree — replace YOUR_FORM_ID with actual ID
-                // await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify(payload)
-                // });
-
-                // For now, store locally and show success
-                console.log('Starter Kit submission:', payload);
+                await fetch('https://script.google.com/macros/s/AKfycbw3cAVvtItHwZj1ihisJNGO1QvhREemouhN04tn1Lx5F-dDOBSceOwaUg027_eSDUndnw/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
             } catch (err) {
                 console.error('Submission error:', err);
             }
