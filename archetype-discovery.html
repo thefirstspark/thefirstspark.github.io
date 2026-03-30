@@ -738,6 +738,7 @@
         </footer>
     </div>
 
+    <script src="referral.js"></script>
     <script>
         // ========================================
         // ARCHETYPE DISCOVERY ENGINE
@@ -1002,6 +1003,11 @@
 
             // Update progress bar to full
             document.getElementById('progress-fill').style.width = '100%';
+
+            // Track quiz completion count + referral conversion
+            const quizCount = parseInt(localStorage.getItem('archetype_quiz_count') || '0') + 1;
+            localStorage.setItem('archetype_quiz_count', quizCount.toString());
+            if (window.SparkReferral) window.SparkReferral.trackConversion('archetype_quiz');
         }
 
         function copyTitle() {
@@ -1021,6 +1027,7 @@
         }
 
         function getShareUrl() {
+            if (window.SparkReferral) return window.SparkReferral.getLink('/archetype-discovery.html');
             return 'https://thefirstspark.shop/archetype-discovery.html';
         }
 

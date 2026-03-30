@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consciousness Starter Kit | The First Spark</title>
+    <meta name="description" content="Your free consciousness toolkit — Energy Check-In, Archetype Quiz, and Daily Reset. Save your results with email.">
+    <meta property="og:title" content="Free Consciousness Starter Kit">
+    <meta property="og:description" content="3 tools to calibrate your consciousness. Energy Check-In, Archetype Quiz, Daily Reset.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thefirstspark.shop/starter-kit.html">
+    <meta property="og:image" content="https://thefirstspark.shop/og-archetype-quiz.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Consciousness Starter Kit | The First Spark">
+    <meta name="twitter:description" content="3 tools to calibrate your consciousness. Free, no signup required.">
+    <meta name="twitter:image" content="https://thefirstspark.shop/og-archetype-quiz.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --void: #0a0a0f;
+            --deep-space: #12121a;
+            --nebula: #1a1a2e;
+            --spark-gold: #d4af37;
+            --spark-ember: #ff6b35;
+            --plasma-cyan: #00fff7;
+            --cosmic-violet: #9d4edd;
+            --stardust: #e8e8e8;
+            --ghost: rgba(255,255,255,0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--void);
+            color: var(--stardust);
+            min-height: 100vh;
+        }
+
+        .bg-layer {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(circle at 25% 25%, rgba(157,78,221,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(0,255,247,0.05) 0%, transparent 50%);
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .kit-header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+        }
+
+        .kit-badge {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--plasma-cyan);
+            border: 1px solid rgba(0,255,247,0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
+
+        .kit-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--stardust), var(--spark-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+        }
+
+        .kit-sub {
+            font-size: 1.05rem;
+            color: rgba(232,232,232,0.55);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .step-card {
+            background: var(--deep-space);
+            border: 1px solid var(--ghost);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .step-card.active {
+            border-color: var(--spark-gold);
+            box-shadow: 0 0 30px rgba(212,175,55,0.1);
+        }
+
+        .step-card.completed {
+            border-color: rgba(0,255,247,0.3);
+        }
+
+        .step-card.locked {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(212,175,55,0.1);
+            border: 2px solid rgba(212,175,55,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--spark-gold);
+            flex-shrink: 0;
+        }
+
+        .step-card.completed .step-number {
+            background: rgba(0,255,247,0.15);
+            border-color: var(--plasma-cyan);
+            color: var(--plasma-cyan);
+        }
+
+        .step-info { flex: 1; }
+
+        .step-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--stardust);
+            margin-bottom: 0.25rem;
+        }
+
+        .step-desc {
+            font-size: 0.85rem;
+            color: rgba(232,232,232,0.45);
+            line-height: 1.4;
+        }
+
+        .step-btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            text-decoration: none;
+        }
+
+        .step-btn.start {
+            background: linear-gradient(135deg, var(--spark-gold), var(--spark-ember));
+            color: var(--void);
+        }
+
+        .step-btn.start:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(212,175,55,0.3);
+        }
+
+        .step-btn.done {
+            background: rgba(0,255,247,0.1);
+            color: var(--plasma-cyan);
+            border: 1px solid rgba(0,255,247,0.2);
+        }
+
+        /* Email Capture */
+        .email-section {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(157,78,221,0.08));
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .email-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .email-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--spark-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .email-desc {
+            font-size: 0.9rem;
+            color: rgba(232,232,232,0.5);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 0.85rem 1.2rem;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--ghost);
+            border-radius: 10px;
+            color: var(--stardust);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--spark-gold);
+        }
+
+        .email-input::placeholder {
+            color: rgba(232,232,232,0.3);
+        }
+
+        .email-submit {
+            padding: 0.85rem 1.5rem;
+            background: linear-gradient(135deg, var(--spark-gold), var(--spark-ember));
+            border: none;
+            border-radius: 10px;
+            color: var(--void);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .email-submit:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 20px rgba(212,175,55,0.4);
+        }
+
+        .email-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .email-success {
+            display: none;
+            color: var(--plasma-cyan);
+            font-size: 1rem;
+            padding: 1rem;
+        }
+
+        .email-privacy {
+            font-size: 0.7rem;
+            color: rgba(232,232,232,0.25);
+            margin-top: 0.75rem;
+        }
+
+        /* Referral section */
+        .referral-section {
+            background: var(--deep-space);
+            border: 1px solid var(--ghost);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .referral-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--spark-gold);
+            margin-bottom: 1rem;
+        }
+
+        .referral-link-box {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 450px;
+            margin: 0 auto 1rem;
+        }
+
+        .referral-link-input {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            background: rgba(0,0,0,0.4);
+            border: 1px dashed rgba(212,175,55,0.3);
+            border-radius: 8px;
+            color: var(--plasma-cyan);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        .referral-copy-btn {
+            padding: 0.7rem 1rem;
+            background: transparent;
+            border: 1px solid var(--ghost);
+            border-radius: 8px;
+            color: var(--stardust);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .referral-copy-btn:hover {
+            border-color: var(--spark-gold);
+            color: var(--spark-gold);
+        }
+
+        .referral-badges {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .ref-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .ref-badge.earned {
+            background: rgba(212,175,55,0.15);
+            border: 1px solid rgba(212,175,55,0.3);
+            color: var(--spark-gold);
+        }
+
+        .ref-badge.locked {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--ghost);
+            color: rgba(232,232,232,0.2);
+        }
+
+        /* Footer */
+        .kit-footer {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            background: linear-gradient(135deg, var(--spark-gold), var(--spark-ember));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-tag {
+            font-size: 0.75rem;
+            color: rgba(232,232,232,0.25);
+            margin-top: 0.25rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .container { padding: 1.5rem; }
+            .step-card { flex-direction: column; text-align: center; }
+            .email-form { flex-direction: column; }
+            .referral-link-box { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-layer"></div>
+
+    <div class="container">
+        <header class="kit-header">
+            <div class="kit-badge">Free Toolkit</div>
+            <h1 class="kit-title">Consciousness Starter Kit</h1>
+            <p class="kit-sub">Three tools to calibrate your consciousness. Complete all three, save your results forever.</p>
+        </header>
+
+        <!-- Steps -->
+        <div class="steps">
+            <div class="step-card active" id="step1">
+                <div class="step-number">1</div>
+                <div class="step-info">
+                    <div class="step-name">Energy Check-In</div>
+                    <div class="step-desc">How does your energy feel right now? Start with awareness.</div>
+                </div>
+                <a href="daily-reset.html" class="step-btn start" id="step1Btn">Start</a>
+            </div>
+
+            <div class="step-card" id="step2">
+                <div class="step-number">2</div>
+                <div class="step-info">
+                    <div class="step-name">Archetype Discovery</div>
+                    <div class="step-desc">6 questions to discover your Player Class. 60 seconds.</div>
+                </div>
+                <a href="archetype-discovery.html" class="step-btn start" id="step2Btn">Start</a>
+            </div>
+
+            <div class="step-card" id="step3">
+                <div class="step-number">3</div>
+                <div class="step-info">
+                    <div class="step-name">Daily Reset</div>
+                    <div class="step-desc">Breathwork, intention, release. Your 5-minute calibration.</div>
+                </div>
+                <a href="daily-reset.html" class="step-btn start" id="step3Btn">Start</a>
+            </div>
+        </div>
+
+        <!-- Email Capture -->
+        <div class="email-section">
+            <div class="email-icon">✦</div>
+            <div class="email-title">Save Your Results</div>
+            <div class="email-desc">Enter your email to save your archetype, streak, and soul data — plus get early access to new tools.</div>
+            <form class="email-form" id="emailForm" onsubmit="submitEmail(event)">
+                <input type="email" class="email-input" id="emailInput" placeholder="your@email.com" required>
+                <button type="submit" class="email-submit" id="emailBtn">Save Results</button>
+            </form>
+            <div class="email-success" id="emailSuccess">✓ Results saved! Check your inbox for your consciousness profile.</div>
+            <div class="email-privacy">No spam. Unsubscribe anytime. Your data stays yours.</div>
+        </div>
+
+        <!-- Referral Section -->
+        <div class="referral-section">
+            <div class="referral-title">✦ Share & Earn Badges</div>
+            <p style="font-size: 0.85rem; color: rgba(232,232,232,0.45); margin-bottom: 1rem;">
+                Share your unique link. Earn badges for every person who takes the quiz.
+            </p>
+            <div class="referral-link-box">
+                <input type="text" class="referral-link-input" id="referralLink" readonly>
+                <button class="referral-copy-btn" onclick="copyReferralLink()">📋 Copy</button>
+            </div>
+            <div class="referral-badges" id="referralBadges"></div>
+        </div>
+
+        <footer class="kit-footer">
+            <div class="footer-logo">THE FIRST SPARK</div>
+            <div class="footer-tag">Reality is programmable</div>
+        </footer>
+    </div>
+
+    <!-- Referral Engine -->
+    <script src="referral.js"></script>
+
+    <script>
+        // Check completion status from localStorage
+        function checkSteps() {
+            const hasReset = localStorage.getItem('lastResetDate');
+            const hasArchetype = localStorage.getItem('spark_archetype');
+            const streak = localStorage.getItem('dailyResetStreak');
+
+            if (hasReset) markComplete('step1');
+            if (hasArchetype) markComplete('step2');
+            if (streak && parseInt(streak) >= 1) markComplete('step3');
+        }
+
+        function markComplete(stepId) {
+            const card = document.getElementById(stepId);
+            card.classList.remove('active', 'locked');
+            card.classList.add('completed');
+            const btn = card.querySelector('.step-btn');
+            btn.textContent = '✓ Done';
+            btn.classList.remove('start');
+            btn.classList.add('done');
+            const num = card.querySelector('.step-number');
+            num.textContent = '✓';
+        }
+
+        // Email submission
+        async function submitEmail(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            const btn = document.getElementById('emailBtn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            // Gather all results
+            const archetype = localStorage.getItem('spark_archetype');
+            const streak = localStorage.getItem('dailyResetStreak') || '0';
+            const resetHistory = localStorage.getItem('resetHistory');
+            const referralData = localStorage.getItem('spark_referral');
+
+            const payload = {
+                email: email,
+                archetype: archetype ? JSON.parse(archetype) : null,
+                streak: parseInt(streak),
+                resetHistory: resetHistory ? JSON.parse(resetHistory) : [],
+                referral: referralData ? JSON.parse(referralData) : null,
+                timestamp: new Date().toISOString(),
+                source: 'starter-kit'
+            };
+
+            // Save locally
+            localStorage.setItem('spark_email', email);
+            localStorage.setItem('spark_kit_submitted', 'true');
+
+            // Try to send to backend (Formspree or Google Apps Script)
+            try {
+                // Using Formspree — replace YOUR_FORM_ID with actual ID
+                // await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(payload)
+                // });
+
+                // For now, store locally and show success
+                console.log('Starter Kit submission:', payload);
+            } catch (err) {
+                console.error('Submission error:', err);
+            }
+
+            // Show success
+            document.getElementById('emailForm').style.display = 'none';
+            document.getElementById('emailSuccess').style.display = 'block';
+
+            // Track in analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'starter_kit_email', { 'method': 'form' });
+            }
+
+            // Track referral conversion
+            if (window.SparkReferral) {
+                window.SparkReferral.trackConversion('email_capture');
+            }
+        }
+
+        // Referral link display
+        function setupReferral() {
+            if (!window.SparkReferral) return;
+            const link = window.SparkReferral.getLink('/starter-kit.html');
+            document.getElementById('referralLink').value = link;
+
+            // Display badges
+            const allBadges = window.SparkReferral.getAllBadges();
+            const earned = window.SparkReferral.getBadges();
+            const earnedNames = earned.map(b => b.name);
+            const badgesHtml = Object.values(allBadges).map(badge => {
+                const isEarned = earnedNames.includes(badge.name);
+                return `<div class="ref-badge ${isEarned ? 'earned' : 'locked'}">${badge.icon} ${badge.name}</div>`;
+            }).join('');
+            document.getElementById('referralBadges').innerHTML = badgesHtml;
+        }
+
+        function copyReferralLink() {
+            const input = document.getElementById('referralLink');
+            navigator.clipboard.writeText(input.value);
+            const btn = document.querySelector('.referral-copy-btn');
+            btn.textContent = '✓ Copied!';
+            setTimeout(() => btn.textContent = '📋 Copy', 2000);
+        }
+
+        // Check if already submitted
+        function checkExisting() {
+            if (localStorage.getItem('spark_kit_submitted')) {
+                document.getElementById('emailForm').style.display = 'none';
+                document.getElementById('emailSuccess').style.display = 'block';
+                document.getElementById('emailSuccess').textContent = '✓ Your results are saved!';
+            }
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            checkSteps();
+            setupReferral();
+            checkExisting();
+        });
+    </script>
+</body>
+</html>

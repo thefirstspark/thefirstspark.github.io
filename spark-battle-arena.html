@@ -1297,6 +1297,7 @@
         </div>
     </div>
 
+    <script src="referral.js"></script>
     <script>
         // Background animation
         const canvas = document.getElementById('bgCanvas');
@@ -1738,6 +1739,7 @@
         }
 
         function getBattleUrl() {
+            if (window.SparkReferral) return window.SparkReferral.getLink('/spark-battle-arena.html');
             return 'https://thefirstspark.shop/spark-battle-arena.html';
         }
 
