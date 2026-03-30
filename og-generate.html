@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>OG Image Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 40px; background: #111; font-family: sans-serif; color: #fff; }
+        .instructions { margin-bottom: 20px; font-size: 14px; color: #888; }
+        .instructions code { color: #d4af37; }
+        #ogCard {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 40%, #12121a 100%);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        .og-bg {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 800px; height: 800px;
+            transform: translate(-50%, -50%);
+            opacity: 0.06;
+        }
+        .og-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+        }
+        .og-badge {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 18px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #00fff7;
+            margin-bottom: 30px;
+        }
+        .og-title {
+            font-family: 'Cinzel', serif;
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #e8e8e8, #d4af37, #ff6b35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .og-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 28px;
+            color: rgba(232,232,232,0.6);
+            max-width: 700px;
+        }
+        .og-chips {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+        }
+        .og-chip {
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px;
+            font-size: 18px;
+            color: rgba(232,232,232,0.5);
+        }
+        .og-footer {
+            position: absolute;
+            bottom: 30px;
+            left: 0; right: 0;
+            text-align: center;
+        }
+        .og-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            background: linear-gradient(135deg, #d4af37, #ff6b35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.15em;
+        }
+        .og-url {
+            font-size: 14px;
+            color: rgba(232,232,232,0.3);
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        Screenshot this card at 1200x630 and save as <code>og-archetype-quiz.png</code> in the repo root.
+        <br>Use browser DevTools > screenshot node, or a screenshot tool.
+    </div>
+
+    <div id="ogCard">
+        <div class="og-bg">
+            <svg viewBox="0 0 200 200" width="800" height="800">
+                <polygon points="100,10 190,150 10,150" stroke="#d4af37" stroke-width="0.5" fill="none"/>
+                <polygon points="100,190 10,50 190,50" stroke="#00fff7" stroke-width="0.5" fill="none"/>
+                <circle cx="100" cy="100" r="60" stroke="#9d4edd" stroke-width="0.5" fill="none"/>
+                <circle cx="100" cy="100" r="40" stroke="#d4af37" stroke-width="0.3" fill="none"/>
+                <circle cx="100" cy="100" r="20" stroke="#00fff7" stroke-width="0.3" fill="none"/>
+            </svg>
+        </div>
+        <div class="og-content">
+            <div class="og-badge">Consciousness Technology</div>
+            <div class="og-title">What's Your<br>Archetype?</div>
+            <div class="og-subtitle">6 questions. One identity. Free quiz — 60 seconds.</div>
+            <div class="og-chips">
+                <div class="og-chip">🔮 Architect</div>
+                <div class="og-chip">🧭 Pathfinder</div>
+                <div class="og-chip">⚡ Generator</div>
+                <div class="og-chip">🔥 Alchemist</div>
+                <div class="og-chip">🌉 Bridgewalker</div>
+                <div class="og-chip">✨ Catalyst</div>
+            </div>
+        </div>
+        <div class="og-footer">
+            <div class="og-logo">THE FIRST SPARK</div>
+            <div class="og-url">thefirstspark.shop</div>
+        </div>
+    </div>
+</body>
+</html>
