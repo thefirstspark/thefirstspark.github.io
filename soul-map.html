@@ -77,6 +77,65 @@
         .modal-btn.cancel { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #666; }
         .modal-btn.save { background: linear-gradient(135deg, #9d4edd, #f72585); border: none; color: white; }
         
+        /* Share & Export */
+        .share-export-card {
+            background: linear-gradient(135deg, rgba(0,245,212,0.05), rgba(157,78,221,0.08));
+            border: 1px solid rgba(157,78,221,0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .share-export-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: #00f5d4;
+            margin-bottom: 12px;
+        }
+
+        .share-export-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .export-btn {
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .export-btn.primary {
+            background: linear-gradient(135deg, #9d4edd, #f72585);
+            border: none;
+            color: white;
+        }
+
+        .export-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(157,78,221,0.4);
+        }
+
+        .export-btn.secondary {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #888;
+        }
+
+        .export-btn.secondary:hover {
+            border-color: #9d4edd;
+            color: #9d4edd;
+        }
+
         footer { text-align: center; padding: 20px 0; }
         footer a { font-size: 0.65rem; color: #333; text-decoration: none; }
     </style>
@@ -102,6 +161,16 @@
             <div class="legend-item"><div class="legend-dot gift"></div>Gifts</div>
         </div>
         
+        <div class="share-export-card">
+            <div class="share-export-title">◇ SHARE YOUR SOUL MAP</div>
+            <div class="share-export-buttons">
+                <button class="export-btn primary" onclick="exportAsImage()">📸 Export as Image</button>
+                <button class="export-btn secondary" onclick="shareSoulMap()">✦ Share</button>
+                <button class="export-btn secondary" onclick="shareToTwitterSM()">𝕏 Twitter</button>
+                <button class="export-btn secondary" onclick="shareToWhatsAppSM()">💬 WhatsApp</button>
+            </div>
+        </div>
+
         <div class="reflection-card">
             <div class="reflection-title">◇ SOUL INQUIRY</div>
             <p class="reflection-prompt" id="reflectionPrompt">What part of yourself have you been neglecting that needs attention?</p>
@@ -136,6 +205,7 @@
         </div>
     </div>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         const canvas = document.getElementById('soulCanvas');
         const ctx = canvas.getContext('2d');
@@ -317,6 +387,117 @@
             document.getElementById('reflectionPrompt').textContent = prompt;
         });
         
+        // Share & Export
+        async function exportAsImage() {
+            // Create a branded export canvas
+            const exportCanvas = document.createElement('canvas');
+            const exportCtx = exportCanvas.getContext('2d');
+            const size = 800;
+            exportCanvas.width = size;
+            exportCanvas.height = size + 100;
+
+            // Background
+            exportCtx.fillStyle = '#0a0a12';
+            exportCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+
+            // Draw the soul map content onto export canvas
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = size;
+            tempCanvas.height = size;
+            const tempCtx = tempCanvas.getContext('2d');
+            const cx = size / 2, cy = size / 2, maxR = size / 2 - 40;
+
+            // Concentric circles
+            for (let i = 3; i >= 1; i--) {
+                tempCtx.beginPath();
+                tempCtx.arc(cx, cy, maxR * (i / 3), 0, Math.PI * 2);
+                tempCtx.strokeStyle = `rgba(157, 78, 221, ${0.1 + (3-i) * 0.05})`;
+                tempCtx.lineWidth = 1;
+                tempCtx.stroke();
+            }
+            tempCtx.strokeStyle = 'rgba(157, 78, 221, 0.1)';
+            tempCtx.beginPath();
+            tempCtx.moveTo(cx, cy - maxR); tempCtx.lineTo(cx, cy + maxR);
+            tempCtx.moveTo(cx - maxR, cy); tempCtx.lineTo(cx + maxR, cy);
+            tempCtx.stroke();
+
+            aspects.forEach((aspect, i) => {
+                const angle = (i / Math.max(aspects.length, 1)) * Math.PI * 2 - Math.PI / 2;
+                const distance = aspect.type === 'core' ? 0.2 : (aspect.type === 'shadow' || aspect.type === 'wound' ? 0.8 : 0.5);
+                const x = cx + Math.cos(angle) * maxR * distance;
+                const y = cy + Math.sin(angle) * maxR * distance;
+                const gradient = tempCtx.createRadialGradient(x, y, 0, x, y, 35);
+                gradient.addColorStop(0, typeColors[aspect.type] + '40');
+                gradient.addColorStop(1, 'transparent');
+                tempCtx.fillStyle = gradient;
+                tempCtx.beginPath(); tempCtx.arc(x, y, 35, 0, Math.PI * 2); tempCtx.fill();
+                tempCtx.fillStyle = typeColors[aspect.type];
+                tempCtx.beginPath(); tempCtx.arc(x, y, 10, 0, Math.PI * 2); tempCtx.fill();
+                tempCtx.fillStyle = '#aaa';
+                tempCtx.font = '14px Rajdhani';
+                tempCtx.textAlign = 'center';
+                tempCtx.fillText(aspect.name, x, y + 28);
+            });
+
+            const coreGrad = tempCtx.createRadialGradient(cx, cy, 0, cx, cy, 40);
+            coreGrad.addColorStop(0, 'rgba(247, 37, 133, 0.3)');
+            coreGrad.addColorStop(1, 'transparent');
+            tempCtx.fillStyle = coreGrad;
+            tempCtx.beginPath(); tempCtx.arc(cx, cy, 40, 0, Math.PI * 2); tempCtx.fill();
+            tempCtx.fillStyle = '#f72585';
+            tempCtx.beginPath(); tempCtx.arc(cx, cy, 15, 0, Math.PI * 2); tempCtx.fill();
+
+            exportCtx.drawImage(tempCanvas, 0, 0);
+
+            // Branded footer
+            exportCtx.fillStyle = 'rgba(157, 78, 221, 0.3)';
+            exportCtx.fillRect(0, size, size, 1);
+            exportCtx.fillStyle = '#888';
+            exportCtx.font = '16px sans-serif';
+            exportCtx.textAlign = 'center';
+            exportCtx.fillText('This is my Soul Map. Discover yours at thefirstspark.shop', size / 2, size + 40);
+            exportCtx.fillStyle = '#f72585';
+            exportCtx.font = 'bold 18px serif';
+            exportCtx.fillText('THE FIRST SPARK', size / 2, size + 70);
+
+            const link = document.createElement('a');
+            link.download = 'my-soul-map.png';
+            link.href = exportCanvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function getSoulShareText() {
+            const count = aspects.length;
+            const types = [...new Set(aspects.map(a => a.type))];
+            return `🗺️ My Soul Map: ${count} aspects mapped across ${types.length} dimensions. Discover your inner landscape:`;
+        }
+
+        function getSoulShareUrl() {
+            return 'https://thefirstspark.shop/soul-map.html';
+        }
+
+        async function shareSoulMap() {
+            if (navigator.share) {
+                try {
+                    await navigator.share({ title: 'My Soul Map', text: getSoulShareText(), url: getSoulShareUrl() });
+                } catch(e) {}
+            } else {
+                navigator.clipboard.writeText(getSoulShareText() + '\n' + getSoulShareUrl());
+                alert('Copied to clipboard!');
+            }
+        }
+
+        function shareToTwitterSM() {
+            const text = encodeURIComponent(getSoulShareText());
+            const url = encodeURIComponent(getSoulShareUrl());
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
+
+        function shareToWhatsAppSM() {
+            const text = encodeURIComponent(getSoulShareText() + '\n' + getSoulShareUrl());
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
         // Init
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);

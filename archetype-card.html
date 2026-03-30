@@ -402,6 +402,56 @@
             transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
+
+        /* Share Panel */
+        .share-panel {
+            background: var(--deep-space);
+            border: 1px solid var(--ghost);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-top: 0.75rem;
+        }
+
+        .share-panel-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(232,232,232,0.4);
+            margin-bottom: 0.75rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--ghost);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--stardust);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .share-btn:hover {
+            border-color: var(--plasma-cyan);
+            color: var(--plasma-cyan);
+            background: rgba(0,255,247,0.05);
+        }
+
+        .share-btn.twitter:hover { border-color: #1DA1F2; color: #1DA1F2; }
+        .share-btn.whatsapp:hover { border-color: #25D366; color: #25D366; }
+        .share-btn.native:hover { border-color: var(--spark-gold); color: var(--spark-gold); }
     </style>
 </head>
 <body>
@@ -460,9 +510,18 @@
                     <button class="action-btn primary" onclick="downloadCard()">
                         📥 Download Card (PNG)
                     </button>
-                    <button class="action-btn secondary" onclick="copyShareable()">
-                        📋 Copy Shareable Title
+                    <button class="action-btn primary" onclick="shareCard()" style="background: linear-gradient(135deg, var(--plasma-cyan), var(--cosmic-violet));">
+                        ✦ Share Your Card
                     </button>
+                    <div class="share-panel">
+                        <div class="share-panel-title">Share to</div>
+                        <div class="share-buttons">
+                            <button class="share-btn twitter" onclick="shareToTwitter()">𝕏 Twitter</button>
+                            <button class="share-btn whatsapp" onclick="shareToWhatsApp()">💬 WhatsApp</button>
+                            <button class="share-btn" onclick="shareToFacebook()">📘 Facebook</button>
+                            <button class="share-btn" onclick="copyShareable()">📋 Copy Link</button>
+                        </div>
+                    </div>
                     <a href="archetype-discovery.html" class="action-btn secondary" style="text-decoration:none; text-align:center;">
                         ↻ Retake Quiz
                     </a>
@@ -661,17 +720,53 @@
             icon.style.animation = '';
         }
 
-        function copyShareable() {
+        function getShareText() {
             const primaryKey = document.getElementById('primaryArchetype').value;
             const trackKey = document.getElementById('trackArchetype').value;
             const primary = archetypes[primaryKey];
             const track = archetypes[trackKey];
+            return `✦ I'm a ${primary.name} on the ${track.name} Track. ${primary.tagline}\n\nDiscover your archetype:`;
+        }
 
-            const title = `${primary.name} • ${track.name} Track • Sparkverse Player`;
-            
-            navigator.clipboard.writeText(title).then(() => {
-                showToast('Copied: ' + title);
+        function getShareUrl() {
+            return 'https://thefirstspark.shop/archetype-discovery.html';
+        }
+
+        function copyShareable() {
+            const text = getShareText() + '\n' + getShareUrl();
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard!');
             });
+        }
+
+        async function shareCard() {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'My Sparkverse Player Card',
+                        text: getShareText(),
+                        url: getShareUrl()
+                    });
+                } catch(e) { /* user cancelled */ }
+            } else {
+                copyShareable();
+            }
+        }
+
+        function shareToTwitter() {
+            const text = encodeURIComponent(getShareText());
+            const url = encodeURIComponent(getShareUrl());
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
+
+        function shareToWhatsApp() {
+            const text = encodeURIComponent(getShareText() + '\n' + getShareUrl());
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function shareToFacebook() {
+            const url = encodeURIComponent(getShareUrl());
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
         }
 
         function showToast(message) {

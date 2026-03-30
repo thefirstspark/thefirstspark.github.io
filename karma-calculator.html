@@ -533,6 +533,63 @@
             color: var(--void);
         }
 
+        /* Karma Share */
+        .karma-share-section {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(45,27,78,0.2), rgba(10,10,15,0.4));
+            border: 1px solid var(--thread);
+            border-radius: 2px;
+            margin-top: 2rem;
+        }
+
+        .karma-share-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--karma-gold);
+            margin-bottom: 1rem;
+        }
+
+        .karma-share-btns {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .karma-share-btn {
+            padding: 10px 18px;
+            border: 1px solid var(--thread);
+            border-radius: 2px;
+            background: transparent;
+            color: var(--light);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .karma-share-btn:hover {
+            border-color: var(--karma-gold);
+            color: var(--karma-gold);
+            transform: translateY(-2px);
+        }
+
+        .karma-share-btn.primary {
+            background: linear-gradient(135deg, var(--karma-gold), #c48b5c);
+            border: none;
+            color: var(--void);
+        }
+
+        .karma-share-btn.primary:hover {
+            box-shadow: 0 4px 15px rgba(212,165,116,0.4);
+        }
+
         /* Wisdom Panel */
         .wisdom-box {
             padding: 1.5rem;
@@ -645,6 +702,17 @@
                     <span class="stat-value" id="resolvedCount">0</span>
                     <span class="stat-label">Threads Resolved<br><small>karma cleared</small></span>
                 </div>
+            </div>
+        </div>
+
+        <!-- Karma Share -->
+        <div class="karma-share-section">
+            <div class="karma-share-title">⟡ Share Your Karma Score</div>
+            <div class="karma-share-btns">
+                <button class="karma-share-btn primary" onclick="shareKarma()">✦ Share Score</button>
+                <button class="karma-share-btn" onclick="shareKarmaTwitter()">𝕏 Twitter</button>
+                <button class="karma-share-btn" onclick="shareKarmaWhatsApp()">💬 WhatsApp</button>
+                <button class="karma-share-btn" onclick="copyKarmaScore()">📋 Copy</button>
             </div>
         </div>
 
@@ -1048,6 +1116,46 @@
 
         // Refresh wisdom periodically
         setInterval(showRandomWisdom, 30000);
+
+        // Karma Share Functions
+        function getKarmaShareText() {
+            const { score, credits, debts, resolved } = calculateKarma();
+            const sign = score > 0 ? '+' : '';
+            return `⟡ My Karma Score: ${sign}${score}\n${credits} credits earned · ${debts} debts pending · ${resolved} threads resolved\n\nTrack your soul's threads:`;
+        }
+
+        function getKarmaShareUrl() {
+            return 'https://thefirstspark.shop/karma-calculator.html';
+        }
+
+        async function shareKarma() {
+            if (navigator.share) {
+                try {
+                    await navigator.share({ title: 'My Karma Score', text: getKarmaShareText(), url: getKarmaShareUrl() });
+                } catch(e) {}
+            } else {
+                copyKarmaScore();
+            }
+        }
+
+        function shareKarmaTwitter() {
+            const text = encodeURIComponent(getKarmaShareText());
+            const url = encodeURIComponent(getKarmaShareUrl());
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
+
+        function shareKarmaWhatsApp() {
+            const text = encodeURIComponent(getKarmaShareText() + '\n' + getKarmaShareUrl());
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function copyKarmaScore() {
+            navigator.clipboard.writeText(getKarmaShareText() + '\n' + getKarmaShareUrl());
+            const btn = document.querySelector('.karma-share-btn.primary');
+            const orig = btn.textContent;
+            btn.textContent = '✓ Copied!';
+            setTimeout(() => btn.textContent = orig, 2000);
+        }
     </script>
 </body>
 </html>

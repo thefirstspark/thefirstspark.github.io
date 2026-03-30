@@ -541,6 +541,50 @@
             margin-top: 0.25rem;
         }
 
+        /* Share Buttons */
+        .share-row {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .share-icon-btn {
+            padding: 0.7rem 1.2rem;
+            border: 1px solid var(--ghost);
+            border-radius: 10px;
+            background: transparent;
+            color: var(--stardust);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .share-icon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212,175,55,0.2);
+        }
+
+        .share-icon-btn.twitter:hover { border-color: #1DA1F2; color: #1DA1F2; }
+        .share-icon-btn.whatsapp:hover { border-color: #25D366; color: #25D366; }
+        .share-icon-btn.facebook:hover { border-color: #4267B2; color: #4267B2; }
+        .share-icon-btn.native {
+            background: linear-gradient(135deg, var(--spark-gold), var(--spark-ember));
+            color: var(--void);
+            border: none;
+            font-weight: 600;
+        }
+
+        .share-icon-btn.native:hover {
+            box-shadow: 0 5px 25px rgba(212,175,55,0.4);
+        }
+
         /* Mobile */
         @media (max-width: 600px) {
             .container {
@@ -656,6 +700,12 @@
                 <div class="shareable-title" id="shareable-title">Signal Architect • Pathfinder Track • Sparkverse Player</div>
                 <div class="shareable-subtitle">Your cosmic coordinates in the simulation</div>
                 <button class="copy-btn" onclick="copyTitle()">📋 Copy Title</button>
+                <div class="share-row">
+                    <button class="share-icon-btn native" onclick="shareResult()">✦ Share Result</button>
+                    <button class="share-icon-btn twitter" onclick="shareToTwitter()">𝕏 Twitter</button>
+                    <button class="share-icon-btn whatsapp" onclick="shareToWhatsApp()">💬 WhatsApp</button>
+                    <button class="share-icon-btn facebook" onclick="shareToFacebook()">📘 Facebook</button>
+                </div>
             </div>
 
             <div class="result-actions">
@@ -951,6 +1001,50 @@
                 btn.textContent = '✓ Copied!';
                 setTimeout(() => btn.textContent = '📋 Copy Title', 2000);
             });
+        }
+
+        function getShareText() {
+            const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const primary = archetypes[sorted[0][0]];
+            const secondary = archetypes[sorted[1][0]];
+            return `✦ I'm a ${primary.name} on the ${secondary.name} Track. ${primary.tagline}\n\nDiscover your archetype:`;
+        }
+
+        function getShareUrl() {
+            return 'https://thefirstspark.shop/archetype-discovery.html';
+        }
+
+        async function shareResult() {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'My Sparkverse Archetype',
+                        text: getShareText(),
+                        url: getShareUrl()
+                    });
+                } catch(e) {}
+            } else {
+                navigator.clipboard.writeText(getShareText() + '\n' + getShareUrl());
+                const btn = document.querySelector('.share-icon-btn.native');
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => btn.textContent = '✦ Share Result', 2000);
+            }
+        }
+
+        function shareToTwitter() {
+            const text = encodeURIComponent(getShareText());
+            const url = encodeURIComponent(getShareUrl());
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
+
+        function shareToWhatsApp() {
+            const text = encodeURIComponent(getShareText() + '\n' + getShareUrl());
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function shareToFacebook() {
+            const url = encodeURIComponent(getShareUrl());
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
         }
 
         function retakeQuiz() {

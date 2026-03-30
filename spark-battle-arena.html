@@ -861,6 +861,66 @@
             transform: translateY(-2px);
         }
 
+        .result-btn.challenge {
+            background: transparent;
+            border: 1px solid var(--glitch-cyan);
+            color: var(--glitch-cyan);
+        }
+
+        .result-btn.challenge:hover {
+            background: rgba(38, 228, 216, 0.1);
+            box-shadow: 0 0 20px rgba(38, 228, 216, 0.3);
+        }
+
+        .share-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .share-sm-btn {
+            padding: 10px 18px;
+            border: 1px solid var(--ash-gray);
+            border-radius: 6px;
+            background: transparent;
+            color: rgba(247, 248, 250, 0.6);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .share-sm-btn:hover { transform: translateY(-2px); }
+        .share-sm-btn.twitter:hover { border-color: #1DA1F2; color: #1DA1F2; }
+        .share-sm-btn.whatsapp:hover { border-color: #25D366; color: #25D366; }
+
+        .challenge-toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--deep-shadow);
+            border: 1px solid var(--glitch-cyan);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            color: var(--glitch-cyan);
+            opacity: 0;
+            transition: all 0.4s;
+            z-index: 1000;
+        }
+
+        .challenge-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
         /* CTA box */
         .cta-box {
             background: var(--deep-shadow);
@@ -1207,8 +1267,16 @@
 
                 <div class="result-actions">
                     <button class="result-btn primary" onclick="battleAgain()">Battle Again</button>
+                    <button class="result-btn challenge" onclick="challengeFriend()">⚔ Challenge a Friend</button>
                     <button class="result-btn secondary" onclick="shareResult()">Share Result</button>
                 </div>
+                <div class="share-row">
+                    <button class="share-sm-btn twitter" onclick="shareToTwitterBattle()">𝕏 Twitter</button>
+                    <button class="share-sm-btn whatsapp" onclick="shareToWhatsAppBattle()">💬 WhatsApp</button>
+                    <button class="share-sm-btn" onclick="copyChallengeLink()">📋 Copy Link</button>
+                </div>
+
+                <div class="challenge-toast" id="challengeToast">Challenge link copied!</div>
 
                 <div class="cta-box">
                     <h3>Want Power-Up Cards?</h3>
@@ -1655,19 +1723,59 @@
             showScreen('entryScreen');
         }
 
-        function shareResult() {
-            const text = `⚔️ SPARK BATTLE RESULT ⚔️\n\n${player1.name} (${archetypeData[player1.archetype].title}) vs ${player2.name} (${archetypeData[player2.archetype].title})\n\nForge your Soul Card and enter the arena at thefirstspark.shop ✦`;
+        function getBattleShareText() {
+            return `⚔️ SPARK BATTLE RESULT ⚔️\n\n${player1.name} (${archetypeData[player1.archetype].title}) vs ${player2.name} (${archetypeData[player2.archetype].title})\n\nThink you can win? Enter the arena:`;
+        }
 
+        function getBattleUrl() {
+            return 'https://thefirstspark.shop/spark-battle-arena.html';
+        }
+
+        function getChallengeText() {
+            return `⚔️ I challenge you to a Spark Battle!\n\nI played as ${player1.name} the ${archetypeData[player1.archetype].title}. Can you beat me?\n\nEnter the arena:`;
+        }
+
+        function shareResult() {
+            const text = getBattleShareText();
             if (navigator.share) {
-                navigator.share({
-                    title: 'Spark Battle Result',
-                    text: text,
-                    url: 'https://thefirstspark.shop'
-                });
+                navigator.share({ title: 'Spark Battle Result', text: text, url: getBattleUrl() });
             } else {
-                navigator.clipboard.writeText(text);
-                alert('Result copied to clipboard!');
+                navigator.clipboard.writeText(text + '\n' + getBattleUrl());
+                showChallengeToast('Result copied to clipboard!');
             }
+        }
+
+        function challengeFriend() {
+            const text = getChallengeText();
+            if (navigator.share) {
+                navigator.share({ title: 'Spark Battle Challenge', text: text, url: getBattleUrl() });
+            } else {
+                navigator.clipboard.writeText(text + '\n' + getBattleUrl());
+                showChallengeToast('Challenge link copied!');
+            }
+        }
+
+        function shareToTwitterBattle() {
+            const text = encodeURIComponent(getChallengeText());
+            const url = encodeURIComponent(getBattleUrl());
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
+
+        function shareToWhatsAppBattle() {
+            const text = encodeURIComponent(getChallengeText() + '\n' + getBattleUrl());
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function copyChallengeLink() {
+            navigator.clipboard.writeText(getChallengeText() + '\n' + getBattleUrl());
+            showChallengeToast('Challenge link copied!');
+        }
+
+        function showChallengeToast(msg) {
+            const toast = document.getElementById('challengeToast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
     </script>
 </body>
