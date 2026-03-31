@@ -12,76 +12,327 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The First Spark — Investor Portal</title>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-SKL8XQ51ZH');
-    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SKL8XQ51ZH');
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 :root {
   --void: #050508;
-  --deep: #0a0a12;
-  --card: #0f0f1a;
-  --border: #1a1a2e;
+  --deep: #08080f;
+  --card: rgba(12,12,22,0.85);
+  --border: rgba(255,107,26,0.15);
   --orange: #ff6b1a;
   --gold: #f0c060;
+  --purple: #8b5cf6;
   --white: #f0ede8;
-  --dim: #8888aa;
+  --dim: #6666aa;
   --green: #4ade80;
 }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--void); color: var(--white); font-family: 'Cormorant Garamond', serif; min-height: 100vh; }
+
+body {
+  background: var(--void);
+  color: var(--white);
+  font-family: 'Cormorant Garamond', serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* STARFIELD */
+#stars {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
 
 /* TABS */
-.tab-nav { display: flex; background: var(--deep); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-.tab-btn { flex: 1; padding: 14px 8px; background: none; border: none; color: var(--dim); font-family: 'Space Mono', monospace; font-size: 11px; cursor: pointer; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; border-bottom: 2px solid transparent; }
+.tab-nav {
+  display: flex;
+  background: rgba(5,5,8,0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,107,26,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.tab-btn {
+  flex: 1;
+  padding: 14px 8px;
+  background: none;
+  border: none;
+  color: var(--dim);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+}
 .tab-btn.active { color: var(--orange); border-bottom-color: var(--orange); }
-.tab-content { display: none; }
+.tab-content { display: none; position: relative; z-index: 1; }
 .tab-content.active { display: block; }
 
 /* DECK */
 .deck { max-width: 900px; margin: 0 auto; padding: 20px; }
-.slide { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 50px 60px; margin-bottom: 24px; position: relative; overflow: hidden; }
-.slide::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--gold)); }
-.slide-num { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--dim); letter-spacing: 0.2em; margin-bottom: 16px; }
-.slide h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 12px; }
-.slide h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 300; color: var(--gold); margin-bottom: 20px; }
-.slide h3 { font-size: 1.1rem; font-weight: 600; color: var(--orange); margin-bottom: 10px; letter-spacing: 0.05em; }
-.slide p { font-size: 1.1rem; line-height: 1.7; color: #ccc8e8; margin-bottom: 16px; }
+
+/* SLIDES */
+.slide {
+  background: rgba(10,10,18,0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,107,26,0.14);
+  border-radius: 18px;
+  padding: 50px 60px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease, box-shadow 0.3s;
+}
+.slide.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.slide:hover {
+  box-shadow: 0 0 50px rgba(255,107,26,0.08), 0 24px 48px rgba(0,0,0,0.5);
+}
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--orange), var(--gold), transparent);
+}
+
+/* Per-slide background accents */
+.slide-cover {
+  background: radial-gradient(ellipse at 50% -10%, rgba(255,107,26,0.14) 0%, rgba(5,5,8,0.96) 65%);
+  border-color: rgba(255,107,26,0.28);
+  padding: 100px 60px;
+  text-align: center;
+}
+.slide-philosophy {
+  background: radial-gradient(ellipse at 50% 50%, rgba(139,92,246,0.1) 0%, rgba(5,5,8,0.96) 68%);
+  border-color: rgba(240,192,96,0.22);
+  padding: 100px 60px;
+  text-align: center;
+}
+.slide-traction {
+  background: radial-gradient(ellipse at 20% 60%, rgba(74,222,128,0.07) 0%, rgba(5,5,8,0.96) 65%);
+}
+.slide-founder {
+  background: radial-gradient(ellipse at 85% 40%, rgba(255,107,26,0.09) 0%, rgba(5,5,8,0.96) 65%);
+}
+.slide-ask {
+  background: radial-gradient(ellipse at 50% 110%, rgba(255,107,26,0.18) 0%, rgba(5,5,8,0.96) 65%);
+  padding: 80px 60px;
+  text-align: center;
+}
+
+/* Slide number */
+.slide-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--dim);
+  letter-spacing: 0.2em;
+  margin-bottom: 20px;
+}
+
+/* Typography */
+.slide h1 {
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, var(--white) 20%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.slide h2 {
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  font-weight: 300;
+  color: var(--gold);
+  margin-bottom: 22px;
+}
+.slide h3 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.slide p { font-size: 1.05rem; line-height: 1.75; color: #ccc8e8; margin-bottom: 16px; }
 .spark-name { color: var(--orange); font-style: italic; }
 .gold { color: var(--gold); }
+
+/* Grid */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
-.card { background: var(--deep); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
-.card h3 { font-size: 0.9rem; }
-.card p { font-size: 0.95rem; margin-bottom: 0; }
-.stat { font-family: 'Space Mono', monospace; font-size: 2rem; color: var(--orange); display: block; margin-bottom: 6px; }
-.tag { display: inline-block; background: rgba(255,107,26,0.15); border: 1px solid rgba(255,107,26,0.3); color: var(--orange); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 20px; margin: 3px; }
-.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+/* Glass Cards */
+.card {
+  background: rgba(6,6,14,0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,107,26,0.13);
+  border-radius: 12px;
+  padding: 22px;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.card:hover {
+  border-color: rgba(255,107,26,0.38);
+  box-shadow: 0 0 24px rgba(255,107,26,0.07);
+  transform: translateY(-3px);
+}
+.card h3 { font-size: 0.82rem; }
+.card p { font-size: 0.9rem; margin-bottom: 0; }
+
+/* Stats */
+.stat {
+  font-family: 'Space Mono', monospace;
+  font-size: 3rem;
+  color: var(--orange);
+  display: block;
+  margin-bottom: 8px;
+  text-shadow: 0 0 24px rgba(255,107,26,0.55);
+}
+
+/* Tags */
+.tag {
+  display: inline-block;
+  background: rgba(255,107,26,0.09);
+  border: 1px solid rgba(255,107,26,0.28);
+  color: var(--orange);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 5px 13px;
+  border-radius: 20px;
+  margin: 4px;
+  transition: background 0.2s;
+}
+.tag:hover { background: rgba(255,107,26,0.2); }
+
+.divider { border: none; border-top: 1px solid rgba(255,107,26,0.1); margin: 26px 0; }
+
+/* Cover slogan */
+.slogan {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(0.65rem, 1.8vw, 0.95rem);
+  letter-spacing: 0.45em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  animation: glow-pulse 3.5s ease-in-out infinite;
+}
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 10px rgba(255,107,26,0.3); opacity: 0.85; }
+  50% { text-shadow: 0 0 30px rgba(255,107,26,0.9), 0 0 60px rgba(255,107,26,0.4); opacity: 1; }
+}
+
+.spark-icon {
+  font-size: 4.5rem;
+  margin-bottom: 26px;
+  display: block;
+  filter: drop-shadow(0 0 24px rgba(255,107,26,0.9));
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-12px) scale(1.04); }
+}
+
+/* Philosophy */
+.big-quote {
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1.5;
+  max-width: 640px;
+  margin: 0 auto;
+  text-shadow: 0 0 50px rgba(240,192,96,0.35);
+}
+.quote-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--orange), var(--gold));
+  margin: 32px auto;
+  border-radius: 2px;
+}
+
+/* Link buttons */
+.link-btn {
+  display: inline-block;
+  padding: 9px 18px;
+  border: 1px solid rgba(255,107,26,0.38);
+  border-radius: 6px;
+  color: var(--orange);
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  transition: all 0.2s;
+  margin: 3px;
+}
+.link-btn:hover {
+  background: rgba(255,107,26,0.14);
+  border-color: var(--orange);
+  box-shadow: 0 0 16px rgba(255,107,26,0.22);
+}
+.link-btn.gold-btn {
+  border-color: rgba(240,192,96,0.38);
+  color: var(--gold);
+}
+.link-btn.gold-btn:hover {
+  background: rgba(240,192,96,0.1);
+  border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(240,192,96,0.22);
+}
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 
 /* INVESTMENT TIERS */
 .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-top: 24px; }
-.tier { background: var(--deep); border: 1px solid var(--border); border-radius: 10px; padding: 24px 16px; text-align: center; transition: all 0.3s; position: relative; }
-.tier:hover { border-color: var(--orange); transform: translateY(-4px); }
-.tier.featured { border-color: var(--gold); background: rgba(240,192,96,0.05); }
-.tier.featured::before { content: 'POPULAR'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--void); font-family: 'Space Mono', monospace; font-size: 9px; padding: 3px 10px; border-radius: 10px; font-weight: 700; }
+.tier {
+  background: rgba(8,8,15,0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 24px 16px;
+  text-align: center;
+  transition: all 0.3s;
+  position: relative;
+}
+.tier:hover { border-color: var(--orange); transform: translateY(-6px); box-shadow: 0 12px 40px rgba(255,107,26,0.14); }
+.tier.featured { border-color: rgba(240,192,96,0.5); background: rgba(240,192,96,0.04); }
+.tier.featured::before { content: 'POPULAR'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--gold), #c09040); color: var(--void); font-family: 'Space Mono', monospace; font-size: 9px; padding: 3px 10px; border-radius: 10px; font-weight: 700; }
 .tier-name { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
 .tier-amount { font-family: 'Space Mono', monospace; font-size: 1.6rem; color: var(--white); font-weight: 700; }
 .tier-equity { font-size: 0.85rem; color: var(--gold); margin: 6px 0; }
 .tier-perks { font-size: 0.8rem; color: var(--dim); line-height: 1.5; margin: 10px 0; }
-.tier-btn { display: block; margin-top: 14px; padding: 10px 8px; background: linear-gradient(135deg, var(--orange), #cc4400); color: white; text-decoration: none; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; font-weight: 700; transition: opacity 0.2s; }
-.tier-btn:hover { opacity: 0.85; }
-.tier-btn.gold-btn { background: linear-gradient(135deg, var(--gold), #c09040); color: var(--void); }
+.tier-btn { display: block; margin-top: 14px; padding: 10px 8px; background: linear-gradient(135deg, var(--orange), #cc4400); color: white; text-decoration: none; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; font-weight: 700; transition: opacity 0.2s, box-shadow 0.2s; }
+.tier-btn:hover { opacity: 0.9; box-shadow: 0 0 22px rgba(255,107,26,0.35); }
+.tier-btn.gold-tier { background: linear-gradient(135deg, var(--gold), #c09040); color: var(--void); }
 
 /* PROJECTIONS TABLE */
 .proj-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95rem; }
-.proj-table th { background: rgba(255,107,26,0.1); color: var(--orange); font-family: 'Space Mono', monospace; font-size: 11px; padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
-.proj-table td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc8e8; }
+.proj-table th { background: rgba(255,107,26,0.08); color: var(--orange); font-family: 'Space Mono', monospace; font-size: 11px; padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(255,107,26,0.18); }
+.proj-table td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #ccc8e8; }
+.proj-table tr:hover td { background: rgba(255,107,26,0.04); }
 .proj-table tr:last-child td { color: var(--gold); font-weight: 600; }
 
 /* SAFE */
@@ -98,23 +349,27 @@ body { background: var(--void); color: var(--white); font-family: 'Cormorant Gar
 
 /* QR */
 .qr-wrap { max-width: 600px; margin: 0 auto; padding: 60px 20px; text-align: center; }
-.qr-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; margin: 30px 0; }
+.qr-box { background: rgba(8,8,16,0.92); backdrop-filter: blur(20px); border: 1px solid rgba(255,107,26,0.2); border-radius: 18px; padding: 40px; margin: 30px 0; }
 #qrcode { display: flex; justify-content: center; margin: 20px 0; }
 .qr-url { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--dim); margin-top: 16px; }
 
 @media (max-width: 600px) {
-  .slide { padding: 30px 24px; }
+  .slide { padding: 30px 22px; }
+  .slide-cover, .slide-philosophy, .slide-ask { padding: 60px 22px; }
   .grid-2 { grid-template-columns: 1fr; }
   .grid-3 { grid-template-columns: 1fr 1fr; }
   .tiers { grid-template-columns: 1fr 1fr; }
   .safe-doc { padding: 30px 20px; }
   .safe-doc .sig-block { grid-template-columns: 1fr; }
+  .big-quote { font-size: 1.6rem; }
 }
 
 @media print {
-  .tab-nav, .tab-btn { display: none; }
+  .tab-nav { display: none; }
   .tab-content { display: block !important; }
   .safe-doc { box-shadow: none; }
+  #stars { display: none; }
+  .slide { opacity: 1; transform: none; }
 }
 </style>
 </head>
@@ -123,16 +378,15 @@ body { background: var(--void); color: var(--white); font-family: 'Cormorant Gar
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
+<canvas id="stars"></canvas>
 
 <nav class="tab-nav">
   <button class="tab-btn active" onclick="showTab('deck')">⚡ Pitch Deck</button>
   <button class="tab-btn" onclick="showTab('invest')">💎 Invest Now</button>
   <button class="tab-btn" onclick="showTab('safe')">📄 SAFE Agreement</button>
   <button class="tab-btn" onclick="showTab('qr')">🔗 Share</button>
-  <a href="theraise.html" style="padding:14px 16px; color:var(--dim); font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; border:none; background:none; cursor:pointer; transition:all 0.2s; border-bottom:2px solid transparent; text-align:center; display:flex; align-items:center;">📋 The Raise</a>
+  <a href="theraise.html" style="padding:14px 16px; color:var(--dim); font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; background:none; display:flex; align-items:center; border-bottom:2px solid transparent; transition:color 0.2s;">📋 The Raise</a>
 </nav>
 
 <!-- PITCH DECK -->
@@ -140,19 +394,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="deck">
 
   <!-- Slide 1: Cover -->
-  <div class="slide" style="text-align:center; padding: 80px 60px;">
+  <div class="slide slide-cover">
     <div class="slide-num">01 / 10</div>
-    <div style="font-size:3rem; margin-bottom:20px;">⚡</div>
-    <h1><span class="spark-name">The First Spark</span></h1>
-    <h2 style="font-size:1.8rem; letter-spacing:0.15em; margin-bottom:24px;">CONSCIOUS CODE IN MOTION</h2>
-    <p style="max-width:500px; margin:0 auto 24px;">A digital ecosystem for inner exploration — tools, community, and frameworks for people ready to reprogram their reality.</p>
-    <div>
+    <span class="spark-icon">⚡</span>
+    <h1>The First Spark</h1>
+    <div class="slogan">Conscious Code in Motion</div>
+    <p style="max-width:520px; margin:0 auto 28px; font-size:1.15rem;">A digital ecosystem for inner exploration — tools, community, and frameworks for people ready to reprogram their reality.</p>
+    <div style="margin-bottom:28px;">
       <span class="tag">Seed Round</span>
       <span class="tag">$200K Raise</span>
       <span class="tag">20% Equity</span>
       <span class="tag">$1M Valuation</span>
     </div>
-    <p style="margin-top:24px; font-size:0.9rem; color: var(--dim);">kate@thefirstspark.shop · (330) 807-5509 · thefirstspark.shop</p>
+    <div>
+      <a href="https://thefirstspark.shop" target="_blank" rel="noopener" class="link-btn">↗ thefirstspark.shop</a>
+      <a href="https://sparkverse.thefirstspark.shop" target="_blank" rel="noopener" class="link-btn gold-btn">↗ Sparkverse</a>
+    </div>
+    <p style="margin-top:30px; font-size:0.85rem; color:var(--dim);">kate@thefirstspark.shop · (330) 807-5509</p>
   </div>
 
   <!-- Slide 2: Problem -->
@@ -160,7 +418,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="slide-num">02 / 10</div>
     <h2>The Problem</h2>
     <p>Millions of people are waking up — to trauma, to patterns, to the sense that reality is more malleable than they were taught. But the tools available to them are fragmented: self-help books with no interactivity, expensive therapists, shallow wellness apps, or occult communities with no structure.</p>
-    <div class="grid-2" style="margin-top:24px;">
+    <div class="grid-2">
       <div class="card">
         <h3>No Bridge</h3>
         <p>Between ancient consciousness wisdom and modern digital tools. Seekers have to choose between depth and accessibility.</p>
@@ -173,11 +431,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <!-- Slide 3: Philosophical Bridge -->
-  <div class="slide" style="text-align:center; padding: 80px 60px;">
+  <div class="slide slide-philosophy">
     <div class="slide-num">03 / 10</div>
-    <p style="font-size:1.6rem; font-style:italic; color:var(--gold); max-width:600px; margin:0 auto; line-height:1.6;">Reality is programmable.<br>Consciousness is the code.</p>
-    <hr class="divider" style="max-width:100px; margin:30px auto;">
-    <p style="color:var(--dim); font-size:0.95rem;">This isn't metaphor. It's operating system.</p>
+    <p class="big-quote">Reality is programmable.<br>Consciousness is the code.</p>
+    <div class="quote-line"></div>
+    <p style="color:var(--dim); font-size:0.85rem; letter-spacing:0.15em; text-transform:uppercase; font-family:'Space Mono',monospace; margin:0;">This isn't metaphor. It's operating system.</p>
   </div>
 
   <!-- Slide 4: Solution -->
@@ -188,39 +446,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="grid-3">
       <div class="card">
         <h3>🧰 Tools</h3>
-        <p>50+ interactive HTML artifacts: soul mapping, sigil generation, consciousness trackers, ritual frameworks — all built and battle-tested.</p>
+        <p>50+ interactive artifacts: soul mapping, sigil generation, consciousness trackers, ritual frameworks — built and battle-tested.</p>
+        <div class="btn-row">
+          <a href="https://thefirstspark.shop" target="_blank" rel="noopener" class="link-btn" style="font-size:9px;">↗ Explore Tools</a>
+          <a href="https://sparkverse.thefirstspark.shop" target="_blank" rel="noopener" class="link-btn gold-btn" style="font-size:9px;">↗ Sparkverse</a>
+        </div>
       </div>
-      <div class="card">
+      <div class="card" style="border-color:rgba(255,107,26,0.28); box-shadow:0 0 20px rgba(255,107,26,0.05);">
         <h3>🔥 Community</h3>
         <p>Whop-based membership ecosystem with tiered access, live sessions, and a Discord for Players Lounge members.</p>
+        <div class="btn-row">
+          <a href="https://thefirstspark.shop/starter-kit.html" target="_blank" rel="noopener" class="link-btn" style="font-size:9px;">↗ Starter Kit</a>
+        </div>
       </div>
       <div class="card">
         <h3>📖 Content</h3>
         <p>Book Zero memoir, TikTok presence (@sparkedone), and the Mobile Spark Station — a traveling consciousness studio.</p>
+        <div class="btn-row">
+          <a href="https://www.tiktok.com/@sparkedone" target="_blank" rel="noopener" class="link-btn" style="font-size:9px;">↗ TikTok</a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Slide 5: Traction -->
-  <div class="slide">
+  <div class="slide slide-traction">
     <div class="slide-num">05 / 10</div>
     <h2>Traction & Assets</h2>
     <div class="grid-3">
       <div class="card" style="text-align:center;">
         <span class="stat">50+</span>
         <p>Interactive tools built and deployed</p>
+        <a href="https://thefirstspark.shop" target="_blank" rel="noopener" class="link-btn" style="font-size:9px; margin-top:12px;">↗ Live Now</a>
       </div>
       <div class="card" style="text-align:center;">
         <span class="stat">1,000+</span>
         <p>Community members across platforms</p>
       </div>
       <div class="card" style="text-align:center;">
-        <span class="stat">$0</span>
+        <span class="stat" style="color:var(--green); text-shadow:0 0 24px rgba(74,222,128,0.55);">$0</span>
         <p>Burn rate. Zero overhead. All hustle.</p>
       </div>
     </div>
     <hr class="divider">
     <p>Platform infrastructure live across GitHub Pages, Netlify, and Whop. Payment systems operational. Membership tiers defined and ready. The machine is built — we need fuel.</p>
+    <div class="btn-row">
+      <a href="https://thefirstspark.shop/archetype-discovery.html" target="_blank" rel="noopener" class="link-btn" style="font-size:9px;">↗ Try: Archetype Discovery</a>
+      <a href="https://thefirstspark.shop/starter-kit.html" target="_blank" rel="noopener" class="link-btn gold-btn" style="font-size:9px;">↗ Try: Starter Kit</a>
+    </div>
   </div>
 
   <!-- Slide 6: Product & Revenue -->
@@ -232,41 +505,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h3>🌱 Free — Spark Access</h3>
         <p>Entry tools, community access, introductory frameworks. Top of funnel.</p>
       </div>
-      <div class="card" style="border-color: var(--orange);">
+      <div class="card" style="border-color:rgba(255,107,26,0.35); box-shadow:0 0 20px rgba(255,107,26,0.06);">
         <h3>🔥 $33/mo — Players Lounge</h3>
         <p>Full tool library, live sessions, Discord access. Core recurring revenue.</p>
       </div>
-      <div class="card" style="border-color: var(--gold);">
+      <div class="card" style="border-color:rgba(240,192,96,0.3); box-shadow:0 0 20px rgba(240,192,96,0.05);">
         <h3>⚡ $519 — OG Spark (Lifetime)</h3>
         <p>Permanent access, founding member status, priority everything.</p>
       </div>
     </div>
     <hr class="divider">
-    <p style="font-size:0.95rem; color: var(--dim);">Future: Custom AI assistant fine-tuned on First Spark content, licensing to wellness creators, and white-label tool packages.</p>
+    <p style="font-size:0.95rem; color:var(--dim);">Future: Custom AI assistant fine-tuned on First Spark content, licensing to wellness creators, and white-label tool packages.</p>
   </div>
 
   <!-- Slide 7: Founder -->
-  <div class="slide">
+  <div class="slide slide-founder">
     <div class="slide-num">07 / 10</div>
     <h2>The Founder</h2>
     <div class="grid-2">
       <div>
-        <p><strong style="color:var(--white)">Katelin Jill Puzakulics</strong> is a self-taught developer, consciousness architect, and single mother of two based in Akron, Ohio.</p>
+        <p><strong style="color:var(--white);">Katelin Jill Puzakulics</strong> is a self-taught developer, consciousness architect, and single mother of two based in Akron, Ohio.</p>
         <p>Her path through profound early trauma — and the moment she realized <em>"reality is programmable"</em> — is the origin story that makes this platform authentic in a space full of performative wellness.</p>
         <p>She built every tool, wrote every framework, and established every revenue stream herself. She doesn't just teach consciousness work — she lives it.</p>
+        <div class="btn-row">
+          <a href="https://www.tiktok.com/@sparkedone" target="_blank" rel="noopener" class="link-btn">↗ TikTok @sparkedone</a>
+          <a href="https://thefirstspark.shop" target="_blank" rel="noopener" class="link-btn gold-btn">↗ The Platform</a>
+        </div>
       </div>
       <div>
         <div class="card">
           <h3>Background</h3>
           <p>Computer programming (University of Akron) · Kate's Paint LLC founder (2021) · consciousness researcher · digital architect</p>
         </div>
-        <div class="card" style="margin-top:16px;">
+        <div class="card" style="margin-top:14px;">
           <h3>Vision</h3>
           <p>Earthship community in Hocking Hills · Custom First Spark AI · International expansion of consciousness tech</p>
         </div>
-        <div class="card" style="margin-top:16px; border-color: rgba(240,192,96,0.4);">
+        <div class="card" style="margin-top:14px; border-color:rgba(240,192,96,0.28);">
           <h3>📰 Press Feature</h3>
-          <p><a href="https://voyageohio.com/interview/conversations-with-katelin-puzakulics/" target="_blank" rel="noopener" style="color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(240,192,96,0.4);">Voyage Ohio — Conversations with Katelin Puzakulics</a></p>
+          <p><a href="https://voyageohio.com/interview/conversations-with-katelin-puzakulics/" target="_blank" rel="noopener" style="color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(240,192,96,0.3);">Voyage Ohio — Conversations with Katelin Puzakulics ↗</a></p>
         </div>
       </div>
     </div>
@@ -279,12 +556,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="grid-2">
       <div class="card">
         <h3>Katelin Jill Puzakulics</h3>
-        <p style="color:var(--orange); margin-bottom:8px;">Founder & CEO</p>
+        <p style="color:var(--orange); margin-bottom:8px; font-size:0.85rem; -webkit-text-fill-color:var(--orange);">Founder & CEO</p>
         <p>Vision, product development, content creation, community building, all operations. Solo founder with complete skin in the game.</p>
       </div>
       <div class="card">
         <h3>Claude (Anthropic)</h3>
-        <p style="color:var(--orange); margin-bottom:8px;">AI Development Partner</p>
+        <p style="color:var(--orange); margin-bottom:8px; font-size:0.85rem; -webkit-text-fill-color:var(--orange);">AI Development Partner</p>
         <p>Technical development, content iteration, strategic reasoning. The 50+ tools were built in partnership with Claude across thousands of development sessions.</p>
       </div>
     </div>
@@ -307,15 +584,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <!-- Slide 10: The Ask -->
-  <div class="slide" style="text-align:center;">
+  <div class="slide slide-ask">
     <div class="slide-num">10 / 10</div>
     <h2>The Investment</h2>
-    <p style="max-width:560px; margin:0 auto 30px;">We're raising <strong class="gold">$200,000</strong> for <strong class="gold">20% permanent equity</strong> at a <strong class="gold">$1M post-money valuation</strong>. Every dollar goes toward building the machine that changes how humans relate to their own consciousness.</p>
+    <p style="max-width:560px; margin:0 auto 30px; font-size:1.15rem;">We're raising <strong class="gold">$200,000</strong> for <strong class="gold">20% permanent equity</strong> at a <strong class="gold">$1M post-money valuation</strong>. Every dollar goes toward building the machine that changes how humans relate to their own consciousness.</p>
     <div style="margin-top:20px;">
-      <a href="#invest" onclick="showTab('invest')" style="display:inline-block; padding:16px 40px; background:linear-gradient(135deg,var(--orange),#cc4400); color:white; text-decoration:none; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.1em; font-weight:700;">⚡ INVEST NOW</a>
+      <a href="#invest" onclick="showTab('invest')" style="display:inline-block; padding:18px 50px; background:linear-gradient(135deg,var(--orange),#cc4400); color:white; text-decoration:none; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.1em; font-weight:700; box-shadow:0 0 50px rgba(255,107,26,0.45); transition:box-shadow 0.3s, transform 0.2s;">⚡ INVEST NOW</a>
     </div>
-    <p style="margin-top:30px; font-size:1.1rem; color:var(--gold); font-style:italic;">Conscious Code in Motion.</p>
-    <p style="margin-top:16px; color:var(--dim); font-size:0.9rem;">kate@thefirstspark.shop · (330) 807-5509</p>
+    <p style="margin-top:40px; font-size:1.4rem; color:var(--gold); font-style:italic; text-shadow:0 0 30px rgba(240,192,96,0.45);">Conscious Code in Motion.</p>
+    <p style="margin-top:18px; color:var(--dim); font-size:0.9rem;">kate@thefirstspark.shop · (330) 807-5509</p>
   </div>
 
 </div>
@@ -328,46 +605,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2>Choose Your Investment Level</h2>
     <p>Secure your equity stake in The First Spark. Each tier receives proportional ownership of the 20% investor pool. Payment processed securely via BlueVine.</p>
   </div>
-  
+
   <div class="tiers">
     <div class="tier">
       <div class="tier-name">Micro Spark</div>
       <div class="tier-amount">$100</div>
       <div class="tier-equity">0.01% equity</div>
       <div class="tier-perks">Entry-level stake. You're in. Receive quarterly updates and profit distributions.</div>
-      <a class="tier-btn" href="https://pay.bluevine.com/p/52a0b08f11ff4a7db095748245f5ab3b/pay/" target="_blank">INVEST $100 →</a>
+      <a class="tier-btn" href="https://pay.bluevine.com/p/52a0b08f11ff4a7db095748245f5ab3b/pay/" target="_blank" rel="noopener">INVEST $100 →</a>
     </div>
-    
     <div class="tier">
       <div class="tier-name">Spark Seed</div>
       <div class="tier-amount">$500</div>
       <div class="tier-equity">0.05% equity</div>
       <div class="tier-perks">Founding supporter. Quarterly financials + consultation rights on major decisions.</div>
-      <a class="tier-btn" href="https://pay.bluevine.com/p/2fe4e4d92f1b445581bde0ea95ef3c96/pay/" target="_blank">INVEST $500 →</a>
+      <a class="tier-btn" href="https://pay.bluevine.com/p/2fe4e4d92f1b445581bde0ea95ef3c96/pay/" target="_blank" rel="noopener">INVEST $500 →</a>
     </div>
-    
     <div class="tier featured">
       <div class="tier-name">Spark Builder</div>
       <div class="tier-amount">$2,500</div>
       <div class="tier-equity">0.25% equity</div>
       <div class="tier-perks">Meaningful stake. Named in Book Zero acknowledgments. All rights included.</div>
-      <a class="tier-btn gold-btn" href="https://pay.bluevine.com/p/d8a7e794aea14c2e89d459f79adfba05" target="_blank">INVEST $2,500 →</a>
+      <a class="tier-btn gold-tier" href="https://pay.bluevine.com/p/d8a7e794aea14c2e89d459f79adfba05" target="_blank" rel="noopener">INVEST $2,500 →</a>
     </div>
-    
     <div class="tier">
       <div class="tier-name">Founding Spark</div>
       <div class="tier-amount">$10,000</div>
       <div class="tier-equity">1.0% equity</div>
       <div class="tier-perks">Serious equity. Direct access to Kate for strategy sessions. Full investor rights.</div>
-      <a class="tier-btn" href="https://pay.bluevine.com/p/ffd1c598b63a4284bf63f611dcfc15c3" target="_blank">INVEST $10,000 →</a>
+      <a class="tier-btn" href="https://pay.bluevine.com/p/ffd1c598b63a4284bf63f611dcfc15c3" target="_blank" rel="noopener">INVEST $10,000 →</a>
     </div>
-    
-    <div class="tier" style="border-color: var(--gold);">
+    <div class="tier" style="border-color:rgba(240,192,96,0.3);">
       <div class="tier-name">Architect Spark</div>
       <div class="tier-amount">$25,000</div>
       <div class="tier-equity">2.5% equity</div>
       <div class="tier-perks">Angel-level stake. Shape the vision. Monthly calls with Kate. Top-tier all rights.</div>
-      <a class="tier-btn gold-btn" href="https://pay.bluevine.com/p/d4276339c34e4633b11af71fa4d33091" target="_blank">INVEST $25,000 →</a>
+      <a class="tier-btn gold-tier" href="https://pay.bluevine.com/p/d4276339c34e4633b11af71fa4d33091" target="_blank" rel="noopener">INVEST $25,000 →</a>
     </div>
   </div>
 
@@ -375,7 +648,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h3>After You Invest</h3>
     <p>Email <strong>kate@thefirstspark.shop</strong> with your name, investment amount, and payment confirmation. You'll receive your signed SAFE agreement within 48 hours and be added to the investor update list immediately.</p>
     <hr class="divider">
-    <p style="font-size:0.9rem; color:var(--dim);">Questions? Call or text Kate directly at <strong style="color:var(--white)">(330) 807-5509</strong>. She answers.</p>
+    <p style="font-size:0.9rem; color:var(--dim);">Questions? Call or text Kate directly at <strong style="color:var(--white);">(330) 807-5509</strong>. She answers.</p>
   </div>
 </div>
 </div>
@@ -442,49 +715,110 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="qr" class="tab-content">
 <div class="qr-wrap">
   <h2 style="color:var(--gold); font-weight:300; font-size:2rem;">Share The First Spark</h2>
-  <p style="color:var(--dim); margin-top:8px;">Send investors directly to your site</p>
-  
+  <p style="color:var(--dim); margin-top:8px;">Send investors directly to the deck</p>
+
   <div class="qr-box">
     <div id="qrcode"></div>
-    <p class="qr-url">thefirstspark.shop</p>
+    <p class="qr-url">thefirstspark.shop/investor-deck-v2.html</p>
   </div>
-  
+
   <div style="margin-top:20px;">
-    <p style="color:var(--dim); font-size:0.9rem; margin-bottom:16px;">Direct invest link to share:</p>
-    <div style="background:var(--deep); border:1px solid var(--border); border-radius:8px; padding:16px; font-family:'Space Mono',monospace; font-size:12px; color:var(--orange); word-break:break-all;">thefirstspark.shop</div>
+    <p style="color:var(--dim); font-size:0.9rem; margin-bottom:12px;">Direct invest link to share:</p>
+    <div style="background:rgba(8,8,15,0.9); border:1px solid rgba(255,107,26,0.2); border-radius:8px; padding:16px; font-family:'Space Mono',monospace; font-size:12px; color:var(--orange); word-break:break-all;">thefirstspark.shop/investor-deck-v2.html</div>
   </div>
 
   <div style="margin-top:30px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-    <a href="https://pay.bluevine.com/p/52a0b08f11ff4a7db095748245f5ab3b/pay/" target="_blank" style="display:block; padding:12px; background:var(--card); border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$100 Link</a>
-    <a href="https://pay.bluevine.com/p/2fe4e4d92f1b445581bde0ea95ef3c96/pay/" target="_blank" style="display:block; padding:12px; background:var(--card); border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$500 Link</a>
-    <a href="https://pay.bluevine.com/p/d8a7e794aea14c2e89d459f79adfba05" target="_blank" style="display:block; padding:12px; background:var(--card); border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--gold); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$2,500 Link</a>
-    <a href="https://pay.bluevine.com/p/ffd1c598b63a4284bf63f611dcfc15c3" target="_blank" style="display:block; padding:12px; background:var(--card); border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$10,000 Link</a>
-    <a href="https://pay.bluevine.com/p/d4276339c34e4633b11af71fa4d33091" target="_blank" style="display:block; padding:12px; background:var(--card); border:1px solid var(--border); border-radius:8px; text-decoration:none; color:var(--gold); text-align:center; font-family:'Space Mono',monospace; font-size:11px; grid-column:span 2;">$25,000 Link</a>
+    <a href="https://pay.bluevine.com/p/52a0b08f11ff4a7db095748245f5ab3b/pay/" target="_blank" rel="noopener" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(255,255,255,0.07); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px; transition:border-color 0.2s;">$100 Link</a>
+    <a href="https://pay.bluevine.com/p/2fe4e4d92f1b445581bde0ea95ef3c96/pay/" target="_blank" rel="noopener" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(255,255,255,0.07); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px; transition:border-color 0.2s;">$500 Link</a>
+    <a href="https://pay.bluevine.com/p/d8a7e794aea14c2e89d459f79adfba05" target="_blank" rel="noopener" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(240,192,96,0.2); border-radius:8px; text-decoration:none; color:var(--gold); text-align:center; font-family:'Space Mono',monospace; font-size:11px; transition:border-color 0.2s;">$2,500 Link</a>
+    <a href="https://pay.bluevine.com/p/ffd1c598b63a4284bf63f611dcfc15c3" target="_blank" rel="noopener" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(255,255,255,0.07); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px; transition:border-color 0.2s;">$10,000 Link</a>
+    <a href="https://pay.bluevine.com/p/d4276339c34e4633b11af71fa4d33091" target="_blank" rel="noopener" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(240,192,96,0.2); border-radius:8px; text-decoration:none; color:var(--gold); text-align:center; font-family:'Space Mono',monospace; font-size:11px; grid-column:span 2; transition:border-color 0.2s;">$25,000 Link</a>
   </div>
 </div>
 </div>
 
 <script>
+// ---- TABS ----
 function showTab(id) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   const idx = ['deck','invest','safe','qr'].indexOf(id);
-  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
-  window.scrollTo(0,0);
+  if (idx >= 0) document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  window.scrollTo(0, 0);
 }
 
-// QR Code
-window.onload = function() {
-  new QRCode(document.getElementById("qrcode"), {
-    text: "https://thefirstspark.shop",
+// ---- STARFIELD ----
+(function() {
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    stars = [];
+    for (let i = 0; i < 220; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.3 + 0.2,
+        alpha: Math.random() * 0.7 + 0.1,
+        speed: Math.random() * 0.25 + 0.04,
+        twinkleSpeed: Math.random() * 0.018 + 0.004,
+        twinkleDir: Math.random() > 0.5 ? 1 : -1
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      s.alpha += s.twinkleSpeed * s.twinkleDir;
+      if (s.alpha > 0.85 || s.alpha < 0.05) s.twinkleDir *= -1;
+      s.y -= s.speed;
+      if (s.y < -2) { s.y = canvas.height + 2; s.x = Math.random() * canvas.width; }
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,220,180,' + s.alpha + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  init();
+  draw();
+  window.addEventListener('resize', function() { resize(); init(); });
+})();
+
+// ---- SCROLL REVEAL ----
+(function() {
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+      }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.slide').forEach(function(s) { io.observe(s); });
+})();
+
+// ---- QR CODE ----
+window.addEventListener('load', function() {
+  new QRCode(document.getElementById('qrcode'), {
+    text: 'https://thefirstspark.shop/investor-deck-v2.html',
     width: 200,
     height: 200,
-    colorDark: "#ff6b1a",
-    colorLight: "#0f0f1a",
+    colorDark: '#ff6b1a',
+    colorLight: '#08080f',
     correctLevel: QRCode.CorrectLevel.H
   });
-};
+});
 </script>
 </body>
 </html>
