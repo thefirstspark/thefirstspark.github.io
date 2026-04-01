@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +29,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   --orange: #ff6b1a;
   --gold: #f0c060;
   --purple: #8b5cf6;
+  --cyan: #26e4d8;
   --white: #f0ede8;
   --dim: #6666aa;
   --green: #4ade80;
@@ -45,7 +45,6 @@ body {
   overflow-x: hidden;
 }
 
-/* STARFIELD */
 #stars {
   position: fixed;
   top: 0; left: 0;
@@ -54,12 +53,10 @@ body {
   pointer-events: none;
 }
 
-/* TABS */
 .tab-nav {
   display: flex;
   background: rgba(5,5,8,0.96);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255,107,26,0.2);
   position: sticky;
   top: 0;
@@ -83,14 +80,11 @@ body {
 .tab-content { display: none; position: relative; z-index: 1; }
 .tab-content.active { display: block; }
 
-/* DECK */
 .deck { max-width: 900px; margin: 0 auto; padding: 20px; }
 
-/* SLIDES */
 .slide {
   background: rgba(10,10,18,0.88);
   backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255,107,26,0.14);
   border-radius: 18px;
   padding: 50px 60px;
@@ -101,13 +95,8 @@ body {
   transform: translateY(28px);
   transition: opacity 0.65s ease, transform 0.65s ease, box-shadow 0.3s;
 }
-.slide.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-.slide:hover {
-  box-shadow: 0 0 50px rgba(255,107,26,0.08), 0 24px 48px rgba(0,0,0,0.5);
-}
+.slide.revealed { opacity: 1; transform: translateY(0); }
+.slide:hover { box-shadow: 0 0 50px rgba(255,107,26,0.08), 0 24px 48px rgba(0,0,0,0.5); }
 .slide::before {
   content: '';
   position: absolute;
@@ -116,21 +105,15 @@ body {
   background: linear-gradient(90deg, transparent, var(--orange), var(--gold), transparent);
 }
 
-/* Per-slide background accents */
 .slide-cover {
   background: radial-gradient(ellipse at 50% -10%, rgba(255,107,26,0.14) 0%, rgba(5,5,8,0.96) 65%);
   border-color: rgba(255,107,26,0.28);
   padding: 100px 60px;
   text-align: center;
 }
-.slide-philosophy {
-  background: radial-gradient(ellipse at 50% 50%, rgba(139,92,246,0.1) 0%, rgba(5,5,8,0.96) 68%);
-  border-color: rgba(240,192,96,0.22);
-  padding: 100px 60px;
-  text-align: center;
-}
 .slide-traction {
-  background: radial-gradient(ellipse at 20% 60%, rgba(74,222,128,0.07) 0%, rgba(5,5,8,0.96) 65%);
+  background: radial-gradient(ellipse at 20% 60%, rgba(38,228,216,0.1) 0%, rgba(5,5,8,0.96) 65%);
+  border-color: rgba(38,228,216,0.25);
 }
 .slide-founder {
   background: radial-gradient(ellipse at 85% 40%, rgba(255,107,26,0.09) 0%, rgba(5,5,8,0.96) 65%);
@@ -141,7 +124,6 @@ body {
   text-align: center;
 }
 
-/* Slide number */
 .slide-num {
   font-family: 'Space Mono', monospace;
   font-size: 10px;
@@ -150,7 +132,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* Typography */
 .slide h1 {
   font-size: clamp(2.6rem, 6vw, 4.2rem);
   font-weight: 300;
@@ -176,18 +157,14 @@ body {
   text-transform: uppercase;
 }
 .slide p { font-size: 1.05rem; line-height: 1.75; color: #ccc8e8; margin-bottom: 16px; }
-.spark-name { color: var(--orange); font-style: italic; }
-.gold { color: var(--gold); }
 
-/* Grid */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
 
-/* Glass Cards */
 .card {
   background: rgba(6,6,14,0.75);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255,107,26,0.13);
   border-radius: 12px;
   padding: 22px;
@@ -198,20 +175,19 @@ body {
   box-shadow: 0 0 24px rgba(255,107,26,0.07);
   transform: translateY(-3px);
 }
-.card h3 { font-size: 0.82rem; }
-.card p { font-size: 0.9rem; margin-bottom: 0; }
 
-/* Stats */
 .stat {
   font-family: 'Space Mono', monospace;
   font-size: 3rem;
-  color: var(--orange);
+  color: var(--gold);
   display: block;
   margin-bottom: 8px;
-  text-shadow: 0 0 24px rgba(255,107,26,0.55);
+  text-shadow: 0 0 24px rgba(240,192,96,0.55);
 }
+.stat-cyan { color: var(--cyan); text-shadow: 0 0 24px rgba(38,228,216,0.55); }
+.stat-green { color: var(--green); text-shadow: 0 0 24px rgba(74,222,128,0.55); }
+.stat-orange { color: var(--orange); text-shadow: 0 0 24px rgba(255,107,26,0.55); }
 
-/* Tags */
 .tag {
   display: inline-block;
   background: rgba(255,107,26,0.09);
@@ -223,13 +199,10 @@ body {
   padding: 5px 13px;
   border-radius: 20px;
   margin: 4px;
-  transition: background 0.2s;
 }
-.tag:hover { background: rgba(255,107,26,0.2); }
 
 .divider { border: none; border-top: 1px solid rgba(255,107,26,0.1); margin: 26px 0; }
 
-/* Cover slogan */
 .slogan {
   font-family: 'Space Mono', monospace;
   font-size: clamp(0.65rem, 1.8vw, 0.95rem);
@@ -256,25 +229,14 @@ body {
   50% { transform: translateY(-12px) scale(1.04); }
 }
 
-/* Philosophy */
 .big-quote {
-  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-style: italic;
   color: var(--gold);
   line-height: 1.5;
-  max-width: 640px;
-  margin: 0 auto;
   text-shadow: 0 0 50px rgba(240,192,96,0.35);
 }
-.quote-line {
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--orange), var(--gold));
-  margin: 32px auto;
-  border-radius: 2px;
-}
 
-/* Link buttons */
 .link-btn {
   display: inline-block;
   padding: 9px 18px;
@@ -288,28 +250,48 @@ body {
   transition: all 0.2s;
   margin: 3px;
 }
-.link-btn:hover {
-  background: rgba(255,107,26,0.14);
-  border-color: var(--orange);
-  box-shadow: 0 0 16px rgba(255,107,26,0.22);
-}
-.link-btn.gold-btn {
-  border-color: rgba(240,192,96,0.38);
-  color: var(--gold);
-}
-.link-btn.gold-btn:hover {
-  background: rgba(240,192,96,0.1);
-  border-color: var(--gold);
-  box-shadow: 0 0 16px rgba(240,192,96,0.22);
-}
+.link-btn:hover { background: rgba(255,107,26,0.14); border-color: var(--orange); }
+.link-btn.gold-btn { border-color: rgba(240,192,96,0.38); color: var(--gold); }
+.link-btn.gold-btn:hover { background: rgba(240,192,96,0.1); border-color: var(--gold); }
+.link-btn.cyan-btn { border-color: rgba(38,228,216,0.38); color: var(--cyan); }
+.link-btn.cyan-btn:hover { background: rgba(38,228,216,0.1); border-color: var(--cyan); }
 
 .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 
-/* INVESTMENT TIERS */
+.progress-row { margin-bottom: 18px; }
+.progress-label { display: flex; justify-content: space-between; margin-bottom: 6px; }
+.progress-label span:first-child { color: var(--white); font-weight: 600; }
+.progress-label span:last-child { color: var(--gold); font-family: 'Space Mono', monospace; }
+.progress-bar { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--orange), var(--gold)); border-radius: 4px; }
+.progress-desc { font-size: 0.85rem; color: var(--dim); margin-top: 4px; }
+
+.timeline-item { display: flex; gap: 20px; margin-bottom: 24px; align-items: flex-start; }
+.timeline-year {
+  background: var(--orange);
+  color: var(--void);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.timeline-content h3 { color: var(--gold); margin-bottom: 6px; }
+.timeline-content p { margin-bottom: 0; font-size: 0.95rem; }
+
+.moat-box {
+  background: rgba(6,6,14,0.9);
+  border: 2px solid var(--gold);
+  border-radius: 14px;
+  padding: 28px;
+  text-align: center;
+}
+.moat-box h3 { color: var(--gold); font-size: 1rem; margin-bottom: 16px; letter-spacing: 0.15em; }
+
 .tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-top: 24px; }
 .tier {
   background: rgba(8,8,15,0.85);
-  backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 12px;
   padding: 24px 16px;
@@ -317,25 +299,21 @@ body {
   transition: all 0.3s;
   position: relative;
 }
-.tier:hover { border-color: var(--orange); transform: translateY(-6px); box-shadow: 0 12px 40px rgba(255,107,26,0.14); }
+.tier:hover { border-color: var(--orange); transform: translateY(-6px); }
 .tier.featured { border-color: rgba(240,192,96,0.5); background: rgba(240,192,96,0.04); }
 .tier.featured::before { content: 'POPULAR'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--gold), #c09040); color: var(--void); font-family: 'Space Mono', monospace; font-size: 9px; padding: 3px 10px; border-radius: 10px; font-weight: 700; }
 .tier-name { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
 .tier-amount { font-family: 'Space Mono', monospace; font-size: 1.6rem; color: var(--white); font-weight: 700; }
 .tier-equity { font-size: 0.85rem; color: var(--gold); margin: 6px 0; }
 .tier-perks { font-size: 0.8rem; color: var(--dim); line-height: 1.5; margin: 10px 0; }
-.tier-btn { display: block; margin-top: 14px; padding: 10px 8px; background: linear-gradient(135deg, var(--orange), #cc4400); color: white; text-decoration: none; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; font-weight: 700; transition: opacity 0.2s, box-shadow 0.2s; }
-.tier-btn:hover { opacity: 0.9; box-shadow: 0 0 22px rgba(255,107,26,0.35); }
+.tier-btn { display: block; margin-top: 14px; padding: 10px 8px; background: linear-gradient(135deg, var(--orange), #cc4400); color: white; text-decoration: none; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; font-weight: 700; }
 .tier-btn.gold-tier { background: linear-gradient(135deg, var(--gold), #c09040); color: var(--void); }
 
-/* PROJECTIONS TABLE */
 .proj-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95rem; }
-.proj-table th { background: rgba(255,107,26,0.08); color: var(--orange); font-family: 'Space Mono', monospace; font-size: 11px; padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(255,107,26,0.18); }
-.proj-table td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #ccc8e8; }
-.proj-table tr:hover td { background: rgba(255,107,26,0.04); }
+.proj-table th { background: rgba(139,92,246,0.3); color: var(--white); font-family: 'Space Mono', monospace; font-size: 11px; padding: 12px 16px; text-align: left; }
+.proj-table td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #ccc8e8; background: rgba(6,6,14,0.5); }
 .proj-table tr:last-child td { color: var(--gold); font-weight: 600; }
 
-/* SAFE */
 .safe-wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px; }
 .safe-doc { background: white; color: #222; padding: 60px; border-radius: 8px; font-family: Georgia, serif; font-size: 14px; line-height: 1.8; }
 .safe-doc h1 { font-size: 1.4rem; text-align: center; margin-bottom: 6px; }
@@ -344,40 +322,25 @@ body {
 .safe-doc .field { border-bottom: 1px solid #333; display: inline-block; min-width: 200px; margin: 0 4px; }
 .safe-doc .sig-block { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
 .safe-doc .sig-line { border-top: 1px solid #333; margin-top: 50px; padding-top: 6px; font-size: 12px; color: #555; }
-.tier-select-row { background: #f9f9f9; border: 1px solid #ddd; border-radius: 6px; padding: 16px 20px; margin: 16px 0; }
-.tier-select-row label { display: flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; }
 
-/* QR */
 .qr-wrap { max-width: 600px; margin: 0 auto; padding: 60px 20px; text-align: center; }
-.qr-box { background: rgba(8,8,16,0.92); backdrop-filter: blur(20px); border: 1px solid rgba(255,107,26,0.2); border-radius: 18px; padding: 40px; margin: 30px 0; }
+.qr-box { background: rgba(8,8,16,0.92); border: 1px solid rgba(255,107,26,0.2); border-radius: 18px; padding: 40px; margin: 30px 0; }
 #qrcode { display: flex; justify-content: center; margin: 20px 0; }
 .qr-url { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--dim); margin-top: 16px; }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .slide { padding: 30px 22px; }
-  .slide-cover, .slide-philosophy, .slide-ask { padding: 60px 22px; }
-  .grid-2 { grid-template-columns: 1fr; }
-  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .slide-cover, .slide-ask { padding: 60px 22px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .tiers { grid-template-columns: 1fr 1fr; }
   .safe-doc { padding: 30px 20px; }
   .safe-doc .sig-block { grid-template-columns: 1fr; }
-  .big-quote { font-size: 1.6rem; }
-}
-
-@media print {
-  .tab-nav { display: none; }
-  .tab-content { display: block !important; }
-  .safe-doc { box-shadow: none; }
-  #stars { display: none; }
-  .slide { opacity: 1; transform: none; }
+  .timeline-item { flex-direction: column; gap: 10px; }
 }
 </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <canvas id="stars"></canvas>
 
@@ -386,377 +349,358 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <button class="tab-btn" onclick="showTab('invest')">💎 Invest Now</button>
   <button class="tab-btn" onclick="showTab('safe')">📄 SAFE Agreement</button>
   <button class="tab-btn" onclick="showTab('qr')">🔗 Share</button>
-  <a href="theraise.html" style="padding:14px 16px; color:var(--dim); font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; background:none; display:flex; align-items:center; border-bottom:2px solid transparent; transition:color 0.2s;">📋 The Raise</a>
 </nav>
 
-<!-- PITCH DECK -->
 <div id="deck" class="tab-content active">
 <div class="deck">
 
-  <!-- Slide 1: Cover -->
   <div class="slide slide-cover">
-    <div class="slide-num">01 / 11</div>
+    <div class="slide-num">01 / 10</div>
     <span class="spark-icon">⚡</span>
     <h1>The First Spark</h1>
     <div class="slogan">Conscious Code in Motion</div>
-    <p style="max-width:520px; margin:0 auto 28px; font-size:1.15rem;">A digital ecosystem for inner exploration — tools, community, and frameworks for people ready to reprogram their reality.</p>
+    <p style="max-width:560px; margin:0 auto 28px; font-size:1.15rem;">The operating system for people who know reality is programmable.</p>
     <div style="margin-bottom:28px;">
       <span class="tag">Seed Round</span>
       <span class="tag">$200K Raise</span>
       <span class="tag">20% Equity</span>
-      <span class="tag">$1M Valuation</span>
+      <span class="tag">$800K Pre-Money</span>
     </div>
     <div>
-      <a href="https://thefirstspark.shop" target="_blank" rel="noopener" class="link-btn">↗ thefirstspark.shop</a>
-      <a href="https://sparkverse.thefirstspark.shop" target="_blank" rel="noopener" class="link-btn gold-btn">↗ Sparkverse</a>
+      <a href="https://thefirstspark.shop" target="_blank" class="link-btn">↗ thefirstspark.shop</a>
+      <a href="https://sparkverse.thefirstspark.shop" target="_blank" class="link-btn gold-btn">↗ Sparkverse</a>
     </div>
     <p style="margin-top:30px; font-size:0.85rem; color:var(--dim);">kate@thefirstspark.shop · (330) 807-5509</p>
   </div>
 
-  <!-- Slide 2: Problem -->
-  <div class="slide">
-    <div class="slide-num">02 / 11</div>
-    <h2>The Problem</h2>
-    <p>Millions of people are waking up — to trauma, to patterns, to the sense that reality is more malleable than they were taught. But the tools available to them are fragmented: self-help books with no interactivity, expensive therapists, shallow wellness apps, or occult communities with no structure.</p>
-    <div class="grid-2">
-      <div class="card">
-        <h3>No Bridge</h3>
-        <p>Between ancient consciousness wisdom and modern digital tools. Seekers have to choose between depth and accessibility.</p>
-      </div>
-      <div class="card">
-        <h3>No Community</h3>
-        <p>Personal transformation is lonely. Existing platforms don't hold sacred space for real inner work — they optimize for engagement, not evolution.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Slide 3: Philosophical Bridge -->
-  <div class="slide slide-philosophy">
-    <div class="slide-num">03 / 11</div>
-    <p class="big-quote">Reality is programmable.<br>Consciousness is the code.</p>
-    <div class="quote-line"></div>
-    <p style="color:var(--dim); font-size:0.85rem; letter-spacing:0.15em; text-transform:uppercase; font-family:'Space Mono',monospace; margin:0;">This isn't metaphor. It's operating system.</p>
-  </div>
-
-  <!-- Slide 4: Solution -->
-  <div class="slide">
-    <div class="slide-num">04 / 11</div>
-    <h2>The Solution</h2>
-    <p><span class="spark-name">The First Spark</span> is a consciousness technology platform — interactive digital tools, guided frameworks, and a living community built around the idea that <em>reality is programmable.</em></p>
-    <div class="grid-3">
-      <div class="card">
-        <h3>🧰 Tools</h3>
-        <p>50+ interactive artifacts: soul mapping, sigil generation, consciousness trackers, ritual frameworks — built and battle-tested.</p>
-        <div class="btn-row">
-          <a href="https://thefirstspark.shop" target="_blank" rel="noopener" class="link-btn" style="font-size:9px;">↗ Explore Tools</a>
-          <a href="https://sparkverse.thefirstspark.shop" target="_blank" rel="noopener" class="link-btn gold-btn" style="font-size:9px;">↗ Sparkverse</a>
-        </div>
-      </div>
-      <div class="card" style="border-color:rgba(255,107,26,0.28); box-shadow:0 0 20px rgba(255,107,26,0.05);">
-        <h3>🔥 Community</h3>
-        <p>Whop-based membership ecosystem with tiered access, live sessions, and a Discord for Players Lounge members.</p>
-        <div class="btn-row">
-          <a href="https://thefirstspark.shop/starter-kit.html" target="_blank" rel="noopener" class="link-btn" style="font-size:9px;">↗ Starter Kit</a>
-        </div>
-      </div>
-      <div class="card">
-        <h3>📖 Content</h3>
-        <p>Book Zero memoir, TikTok presence (@sparkedone), and the Mobile Spark Station — a traveling consciousness studio.</p>
-        <div class="btn-row">
-          <a href="https://www.tiktok.com/@sparkedone" target="_blank" rel="noopener" class="link-btn" style="font-size:9px;">↗ TikTok</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Slide 5: Traction -->
   <div class="slide slide-traction">
-    <div class="slide-num">05 / 11</div>
-    <h2>Traction & Assets</h2>
-    <div class="grid-3">
-      <div class="card" style="text-align:center;">
-        <span class="stat">50+</span>
-        <p>Interactive tools built and deployed</p>
-        <a href="https://thefirstspark.shop" target="_blank" rel="noopener" class="link-btn" style="font-size:9px; margin-top:12px;">↗ Live Now</a>
+    <div class="slide-num">02 / 10</div>
+    <h3 style="color:var(--cyan);">Traction</h3>
+    <h2 style="color:var(--white);">Already Built. Already Live.</h2>
+    <div class="grid-4">
+      <div class="card" style="text-align:center; border-color:rgba(139,92,246,0.3);">
+        <span class="stat">90+</span>
+        <p>Interactive Tools Deployed</p>
       </div>
-      <div class="card" style="text-align:center;">
-        <span class="stat">1,000+</span>
-        <p>Community members across platforms</p>
+      <div class="card" style="text-align:center; border-color:rgba(38,228,216,0.3);">
+        <span class="stat stat-cyan">1,000+</span>
+        <p>Community Members</p>
       </div>
-      <div class="card" style="text-align:center;">
-        <span class="stat" style="color:var(--green); text-shadow:0 0 24px rgba(74,222,128,0.55);">$0</span>
-        <p>Burn rate. Zero overhead. All hustle.</p>
+      <div class="card" style="text-align:center; border-color:rgba(74,222,128,0.3);">
+        <span class="stat stat-green">$0</span>
+        <p>Monthly Burn Rate</p>
+      </div>
+      <div class="card" style="text-align:center; border-color:rgba(255,107,26,0.3);">
+        <span class="stat stat-orange">100%</span>
+        <p>Solo Built</p>
       </div>
     </div>
     <hr class="divider">
-    <p>Platform infrastructure live across GitHub Pages, Netlify, and Whop. Payment systems operational. Membership tiers defined and ready. The machine is built — we need fuel.</p>
+    <p>Live infrastructure across GitHub Pages, Netlify, and Whop. Payment systems operational. <strong style="color:var(--white);">No vaporware.</strong></p>
     <div class="btn-row">
-      <a href="https://thefirstspark.shop/archetype-discovery.html" target="_blank" rel="noopener" class="link-btn" style="font-size:9px;">↗ Try: Archetype Discovery</a>
-      <a href="https://thefirstspark.shop/starter-kit.html" target="_blank" rel="noopener" class="link-btn gold-btn" style="font-size:9px;">↗ Try: Starter Kit</a>
+      <a href="https://thefirstspark.shop" target="_blank" class="link-btn cyan-btn">↗ LIVE: thefirstspark.shop</a>
+      <a href="https://thefirstspark.shop/codex.html" target="_blank" class="link-btn">↗ Project Codex (90+ Tools)</a>
     </div>
   </div>
 
-  <!-- Slide 6: Product & Revenue -->
   <div class="slide">
-    <div class="slide-num">06 / 11</div>
-    <h2>Membership Tiers</h2>
+    <div class="slide-num">03 / 10</div>
+    <h3 style="color:var(--orange);">The Problem</h3>
+    <h2 style="color:var(--white);">The $4.2T Wellness Industry Is Missing Something.</h2>
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:16px; border-left:3px solid var(--orange);">
+          <h3>Fragmented Tools</h3>
+          <p style="margin:0;">Self-help books with no interactivity. Expensive therapists. Shallow wellness apps. No bridge between depth and accessibility.</p>
+        </div>
+        <div class="card" style="margin-bottom:16px; border-left:3px solid var(--gold);">
+          <h3>No Sacred Tech</h3>
+          <p style="margin:0;">Existing platforms optimize for engagement, not evolution. They're selling calm, not transformation.</p>
+        </div>
+        <div class="card" style="border-left:3px solid var(--purple);">
+          <h3>Lonely Journey</h3>
+          <p style="margin:0;">Personal transformation is isolating. No community holds space for real inner work without gatekeeping or dogma.</p>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(240,192,96,0.3); display:flex; flex-direction:column; justify-content:center; text-align:center;">
+        <span class="stat" style="font-size:3.5rem;">$4.2T</span>
+        <p style="font-size:1.1rem; color:var(--white); font-weight:600; margin-bottom:12px;">Global Wellness Market</p>
+        <p style="font-size:0.9rem; margin-bottom:0;">Growing 5-10% annually. Mindfulness apps alone: $2.2B by 2027. <em>But none truly bridge ancient wisdom with modern digital tools.</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-num">04 / 10</div>
+    <h3 style="color:var(--cyan);">The Solution</h3>
+    <h2 style="color:var(--white);">Headspace Meets Notion. For Inner Work.</h2>
+    <div class="card" style="text-align:center; border-color:var(--gold); margin-bottom:24px; padding:20px;">
+      <p class="big-quote" style="margin:0;">"Reality is programmable. Consciousness is the code."</p>
+    </div>
     <div class="grid-3">
-      <div class="card">
-        <h3>🌱 Free — Spark Access</h3>
-        <p>Entry tools, community access, introductory frameworks. Top of funnel.</p>
+      <div class="card" style="text-align:center; border-color:rgba(139,92,246,0.3);">
+        <div style="font-size:2rem; margin-bottom:12px;">🧰</div>
+        <h3 style="color:var(--gold);">90+ Interactive Tools</h3>
+        <p style="margin:0;">Soul mapping, sigil generation, consciousness trackers, ritual frameworks. Built and battle-tested.</p>
       </div>
-      <div class="card" style="border-color:rgba(255,107,26,0.35); box-shadow:0 0 20px rgba(255,107,26,0.06);">
-        <h3>🔥 $33/mo — Players Lounge</h3>
-        <p>Full tool library, live sessions, Discord access. Core recurring revenue.</p>
+      <div class="card" style="text-align:center; border-color:rgba(38,228,216,0.3);">
+        <div style="font-size:2rem; margin-bottom:12px;">🔥</div>
+        <h3 style="color:var(--gold);">Living Community</h3>
+        <p style="margin:0;">Whop-based membership with tiered access, live sessions, and Discord for deep players.</p>
       </div>
-      <div class="card" style="border-color:rgba(240,192,96,0.3); box-shadow:0 0 20px rgba(240,192,96,0.05);">
-        <h3>⚡ $519 — OG Spark (Lifetime)</h3>
-        <p>Permanent access, founding member status, priority everything.</p>
+      <div class="card" style="text-align:center; border-color:rgba(255,107,26,0.3);">
+        <div style="font-size:2rem; margin-bottom:12px;">🧠</div>
+        <h3 style="color:var(--gold);">Philosophical OS</h3>
+        <p style="margin:0;">The Selector Model: treating reality as programmable code, consciousness as the interface.</p>
       </div>
     </div>
-    <hr class="divider">
-    <p style="font-size:0.95rem; color:var(--dim);">Future: Custom AI assistant fine-tuned on First Spark content, licensing to wellness creators, and white-label tool packages.</p>
   </div>
 
-  <!-- Slide 7: Revenue Streams & Automation -->
   <div class="slide">
-    <div class="slide-num">07 / 11</div>
-    <h2>Revenue Streams</h2>
-    <p style="font-size:0.95rem; color:var(--dim);">Multiple income vectors running simultaneously — most of them automated.</p>
-    <div class="grid-2" style="margin-top:20px;">
-
-      <div>
-        <div class="card" style="border-color:rgba(255,107,26,0.3); margin-bottom:14px;">
-          <h3>🔁 Recurring Subscriptions</h3>
-          <p>Players Lounge at $33/mo — the core engine. Auto-billed through Whop. Members get full tool access, Discord, and live sessions. Scales linearly with zero extra overhead per member.</p>
-        </div>
-        <div class="card" style="margin-bottom:14px;">
-          <h3>⚡ Lifetime Access Sales</h3>
-          <p>OG Spark at $519 — lump-sum, high-margin, no ongoing cost. Single payment, permanent access. Strong for cash flow spikes and community loyalty.</p>
-        </div>
-        <div class="card">
-          <h3>📍 Mobile Spark Station</h3>
-          <p>In-person events, pop-ups, and consciousness workshops. The physical arm of the brand — direct revenue plus top-of-funnel for online membership conversion.</p>
-        </div>
+    <div class="slide-num">05 / 10</div>
+    <h3 style="color:var(--gold);">Business Model</h3>
+    <h2 style="color:var(--white);">Multiple Revenue Streams. Mostly Automated.</h2>
+    <div class="grid-3">
+      <div class="card" style="border-color:rgba(255,107,26,0.3);">
+        <h3 style="color:var(--orange);">Recurring Subs</h3>
+        <p style="color:var(--white); font-weight:600; margin-bottom:8px;">$33/mo</p>
+        <p style="margin:0;">Players Lounge tier. Auto-billed via Whop. Full tool access + Discord + live sessions.</p>
       </div>
-
-      <div>
-        <div class="card" style="border-color:rgba(240,192,96,0.25); margin-bottom:14px;">
-          <h3>📦 Licensing & White-Label</h3>
-          <p>The 50+ tools are modular and portable. Wellness creators, coaches, and brands can license the frameworks and tool packages — high-margin B2B revenue layer with no new buildout required.</p>
-        </div>
-        <div class="card" style="margin-bottom:14px;">
-          <h3>📖 Book Zero + Content</h3>
-          <p>The memoir is a standalone revenue stream and the primary funnel driver. TikTok (@sparkedone) converts attention directly into membership. Each piece of content compounds.</p>
-        </div>
-        <div class="card" style="border-color:rgba(139,92,246,0.25);">
-          <h3>🤖 Custom AI (Upcoming)</h3>
-          <p>A fine-tuned AI assistant trained on First Spark frameworks — subscription tier above Players Lounge. Highest margin product in the roadmap. Infrastructure already in place.</p>
-        </div>
+      <div class="card" style="border-color:rgba(240,192,96,0.3);">
+        <h3 style="color:var(--gold);">Lifetime Access</h3>
+        <p style="color:var(--white); font-weight:600; margin-bottom:8px;">$519</p>
+        <p style="margin:0;">OG Spark tier. Lump-sum, high-margin, permanent access. Cash flow + loyalty.</p>
       </div>
-
-    </div>
-
-    <hr class="divider">
-    <h2 style="font-size:1.1rem; margin-bottom:16px;">Automation Stack</h2>
-    <div class="grid-3" style="margin-top:0;">
-      <div class="card" style="text-align:center; padding:16px;">
-        <div style="font-size:1.5rem; margin-bottom:8px;">⚙️</div>
-        <h3 style="font-size:0.78rem;">Whop Platform</h3>
-        <p style="font-size:0.82rem;">Auto-billing, access gating, Discord roles, and member management — fully hands-off.</p>
+      <div class="card" style="border-color:rgba(139,92,246,0.3);">
+        <h3 style="color:var(--purple);">Soul Maps</h3>
+        <p style="color:var(--white); font-weight:600; margin-bottom:8px;">$111+</p>
+        <p style="margin:0;">Hand-decoded personalized consciousness maps. NFT collection on Base blockchain.</p>
       </div>
-      <div class="card" style="text-align:center; padding:16px;">
-        <div style="font-size:1.5rem; margin-bottom:8px;">🚀</div>
-        <h3 style="font-size:0.78rem;">Zero-Cost Deploy</h3>
-        <p style="font-size:0.82rem;">GitHub Pages + Netlify serve all 50+ tools at scale. A git push deploys everything. No servers, no DevOps bill.</p>
+      <div class="card" style="border-color:rgba(38,228,216,0.3);">
+        <h3 style="color:var(--cyan);">B2B Licensing</h3>
+        <p style="color:var(--white); font-weight:600; margin-bottom:8px;">HIGH MARGIN</p>
+        <p style="margin:0;">White-label tool packages for wellness creators, coaches, and brands.</p>
       </div>
-      <div class="card" style="text-align:center; padding:16px;">
-        <div style="font-size:1.5rem; margin-bottom:8px;">💳</div>
-        <h3 style="font-size:0.78rem;">Payment Rails</h3>
-        <p style="font-size:0.82rem;">BlueVine direct payment links handle investor transactions. Stripe powers Whop subscriptions. No checkout friction.</p>
+      <div class="card" style="border-color:rgba(139,92,246,0.3);">
+        <h3 style="color:#a78bfa;">Book Zero</h3>
+        <p style="color:var(--white); font-weight:600; margin-bottom:8px;">IP ASSET</p>
+        <p style="margin:0;">Memoir + true crime + spiritual awakening. Serial-level IP. Content funnel driver.</p>
+      </div>
+      <div class="card" style="border-color:rgba(243,178,58,0.3);">
+        <h3 style="color:#f3b23a;">Custom AI</h3>
+        <p style="color:var(--white); font-weight:600; margin-bottom:8px;">ROADMAP</p>
+        <p style="margin:0;">Fine-tuned AI on First Spark content. Highest margin product in pipeline.</p>
       </div>
     </div>
   </div>
 
-  <!-- Slide 8: Founder -->
+  <div class="slide">
+    <div class="slide-num">06 / 10</div>
+    <h3 style="color:var(--orange);">Why Now</h3>
+    <h2 style="color:var(--white);">2026 Is the Consciousness Tech Inflection Point.</h2>
+    <div class="grid-2">
+      <div>
+        <div class="timeline-item">
+          <span class="timeline-year">2020-23</span>
+          <div class="timeline-content">
+            <h3>Collective Awakening</h3>
+            <p>COVID forced millions into self-reflection. Meditation app downloads 2x. Therapy demand exploded.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2024-25</span>
+          <div class="timeline-content">
+            <h3>AI Democratization</h3>
+            <p>Solo founders can now build what took teams of 20. The infrastructure gap is closing.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2026+</span>
+          <div class="timeline-content">
+            <h3>Conscious Tech Wave</h3>
+            <p>First movers in spiritual-meets-tech will define the category. <strong>We're already here.</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="moat-box">
+        <div style="font-size:2.5rem; margin-bottom:12px;">🚀</div>
+        <h3>First Mover Advantage</h3>
+        <p style="color:var(--white); margin-bottom:16px;">90+ tools already built. Community growing. Infrastructure live.</p>
+        <p style="color:var(--gold); font-style:italic; margin:0;">You're not investing in a plan — you're investing in execution.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="slide slide-founder">
-    <div class="slide-num">08 / 11</div>
-    <h2>The Founder</h2>
+    <div class="slide-num">07 / 10</div>
+    <h3 style="color:var(--purple);">The Founder</h3>
+    <h2 style="color:var(--white);">Katelin Jill Puzakulics</h2>
+    <p style="color:var(--gold); font-style:italic; margin-bottom:24px;">Solo Founder & CEO · Akron, Ohio</p>
     <div class="grid-2">
       <div>
-        <p><strong style="color:var(--white);">Katelin Jill Puzakulics</strong> is a self-taught developer, consciousness architect, and single mother of two based in Akron, Ohio.</p>
-        <p>Her path through profound early trauma — and the moment she realized <em>"reality is programmable"</em> — is the origin story that makes this platform authentic in a space full of performative wellness.</p>
-        <p>She built every tool, wrote every framework, and established every revenue stream herself. She doesn't just teach consciousness work — she lives it.</p>
+        <p style="color:var(--orange); font-size:1.2rem; font-style:italic; margin-bottom:16px;">The product is autobiography turned into technology.</p>
+        <p>Self-taught developer who built 90+ consciousness tools solo. Single mother of two. Survived profound early trauma and turned the insight that "reality is programmable" into a platform.</p>
+        <p style="color:var(--white); font-weight:600;">This isn't a pitch for something that might get built. The infrastructure exists. You're investing in scaling what already works.</p>
         <div class="btn-row">
-          <a href="https://www.tiktok.com/@sparkedone" target="_blank" rel="noopener" class="link-btn">↗ TikTok @sparkedone</a>
-          <a href="https://thefirstspark.shop" target="_blank" rel="noopener" class="link-btn gold-btn">↗ The Platform</a>
+          <a href="https://voyageohio.com/interview/conversations-with-katelin-puzakulics/" target="_blank" class="link-btn gold-btn">↗ Voyage Ohio Feature</a>
+          <a href="https://thefirstspark.shop" target="_blank" class="link-btn">↗ The Platform</a>
         </div>
       </div>
-      <div>
-        <div class="card">
-          <h3>Background</h3>
-          <p>Computer programming (University of Akron) · Kate's Paint LLC founder (2021) · consciousness researcher · digital architect</p>
-        </div>
-        <div class="card" style="margin-top:14px;">
-          <h3>Vision</h3>
-          <p>Earthship community in Hocking Hills · Custom First Spark AI · International expansion of consciousness tech</p>
-        </div>
-        <div class="card" style="margin-top:14px; border-color:rgba(240,192,96,0.28);">
-          <h3>📰 Press Feature</h3>
-          <p><a href="https://voyageohio.com/interview/conversations-with-katelin-puzakulics/" target="_blank" rel="noopener" style="color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(240,192,96,0.3);">Voyage Ohio — Conversations with Katelin Puzakulics ↗</a></p>
-        </div>
+      <div class="moat-box">
+        <h3>THE MOAT</h3>
+        <div style="font-size:2.5rem; margin:16px 0;">∞</div>
+        <p style="color:var(--white); margin-bottom:16px;">The founder story is the competitive advantage.</p>
+        <p style="color:var(--dim); margin-bottom:16px;">Trauma. Awakening. Self-taught engineering. Solo parenting.</p>
+        <p style="color:var(--gold); font-style:italic; margin:0;">This origin is irreplicable.</p>
       </div>
     </div>
   </div>
 
-  <!-- Slide 8: Team -->
   <div class="slide">
-    <div class="slide-num">09 / 11</div>
-    <h2>The Team</h2>
-    <div class="grid-2">
-      <div class="card">
-        <h3>Katelin Jill Puzakulics</h3>
-        <p style="color:var(--orange); margin-bottom:8px; font-size:0.85rem; -webkit-text-fill-color:var(--orange);">Founder & CEO</p>
-        <p>Vision, product development, content creation, community building, all operations. Solo founder with complete skin in the game.</p>
-      </div>
-      <div class="card">
-        <h3>Claude (Anthropic)</h3>
-        <p style="color:var(--orange); margin-bottom:8px; font-size:0.85rem; -webkit-text-fill-color:var(--orange);">AI Development Partner</p>
-        <p>Technical development, content iteration, strategic reasoning. The 50+ tools were built in partnership with Claude across thousands of development sessions.</p>
-      </div>
-    </div>
-    <hr class="divider">
-    <p style="font-size:0.9rem; color:var(--dim);">Post-funding: Community manager, content producer, and technical advisor roles planned.</p>
-  </div>
-
-  <!-- Slide 9: Projections -->
-  <div class="slide">
-    <div class="slide-num">10 / 11</div>
-    <h2>Financial Projections</h2>
+    <div class="slide-num">08 / 10</div>
+    <h3 style="color:var(--cyan);">Projections</h3>
+    <h2 style="color:var(--white);">Conservative Path to $1M ARR</h2>
     <table class="proj-table">
-      <tr><th>Year</th><th>Members</th><th>Revenue</th><th>Key Milestone</th></tr>
-      <tr><td>Year 1</td><td>100 Players + 20 OG</td><td>$40K</td><td>Mobile Spark Station deployed</td></tr>
-      <tr><td>Year 2</td><td>500 members</td><td>$200K</td><td>Book Zero published, licensing launched</td></tr>
-      <tr><td>Year 3</td><td>Ecosystem scale</td><td>$1M+</td><td>Custom AI live, land project begins</td></tr>
+      <tr><th>Year</th><th>Members</th><th>Revenue</th><th>Milestone</th></tr>
+      <tr><td>Y1</td><td>100 Players + 20 OG</td><td>$50K</td><td>Mobile Spark Station deployed</td></tr>
+      <tr><td>Y2</td><td>500 members</td><td>$200K</td><td>Book Zero published, licensing live</td></tr>
+      <tr><td>Y3</td><td>2,000+ ecosystem</td><td>$1M+</td><td>Custom AI, land project begins</td></tr>
     </table>
     <hr class="divider">
-    <p style="font-size:0.9rem; color:var(--dim);">Investor receives 20% profit distributions quarterly once revenue exceeds operating costs. Buyout option available at 5× investment or fair market value.</p>
+    <p style="font-size:0.9rem; color:var(--white); margin-bottom:8px;"><strong>Conservative assumptions:</strong></p>
+    <p style="font-size:0.85rem; color:var(--dim); margin-bottom:0;">• 2% conversion from free → paid (industry avg is 3-5%)<br>• $33/mo × 12 = $396/yr LTV minimum per Players Lounge member<br>• Zero paid acquisition assumed — organic + content only</p>
   </div>
 
-  <!-- Slide 10: The Ask -->
-  <div class="slide slide-ask">
-    <div class="slide-num">11 / 11</div>
-    <h2>The Investment</h2>
-    <p style="max-width:560px; margin:0 auto 30px; font-size:1.15rem;">We're raising <strong class="gold">$200,000</strong> for <strong class="gold">20% permanent equity</strong> at a <strong class="gold">$1M post-money valuation</strong>. Every dollar goes toward building the machine that changes how humans relate to their own consciousness.</p>
-    <div style="margin-top:20px;">
-      <a href="#invest" onclick="showTab('invest')" style="display:inline-block; padding:18px 50px; background:linear-gradient(135deg,var(--orange),#cc4400); color:white; text-decoration:none; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.1em; font-weight:700; box-shadow:0 0 50px rgba(255,107,26,0.45); transition:box-shadow 0.3s, transform 0.2s;">⚡ INVEST NOW</a>
+  <div class="slide">
+    <div class="slide-num">09 / 10</div>
+    <h3 style="color:var(--gold);">Use of Funds</h3>
+    <h2 style="color:var(--white);">Where $200K Goes</h2>
+    <div class="progress-row">
+      <div class="progress-label"><span>Mobile Spark Station</span><span>$60K</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:30%;"></div></div>
+      <div class="progress-desc">Converted van, equipment, first tour</div>
     </div>
-    <p style="margin-top:40px; font-size:1.4rem; color:var(--gold); font-style:italic; text-shadow:0 0 30px rgba(240,192,96,0.45);">Conscious Code in Motion.</p>
+    <div class="progress-row">
+      <div class="progress-label"><span>AI Infrastructure</span><span>$50K</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:25%;"></div></div>
+      <div class="progress-desc">Custom model fine-tuning, hosting, API</div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label"><span>Content & Marketing</span><span>$40K</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:20%;"></div></div>
+      <div class="progress-desc">Book Zero production, video, paid growth</div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label"><span>Community Tools</span><span>$30K</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:15%;"></div></div>
+      <div class="progress-desc">Platform upgrades, new tool development</div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-label"><span>Operating Reserve</span><span>$20K</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:10%;"></div></div>
+      <div class="progress-desc">12-month runway buffer</div>
+    </div>
+    <div class="card" style="text-align:center; border-color:var(--cyan); margin-top:24px; padding:16px;">
+      <p style="color:var(--cyan); margin:0; font-weight:600;">Zero founder salary until profitable. Every dollar goes to building.</p>
+    </div>
+  </div>
+
+  <div class="slide slide-ask">
+    <div class="slide-num">10 / 10</div>
+    <span class="spark-icon">⚡</span>
+    <h3 style="color:var(--orange);">The Investment</h3>
+    <h1>$200,000 for 20% Equity</h1>
+    <p style="color:var(--gold); font-size:1.1rem; margin-bottom:30px;">$800K Pre-Money · SAFE Note · Founder-First Terms</p>
+    <div style="max-width:400px; margin:0 auto 30px; text-align:left;">
+      <p style="margin-bottom:12px;"><span style="color:var(--cyan);">✓</span> Quarterly profit distributions once operational</p>
+      <p style="margin-bottom:12px;"><span style="color:var(--cyan);">✓</span> 5× buyout option or fair market value</p>
+      <p style="margin-bottom:0;"><span style="color:var(--cyan);">✓</span> Full reporting transparency</p>
+    </div>
+    <div style="margin-top:30px;">
+      <a href="#invest" onclick="showTab('invest')" style="display:inline-block; padding:18px 50px; background:linear-gradient(135deg,var(--orange),#cc4400); color:white; text-decoration:none; border-radius:8px; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.1em; font-weight:700; box-shadow:0 0 50px rgba(255,107,26,0.45);">⚡ LET'S BUILD</a>
+    </div>
+    <p style="margin-top:40px; font-size:1.4rem; color:var(--gold); font-style:italic;">Conscious Code in Motion.</p>
     <p style="margin-top:18px; color:var(--dim); font-size:0.9rem;">kate@thefirstspark.shop · (330) 807-5509</p>
   </div>
 
 </div>
 </div>
 
-<!-- INVEST NOW TAB -->
 <div id="invest" class="tab-content">
 <div class="deck">
   <div class="slide" style="text-align:center; padding-bottom:30px;">
     <h2>Choose Your Investment Level</h2>
     <p>Secure your equity stake in The First Spark. Each tier receives proportional ownership of the 20% investor pool. Payment processed securely via BlueVine.</p>
   </div>
-
   <div class="tiers">
     <div class="tier">
       <div class="tier-name">Micro Spark</div>
       <div class="tier-amount">$100</div>
-      <div class="tier-equity">0.01% equity</div>
-      <div class="tier-perks">Entry-level stake. You're in. Receive quarterly updates and profit distributions.</div>
-      <a class="tier-btn" href="https://pay.bluevine.com/p/52a0b08f11ff4a7db095748245f5ab3b/pay/" target="_blank" rel="noopener">INVEST $100 →</a>
+      <div class="tier-equity">0.0125% equity</div>
+      <div class="tier-perks">Entry-level stake. Quarterly updates and profit distributions.</div>
+      <a class="tier-btn" href="https://pay.bluevine.com/p/52a0b08f11ff4a7db095748245f5ab3b/pay/" target="_blank">INVEST $100 →</a>
     </div>
     <div class="tier">
       <div class="tier-name">Spark Seed</div>
       <div class="tier-amount">$500</div>
-      <div class="tier-equity">0.05% equity</div>
-      <div class="tier-perks">Founding supporter. Quarterly financials + consultation rights on major decisions.</div>
-      <a class="tier-btn" href="https://pay.bluevine.com/p/2fe4e4d92f1b445581bde0ea95ef3c96/pay/" target="_blank" rel="noopener">INVEST $500 →</a>
+      <div class="tier-equity">0.0625% equity</div>
+      <div class="tier-perks">Founding supporter. Quarterly financials + consultation rights.</div>
+      <a class="tier-btn" href="https://pay.bluevine.com/p/2fe4e4d92f1b445581bde0ea95ef3c96/pay/" target="_blank">INVEST $500 →</a>
     </div>
     <div class="tier featured">
       <div class="tier-name">Spark Builder</div>
       <div class="tier-amount">$2,500</div>
-      <div class="tier-equity">0.25% equity</div>
-      <div class="tier-perks">Meaningful stake. Named in Book Zero acknowledgments. All rights included.</div>
-      <a class="tier-btn gold-tier" href="https://pay.bluevine.com/p/d8a7e794aea14c2e89d459f79adfba05" target="_blank" rel="noopener">INVEST $2,500 →</a>
+      <div class="tier-equity">0.3125% equity</div>
+      <div class="tier-perks">Meaningful stake. Named in Book Zero acknowledgments.</div>
+      <a class="tier-btn gold-tier" href="https://pay.bluevine.com/p/d8a7e794aea14c2e89d459f79adfba05" target="_blank">INVEST $2,500 →</a>
     </div>
     <div class="tier">
       <div class="tier-name">Founding Spark</div>
       <div class="tier-amount">$10,000</div>
-      <div class="tier-equity">1.0% equity</div>
-      <div class="tier-perks">Serious equity. Direct access to Kate for strategy sessions. Full investor rights.</div>
-      <a class="tier-btn" href="https://pay.bluevine.com/p/ffd1c598b63a4284bf63f611dcfc15c3" target="_blank" rel="noopener">INVEST $10,000 →</a>
+      <div class="tier-equity">1.25% equity</div>
+      <div class="tier-perks">Direct access to Kate for strategy sessions.</div>
+      <a class="tier-btn" href="https://pay.bluevine.com/p/ffd1c598b63a4284bf63f611dcfc15c3" target="_blank">INVEST $10,000 →</a>
     </div>
     <div class="tier" style="border-color:rgba(240,192,96,0.3);">
       <div class="tier-name">Architect Spark</div>
       <div class="tier-amount">$25,000</div>
-      <div class="tier-equity">2.5% equity</div>
-      <div class="tier-perks">Angel-level stake. Shape the vision. Monthly calls with Kate. Top-tier all rights.</div>
-      <a class="tier-btn gold-tier" href="https://pay.bluevine.com/p/d4276339c34e4633b11af71fa4d33091" target="_blank" rel="noopener">INVEST $25,000 →</a>
+      <div class="tier-equity">3.125% equity</div>
+      <div class="tier-perks">Angel-level stake. Shape the vision. Monthly calls.</div>
+      <a class="tier-btn gold-tier" href="https://pay.bluevine.com/p/d4276339c34e4633b11af71fa4d33091" target="_blank">INVEST $25,000 →</a>
     </div>
   </div>
-
   <div class="slide" style="margin-top:24px;">
     <h3>After You Invest</h3>
-    <p>Email <strong>kate@thefirstspark.shop</strong> with your name, investment amount, and payment confirmation. You'll receive your signed SAFE agreement within 48 hours and be added to the investor update list immediately.</p>
+    <p>Email <strong>kate@thefirstspark.shop</strong> with your name, investment amount, and payment confirmation. You'll receive your signed SAFE agreement within 48 hours.</p>
     <hr class="divider">
     <p style="font-size:0.9rem; color:var(--dim);">Questions? Call or text Kate directly at <strong style="color:var(--white);">(330) 807-5509</strong>. She answers.</p>
   </div>
 </div>
 </div>
 
-<!-- SAFE AGREEMENT -->
 <div id="safe" class="tab-content">
 <div class="safe-wrap">
 <div class="safe-doc">
   <h1>SIMPLE AGREEMENT FOR FUTURE EQUITY (SAFE)</h1>
   <p class="subtitle">The First Spark · Kate's Paint LLC DBA · Akron, Ohio</p>
-
-  <p>This Simple Agreement for Future Equity ("Agreement") is entered into as of <span class="field">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>, 2026, between:</p>
-
+  <p>This Simple Agreement for Future Equity ("Agreement") is entered into as of <span class="field"></span>, 2026, between:</p>
   <p><strong>Company:</strong> Kate's Paint LLC, doing business as The First Spark, an Ohio limited liability company ("Company"), represented by Katelin Puzakulics, Founder and CEO.</p>
-
-  <p><strong>Investor:</strong> <span class="field">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> ("Investor")</p>
-
-  <h2>1. Investment Tier Selection</h2>
-  <p>Investor selects the following investment tier (check one):</p>
-
-  <div class="tier-select-row"><label><input type="radio" name="tier" value="100"> <strong>Micro Spark — $100</strong> · 0.01% permanent equity stake</label></div>
-  <div class="tier-select-row"><label><input type="radio" name="tier" value="500"> <strong>Spark Seed — $500</strong> · 0.05% permanent equity stake</label></div>
-  <div class="tier-select-row"><label><input type="radio" name="tier" value="2500"> <strong>Spark Builder — $2,500</strong> · 0.25% permanent equity stake</label></div>
-  <div class="tier-select-row"><label><input type="radio" name="tier" value="10000"> <strong>Founding Spark — $10,000</strong> · 1.0% permanent equity stake</label></div>
-  <div class="tier-select-row"><label><input type="radio" name="tier" value="25000"> <strong>Architect Spark — $25,000</strong> · 2.5% permanent equity stake</label></div>
-
-  <h2>2. Investment Amount & Equity</h2>
-  <p>Investor agrees to invest the amount specified above ("Investment Amount") in exchange for a permanent, proportional equity stake in Kate's Paint LLC DBA The First Spark, as indicated. Total raise is $200,000 for 20% equity, valuing the Company at $1,000,000 post-money.</p>
-
-  <h2>3. Investor Rights</h2>
-  <p><strong>3.1 Profit Distributions.</strong> Investor shall receive their proportional percentage of net profits, distributed quarterly within 30 days of each quarter end, once operating costs are covered.</p>
-  <p><strong>3.2 Exit Participation.</strong> Upon sale or acquisition of the Company, Investor receives their proportional percentage of proceeds after debt obligations.</p>
-  <p><strong>3.3 Reporting.</strong> Investor receives quarterly financial summaries via email and annual review documents.</p>
-  <p><strong>3.4 Consultation Rights (Founding Spark & Architect Spark tiers only).</strong> Investor may be consulted on strategic decisions and expenditures exceeding $25,000.</p>
-  <p><strong>3.5 Information Access.</strong> Investor may request review of financial records upon reasonable written notice.</p>
-
-  <h2>4. Founder Control</h2>
+  <p><strong>Investor:</strong> <span class="field"></span> ("Investor")</p>
+  <h2>1. Investment Amount & Valuation</h2>
+  <p>Investor agrees to invest the amount specified in their selected tier in exchange for a permanent, proportional equity stake in Kate's Paint LLC DBA The First Spark. This raise is based on an <strong>$800,000 pre-money valuation</strong>, with a total raise of $200,000 for 20% equity ($1,000,000 post-money valuation).</p>
+  <h2>2. Investor Rights</h2>
+  <p><strong>2.1 Profit Distributions.</strong> Investor shall receive their proportional percentage of net profits, distributed quarterly within 30 days of each quarter end, once operating costs are covered.</p>
+  <p><strong>2.2 Exit Participation.</strong> Upon sale or acquisition of the Company, Investor receives their proportional percentage of proceeds after debt obligations.</p>
+  <p><strong>2.3 Reporting.</strong> Investor receives quarterly financial summaries via email and annual review documents.</p>
+  <p><strong>2.4 Consultation Rights (Founding Spark & Architect Spark tiers only).</strong> Investor may be consulted on strategic decisions and expenditures exceeding $25,000.</p>
+  <h2>3. Founder Control</h2>
   <p>Katelin Puzakulics retains 100% operational and management authority. Investor has no management rights, veto power, board seat, or right to direct day-to-day operations. This is a passive equity investment.</p>
-
-  <h2>5. Buyout Option</h2>
+  <h2>4. Buyout Option</h2>
   <p>The Company may repurchase Investor's equity stake at any time for the greater of: (a) 5× the original Investment Amount, or (b) fair market value of the equity stake as determined by mutual agreement or independent valuation.</p>
-
-  <h2>6. Representations</h2>
+  <h2>5. Representations</h2>
   <p>Investor represents that they are investing with funds they can afford to risk, understand this is an early-stage investment, and have had opportunity to review available materials and ask questions.</p>
-
-  <h2>7. Governing Law</h2>
+  <h2>6. Governing Law</h2>
   <p>This Agreement shall be governed by the laws of the State of Ohio.</p>
-
   <div class="sig-block">
     <div>
       <p><strong>COMPANY</strong></p>
@@ -771,34 +715,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 
-<!-- QR / SHARE TAB -->
 <div id="qr" class="tab-content">
 <div class="qr-wrap">
   <h2 style="color:var(--gold); font-weight:300; font-size:2rem;">Share The First Spark</h2>
-  <p style="color:var(--dim); margin-top:8px;">Send investors directly to the deck</p>
-
+  <p style="color:var(--dim);">Send investors directly to the deck</p>
   <div class="qr-box">
     <div id="qrcode"></div>
     <p class="qr-url">thefirstspark.shop/investor-deck-v2.html</p>
   </div>
-
-  <div style="margin-top:20px;">
-    <p style="color:var(--dim); font-size:0.9rem; margin-bottom:12px;">Direct invest link to share:</p>
-    <div style="background:rgba(8,8,15,0.9); border:1px solid rgba(255,107,26,0.2); border-radius:8px; padding:16px; font-family:'Space Mono',monospace; font-size:12px; color:var(--orange); word-break:break-all;">thefirstspark.shop/investor-deck-v2.html</div>
-  </div>
-
   <div style="margin-top:30px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-    <a href="https://pay.bluevine.com/p/52a0b08f11ff4a7db095748245f5ab3b/pay/" target="_blank" rel="noopener" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(255,255,255,0.07); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px; transition:border-color 0.2s;">$100 Link</a>
-    <a href="https://pay.bluevine.com/p/2fe4e4d92f1b445581bde0ea95ef3c96/pay/" target="_blank" rel="noopener" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(255,255,255,0.07); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px; transition:border-color 0.2s;">$500 Link</a>
-    <a href="https://pay.bluevine.com/p/d8a7e794aea14c2e89d459f79adfba05" target="_blank" rel="noopener" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(240,192,96,0.2); border-radius:8px; text-decoration:none; color:var(--gold); text-align:center; font-family:'Space Mono',monospace; font-size:11px; transition:border-color 0.2s;">$2,500 Link</a>
-    <a href="https://pay.bluevine.com/p/ffd1c598b63a4284bf63f611dcfc15c3" target="_blank" rel="noopener" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(255,255,255,0.07); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px; transition:border-color 0.2s;">$10,000 Link</a>
-    <a href="https://pay.bluevine.com/p/d4276339c34e4633b11af71fa4d33091" target="_blank" rel="noopener" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(240,192,96,0.2); border-radius:8px; text-decoration:none; color:var(--gold); text-align:center; font-family:'Space Mono',monospace; font-size:11px; grid-column:span 2; transition:border-color 0.2s;">$25,000 Link</a>
+    <a href="https://pay.bluevine.com/p/52a0b08f11ff4a7db095748245f5ab3b/pay/" target="_blank" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(255,255,255,0.07); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$100 Link</a>
+    <a href="https://pay.bluevine.com/p/2fe4e4d92f1b445581bde0ea95ef3c96/pay/" target="_blank" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(255,255,255,0.07); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$500 Link</a>
+    <a href="https://pay.bluevine.com/p/d8a7e794aea14c2e89d459f79adfba05" target="_blank" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(240,192,96,0.2); border-radius:8px; text-decoration:none; color:var(--gold); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$2,500 Link</a>
+    <a href="https://pay.bluevine.com/p/ffd1c598b63a4284bf63f611dcfc15c3" target="_blank" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(255,255,255,0.07); border-radius:8px; text-decoration:none; color:var(--white); text-align:center; font-family:'Space Mono',monospace; font-size:11px;">$10,000 Link</a>
+    <a href="https://pay.bluevine.com/p/d4276339c34e4633b11af71fa4d33091" target="_blank" style="display:block; padding:12px; background:rgba(10,10,20,0.85); border:1px solid rgba(240,192,96,0.2); border-radius:8px; text-decoration:none; color:var(--gold); text-align:center; font-family:'Space Mono',monospace; font-size:11px; grid-column:span 2;">$25,000 Link</a>
   </div>
 </div>
 </div>
 
 <script>
-// ---- TABS ----
 function showTab(id) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -808,36 +743,20 @@ function showTab(id) {
   window.scrollTo(0, 0);
 }
 
-// ---- STARFIELD ----
 (function() {
   const canvas = document.getElementById('stars');
   const ctx = canvas.getContext('2d');
   let stars = [];
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   function init() {
     stars = [];
     for (let i = 0; i < 220; i++) {
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.3 + 0.2,
-        alpha: Math.random() * 0.7 + 0.1,
-        speed: Math.random() * 0.25 + 0.04,
-        twinkleSpeed: Math.random() * 0.018 + 0.004,
-        twinkleDir: Math.random() > 0.5 ? 1 : -1
-      });
+      stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.3 + 0.2, alpha: Math.random() * 0.7 + 0.1, speed: Math.random() * 0.25 + 0.04, twinkleSpeed: Math.random() * 0.018 + 0.004, twinkleDir: Math.random() > 0.5 ? 1 : -1 });
     }
   }
-
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < stars.length; i++) {
-      const s = stars[i];
+    for (let s of stars) {
       s.alpha += s.twinkleSpeed * s.twinkleDir;
       if (s.alpha > 0.85 || s.alpha < 0.05) s.twinkleDir *= -1;
       s.y -= s.speed;
@@ -849,35 +768,19 @@ function showTab(id) {
     }
     requestAnimationFrame(draw);
   }
-
-  resize();
-  init();
-  draw();
-  window.addEventListener('resize', function() { resize(); init(); });
+  resize(); init(); draw();
+  window.addEventListener('resize', () => { resize(); init(); });
 })();
 
-// ---- SCROLL REVEAL ----
 (function() {
-  const io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-      }
-    });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('revealed'); });
   }, { threshold: 0.07 });
-  document.querySelectorAll('.slide').forEach(function(s) { io.observe(s); });
+  document.querySelectorAll('.slide').forEach(s => io.observe(s));
 })();
 
-// ---- QR CODE ----
-window.addEventListener('load', function() {
-  new QRCode(document.getElementById('qrcode'), {
-    text: 'https://thefirstspark.shop/investor-deck-v2.html',
-    width: 200,
-    height: 200,
-    colorDark: '#ff6b1a',
-    colorLight: '#08080f',
-    correctLevel: QRCode.CorrectLevel.H
-  });
+window.addEventListener('load', () => {
+  new QRCode(document.getElementById('qrcode'), { text: 'https://thefirstspark.shop/investor-deck-v2.html', width: 200, height: 200, colorDark: '#ff6b1a', colorLight: '#08080f', correctLevel: QRCode.CorrectLevel.H });
 });
 </script>
 </body>
