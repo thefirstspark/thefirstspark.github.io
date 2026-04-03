@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING GAMPO x THE FIRST SPARK</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --void:     #000000;
+            --deep:     #060810;
+            --card:     #0c0f1a;
+            --border:   #1a2035;
+            --blue:     #3b82f6;
+            --electric: #60a5fa;
+            --purple:   #7c3aed;
+            --violet:   #a78bfa;
+            --gold:     #f59e0b;
+            --white:    #e8eaf0;
+            --ghost:    rgba(232,234,240,0.85);
+            --bone:     #9ca3af;
+            --dim:      #4b5563;
+        }
+
+        body {
+            background: var(--void);
+            color: var(--white);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* HEADER */
+        .collab-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .brand {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .brand.gampo {
+            color: var(--electric);
+            text-shadow: 0 0 30px rgba(96,165,250,0.6);
+        }
+
+        .brand.spark {
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(245,158,11,0.5);
+        }
+
+        .x-mark {
+            font-size: 2rem;
+            color: var(--ghost);
+            opacity: 0.4;
+        }
+
+        /* MAIN MESSAGE */
+        .message {
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .headline {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--electric) 0%, var(--violet) 50%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subline {
+            font-size: 1.1rem;
+            color: var(--ghost);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .subline strong {
+            color: var(--electric);
+        }
+
+        .subline-byline { font-size: 0.95rem; opacity: 0.7; }
+
+        /* STATS */
+        .stats {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat { text-align: center; }
+
+        .stat-num {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--electric);
+            text-shadow: 0 0 20px rgba(96,165,250,0.5);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--ghost);
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        /* EQUITY BLOCK */
+        .equity-block {
+            max-width: 620px;
+            width: 100%;
+            border: 1px solid rgba(96,165,250,0.3);
+            background: rgba(96,165,250,0.04);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .equity-block::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--blue), var(--violet), var(--gold));
+        }
+
+        .equity-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.4em;
+            color: var(--electric);
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .equity-main {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .equity-main span {
+            color: var(--gold);
+        }
+
+        .equity-detail {
+            font-size: 0.85rem;
+            color: var(--ghost);
+            line-height: 1.8;
+            margin-top: 1rem;
+        }
+
+        .equity-detail strong {
+            color: var(--electric);
+        }
+
+        .equity-badge {
+            display: inline-block;
+            margin-top: 1.25rem;
+            padding: 0.4rem 1rem;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            background: rgba(245,158,11,0.08);
+        }
+
+        /* OPTIONS */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            text-align: left;
+            max-width: 580px;
+            width: 100%;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.1rem;
+            border: 1px solid rgba(96,165,250,0.2);
+            background: rgba(96,165,250,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: var(--gold);
+            background: rgba(245,158,11,0.04);
+        }
+
+        .option-letter {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--electric);
+            min-width: 2rem;
+        }
+
+        .option-text {
+            color: var(--ghost);
+            line-height: 1.6;
+        }
+
+        .option-text strong {
+            color: var(--white);
+        }
+
+        /* ROLE SECTION */
+        .wave-divider {
+            width: 100%;
+            max-width: 700px;
+            margin: 3rem auto 2.5rem;
+            text-align: center;
+        }
+
+        .wave-label {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: var(--ghost);
+            opacity: 0.5;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .wave-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 900;
+            color: var(--electric);
+            text-shadow: 0 0 20px rgba(96,165,250,0.3);
+            letter-spacing: 0.15em;
+        }
+
+        /* PROF CARD */
+        .roster {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 680px;
+            width: 100%;
+            margin-bottom: 4rem;
+        }
+
+        .artist-card {
+            border: 1px solid rgba(96,165,250,0.25);
+            background: rgba(96,165,250,0.04);
+            padding: 2.5rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .artist-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue), var(--violet), var(--gold));
+            opacity: 1;
+        }
+
+        .artist-card:hover {
+            border-color: rgba(96,165,250,0.5);
+            background: rgba(96,165,250,0.07);
+            transform: translateY(-2px);
+        }
+
+        .artist-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+            background: linear-gradient(90deg, var(--electric), var(--violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .artist-role {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            color: var(--electric);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .artist-handle {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+        }
+
+        .artist-pitch {
+            font-size: 0.92rem;
+            color: var(--ghost);
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 0.75rem;
+        }
+
+        .artist-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+
+        .atag {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border: 1px solid rgba(96,165,250,0.25);
+            color: var(--ghost);
+            opacity: 0.75;
+        }
+
+        /* CTA BUTTONS */
+        .ctas {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            text-transform: uppercase;
+            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+            transition: all 0.3s ease;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: var(--white);
+        }
+
+        .cta-primary:hover {
+            background: linear-gradient(135deg, var(--gold), #d97706);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(245,158,11,0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--electric);
+            border: 1px solid var(--electric);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(96,165,250,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* SIGNATURE */
+        .signature {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .sig-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+        }
+
+        .sig-title {
+            font-size: 0.8rem;
+            color: var(--ghost);
+            opacity: 0.6;
+            margin-top: 0.25rem;
+        }
+
+        .sig-contact {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .sig-contact a {
+            color: var(--electric);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .sig-contact a:hover { color: var(--gold); }
+
+        /* BEAT BUTTON */
+        .beat-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 200;
+            background: rgba(0,8,16,0.85);
+            border: 1px solid rgba(96,165,250,0.5);
+            color: var(--electric);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            padding: 0.8rem 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-transform: uppercase;
+            clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+            transition: all 0.3s;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+        .beat-btn:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(96,165,250,0.3); }
+        .beat-btn.active {
+            background: rgba(59,130,246,0.3);
+            border-color: var(--electric);
+            color: var(--white);
+            box-shadow: 0 0 30px rgba(96,165,250,0.5);
+            animation: beatPulse 0.5s infinite alternate;
+        }
+        @keyframes beatPulse {
+            from { opacity: 0.85; }
+            to   { opacity: 1; }
+        }
+        .beat-icon { font-size: 1.1rem; line-height: 1; }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .collab-header { flex-direction: column; gap: 0.5rem; }
+            .brand { font-size: 1.2rem; }
+            .stats { gap: 2rem; }
+            .ctas { flex-direction: column; width: 100%; }
+            .cta { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <canvas id="particles"></canvas>
+
+    <button type="button" class="beat-btn" id="beatToggle" onclick="toggleBeat()">
+        <span class="beat-icon">▶</span>
+        <span class="beat-label">ACTIVATE BEAT</span>
+    </button>
+
+    <div class="content">
+
+        <div class="collab-header">
+            <span class="brand gampo">KING GAMPO</span>
+            <span class="x-mark">×</span>
+            <span class="brand spark">THE FIRST SPARK</span>
+        </div>
+
+        <div class="message">
+            <h1 class="headline">NO LABEL.<br>NO PERMISSION.<br>JUST BUILD.</h1>
+            <p class="subline">
+                You proved the whole model wrong.<br>
+                Dropped from Rhymesayers. Built Stophouse. Headlined Red Rocks — independent.<br>
+                <strong>I did the same thing with tech.</strong>
+            </p>
+            <p class="subline">
+                50+ tools. No VC. No investors. Built for the kids who grind without a machine behind them.<br>
+                That's your people. The Gampos. This is for them.
+            </p>
+            <p class="subline subline-byline">
+                <strong>— KJP</strong>
+            </p>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-num">50+</div>
+                <div class="stat-label">Tools Built</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">$0</div>
+                <div class="stat-label">VC Money</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">$2M</div>
+                <div class="stat-label">Valuation</div>
+            </div>
+        </div>
+
+        <!-- THE OFFER -->
+        <div class="equity-block">
+            <div class="equity-title">The Offer On The Table</div>
+            <div class="equity-main"><span>20%</span> equity for <span>$200K</span></div>
+            <div class="equity-detail">
+                At a <strong>$2M valuation</strong>, that 20% stake is worth <strong>$400,000</strong> —
+                you're getting in at half price. That's not a typo.<br><br>
+                This raise is capped. The number goes up fast once we close.
+                You'd be locking in the lowest entry point that will ever exist in this company.
+            </div>
+            <div class="equity-badge">Lowest entry price. Ever.</div>
+        </div>
+
+        <div class="options">
+            <div class="option">
+                <span class="option-letter">A</span>
+                <span class="option-text"><strong>Invest.</strong> 20% equity. $200K. Ground floor. $2M valuation — your stake is already worth double what you pay.</span>
+            </div>
+            <div class="option">
+                <div class="option-letter">B</div>
+                <span class="option-text"><strong>Co-found it with me.</strong> Your brand, your Gampos, baked into the platform. Culture lead. Your world lives inside ours.</span>
+            </div>
+            <div class="option">
+                <span class="option-letter">C</span>
+                <span class="option-text"><strong>Just the word.</strong> Point your audience at this. The Gampo community is exactly who this was built for.</span>
+            </div>
+        </div>
+
+        <div class="ctas">
+            <a href="trinity.html" class="cta cta-primary">Enter The Trinity</a>
+            <a href="invest.html" class="cta cta-secondary">See The Raise</a>
+            <a href="investor-deck-v2.html" class="cta cta-secondary">Investor Deck</a>
+            <a href="https://sparkverse.thefirstspark.shop" class="cta cta-secondary">Sparkverse</a>
+        </div>
+
+        <!-- PROF COLLAB SECTION -->
+        <div class="wave-divider">
+            <div class="wave-label">The Offer</div>
+            <div class="wave-title">PROF × THE FIRST SPARK</div>
+        </div>
+
+        <div class="roster">
+            <div class="artist-card">
+                <div class="artist-name">Prof</div>
+                <div class="artist-role">King Gampo · Stophouse Founder · The Independent Blueprint</div>
+                <div class="artist-handle">Minneapolis, MN · @profgampo · 250M+ Streams · 0 Labels</div>
+
+                <p class="artist-pitch">
+                    You burned the whole playbook. Got dropped. Built your own label.
+                    Sold out Red Rocks as a fully independent artist. That's not luck —
+                    that's the same obsessive, zero-permission energy I've been running with
+                    since day one of this company.
+                </p>
+
+                <p class="artist-pitch">
+                    The First Spark is 50+ tools for self-development, mental sovereignty,
+                    and independent thinking — built for people who never fit the default mold.
+                    The Gampos. Your crowd. They're already living this philosophy; they just
+                    don't have the infrastructure yet. That's what I built.
+                </p>
+
+                <p class="artist-pitch">
+                    Your role isn't a sponsorship deal. It's a <strong>seat at the table</strong> —
+                    culture lead, community bridge, co-founder if you want it.
+                    Your audience gets exclusive tools, experiences, and drops built around them.
+                    You get equity in a company valued at $2M that I believe will be worth
+                    10x that within two years.
+                </p>
+
+                <p class="artist-pitch">
+                    "When you do everything DIY, it's a slow come-up, a slow grind." — you said that.
+                    I heard it. I lived it. Now let's speed it up — together.
+                </p>
+
+                <div class="artist-tags">
+                    <span class="atag">Direct Collab Offer</span>
+                    <span class="atag">Equity Partner</span>
+                    <span class="atag">Culture Lead</span>
+                    <span class="atag">Stophouse × TFS</span>
+                    <span class="atag">Gampo Community</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="signature">
+            <div class="sig-name">KJP</div>
+            <div class="sig-title">Founder / The First Spark</div>
+            <div class="sig-contact">
+                <a href="mailto:kjpthefirstspark@gmail.com">kjpthefirstspark@gmail.com</a> ·
+                <a href="tel:+13308075509">(330) 807-5509</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ── CANVAS ─────────────────────────────────────────────────────
+        const canvas = document.getElementById('particles');
+        const ctx    = canvas.getContext('2d');
+        let width, height, sparks = [], grainCanvas, grainCtx;
+        let mouse = { x: null, y: null };
+
+        // ── AUDIO ENGINE ───────────────────────────────────────────────
+        let audioCtx = null, analyser = null, masterGain = null;
+        let isPlaying = false, beatStep = 0, beatSchedulerId = null;
+        let nextStepTime = 0;
+        let kickFlash = 0, snareFlash = 0, bassEnergy = 0;
+
+        // Midwest hip hop beat — 105 BPM, bouncy, funky
+        const BPM      = 105;
+        const stepTime = 60 / BPM / 4;
+
+        const kickPat  = [1,0,0,0, 0,0,1,0, 1,0,0,0, 0,1,0,0];
+        const snarePat = [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0];
+        const hihatPat = [1,0,1,0, 1,0,1,1, 1,0,1,0, 1,1,0,1];
+        const bassPat  = [1,0,0,1, 0,0,1,0, 1,0,0,1, 0,0,1,0];
+        const bassFreq = [55,55,55,49, 55,55,49,55, 55,55,55,49, 44,49,55,55];
+
+        function initAudio() {
+            audioCtx   = new (window.AudioContext || window.webkitAudioContext)();
+            analyser   = audioCtx.createAnalyser();
+            analyser.fftSize = 512;
+            analyser.smoothingTimeConstant = 0.75;
+            masterGain = audioCtx.createGain();
+            masterGain.gain.value = 0.75;
+            masterGain.connect(analyser);
+            analyser.connect(audioCtx.destination);
+        }
+
+        function play808(t, freq) {
+            const osc = audioCtx.createOscillator();
+            const g   = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq * 2.5, t);
+            osc.frequency.exponentialRampToValueAtTime(freq, t + 0.06);
+            osc.frequency.exponentialRampToValueAtTime(freq * 0.55, t + 0.5);
+            g.gain.setValueAtTime(1.4, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.65);
+            osc.connect(g); g.connect(masterGain);
+            osc.start(t); osc.stop(t + 0.65);
+            kickFlash = 1.0;
+        }
+
+        function playKick(t) {
+            const osc = audioCtx.createOscillator();
+            const g   = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(160, t);
+            osc.frequency.exponentialRampToValueAtTime(40, t + 0.07);
+            g.gain.setValueAtTime(1.8, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+            osc.connect(g); g.connect(masterGain);
+            osc.start(t); osc.stop(t + 0.12);
+        }
+
+        function playSnare(t) {
+            const len  = audioCtx.sampleRate * 0.16;
+            const buf  = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+            const data = buf.getChannelData(0);
+            for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+            const src = audioCtx.createBufferSource();
+            src.buffer = buf;
+            const flt = audioCtx.createBiquadFilter();
+            flt.type = 'bandpass'; flt.frequency.value = 1600; flt.Q.value = 0.9;
+            const g = audioCtx.createGain();
+            g.gain.setValueAtTime(0.85, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
+            src.connect(flt); flt.connect(g); g.connect(masterGain);
+            src.start(t);
+            snareFlash = 0.8;
+        }
+
+        function playHihat(t, vol) {
+            const dur  = vol > 0.15 ? 0.05 : 0.02;
+            const len  = Math.floor(audioCtx.sampleRate * dur);
+            const buf  = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+            const data = buf.getChannelData(0);
+            for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+            const src = audioCtx.createBufferSource();
+            src.buffer = buf;
+            const flt = audioCtx.createBiquadFilter();
+            flt.type = 'highpass'; flt.frequency.value = 9000;
+            const g = audioCtx.createGain();
+            g.gain.setValueAtTime(vol, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+            src.connect(flt); flt.connect(g); g.connect(masterGain);
+            src.start(t);
+        }
+
+        function scheduleBeat() {
+            while (nextStepTime < audioCtx.currentTime + 0.15) {
+                const s   = beatStep % 16;
+                const t   = nextStepTime;
+                const vol = (s % 2 === 0) ? 0.2 : 0.1;
+                if (kickPat[s])  { play808(t, bassFreq[s]); playKick(t); }
+                if (snarePat[s]) playSnare(t);
+                if (hihatPat[s]) playHihat(t, vol);
+                beatStep++;
+                nextStepTime += stepTime;
+            }
+            beatSchedulerId = setTimeout(scheduleBeat, 25);
+        }
+
+        function toggleBeat() {
+            const btn = document.getElementById('beatToggle');
+            if (!audioCtx) initAudio();
+            if (!isPlaying) {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                nextStepTime = audioCtx.currentTime;
+                beatStep = 0;
+                scheduleBeat();
+                isPlaying = true;
+                btn.classList.add('active');
+                btn.querySelector('.beat-label').textContent = 'STOP BEAT';
+                btn.querySelector('.beat-icon').textContent  = '■';
+            } else {
+                clearTimeout(beatSchedulerId);
+                isPlaying = false;
+                btn.classList.remove('active');
+                btn.querySelector('.beat-label').textContent = 'ACTIVATE BEAT';
+                btn.querySelector('.beat-icon').textContent  = '▶';
+            }
+        }
+
+        // ── SPARK PARTICLES (electric blue instead of embers) ──────────
+        class Spark {
+            constructor(fromKick) { this.spawn(fromKick); }
+            spawn(fromKick) {
+                this.x    = Math.random() * width;
+                this.y    = height + Math.random() * 20;
+                this.size = fromKick
+                    ? Math.random() * 4 + 2
+                    : Math.random() * 2 + 0.5;
+                this.vx   = (Math.random() - 0.5) * (fromKick ? 3 : 1.2);
+                this.vy   = -(Math.random() * (fromKick ? 3.5 : 1.8) + 0.5);
+                this.life = 1.0;
+                this.decay = fromKick
+                    ? Math.random() * 0.013 + 0.006
+                    : Math.random() * 0.007 + 0.002;
+                // Blue → violet → white
+                const hot = this.size > 2;
+                this.r = hot ? 80 + Math.random() * 80   : 96;
+                this.g = hot ? 120 + Math.random() * 80  : 165;
+                this.b = hot ? 220 + Math.random() * 35  : 250;
+            }
+            update() {
+                this.x   += this.vx + (Math.random() - 0.5) * 0.3;
+                this.vy  -= 0.018;
+                this.y   += this.vy * (1 + bassEnergy * 2);
+                this.life -= this.decay * (1 + bassEnergy);
+                this.size *= 0.996;
+                if (mouse.x !== null) {
+                    const dx = this.x - mouse.x, dy = this.y - mouse.y;
+                    const d  = Math.sqrt(dx*dx + dy*dy);
+                    if (d < 100) {
+                        const f = (100 - d) / 100;
+                        this.x += (dx / d) * f * 3;
+                        this.y += (dy / d) * f * 3;
+                    }
+                }
+            }
+            draw() {
+                const alpha = this.life * 0.85;
+                const grd = ctx.createRadialGradient(
+                    this.x, this.y, 0,
+                    this.x, this.y, this.size * 3
+                );
+                grd.addColorStop(0, `rgba(${this.r},${this.g},${this.b},${alpha})`);
+                grd.addColorStop(1, `rgba(${Math.floor(this.r*0.3)},${Math.floor(this.g*0.3)},${this.b},0)`);
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                ctx.fillStyle = grd;
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.r + 60},${this.g + 60},255,${alpha})`;
+                ctx.fill();
+            }
+            get dead() { return this.life <= 0 || this.y < -20; }
+        }
+
+        function spawnSparks(count, fromKick) {
+            for (let i = 0; i < count; i++) sparks.push(new Spark(fromKick));
+        }
+
+        // ── FILM GRAIN ─────────────────────────────────────────────────
+        function buildGrain() {
+            grainCanvas = document.createElement('canvas');
+            grainCanvas.width  = 256;
+            grainCanvas.height = 256;
+            grainCtx = grainCanvas.getContext('2d');
+        }
+
+        function drawGrain() {
+            const imgData = grainCtx.createImageData(256, 256);
+            const d = imgData.data;
+            for (let i = 0; i < d.length; i += 4) {
+                const v = Math.random() * 35;
+                d[i] = d[i+1] = d[i+2] = v;
+                d[i+3] = 15;
+            }
+            grainCtx.putImageData(imgData, 0, 0);
+            ctx.globalAlpha = 0.3;
+            const pat = ctx.createPattern(grainCanvas, 'repeat');
+            ctx.fillStyle = pat;
+            ctx.fillRect(0, 0, width, height);
+            ctx.globalAlpha = 1;
+        }
+
+        // ── AUDIO VISUALS ──────────────────────────────────────────────
+        function getAudioData() {
+            if (!analyser) return { freqData: new Uint8Array(128), waveData: new Uint8Array(512) };
+            const freqData = new Uint8Array(analyser.frequencyBinCount);
+            const waveData = new Uint8Array(analyser.fftSize);
+            analyser.getByteFrequencyData(freqData);
+            analyser.getByteTimeDomainData(waveData);
+            return { freqData, waveData };
+        }
+
+        function drawFreqBars(freqData) {
+            const bars = 60;
+            const bw   = width / bars;
+            for (let i = 0; i < bars; i++) {
+                const idx   = Math.floor(i * freqData.length / bars);
+                const val   = freqData[idx] / 255;
+                const jitter = (Math.random() - 0.5) * 3;
+                const bh    = val * height * 0.45 + jitter;
+                const alpha = val * 0.45;
+                const t = i / bars;
+                // Blue → violet gradient
+                const r = Math.floor(59  + t * 100);
+                const g = Math.floor(130 - t * 60);
+                const b = Math.floor(246 - t * 50);
+                ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+                ctx.fillRect(i * bw, height - bh, bw - 2, bh);
+                ctx.fillStyle = `rgba(${r},${g},${b},${alpha * 0.12})`;
+                ctx.fillRect(i * bw, 0, bw - 2, bh * 0.2);
+            }
+        }
+
+        function drawWaveform(waveData) {
+            ctx.beginPath();
+            ctx.lineWidth = 1.5;
+            const grad = ctx.createLinearGradient(0, 0, width, 0);
+            grad.addColorStop(0,   'rgba(59,130,246,0.8)');
+            grad.addColorStop(0.5, 'rgba(124,58,237,0.8)');
+            grad.addColorStop(1,   'rgba(245,158,11,0.6)');
+            ctx.strokeStyle = grad;
+            const sw = width / waveData.length;
+            for (let i = 0; i < waveData.length; i++) {
+                const y = (height / 2) + ((waveData[i] / 128) - 1) * height * 0.15;
+                if (i === 0) ctx.moveTo(0, y);
+                else         ctx.lineTo(i * sw, y);
+            }
+            ctx.stroke();
+        }
+
+        function drawGlow() {
+            const g = ctx.createLinearGradient(0, height * 0.7, 0, height);
+            g.addColorStop(0, 'rgba(0,0,0,0)');
+            g.addColorStop(1, `rgba(0,8,40,${0.15 + bassEnergy * 0.2})`);
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, width, height);
+
+            if (kickFlash > 0.01) {
+                const gr = ctx.createRadialGradient(width/2, height, 0, width/2, height * 0.3, width * 0.9);
+                gr.addColorStop(0, `rgba(59,130,246,${kickFlash * 0.15})`);
+                gr.addColorStop(0.5, `rgba(124,58,237,${kickFlash * 0.06})`);
+                gr.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = gr;
+                ctx.fillRect(0, 0, width, height);
+                kickFlash *= 0.80;
+                spawnSparks(6, true);
+            }
+            if (snareFlash > 0.01) {
+                const gr = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.5);
+                gr.addColorStop(0, `rgba(167,139,250,${snareFlash * 0.1})`);
+                gr.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = gr;
+                ctx.fillRect(0, 0, width, height);
+                snareFlash *= 0.75;
+            }
+        }
+
+        // ── FLOATING TRUTHS ────────────────────────────────────────────
+        const TRUTHS = [
+            "50+ TOOLS BUILT",
+            "ZERO VC FUNDING",
+            "$2M VALUATION",
+            "BUILT FROM NOTHING",
+            "NO PERMISSION NEEDED",
+            "PURE INDEPENDENT",
+            "REAL INFRASTRUCTURE",
+            "BUILT FOR OUTSIDERS",
+            "DAILY RESET",
+            "SPARK PLANNER",
+            "ORACLE OF SELF",
+            "SOVEREIGNTY TOOLS",
+            "MENTAL FREEDOM",
+            "ZERO LABEL",
+            "ZERO MACHINE",
+            "THE FIRST SPARK",
+            "GAMPOS WELCOME",
+            "TOOLS THAT THINK WITH YOU",
+            "100% HUMAN MADE",
+            "STOPHOUSE × TFS",
+            "AGAINST FEAR & HOPELESSNESS",
+            "SLOW COME-UP. SLOW GRIND.",
+            "NOW WE SPEED IT UP",
+            "COSMIC STAIRWAY",
+            "SPARK BATTLE ARENA",
+            "ARCHETYPE DISCOVERY",
+            "CONSCIOUSNESS PLAYGROUND",
+            "QUANTUM ECHO CHAMBER",
+        ];
+
+        let truths = [];
+
+        class FloatingTruth {
+            constructor() { this.reset(true); }
+            reset(init) {
+                this.text  = TRUTHS[Math.floor(Math.random() * TRUTHS.length)];
+                this.x     = Math.random() * width;
+                this.y     = init ? Math.random() * height : height + 40;
+                this.vx    = (Math.random() - 0.5) * 0.25;
+                this.vy    = -(Math.random() * 0.3 + 0.08);
+                // font size: mostly small, occasional larger
+                this.size  = Math.random() < 0.15
+                    ? Math.floor(Math.random() * 8 + 14)   // rare big
+                    : Math.floor(Math.random() * 5 + 7);   // small ambient
+                this.alpha = 0;
+                this.targetAlpha = Math.random() * 0.18 + 0.04;
+                this.fadeIn  = true;
+                this.fadeOut = false;
+                this.pulse   = 0; // beat-driven brightness burst
+                // color: 70% blue, 20% violet, 10% gold
+                const roll = Math.random();
+                if (roll < 0.70)      this.color = `96,165,250`;   // electric blue
+                else if (roll < 0.90) this.color = `167,139,250`;  // violet
+                else                  this.color = `245,158,11`;   // gold
+            }
+            beatHit() {
+                // random truths flash brighter on the kick
+                if (Math.random() < 0.3) {
+                    this.pulse = 0.55;
+                    this.targetAlpha = Math.random() * 0.35 + 0.2;
+                }
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy * (1 + bassEnergy * 1.5);
+                this.pulse *= 0.88;
+                if (this.fadeIn) {
+                    this.alpha = Math.min(this.alpha + 0.004, this.targetAlpha);
+                    if (this.alpha >= this.targetAlpha) this.fadeIn = false;
+                } else if (this.fadeOut) {
+                    this.alpha = Math.max(this.alpha - 0.003, 0);
+                } else {
+                    // start fading out near top or edges
+                    if (this.y < height * 0.15 || this.x < -80 || this.x > width + 80)
+                        this.fadeOut = true;
+                }
+                // mouse repel — gentle drift away
+                if (mouse.x !== null) {
+                    const dx = this.x - mouse.x, dy = this.y - mouse.y;
+                    const d  = Math.sqrt(dx*dx + dy*dy);
+                    if (d < 140) {
+                        const f = (140 - d) / 140;
+                        this.x += (dx / d) * f * 1.8;
+                        this.y += (dy / d) * f * 1.8;
+                    }
+                }
+            }
+            draw() {
+                const a = Math.min(this.alpha + this.pulse, 0.9);
+                ctx.save();
+                ctx.font = `700 ${this.size}px 'Orbitron', monospace`;
+                ctx.letterSpacing = '0.15em';
+                ctx.fillStyle = `rgba(${this.color},${a})`;
+                ctx.fillText(this.text, this.x, this.y);
+                ctx.restore();
+            }
+            get dead() { return this.fadeOut && this.alpha <= 0; }
+        }
+
+        function initTruths() {
+            for (let i = 0; i < 28; i++) truths.push(new FloatingTruth());
+        }
+
+        // ── MAIN LOOP ──────────────────────────────────────────────────
+        function resize() {
+            width  = canvas.width  = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            sparks = [];
+            truths = [];
+            initTruths();
+        }
+
+        // hook into kick for truth pulse
+        const _origPlay808 = play808;
+        function play808(t, freq) {
+            _origPlay808(t, freq);
+            truths.forEach(tr => tr.beatHit());
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, width, height);
+
+            const { freqData, waveData } = getAudioData();
+            if (analyser) {
+                const sub = freqData.slice(0, 4);
+                bassEnergy = sub.reduce((a, b) => a + b, 0) / (sub.length * 255);
+            }
+
+            drawGlow();
+            drawFreqBars(freqData);
+
+            // truths layer (below waveform)
+            truths = truths.filter(tr => !tr.dead);
+            while (truths.length < 28) truths.push(new FloatingTruth());
+            truths.forEach(tr => { tr.update(); tr.draw(); });
+
+            drawWaveform(waveData);
+
+            // ambient sparks
+            if (Math.random() < 0.15 + bassEnergy * 0.4) spawnSparks(1, false);
+            sparks = sparks.filter(s => !s.dead);
+            sparks.forEach(s => { s.update(); s.draw(); });
+
+            drawGrain();
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+        buildGrain();
+        resize();
+        animate();
+    </script>
+</body>
+</html>
