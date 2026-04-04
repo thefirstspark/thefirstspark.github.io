@@ -723,6 +723,55 @@
 
         .resolution-textarea { min-height: 70px; }
 
+        /* ── Footer ── */
+        .site-footer {
+            margin-top: 3rem;
+            padding: 2rem 0 3rem;
+            border-top: 1px solid var(--thread);
+            text-align: center;
+        }
+
+        .footer-specs {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--neutral);
+            margin-bottom: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-specs .sep { color: var(--thread); }
+
+        .footer-privacy {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--neutral);
+            line-height: 1.7;
+            max-width: 520px;
+            margin: 0 auto 1rem;
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--thread);
+            background: rgba(0,0,0,0.2);
+        }
+
+        .privacy-icon {
+            color: var(--karma-gold);
+            margin-right: 0.4rem;
+        }
+
+        .footer-credit {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--thread);
+            letter-spacing: 0.15em;
+            margin-top: 1rem;
+        }
+
         /* ── Responsive ── */
         @media (max-width: 700px) {
             h1 { font-size: 2.2rem; }
@@ -916,6 +965,24 @@
 
             <button type="button" class="add-thread-btn" onclick="resetForNewThread()">+ Log Another Thread</button>
         </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-specs">
+                <span>6 archetypes</span>
+                <span class="sep">·</span>
+                <span>6 life domains</span>
+                <span class="sep">·</span>
+                <span>4-module journey</span>
+                <span class="sep">·</span>
+                <span>persistent ledger</span>
+            </div>
+            <div class="footer-privacy">
+                <span class="privacy-icon">⟡</span>
+                Your ledger saves locally to your browser. Nothing you enter is sent to any server. Only you can see your threads.
+            </div>
+            <div class="footer-credit">// thefirstspark.shop &nbsp;·&nbsp; karma corrector control center</div>
+        </footer>
     </div>
 
     <script>
