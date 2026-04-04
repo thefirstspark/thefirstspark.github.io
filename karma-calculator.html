@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karma Debugger | Resolve Your Soul's Threads</title>
-    <meta name="description" content="Track, resolve, and balance your karmic threads across 6 life domains. A consciousness debugging tool.">
-    <meta property="og:title" content="Karma Debugger — Resolve Your Soul's Threads">
-    <meta property="og:description" content="Track, resolve, and balance your karmic threads across 6 life domains.">
+    <title>Karma Corrector Control Center | The First Spark</title>
+    <meta name="description" content="A four-module karmic audit. Surface your patterns, discover your archetype, and seal your threads.">
+    <meta property="og:title" content="Karma Corrector Control Center">
+    <meta property="og:description" content="Surface your patterns. Discover your karmic archetype. Seal your threads.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thefirstspark.shop/karma-calculator.html">
     <meta property="og:image" content="https://thefirstspark.shop/og-archetype-quiz.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Karma Debugger | The First Spark">
-    <meta name="twitter:description" content="Track, resolve, and balance your karmic threads across 6 life domains.">
+    <meta name="twitter:title" content="Karma Corrector Control Center">
+    <meta name="twitter:description" content="Surface your patterns. Discover your karmic archetype. Seal your threads.">
     <meta name="twitter:image" content="https://thefirstspark.shop/og-archetype-quiz.png">
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -24,11 +23,7 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --void: #0a0a0f;
@@ -49,42 +44,26 @@
             overflow-x: hidden;
         }
 
-        /* Cosmic background threads */
-        .cosmic-bg {
+        canvas#cosmicCanvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.4;
-        }
-
-        .thread-line {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--karma-gold), transparent);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.6; }
+            opacity: 0.5;
         }
 
         .container {
             position: relative;
             z-index: 1;
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
         }
 
         header {
             text-align: center;
-            padding: 3rem 0;
-            border-bottom: 1px solid var(--thread);
+            padding: 3rem 0 2rem;
         }
 
         h1 {
@@ -96,154 +75,213 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
         }
 
         .subtitle {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--neutral);
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
+            margin-top: 0.5rem;
         }
 
-        /* Karma Score Display */
-        .karma-score {
+        /* ── Progress Bar ── */
+        .progress-bar {
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: center;
-            gap: 4rem;
-            padding: 3rem;
-            margin: 2rem 0;
-            background: linear-gradient(135deg, rgba(45, 27, 78, 0.3), rgba(10, 10, 15, 0.8));
+            margin: 2rem 0 3rem;
+            padding: 1.5rem 2rem;
+            background: rgba(45, 27, 78, 0.2);
             border: 1px solid var(--thread);
-            border-radius: 2px;
         }
 
-        .score-ring {
-            position: relative;
-            width: 200px;
-            height: 200px;
+        .station {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.3;
+            transition: all 0.5s;
         }
 
-        .score-ring svg {
-            transform: rotate(-90deg);
-        }
+        .station.active { opacity: 1; }
+        .station.complete { opacity: 0.7; }
 
-        .score-bg {
-            fill: none;
-            stroke: var(--thread);
-            stroke-width: 8;
-        }
-
-        .score-fill {
-            fill: none;
-            stroke: url(#karmaGradient);
-            stroke-width: 8;
-            stroke-linecap: round;
-            stroke-dasharray: 565;
-            stroke-dashoffset: 565;
-            transition: stroke-dashoffset 1s ease-out;
-        }
-
-        .score-value {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .score-number {
-            font-size: 3rem;
-            font-weight: 300;
-            color: var(--karma-gold);
-        }
-
-        .score-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--neutral);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-        }
-
-        .karma-stats {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .stat {
+        .station-dot {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--thread);
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-left: 2px solid var(--neutral);
-        }
-
-        .stat.positive { border-left-color: var(--resolve-green); }
-        .stat.negative { border-left-color: var(--debt-red); }
-        .stat.pending { border-left-color: var(--karma-gold); }
-
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 300;
-            min-width: 60px;
-        }
-
-        .stat-label {
+            justify-content: center;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
             color: var(--neutral);
+            transition: all 0.5s;
         }
 
-        /* Main Grid */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 900px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .panel {
-            background: linear-gradient(180deg, rgba(45, 27, 78, 0.2), rgba(10, 10, 15, 0.9));
-            border: 1px solid var(--thread);
-            padding: 2rem;
-        }
-
-        .panel-title {
-            font-size: 1.2rem;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
+        .station.active .station-dot {
+            border-color: var(--karma-gold);
             color: var(--karma-gold);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
+            box-shadow: 0 0 20px rgba(212, 165, 116, 0.3);
+        }
+
+        .station.complete .station-dot {
+            border-color: var(--resolve-green);
+            color: var(--resolve-green);
+            background: rgba(74, 158, 124, 0.1);
+        }
+
+        .station-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--neutral);
+        }
+
+        .station.active .station-label { color: var(--karma-gold); }
+
+        .progress-line {
+            flex: 1;
+            height: 1px;
+            background: var(--thread);
+            transition: background 0.5s;
+            max-width: 80px;
+            margin-bottom: 1.2rem;
+        }
+
+        .progress-line.lit { background: var(--karma-gold); box-shadow: 0 0 8px rgba(212,165,116,0.4); }
+
+        /* ── Modules ── */
+        .module {
+            background: linear-gradient(180deg, rgba(45, 27, 78, 0.15), rgba(10, 10, 15, 0.8));
+            border: 1px solid var(--thread);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.5s ease-out;
+        }
+
+        .module.hidden { display: none; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .module-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
             border-bottom: 1px solid var(--thread);
         }
 
-        /* Add Thread Form */
-        .form-group {
-            margin-bottom: 1.5rem;
+        .module-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--thread);
+            line-height: 1;
+            min-width: 60px;
         }
+
+        .module-title {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--karma-gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .module-subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--neutral);
+            letter-spacing: 0.1em;
+        }
+
+        .module-intro {
+            font-size: 1rem;
+            color: var(--neutral);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* ── Domain Grid ── */
+        .domain-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .domain-card {
+            padding: 1.3rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--thread);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .domain-card:hover {
+            border-color: var(--karma-gold);
+            background: rgba(212, 165, 116, 0.05);
+        }
+
+        .domain-card.selected {
+            border-color: var(--karma-gold);
+            background: rgba(212, 165, 116, 0.1);
+            box-shadow: 0 0 20px rgba(212, 165, 116, 0.15);
+        }
+
+        .domain-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+
+        .domain-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--neutral);
+        }
+
+        .domain-card.selected .domain-name { color: var(--karma-gold); }
+
+        /* ── Questions ── */
+        .questions.hidden { display: none; }
+
+        .question-block {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .q-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--thread);
+            min-width: 24px;
+            padding-top: 0.2rem;
+        }
+
+        .q-body { flex: 1; }
 
         label {
             display: block;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--neutral);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
         }
 
-        input, textarea, select {
+        textarea, input[type="text"] {
             width: 100%;
             padding: 0.8rem;
             background: rgba(0, 0, 0, 0.4);
@@ -254,918 +292,1149 @@
             transition: border-color 0.3s;
         }
 
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: var(--karma-gold);
-        }
-
         textarea {
             resize: vertical;
             min-height: 80px;
         }
 
-        select {
+        textarea:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--karma-gold);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 4px;
+            background: var(--thread);
+            outline: none;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--karma-gold);
             cursor: pointer;
         }
 
-        select option {
-            background: var(--void);
-        }
-
-        .type-selector {
+        /* ── Choice Buttons ── */
+        .choice-btns {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .type-btn {
-            flex: 1;
-            padding: 0.8rem;
+        .choice-btn {
+            padding: 0.6rem 1.2rem;
             background: transparent;
             border: 1px solid var(--thread);
             color: var(--neutral);
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
             cursor: pointer;
             transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .type-btn:hover {
+        .choice-btn:hover { border-color: var(--karma-gold); color: var(--light); }
+
+        .choice-btn.selected {
             border-color: var(--karma-gold);
-            color: var(--light);
+            background: rgba(212, 165, 116, 0.12);
+            color: var(--karma-gold);
         }
 
-        .type-btn.active.debt {
-            background: rgba(139, 58, 58, 0.3);
-            border-color: var(--debt-red);
+        .error-msg {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
             color: var(--debt-red);
+            margin-top: 1rem;
+            display: none;
         }
 
-        .type-btn.active.credit {
-            background: rgba(74, 158, 124, 0.3);
-            border-color: var(--resolve-green);
-            color: var(--resolve-green);
-        }
-
-        .btn {
+        /* ── Proceed Button ── */
+        .proceed-btn {
             width: 100%;
-            padding: 1rem;
+            padding: 1rem 2rem;
             background: linear-gradient(135deg, var(--karma-gold), #c49664);
             border: none;
             color: var(--void);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             cursor: pointer;
+            margin-top: 2rem;
             transition: all 0.3s;
         }
 
-        .btn:hover {
+        .proceed-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(212, 165, 116, 0.3);
         }
 
-        /* Threads List */
-        .threads-list {
-            max-height: 500px;
-            overflow-y: auto;
-        }
+        .proceed-btn.hidden { display: none; }
 
-        .threads-list::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .threads-list::-webkit-scrollbar-track {
-            background: var(--void);
-        }
-
-        .threads-list::-webkit-scrollbar-thumb {
-            background: var(--thread);
-        }
-
-        .thread-item {
-            padding: 1.2rem;
-            margin-bottom: 0.5rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-left: 3px solid var(--neutral);
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .thread-item:hover {
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .thread-item.debt { border-left-color: var(--debt-red); }
-        .thread-item.credit { border-left-color: var(--resolve-green); }
-        .thread-item.resolved { 
-            opacity: 0.5;
-            border-left-color: var(--neutral);
-        }
-
-        .thread-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.5rem;
-        }
-
-        .thread-name {
-            font-size: 1.1rem;
-            font-weight: 400;
-        }
-
-        .thread-weight {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            padding: 0.2rem 0.5rem;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .thread-weight.debt { color: var(--debt-red); }
-        .thread-weight.credit { color: var(--resolve-green); }
-
-        .thread-category {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--karma-gold);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-        }
-
-        .thread-description {
-            font-size: 0.9rem;
-            color: var(--neutral);
-            line-height: 1.5;
-            margin-bottom: 0.8rem;
-        }
-
-        .thread-resolution {
-            font-size: 0.85rem;
-            color: var(--light);
-            padding: 0.8rem;
-            background: rgba(74, 158, 124, 0.1);
-            border-left: 2px solid var(--resolve-green);
-            margin-bottom: 0.8rem;
-        }
-
-        .thread-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .thread-btn {
-            padding: 0.4rem 0.8rem;
-            background: transparent;
-            border: 1px solid var(--thread);
-            color: var(--neutral);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .thread-btn:hover {
-            border-color: var(--karma-gold);
-            color: var(--karma-gold);
-        }
-
-        .thread-btn.resolve:hover {
-            border-color: var(--resolve-green);
-            color: var(--resolve-green);
-        }
-
-        .thread-btn.delete:hover {
-            border-color: var(--debt-red);
-            color: var(--debt-red);
-        }
-
-        /* Categories Panel */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.8rem;
-        }
-
-        .category-card {
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--thread);
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .category-card:hover {
-            border-color: var(--karma-gold);
-        }
-
-        .category-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .category-name {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.3rem;
-        }
-
-        .category-balance {
-            font-size: 1.2rem;
-            font-weight: 300;
-        }
-
-        /* Resolution Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 15, 0.9);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
-            width: 90%;
-            max-width: 500px;
-            background: linear-gradient(180deg, var(--cosmic-purple), var(--void));
-            border: 1px solid var(--karma-gold);
+        /* ── Mirror ── */
+        .mirror-container {
             padding: 2rem;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            color: var(--karma-gold);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .modal-btn {
-            flex: 1;
-            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--thread);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
+            border-left: 3px solid var(--karma-gold);
         }
 
-        .modal-btn.cancel {
-            background: transparent;
+        .mirror-reading {
+            font-size: 1.15rem;
+            line-height: 1.85;
             color: var(--light);
+            font-style: italic;
+            min-height: 80px;
         }
 
-        .modal-btn.confirm {
-            background: var(--resolve-green);
-            border-color: var(--resolve-green);
-            color: var(--void);
-        }
-
-        /* Karma Share */
-        .karma-share-section {
+        /* ── Archetype Scanner ── */
+        .archetype-scanner {
             text-align: center;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(45,27,78,0.2), rgba(10,10,15,0.4));
-            border: 1px solid var(--thread);
-            border-radius: 2px;
-            margin-top: 2rem;
+            padding: 3rem 1rem;
         }
 
-        .karma-share-title {
+        .archetype-scanner.hidden { display: none; }
+
+        .scanner-text {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.78rem;
+            color: var(--neutral);
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--karma-gold);
-            margin-bottom: 1rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            transition: opacity 0.3s;
         }
 
-        .karma-share-btns {
+        .scanner-bar {
+            width: 100%;
+            max-width: 420px;
+            height: 2px;
+            background: var(--thread);
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .scanner-fill {
+            height: 100%;
+            background: var(--karma-gold);
+            width: 0%;
+            transition: width 2.2s ease-out;
+            box-shadow: 0 0 12px var(--karma-gold);
+        }
+
+        /* ── Archetype Card ── */
+        .archetype-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            border: 1px solid var(--karma-gold);
+            background: linear-gradient(180deg, rgba(45, 27, 78, 0.4), rgba(10, 10, 15, 0.9));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .archetype-card.hidden { display: none; }
+
+        .archetype-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at center, var(--archetype-color, var(--karma-gold)) 0%, transparent 65%);
+            opacity: 0.06;
+            pointer-events: none;
+        }
+
+        .archetype-symbol {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--archetype-color, var(--karma-gold));
+            text-shadow: 0 0 40px var(--archetype-color, var(--karma-gold));
+            animation: symbolPulse 3s ease-in-out infinite;
+            display: block;
+        }
+
+        @keyframes symbolPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.06); opacity: 0.85; }
+        }
+
+        .archetype-name {
+            font-size: 2.3rem;
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            color: var(--archetype-color, var(--karma-gold));
+            margin-bottom: 0.8rem;
+        }
+
+        .archetype-tagline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--neutral);
+            letter-spacing: 0.04em;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .archetype-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--archetype-color, var(--karma-gold));
+            margin: 0 auto 1.5rem;
+            opacity: 0.4;
+        }
+
+        .archetype-desc {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--light);
+            max-width: 580px;
+            margin: 0 auto 1.5rem;
+            text-align: left;
+        }
+
+        .archetype-footer {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--thread);
+            letter-spacing: 0.15em;
+        }
+
+        /* ── Share ── */
+        .archetype-share {
             display: flex;
-            gap: 8px;
+            gap: 0.8rem;
             justify-content: center;
+            margin-top: 1.5rem;
             flex-wrap: wrap;
         }
 
-        .karma-share-btn {
-            padding: 10px 18px;
-            border: 1px solid var(--thread);
-            border-radius: 2px;
+        .archetype-share.hidden { display: none; }
+
+        .share-btn {
+            padding: 0.7rem 1.5rem;
             background: transparent;
+            border: 1px solid var(--thread);
             color: var(--light);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        .karma-share-btn:hover {
-            border-color: var(--karma-gold);
-            color: var(--karma-gold);
-            transform: translateY(-2px);
-        }
+        .share-btn:hover { border-color: var(--karma-gold); color: var(--karma-gold); }
 
-        .karma-share-btn.primary {
-            background: linear-gradient(135deg, var(--karma-gold), #c48b5c);
+        .share-btn.primary {
+            background: linear-gradient(135deg, var(--karma-gold), #c49664);
             border: none;
             color: var(--void);
+            font-weight: 600;
         }
 
-        .karma-share-btn.primary:hover {
-            box-shadow: 0 4px 15px rgba(212,165,116,0.4);
+        .share-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 165, 116, 0.3);
         }
 
-        /* Wisdom Panel */
-        .wisdom-box {
-            padding: 1.5rem;
-            background: rgba(212, 165, 116, 0.1);
-            border: 1px solid var(--karma-gold);
-            text-align: center;
-            margin-top: 2rem;
+        /* ── Ledger Layout ── */
+        .ledger-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .wisdom-text {
-            font-size: 1.1rem;
-            font-style: italic;
-            line-height: 1.6;
-            color: var(--light);
-        }
+        .form-group { margin-bottom: 1.2rem; }
 
-        .wisdom-source {
+        .ledger-domain {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.85rem;
             color: var(--karma-gold);
-            margin-top: 1rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--thread);
         }
 
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--neutral);
-        }
+        .type-btns { display: flex; gap: 0.5rem; }
 
-        .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .thread-item {
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        /* Filter tabs */
-        .filter-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .filter-tab {
-            padding: 0.5rem 1rem;
+        .type-btn {
+            flex: 1;
+            padding: 0.6rem;
             background: transparent;
             border: 1px solid var(--thread);
             color: var(--neutral);
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.7rem;
+            text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s;
         }
 
-        .filter-tab:hover, .filter-tab.active {
-            border-color: var(--karma-gold);
+        .type-btn.active-debt { border-color: var(--debt-red); color: var(--debt-red); background: rgba(139,58,58,0.12); }
+        .type-btn.active-credit { border-color: var(--resolve-green); color: var(--resolve-green); background: rgba(74,158,124,0.12); }
+
+        .weight-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
             color: var(--karma-gold);
+        }
+
+        .seal-btn {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid var(--karma-gold);
+            color: var(--karma-gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .seal-btn:hover {
+            background: rgba(212, 165, 116, 0.08);
+            box-shadow: 0 0 24px rgba(212, 165, 116, 0.2);
+        }
+
+        .seal-confirm {
+            display: none;
+            text-align: center;
+            padding: 0.8rem;
+            background: rgba(74, 158, 124, 0.08);
+            border: 1px solid var(--resolve-green);
+            margin-top: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--resolve-green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ── Thread Map ── */
+        .ledger-viz-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--thread);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .viz-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--neutral);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        #threadMap { width: 100%; height: auto; flex: 1; }
+
+        /* ── Sealed Threads ── */
+        .sealed-threads { margin-top: 2rem; }
+
+        .sealed-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--neutral);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--thread);
+        }
+
+        .thread-entry {
+            padding: 1rem 1.2rem;
+            margin-bottom: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--neutral);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            animation: fadeUp 0.3s ease-out;
+        }
+
+        .thread-entry.debt { border-left-color: var(--debt-red); }
+        .thread-entry.credit { border-left-color: var(--resolve-green); }
+
+        .thread-entry-name { font-size: 1rem; margin-bottom: 0.3rem; }
+
+        .thread-entry-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--neutral);
+        }
+
+        .thread-entry-resolution {
+            font-size: 0.85rem;
+            color: var(--light);
+            font-style: italic;
+            margin-top: 0.4rem;
+            opacity: 0.65;
+        }
+
+        .thread-entry-weight {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--karma-gold);
+            min-width: 24px;
+            text-align: right;
+        }
+
+        .empty-ledger {
+            text-align: center;
+            padding: 2rem;
+            color: var(--neutral);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .add-thread-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: transparent;
+            border: 1px solid var(--thread);
+            color: var(--neutral);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .add-thread-btn:hover { border-color: var(--karma-gold); color: var(--karma-gold); }
+
+        .resolution-textarea { min-height: 70px; }
+
+        /* ── Responsive ── */
+        @media (max-width: 700px) {
+            h1 { font-size: 2.2rem; }
+            .module { padding: 1.5rem; }
+            .domain-grid { grid-template-columns: repeat(2, 1fr); }
+            .ledger-layout { grid-template-columns: 1fr; }
+            .station-label { display: none; }
         }
     </style>
 </head>
 <body>
-    <!-- Cosmic Background Threads -->
-    <div class="cosmic-bg" id="cosmicBg"></div>
+    <canvas id="cosmicCanvas"></canvas>
 
     <div class="container">
         <header>
-            <h1>Karma Debugger</h1>
-            <p class="subtitle">// resolve your soul's tangled threads</p>
+            <h1>Karma Corrector</h1>
+            <p class="subtitle">// control center</p>
         </header>
 
-        <!-- Karma Score Display -->
-        <div class="karma-score">
-            <div class="score-ring">
-                <svg width="200" height="200" viewBox="0 0 200 200">
-                    <defs>
-                        <linearGradient id="karmaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#8b3a3a"/>
-                            <stop offset="50%" stop-color="#d4a574"/>
-                            <stop offset="100%" stop-color="#4a9e7c"/>
-                        </linearGradient>
-                    </defs>
-                    <circle class="score-bg" cx="100" cy="100" r="90"/>
-                    <circle class="score-fill" id="scoreFill" cx="100" cy="100" r="90"/>
-                </svg>
-                <div class="score-value">
-                    <div class="score-number" id="karmaScore">0</div>
-                    <div class="score-label">Karma Balance</div>
-                </div>
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="station active" id="station-1">
+                <div class="station-dot">01</div>
+                <div class="station-label">Audit</div>
             </div>
-            <div class="karma-stats">
-                <div class="stat positive">
-                    <span class="stat-value" id="creditCount">0</span>
-                    <span class="stat-label">Credits Earned<br><small>good karma generated</small></span>
-                </div>
-                <div class="stat negative">
-                    <span class="stat-value" id="debtCount">0</span>
-                    <span class="stat-label">Debts Pending<br><small>awaiting resolution</small></span>
-                </div>
-                <div class="stat pending">
-                    <span class="stat-value" id="resolvedCount">0</span>
-                    <span class="stat-label">Threads Resolved<br><small>karma cleared</small></span>
-                </div>
+            <div class="progress-line" id="line-12"></div>
+            <div class="station" id="station-2">
+                <div class="station-dot">02</div>
+                <div class="station-label">Mirror</div>
+            </div>
+            <div class="progress-line" id="line-23"></div>
+            <div class="station" id="station-3">
+                <div class="station-dot">03</div>
+                <div class="station-label">Archetype</div>
+            </div>
+            <div class="progress-line" id="line-34"></div>
+            <div class="station" id="station-4">
+                <div class="station-dot">04</div>
+                <div class="station-label">Ledger</div>
             </div>
         </div>
 
-        <!-- Karma Share -->
-        <div class="karma-share-section">
-            <div class="karma-share-title">⟡ Share Your Karma Score</div>
-            <div class="karma-share-btns">
-                <button class="karma-share-btn primary" onclick="shareKarma()">✦ Share Score</button>
-                <button class="karma-share-btn" onclick="shareKarmaTwitter()">𝕏 Twitter</button>
-                <button class="karma-share-btn" onclick="shareKarmaWhatsApp()">💬 WhatsApp</button>
-                <button class="karma-share-btn" onclick="copyKarmaScore()">📋 Copy</button>
-            </div>
-        </div>
-
-        <!-- Categories Overview -->
-        <div class="panel" style="margin-bottom: 2rem;">
-            <h2 class="panel-title">⟡ Life Domain Balance</h2>
-            <div class="categories-grid">
-                <div class="category-card">
-                    <div class="category-icon">♡</div>
-                    <div class="category-name">Relationships</div>
-                    <div class="category-balance" id="cat-relationships">0</div>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">◈</div>
-                    <div class="category-name">Self</div>
-                    <div class="category-balance" id="cat-self">0</div>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">⬡</div>
-                    <div class="category-name">Community</div>
-                    <div class="category-balance" id="cat-community">0</div>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">◉</div>
-                    <div class="category-name">Purpose</div>
-                    <div class="category-balance" id="cat-purpose">0</div>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">⧫</div>
-                    <div class="category-name">Abundance</div>
-                    <div class="category-balance" id="cat-abundance">0</div>
-                </div>
-                <div class="category-card">
-                    <div class="category-icon">✧</div>
-                    <div class="category-name">Spirit</div>
-                    <div class="category-balance" id="cat-spirit">0</div>
+        <!-- MODULE 01: THE AUDIT -->
+        <div class="module" id="module-01">
+            <div class="module-header">
+                <span class="module-number">01</span>
+                <div>
+                    <h2 class="module-title">The Audit</h2>
+                    <p class="module-subtitle">// surface the thread</p>
                 </div>
             </div>
-        </div>
 
-        <div class="main-grid">
-            <!-- Add New Thread -->
-            <div class="panel">
-                <h2 class="panel-title">⟡ Log Karmic Thread</h2>
-                
-                <div class="type-selector">
-                    <button class="type-btn debt active" data-type="debt">⊖ Debt</button>
-                    <button class="type-btn credit" data-type="credit">⊕ Credit</button>
-                </div>
+            <p class="module-intro">Select the life domain that feels heaviest right now.</p>
 
-                <form id="threadForm">
-                    <div class="form-group">
-                        <label>Thread Name</label>
-                        <input type="text" id="threadName" placeholder="e.g., Broke a promise to myself" required>
+            <div class="domain-grid" id="domainGrid"></div>
+
+            <div class="questions hidden" id="auditQuestions">
+                <div class="question-block">
+                    <div class="q-num">01</div>
+                    <div class="q-body">
+                        <label>What happened?</label>
+                        <textarea id="q1" placeholder="Describe the situation, briefly or in full."></textarea>
                     </div>
-
-                    <div class="form-group">
-                        <label>Life Domain</label>
-                        <select id="threadCategory">
-                            <option value="relationships">♡ Relationships</option>
-                            <option value="self">◈ Self</option>
-                            <option value="community">⬡ Community</option>
-                            <option value="purpose">◉ Purpose</option>
-                            <option value="abundance">⧫ Abundance</option>
-                            <option value="spirit">✧ Spirit</option>
-                        </select>
+                </div>
+                <div class="question-block">
+                    <div class="q-num">02</div>
+                    <div class="q-body">
+                        <label>What was your intention?</label>
+                        <textarea id="q2" placeholder="What were you trying to do, or avoid doing?"></textarea>
                     </div>
-
-                    <div class="form-group">
-                        <label>Weight (1-10)</label>
-                        <input type="range" id="threadWeight" min="1" max="10" value="5">
-                        <div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--neutral);">
-                            <span>Minor</span>
-                            <span id="weightDisplay">5</span>
-                            <span>Major</span>
+                </div>
+                <div class="question-block">
+                    <div class="q-num">03</div>
+                    <div class="q-body">
+                        <label>What was the impact?</label>
+                        <textarea id="q3" placeholder="What actually happened as a result?"></textarea>
+                    </div>
+                </div>
+                <div class="question-block">
+                    <div class="q-num">04</div>
+                    <div class="q-body">
+                        <label>Have you acknowledged it?</label>
+                        <div class="choice-btns" id="ackBtns">
+                            <button type="button" class="choice-btn" data-value="yes" onclick="selectAck(this)">Yes</button>
+                            <button type="button" class="choice-btn" data-value="partially" onclick="selectAck(this)">Partially</button>
+                            <button type="button" class="choice-btn" data-value="no" onclick="selectAck(this)">Not yet</button>
                         </div>
                     </div>
+                </div>
+                <div class="question-block">
+                    <div class="q-num">05</div>
+                    <div class="q-body">
+                        <label>Is this a debt you owe, or credit you haven't claimed?</label>
+                        <div class="choice-btns" id="orientBtns">
+                            <button type="button" class="choice-btn" data-value="debt" onclick="selectOrient(this)">I owe this</button>
+                            <button type="button" class="choice-btn" data-value="credit" onclick="selectOrient(this)">I'm owed this</button>
+                            <button type="button" class="choice-btn" data-value="both" onclick="selectOrient(this)">Both</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="error-msg" id="auditError">Please answer all questions before proceeding.</div>
+                <button type="button" class="proceed-btn" onclick="completeAudit()">Run the Audit ⟶</button>
+            </div>
+        </div>
 
+        <!-- MODULE 02: THE MIRROR -->
+        <div class="module hidden" id="module-02">
+            <div class="module-header">
+                <span class="module-number">02</span>
+                <div>
+                    <h2 class="module-title">The Mirror</h2>
+                    <p class="module-subtitle">// your pattern, surfaced</p>
+                </div>
+            </div>
+            <div class="mirror-container">
+                <div class="mirror-reading" id="mirrorReading"></div>
+            </div>
+            <button type="button" class="proceed-btn" onclick="proceedToArchetype()">See Your Archetype ⟶</button>
+        </div>
+
+        <!-- MODULE 03: ARCHETYPE -->
+        <div class="module hidden" id="module-03">
+            <div class="module-header">
+                <span class="module-number">03</span>
+                <div>
+                    <h2 class="module-title">Archetype</h2>
+                    <p class="module-subtitle">// your karmic signature</p>
+                </div>
+            </div>
+            <div class="archetype-scanner hidden" id="archetypeScanner">
+                <div class="scanner-text" id="scannerText">Analyzing karmic threads...</div>
+                <div class="scanner-bar"><div class="scanner-fill" id="scannerFill"></div></div>
+            </div>
+            <div class="archetype-card hidden" id="archetypeCard"></div>
+            <div class="archetype-share hidden" id="archetypeShare">
+                <button type="button" class="share-btn primary" onclick="shareArchetype()">✦ Share Archetype</button>
+                <button type="button" class="share-btn" onclick="copyArchetype(this)">⎘ Copy</button>
+            </div>
+            <button type="button" class="proceed-btn hidden" id="ledgerBtn" onclick="proceedToLedger()">Open the Ledger ⟶</button>
+        </div>
+
+        <!-- MODULE 04: THE LEDGER -->
+        <div class="module hidden" id="module-04">
+            <div class="module-header">
+                <span class="module-number">04</span>
+                <div>
+                    <h2 class="module-title">The Ledger</h2>
+                    <p class="module-subtitle">// log it. seal it. clear it.</p>
+                </div>
+            </div>
+
+            <div class="ledger-layout">
+                <div>
                     <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="threadDesc" placeholder="What happened? What energy did this create?"></textarea>
+                        <label>Thread Name</label>
+                        <input type="text" id="ledgerName" placeholder="Name this thread">
                     </div>
-
-                    <div class="form-group" id="resolutionGroup" style="display: none;">
-                        <label>Resolution Path (for debts)</label>
-                        <textarea id="resolutionPath" placeholder="How might you resolve this? What action could clear this thread?"></textarea>
+                    <div class="form-group">
+                        <label>Domain</label>
+                        <div class="ledger-domain" id="ledgerDomain"></div>
                     </div>
-
-                    <button type="submit" class="btn">Weave Thread Into Tapestry</button>
-                </form>
-            </div>
-
-            <!-- Active Threads -->
-            <div class="panel">
-                <h2 class="panel-title">⟡ Active Threads</h2>
-                
-                <div class="filter-tabs">
-                    <button class="filter-tab active" data-filter="all">All</button>
-                    <button class="filter-tab" data-filter="debt">Debts</button>
-                    <button class="filter-tab" data-filter="credit">Credits</button>
-                    <button class="filter-tab" data-filter="resolved">Resolved</button>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <div class="type-btns">
+                            <button type="button" class="type-btn" id="typeDebt" onclick="setThreadType('debt')">⊖ Debt</button>
+                            <button type="button" class="type-btn" id="typeCredit" onclick="setThreadType('credit')">⊕ Credit</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Weight — <span class="weight-display" id="weightVal">5</span>/10</label>
+                        <input type="range" id="ledgerWeight" min="1" max="10" value="5" oninput="document.getElementById('weightVal').textContent=this.value">
+                    </div>
+                    <div class="form-group">
+                        <label>Resolution Path</label>
+                        <textarea id="ledgerResolution" placeholder="What single action closes this thread?" class="resolution-textarea"></textarea>
+                    </div>
+                    <button type="button" class="seal-btn" onclick="sealThread()">⟡ Seal This Thread</button>
+                    <div class="seal-confirm" id="sealConfirm">⟡ Thread sealed. Resolution recorded.</div>
                 </div>
 
-                <div class="threads-list" id="threadsList">
-                    <div class="empty-state">
-                        <div class="empty-icon">∞</div>
-                        <p>Your karmic slate is clear.<br>Begin logging threads to track your soul's journey.</p>
-                    </div>
+                <div class="ledger-viz-panel">
+                    <div class="viz-title">// thread map</div>
+                    <svg id="threadMap" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg"></svg>
                 </div>
             </div>
-        </div>
 
-        <!-- Wisdom Box -->
-        <div class="wisdom-box">
-            <p class="wisdom-text" id="wisdomText">"What you do not transform, you will transmit."</p>
-            <p class="wisdom-source" id="wisdomSource">— Richard Rohr</p>
-        </div>
-    </div>
-
-    <!-- Resolution Modal -->
-    <div class="modal-overlay" id="resolutionModal">
-        <div class="modal">
-            <h3 class="modal-title">✧ Resolve This Thread</h3>
-            <p style="color: var(--neutral); margin-bottom: 1rem; text-align: center;">
-                Describe how you resolved or balanced this karmic thread:
-            </p>
-            <textarea id="resolutionNote" placeholder="What did you do? What shifted? What did you learn?"></textarea>
-            <div class="modal-actions">
-                <button class="modal-btn cancel" onclick="closeModal()">Cancel</button>
-                <button class="modal-btn confirm" onclick="confirmResolution()">Mark Resolved</button>
+            <div class="sealed-threads">
+                <h3 class="sealed-title">// sealed threads</h3>
+                <div id="threadsList"></div>
             </div>
+
+            <button type="button" class="add-thread-btn" onclick="resetForNewThread()">+ Log Another Thread</button>
         </div>
     </div>
 
     <script>
-        // State
-        let threads = JSON.parse(localStorage.getItem('karmaThreads')) || [];
-        let currentType = 'debt';
-        let currentFilter = 'all';
-        let resolvingThreadId = null;
+    // ═══════════════════════════════════════════════════════
+    // DATA
+    // ═══════════════════════════════════════════════════════
 
-        // Wisdom quotes
-        const wisdoms = [
-            { text: "What you do not transform, you will transmit.", source: "Richard Rohr" },
-            { text: "The wound is the place where the light enters you.", source: "Rumi" },
-            { text: "You cannot solve a problem with the same mind that created it.", source: "Albert Einstein" },
-            { text: "Holding onto anger is like drinking poison and expecting the other person to die.", source: "Buddha" },
-            { text: "The best time to plant a tree was 20 years ago. The second best time is now.", source: "Chinese Proverb" },
-            { text: "What we resist persists.", source: "Carl Jung" },
-            { text: "Everything that irritates us about others can lead us to an understanding of ourselves.", source: "Carl Jung" },
-            { text: "The only way out is through.", source: "Robert Frost" },
-            { text: "When you change the way you look at things, the things you look at change.", source: "Wayne Dyer" },
-            { text: "Your task is not to seek for love, but to find all the barriers you have built against it.", source: "Rumi" }
+    const DOMAINS = {
+        relationships: { label: 'Relationships', icon: '♡', svgPos: { x: 200, y: 28 } },
+        self:          { label: 'Self',          icon: '◈', svgPos: { x: 313, y: 94 } },
+        community:     { label: 'Community',     icon: '⬡', svgPos: { x: 313, y: 226 } },
+        purpose:       { label: 'Purpose',       icon: '◉', svgPos: { x: 200, y: 292 } },
+        abundance:     { label: 'Abundance',     icon: '⧫', svgPos: { x: 87,  y: 226 } },
+        spirit:        { label: 'Spirit',        icon: '✧', svgPos: { x: 87,  y: 94  } }
+    };
+
+    const ARCHETYPES = {
+        'phantom-debtor': {
+            symbol: '◌',
+            name: 'The Phantom Debtor',
+            color: '#c0524a',
+            tagline: 'The weight you carry is real. You just haven\'t looked at it yet.',
+            description: 'You\'ve accumulated karmic threads without registering them as yours. The debts exist — in the reactions of others, in the hollow feeling after certain choices — but you\'ve filed them under coincidence or someone else\'s fault. The first step toward correction is not action. It\'s acknowledgment.'
+        },
+        'overgiving-flame': {
+            symbol: '⌘',
+            name: 'The Overgiving Flame',
+            color: '#d4a574',
+            tagline: 'You pour for others. Your own cup has been empty for some time.',
+            description: 'Your karmic ledger shows consistent credit generation in the lives of those around you — but a deficit in your own domain. You resolve others\' threads while yours accumulate. This is not virtue; it is avoidance. The most unresolved thread in your ledger is the one you\'re standing on.'
+        },
+        'unresolved-loop': {
+            symbol: '∞',
+            name: 'The Unresolved Loop',
+            color: '#9b72d0',
+            tagline: 'Different situation. Same thread.',
+            description: 'What you described is not a new event. It is a recurring scene with rotating cast members. You\'ve been here before — the details change but the feeling doesn\'t. The loop won\'t break through effort alone. It breaks when you identify the pattern underneath the pattern.'
+        },
+        'reluctant-creditor': {
+            symbol: '⧖',
+            name: 'The Reluctant Creditor',
+            color: '#4a9e7c',
+            tagline: 'You\'ve done the work. You haven\'t let yourself receive the result.',
+            description: 'You\'re sitting on uncleared credit. Good has been done — by you, for you — but you haven\'t claimed it. Whether from guilt, unworthiness, or simple inattention, the credit sits uncollected. Your ledger is more positive than you believe. The correction here is not more action. It\'s receiving.'
+        },
+        'awakening-knot': {
+            symbol: '✦',
+            name: 'The Awakening Knot',
+            color: '#7ec8d4',
+            tagline: 'You see it. Now the real work begins.',
+            description: 'Awareness is the rarest first step. You\'ve already done the hardest part — you\'re looking directly at the thread without flinching. The knot hasn\'t unraveled yet, but you have your hands on it. What\'s required now is not more seeing. It\'s a single, deliberate act of resolution.'
+        },
+        'balanced-thread': {
+            symbol: '⟡',
+            name: 'The Balanced Thread',
+            color: '#e8e4db',
+            tagline: 'Rare. Temporary. Worth noting.',
+            description: 'At this moment, your karmic threads are in equilibrium. Credits and debts have found a temporary alignment. This is not a destination — it\'s a condition. Note it. Don\'t mistake stillness for completion. The balanced thread is an invitation to move consciously from here.'
+        }
+    };
+
+    const MIRROR_READINGS = {
+        'phantom-debtor':    d => `In the domain of ${d}, a thread has been accumulating. You've passed it many times — it's familiar in the way background noise is familiar. The weight is there, diffuse rather than concentrated, which is why it hasn't demanded attention. But the ledger is always running. What you're carrying in ${d} has been shaping decisions, reactions, and distance without a name attached to it. Naming it is the correction.`,
+        'overgiving-flame':  d => `Your ${d} domain shows a consistent pattern: you extend toward others before attending to yourself. The credit you generate in this space is real — people feel it — but you're operating at a deficit. What looks like generosity from the outside carries a subtle charge: the expectation that eventually the balance will correct itself. It won't, not on its own. The thread you've been avoiding is the one that starts with you.`,
+        'unresolved-loop':   d => `The situation you described in ${d} has the signature of a recurring pattern. The specific facts are new. The underlying structure is not. You've navigated this particular shape of problem before — maybe in a different relationship, a different context, a different version of yourself. The loop continues not because you're failing to resolve it, but because you haven't yet identified the belief underneath it that keeps calling it back.`,
+        'reluctant-creditor':d => `In ${d}, credit has accumulated that you haven't claimed. Something good was done — an act of honesty, an effort made, a relationship held through difficulty — and you've left it on the ledger without registering it as yours. This isn't modesty. It's an incomplete transaction. The balance can't close if one side remains unacknowledged. The work here is not more action. It's receipt.`,
+        'awakening-knot':    d => `You've done something most people avoid: you've looked at the thread in ${d} directly. The acknowledgment is real. What you're feeling now — that particular discomfort that comes after clarity — is the knot beginning to recognize that it can be undone. The correction isn't dramatic. One honest action, one real conversation, one decision you've been deferring. The thread responds to precision, not force.`,
+        'balanced-thread':   d => `In ${d}, your karmic threads are in a rare state of equilibrium. Credits and debts have reached a temporary alignment. This isn't the end of the work — it's a moment of clarity before the next movement. Use it to be deliberate. The balanced thread is most valuable not as a destination but as a reference point: this is what it feels like to operate without the weight.`
+    };
+
+    const SVG_CENTER = { x: 200, y: 160 };
+
+    // ═══════════════════════════════════════════════════════
+    // STATE
+    // ═══════════════════════════════════════════════════════
+
+    const state = {
+        domain: null,
+        acknowledgment: null,
+        orientation: null,
+        archetype: null,
+        currentType: 'debt'
+    };
+
+    // ═══════════════════════════════════════════════════════
+    // MODULE 01 — AUDIT
+    // ═══════════════════════════════════════════════════════
+
+    function initDomainGrid() {
+        const grid = document.getElementById('domainGrid');
+        Object.entries(DOMAINS).forEach(([key, d]) => {
+            const card = document.createElement('div');
+            card.className = 'domain-card';
+            card.dataset.domain = key;
+            card.innerHTML = `<div class="domain-icon">${d.icon}</div><div class="domain-name">${d.label}</div>`;
+            card.onclick = () => selectDomain(key);
+            grid.appendChild(card);
+        });
+    }
+
+    function selectDomain(key) {
+        state.domain = key;
+        document.querySelectorAll('.domain-card').forEach(c => c.classList.remove('selected'));
+        document.querySelector(`[data-domain="${key}"]`).classList.add('selected');
+        const q = document.getElementById('auditQuestions');
+        q.classList.remove('hidden');
+        setTimeout(() => q.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+    }
+
+    function selectAck(btn) {
+        document.querySelectorAll('#ackBtns .choice-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        state.acknowledgment = btn.dataset.value;
+    }
+
+    function selectOrient(btn) {
+        document.querySelectorAll('#orientBtns .choice-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        state.orientation = btn.dataset.value;
+    }
+
+    function completeAudit() {
+        const q1 = document.getElementById('q1').value.trim();
+        const q2 = document.getElementById('q2').value.trim();
+        const q3 = document.getElementById('q3').value.trim();
+        const err = document.getElementById('auditError');
+        if (!state.domain || !q1 || !q2 || !q3 || !state.acknowledgment || !state.orientation) {
+            err.style.display = 'block';
+            return;
+        }
+        err.style.display = 'none';
+        state.archetype = assignArchetype(state.domain, state.acknowledgment, state.orientation);
+        completeStation(1);
+        showModule('module-02');
+        showMirror();
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // MODULE 02 — MIRROR
+    // ═══════════════════════════════════════════════════════
+
+    function showMirror() {
+        const domainLabel = DOMAINS[state.domain].label;
+        const reading = MIRROR_READINGS[state.archetype](domainLabel);
+        typewriter('mirrorReading', reading, 16);
+    }
+
+    function typewriter(id, text, speed) {
+        const el = document.getElementById(id);
+        el.textContent = '';
+        let i = 0;
+        const iv = setInterval(() => {
+            el.textContent += text[i++];
+            if (i >= text.length) clearInterval(iv);
+        }, speed);
+    }
+
+    function proceedToArchetype() {
+        completeStation(2);
+        showModule('module-03');
+        runScanner();
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // MODULE 03 — ARCHETYPE
+    // ═══════════════════════════════════════════════════════
+
+    function runScanner() {
+        const scanner = document.getElementById('archetypeScanner');
+        const fill = document.getElementById('scannerFill');
+        const textEl = document.getElementById('scannerText');
+        scanner.classList.remove('hidden');
+
+        const msgs = [
+            'Analyzing karmic threads...',
+            'Mapping life domain patterns...',
+            'Cross-referencing acknowledgment index...',
+            'Resolving archetype signature...'
         ];
+        let m = 0;
+        const msgIv = setInterval(() => { textEl.textContent = msgs[++m % msgs.length]; }, 650);
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            createCosmicBg();
-            setupEventListeners();
-            render();
-            showRandomWisdom();
+        setTimeout(() => { fill.style.width = '100%'; }, 60);
+
+        setTimeout(() => {
+            clearInterval(msgIv);
+            scanner.classList.add('hidden');
+            revealArchetype();
+        }, 2600);
+    }
+
+    function revealArchetype() {
+        const arch = ARCHETYPES[state.archetype];
+        const card = document.getElementById('archetypeCard');
+        card.style.setProperty('--archetype-color', arch.color);
+        card.innerHTML = `
+            <span class="archetype-symbol">${arch.symbol}</span>
+            <div class="archetype-name">${arch.name}</div>
+            <div class="archetype-tagline">${arch.tagline}</div>
+            <div class="archetype-divider"></div>
+            <div class="archetype-desc">${arch.description}</div>
+            <div class="archetype-footer">// thefirstspark.shop &nbsp;·&nbsp; karma corrector</div>
+        `;
+        card.classList.remove('hidden');
+        document.getElementById('archetypeShare').classList.remove('hidden');
+        document.getElementById('ledgerBtn').classList.remove('hidden');
+    }
+
+    function shareArchetype() {
+        const arch = ARCHETYPES[state.archetype];
+        const text = `My karmic archetype is ${arch.name} — "${arch.tagline}" — Discover yours at thefirstspark.shop`;
+        if (navigator.share) {
+            navigator.share({ title: 'Karma Corrector', text, url: 'https://thefirstspark.shop/karma-calculator.html' });
+        } else {
+            navigator.clipboard.writeText(text + '\nhttps://thefirstspark.shop/karma-calculator.html');
+            alert('Copied to clipboard.');
+        }
+    }
+
+    function copyArchetype(btn) {
+        const arch = ARCHETYPES[state.archetype];
+        const text = `My karmic archetype: ${arch.name}\n"${arch.tagline}"\nDiscover yours → thefirstspark.shop/karma-calculator.html`;
+        navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = '✓ Copied';
+            setTimeout(() => { btn.textContent = '⎘ Copy'; }, 2000);
+        });
+    }
+
+    function proceedToLedger() {
+        completeStation(3);
+        showModule('module-04');
+        prefillLedger();
+        initThreadMap();
+        renderSealedList();
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // MODULE 04 — LEDGER
+    // ═══════════════════════════════════════════════════════
+
+    function prefillLedger() {
+        const domain = DOMAINS[state.domain];
+        document.getElementById('ledgerDomain').textContent = `${domain.icon}  ${domain.label}`;
+        setThreadType(state.orientation === 'credit' ? 'credit' : 'debt');
+        const q1 = document.getElementById('q1').value.trim();
+        if (q1) document.getElementById('ledgerName').value = q1.substring(0, 70);
+    }
+
+    function setThreadType(type) {
+        state.currentType = type;
+        document.getElementById('typeDebt').className = 'type-btn' + (type === 'debt' ? ' active-debt' : '');
+        document.getElementById('typeCredit').className = 'type-btn' + (type === 'credit' ? ' active-credit' : '');
+    }
+
+    function sealThread() {
+        const name = document.getElementById('ledgerName').value.trim();
+        if (!name) { document.getElementById('ledgerName').focus(); return; }
+
+        const thread = {
+            id: Date.now(),
+            name,
+            domain: state.domain,
+            type: state.currentType,
+            weight: parseInt(document.getElementById('ledgerWeight').value),
+            resolution: document.getElementById('ledgerResolution').value.trim(),
+            timestamp: new Date().toLocaleDateString()
+        };
+
+        const threads = loadLedger();
+        threads.push(thread);
+        saveLedger(threads);
+
+        animateThread(thread);
+
+        const confirm = document.getElementById('sealConfirm');
+        confirm.style.display = 'block';
+        setTimeout(() => { confirm.style.display = 'none'; }, 3000);
+
+        renderSealedList();
+
+        document.getElementById('ledgerName').value = '';
+        document.getElementById('ledgerResolution').value = '';
+        document.getElementById('ledgerWeight').value = 5;
+        document.getElementById('weightVal').textContent = '5';
+    }
+
+    function resetForNewThread() {
+        document.getElementById('ledgerName').value = '';
+        document.getElementById('ledgerResolution').value = '';
+        document.getElementById('ledgerDomain').textContent = '— select a domain above —';
+        setThreadType('debt');
+        state.domain = null;
+        document.querySelectorAll('.domain-card').forEach(c => c.classList.remove('selected'));
+        document.getElementById('module-01').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // SVG THREAD MAP
+    // ═══════════════════════════════════════════════════════
+
+    function initThreadMap() {
+        const svg = document.getElementById('threadMap');
+        svg.innerHTML = `
+            <defs>
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+            <g id="threadLines"></g>
+            <g id="domainNodes"></g>
+            <circle cx="${SVG_CENTER.x}" cy="${SVG_CENTER.y}" r="10" fill="none" stroke="#d4a574" stroke-width="1" filter="url(#glow)" opacity="0.6"/>
+            <circle cx="${SVG_CENTER.x}" cy="${SVG_CENTER.y}" r="4" fill="#d4a574" filter="url(#glow)" opacity="0.9"/>
+        `;
+
+        const nodesGroup = document.getElementById('domainNodes');
+        Object.entries(DOMAINS).forEach(([key, d]) => {
+            const isActive = key === state.domain;
+            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', d.svgPos.x);
+            circle.setAttribute('cy', d.svgPos.y);
+            circle.setAttribute('r', '20');
+            circle.setAttribute('fill', 'rgba(10,10,15,0.85)');
+            circle.setAttribute('stroke', isActive ? '#d4a574' : '#3d2a5c');
+            circle.setAttribute('stroke-width', isActive ? '1.5' : '1');
+            if (isActive) circle.setAttribute('filter', 'url(#glow)');
+
+            const icon = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            icon.setAttribute('x', d.svgPos.x);
+            icon.setAttribute('y', d.svgPos.y + 1);
+            icon.setAttribute('text-anchor', 'middle');
+            icon.setAttribute('dominant-baseline', 'middle');
+            icon.setAttribute('fill', isActive ? '#d4a574' : '#6b6b7b');
+            icon.setAttribute('font-size', '14');
+            icon.textContent = d.icon;
+
+            g.appendChild(circle);
+            g.appendChild(icon);
+            nodesGroup.appendChild(g);
         });
 
-        function createCosmicBg() {
-            const bg = document.getElementById('cosmicBg');
-            for (let i = 0; i < 15; i++) {
-                const thread = document.createElement('div');
-                thread.className = 'thread-line';
-                thread.style.top = `${Math.random() * 100}%`;
-                thread.style.left = '0';
-                thread.style.width = `${30 + Math.random() * 70}%`;
-                thread.style.animationDelay = `${Math.random() * 4}s`;
-                bg.appendChild(thread);
-            }
+        // Draw existing threads
+        loadLedger().forEach(t => drawLine(t, false));
+    }
+
+    function drawLine(thread, animate) {
+        const pos = DOMAINS[thread.domain]?.svgPos;
+        if (!pos) return;
+        const group = document.getElementById('threadLines');
+        const color = thread.type === 'debt' ? '#8b3a3a' : '#4a9e7c';
+        const opacity = 0.3 + (thread.weight / 10) * 0.55;
+        const strokeW = Math.max(1, thread.weight / 3.5);
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', pos.x);
+        line.setAttribute('y1', pos.y);
+        line.setAttribute('x2', SVG_CENTER.x);
+        line.setAttribute('y2', SVG_CENTER.y);
+        line.setAttribute('stroke', color);
+        line.setAttribute('stroke-width', strokeW);
+        line.setAttribute('opacity', opacity);
+        line.setAttribute('filter', 'url(#glow)');
+
+        if (animate) {
+            const len = Math.hypot(SVG_CENTER.x - pos.x, SVG_CENTER.y - pos.y);
+            line.style.strokeDasharray = len;
+            line.style.strokeDashoffset = len;
+            group.appendChild(line);
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                line.style.transition = 'stroke-dashoffset 0.9s ease-out';
+                line.style.strokeDashoffset = '0';
+            }));
+        } else {
+            group.appendChild(line);
         }
+    }
 
-        function setupEventListeners() {
-            // Type selector
-            document.querySelectorAll('.type-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    currentType = btn.dataset.type;
-                    document.getElementById('resolutionGroup').style.display = 
-                        currentType === 'debt' ? 'block' : 'none';
-                });
-            });
+    function animateThread(thread) {
+        drawLine(thread, true);
+    }
 
-            // Weight slider
-            const weightSlider = document.getElementById('threadWeight');
-            weightSlider.addEventListener('input', (e) => {
-                document.getElementById('weightDisplay').textContent = e.target.value;
-            });
+    // ═══════════════════════════════════════════════════════
+    // SEALED THREADS LIST
+    // ═══════════════════════════════════════════════════════
 
-            // Form submission
-            document.getElementById('threadForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                addThread();
-            });
-
-            // Filter tabs
-            document.querySelectorAll('.filter-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    currentFilter = tab.dataset.filter;
-                    renderThreads();
-                });
-            });
+    function renderSealedList() {
+        const threads = loadLedger();
+        const container = document.getElementById('threadsList');
+        if (!threads.length) {
+            container.innerHTML = '<div class="empty-ledger">No threads sealed yet.</div>';
+            return;
         }
-
-        function addThread() {
-            const thread = {
-                id: Date.now(),
-                name: document.getElementById('threadName').value,
-                type: currentType,
-                category: document.getElementById('threadCategory').value,
-                weight: parseInt(document.getElementById('threadWeight').value),
-                description: document.getElementById('threadDesc').value,
-                resolutionPath: document.getElementById('resolutionPath')?.value || '',
-                resolved: false,
-                resolutionNote: '',
-                createdAt: new Date().toISOString(),
-                resolvedAt: null
-            };
-
-            threads.unshift(thread);
-            saveThreads();
-            render();
-            
-            // Reset form
-            document.getElementById('threadForm').reset();
-            document.getElementById('weightDisplay').textContent = '5';
-        }
-
-        function resolveThread(id) {
-            resolvingThreadId = id;
-            document.getElementById('resolutionModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('resolutionModal').classList.remove('active');
-            document.getElementById('resolutionNote').value = '';
-            resolvingThreadId = null;
-        }
-
-        function confirmResolution() {
-            const note = document.getElementById('resolutionNote').value;
-            const thread = threads.find(t => t.id === resolvingThreadId);
-            if (thread) {
-                thread.resolved = true;
-                thread.resolutionNote = note;
-                thread.resolvedAt = new Date().toISOString();
-                saveThreads();
-                render();
-            }
-            closeModal();
-        }
-
-        function deleteThread(id) {
-            if (confirm('Remove this thread from your tapestry?')) {
-                threads = threads.filter(t => t.id !== id);
-                saveThreads();
-                render();
-            }
-        }
-
-        function saveThreads() {
-            localStorage.setItem('karmaThreads', JSON.stringify(threads));
-        }
-
-        function calculateKarma() {
-            let score = 0;
-            let credits = 0;
-            let debts = 0;
-            let resolved = 0;
-            const categories = {
-                relationships: 0,
-                self: 0,
-                community: 0,
-                purpose: 0,
-                abundance: 0,
-                spirit: 0
-            };
-
-            threads.forEach(t => {
-                const value = t.weight * (t.type === 'credit' ? 1 : -1);
-                
-                if (t.resolved) {
-                    resolved++;
-                    // Resolved debts become neutral or slightly positive
-                    if (t.type === 'debt') {
-                        score += Math.ceil(t.weight / 2); // Bonus for resolution
-                    }
-                } else {
-                    score += value;
-                    categories[t.category] += value;
-                    
-                    if (t.type === 'credit') credits++;
-                    else debts++;
-                }
-            });
-
-            return { score, credits, debts, resolved, categories };
-        }
-
-        function render() {
-            const { score, credits, debts, resolved, categories } = calculateKarma();
-            
-            // Update score ring
-            const maxScore = 100;
-            const normalizedScore = Math.max(-maxScore, Math.min(maxScore, score));
-            const percentage = (normalizedScore + maxScore) / (2 * maxScore);
-            const circumference = 2 * Math.PI * 90;
-            const offset = circumference * (1 - percentage);
-            
-            document.getElementById('scoreFill').style.strokeDashoffset = offset;
-            document.getElementById('karmaScore').textContent = score > 0 ? `+${score}` : score;
-            document.getElementById('karmaScore').style.color = 
-                score > 0 ? 'var(--resolve-green)' : score < 0 ? 'var(--debt-red)' : 'var(--karma-gold)';
-
-            // Update stats
-            document.getElementById('creditCount').textContent = credits;
-            document.getElementById('debtCount').textContent = debts;
-            document.getElementById('resolvedCount').textContent = resolved;
-
-            // Update categories
-            Object.entries(categories).forEach(([cat, val]) => {
-                const el = document.getElementById(`cat-${cat}`);
-                el.textContent = val > 0 ? `+${val}` : val;
-                el.style.color = val > 0 ? 'var(--resolve-green)' : val < 0 ? 'var(--debt-red)' : 'var(--light)';
-            });
-
-            renderThreads();
-        }
-
-        function renderThreads() {
-            const list = document.getElementById('threadsList');
-            
-            let filtered = threads;
-            if (currentFilter === 'debt') filtered = threads.filter(t => t.type === 'debt' && !t.resolved);
-            else if (currentFilter === 'credit') filtered = threads.filter(t => t.type === 'credit');
-            else if (currentFilter === 'resolved') filtered = threads.filter(t => t.resolved);
-            else if (currentFilter === 'all') filtered = threads.filter(t => !t.resolved);
-
-            if (filtered.length === 0) {
-                list.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-icon">∞</div>
-                        <p>${currentFilter === 'resolved' ? 'No resolved threads yet.' : 
-                            currentFilter === 'debt' ? 'No pending debts. Well done!' :
-                            currentFilter === 'credit' ? 'No credits logged yet.' :
-                            'Your karmic slate is clear.'}</p>
-                    </div>
-                `;
-                return;
-            }
-
-            const categoryIcons = {
-                relationships: '♡',
-                self: '◈',
-                community: '⬡',
-                purpose: '◉',
-                abundance: '⧫',
-                spirit: '✧'
-            };
-
-            list.innerHTML = filtered.map(t => `
-                <div class="thread-item ${t.type} ${t.resolved ? 'resolved' : ''}">
-                    <div class="thread-header">
-                        <span class="thread-name">${t.name}</span>
-                        <span class="thread-weight ${t.type}">${t.type === 'credit' ? '+' : '-'}${t.weight}</span>
-                    </div>
-                    <div class="thread-category">${categoryIcons[t.category]} ${t.category}</div>
-                    ${t.description ? `<p class="thread-description">${t.description}</p>` : ''}
-                    ${t.resolutionPath && !t.resolved ? `
-                        <div class="thread-resolution" style="background: rgba(212, 165, 116, 0.1); border-left-color: var(--karma-gold);">
-                            <strong style="color: var(--karma-gold);">Resolution Path:</strong> ${t.resolutionPath}
-                        </div>
-                    ` : ''}
-                    ${t.resolved && t.resolutionNote ? `
-                        <div class="thread-resolution">
-                            <strong>Resolved:</strong> ${t.resolutionNote}
-                        </div>
-                    ` : ''}
-                    <div class="thread-actions">
-                        ${!t.resolved && t.type === 'debt' ? `
-                            <button class="thread-btn resolve" onclick="resolveThread(${t.id})">✓ Resolve</button>
-                        ` : ''}
-                        <button class="thread-btn delete" onclick="deleteThread(${t.id})">✕ Remove</button>
-                    </div>
+        container.innerHTML = threads.slice().reverse().map(t => `
+            <div class="thread-entry ${t.type}">
+                <div style="flex:1">
+                    <div class="thread-entry-name">${esc(t.name)}</div>
+                    <div class="thread-entry-meta">${DOMAINS[t.domain]?.icon || ''} ${DOMAINS[t.domain]?.label || t.domain} &nbsp;·&nbsp; ${t.type} &nbsp;·&nbsp; ${t.timestamp}</div>
+                    ${t.resolution ? `<div class="thread-entry-resolution">→ ${esc(t.resolution)}</div>` : ''}
                 </div>
-            `).join('');
+                <div class="thread-entry-weight">${t.weight}</div>
+            </div>
+        `).join('');
+    }
+
+    function esc(str) {
+        if (!str) return '';
+        const d = document.createElement('div');
+        d.appendChild(document.createTextNode(str));
+        return d.innerHTML;
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // ARCHETYPE ASSIGNMENT
+    // ═══════════════════════════════════════════════════════
+
+    function assignArchetype(domain, acknowledgment, orientation) {
+        const awareness = { yes: 2, partially: 1, no: 0 }[acknowledgment] ?? 0;
+        const otherDomains = ['relationships', 'community'];
+
+        // Balanced thread: earned through ledger history
+        const threads = loadLedger();
+        if (threads.length >= 4 && awareness === 2 && orientation === 'both') {
+            const credits = threads.filter(t => t.type === 'credit').length;
+            const debts = threads.filter(t => t.type === 'debt').length;
+            if (credits >= debts) return 'balanced-thread';
         }
 
-        function showRandomWisdom() {
-            const wisdom = wisdoms[Math.floor(Math.random() * wisdoms.length)];
-            document.getElementById('wisdomText').textContent = `"${wisdom.text}"`;
-            document.getElementById('wisdomSource').textContent = `— ${wisdom.source}`;
+        if (awareness === 0) {
+            return orientation === 'credit' ? 'unresolved-loop' : 'phantom-debtor';
         }
-
-        // Refresh wisdom periodically
-        setInterval(showRandomWisdom, 30000);
-
-        // Karma Share Functions
-        function getKarmaShareText() {
-            const { score, credits, debts, resolved } = calculateKarma();
-            const sign = score > 0 ? '+' : '';
-            return `⟡ My Karma Score: ${sign}${score}\n${credits} credits earned · ${debts} debts pending · ${resolved} threads resolved\n\nTrack your soul's threads:`;
+        if (awareness === 1) {
+            if (orientation === 'debt') return otherDomains.includes(domain) ? 'overgiving-flame' : 'unresolved-loop';
+            if (orientation === 'credit') return 'reluctant-creditor';
+            return 'awakening-knot';
         }
+        // awareness === 2
+        if (orientation === 'debt') return otherDomains.includes(domain) ? 'overgiving-flame' : 'awakening-knot';
+        if (orientation === 'credit') return 'reluctant-creditor';
+        return 'awakening-knot';
+    }
 
-        function getKarmaShareUrl() {
-            return 'https://thefirstspark.shop/karma-calculator.html';
-        }
+    // ═══════════════════════════════════════════════════════
+    // PROGRESS / MODULE NAV
+    // ═══════════════════════════════════════════════════════
 
-        async function shareKarma() {
-            if (navigator.share) {
-                try {
-                    await navigator.share({ title: 'My Karma Score', text: getKarmaShareText(), url: getKarmaShareUrl() });
-                } catch(e) {}
-            } else {
-                copyKarmaScore();
-            }
-        }
+    function showModule(id) {
+        document.getElementById(id).classList.remove('hidden');
+        setTimeout(() => {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+    }
 
-        function shareKarmaTwitter() {
-            const text = encodeURIComponent(getKarmaShareText());
-            const url = encodeURIComponent(getKarmaShareUrl());
-            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+    function completeStation(n) {
+        const s = document.getElementById(`station-${n}`);
+        s.classList.remove('active');
+        s.classList.add('complete');
+        s.querySelector('.station-dot').textContent = '✓';
+        if (n < 4) {
+            document.getElementById(`line-${n}${n + 1}`).classList.add('lit');
+            document.getElementById(`station-${n + 1}`).classList.add('active');
         }
+    }
 
-        function shareKarmaWhatsApp() {
-            const text = encodeURIComponent(getKarmaShareText() + '\n' + getKarmaShareUrl());
-            window.open(`https://wa.me/?text=${text}`, '_blank');
-        }
+    // ═══════════════════════════════════════════════════════
+    // LOCALSTORAGE
+    // ═══════════════════════════════════════════════════════
 
-        function copyKarmaScore() {
-            navigator.clipboard.writeText(getKarmaShareText() + '\n' + getKarmaShareUrl());
-            const btn = document.querySelector('.karma-share-btn.primary');
-            const orig = btn.textContent;
-            btn.textContent = '✓ Copied!';
-            setTimeout(() => btn.textContent = orig, 2000);
+    function saveLedger(threads) {
+        localStorage.setItem('kcc_threads', JSON.stringify(threads));
+    }
+
+    function loadLedger() {
+        try { return JSON.parse(localStorage.getItem('kcc_threads') || '[]'); }
+        catch { return []; }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // COSMIC BACKGROUND
+    // ═══════════════════════════════════════════════════════
+
+    function initCosmic() {
+        const canvas = document.getElementById('cosmicCanvas');
+        const ctx = canvas.getContext('2d');
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const stars = Array.from({ length: 180 }, () => ({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            r: Math.random() * 1.3 + 0.2,
+            op: Math.random(),
+            spd: (Math.random() * 0.007 + 0.002) * (Math.random() > 0.5 ? 1 : -1)
+        }));
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(s => {
+                s.op += s.spd;
+                if (s.op >= 1) { s.op = 1; s.spd *= -1; }
+                if (s.op <= 0) { s.op = 0; s.spd *= -1; }
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(212,165,116,${s.op * 0.4})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
         }
+        draw();
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // INIT
+    // ═══════════════════════════════════════════════════════
+
+    initDomainGrid();
+    initCosmic();
     </script>
 </body>
 </html>
