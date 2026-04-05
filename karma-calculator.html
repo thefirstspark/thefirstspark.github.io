@@ -772,6 +772,126 @@
             margin-top: 1rem;
         }
 
+        /* ── Paywall Gate ── */
+        #paywallGate {
+            display: none;
+            margin-bottom: 2rem;
+        }
+
+        .gate-inner {
+            text-align: center;
+            padding: 3.5rem 2rem;
+            border: 1px solid var(--karma-gold);
+            background: linear-gradient(180deg, rgba(45,27,78,0.3), rgba(10,10,15,0.95));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gate-inner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(212,165,116,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .gate-lock {
+            font-size: 2.5rem;
+            color: var(--karma-gold);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 30px rgba(212,165,116,0.5);
+            animation: symbolPulse 3s ease-in-out infinite;
+            display: block;
+        }
+
+        .gate-headline {
+            font-size: 1.7rem;
+            font-weight: 300;
+            line-height: 1.4;
+            color: var(--light);
+            max-width: 520px;
+            margin: 0 auto 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .gate-price {
+            margin-bottom: 2rem;
+        }
+
+        .gate-amount {
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--karma-gold);
+            letter-spacing: 0.05em;
+        }
+
+        .gate-period {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--neutral);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            display: block;
+            margin-top: 0.3rem;
+        }
+
+        .gate-features {
+            list-style: none;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin: 0 auto 2.5rem;
+            text-align: left;
+        }
+
+        .gate-features li {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--neutral);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .gate-features li::before {
+            content: '⟡';
+            position: absolute;
+            left: 0;
+            color: var(--karma-gold);
+            font-size: 0.6rem;
+            top: 1px;
+        }
+
+        .gate-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, var(--karma-gold), #c49664);
+            color: var(--void);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-bottom: 1rem;
+        }
+
+        .gate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212,165,116,0.35);
+        }
+
+        .gate-note {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--thread);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
         /* ── Responsive ── */
         @media (max-width: 700px) {
             h1 { font-size: 2.2rem; }
@@ -790,6 +910,31 @@
             <h1>Karma Corrector</h1>
             <p class="subtitle">// control center</p>
         </header>
+
+        <!-- Paywall Gate -->
+        <div id="paywallGate">
+            <div class="gate-inner">
+                <span class="gate-lock">⟡</span>
+                <h2 class="gate-headline">Your karma isn't bad luck.<br>It's a pattern you haven't named yet.</h2>
+                <div class="gate-price">
+                    <span class="gate-amount">$7</span>
+                    <span class="gate-period">one-time access</span>
+                </div>
+                <ul class="gate-features">
+                    <li>4-module guided journey</li>
+                    <li>6 karmic archetypes</li>
+                    <li>6 life domains</li>
+                    <li>Persistent ledger — builds over time</li>
+                    <li>Private — saves to your device only</li>
+                    <li>No account required</li>
+                </ul>
+                <a href="https://whop.com/sparkverse-511c/karma-corrector-control-center" class="gate-btn" target="_blank" rel="noopener">Unlock Access ⟶</a>
+                <p class="gate-note">After purchase you'll be redirected back automatically.</p>
+            </div>
+        </div>
+
+        <!-- Tool Content (shown after unlock) -->
+        <div id="toolContent" class="hidden">
 
         <!-- Progress Bar -->
         <div class="progress-bar">
@@ -965,6 +1110,8 @@
 
             <button type="button" class="add-thread-btn" onclick="resetForNewThread()">+ Log Another Thread</button>
         </div>
+
+        </div><!-- /toolContent -->
 
         <!-- Footer -->
         <footer class="site-footer">
@@ -1497,9 +1644,33 @@
     }
 
     // ═══════════════════════════════════════════════════════
+    // ACCESS GATE
+    // ═══════════════════════════════════════════════════════
+
+    function checkAccess() {
+        if (localStorage.getItem('kcc_access') === '1') {
+            unlock();
+            return;
+        }
+        if (window.location.hash === '#kcc-unlocked') {
+            localStorage.setItem('kcc_access', '1');
+            history.replaceState(null, '', window.location.pathname);
+            unlock();
+            return;
+        }
+        document.getElementById('paywallGate').style.display = 'block';
+    }
+
+    function unlock() {
+        document.getElementById('toolContent').classList.remove('hidden');
+        document.getElementById('paywallGate').style.display = 'none';
+    }
+
+    // ═══════════════════════════════════════════════════════
     // INIT
     // ═══════════════════════════════════════════════════════
 
+    checkAccess();
     initDomainGrid();
     initCosmic();
     </script>
