@@ -1110,6 +1110,110 @@
 
     animateWave();
 
+    // ── AUDIO ────────────────────────────────────────────────────────────
+    let audioCtx = null;
+    let droneNodes = null;
+
+    function getAudioCtx() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return audioCtx;
+    }
+
+    function playActivate() {
+      const ac = getAudioCtx();
+
+      // Static burst
+      const bufSize = ac.sampleRate * 0.3;
+      const buffer = ac.createBuffer(1, bufSize, ac.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufSize; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / bufSize);
+      const noise = ac.createBufferSource();
+      noise.buffer = buffer;
+      const noiseGain = ac.createGain();
+      noiseGain.gain.setValueAtTime(0.18, ac.currentTime);
+      noiseGain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.3);
+      noise.connect(noiseGain);
+      noiseGain.connect(ac.destination);
+      noise.start();
+
+      // Frequency sweep 432 → 963 Hz
+      const osc = ac.createOscillator();
+      const oscGain = ac.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(432, ac.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(963, ac.currentTime + 0.9);
+      oscGain.gain.setValueAtTime(0, ac.currentTime);
+      oscGain.gain.linearRampToValueAtTime(0.25, ac.currentTime + 0.1);
+      oscGain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.95);
+      osc.connect(oscGain);
+      oscGain.connect(ac.destination);
+      osc.start();
+      osc.stop(ac.currentTime + 1);
+
+      // Lock-in chime at 963 Hz
+      setTimeout(() => {
+        const chime = ac.createOscillator();
+        const chimeGain = ac.createGain();
+        chime.type = 'sine';
+        chime.frequency.value = 963;
+        chimeGain.gain.setValueAtTime(0.3, ac.currentTime);
+        chimeGain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 1.5);
+        chime.connect(chimeGain);
+        chimeGain.connect(ac.destination);
+        chime.start();
+        chime.stop(ac.currentTime + 1.5);
+      }, 900);
+
+      // Ambient drone (low hum while active)
+      setTimeout(() => {
+        startDrone();
+      }, 1000);
+    }
+
+    function startDrone() {
+      if (droneNodes) return;
+      const ac = getAudioCtx();
+      const freqs = [54, 108, 216]; // sub harmonics of 432
+      droneNodes = freqs.map(f => {
+        const osc = ac.createOscillator();
+        const gain = ac.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = f;
+        gain.gain.setValueAtTime(0, ac.currentTime);
+        gain.gain.linearRampToValueAtTime(f === 54 ? 0.08 : 0.03, ac.currentTime + 2);
+        osc.connect(gain);
+        gain.connect(ac.destination);
+        osc.start();
+        return { osc, gain };
+      });
+    }
+
+    function stopDrone() {
+      if (!droneNodes) return;
+      const ac = getAudioCtx();
+      droneNodes.forEach(({ osc, gain }) => {
+        gain.gain.linearRampToValueAtTime(0, ac.currentTime + 1);
+        osc.stop(ac.currentTime + 1.1);
+      });
+      droneNodes = null;
+    }
+
+    function playDeactivate() {
+      const ac = getAudioCtx();
+      stopDrone();
+      const osc = ac.createOscillator();
+      const gain = ac.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(963, ac.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(432, ac.currentTime + 0.5);
+      gain.gain.setValueAtTime(0.15, ac.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.5);
+      osc.connect(gain);
+      gain.connect(ac.destination);
+      osc.start();
+      osc.stop(ac.currentTime + 0.5);
+    }
+
     // ── TUNER ────────────────────────────────────────────────────────────
     const tunerCore = document.getElementById('tuner-core');
     const freqDisplay = document.getElementById('frequency-display');
@@ -1133,6 +1237,7 @@
       signalBars.classList.toggle('tuned', tuned);
 
       if (tuned) {
+        playActivate();
         // Haywire sequence
         flashStatic(500);
         rings.forEach((r, i) => {
@@ -1175,6 +1280,7 @@
         setTimeout(startTypewriter, 800);
 
       } else {
+        playDeactivate();
         rings.forEach(r => r.classList.remove('locked'));
         freqDisplay.textContent = 'FREQUENCY: 432.00 Hz — STANDBY';
         tunerInstruction.textContent = '[ CLICK CORE TO INITIATE ]';
