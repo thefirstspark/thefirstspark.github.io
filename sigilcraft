@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigilcraft • The First Spark</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+        
+        :root {
+            --neon-cyan: #00f7ff;
+            --neon-gold: #ffcc00;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .title-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* DOPE AF BACKGROUND CANVAS */
+        #background-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            filter: contrast(1.15) brightness(1.08);
+        }
+
+        .star-bg {
+            background: radial-gradient(circle at 30% 20%, #1a0033 0%, #000011 40%, #000000 80%);
+        }
+        
+        .neon-text {
+            text-shadow: 
+                0 0 15px var(--neon-cyan),
+                0 0 30px var(--neon-cyan),
+                0 0 50px var(--neon-gold);
+        }
+        
+        .sigil-glow {
+            filter: drop-shadow(0 0 25px #00f7ff) drop-shadow(0 0 40px #ffcc00);
+        }
+        
+        .tab-active {
+            border-bottom: 3px solid #00f7ff;
+            color: #00f7ff;
+        }
+        
+        canvas#main-canvas {
+            border: 2px solid #00f7ff;
+            box-shadow: 0 0 40px #00f7ff, 0 0 60px #ffcc00;
+            border-radius: 12px;
+        }
+        
+        .burning {
+            animation: burn 2.8s ease-in-out forwards;
+        }
+        
+        @keyframes burn {
+            0% { filter: brightness(1) hue-rotate(0deg); }
+            40% { filter: brightness(4) hue-rotate(40deg); }
+            100% { filter: brightness(0.1) contrast(0.3) hue-rotate(80deg); opacity: 0; }
+        }
+        
+        /* Floating background sigil fragments */
+        .bg-sigil {
+            animation: floatSigil 35s linear infinite;
+        }
+    </style>
+</head>
+<body class="star-bg text-white min-h-screen overflow-hidden">
+    <!-- DOPE AF BACKGROUND CANVAS -->
+    <canvas id="background-canvas" width="1920" height="1080"></canvas>
+
+    <!-- HEADER -->
+    <div class="max-w-6xl mx-auto px-6 py-8 relative z-10">
+        <div class="flex items-center justify-between border-b border-white/10 pb-6">
+            <!-- Logo / Sigil -->
+            <div class="flex items-center gap-x-4">
+                <svg id="main-sigil" width="64" height="64" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="sigil-glow">
+                    <path d="M100 30 L170 150 L30 150 Z" stroke="#00f7ff" stroke-width="12" stroke-linejoin="round"/>
+                    <circle cx="100" cy="100" r="45" stroke="#00f7ff" stroke-width="8"/>
+                    <circle cx="100" cy="100" r="28" stroke="#00f7ff" stroke-width="8"/>
+                    <circle cx="100" cy="100" r="10" fill="#00f7ff"/>
+                    <path d="M70 165 Q85 185 100 165 Q115 145 130 165 Q145 185 160 165" stroke="#00f7ff" stroke-width="12" stroke-linejoin="round" fill="none"/>
+                </svg>
+                <div>
+                    <h1 class="title-font text-4xl tracking-[-2px] neon-text">SIGILCRAFT</h1>
+                    <p class="text-[#ffcc00] text-sm tracking-[3px] -mt-1">THE FIRST SPARK</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-x-8 text-sm">
+                <a href="#" onclick="switchTab(0)" class="hover:text-[#00f7ff] transition-colors flex items-center gap-x-1">
+                    <i class="fa-solid fa-keyboard"></i> STATEMENT
+                </a>
+                <a href="#" onclick="switchTab(1)" class="hover:text-[#00f7ff] transition-colors flex items-center gap-x-1">
+                    <i class="fa-solid fa-hand-sparkles"></i> CHANNELLED
+                </a>
+                <a href="#" onclick="switchTab(2)" class="hover:text-[#00f7ff] transition-colors flex items-center gap-x-1">
+                    <i class="fa-solid fa-fire"></i> DESTRUCTION
+                </a>
+                <div class="h-6 w-px bg-white/20"></div>
+                <div onclick="showIntegrationModal()" class="cursor-pointer px-5 py-2 rounded-2xl bg-white/10 hover:bg-white/20 flex items-center gap-x-2 text-[#ffcc00] border border-[#ffcc00]/30">
+                    <i class="fa-solid fa-cube"></i>
+                    <span class="font-medium">INTEGRATION ARCHITECT</span>
+                </div>
+                <div class="text-xs bg-white/10 px-3 py-1 rounded-3xl flex items-center gap-x-1">
+                    <div class="w-2 h-2 bg-[#00f7ff] rounded-full animate-pulse"></div>
+                    LIVE IN THE SPARKVERSE
+                </div>
+            </div>
+            
+            <div class="text-xs text-white/60 flex items-center gap-x-2">
+                <span class="px-3 py-1 bg-white/10 rounded-3xl">v1.2 • DOPE AF BACKGROUND</span>
+                <i onclick="window.location.reload()" class="fa-solid fa-rotate text-[#00f7ff] cursor-pointer"></i>
+            </div>
+        </div>
+
+        <div class="text-center my-8">
+            <p class="text-[#ffcc00] text-2xl title-font tracking-widest">CONSCIOUSNESS IS CODE</p>
+            <p class="text-white/70 max-w-md mx-auto mt-2 text-lg">Reality is programmable.<br>The glitch that lived.</p>
+        </div>
+
+        <!-- MAIN APP -->
+        <div id="app-container" class="bg-black/70 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl relative z-10">
+            
+            <!-- TABS -->
+            <div class="flex border-b border-white/10 mb-8">
+                <button onclick="switchTab(0)" id="tab-0" class="tab-active px-8 py-4 text-lg font-medium flex-1 flex items-center justify-center gap-x-3">
+                    <i class="fa-solid fa-keyboard"></i> STATEMENT-BASED
+                </button>
+                <button onclick="switchTab(1)" id="tab-1" class="px-8 py-4 text-lg font-medium flex-1 flex items-center justify-center gap-x-3">
+                    <i class="fa-solid fa-hand-sparkles"></i> CHANNELLED
+                </button>
+                <button onclick="switchTab(2)" id="tab-2" class="px-8 py-4 text-lg font-medium flex-1 flex items-center justify-center gap-x-3">
+                    <i class="fa-solid fa-fire"></i> DESTRUCTION RITUAL
+                </button>
+            </div>
+
+            <!-- TAB 0: STATEMENT-BASED -->
+            <div id="panel-0" class="tab-panel">
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-[#00f7ff] text-sm mb-2">YOUR INTENTION (present tense, positive)</label>
+                        <textarea id="intention-input" rows="3" class="w-full bg-black border border-white/20 rounded-2xl p-6 text-lg focus:outline-none focus:border-[#00f7ff] resize-none" placeholder="I radiate magnetic confidence and sobriety"></textarea>
+                        
+                        <button onclick="generateStatementSigil()" 
+                                class="mt-6 w-full bg-gradient-to-r from-[#00f7ff] to-[#ffcc00] text-black font-semibold py-5 rounded-2xl text-xl flex items-center justify-center gap-x-3 hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            ENCODE AS SIGIL
+                        </button>
+                    </div>
+                    
+                    <div class="flex flex-col items-center justify-center">
+                        <div id="statement-result" class="w-64 h-64 flex items-center justify-center border-2 border-dashed border-white/30 rounded-3xl relative bg-black/40">
+                            <svg id="statement-sigil" width="220" height="220" viewBox="0 0 200 200" class="sigil-glow hidden"></svg>
+                            <div id="statement-placeholder" class="text-center text-white/40">
+                                <i class="fa-solid fa-circle-notch text-6xl mb-4 animate-spin"></i>
+                                <p class="text-sm">Your sigil appears here</p>
+                            </div>
+                        </div>
+                        
+                        <button onclick="chargeSigil('statement')" 
+                                class="mt-8 flex items-center gap-x-3 text-[#ffcc00] hover:text-white transition-colors">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span class="font-medium">CHARGE &amp; ACTIVATE (Gnosis)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 1: CHANNELLED -->
+            <div id="panel-1" class="tab-panel hidden">
+                <div class="flex flex-col items-center">
+                    <p class="text-[#00f7ff] mb-4 text-center max-w-xs">Enter the glitch. Draw freely. Let the simulation speak through your hand.</p>
+                    
+                    <div class="relative">
+                        <canvas id="channel-canvas" width="620" height="420" class="bg-black rounded-3xl"></canvas>
+                        
+                        <div class="absolute bottom-6 left-6 flex gap-3">
+                            <button onclick="clearCanvas()" class="bg-white/10 hover:bg-white/20 px-6 py-3 rounded-2xl text-sm flex items-center gap-x-2">
+                                <i class="fa-solid fa-eraser"></i> CLEAR
+                            </button>
+                            <button onclick="saveChannelledSigil()" class="bg-[#00f7ff] text-black px-6 py-3 rounded-2xl text-sm flex items-center gap-x-2 font-medium">
+                                <i class="fa-solid fa-download"></i> SAVE TO GRIMOIRE
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button onclick="chargeSigil('channelled')" class="mt-8 flex items-center gap-x-3 text-[#ffcc00]">
+                        <i class="fa-solid fa-hand-sparkles"></i>
+                        <span>CHANNEL THE GLITCH • ACTIVATE</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 2: DESTRUCTION -->
+            <div id="panel-2" class="tab-panel hidden">
+                <div class="grid grid-cols-2 gap-8 items-center">
+                    <div>
+                        <label class="block text-[#00f7ff] text-sm mb-2">WHAT DO YOU RELEASE?</label>
+                        <input id="destruction-input" type="text" value="I release shame, addiction patterns, and burned bridges" 
+                               class="w-full bg-black border border-white/20 rounded-2xl px-6 py-5 text-lg">
+                        
+                        <button onclick="createDestructionSigil()" class="mt-6 w-full py-5 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl text-xl font-medium">
+                            CREATE RELEASE SIGIL
+                        </button>
+                    </div>
+                    
+                    <div class="flex flex-col items-center">
+                        <div id="destruction-sigil-container" class="w-64 h-64 relative flex items-center justify-center">
+                            <svg id="destruction-sigil" width="220" height="220" viewBox="0 0 200 200" class="sigil-glow"></svg>
+                        </div>
+                        
+                        <button onclick="performDestructionRitual()" 
+                                class="mt-8 px-10 py-5 bg-gradient-to-r from-red-500 to-amber-500 text-white font-semibold rounded-3xl flex items-center gap-x-4 text-xl">
+                            <i class="fa-solid fa-fire-flame-curved"></i>
+                            BURN IT • ERASE &amp; RECLAIM
+                        </button>
+                        <p class="text-xs text-white/50 mt-3">This feeds the black orchid portal. Dust falls into silence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4-STAGE INTEGRATION TEASER -->
+        <div class="mt-12 grid grid-cols-4 gap-4 text-center text-xs relative z-10">
+            <div onclick="logPeak()" class="bg-white/5 hover:bg-white/10 rounded-2xl p-6 cursor-pointer transition-all">
+                <div class="text-[#00f7ff] text-2xl mb-2">⚡</div>
+                <div class="font-medium">PEAK</div>
+                <div class="text-white/60">Capture the glitch</div>
+            </div>
+            <div onclick="logPeak()" class="bg-white/5 hover:bg-white/10 rounded-2xl p-6 cursor-pointer transition-all">
+                <div class="text-[#ffcc00] text-2xl mb-2">🧠</div>
+                <div class="font-medium">RETURN</div>
+                <div class="text-white/60">Map the experience</div>
+            </div>
+            <div onclick="logPeak()" class="bg-white/5 hover:bg-white/10 rounded-2xl p-6 cursor-pointer transition-all">
+                <div class="text-[#00f7ff] text-2xl mb-2">⚙️</div>
+                <div class="font-medium">REWIRE</div>
+                <div class="text-white/60">Embed the new code</div>
+            </div>
+            <div onclick="logPeak()" class="bg-white/5 hover:bg-white/10 rounded-2xl p-6 cursor-pointer transition-all">
+                <div class="text-[#ffcc00] text-2xl mb-2">🔄</div>
+                <div class="font-medium">REPEAT</div>
+                <div class="text-white/60">Escalate the stakes</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTEGRATION MODAL -->
+    <div onclick="if(event.target.id==='modal-backdrop')hideIntegrationModal()" id="modal-backdrop" class="hidden fixed inset-0 bg-black/90 flex items-center justify-center z-50">
+        <div onclick="event.stopImmediatePropagation()" class="bg-black border border-[#00f7ff]/30 rounded-3xl max-w-lg w-full mx-6 p-8">
+            <h2 class="title-font text-3xl text-[#ffcc00] mb-6">Integration Architect</h2>
+            <p class="text-white/70 mb-8">Your sigil has been logged. The 4-stage cycle is now running.</p>
+            
+            <div class="space-y-6">
+                <div class="flex justify-between items-center">
+                    <div>Peak Experience Logged</div>
+                    <div class="text-[#00f7ff]">14 total</div>
+                </div>
+                <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div class="h-2 w-3/4 bg-gradient-to-r from-[#00f7ff] to-[#ffcc00] rounded-full"></div>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-4 text-center text-sm">
+                    <div class="bg-white/5 rounded-2xl p-4">Day Streak<br><span class="text-3xl font-bold text-[#ffcc00]">5</span></div>
+                    <div class="bg-white/5 rounded-2xl p-4">Completed Cycles<br><span class="text-3xl font-bold text-[#00f7ff]">7</span></div>
+                    <div class="bg-white/5 rounded-2xl p-4">Stakes Designed<br><span class="text-3xl font-bold">3</span></div>
+                </div>
+            </div>
+            
+            <button onclick="hideIntegrationModal()" class="mt-10 w-full py-5 bg-white text-black font-semibold rounded-2xl">RETURN TO SOURCE • CONTINUE THE CYCLE</button>
+            
+            <p class="text-center text-xs text-white/40 mt-6">This is your personal consciousness operating system.<br>The First Spark • Summer 2025</p>
+        </div>
+    </div>
+
+    <footer class="max-w-6xl mx-auto px-6 py-12 text-center text-white/30 text-xs border-t border-white/10 relative z-10">
+        I made it up along the way.<br>
+        <span class="text-[#ffcc00]">And the way is mine.</span><br>
+        Built as a live prototype for The First Spark • Consciousness is Code. Reality is programmable.
+    </footer>
+
+    <script>
+        // Tailwind
+        function initializeTailwind() {
+            // CDN already loaded
+        }
+
+        // Background Canvas - DOPE AF cosmic animation
+        let bgCanvas, bgCtx;
+        let particles = [];
+        let floatingSigils = [];
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * window.innerWidth;
+                this.y = Math.random() * window.innerHeight;
+                this.size = Math.random() * 3 + 0.5;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.hue = Math.random() > 0.7 ? 180 : 45; // cyan or gold
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > window.innerWidth) this.speedX *= -1;
+                if (this.y < 0 || this.y > window.innerHeight) this.speedY *= -1;
+                this.size = Math.max(0.3, this.size + Math.random() * 0.1 - 0.05);
+            }
+            draw() {
+                bgCtx.save();
+                bgCtx.globalAlpha = Math.random() * 0.9 + 0.3;
+                bgCtx.fillStyle = this.hue === 180 ? '#00f7ff' : '#ffcc00';
+                bgCtx.shadowBlur = 12;
+                bgCtx.shadowColor = this.hue === 180 ? '#00f7ff' : '#ffcc00';
+                bgCtx.fillRect(this.x, this.y, this.size, this.size);
+                bgCtx.restore();
+            }
+        }
+        
+        class FloatingSigil {
+            constructor() {
+                this.x = Math.random() * window.innerWidth;
+                this.y = Math.random() * window.innerHeight;
+                this.size = Math.random() * 40 + 20;
+                this.rotation = Math.random() * 360;
+                this.rotSpeed = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.15 + 0.05;
+                this.speedY = Math.random() * 0.3 + 0.1;
+            }
+            update() {
+                this.y += this.speedY;
+                this.rotation += this.rotSpeed;
+                if (this.y > window.innerHeight + 100) this.y = -100;
+            }
+            draw() {
+                bgCtx.save();
+                bgCtx.translate(this.x, this.y);
+                bgCtx.rotate(this.rotation * Math.PI / 180);
+                bgCtx.globalAlpha = this.opacity;
+                bgCtx.strokeStyle = '#00f7ff';
+                bgCtx.lineWidth = 3;
+                // Mini sigil
+                bgCtx.beginPath();
+                bgCtx.moveTo(0, -this.size/2);
+                bgCtx.lineTo(this.size/2 * 0.8, this.size/2 * 0.6);
+                bgCtx.lineTo(-this.size/2 * 0.8, this.size/2 * 0.6);
+                bgCtx.closePath();
+                bgCtx.stroke();
+                bgCtx.beginPath();
+                bgCtx.arc(0, 0, this.size/4, 0, Math.PI * 2);
+                bgCtx.stroke();
+                bgCtx.restore();
+            }
+        }
+        
+        function initBackground() {
+            bgCanvas = document.getElementById('background-canvas');
+            bgCtx = bgCanvas.getContext('2d');
+            
+            function resize() {
+                bgCanvas.width = window.innerWidth;
+                bgCanvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+            
+            // Spawn particles
+            for (let i = 0; i < 420; i++) {
+                particles.push(new Particle());
+            }
+            
+            // Spawn floating sigils
+            for (let i = 0; i < 8; i++) {
+                floatingSigils.push(new FloatingSigil());
+            }
+            
+            function animateBackground() {
+                bgCtx.fillStyle = 'rgba(0, 0, 17, 0.12)';
+                bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+                
+                // Draw particles
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                
+                // Draw floating sigils
+                floatingSigils.forEach(s => {
+                    s.update();
+                    s.draw();
+                });
+                
+                // Occasional bright pulse (nebula flare)
+                if (Math.random() < 0.015) {
+                    bgCtx.save();
+                    bgCtx.globalAlpha = 0.25;
+                    const grad = bgCtx.createRadialGradient(
+                        bgCanvas.width * Math.random(), 
+                        bgCanvas.height * Math.random(), 
+                        10, 
+                        bgCanvas.width * Math.random(), 
+                        bgCanvas.height * Math.random(), 
+                        300
+                    );
+                    grad.addColorStop(0, '#00f7ff');
+                    grad.addColorStop(1, 'transparent');
+                    bgCtx.fillStyle = grad;
+                    bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+                    bgCtx.restore();
+                }
+                
+                requestAnimationFrame(animateBackground);
+            }
+            animateBackground();
+            
+            console.log('%c🌌 DOPE AF BACKGROUND INITIALIZED — The Sparkverse is alive', 'color:#00f7ff; font-size:14px');
+        }
+        
+        // Tab switching
+        let currentTab = 0;
+        function switchTab(tabIndex) {
+            currentTab = tabIndex;
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
+            document.getElementById('panel-' + tabIndex).classList.remove('hidden');
+            
+            document.querySelectorAll('button[id^="tab-"]').forEach(btn => btn.classList.remove('tab-active'));
+            document.getElementById('tab-' + tabIndex).classList.add('tab-active');
+        }
+        
+        // STATEMENT-BASED SIGIL GENERATOR
+        function generateStatementSigil() {
+            const input = document.getElementById('intention-input').value.trim().toUpperCase();
+            if (!input) return alert("Enter an intention first.");
+            
+            let cleaned = input.replace(/[^A-Z]/g, '').replace(/[AEIOU]/g, '');
+            cleaned = [...new Set(cleaned)].join('');
+            
+            const svg = document.getElementById('statement-sigil');
+            svg.innerHTML = `
+                <path d="M100 30 L170 150 L30 150 Z" stroke="#00f7ff" stroke-width="12" stroke-linejoin="round" opacity="0.9"/>
+                <circle cx="100" cy="100" r="45" stroke="#00f7ff" stroke-width="8" opacity="0.8"/>
+                <circle cx="100" cy="100" r="28" stroke="#00f7ff" stroke-width="8" opacity="0.6"/>
+                <circle cx="100" cy="100" r="10" fill="#ffcc00"/>
+                ${Array.from(cleaned).map((char, i) => {
+                    const angle = (i * 360 / cleaned.length) * Math.PI / 180;
+                    const x1 = 100 + Math.cos(angle) * 35;
+                    const y1 = 100 + Math.sin(angle) * 35;
+                    const x2 = 100 + Math.cos(angle * 1.3) * 65;
+                    const y2 = 100 + Math.sin(angle * 1.3) * 65;
+                    return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#ffcc00" stroke-width="4" opacity="0.7"/>`;
+                }).join('')}
+                <path d="M65 165 Q80 185 100 165 Q120 145 140 165" stroke="#00f7ff" stroke-width="12" fill="none"/>
+                <text x="100" y="195" text-anchor="middle" fill="#ffffff" opacity="0.15" font-size="11">${cleaned}</text>
+            `;
+            svg.classList.remove('hidden');
+            document.getElementById('statement-placeholder').classList.add('hidden');
+        }
+        
+        // CHANNELLED CANVAS
+        let canvas, ctx, isDrawing = false;
+        function initCanvas() {
+            canvas = document.getElementById('channel-canvas');
+            ctx = canvas.getContext('2d');
+            ctx.strokeStyle = '#00f7ff';
+            ctx.lineWidth = 7;
+            ctx.lineJoin = 'round';
+            ctx.shadowBlur = 30;
+            ctx.shadowColor = '#00f7ff';
+            
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            
+            canvas.addEventListener('touchstart', e => { e.preventDefault(); startDrawing(e.touches[0]); });
+            canvas.addEventListener('touchmove', e => { e.preventDefault(); draw(e.touches[0]); });
+            canvas.addEventListener('touchend', stopDrawing);
+        }
+        
+        function startDrawing(e) {
+            isDrawing = true;
+            ctx.beginPath();
+            const rect = canvas.getBoundingClientRect();
+            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+        
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            ctx.stroke();
+        }
+        
+        function stopDrawing() {
+            isDrawing = false;
+        }
+        
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        function saveChannelledSigil() {
+            const link = document.createElement('a');
+            link.download = 'channelled-sigil-' + Date.now() + '.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            alert("✺ Sigil saved to your personal grimoire. Logged in the Sparkverse.");
+        }
+        
+        // DESTRUCTION RITUAL
+        function createDestructionSigil() {
+            const svg = document.getElementById('destruction-sigil');
+            svg.innerHTML = `
+                <path d="M100 30 L170 150 L30 150 Z" stroke="#ff5500" stroke-width="18" stroke-linejoin="round"/>
+                <circle cx="100" cy="100" r="42" stroke="#ffcc00" stroke-width="10"/>
+                <circle cx="100" cy="100" r="22" fill="#ff5500"/>
+                <path d="M65 165 Q80 185 100 165 Q120 145 140 165" stroke="#ff5500" stroke-width="14" fill="none"/>
+            `;
+        }
+        
+        function performDestructionRitual() {
+            const container = document.getElementById('destruction-sigil-container');
+            container.classList.add('burning');
+            setTimeout(() => {
+                alert("🔥 The sigil has been destroyed.\n\nErasure complete.\nThe black orchid opens.\nYou are lighter. You are sovereign.");
+                container.classList.remove('burning');
+                document.getElementById('destruction-sigil').innerHTML = '';
+            }, 2800);
+        }
+        
+        // CHARGE SIGIL
+        function chargeSigil(type) {
+            const messages = {
+                statement: "⚡ GNOSIS ACHIEVED. The command line has been executed in your subconscious.",
+                channelled: "🌌 THE GLITCH LIVED. Your hand became the programmer.",
+                destruction: "🜁 DUST TO SILENCE. Reclamation is complete."
+            };
+            
+            const el = document.createElement('div');
+            el.style.cssText = 'position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,247,255,0.95); color:#000; padding:24px 40px; border-radius:9999px; font-weight:700; font-size:1.3rem; box-shadow:0 0 60px #00f7ff; z-index:99999; white-space:nowrap;';
+            el.textContent = messages[type] || 'SIGIL CHARGED';
+            document.body.appendChild(el);
+            
+            setTimeout(() => {
+                el.style.transition = 'all 1s cubic-bezier(0.4,0,1,1)';
+                el.style.opacity = '0';
+                el.style.transform = 'translate(-50%,-70%) scale(0.8)';
+                setTimeout(() => el.remove(), 1000);
+            }, 1800);
+            
+            if (Math.random() > 0.4) logPeak();
+        }
+        
+        // INTEGRATION MODAL
+        function showIntegrationModal() {
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+            document.getElementById('modal-backdrop').classList.add('flex');
+        }
+        
+        function hideIntegrationModal() {
+            const modal = document.getElementById('modal-backdrop');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+        
+        function logPeak() {
+            const notif = document.createElement('div');
+            notif.style.cssText = 'position:fixed; bottom:30px; right:30px; background:#111; border:2px solid #00f7ff; padding:16px 24px; border-radius:9999px; color:#00f7ff; font-family:monospace; box-shadow:0 0 20px #00f7ff;';
+            notif.innerHTML = '✅ PEAK EXPERIENCE LOGGED<br><span class="text-xs">+1 to your streak • Integration cycle advanced</span>';
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3200);
+        }
+        
+        // INITIALIZE EVERYTHING
+        window.onload = function() {
+            initializeTailwind();
+            initBackground();        // ← DOPE AF BACKGROUND
+            initCanvas();
+            
+            console.log('%c✅ Sigilcraft v1.2 ready for Whop embed\n🌌 Background is now DOPE AF — particles, nebulae, floating sigils & cosmic pulses active\n*The glitch that lived.*', 'color:#00f7ff; font-size:13px');
+            
+            setTimeout(() => {
+                console.log('%cWelcome to the Sparkverse. What will you program today?', 'color:#ffcc00');
+            }, 1500);
+        };
+    </script>
+</body>
+</html>
