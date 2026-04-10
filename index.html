@@ -963,28 +963,33 @@
     </footer>
 
     <script>
-    // ─── COSMIC DNA / BLOODLINE GEOMETRY ───
+    // ─── COSMIC BLOODLINE: DESKTOP DNA + MOBILE ENERGY SPINE ───
     (function(){
         const canvas = document.getElementById('cosmos');
         const ctx = canvas.getContext('2d');
         let W, H, mouse = {x: -999, y: -999};
         let time = 0;
+        let scrollY = 0;
+        let isMobile = window.innerWidth < 768;
+        let touchActive = false;
+        let touchRipples = [];
 
         function resize(){
             W = canvas.width = window.innerWidth;
             H = canvas.height = window.innerHeight;
+            isMobile = W < 768;
         }
 
-        // DNA Helix parameters
-        const helixCount = 3;
+        // ═══════════════════════════════════════════
+        // DESKTOP: DNA HELIXES (unchanged awesomeness)
+        // ═══════════════════════════════════════════
         const helixes = [];
-        
         function initHelixes() {
             helixes.length = 0;
-            for(let i = 0; i < helixCount; i++) {
+            const count = isMobile ? 0 : 3;
+            for(let i = 0; i < count; i++) {
                 helixes.push({
                     offsetX: W * (0.2 + i * 0.3),
-                    offsetY: H * 0.5,
                     amplitude: 80 + i * 30,
                     frequency: 0.008 + i * 0.002,
                     phase: i * Math.PI * 0.6,
@@ -995,86 +1000,231 @@
             }
         }
 
-        // Sacred geometry particles orbiting the helixes
-        const sacredParticles = [];
-        function initSacredParticles() {
-            sacredParticles.length = 0;
-            const count = Math.min(60, Math.floor(W * H / 20000));
-            for(let i = 0; i < count; i++) {
-                sacredParticles.push({
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    size: Math.random() * 3 + 1,
-                    alpha: Math.random() * 0.4 + 0.1,
-                    speed: Math.random() * 0.5 + 0.2,
-                    angle: Math.random() * Math.PI * 2,
-                    orbitRadius: Math.random() * 50 + 20,
-                    type: Math.floor(Math.random() * 4) // 0: circle, 1: triangle, 2: diamond, 3: hexagon
+        // ═══════════════════════════════════════════
+        // MOBILE: THE ENERGY SPINE + ORBITING SIGILS
+        // ═══════════════════════════════════════════
+        const sigils = [];
+        const spineNodes = [];
+        
+        function initMobileElements() {
+            sigils.length = 0;
+            spineNodes.length = 0;
+            
+            if(!isMobile) return;
+            
+            // Create spine nodes along center
+            const nodeCount = 12;
+            for(let i = 0; i < nodeCount; i++) {
+                spineNodes.push({
+                    y: (i / (nodeCount - 1)) * H,
+                    baseX: W / 2,
+                    pulse: Math.random() * Math.PI * 2,
+                    size: 3 + Math.random() * 4,
+                    color: i % 3 === 0 ? [251, 191, 36] : i % 3 === 1 ? [139, 92, 246] : [255, 106, 61]
+                });
+            }
+            
+            // Create orbiting sigils
+            const sigilCount = 8;
+            for(let i = 0; i < sigilCount; i++) {
+                sigils.push({
+                    angle: (i / sigilCount) * Math.PI * 2,
+                    radius: 60 + Math.random() * 80,
+                    speed: 0.3 + Math.random() * 0.4,
+                    size: 8 + Math.random() * 12,
+                    type: i % 4,
+                    yOffset: Math.random() * H,
+                    drift: Math.random() * 0.5,
+                    alpha: 0.15 + Math.random() * 0.2
                 });
             }
         }
 
-        function drawSacredShape(x, y, size, type, alpha, color) {
+        // Sacred geometry drawer
+        function drawSigil(x, y, size, type, alpha, rotation) {
             ctx.save();
             ctx.globalAlpha = alpha;
-            ctx.strokeStyle = color;
-            ctx.lineWidth = 0.5;
             ctx.translate(x, y);
-            ctx.rotate(time * 0.5);
-            ctx.beginPath();
+            ctx.rotate(rotation);
             
-            if(type === 0) { // Circle
-                ctx.arc(0, 0, size, 0, Math.PI * 2);
-            } else if(type === 1) { // Triangle
-                for(let i = 0; i < 3; i++) {
-                    const angle = (i / 3) * Math.PI * 2 - Math.PI / 2;
-                    const px = Math.cos(angle) * size;
-                    const py = Math.sin(angle) * size;
-                    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
-                }
-                ctx.closePath();
-            } else if(type === 2) { // Diamond
-                ctx.moveTo(0, -size);
-                ctx.lineTo(size, 0);
-                ctx.lineTo(0, size);
-                ctx.lineTo(-size, 0);
-                ctx.closePath();
-            } else { // Hexagon
+            const colors = ['rgba(251, 191, 36, 1)', 'rgba(139, 92, 246, 1)', 'rgba(255, 106, 61, 1)', 'rgba(34, 211, 238, 1)'];
+            ctx.strokeStyle = colors[type % 4];
+            ctx.lineWidth = 1;
+            
+            ctx.beginPath();
+            if(type === 0) { // Flower of life segment
                 for(let i = 0; i < 6; i++) {
-                    const angle = (i / 6) * Math.PI * 2;
-                    const px = Math.cos(angle) * size;
-                    const py = Math.sin(angle) * size;
-                    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+                    const a = (i / 6) * Math.PI * 2;
+                    ctx.moveTo(0, 0);
+                    ctx.arc(Math.cos(a) * size * 0.5, Math.sin(a) * size * 0.5, size * 0.5, 0, Math.PI * 2);
                 }
-                ctx.closePath();
+            } else if(type === 1) { // Metatron's cube hint
+                for(let i = 0; i < 6; i++) {
+                    const a1 = (i / 6) * Math.PI * 2;
+                    const a2 = ((i + 2) / 6) * Math.PI * 2;
+                    ctx.moveTo(Math.cos(a1) * size, Math.sin(a1) * size);
+                    ctx.lineTo(Math.cos(a2) * size, Math.sin(a2) * size);
+                }
+                ctx.moveTo(size, 0); ctx.arc(0, 0, size, 0, Math.PI * 2);
+            } else if(type === 2) { // Vesica piscis
+                ctx.arc(-size * 0.4, 0, size * 0.7, 0, Math.PI * 2);
+                ctx.moveTo(size * 0.4 + size * 0.7, 0);
+                ctx.arc(size * 0.4, 0, size * 0.7, 0, Math.PI * 2);
+            } else { // Sri yantra triangle
+                for(let j = 0; j < 3; j++) {
+                    ctx.moveTo(0, -size);
+                    const s = size * (1 - j * 0.25);
+                    for(let i = 0; i < 3; i++) {
+                        const a = (i / 3) * Math.PI * 2 - Math.PI / 2;
+                        i === 0 ? ctx.moveTo(Math.cos(a) * s, Math.sin(a) * s) : ctx.lineTo(Math.cos(a) * s, Math.sin(a) * s);
+                    }
+                    ctx.closePath();
+                }
             }
             ctx.stroke();
             ctx.restore();
         }
 
+        // Draw the mobile energy spine
+        function drawEnergySpine() {
+            const centerX = W / 2;
+            const breathe = Math.sin(time * 0.8) * 0.3 + 1;
+            const scrollInfluence = (scrollY % H) / H;
+            
+            // Main spine glow
+            const spineGrad = ctx.createLinearGradient(centerX, 0, centerX, H);
+            spineGrad.addColorStop(0, 'rgba(139, 92, 246, 0)');
+            spineGrad.addColorStop(0.2, 'rgba(139, 92, 246, 0.15)');
+            spineGrad.addColorStop(0.5, `rgba(251, 191, 36, ${0.2 * breathe})`);
+            spineGrad.addColorStop(0.8, 'rgba(255, 106, 61, 0.15)');
+            spineGrad.addColorStop(1, 'rgba(255, 106, 61, 0)');
+            
+            // Draw spine core
+            ctx.beginPath();
+            ctx.moveTo(centerX, 0);
+            
+            for(let y = 0; y <= H; y += 5) {
+                const wave = Math.sin(y * 0.015 + time * 1.5 + scrollInfluence * Math.PI * 2) * 15 * breathe;
+                const secondWave = Math.sin(y * 0.008 - time * 0.8) * 8;
+                ctx.lineTo(centerX + wave + secondWave, y);
+            }
+            
+            ctx.strokeStyle = spineGrad;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Outer energy field
+            ctx.beginPath();
+            ctx.moveTo(centerX - 30, 0);
+            for(let y = 0; y <= H; y += 8) {
+                const wave = Math.sin(y * 0.012 + time * 1.2) * 25 * breathe;
+                ctx.lineTo(centerX + wave - 30, y);
+            }
+            ctx.strokeStyle = 'rgba(139, 92, 246, 0.08)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX + 30, 0);
+            for(let y = 0; y <= H; y += 8) {
+                const wave = Math.sin(y * 0.012 + time * 1.2 + Math.PI) * 25 * breathe;
+                ctx.lineTo(centerX + wave + 30, y);
+            }
+            ctx.stroke();
+            
+            // Spine nodes (chakra points)
+            spineNodes.forEach((node, i) => {
+                const pulse = Math.sin(time * 2 + node.pulse) * 0.5 + 0.5;
+                const wave = Math.sin(node.y * 0.015 + time * 1.5) * 15;
+                const x = node.baseX + wave;
+                const size = node.size * (0.8 + pulse * 0.4) * breathe;
+                
+                // Outer glow
+                const glow = ctx.createRadialGradient(x, node.y, 0, x, node.y, size * 4);
+                glow.addColorStop(0, `rgba(${node.color[0]}, ${node.color[1]}, ${node.color[2]}, ${0.3 * pulse})`);
+                glow.addColorStop(1, 'transparent');
+                ctx.fillStyle = glow;
+                ctx.fillRect(x - size * 4, node.y - size * 4, size * 8, size * 8);
+                
+                // Core node
+                ctx.beginPath();
+                ctx.arc(x, node.y, size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${node.color[0]}, ${node.color[1]}, ${node.color[2]}, ${0.6 + pulse * 0.4})`;
+                ctx.fill();
+                
+                // Inner bright core
+                ctx.beginPath();
+                ctx.arc(x, node.y, size * 0.4, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${0.5 + pulse * 0.5})`;
+                ctx.fill();
+            });
+        }
+
+        // Draw orbiting sigils (mobile)
+        function drawOrbitingSigils() {
+            const centerX = W / 2;
+            const breathe = Math.sin(time * 0.8) * 0.15 + 1;
+            
+            sigils.forEach((sigil, i) => {
+                sigil.angle += sigil.speed * 0.01;
+                const driftY = Math.sin(time * sigil.drift + i) * 50;
+                
+                const x = centerX + Math.cos(sigil.angle) * sigil.radius * breathe;
+                const y = (sigil.yOffset + driftY + scrollY * 0.1) % (H + 100) - 50;
+                
+                const distFromCenter = Math.abs(x - centerX);
+                const alphaBoost = touchActive ? 0.3 : 0;
+                const finalAlpha = (sigil.alpha + alphaBoost) * (1 - distFromCenter / W);
+                
+                drawSigil(x, y, sigil.size * breathe, sigil.type, finalAlpha, time * 0.3 + sigil.angle);
+            });
+        }
+
+        // Touch ripple effect
+        function drawTouchRipples() {
+            touchRipples = touchRipples.filter(r => r.alpha > 0);
+            touchRipples.forEach(ripple => {
+                ripple.radius += 3;
+                ripple.alpha -= 0.02;
+                
+                ctx.beginPath();
+                ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(251, 191, 36, ${ripple.alpha})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Inner sacred geometry burst
+                const sides = 6;
+                for(let i = 0; i < sides; i++) {
+                    const angle = (i / sides) * Math.PI * 2 + ripple.radius * 0.05;
+                    const x2 = ripple.x + Math.cos(angle) * ripple.radius * 0.7;
+                    const y2 = ripple.y + Math.sin(angle) * ripple.radius * 0.7;
+                    ctx.beginPath();
+                    ctx.moveTo(ripple.x, ripple.y);
+                    ctx.lineTo(x2, y2);
+                    ctx.strokeStyle = `rgba(139, 92, 246, ${ripple.alpha * 0.5})`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            });
+        }
+
+        // Desktop helix functions (kept from before)
         function drawHelixStrand(helix, offset, isSecondary) {
             const points = [];
             const segments = 80;
-            
             for(let i = 0; i < segments; i++) {
                 const t = i / segments;
                 const y = t * H * 1.4 - H * 0.2;
                 const wave = Math.sin(y * helix.frequency + time * helix.speed + helix.phase + offset) * helix.amplitude;
                 const x = helix.offsetX + wave;
-                
-                // Mouse interaction - strands bend away from cursor
-                const dx = x - mouse.x;
-                const dy = y - mouse.y;
+                const dx = x - mouse.x, dy = y - mouse.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 const influence = Math.max(0, 1 - dist / 200) * 40;
                 const bendX = dx / (dist || 1) * influence;
-                
                 points.push({ x: x + bendX, y, t });
             }
-            
-            // Draw the strand
             const col = isSecondary ? helix.color2 : helix.color1;
-            
             ctx.beginPath();
             ctx.moveTo(points[0].x, points[0].y);
             for(let i = 1; i < points.length - 1; i++) {
@@ -1082,48 +1232,36 @@
                 const yc = (points[i].y + points[i + 1].y) / 2;
                 ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
             }
-            
             const gradient = ctx.createLinearGradient(0, 0, 0, H);
             gradient.addColorStop(0, `rgba(${col[0]}, ${col[1]}, ${col[2]}, 0)`);
             gradient.addColorStop(0.3, `rgba(${col[0]}, ${col[1]}, ${col[2]}, 0.3)`);
             gradient.addColorStop(0.5, `rgba(${col[0]}, ${col[1]}, ${col[2]}, 0.5)`);
             gradient.addColorStop(0.7, `rgba(${col[0]}, ${col[1]}, ${col[2]}, 0.3)`);
             gradient.addColorStop(1, `rgba(${col[0]}, ${col[1]}, ${col[2]}, 0)`);
-            
             ctx.strokeStyle = gradient;
             ctx.lineWidth = isSecondary ? 1 : 1.5;
             ctx.stroke();
-            
             return points;
         }
 
         function drawConnectors(points1, points2, helix) {
             const step = 8;
             for(let i = 0; i < points1.length; i += step) {
-                const p1 = points1[i];
-                const p2 = points2[i];
+                const p1 = points1[i], p2 = points2[i];
                 if(!p1 || !p2) continue;
-                
-                const midX = (p1.x + p2.x) / 2;
-                const midY = (p1.y + p2.y) / 2;
-                
-                // Pulsing alpha based on position and time
+                const midX = (p1.x + p2.x) / 2, midY = (p1.y + p2.y) / 2;
                 const pulse = Math.sin(i * 0.1 + time * 2) * 0.5 + 0.5;
                 const alpha = 0.1 + pulse * 0.15;
-                
                 const gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
                 gradient.addColorStop(0, `rgba(${helix.color1[0]}, ${helix.color1[1]}, ${helix.color1[2]}, ${alpha})`);
                 gradient.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.5})`);
                 gradient.addColorStop(1, `rgba(${helix.color2[0]}, ${helix.color2[1]}, ${helix.color2[2]}, ${alpha})`);
-                
                 ctx.beginPath();
                 ctx.moveTo(p1.x, p1.y);
                 ctx.lineTo(p2.x, p2.y);
                 ctx.strokeStyle = gradient;
                 ctx.lineWidth = 0.5;
                 ctx.stroke();
-                
-                // Draw node at connection points
                 ctx.beginPath();
                 ctx.arc(midX, midY, 1.5 + pulse, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 2})`;
@@ -1131,11 +1269,12 @@
             }
         }
 
+        // Main draw loop
         function draw() {
             ctx.clearRect(0, 0, W, H);
             time += 0.016;
             
-            // Deep space gradient background enhancement
+            // Background nebulas
             const bg1 = ctx.createRadialGradient(W * 0.3, H * 0.2, 0, W * 0.3, H * 0.2, W * 0.5);
             bg1.addColorStop(0, 'rgba(139, 92, 246, 0.03)');
             bg1.addColorStop(1, 'transparent');
@@ -1147,80 +1286,61 @@
             bg2.addColorStop(1, 'transparent');
             ctx.fillStyle = bg2;
             ctx.fillRect(0, 0, W, H);
-            
-            const bg3 = ctx.createRadialGradient(W * 0.5, H * 0.5, 0, W * 0.5, H * 0.5, W * 0.6);
-            bg3.addColorStop(0, 'rgba(255, 106, 61, 0.015)');
-            bg3.addColorStop(1, 'transparent');
-            ctx.fillStyle = bg3;
-            ctx.fillRect(0, 0, W, H);
-            
-            // Draw each DNA helix
-            helixes.forEach(helix => {
-                const strand1 = drawHelixStrand(helix, 0, false);
-                const strand2 = drawHelixStrand(helix, Math.PI, true);
-                drawConnectors(strand1, strand2, helix);
-            });
-            
-            // Sacred geometry particles
-            sacredParticles.forEach(p => {
-                p.angle += p.speed * 0.02;
-                p.x += Math.sin(p.angle) * 0.3;
-                p.y += Math.cos(p.angle * 0.5) * 0.2;
+
+            if(isMobile) {
+                // MOBILE: Energy spine + orbiting sigils
+                drawEnergySpine();
+                drawOrbitingSigils();
+                drawTouchRipples();
+            } else {
+                // DESKTOP: DNA helixes
+                helixes.forEach(helix => {
+                    const strand1 = drawHelixStrand(helix, 0, false);
+                    const strand2 = drawHelixStrand(helix, Math.PI, true);
+                    drawConnectors(strand1, strand2, helix);
+                });
                 
-                // Wrap around
-                if(p.x < -50) p.x = W + 50;
-                if(p.x > W + 50) p.x = -50;
-                if(p.y < -50) p.y = H + 50;
-                if(p.y > H + 50) p.y = -50;
-                
-                const colorIndex = Math.floor(p.angle) % 3;
-                const colors = ['rgba(251, 191, 36, 0.4)', 'rgba(139, 92, 246, 0.4)', 'rgba(255, 106, 61, 0.4)'];
-                
-                drawSacredShape(p.x, p.y, p.size, p.type, p.alpha * (0.5 + Math.sin(time + p.angle) * 0.5), colors[colorIndex]);
-            });
-            
-            // Floating ancestral sparks - tiny glowing dots
-            const sparkCount = 30;
-            for(let i = 0; i < sparkCount; i++) {
-                const sparkX = (Math.sin(time * 0.5 + i * 0.5) * 0.5 + 0.5) * W;
-                const sparkY = (Math.cos(time * 0.3 + i * 0.7) * 0.5 + 0.5) * H;
-                const sparkAlpha = Math.sin(time * 2 + i) * 0.3 + 0.3;
-                
-                ctx.beginPath();
-                ctx.arc(sparkX, sparkY, 1, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${sparkAlpha})`;
-                ctx.fill();
+                // Floating sparks
+                for(let i = 0; i < 30; i++) {
+                    const sparkX = (Math.sin(time * 0.5 + i * 0.5) * 0.5 + 0.5) * W;
+                    const sparkY = (Math.cos(time * 0.3 + i * 0.7) * 0.5 + 0.5) * H;
+                    const sparkAlpha = Math.sin(time * 2 + i) * 0.3 + 0.3;
+                    ctx.beginPath();
+                    ctx.arc(sparkX, sparkY, 1, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${sparkAlpha})`;
+                    ctx.fill();
+                }
             }
             
             requestAnimationFrame(draw);
         }
 
-        // Click creates a burst of sacred geometry
-        document.addEventListener('click', e => {
-            for(let i = 0; i < 12; i++) {
-                const angle = (Math.PI * 2 / 12) * i;
-                sacredParticles.push({
-                    x: e.clientX,
-                    y: e.clientY,
-                    size: Math.random() * 4 + 2,
-                    alpha: 0.8,
-                    speed: Math.random() * 2 + 1,
-                    angle: angle,
-                    orbitRadius: 0,
-                    type: Math.floor(Math.random() * 4)
-                });
-                // Remove burst particles after animation
-                setTimeout(() => {
-                    if(sacredParticles.length > 80) sacredParticles.shift();
-                }, 2000);
+        // Touch/click handlers
+        function handleInteraction(x, y) {
+            if(isMobile) {
+                touchRipples.push({ x, y, radius: 5, alpha: 0.8 });
+                touchActive = true;
+                setTimeout(() => touchActive = false, 300);
             }
-        });
+        }
 
+        document.addEventListener('click', e => handleInteraction(e.clientX, e.clientY));
+        document.addEventListener('touchstart', e => {
+            const touch = e.touches[0];
+            handleInteraction(touch.clientX, touch.clientY);
+        });
+        
+        window.addEventListener('scroll', () => { scrollY = window.scrollY; });
         window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-        window.addEventListener('resize', () => { resize(); initHelixes(); initSacredParticles(); });
+        window.addEventListener('resize', () => { 
+            resize(); 
+            initHelixes(); 
+            initMobileElements(); 
+        });
+        
         resize();
         initHelixes();
-        initSacredParticles();
+        initMobileElements();
         draw();
 
         // Nav scroll state
