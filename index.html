@@ -350,25 +350,44 @@
             opacity: .45;
         }
 
-        /* Novel card with cover */
-        .card.novel-card {
+        /* Cards with preview images */
+        .card.has-preview {
             display: flex;
-            gap: 20px;
+            gap: 18px;
             align-items: center;
         }
-        .novel-cover {
-            width: 80px;
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 0 4px 20px rgba(255,106,61,.25);
+        .card-preview {
+            width: 90px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
             flex-shrink: 0;
+            opacity: 0.85;
+            transition: opacity 0.3s;
         }
-        .novel-content {
+        .card:hover .card-preview {
+            opacity: 1;
+        }
+        .card.gold .card-preview { box-shadow: 0 4px 16px rgba(251,191,36,.2); }
+        .card.purple .card-preview { box-shadow: 0 4px 16px rgba(139,92,246,.2); }
+        .card.cyan .card-preview { box-shadow: 0 4px 16px rgba(34,211,238,.2); }
+        .card.ember .card-preview { box-shadow: 0 4px 16px rgba(255,106,61,.2); }
+        
+        /* Novel cover is taller */
+        .card-preview.book-cover {
+            width: 70px;
+            height: 100px;
+            object-fit: cover;
+        }
+        
+        .card-content {
             flex: 1;
+            min-width: 0;
         }
-        @media(max-width: 480px) {
-            .card.novel-card { flex-direction: column; text-align: center; }
-            .novel-cover { width: 100px; }
+        @media(max-width: 520px) {
+            .card.has-preview { flex-direction: column; text-align: center; }
+            .card-preview { width: 120px; height: 80px; }
+            .card-preview.book-cover { width: 80px; height: 115px; }
         }
 
         /* ─── SOUL MAP CALLOUT ─── */
@@ -705,23 +724,27 @@
                     <div class="card-tag">Free · Players Lounge · OG Spark</div>
                 </a>
 
-                <a href="https://soul-maps.thefirstspark.shop" target="_blank" class="card purple">
-                    <div class="card-icon">✦</div>
-                    <div class="card-name">Soul Maps</div>
-                    <div class="card-desc">Your personal numerological blueprint — Life Path, Expression, Soul Urge — decoded by hand, just for you.</div>
-                    <div class="card-tag">$22 · One-time · Yours forever</div>
+                <a href="https://soul-maps.thefirstspark.shop" target="_blank" class="card purple has-preview">
+                    <img src="/preview-soulmaps.png" alt="Soul Maps Archive" class="card-preview">
+                    <div class="card-content">
+                        <div class="card-name">Soul Maps</div>
+                        <div class="card-desc">Your personal numerological blueprint — Life Path, Expression, Soul Urge — decoded by hand, just for you.</div>
+                        <div class="card-tag">$22 · One-time · Yours forever</div>
+                    </div>
                 </a>
 
-                <a href="https://sparkverse.thefirstspark.shop" target="_blank" class="card cyan">
-                    <div class="card-icon">⬡</div>
-                    <div class="card-name">Sparkverse</div>
-                    <div class="card-desc">Interactive consciousness tools and orbital interfaces. Live prototype — the foundation is already built.</div>
-                    <div class="card-tag">Live Prototype · More coming</div>
+                <a href="https://sparkverse.thefirstspark.shop" target="_blank" class="card cyan has-preview">
+                    <img src="/preview-sparkverse.png" alt="Sparkverse Interface" class="card-preview">
+                    <div class="card-content">
+                        <div class="card-name">Sparkverse</div>
+                        <div class="card-desc">Interactive consciousness tools and orbital interfaces. Live prototype — the foundation is already built.</div>
+                        <div class="card-tag">Live Prototype · More coming</div>
+                    </div>
                 </a>
 
-                <a href="https://whop.com/sparkverse-511c/the-first-spark-genesis-of-the-sparkverse-the-novel/" target="_blank" class="card ember novel-card">
-                    <img src="/novel-cover.avif" alt="The First Spark: Genesis of the Sparkverse" class="novel-cover">
-                    <div class="novel-content">
+                <a href="https://whop.com/sparkverse-511c/the-first-spark-genesis-of-the-sparkverse-the-novel/" target="_blank" class="card ember has-preview">
+                    <img src="/novel-cover.avif" alt="The First Spark: Genesis of the Sparkverse" class="card-preview book-cover">
+                    <div class="card-content">
                         <div class="card-name">The Novel</div>
                         <div class="card-desc">Genesis of the Sparkverse — the origin story. Where consciousness technology meets fiction. Out now.</div>
                         <div class="card-tag">New Release · Available Now</div>
