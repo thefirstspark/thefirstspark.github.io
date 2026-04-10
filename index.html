@@ -350,6 +350,27 @@
             opacity: .45;
         }
 
+        /* Novel card with cover */
+        .card.novel-card {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .novel-cover {
+            width: 80px;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(255,106,61,.25);
+            flex-shrink: 0;
+        }
+        .novel-content {
+            flex: 1;
+        }
+        @media(max-width: 480px) {
+            .card.novel-card { flex-direction: column; text-align: center; }
+            .novel-cover { width: 100px; }
+        }
+
         /* ─── SOUL MAP CALLOUT ─── */
         .soul-callout {
             border: 1px solid rgba(251,191,36,.3);
@@ -698,11 +719,13 @@
                     <div class="card-tag">Live Prototype · More coming</div>
                 </a>
 
-                <a href="https://whop.com/sparkverse-511c/the-first-spark-genesis-of-the-sparkverse-the-novel/" target="_blank" class="card ember">
-                    <div class="card-icon">📖</div>
-                    <div class="card-name">The Novel</div>
-                    <div class="card-desc">Genesis of the Sparkverse — the origin story. Where consciousness technology meets fiction. Out now.</div>
-                    <div class="card-tag">New Release · Available Now</div>
+                <a href="https://whop.com/sparkverse-511c/the-first-spark-genesis-of-the-sparkverse-the-novel/" target="_blank" class="card ember novel-card">
+                    <img src="/novel-cover.avif" alt="The First Spark: Genesis of the Sparkverse" class="novel-cover">
+                    <div class="novel-content">
+                        <div class="card-name">The Novel</div>
+                        <div class="card-desc">Genesis of the Sparkverse — the origin story. Where consciousness technology meets fiction. Out now.</div>
+                        <div class="card-tag">New Release · Available Now</div>
+                    </div>
                 </a>
             </div>
         </div>
