@@ -539,6 +539,58 @@
             border-color: var(--spark);
         }
 
+        /* ─── FEATURED IN ─── */
+        .featured-in {
+            text-align: center;
+            padding: 50px 0;
+            background: rgba(251,191,36,.02);
+            border-top: 1px solid rgba(251,191,36,.08);
+            border-bottom: 1px solid rgba(251,191,36,.08);
+        }
+        .featured-in-label {
+            font-size: .5em;
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 24px;
+        }
+        .featured-in-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,.03);
+            border: 1px solid rgba(251,191,36,.15);
+            border-radius: 12px;
+            padding: 24px 36px;
+            text-decoration: none;
+            transition: all .3s;
+        }
+        .featured-in-card:hover {
+            border-color: var(--spark);
+            box-shadow: 0 8px 32px rgba(251,191,36,.12);
+            transform: translateY(-2px);
+        }
+        .featured-in-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--spark);
+            letter-spacing: .1em;
+        }
+        .featured-in-text {
+            text-align: left;
+        }
+        .featured-in-title {
+            font-size: .7em;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+        .featured-in-date {
+            font-size: .55em;
+            color: var(--dim);
+            letter-spacing: .15em;
+        }
+
         /* ─── FOOTER ─── */
         footer {
             position: relative;
@@ -751,6 +803,20 @@
                 </div>
             </div>
             <a href="mailto:thefirstspark@proton.me?subject=Press Inquiry" class="press-cta">Press Inquiries →</a>
+        </div>
+    </section>
+
+    <!-- FEATURED IN -->
+    <section class="featured-in">
+        <div class="wrap">
+            <div class="featured-in-label">As Featured In</div>
+            <a href="https://voyageohio.com/interview/conversations-with-katelin-puzakulics/" target="_blank" class="featured-in-card">
+                <div class="featured-in-logo">VOYAGE<br>OHIO</div>
+                <div class="featured-in-text">
+                    <div class="featured-in-title">"Conversations with Katelin Puzakulics"</div>
+                    <div class="featured-in-date">Hidden Gems · March 2026</div>
+                </div>
+            </a>
         </div>
     </section>
 
