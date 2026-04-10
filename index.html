@@ -290,7 +290,7 @@
         /* ─── CARDS (3 only) ─── */
         .cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
         @media(max-width: 680px) {
@@ -310,10 +310,12 @@
         .card.gold  { border-color: rgba(251,191,36,.25); }
         .card.purple{ border-color: rgba(139,92,246,.25); }
         .card.cyan  { border-color: rgba(34,211,238,.25); }
+        .card.ember { border-color: rgba(255,106,61,.25); }
 
         .card.gold:hover  { border-color: var(--spark);  box-shadow: 0 8px 32px rgba(251,191,36,.15); }
         .card.purple:hover{ border-color: var(--nebula); box-shadow: 0 8px 32px rgba(139,92,246,.15); }
         .card.cyan:hover  { border-color: var(--cyan);   box-shadow: 0 8px 32px rgba(34,211,238,.15); }
+        .card.ember:hover { border-color: #FF6A3D;       box-shadow: 0 8px 32px rgba(255,106,61,.15); }
 
         .card-icon {
             font-size: 1.6em;
@@ -332,6 +334,7 @@
         .card.gold   .card-name { color: var(--spark); }
         .card.purple .card-name { color: var(--nebula); }
         .card.cyan   .card-name { color: var(--cyan); }
+        .card.ember  .card-name { color: #FF6A3D; }
 
         .card-desc {
             font-size: .75em;
@@ -618,7 +621,7 @@
     <section id="explore">
         <div class="wrap">
             <div class="sec-label">◈ &nbsp; What's Here</div>
-            <h2 class="sec-title">Three Ways In</h2>
+            <h2 class="sec-title">Four Ways In</h2>
             <p class="sec-sub">Start wherever you are. Every path leads to the same place.</p>
 
             <div class="cards">
@@ -641,6 +644,13 @@
                     <div class="card-name">Sparkverse</div>
                     <div class="card-desc">Interactive consciousness tools and orbital interfaces. Live prototype — the foundation is already built.</div>
                     <div class="card-tag">Live Prototype · More coming</div>
+                </a>
+
+                <a href="https://whop.com/sparkverse-511c/the-first-spark-genesis-of-the-sparkverse-the-novel/" target="_blank" class="card ember">
+                    <div class="card-icon">📖</div>
+                    <div class="card-name">The Novel</div>
+                    <div class="card-desc">Genesis of the Sparkverse — the origin story. Where consciousness technology meets fiction. Out now.</div>
+                    <div class="card-tag">New Release · Available Now</div>
                 </a>
             </div>
         </div>
