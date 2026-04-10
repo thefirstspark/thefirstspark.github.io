@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh repo:*)",
+      "Bash(grep -l \"<title>\" /c/Users/Katel/Desktop/ALL_HTML_MASTER/soul-maps/*.html)",
+      "Bash(xargs -I{} bash -c 'echo \"=== {} ===\" && grep -m1 \"<title>\" \"{}\"')",
+      "Bash(xargs grep:*)"
+    ]
+  }
+}
