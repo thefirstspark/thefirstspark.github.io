@@ -1,718 +1,677 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Codex | The First Spark</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --space-black: #0a0a0f;
-            --deep-void: #12121a;
-            --sacred-gold: #d4af37;
-            --electric-purple: #8b5cf6;
-            --cyan-glow: #22d3ee;
-            --soft-white: #e8e8e8;
-            --muted: #666;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Codex — The First Spark</title>
+<meta name="description" content="The Source Code of Reality. 96 projects. 34 consciousness tools. One living ecosystem built to re-code what we think is possible.">
+<meta property="og:title" content="Project Codex — The First Spark">
+<meta property="og:description" content="The Source Code of Reality. 96 projects. 34 consciousness tools. One living ecosystem.">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SKL8XQ51ZH', {
+    page_title: 'Project Codex',
+    page_location: window.location.href,
+    send_page_view: true
+  });
+</script>
 
-        body {
-            font-family: 'Space Mono', monospace;
-            background: var(--space-black);
-            color: var(--soft-white);
-            min-height: 100vh;
-            line-height: 1.6;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-        /* Star background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 100%),
-                radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.2) 0%, transparent 100%),
-                radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.3) 0%, transparent 100%),
-                radial-gradient(1px 1px at 80% 90%, rgba(255,255,255,0.2) 0%, transparent 100%),
-                radial-gradient(2px 2px at 15% 85%, rgba(212,175,55,0.15) 0%, transparent 100%),
-                radial-gradient(2px 2px at 85% 15%, rgba(139,92,246,0.15) 0%, transparent 100%);
-            background-size: 200px 200px;
-            pointer-events: none;
-            z-index: 0;
-        }
+<style>
+:root {
+  --void: #060608;
+  --gold: #F3B23A;
+  --sacred-gold: #d4af37;
+  --violet: #6B4DF2;
+  --cyan: #26E4D8;
+  --ember: #FF6A3D;
+  --soft-white: #F0EDE6;
+  --muted: rgba(240,237,230,0.45);
+  --dim: rgba(240,237,230,0.15);
+}
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-            border-bottom: 1px solid rgba(212,175,55,0.2);
-        }
+body {
+  background: var(--void);
+  color: var(--soft-white);
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
 
-        h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--sacred-gold), var(--electric-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
+/* ── STARFIELD ── */
+.starfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.starfield canvas { width: 100%; height: 100%; }
 
-        .subtitle {
-            color: var(--muted);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+/* ── AMBIENT GLOWS ── */
+.glow-top {
+  position: fixed;
+  top: -200px; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 500px;
+  background: radial-gradient(ellipse, rgba(107,77,242,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-bottom {
+  position: fixed;
+  bottom: -200px; right: -100px;
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(38,228,216,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
 
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
+/* ── CONTAINER ── */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 6rem;
+}
 
-        .stat {
-            text-align: center;
-        }
+/* ── HEADER ── */
+.header {
+  text-align: center;
+  padding: 5rem 0 3rem;
+}
+.header .eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  opacity: 0.7;
+  margin-bottom: 1.2rem;
+}
+.header h1 {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--ember) 45%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+}
+.header .tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 3rem;
+}
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--sacred-gold);
-        }
+/* ── DIVIDER ── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(243,178,58,0.3), transparent);
+  margin: 0 auto 3rem;
+}
 
-        .stat-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--muted);
-        }
+/* ── STATS BAR ── */
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  flex-wrap: wrap;
+  padding: 2.5rem 2rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--dim);
+  border-radius: 2px;
+  margin-bottom: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.stats-bar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.5;
+}
+.stat {
+  text-align: center;
+}
+.stat-number {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold), var(--sacred-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 
-        /* Search and Filter */
-        .controls {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  opacity: 0.6;
+  margin-bottom: 0.8rem;
+}
 
-        .search-box {
-            flex: 1;
-            max-width: 400px;
-            position: relative;
-        }
+/* ── SECTION HEADER ── */
+.section-header {
+  margin-bottom: 2.5rem;
+}
+.section-header h2 {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--soft-white);
+  margin-bottom: 0.5rem;
+}
+.section-header p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 680px;
+}
 
-        .search-box input {
-            width: 100%;
-            padding: 0.75rem 1rem 0.75rem 2.5rem;
-            background: var(--deep-void);
-            border: 1px solid rgba(212,175,55,0.3);
-            border-radius: 4px;
-            color: var(--soft-white);
-            font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
-        }
+/* ── FULL-WIDTH SECTION BLOCK ── */
+.section-block {
+  margin-bottom: 4rem;
+  padding: 2.5rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--dim);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s ease;
+}
+.section-block:hover {
+  border-color: rgba(243,178,58,0.2);
+}
+.section-block .accent-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
 
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--sacred-gold);
-            box-shadow: 0 0 20px rgba(212,175,55,0.1);
-        }
+/* ── TWO-COL GRID ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+@media (max-width: 720px) {
+  .two-col { grid-template-columns: 1fr; }
+}
 
-        .search-box::before {
-            content: '⌘';
-            position: absolute;
-            left: 0.75rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--muted);
-        }
+/* ── THREE-COL GRID ── */
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+@media (max-width: 860px) {
+  .three-col { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .three-col { grid-template-columns: 1fr; }
+}
 
-        .filter-pills {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+/* ── CARD ── */
+.card {
+  padding: 2rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--dim);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+.card:hover {
+  border-color: rgba(243,178,58,0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.card:hover::before { opacity: 1; }
 
-        .filter-pill {
-            padding: 0.5rem 1rem;
-            background: transparent;
-            border: 1px solid rgba(139,92,246,0.3);
-            border-radius: 20px;
-            color: var(--soft-white);
-            font-family: 'Space Mono', monospace;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.card .icon {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+.card h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--soft-white);
+  margin-bottom: 0.6rem;
+}
+.card p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.card .badge {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid;
+  border-radius: 20px;
+  opacity: 0.7;
+}
 
-        .filter-pill:hover,
-        .filter-pill.active {
-            background: var(--electric-purple);
-            border-color: var(--electric-purple);
-        }
+/* accent colors per card */
+.card.gold::before { background: linear-gradient(90deg, var(--gold), transparent); }
+.card.violet::before { background: linear-gradient(90deg, var(--violet), transparent); }
+.card.cyan::before { background: linear-gradient(90deg, var(--cyan), transparent); }
+.card.ember::before { background: linear-gradient(90deg, var(--ember), transparent); }
+.card.gold .badge { border-color: var(--gold); color: var(--gold); }
+.card.violet .badge { border-color: var(--violet); color: var(--violet); }
+.card.cyan .badge { border-color: var(--cyan); color: var(--cyan); }
+.card.ember .badge { border-color: var(--ember); color: var(--ember); }
 
-        /* Category Sections */
-        .category {
-            margin-bottom: 3rem;
-        }
+/* ── TOOLS STRIP ── */
+.tools-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+.tool-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(38,228,216,0.25);
+  color: var(--cyan);
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+.tool-tag:hover { opacity: 1; }
 
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(139,92,246,0.2);
-        }
+/* ── COMING SOON BANNER ── */
+.coming-soon {
+  margin-bottom: 4rem;
+  padding: 3rem 2.5rem;
+  background: rgba(107,77,242,0.06);
+  border: 1px solid rgba(107,77,242,0.25);
+  border-radius: 2px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.coming-soon::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--violet), var(--cyan), transparent);
+}
+.coming-soon .eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--violet);
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+.coming-soon h2 {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+.coming-soon p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+}
+.coming-soon .pills {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.coming-soon .pill {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid rgba(107,77,242,0.4);
+  color: rgba(240,237,230,0.65);
+}
 
-        .category-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--electric-purple), var(--cyan-glow));
-            border-radius: 8px;
-            font-size: 1.2rem;
-        }
+/* ── CTA ROW ── */
+.cta-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 5rem;
+}
+.btn {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  border: 1px solid;
+  transition: all 0.3s ease;
+  display: inline-block;
+  cursor: pointer;
+}
+.btn-gold {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: transparent;
+}
+.btn-gold:hover {
+  background: rgba(243,178,58,0.1);
+  box-shadow: 0 0 30px rgba(243,178,58,0.15);
+}
+.btn-violet {
+  border-color: var(--violet);
+  color: var(--violet);
+  background: transparent;
+}
+.btn-violet:hover {
+  background: rgba(107,77,242,0.1);
+  box-shadow: 0 0 30px rgba(107,77,242,0.2);
+}
 
-        .category h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--soft-white);
-        }
-
-        .category-count {
-            margin-left: auto;
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-
-        /* Project Grid */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-        }
-
-        .project-card {
-            background: var(--deep-void);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 8px;
-            padding: 1.25rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--sacred-gold), var(--electric-purple));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card:hover {
-            border-color: rgba(212,175,55,0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .project-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--soft-white);
-            margin-bottom: 0.5rem;
-        }
-
-        .project-desc {
-            font-size: 0.75rem;
-            color: var(--muted);
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .project-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 0.3rem;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            padding: 0.2rem 0.5rem;
-            background: rgba(139,92,246,0.1);
-            border-radius: 3px;
-            font-size: 0.65rem;
-            color: var(--electric-purple);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .tag.gold { background: rgba(212,175,55,0.1); color: var(--sacred-gold); }
-        .tag.cyan { background: rgba(34,211,238,0.1); color: var(--cyan-glow); }
-
-        .project-link {
-            padding: 0.4rem 0.8rem;
-            background: transparent;
-            border: 1px solid var(--sacred-gold);
-            border-radius: 4px;
-            color: var(--sacred-gold);
-            text-decoration: none;
-            font-size: 0.7rem;
-            transition: all 0.3s ease;
-        }
-
-        .project-link:hover {
-            background: var(--sacred-gold);
-            color: var(--space-black);
-        }
-
-        /* Status Indicators */
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            font-size: 0.65rem;
-            margin-left: 0.5rem;
-        }
-
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-        }
-
-        .status.live .status-dot { background: #22c55e; }
-        .status.wip .status-dot { background: var(--sacred-gold); }
-        .status.planned .status-dot { background: var(--muted); }
-
-        /* Coming Soon Section */
-        .coming-soon {
-            background: linear-gradient(135deg, rgba(139,92,246,0.05), rgba(34,211,238,0.05));
-            border: 1px dashed rgba(139,92,246,0.3);
-            border-radius: 8px;
-            padding: 1.5rem;
-        }
-
-        .coming-soon-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .coming-soon-item:last-child {
-            border-bottom: none;
-        }
-
-        .coming-soon-icon {
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(139,92,246,0.2);
-            border-radius: 6px;
-        }
-
-        .coming-soon-text {
-            flex: 1;
-        }
-
-        .coming-soon-title {
-            font-size: 0.9rem;
-            color: var(--soft-white);
-        }
-
-        .coming-soon-desc {
-            font-size: 0.7rem;
-            color: var(--muted);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(212,175,55,0.1);
-            color: var(--muted);
-            font-size: 0.75rem;
-        }
-
-        footer a {
-            color: var(--sacred-gold);
-            text-decoration: none;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .stats-bar { gap: 1.5rem; }
-            .container { padding: 1rem; }
-        }
-    </style>
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 1px solid var(--dim);
+}
+footer p {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.5;
+}
+footer a {
+  color: var(--gold);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+footer a:hover { opacity: 1; }
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1>⚡ Project Codex</h1>
-            <p class="subtitle">The First Spark Build Index</p>
-            <div class="stats-bar">
-                <div class="stat">
-                    <div class="stat-number" id="totalCount">0</div>
-                    <div class="stat-label">Total Projects</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number" id="liveCount">0</div>
-                    <div class="stat-label">Live</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number" id="toolCount">0</div>
-                    <div class="stat-label">Tools</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number" id="soulMapCount">0</div>
-                    <div class="stat-label">Soul Maps</div>
-                </div>
-            </div>
-        </header>
 
-        <div class="controls">
-            <div class="search-box">
-                <input type="text" id="search" placeholder="Search projects...">
-            </div>
-            <div class="filter-pills">
-                <button class="filter-pill active" data-filter="all">All</button>
-                <button class="filter-pill" data-filter="tool">Tools</button>
-                <button class="filter-pill" data-filter="investor">Investor</button>
-                <button class="filter-pill" data-filter="soul-map">Soul Maps</button>
-                <button class="filter-pill" data-filter="mythos">Mythos</button>
-                <button class="filter-pill" data-filter="internal">Internal</button>
-            </div>
-        </div>
+<!-- Starfield -->
+<div class="starfield"><canvas id="stars"></canvas></div>
+<div class="glow-top"></div>
+<div class="glow-bottom"></div>
 
-        <main id="projectsContainer">
-            <!-- Categories will be injected here -->
-        </main>
+<div class="container">
 
-        <footer>
-            <p>Built with 🔥 by <a href="https://thefirstspark.shop">The First Spark</a></p>
-            <p style="margin-top: 0.5rem;">Reality is programmable. This is the source code.</p>
-        </footer>
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="eyebrow">The First Spark · Living Ecosystem</div>
+    <h1>Project Codex</h1>
+    <p class="tagline">The Source Code of Reality</p>
+    <div class="divider"></div>
+  </header>
+
+  <!-- ── STATS BAR ── -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-number">96</div>
+      <div class="stat-label">Total Projects</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">90</div>
+      <div class="stat-label">Live Projects</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">34</div>
+      <div class="stat-label">Consciousness Tools</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">5</div>
+      <div class="stat-label">Soul Maps Delivered</div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 1: PROJECTS TO RE-CODE REALITY ── -->
+  <div class="section-block">
+    <div class="accent-bar" style="background: linear-gradient(90deg, var(--gold), var(--ember), transparent);"></div>
+    <div class="section-label">Archive</div>
+    <div class="section-header">
+      <h2>Projects to Re-Code Reality</h2>
+      <p>A vast living library of 90 builds — tools, soul maps, investor materials, mythos chapters, and interactive experiences — each designed to fracture the ordinary and reveal the architecture beneath.</p>
+    </div>
+    <div class="tools-strip">
+      <span class="tool-tag">90 Live Builds</span>
+      <span class="tool-tag">33 Tools</span>
+      <span class="tool-tag">6 Soul Maps</span>
+      <span class="tool-tag">Investor Materials</span>
+      <span class="tool-tag">Mythos Chapters</span>
+      <span class="tool-tag">Interactive Experiences</span>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: CONSCIOUSNESS + SCIOUSNESS (two-col) ── -->
+  <div class="two-col">
+
+    <div class="card gold">
+      <span class="icon">🧠</span>
+      <h3>The Consciousness</h3>
+      <p>34 interactive modules ranging from archetype decoders and reality debugging sandboxes to selector rituals, entanglement maps, and soul-map interfaces — each tool a lens on a different layer of awareness.</p>
+      <span class="badge">34 Tools Live</span>
+      <div class="tools-strip" style="margin-top:1.2rem;">
+        <span class="tool-tag">Archetype Decoders</span>
+        <span class="tool-tag">Reality Debugging</span>
+        <span class="tool-tag">Selector Rituals</span>
+        <span class="tool-tag">Soul Contracts</span>
+      </div>
     </div>
 
-    <script>
-        // Project Data - Edit this to add/remove/update projects
-        const projects = {
-            "Consciousness Tools": {
-                icon: "🧠",
-                items: [
-                    { name: "Soul Map Interface", desc: "Core soul mapping engine - archetype + numerology decoder", url: "https://thefirstspark.shop/soul-map.html", tags: ["core", "tool"], status: "live" },
-                    { name: "Archetype Discovery", desc: "Interactive journey to reveal your archetype configuration", url: "https://thefirstspark.shop/archetype-discovery.html", tags: ["tool"], status: "live" },
-                    { name: "Consciousness Playground", desc: "Sandbox for reality debugging experiments", url: "https://thefirstspark.shop/consciousness-playground.html", tags: ["tool"], status: "live" },
-                    { name: "Selector Interface", desc: "The Selector Model operating system explorer", url: "https://thefirstspark.shop/selector-interface.html", tags: ["tool", "selector"], status: "live" },
-                    { name: "Selector Theory", desc: "Deep dive into selector consciousness mechanics", url: "https://thefirstspark.shop/selector-theory.html", tags: ["mythos", "selector"], status: "live" },
-                    { name: "Selector Ritual", desc: "Guided ritual for selector activation", url: "https://thefirstspark.shop/selector-ritual.html", tags: ["ritual", "selector"], status: "live" },
-                    { name: "Collapse Protocol", desc: "Pattern interruption & reality reset tool", url: "https://thefirstspark.shop/collapse.html", tags: ["tool"], status: "live" },
-                    { name: "Daily Reset", desc: "Morning consciousness calibration ritual", url: "https://thefirstspark.shop/daily-reset.html", tags: ["ritual", "tool"], status: "live" },
-                    { name: "Energy Check-In", desc: "Real-time frequency diagnostic", url: "https://thefirstspark.shop/energy-checkin.html", tags: ["tool"], status: "live" },
-                    { name: "Intention Setter", desc: "Reality programming interface for intentions", url: "https://thefirstspark.shop/intention-setter.html", tags: ["tool"], status: "live" },
-                    { name: "Karma Calculator", desc: "Karmic pattern analysis tool", url: "https://thefirstspark.shop/karma-calculator.html", tags: ["tool"], status: "live" },
-                    { name: "Lunar Wisdom", desc: "Moon phase consciousness guidance", url: "https://thefirstspark.shop/lunar-wisdom.html", tags: ["tool"], status: "live" },
-                    { name: "Oracle", desc: "Divination interface for consciousness queries", url: "https://thefirstspark.shop/oracle.html", tags: ["tool"], status: "live" },
-                    { name: "Oracle Consciousness", desc: "Advanced oracle with consciousness integration", url: "https://thefirstspark.shop/oracle-consciousness.html", tags: ["tool"], status: "live" },
-                    { name: "Pause Chamber", desc: "Mindfulness reset space", url: "https://thefirstspark.shop/pause-chamber.html", tags: ["tool", "ritual"], status: "live" },
-                    { name: "Render Engine", desc: "Reality rendering visualization", url: "https://thefirstspark.shop/render-engine.html", tags: ["tool", "selector"], status: "live" },
-                    { name: "Sigil Generator", desc: "Personal sigil creation tool", url: "https://thefirstspark.shop/sigil.html", tags: ["tool"], status: "live" },
-                    { name: "Timeline Navigator", desc: "Temporal awareness and timeline mapping", url: "https://thefirstspark.shop/timeline.html", tags: ["tool"], status: "live" },
-                    { name: "Void Portal", desc: "Entry point to the void space", url: "https://thefirstspark.shop/void-portal.html", tags: ["mythos"], status: "live" },
-                    { name: "Zone Codex", desc: "Flow state activation protocols", url: "https://thefirstspark.shop/zone-codex.html", tags: ["tool"], status: "live" },
-                    { name: "Five Paths Explorer", desc: "Multi-path consciousness navigation", url: "https://thefirstspark.shop/five-paths-explorer.html", tags: ["tool"], status: "live" },
-                    { name: "Quantum Echo Chamber", desc: "Reality feedback loop visualizer", url: "https://thefirstspark.shop/quantum_echo_chamber.html", tags: ["tool"], status: "live" },
-                    { name: "Spark Protocol", desc: "Core activation protocol dashboard", url: "https://thefirstspark.shop/spark-protocol.html", tags: ["core", "tool"], status: "live" },
-                    { name: "Sovereignty Dashboard", desc: "Personal sovereignty tracking system", url: "https://thefirstspark.shop/sovereignty-dashboard.html", tags: ["tool"], status: "live" },
-                    { name: "Sovereignty Pillars", desc: "Foundation principles of sovereignty", url: "https://thefirstspark.shop/sovereignty-pillars.html", tags: ["mythos"], status: "live" },
-                    { name: "Pattern Recognition", desc: "Pattern awareness interface", url: "https://thefirstspark.shop/patterns.html", tags: ["tool"], status: "live" },
-                    { name: "Lineage Debugger", desc: "Ancestral pattern debugging tool", url: "https://thefirstspark.shop/lineage.html", tags: ["tool"], status: "live" },
-                    { name: "Numbers", desc: "Numerology calculation interface", url: "https://thefirstspark.shop/numbers.html", tags: ["tool"], status: "live" },
-                    { name: "Trinity", desc: "Three-fold consciousness framework", url: "https://thefirstspark.shop/trinity.html", tags: ["mythos"], status: "live" },
-                    { name: "Equilibrium", desc: "Balance calibration tool", url: "https://thefirstspark.shop/equilibrium.html", tags: ["tool"], status: "live" },
-                    { name: "Journal", desc: "Consciousness journaling interface", url: "https://thefirstspark.shop/journal.html", tags: ["tool"], status: "live" },
-                    { name: "Algorithmic Soul", desc: "Algorithm-based soul pattern analyzer", url: "https://thefirstspark.shop/algorithmic_soul.html", tags: ["tool"], status: "live" },
-                    { name: "Selector Entanglement", desc: "Multi-selector connection mapping", url: "https://thefirstspark.shop/selector-entanglement.html", tags: ["tool", "selector"], status: "live" },
-                    { name: "Cosmic Stairway", desc: "Ascension pathway visualization", url: "https://thefirstspark.shop/cosmic-stairway.html", tags: ["mythos"], status: "live" },
-                ]
-            },
-            "Investor & Business": {
-                icon: "💎",
-                items: [
-                    { name: "Investor Deck v2", desc: "Current pitch deck - SAFE at pre-money valuation", url: "https://thefirstspark.shop/investor-deck-v2.html", tags: ["investor", "core"], status: "live" },
-                    { name: "Invest Page", desc: "Public-facing investment opportunity page", url: "https://thefirstspark.shop/invest.html", tags: ["investor"], status: "live" },
-                    { name: "TFS Valuation", desc: "Valuation breakdown and analysis", url: "https://thefirstspark.shop/tfs-valuation.html", tags: ["investor", "internal"], status: "live" },
-                    { name: "Investor Call Companion", desc: "Tool for live investor call support", url: "https://thefirstspark.shop/investor-call-companion.html", tags: ["investor", "internal"], status: "live" },
-                    { name: "The Raise", desc: "Fundraising dashboard and tracker", url: "https://thefirstspark.shop/theraise.html", tags: ["investor", "internal"], status: "live" },
-                    { name: "TFS Pitch Deck (Sparkverse)", desc: "Alternative pitch deck version", url: "https://sparkverse.thefirstspark.shop/The_First_Spark_Pitch_Deck_200K.html", tags: ["investor"], status: "live" },
-                    { name: "One Sheet", desc: "Single-page investor handout", url: "https://sparkverse.thefirstspark.shop/TFS-Investor-OneSheet.html", tags: ["investor"], status: "live" },
-                    { name: "Spark Money Tracker", desc: "Financial tracking dashboard", url: "https://thefirstspark.shop/spark-money-tracker.html", tags: ["internal", "tool"], status: "live" },
-                ]
-            },
-            "Soul Maps (Delivered)": {
-                icon: "🗺️",
-                items: [
-                    { name: "KJP Soul Map (Kate)", desc: "Founder soul map - the original", url: "https://soul-maps.thefirstspark.shop/kjp519.html", tags: ["soul-map", "core"], status: "live" },
-                    { name: "Devon Soul Map", desc: "Soul map for Devon", url: "https://soul-maps.thefirstspark.shop/devon_soul_map.html", tags: ["soul-map"], status: "live" },
-                    { name: "Mason Soul Map", desc: "Soul map for Mason", url: "https://soul-maps.thefirstspark.shop/mason_soul_map.html", tags: ["soul-map"], status: "live" },
-                    { name: "Aubrey Thomas", desc: "Soul map delivery", url: "https://soul-maps.thefirstspark.shop/aubrey_thomas.html", tags: ["soul-map"], status: "live" },
-                    { name: "Thomas Birthday", desc: "Birthday soul map special", url: "https://soul-maps.thefirstspark.shop/thomas_birthday_soul_map.html", tags: ["soul-map"], status: "live" },
-                ]
-            },
-            "Mythos & Origin": {
-                icon: "📜",
-                items: [
-                    { name: "Origin Story", desc: "The First Spark origin narrative", url: "https://thefirstspark.shop/origin.html", tags: ["mythos", "core"], status: "live" },
-                    { name: "Origin Key", desc: "Unlocking the origin mysteries", url: "https://thefirstspark.shop/origin_key.html", tags: ["mythos"], status: "live" },
-                    { name: "Source Architecture", desc: "Source code of reality framework", url: "https://thefirstspark.shop/source.html", tags: ["mythos", "core"], status: "live" },
-                    { name: "Genesis", desc: "Genesis chapter of the mythos", url: "https://thefirstspark.shop/genesis.html", tags: ["mythos"], status: "live" },
-                    { name: "The Spark Keeper (KJP)", desc: "Kate's archetype page", url: "https://thefirstspark.shop/kjp-the-spark-keeper.html", tags: ["mythos"], status: "live" },
-                    { name: "Devon's Page", desc: "Devon's mythos presence", url: "https://thefirstspark.shop/devon.html", tags: ["mythos"], status: "live" },
-                    { name: "Mason's Page", desc: "Mason's mythos presence", url: "https://thefirstspark.shop/mason.html", tags: ["mythos"], status: "live" },
-                    { name: "Katelin Oracle", desc: "Personal oracle tool", url: "https://thefirstspark.shop/katelin.html", tags: ["tool", "personal"], status: "live" },
-                    { name: "Phoenix Reset 2026", desc: "2026 rebirth narrative", url: "https://thefirstspark.shop/phoenix-reset-2026.html", tags: ["mythos"], status: "live" },
-                    { name: "Year in Review", desc: "Kate's year reflection", url: "https://thefirstspark.shop/katelin-year-in-review.html", tags: ["personal"], status: "live" },
-                    { name: "Ebook", desc: "The First Spark ebook", url: "https://thefirstspark.shop/ebook.html", tags: ["mythos", "content"], status: "live" },
-                    { name: "TFS Cover", desc: "Book/brand cover design", url: "https://sparkverse.thefirstspark.shop/The_First_Spark_Cover.html", tags: ["mythos"], status: "live" },
-                ]
-            },
-            "Sparkverse & Membership": {
-                icon: "🌌",
-                items: [
-                    { name: "Sparkverse Hub", desc: "Main membership hub", url: "https://thefirstspark.shop/sparkverse-hub.html", tags: ["core"], status: "live" },
-                    { name: "Sparkverse Gateway", desc: "Entry point to Sparkverse", url: "https://thefirstspark.shop/sparkverse-gateway.html", tags: ["core"], status: "live" },
-                    { name: "Sparkverse Main", desc: "Sparkverse landing", url: "https://thefirstspark.shop/sparkverse.html", tags: ["core"], status: "live" },
-                    { name: "Players Lounge", desc: "$33/mo membership tier", url: "https://thefirstspark.shop/players-lounge.html", tags: ["membership"], status: "live" },
-                    { name: "Players", desc: "Players tier info", url: "https://thefirstspark.shop/players.html", tags: ["membership"], status: "live" },
-                    { name: "Member Hub", desc: "Member dashboard", url: "https://thefirstspark.shop/member-hub.html", tags: ["membership"], status: "live" },
-                    { name: "Welcome Member", desc: "Post-purchase welcome page", url: "https://thefirstspark.shop/welcome-member.html", tags: ["membership"], status: "live" },
-                    { name: "Founding Members", desc: "Founding member program", url: "https://thefirstspark.shop/founding.html", tags: ["membership"], status: "live" },
-                    { name: "OG Generator", desc: "OG Spark tier content", url: "https://thefirstspark.shop/og-generate.html", tags: ["membership"], status: "live" },
-                    { name: "Selector Hub", desc: "Selector community hub", url: "https://thefirstspark.shop/selector-hub.html", tags: ["selector"], status: "live" },
-                    { name: "Starter Kit", desc: "New member starter resources", url: "https://thefirstspark.shop/starter-kit.html", tags: ["membership"], status: "live" },
-                    { name: "Discover", desc: "Discovery pathway", url: "https://thefirstspark.shop/discover.html", tags: ["tool"], status: "live" },
-                ]
-            },
-            "Games & Interactive": {
-                icon: "🎮",
-                items: [
-                    { name: "Spark Battle Arena", desc: "Consciousness battle game", url: "https://thefirstspark.shop/spark-battle-arena.html", tags: ["game"], status: "live" },
-                    { name: "Playground", desc: "Interactive experiment space", url: "https://thefirstspark.shop/playground.html", tags: ["tool"], status: "live" },
-                    { name: "The Wall Deluxe", desc: "Interactive wall experience", url: "https://thefirstspark.shop/the-wall-deluxe.html", tags: ["game"], status: "live" },
-                    { name: "Graffiti", desc: "Digital graffiti canvas", url: "https://thefirstspark.shop/graffiti.html", tags: ["game"], status: "live" },
-                    { name: "TFS Viral", desc: "Viral content generator", url: "https://thefirstspark.shop/tfs-viral.html", tags: ["tool"], status: "live" },
-                ]
-            },
-            "Internal & Dev": {
-                icon: "🔧",
-                items: [
-                    { name: "Spark Planner", desc: "Internal planning tool", url: "https://thefirstspark.shop/spark-planner.html", tags: ["internal"], status: "live" },
-                    { name: "Subject Tracker", desc: "Content/subject tracking", url: "https://thefirstspark.shop/subject-tracker.html", tags: ["internal"], status: "live" },
-                    { name: "Tracker", desc: "General tracking dashboard", url: "https://thefirstspark.shop/tracker.html", tags: ["internal"], status: "live" },
-                    { name: "Tools Index", desc: "Original tools listing", url: "https://thefirstspark.shop/tools.html", tags: ["internal"], status: "live" },
-                    { name: "Tools New", desc: "Updated tools index", url: "https://thefirstspark.shop/tools-new.html", tags: ["internal"], status: "live" },
-                    { name: "Presentation", desc: "Presentation template", url: "https://thefirstspark.shop/presentation.html", tags: ["internal"], status: "live" },
-                    { name: "Bridge", desc: "Integration bridge tool", url: "https://thefirstspark.shop/bridge.html", tags: ["internal"], status: "live" },
-                    { name: "Signal", desc: "Signal processing/communication", url: "https://thefirstspark.shop/signal.html", tags: ["internal"], status: "live" },
-                    { name: "Card Generator", desc: "Card/asset generation", url: "https://thefirstspark.shop/card.html", tags: ["internal"], status: "live" },
-                    { name: "Archetype Card", desc: "Archetype card template", url: "https://thefirstspark.shop/archetype-card.html", tags: ["internal"], status: "live" },
-                ]
-            },
-            "AI Partner Pages": {
-                icon: "🤖",
-                items: [
-                    { name: "Claude", desc: "Claude AI integration page", url: "https://thefirstspark.shop/claude.html", tags: ["ai"], status: "live" },
-                    { name: "ChatGPT", desc: "ChatGPT integration page", url: "https://thefirstspark.shop/chatgpt.html", tags: ["ai"], status: "live" },
-                    { name: "Grok", desc: "Grok AI integration", url: "https://thefirstspark.shop/Grok001.html", tags: ["ai"], status: "live" },
-                ]
-            },
-            "Coming Soon": {
-                icon: "🚀",
-                items: [
-                    { name: "First Spark Mythos (Whop)", desc: "7-chapter interactive HTML origin story", tags: ["mythos", "core"], status: "wip" },
-                    { name: "$SPRK Token Economy", desc: "Token shop, ledger system, Whop integration", tags: ["token"], status: "planned" },
-                    { name: "Soul Maps NFT Collection", desc: "Genesis Collection on Base via Manifold", tags: ["nft", "soul-map"], status: "planned" },
-                    { name: "Mobile Spark Station", desc: "Converted van consciousness hub", tags: ["irl"], status: "planned" },
-                    { name: "Book Zero", desc: "Memoir - REDRUM to redemption", tags: ["content", "core"], status: "wip" },
-                    { name: "Obitura", desc: "AI obituary service for funeral homes", url: "https://obitura.com", tags: ["side-project"], status: "live" },
-                    { name: "Inner Sanctum", desc: "Hidden mystery school entrance", tags: ["mythos"], status: "wip" },
-                ]
-            }
-        };
+    <div class="card cyan">
+      <span class="icon">🧭</span>
+      <h3>The Sciousness Engine</h3>
+      <p>The tracking, mapping, and synthesis layer of the ecosystem. Integrates Maps of Consciousness, Soul Code Registry, Bloodline geometry, and the Soul Map Interface into a coherent model of individual and collective awareness.</p>
+      <span class="badge">Core Architecture</span>
+      <div class="tools-strip" style="margin-top:1.2rem;">
+        <span class="tool-tag" style="border-color:rgba(38,228,216,0.25)">Maps of Consciousness</span>
+        <span class="tool-tag" style="border-color:rgba(38,228,216,0.25)">Soul Code Registry</span>
+        <span class="tool-tag" style="border-color:rgba(38,228,216,0.25)">Bloodline</span>
+      </div>
+    </div>
 
-        // Render functions
-        function renderProjects() {
-            const container = document.getElementById('projectsContainer');
-            container.innerHTML = '';
-            
-            let totalCount = 0;
-            let liveCount = 0;
-            let toolCount = 0;
-            let soulMapCount = 0;
+  </div>
 
-            for (const [category, data] of Object.entries(projects)) {
-                const categoryEl = document.createElement('div');
-                categoryEl.className = 'category';
-                categoryEl.dataset.category = category;
+  <!-- ── SECTION 3: SOUL MAP INTERFACE + MYTHOS (two-col) ── -->
+  <div class="two-col">
 
-                const items = data.items;
-                totalCount += items.length;
-                items.forEach(item => {
-                    if (item.status === 'live') liveCount++;
-                    if (item.tags?.includes('tool')) toolCount++;
-                    if (item.tags?.includes('soul-map')) soulMapCount++;
-                });
+    <div class="card violet">
+      <span class="icon">🗺️</span>
+      <h3>Soul Map Interface</h3>
+      <p>Delivered individually by hand. Each Soul Map decodes a person's archetypes, numerological signature, and soul geometry into a navigable map of their specific consciousness field.</p>
+      <span class="badge">5 Delivered</span>
+    </div>
 
-                categoryEl.innerHTML = `
-                    <div class="category-header">
-                        <div class="category-icon">${data.icon}</div>
-                        <h2>${category}</h2>
-                        <span class="category-count">${items.length} items</span>
-                    </div>
-                    <div class="project-grid">
-                        ${items.map(item => `
-                            <div class="project-card" data-tags="${(item.tags || []).join(',')}" data-name="${item.name.toLowerCase()}" data-desc="${(item.desc || '').toLowerCase()}">
-                                <div class="project-title">
-                                    ${item.name}
-                                    <span class="status ${item.status}">
-                                        <span class="status-dot"></span>
-                                        ${item.status}
-                                    </span>
-                                </div>
-                                <div class="project-desc">${item.desc || ''}</div>
-                                <div class="project-meta">
-                                    <div class="project-tags">
-                                        ${(item.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('')}
-                                    </div>
-                                    ${item.url ? `<a href="${item.url}" target="_blank" class="project-link">View →</a>` : ''}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
+    <div class="card ember">
+      <span class="icon">📜</span>
+      <h3>Integrated Mythos &amp; Origin</h3>
+      <p>A 12-item framework detailing the "Source Architecture" — the origin narrative that underlies every tool, map, and build in the Codex. The why beneath the what.</p>
+      <span class="badge">12-Item Framework</span>
+      <div class="tools-strip" style="margin-top:1.2rem;">
+        <span class="tool-tag" style="border-color:rgba(255,106,61,0.3); color:var(--ember);">Source Architecture</span>
+        <span class="tool-tag" style="border-color:rgba(255,106,61,0.3); color:var(--ember);">Origin Narrative</span>
+      </div>
+    </div>
 
-                if (category === 'Coming Soon') {
-                    categoryEl.querySelector('.project-grid').className = 'coming-soon';
-                    categoryEl.querySelector('.coming-soon').innerHTML = items.map(item => `
-                        <div class="coming-soon-item" data-tags="${(item.tags || []).join(',')}" data-name="${item.name.toLowerCase()}" data-desc="${(item.desc || '').toLowerCase()}">
-                            <div class="coming-soon-icon">
-                                ${item.status === 'wip' ? '🔨' : '📋'}
-                            </div>
-                            <div class="coming-soon-text">
-                                <div class="coming-soon-title">${item.name}</div>
-                                <div class="coming-soon-desc">${item.desc || ''}</div>
-                            </div>
-                            <div class="project-tags">
-                                ${(item.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('')}
-                            </div>
-                            ${item.url ? `<a href="${item.url}" target="_blank" class="project-link">View →</a>` : ''}
-                        </div>
-                    `).join('');
-                }
+  </div>
 
-                container.appendChild(categoryEl);
-            }
+  <!-- ── SECTION 4: THE SPARKVERSE ECOSYSTEM ── -->
+  <div class="section-block" style="border-color: rgba(38,228,216,0.12);">
+    <div class="accent-bar" style="background: linear-gradient(90deg, var(--cyan), var(--violet), transparent);"></div>
+    <div class="section-label">Ecosystem</div>
+    <div class="section-header">
+      <h2>The Sparkverse Ecosystem</h2>
+      <p>A membership gateway and sovereign tracking layer built for the community doing the work. Every tool, map, and module lives inside a coherent living system.</p>
+    </div>
+    <div class="three-col" style="margin-bottom:0;">
+      <div class="card cyan" style="margin:0;">
+        <span class="icon">🚀</span>
+        <h3>The Sparkverse Hub</h3>
+        <p>The central membership gateway. Features the Players Lounge, sovereign tracking systems, and full access to the consciousness tool library.</p>
+        <span class="badge">Live</span>
+      </div>
+      <div class="card cyan" style="margin:0;">
+        <span class="icon">🎮</span>
+        <h3>Players Lounge</h3>
+        <p>The community layer. A space for players, builders, and seekers inside the Sparkverse — discussion, accountability, and live collaboration.</p>
+        <span class="badge">Live</span>
+      </div>
+      <div class="card cyan" style="margin:0;">
+        <span class="icon">📡</span>
+        <h3>Sovereign Tracking</h3>
+        <p>Tools and systems for members to track their own consciousness evolution, soul map progress, and engagement with the ecosystem over time.</p>
+        <span class="badge">In Development</span>
+      </div>
+    </div>
+  </div>
 
-            // Update stats
-            document.getElementById('totalCount').textContent = totalCount;
-            document.getElementById('liveCount').textContent = liveCount;
-            document.getElementById('toolCount').textContent = toolCount;
-            document.getElementById('soulMapCount').textContent = soulMapCount;
-        }
+  <!-- ── COMING SOON: $SPRK TOKEN ── -->
+  <div class="coming-soon">
+    <div class="eyebrow">Coming Soon</div>
+    <h2>$SPRK Token</h2>
+    <p>The next expansion of the ecosystem introduces a tolog economy, NFT collections, and the Inner Sanctum — a sovereign layer for those ready to go deeper into the Source Architecture.</p>
+    <div class="pills">
+      <span class="pill">Tolog Economy</span>
+      <span class="pill">NFT Collections</span>
+      <span class="pill">Inner Sanctum</span>
+      <span class="pill">$SPRK Token</span>
+    </div>
+  </div>
 
-        // Filter & Search
-        function filterProjects(searchTerm, tagFilter) {
-            const cards = document.querySelectorAll('.project-card, .coming-soon-item');
-            const categories = document.querySelectorAll('.category');
+  <!-- ── CTA ── -->
+  <div class="cta-row">
+    <a href="https://sparkverse.thefirstspark.shop" class="btn btn-gold">Enter the Sparkverse</a>
+    <a href="/investor-deck-v2.html" class="btn btn-violet">View Investor Deck</a>
+  </div>
 
-            cards.forEach(card => {
-                const name = card.dataset.name || '';
-                const desc = card.dataset.desc || '';
-                const tags = card.dataset.tags || '';
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p>
+      <a href="/">The First Spark</a> &nbsp;·&nbsp; thefirstspark.shop &nbsp;·&nbsp; Project Codex
+    </p>
+  </footer>
 
-                const matchesSearch = !searchTerm || 
-                    name.includes(searchTerm.toLowerCase()) || 
-                    desc.includes(searchTerm.toLowerCase());
+</div><!-- /container -->
 
-                const matchesFilter = tagFilter === 'all' || tags.includes(tagFilter);
+<!-- ── STARFIELD SCRIPT ── -->
+<script>
+(function() {
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
 
-                card.classList.toggle('hidden', !(matchesSearch && matchesFilter));
-            });
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
 
-            // Hide empty categories
-            categories.forEach(cat => {
-                const visibleCards = cat.querySelectorAll('.project-card:not(.hidden), .coming-soon-item:not(.hidden)');
-                cat.classList.toggle('hidden', visibleCards.length === 0);
-            });
-        }
+  function initStars() {
+    stars = [];
+    const count = Math.floor((canvas.width * canvas.height) / 4000);
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.2,
+        a: Math.random() * 0.7 + 0.1,
+        speed: Math.random() * 0.004 + 0.001,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
 
-        // Event listeners
-        document.getElementById('search').addEventListener('input', (e) => {
-            const activeFilter = document.querySelector('.filter-pill.active').dataset.filter;
-            filterProjects(e.target.value, activeFilter);
-        });
+  let frame = 0;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    frame++;
+    stars.forEach(s => {
+      const alpha = s.a * (0.6 + 0.4 * Math.sin(frame * s.speed + s.phase));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
 
-        document.querySelectorAll('.filter-pill').forEach(pill => {
-            pill.addEventListener('click', () => {
-                document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-                pill.classList.add('active');
-                filterProjects(document.getElementById('search').value, pill.dataset.filter);
-            });
-        });
+  window.addEventListener('resize', () => { resize(); initStars(); });
+  resize();
+  initStars();
+  draw();
+})();
+</script>
 
-        // Init
-        renderProjects();
-    </script>
 </body>
 </html>
