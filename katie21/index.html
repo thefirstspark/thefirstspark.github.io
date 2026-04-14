@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Soul Map — Katie Marie Wunderle</title>
+    <meta name="description" content="A personalized soul map drawn from the numbers and stars of January 2, 1988.">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --void: #06060c;
+            --surface: #0a0a14;
+            --surface-2: #0e0e1a;
+            --purple: #9d4edd;
+            --purple-dim: rgba(157,78,221,0.15);
+            --pink: #f72585;
+            --pink-dim: rgba(247,37,133,0.15);
+            --cyan: #00f5d4;
+            --cyan-dim: rgba(0,245,212,0.1);
+            --gold: #ffd166;
+            --gold-dim: rgba(255,209,102,0.12);
+            --text: #d8d6e4;
+            --text-dim: #5a5a72;
+            --text-faint: #2e2e42;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--void);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Stars background ── */
+        #stars-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── Scroll container ── */
+        .scroll-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Section base ── */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+            position: relative;
+        }
+
+        /* ── Reveal animation ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+        .reveal-delay-3 { transition-delay: 0.45s; }
+        .reveal-delay-4 { transition-delay: 0.6s; }
+        .reveal-delay-5 { transition-delay: 0.75s; }
+
+        /* ── Typography ── */
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-cormorant { font-family: 'Cormorant Garamond', serif; }
+
+        .section-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-sigil {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .sigil-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1px solid rgba(157,78,221,0.3);
+            animation: sigil-spin 20s linear infinite;
+        }
+        .sigil-ring:nth-child(2) {
+            inset: 10px;
+            border-color: rgba(247,37,133,0.2);
+            animation-duration: 15s;
+            animation-direction: reverse;
+        }
+        .sigil-ring:nth-child(3) {
+            inset: 20px;
+            border-color: rgba(0,245,212,0.2);
+            animation-duration: 25s;
+        }
+        .sigil-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--purple);
+            box-shadow: 0 0 30px rgba(157,78,221,0.6), 0 0 60px rgba(157,78,221,0.3);
+            animation: pulse-core 3s ease-in-out infinite;
+        }
+        @keyframes sigil-spin { to { transform: rotate(360deg); } }
+        @keyframes pulse-core {
+            0%, 100% { box-shadow: 0 0 30px rgba(157,78,221,0.6), 0 0 60px rgba(157,78,221,0.3); }
+            50% { box-shadow: 0 0 50px rgba(157,78,221,0.8), 0 0 100px rgba(157,78,221,0.4); }
+        }
+
+        .hero-name {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            background: linear-gradient(135deg, #e2d0f8, #f0abfc, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-dim);
+            letter-spacing: 0.15em;
+            margin-top: 16px;
+        }
+
+        .hero-birth-line {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--text-faint);
+            margin-top: 30px;
+            text-transform: uppercase;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: float 3s ease-in-out infinite;
+        }
+        .scroll-hint span {
+            font-size: 0.55rem;
+            letter-spacing: 3px;
+            color: var(--text-faint);
+            text-transform: uppercase;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 30px;
+            background: linear-gradient(to bottom, var(--purple), transparent);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-8px); }
+        }
+
+        /* ── CONSTELLATION SECTION ── */
+        #constellation {
+            padding: 80px 24px;
+        }
+
+        .constellation-canvas-wrap {
+            width: min(400px, 90vw);
+            aspect-ratio: 1;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        #constellationCanvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        /* ── NUMBER CARDS ── */
+        #numbers {
+            padding: 80px 24px;
+        }
+
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        @media (min-width: 540px) {
+            .numbers-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .num-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 20px;
+            padding: 28px 24px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s, transform 0.4s;
+        }
+        .num-card:hover {
+            border-color: rgba(157,78,221,0.25);
+            transform: translateY(-2px);
+        }
+
+        .num-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        .num-card.purple::before { background: var(--purple); }
+        .num-card.pink::before { background: var(--pink); }
+        .num-card.cyan::before { background: var(--cyan); }
+        .num-card.gold::before { background: var(--gold); }
+
+        .num-card-label {
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .num-card.purple .num-card-label { color: var(--purple); }
+        .num-card.pink .num-card-label { color: var(--pink); }
+        .num-card.cyan .num-card-label { color: var(--cyan); }
+        .num-card.gold .num-card-label { color: var(--gold); }
+
+        .num-card-number {
+            font-family: 'Cinzel', serif;
+            font-size: 2.4rem;
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .num-card.purple .num-card-number { color: #c4b5fd; }
+        .num-card.pink .num-card-number { color: #f9a8d4; }
+        .num-card.cyan .num-card-number { color: #67e8f9; }
+        .num-card.gold .num-card-number { color: #fde68a; }
+
+        .num-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-style: italic;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .num-card-body {
+            font-size: 0.8rem;
+            line-height: 1.7;
+            color: #7a7a92;
+        }
+
+        .num-card-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 14px;
+        }
+        .keyword {
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+            color: var(--text-dim);
+        }
+
+        /* ── LIFE PATH DEEP DIVE ── */
+        #lifepath {
+            padding: 80px 24px;
+        }
+
+        .lifepath-content {
+            max-width: 560px;
+            text-align: center;
+        }
+
+        .lp-master-badge {
+            display: inline-block;
+            font-size: 0.55rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border: 1px solid rgba(157,78,221,0.3);
+            border-radius: 20px;
+            color: var(--purple);
+            margin-bottom: 20px;
+        }
+
+        .lp-number {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(4rem, 12vw, 7rem);
+            font-weight: 400;
+            background: linear-gradient(135deg, #c4b5fd, #a78bfa, #f0abfc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .lp-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 300;
+            font-style: italic;
+            color: #b0b0c8;
+            margin: 8px 0 30px;
+        }
+
+        .lp-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            line-height: 2;
+            color: #8888a0;
+        }
+
+        .lp-calculation {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 16px;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        .lp-calc-step {
+            margin: 6px 0;
+        }
+        .lp-calc-result {
+            color: var(--purple);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        /* ── CAPRICORN ── */
+        #stars {
+            padding: 80px 24px;
+        }
+
+        .stars-content {
+            max-width: 560px;
+            text-align: center;
+        }
+
+        .cap-glyph {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 30px rgba(255,209,102,0.3));
+        }
+
+        .cap-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .cap-sub {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--text-dim);
+            margin-bottom: 30px;
+        }
+
+        .cap-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            line-height: 2;
+            color: #8888a0;
+        }
+
+        .cap-traits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .cap-trait {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            padding: 8px 16px;
+            border-radius: 24px;
+            background: var(--gold-dim);
+            border: 1px solid rgba(255,209,102,0.15);
+            color: var(--gold);
+        }
+
+        /* ── INTEGRATION ── */
+        #integration {
+            padding: 80px 24px;
+        }
+
+        .integration-content {
+            max-width: 560px;
+            text-align: center;
+        }
+
+        .integration-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+            letter-spacing: 0.15em;
+            background: linear-gradient(135deg, var(--purple), var(--pink), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+        }
+
+        .integration-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            line-height: 2.2;
+            color: #9090a8;
+        }
+
+        .integration-text em {
+            color: #c4b5fd;
+            font-style: italic;
+        }
+
+        .thread {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 20px;
+            margin: 12px 0;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.03);
+            text-align: left;
+        }
+
+        .thread-num {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            min-width: 36px;
+            text-align: center;
+        }
+        .thread-num.purple { color: var(--purple); }
+        .thread-num.pink { color: var(--pink); }
+        .thread-num.cyan { color: var(--cyan); }
+        .thread-num.gold { color: var(--gold); }
+
+        .thread-text {
+            font-size: 0.8rem;
+            color: #7a7a92;
+            line-height: 1.5;
+        }
+
+        /* ── REFLECTION ── */
+        #reflection {
+            padding: 80px 24px;
+            min-height: 60vh;
+        }
+
+        .reflection-card {
+            max-width: 480px;
+            background: linear-gradient(145deg, rgba(157,78,221,0.08), rgba(247,37,133,0.04));
+            border: 1px solid rgba(157,78,221,0.15);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .reflection-icon {
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+
+        .reflection-label {
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            color: var(--pink);
+            margin-bottom: 20px;
+        }
+
+        .reflection-prompt {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #a0a0b8;
+            font-style: italic;
+        }
+
+        .reflection-btn {
+            margin-top: 24px;
+            padding: 10px 24px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            color: var(--text-dim);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .reflection-btn:hover {
+            border-color: var(--purple);
+            color: var(--purple);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 40px 24px 60px;
+        }
+        footer a {
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            color: var(--text-faint);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover { color: var(--purple); }
+
+        /* ── Divider ── */
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--purple), transparent);
+            margin: 40px auto;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 480px) {
+            section { padding: 50px 18px; }
+            .num-card { padding: 22px 18px; }
+            .reflection-card { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+
+<div class="scroll-container">
+
+    <!-- ═══════ HERO ═══════ -->
+    <section id="hero">
+        <div class="hero-sigil reveal">
+            <div class="sigil-ring"></div>
+            <div class="sigil-ring"></div>
+            <div class="sigil-ring"></div>
+            <div class="sigil-core"></div>
+        </div>
+
+        <div class="hero-name reveal reveal-delay-1">Katie Marie<br>Wunderle</div>
+        <div class="hero-subtitle reveal reveal-delay-2">A Map of the Soul</div>
+        <div class="hero-birth-line reveal reveal-delay-3">
+            January 2, 1988 &middot; Akron, Ohio &middot; City Hospital
+        </div>
+
+        <div class="scroll-hint">
+            <span>Descend</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ═══════ CONSTELLATION ═══════ -->
+    <section id="constellation">
+        <div class="section-label reveal">The Soul Constellation</div>
+        <div class="constellation-canvas-wrap reveal reveal-delay-1">
+            <canvas id="constellationCanvas"></canvas>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:0.85rem; color:var(--text-dim); font-style:italic; max-width:400px; text-align:center; margin-top:16px;" class="reveal reveal-delay-2">
+            Each point is a number in your blueprint. Together they form the constellation of who you are.
+        </p>
+    </section>
+
+    <!-- ═══════ LIFE PATH DEEP DIVE ═══════ -->
+    <section id="lifepath">
+        <div class="lifepath-content">
+            <div class="section-label reveal">Life Path</div>
+            <div class="lp-master-badge reveal reveal-delay-1">Master Number</div>
+            <div class="lp-number reveal reveal-delay-1">11</div>
+            <div class="lp-title reveal reveal-delay-2">The Illuminated Channel</div>
+
+            <div class="divider reveal reveal-delay-2"></div>
+
+            <p class="lp-description reveal reveal-delay-3">
+                Eleven is the first master number &mdash; a frequency that does not reduce. It vibrates between the seen and unseen, acting as a bridge between intuition and the physical world. You arrived carrying the voltage of spiritual illumination threaded through the gentleness of the 2: sensitivity, empathy, the ability to feel what others cannot name.
+            </p>
+
+            <p class="lp-description reveal reveal-delay-4" style="margin-top: 20px;">
+                Your path is not about force. It is about <em>transmission</em>. You are here to receive insight from the invisible and ground it into something others can feel, see, and understand. The 11 does not shout &mdash; it radiates. When aligned, you become a tuning fork for truth, and the people around you begin to vibrate at the frequency you hold.
+            </p>
+
+            <div class="lp-calculation reveal reveal-delay-5">
+                <div class="lp-calc-step">Month: 0 + 1 = 1</div>
+                <div class="lp-calc-step">Day: 0 + 2 = 2</div>
+                <div class="lp-calc-step">Year: 1 + 9 + 8 + 8 = 26 &rarr; 2 + 6 = 8</div>
+                <div class="lp-calc-result">1 + 2 + 8 = 11 &mdash; Master Number, does not reduce</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ NUMBER CARDS ═══════ -->
+    <section id="numbers">
+        <div class="section-label reveal">The Blueprint</div>
+        <div class="numbers-grid">
+
+            <div class="num-card purple reveal reveal-delay-1">
+                <div class="num-card-label">Expression / Destiny</div>
+                <div class="num-card-number">5</div>
+                <div class="num-card-title">The Freedom Seeker</div>
+                <div class="num-card-body">
+                    Your soul chose to express itself through freedom, change, and versatility. Five energy is magnetic and restless &mdash; it needs to move, taste, explore, and communicate. You are wired to break stagnation wherever you find it.
+                </div>
+                <div class="num-card-keywords">
+                    <span class="keyword">Freedom</span>
+                    <span class="keyword">Adaptability</span>
+                    <span class="keyword">Magnetism</span>
+                    <span class="keyword">Sensory</span>
+                    <span class="keyword">Change</span>
+                </div>
+            </div>
+
+            <div class="num-card pink reveal reveal-delay-2">
+                <div class="num-card-label">Soul Urge / Heart's Desire</div>
+                <div class="num-card-number">7</div>
+                <div class="num-card-title">The Seeker of Truth</div>
+                <div class="num-card-body">
+                    Beneath everything, your heart craves understanding. The 7 is the mystic's hunger &mdash; a need to pierce surfaces and find what is real. You are not satisfied by answers that don't resonate in your bones.
+                </div>
+                <div class="num-card-keywords">
+                    <span class="keyword">Truth</span>
+                    <span class="keyword">Depth</span>
+                    <span class="keyword">Intuition</span>
+                    <span class="keyword">Solitude</span>
+                    <span class="keyword">Wisdom</span>
+                </div>
+            </div>
+
+            <div class="num-card cyan reveal reveal-delay-3">
+                <div class="num-card-label">Personality</div>
+                <div class="num-card-number">7</div>
+                <div class="num-card-title">The Mystic</div>
+                <div class="num-card-body">
+                    The world sees you as someone who carries depth. Others sense you know things before they are spoken. You give off an aura of quiet knowing &mdash; a presence that suggests inner worlds far larger than what you reveal.
+                </div>
+                <div class="num-card-keywords">
+                    <span class="keyword">Mystery</span>
+                    <span class="keyword">Perception</span>
+                    <span class="keyword">Quiet Power</span>
+                    <span class="keyword">Depth</span>
+                </div>
+            </div>
+
+            <div class="num-card gold reveal reveal-delay-4">
+                <div class="num-card-label">Maturity</div>
+                <div class="num-card-number">7</div>
+                <div class="num-card-title">The Sage Awakening</div>
+                <div class="num-card-body">
+                    As the years accumulate, your path converges toward a single frequency: wisdom. The maturity number reveals where all roads lead &mdash; and yours lead inward, toward spiritual mastery, inner authority, and the quiet power of someone who has finally stopped seeking because they found it.
+                </div>
+                <div class="num-card-keywords">
+                    <span class="keyword">Mastery</span>
+                    <span class="keyword">Inner Authority</span>
+                    <span class="keyword">Spiritual Knowing</span>
+                </div>
+            </div>
+
+            <div class="num-card purple reveal reveal-delay-5" style="grid-column: 1 / -1;">
+                <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+                    <div style="flex:1; min-width:200px;">
+                        <div class="num-card-label">Birthday Number</div>
+                        <div class="num-card-number">2</div>
+                        <div class="num-card-title">The Sensitive</div>
+                        <div class="num-card-body">
+                            Born on the 2nd &mdash; a day that carries the energy of receptivity, diplomacy, and emotional intelligence. You feel the room before you think about it. Partnerships and collaboration are encoded in your operating system.
+                        </div>
+                    </div>
+                    <div style="flex:1; min-width:200px;">
+                        <div class="num-card-label">Dominant Frequency</div>
+                        <div class="num-card-number" style="font-size:1.8rem;">7 &middot; 7 &middot; 7</div>
+                        <div class="num-card-title">Triple Seven</div>
+                        <div class="num-card-body">
+                            When a number appears three times across your core positions, it becomes a dominant frequency. The triple 7 amplifies your mystic channel &mdash; truth-seeking, spiritual depth, and inner wisdom are not just tendencies. They are your architecture.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════ CAPRICORN ═══════ -->
+    <section id="stars">
+        <div class="stars-content">
+            <div class="section-label reveal">The Stars</div>
+            <div class="cap-glyph reveal reveal-delay-1">&#9809;</div>
+            <div class="cap-title reveal reveal-delay-1">CAPRICORN</div>
+            <div class="cap-sub reveal reveal-delay-2">Sun at ~11&deg; &middot; Decan II &middot; Ruled by Saturn &middot; Cardinal Earth</div>
+
+            <div class="divider reveal reveal-delay-2"></div>
+
+            <p class="cap-description reveal reveal-delay-3">
+                Capricorn is the mountain &mdash; patient, ancient, and always climbing. Saturn, your ruling planet, teaches through time and pressure, turning carbon into diamond. You build things that last because you understand that real structures are not rushed.
+            </p>
+
+            <p class="cap-description reveal reveal-delay-4" style="margin-top: 20px;">
+                But this is no ordinary Capricorn blueprint. An 11 life path inside a Capricorn vessel means you are building <em>sacred architecture</em>. Not just career, not just material &mdash; you are constructing a bridge between the spiritual vision you carry and the tangible world that needs it. The mountain goat does not just climb for the view. She climbs because something at the summit is calling her name.
+            </p>
+
+            <div class="cap-traits reveal reveal-delay-5">
+                <span class="cap-trait">Discipline</span>
+                <span class="cap-trait">Endurance</span>
+                <span class="cap-trait">Sacred Builder</span>
+                <span class="cap-trait">Authority</span>
+                <span class="cap-trait">Ancestral Wisdom</span>
+                <span class="cap-trait">Quiet Ambition</span>
+            </div>
+
+            <p class="cap-description reveal" style="margin-top: 30px; font-size:0.9rem; color:var(--text-dim);">
+                Note: Moon &amp; Rising require exact birth time for precision. Mid-to-late morning in Akron on this date suggests a possible Pisces Moon and Pisces or Aries Ascendant &mdash; but this would need confirmation through a timed chart.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════ INTEGRATION ═══════ -->
+    <section id="integration">
+        <div class="integration-content">
+            <div class="section-label reveal">The Weave</div>
+            <div class="integration-title reveal reveal-delay-1">How It All Threads Together</div>
+
+            <div class="divider reveal reveal-delay-1"></div>
+
+            <p class="integration-text reveal reveal-delay-2">
+                You are a soul born to <em>channel spiritual vision</em> through the freedom and versatility of lived experience, driven by a bone-deep hunger for what is true, perceived by the world as someone who carries ancient knowing &mdash; all housed inside the disciplined, world-building body of the mountain.
+            </p>
+
+            <div style="margin-top: 30px;">
+                <div class="thread reveal reveal-delay-2">
+                    <div class="thread-num purple">11</div>
+                    <div class="thread-text">receives the signal &mdash; intuition, vision, the download from beyond</div>
+                </div>
+                <div class="thread reveal reveal-delay-3">
+                    <div class="thread-num pink">5</div>
+                    <div class="thread-text">expresses it &mdash; through freedom, words, movement, sensory creation</div>
+                </div>
+                <div class="thread reveal reveal-delay-3">
+                    <div class="thread-num cyan">7</div>
+                    <div class="thread-text">refines it &mdash; only truth survives the filter of the triple seven</div>
+                </div>
+                <div class="thread reveal reveal-delay-4">
+                    <div class="thread-num gold">&#9809;</div>
+                    <div class="thread-text">builds it &mdash; Capricorn grounds the vision into something the world can stand on</div>
+                </div>
+            </div>
+
+            <p class="integration-text reveal reveal-delay-5" style="margin-top: 30px; font-size: 0.95rem;">
+                This is the architecture of a <em>sacred builder</em>. Someone who doesn't just dream &mdash; someone who makes the dream <em>real</em>.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════ REFLECTION ═══════ -->
+    <section id="reflection">
+        <div class="reflection-card reveal">
+            <div class="reflection-icon">&#9826;</div>
+            <div class="reflection-label">Soul Inquiry</div>
+            <p class="reflection-prompt" id="reflectionPrompt">
+                What structure are you building right now that your intuition started but your discipline hasn't finished?
+            </p>
+            <button class="reflection-btn" id="newPromptBtn">New Prompt</button>
+        </div>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer>
+        <a href="https://thefirstspark.shop">THE FIRST SPARK</a>
+    </footer>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// STARS BACKGROUND
+// ═══════════════════════════════════════════
+(function() {
+    const c = document.getElementById('stars-canvas');
+    const ctx = c.getContext('2d');
+    let stars = [];
+    const COUNT = 200;
+
+    function resize() {
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+        initStars();
+    }
+
+    function initStars() {
+        stars = [];
+        for (let i = 0; i < COUNT; i++) {
+            stars.push({
+                x: Math.random() * c.width,
+                y: Math.random() * c.height,
+                r: Math.random() * 1.2 + 0.2,
+                a: Math.random() * 0.6 + 0.1,
+                speed: Math.random() * 0.0008 + 0.0003,
+                phase: Math.random() * Math.PI * 2
+            });
+        }
+    }
+
+    function draw(t) {
+        ctx.clearRect(0, 0, c.width, c.height);
+        stars.forEach(s => {
+            const flicker = 0.5 + 0.5 * Math.sin(t * s.speed * 1000 + s.phase);
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(200,200,240,${s.a * flicker})`;
+            ctx.fill();
+        });
+        requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(draw);
+})();
+
+// ═══════════════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════════════
+(function() {
+    const els = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15 });
+    els.forEach(el => obs.observe(el));
+})();
+
+// ═══════════════════════════════════════════
+// SOUL CONSTELLATION CANVAS
+// ═══════════════════════════════════════════
+(function() {
+    const canvas = document.getElementById('constellationCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const nodes = [
+        { label: '11',  sub: 'Life Path',   angle: -90,  ring: 0,    color: '#a78bfa', size: 18 },
+        { label: '5',   sub: 'Expression',   angle: -18,  ring: 0.55, color: '#c084fc', size: 13 },
+        { label: '7',   sub: 'Soul Urge',    angle: 54,   ring: 0.55, color: '#f472b6', size: 13 },
+        { label: '7',   sub: 'Personality',   angle: 126,  ring: 0.55, color: '#22d3ee', size: 13 },
+        { label: '7',   sub: 'Maturity',      angle: 198,  ring: 0.55, color: '#fbbf24', size: 13 },
+        { label: '2',   sub: 'Birthday',      angle: 270,  ring: 0.38, color: '#a78bfa', size: 10 },
+        { label: '\u2649', sub: 'Capricorn', angle: -54,  ring: 0.78, color: '#fbbf24', size: 12 },
+    ];
+
+    // connections (indices)
+    const connections = [
+        [0, 1], [0, 2], [0, 3], [0, 4], [0, 5],
+        [1, 6], [2, 3], [3, 4], [5, 0]
+    ];
+
+    let time = 0;
+
+    function resize() {
+        const w = canvas.parentElement.clientWidth;
+        canvas.width = w * 2;
+        canvas.height = w * 2;
+        canvas.style.width = w + 'px';
+        canvas.style.height = w + 'px';
+    }
+
+    function getPos(node) {
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const maxR = canvas.width / 2 - 60;
+        const rad = node.angle * Math.PI / 180;
+        return {
+            x: cx + Math.cos(rad) * maxR * node.ring,
+            y: cy + Math.sin(rad) * maxR * node.ring
+        };
+    }
+
+    function draw() {
+        time += 0.005;
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const maxR = canvas.width / 2 - 60;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Subtle concentric rings
+        for (let i = 1; i <= 3; i++) {
+            ctx.beginPath();
+            ctx.arc(cx, cy, maxR * (i / 3), 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(157, 78, 221, ${0.06 + (3 - i) * 0.02})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+
+        // Draw connections
+        connections.forEach(([a, b]) => {
+            const pa = getPos(nodes[a]);
+            const pb = getPos(nodes[b]);
+            ctx.beginPath();
+            ctx.moveTo(pa.x, pa.y);
+            ctx.lineTo(pb.x, pb.y);
+            ctx.strokeStyle = 'rgba(157, 78, 221, 0.12)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        });
+
+        // Draw nodes
+        nodes.forEach((node, i) => {
+            const pos = getPos(node);
+            const pulse = 1 + 0.08 * Math.sin(time * 2 + i * 1.2);
+
+            // Outer glow
+            const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, node.size * 3 * pulse);
+            grad.addColorStop(0, node.color + '30');
+            grad.addColorStop(1, 'transparent');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, node.size * 3 * pulse, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Core circle
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, node.size * pulse, 0, Math.PI * 2);
+            ctx.fillStyle = node.color;
+            ctx.fill();
+
+            // Label inside
+            ctx.fillStyle = '#0a0a14';
+            ctx.font = `bold ${node.size * 0.9}px 'Cinzel', serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(node.label, pos.x, pos.y + 1);
+
+            // Sub label outside
+            ctx.fillStyle = '#5a5a72';
+            ctx.font = `${Math.max(16, node.size * 0.7)}px 'Rajdhani', sans-serif`;
+            ctx.textAlign = 'center';
+            const labelOffset = node.size * 2.2;
+            const rad = node.angle * Math.PI / 180;
+            const lx = pos.x + Math.cos(rad) * labelOffset;
+            const ly = pos.y + Math.sin(rad) * labelOffset;
+            ctx.fillText(node.sub, lx, ly);
+        });
+
+        requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(draw);
+})();
+
+// ═══════════════════════════════════════════
+// REFLECTION PROMPTS (personalized to 11-5-7 Capricorn)
+// ═══════════════════════════════════════════
+(function() {
+    const prompts = [
+        "What structure are you building right now that your intuition started but your discipline hasn\u2019t finished?",
+        "Where in your life are you playing small when the 11 in you is ready to transmit at full volume?",
+        "What truth are you circling that the triple 7 already knows?",
+        "What would you create if you let your 5 run free inside the container your Capricorn has already built?",
+        "Where are you seeking permission when your soul urge is asking you to just \u2026 know?",
+        "What part of your sensitivity have you armored over that wants to breathe again?",
+        "If your future sage self could send one message back to today, what would she say?",
+        "What sacred thing are you building that nobody else can see yet?",
+        "Where is Saturn asking you to be patient right now \u2014 and where is the 5 asking you to move?",
+        "What have you been calling \u2018too much\u2019 that is actually exactly the right amount?",
+        "What wound taught you something that became a gift?",
+        "What does freedom actually feel like in your body \u2014 not the idea of it, but the real sensation?",
+    ];
+
+    let last = -1;
+    const el = document.getElementById('reflectionPrompt');
+    document.getElementById('newPromptBtn').addEventListener('click', () => {
+        let idx;
+        do { idx = Math.floor(Math.random() * prompts.length); } while (idx === last);
+        last = idx;
+        el.style.opacity = 0;
+        setTimeout(() => {
+            el.textContent = prompts[idx];
+            el.style.opacity = 1;
+        }, 300);
+    });
+    el.style.transition = 'opacity 0.3s ease';
+})();
+</script>
+</body>
+</html>
