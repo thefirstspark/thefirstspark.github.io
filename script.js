@@ -90,9 +90,9 @@ function toggleHelp() {
 // Signup function
 function signup(tier) {
     const whopLinks = {
-        'free': 'https://whop.com/sparkverse-511c/the-sparkverse-lobby/',
-        'player': 'https://whop.com/sparkverse-511c/the-players-lounge/',
-        'og': 'https://whop.com/sparkverse-511c/og-spark-lifetime-access/'
+        'free': 'https://whop.com/sparkverse-511c/spark-acces/',
+        'player': 'https://whop.com/sparkverse-511c/spark-acces/',
+        'og': 'https://whop.com/sparkverse-511c/spark-acces/'
     };
 
     window.location.href = whopLinks[tier];
