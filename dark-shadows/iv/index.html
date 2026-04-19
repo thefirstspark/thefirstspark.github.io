@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Return — Dark Shadows IV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #080810;
+    --bone: #d8d4cc;
+    --pale: #a8a8b8;
+    --gold: #b8934f;
+    --rose: #c4756e;
+    --warm: #e8b071;
+    --whisper: rgba(216, 212, 204, 0.4);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.7;
+    min-height: 100vh;
+    transition: background 4s ease;
+  }
+
+  /* The magic: saturation layer that grows as user scrolls */
+  .saturation-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(196, 117, 110, 0.25) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 70%, rgba(232, 176, 113, 0.2) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 50%, rgba(184, 147, 79, 0.12) 0%, transparent 70%);
+    transition: opacity 0.6s ease;
+    mix-blend-mode: screen;
+  }
+
+  /* Subtle grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 101;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .series-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: appear 2s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: appear 2.5s ease 0.8s forwards;
+  }
+
+  .hero h1 .bloom { color: var(--rose); font-style: normal; transition: color 3s ease, text-shadow 3s ease; }
+
+  .hero .intro {
+    max-width: 540px;
+    font-size: 1.15rem;
+    color: var(--whisper);
+    font-style: italic;
+    margin-bottom: 4rem;
+    opacity: 0;
+    animation: appear 2.5s ease 1.5s forwards;
+  }
+
+  .scroll-cue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--rose);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: appear 2s ease 2.2s forwards, pulse 3s ease infinite 3s;
+  }
+
+  .scroll-cue::after {
+    content: '  ↓';
+    display: inline-block;
+    animation: bob 2s ease infinite;
+  }
+
+  @keyframes appear { to { opacity: 1; } }
+  @keyframes pulse { 50% { opacity: 0.35; } }
+  @keyframes bob { 50% { transform: translateY(4px); } }
+
+  /* ============ PIECE ============ */
+  .piece {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 10rem;
+  }
+
+  .marker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+
+  .piece h2 {
+    font-size: clamp(2rem, 5vw, 3.3rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .piece h2 .bloom { color: var(--rose); font-style: normal; }
+
+  .section {
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+  }
+
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: rgba(216, 212, 204, 0.9);
+  }
+
+  .section p.soft {
+    color: var(--whisper);
+    font-style: italic;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--rose);
+    font-size: 1.1rem;
+  }
+
+  .section .center-line {
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--bone);
+    padding: 2rem 0;
+    line-height: 1.4;
+  }
+
+  .section .center-line .bloom { color: var(--rose); font-style: normal; }
+  .section .center-line .warm-accent { color: var(--warm); font-style: normal; }
+
+  .section .code-frag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--gold);
+    background: rgba(184, 147, 79, 0.05);
+    border-left: 2px solid var(--rose);
+    padding: 1.2rem 1.4rem;
+    margin: 2rem 0;
+    font-style: normal;
+  }
+
+  .code-frag .com { color: var(--whisper); }
+
+  /* First-letter drop cap on first section */
+  .section:first-of-type p:first-child::first-letter {
+    font-size: 4rem;
+    float: left;
+    line-height: 0.85;
+    padding-right: 0.6rem;
+    padding-top: 0.4rem;
+    color: var(--rose);
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Floating petals that appear as saturation grows */
+  .petals {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .petals span {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50% 0 50% 0;
+    background: var(--rose);
+    opacity: 0;
+    bottom: -20px;
+    box-shadow: 0 0 12px rgba(196, 117, 110, 0.5);
+    animation: float-up linear infinite;
+  }
+
+  @keyframes float-up {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    100% { transform: translateY(-110vh) translateX(120px) rotate(720deg); opacity: 0; }
+  }
+
+  /* Closing */
+  .closing {
+    text-align: center;
+    margin-top: 6rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(196, 117, 110, 0.25);
+  }
+
+  .closing .mark {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, var(--warm), var(--rose));
+    border-radius: 50%;
+    margin: 0 auto 2.5rem;
+    box-shadow: 0 0 40px var(--rose);
+    animation: beat 3s ease infinite;
+  }
+
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
+
+  .closing h3 {
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    line-height: 1.3;
+  }
+
+  .closing h3 .bloom { color: var(--rose); font-style: normal; }
+  .closing h3 .warm-accent { color: var(--warm); font-style: normal; }
+
+  .closing p {
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    color: var(--whisper);
+    font-style: italic;
+    font-size: 1.05rem;
+  }
+
+  .cta-link {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid var(--warm);
+    color: var(--warm);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: all 0.4s ease;
+  }
+
+  .cta-link:hover {
+    background: var(--warm);
+    color: var(--void);
+    box-shadow: 0 0 30px var(--rose);
+  }
+
+  .sig {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 3rem;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    .piece { padding: 3rem 1.5rem 6rem; }
+    .section p { font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="saturation-layer" id="satLayer"></div>
+<div class="petals" id="petals"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="series-tag">Dark Shadows · IV</div>
+  <h1>the <span class="bloom" id="bloomWord">return</span></h1>
+  <p class="intro">When feeling comes back online, and the world is too loud, and you forgot how to be a person who feels things.</p>
+  <div class="scroll-cue">scroll to bloom</div>
+</section>
+
+<!-- ============ THE PIECE ============ -->
+<section class="piece">
+
+  <div class="marker">◆ after the hollow ◆</div>
+  <h2>No one warns you<br>that <span class="bloom">color</span><br>comes back <em>first.</em></h2>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <p>It starts small. The sky, one Tuesday, is a color you remember from childhood. A peach that shouldn't exist. You stand on the porch holding coffee that's gone cold and you feel — genuinely feel — the air on your arms for the first time in a year, or two, or however long it's been.</p>
+
+    <p>And it's too much. Immediately. You didn't know you were going to feel again. You weren't braced for it. The hollow had become a kind of home and suddenly you've been evicted without notice.</p>
+
+    <p class="soft">The tears that come are not sad tears. They are not happy tears either. They are the tears of a body that forgot it had tear ducts and is testing them at full volume.</p>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <p>This is the part of the return nobody prepared you for. You assumed if feeling came back, it would come back gently — a sunrise. Instead it arrives like someone kicked the dimmer switch to full in a room you'd gotten used to being dark in.</p>
+
+    <p>Everything is loud. The sound of traffic. The smell of a stranger's perfume. The weight of your own name in someone's mouth. You cry at commercials. You cry at the bagger at the grocery store who asks if you need help to your car. You cry at songs you've heard a thousand times because you are now hearing them.</p>
+
+    <div class="code-frag">
+      <span class="com">// the nervous system is recalibrating.</span><br>
+      <span class="com">// it turned the dial to zero to survive.</span><br>
+      <span class="com">// now it's testing every notch on the way</span><br>
+      <span class="com">// back up. you are not malfunctioning.</span><br>
+      <span class="com">// you are RE-inhabiting.</span>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="center-line">You will feel <span class="bloom">everything</span><br>at <em>once</em>, for a while.<br><span class="warm-accent">That is the price of coming back.</span></div>
+
+    <p>The grief you paused returns. The rage you set down gets picked up again. But so does the joy. So does the kind of tenderness that takes your knees out when you see a child feeding a dog on a sidewalk. So does awe at how light moves through leaves. So does desire — for food, for touch, for a future that now, suddenly, seems possible.</p>
+
+    <p>It's all in there. The hollow didn't remove any of it. The hollow just put it in storage while your system finished the repairs. Now the storage unit is open and you're standing in the doorway realizing you have been collecting this inventory your whole life.</p>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <p>Here is the gentle instruction for this phase: <em>small doses.</em> Do not try to feel everything at the speed the world is offering it. Leave the party early. Turn down the invitation. Watch one scene of the movie, not the whole thing. Eat the soup with the spoon, not straight from the pot.</p>
+
+    <p>You are learning to be a feeling person again. That is a skill. It has a learning curve. You are allowed to be bad at it for as long as you need to be.</p>
+
+    <p class="soft">The people who love you will understand. The people who don't — who demand the old version, who need you to be back to normal on their timeline — those aren't the people you are coming back for.</p>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <div class="center-line">You are not <span class="warm-accent">too much.</span><br>You are finally the <em>right amount</em><br>of what you <span class="bloom">actually are.</span></div>
+
+    <p>The flatness you felt in the hollow was not truth. The numbness was not your real state. Those were protective measures that have now, gracefully, mostly, completed their service. Underneath them has always been this — a person with a whole frequency range, a person who contains oceans, a person who was never designed to run on low power forever.</p>
+
+    <p>You get to be bright now. You get to be intense. You get to feel the pomegranate when you bite into it. You get to hear the song the way the song was meant to be heard. You get to love people at a volume that embarrasses you a little because it has nowhere safe to go yet.</p>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section">
+    <p>Build the vessel as you go. Practice boundaries like learning a musical instrument — badly at first, then better. Find the friends whose nervous systems can match yours without flinching. Create small daily rituals that regulate you back down when the sensory floodgates swing open too wide.</p>
+
+    <p>You are not just feeling again. You are building the capacity to feel <em>sustainably</em>. That is a life skill that most people never develop because they never had to. You had to. That is a gift dressed as a curse dressed as a gift.</p>
+
+    <div class="center-line">The color is for <span class="bloom">keeping.</span><br><em>This time, you get to keep it.</em></div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <div class="mark"></div>
+    <h3>You didn't come back <span class="bloom">smaller.</span><br>You came back with <span class="warm-accent">more aperture.</span></h3>
+    <p>Save this for the days when the feelings flood in and you think something's wrong. Nothing's wrong. You're just more alive than you've been in a long time, and alive takes practice.</p>
+    <a href="v/" class="cta-link">Continue to Chapter V · The Integration</a>
+    <a href="../" class="cta-link" style="margin-left: 1rem; margin-top: 1rem;">◆ All Chapters</a>
+    <div class="sig">Dark Shadows · IV · The Return</div>
+  </div>
+
+</section>
+
+<script>
+  // The core magic: saturation layer opacity scales with scroll depth
+  const satLayer = document.getElementById('satLayer');
+  const bloomWord = document.getElementById('bloomWord');
+
+  window.addEventListener('scroll', () => {
+    const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    // Saturation grows from 0 to 1 as user scrolls, easing in
+    const eased = Math.min(1, Math.pow(scrollPct, 0.8));
+    satLayer.style.opacity = eased;
+
+    // Bloom word intensifies too
+    const glow = eased * 30;
+    bloomWord.style.textShadow = `0 0 ${glow}px rgba(196, 117, 110, ${eased * 0.6})`;
+  });
+
+  // Section reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.section').forEach(el => observer.observe(el));
+
+  // Generate petals — but only activate them once user scrolls
+  const petals = document.getElementById('petals');
+  let petalsStarted = false;
+
+  window.addEventListener('scroll', () => {
+    if (!petalsStarted && window.scrollY > 300) {
+      petalsStarted = true;
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement('span');
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (12 + Math.random() * 18) + 's';
+        p.style.animationDelay = Math.random() * 10 + 's';
+        const colors = ['#c4756e', '#e8b071', '#b8934f'];
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
+        p.style.opacity = (Math.random() * 0.4 + 0.3).toString();
+        petals.appendChild(p);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

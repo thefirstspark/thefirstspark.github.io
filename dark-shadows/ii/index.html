@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Rage Chapter — Dark Shadows II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #050507;
+    --bone: #e8e4dc;
+    --blood: #6b1a1f;
+    --ember: #c73e1d;
+    --gold: #b8934f;
+    --smoke: rgba(232, 228, 220, 0.4);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.09;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* ============ ENTRY ============ */
+  .portal {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Ember glow behind hero */
+  .portal::before {
+    content: '';
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(199, 62, 29, 0.15) 0%, transparent 60%);
+    animation: breathe 6s ease-in-out infinite;
+    z-index: 0;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+
+  .portal > * { position: relative; z-index: 1; }
+
+  .series-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: rise 1.5s ease 0.3s forwards;
+  }
+
+  .portal h1 {
+    font-size: clamp(3rem, 11vw, 8rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: rise 2s ease 0.8s forwards;
+  }
+
+  .portal h1 .burn {
+    color: var(--ember);
+    font-style: normal;
+    text-shadow: 0 0 40px rgba(199, 62, 29, 0.4);
+  }
+
+  .portal-warning {
+    max-width: 500px;
+    font-size: 1.05rem;
+    color: var(--smoke);
+    font-style: italic;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: rise 2s ease 1.5s forwards;
+  }
+
+  .enter-btn {
+    background: transparent;
+    border: 1px solid var(--ember);
+    color: var(--ember);
+    padding: 1rem 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    opacity: 0;
+    animation: rise 2s ease 2s forwards;
+  }
+
+  .enter-btn:hover {
+    background: var(--ember);
+    color: var(--void);
+    box-shadow: 0 0 30px rgba(199, 62, 29, 0.4);
+  }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ============ STORY CONTAINER ============ */
+  .story {
+    display: none;
+    min-height: 100vh;
+    padding: 6rem 2rem 10rem;
+    max-width: 780px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .story.active {
+    display: block;
+    animation: fadeInSlow 2s ease;
+  }
+
+  @keyframes fadeInSlow { from { opacity: 0; } to { opacity: 1; } }
+
+  .chapter-marker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .chapter-marker::before,
+  .chapter-marker::after {
+    content: '◆';
+    margin: 0 1rem;
+    opacity: 0.4;
+  }
+
+  .story h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.05;
+    text-align: center;
+    margin-bottom: 4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .story h2 .burn { color: var(--ember); font-style: normal; }
+
+  .story p {
+    font-size: 1.25rem;
+    margin-bottom: 1.8rem;
+    color: rgba(232, 228, 220, 0.88);
+  }
+
+  .story p:first-of-type::first-letter {
+    font-size: 4rem;
+    float: left;
+    line-height: 0.85;
+    padding-right: 0.7rem;
+    padding-top: 0.4rem;
+    color: var(--ember);
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .story .pull {
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--bone);
+    padding: 2rem 0;
+    margin: 3rem 0;
+    border-top: 1px solid rgba(184, 147, 79, 0.3);
+    border-bottom: 1px solid rgba(184, 147, 79, 0.3);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .story .pull .burn { color: var(--ember); font-style: normal; }
+
+  .story .code-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--gold);
+    background: rgba(184, 147, 79, 0.05);
+    border-left: 2px solid var(--ember);
+    padding: 1.2rem 1.4rem;
+    margin: 2.5rem 0;
+    font-style: normal;
+  }
+
+  .code-note .com { color: rgba(232, 228, 220, 0.4); }
+
+  /* Interactive: tap to burn */
+  .burn-zone {
+    margin: 4rem 0;
+    padding: 3rem 2rem;
+    border: 1px solid rgba(199, 62, 29, 0.3);
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    overflow: hidden;
+  }
+
+  .burn-zone:hover {
+    border-color: var(--ember);
+    box-shadow: inset 0 0 60px rgba(199, 62, 29, 0.15);
+  }
+
+  .burn-zone .prompt {
+    font-style: italic;
+    color: var(--smoke);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .burn-zone textarea {
+    width: 100%;
+    min-height: 120px;
+    background: transparent;
+    border: none;
+    color: var(--bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    text-align: center;
+    resize: none;
+    outline: none;
+    line-height: 1.5;
+  }
+
+  .burn-zone textarea::placeholder {
+    color: rgba(232, 228, 220, 0.25);
+  }
+
+  .burn-btn {
+    background: transparent;
+    border: 1px solid var(--ember);
+    color: var(--ember);
+    padding: 0.8rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .burn-btn:hover {
+    background: var(--ember);
+    color: var(--void);
+  }
+
+  .burn-zone.burning textarea {
+    animation: dissolve 3s ease forwards;
+  }
+
+  .burn-zone.burning .burn-btn {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  @keyframes dissolve {
+    0% { opacity: 1; filter: blur(0); transform: translateY(0); color: var(--bone); }
+    30% { color: var(--ember); filter: blur(0.5px); }
+    100% { opacity: 0; filter: blur(8px); transform: translateY(-30px); }
+  }
+
+  .ashes {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 2rem;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .burn-zone.burning .ashes { opacity: 1; transition-delay: 2.5s; }
+
+  /* Ember particles */
+  .embers {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .embers span {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--ember);
+    border-radius: 50%;
+    bottom: -10px;
+    opacity: 0;
+    box-shadow: 0 0 6px var(--ember);
+    animation: rise-ember linear infinite;
+  }
+
+  @keyframes rise-ember {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) translateX(40px); opacity: 0; }
+  }
+
+  /* Closing */
+  .closing {
+    text-align: center;
+    margin-top: 6rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(184, 147, 79, 0.2);
+  }
+
+  .closing .mark {
+    width: 24px;
+    height: 24px;
+    background: var(--ember);
+    transform: rotate(45deg);
+    margin: 0 auto 2.5rem;
+    box-shadow: 0 0 20px var(--ember);
+  }
+
+  .closing h3 {
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .closing h3 .burn { color: var(--ember); font-style: normal; }
+
+  .closing p {
+    max-width: 450px;
+    margin: 0 auto 2rem;
+    color: var(--smoke);
+    font-style: italic;
+    font-size: 1.05rem;
+  }
+
+  .closing .sig {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 3rem;
+    opacity: 0.6;
+  }
+
+  .cta-link {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: all 0.4s ease;
+  }
+
+  .cta-link:hover {
+    background: var(--gold);
+    color: var(--void);
+  }
+
+  @media (max-width: 768px) {
+    .story { padding: 4rem 1.5rem 6rem; }
+    .story p { font-size: 1.1rem; }
+    .story .pull { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="embers" id="embers"></div>
+
+<!-- ============ PORTAL ============ -->
+<section class="portal" id="portal">
+  <div class="series-tag">Dark Shadows · II</div>
+  <h1>the <span class="burn">rage</span><br>chapter</h1>
+  <p class="portal-warning">Grief arrives in shapes nobody taught you to hold. This one has teeth.</p>
+  <button class="enter-btn" onclick="enter()">Enter the Furnace</button>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="story" id="story">
+
+  <div class="chapter-marker">An entry from inside</div>
+  <h2>Nobody wants to hear<br>about the <span class="burn">rage</span>.</h2>
+
+  <p>They want the wise one. The one who learned something. The one who writes a tidy little post about how suffering becomes medicine. They want the alchemy, skipping the part where the lead is actually lead — heavy, toxic, and yours to carry.</p>
+
+  <p>So we don't talk about it. We swallow it. We call it anxiety. We call it insomnia. We call it "I'm just tired." We let it leak out sideways at people who don't deserve it and then hate ourselves for the leak.</p>
+
+  <div class="pull">The rage isn't a <span class="burn">failure</span> of healing.<br>The rage is how your body remembers<br>that something was <em>taken.</em></div>
+
+  <p>Your nervous system is not confused. It knows what should not have happened. It files it correctly. It is the only part of you that refused, from the beginning, to pretend.</p>
+
+  <div class="code-note">
+    <span class="com">// rage is not a bug.</span><br>
+    <span class="com">// rage is an alarm that never got turned off</span><br>
+    <span class="com">// because the threat was never named.</span>
+  </div>
+
+  <p>The well-meaning people will tell you to let it go. They mean well. They are also wrong. You cannot release something you have not yet been allowed to fully <em>hold</em>. The rage has to be witnessed before it can be composted. Otherwise it just goes underground and builds a city.</p>
+
+  <p>So here is a small thing. A container. A place to say the unsayable thing — the sentence that has been sitting at the back of your throat for a year, or ten, or thirty. Write it. Nobody will see it. It never gets stored, never gets sent. You will burn it in the next breath.</p>
+
+  <!-- INTERACTIVE BURN ZONE -->
+  <div class="burn-zone" id="burnZone">
+    <p class="prompt">What needs to be said that you've never said?</p>
+    <textarea id="burnText" placeholder="I am angry that..." maxlength="600"></textarea>
+    <br>
+    <button class="burn-btn" onclick="burnIt()">Burn it</button>
+    <p class="ashes">— returned to ash —</p>
+  </div>
+
+  <p>Notice your body. Did your shoulders drop? Did you exhale without meaning to? That's information. That's the nervous system getting one molecule lighter because something that needed air finally got it.</p>
+
+  <p>You can come back and do this again. You can do it a hundred times. There's no quota on rage, and there's no gold medal for getting through grief quietly. The people who loved you don't need you to perform peace. They need you to come back to yourself — and the self you're coming back to has <em>all</em> the feelings, not just the palatable ones.</p>
+
+  <div class="pull">You are <span class="burn">allowed</span> to be furious<br>about what happened.<br><em>That's not the opposite of healing.<br>That IS the healing.</em></div>
+
+  <p>Somewhere in the story there's forgiveness, maybe. Or there isn't. Both are valid endings. The rage isn't the villain of the arc; it's the witness. It was there before you had words. It will be there, quieter, when you learn new ones.</p>
+
+  <p>For now — just let it be real. Let it take up the space it earned. Pour it into a cup that can hold it. And when you're tired of holding, set the cup down. It will still be there. You can come back.</p>
+
+  <div class="closing">
+    <div class="mark"></div>
+    <h3>The furnace is not <span class="burn">destruction.</span><br>It's how iron remembers<br>it was <em>ever sharp.</em></h3>
+    <p>Come back to this page when the rage rises and has nowhere to go. This is a sanctuary. Use it.</p>
+    <a href="iii/" class="cta-link">Continue to Chapter III · The Hollow</a>
+    <a href="../" class="cta-link" style="margin-left: 1rem; margin-top: 1rem;">◆ All Chapters</a>
+    <div class="sig">Dark Shadows · II · The Rage Chapter</div>
+  </div>
+
+</section>
+
+<script>
+  function enter() {
+    document.getElementById('portal').style.display = 'none';
+    document.getElementById('story').classList.add('active');
+    window.scrollTo(0, 0);
+    startEmbers();
+  }
+
+  function burnIt() {
+    const zone = document.getElementById('burnZone');
+    zone.classList.add('burning');
+    // Never stored, never sent. Just gone.
+    setTimeout(() => {
+      document.getElementById('burnText').value = '';
+    }, 3000);
+  }
+
+  function startEmbers() {
+    const e = document.getElementById('embers');
+    for (let i = 0; i < 30; i++) {
+      const s = document.createElement('span');
+      s.style.left = Math.random() * 100 + '%';
+      s.style.animationDuration = (8 + Math.random() * 12) + 's';
+      s.style.animationDelay = Math.random() * 15 + 's';
+      s.style.opacity = Math.random() * 0.7 + 0.3;
+      e.appendChild(s);
+    }
+  }
+</script>
+
+</body>
+</html>

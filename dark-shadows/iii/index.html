@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hollow — Dark Shadows III</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #040407;
+    --fog: #151520;
+    --bone: #d8d4cc;
+    --pale: #9b9ba8;
+    --cold: #6b8aa8;
+    --gold: #8a7249;
+    --whisper: rgba(216, 212, 204, 0.35);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Grain — quieter this time */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* Cold fog */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99;
+    background: radial-gradient(ellipse at 30% 40%, rgba(107, 138, 168, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(21, 21, 32, 0.4) 0%, transparent 70%);
+  }
+
+  /* ============ BREATH ORB (landing) ============ */
+  .entry {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .series-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: appear 2s ease 0.3s forwards;
+  }
+
+  .entry h1 {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: appear 3s ease 0.8s forwards;
+  }
+
+  .entry h1 .cold { color: var(--cold); font-style: normal; }
+
+  .entry .intro {
+    max-width: 520px;
+    font-size: 1.15rem;
+    color: var(--whisper);
+    font-style: italic;
+    margin-bottom: 4rem;
+    opacity: 0;
+    animation: appear 3s ease 1.5s forwards;
+  }
+
+  @keyframes appear { to { opacity: 1; } }
+
+  /* Breath orb */
+  .orb-container {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: appear 2.5s ease 2.2s forwards;
+    cursor: pointer;
+  }
+
+  .orb {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(107, 138, 168, 0.5), rgba(21, 21, 32, 0.9) 70%);
+    box-shadow: 0 0 80px rgba(107, 138, 168, 0.3),
+                inset 0 0 40px rgba(107, 138, 168, 0.2);
+    animation: breath 8s ease-in-out infinite;
+  }
+
+  @keyframes breath {
+    0%, 100% { transform: scale(0.85); box-shadow: 0 0 60px rgba(107, 138, 168, 0.25), inset 0 0 30px rgba(107, 138, 168, 0.15); }
+    50% { transform: scale(1.15); box-shadow: 0 0 120px rgba(107, 138, 168, 0.45), inset 0 0 50px rgba(107, 138, 168, 0.3); }
+  }
+
+  .orb-ring {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid rgba(107, 138, 168, 0.2);
+    animation: breath-ring 8s ease-in-out infinite;
+  }
+
+  @keyframes breath-ring {
+    0%, 100% { transform: scale(0.9); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+  }
+
+  .orb-ring.outer {
+    width: 240px;
+    height: 240px;
+    animation-delay: 0.5s;
+  }
+
+  .orb-instruction {
+    position: absolute;
+    bottom: -4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--cold);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .orb-instruction::before,
+  .orb-instruction::after {
+    content: '—';
+    margin: 0 0.8rem;
+    color: var(--whisper);
+  }
+
+  /* ============ PIECE CONTAINER ============ */
+  .piece {
+    display: none;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 6rem 2rem 10rem;
+    position: relative;
+  }
+
+  .piece.visible {
+    display: block;
+    animation: slowFade 3s ease;
+  }
+
+  @keyframes slowFade { from { opacity: 0; } to { opacity: 1; } }
+
+  .marker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+
+  .piece h2 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .piece h2 .cold { color: var(--cold); font-style: normal; }
+
+  /* Each passage fades in only when user clicks "next breath" */
+  .passage {
+    opacity: 0;
+    filter: blur(8px);
+    transition: opacity 3s ease, filter 3s ease;
+    margin-bottom: 3rem;
+  }
+
+  .passage.revealed {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  .passage p {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: rgba(216, 212, 204, 0.9);
+    line-height: 1.7;
+  }
+
+  .passage p.soft {
+    color: var(--whisper);
+    font-style: italic;
+    padding-left: 2rem;
+    border-left: 1px solid var(--cold);
+    font-size: 1.1rem;
+  }
+
+  .passage .center-line {
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--bone);
+    padding: 2rem 0;
+    line-height: 1.4;
+  }
+
+  .passage .center-line .cold { color: var(--cold); font-style: normal; }
+
+  .passage .code-frag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--pale);
+    background: rgba(107, 138, 168, 0.05);
+    border-left: 2px solid var(--cold);
+    padding: 1.2rem 1.4rem;
+    margin: 2rem 0;
+    font-style: normal;
+  }
+
+  .passage .code-frag .com { color: var(--whisper); }
+
+  /* Next breath button */
+  .breath-btn {
+    display: block;
+    margin: 2rem auto;
+    background: transparent;
+    border: 1px solid var(--cold);
+    color: var(--cold);
+    padding: 0.9rem 2.2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.6s ease;
+    opacity: 0.7;
+  }
+
+  .breath-btn:hover {
+    background: var(--cold);
+    color: var(--void);
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(107, 138, 168, 0.3);
+  }
+
+  .breath-btn.gone {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s ease;
+  }
+
+  /* Progress dots */
+  .progress {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+
+  .progress.active { opacity: 1; }
+
+  .progress .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(107, 138, 168, 0.25);
+    transition: all 0.8s ease;
+  }
+
+  .progress .dot.lit {
+    background: var(--cold);
+    box-shadow: 0 0 10px var(--cold);
+  }
+
+  /* Closing */
+  .closing {
+    text-align: center;
+    margin-top: 6rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(107, 138, 168, 0.15);
+    opacity: 0;
+    filter: blur(8px);
+    transition: opacity 3s ease, filter 3s ease;
+  }
+
+  .closing.revealed {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  .closing .mark {
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--cold);
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+    position: relative;
+    box-shadow: 0 0 15px rgba(107, 138, 168, 0.4);
+  }
+
+  .closing .mark::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: var(--cold);
+    border-radius: 50%;
+  }
+
+  .closing h3 {
+    font-size: 1.9rem;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    line-height: 1.3;
+  }
+
+  .closing h3 .cold { color: var(--cold); font-style: normal; }
+
+  .closing p {
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    color: var(--whisper);
+    font-style: italic;
+    font-size: 1.05rem;
+  }
+
+  .cta-link {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: all 0.4s ease;
+  }
+
+  .cta-link:hover {
+    background: var(--gold);
+    color: var(--void);
+  }
+
+  .sig {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 3rem;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    .piece { padding: 4rem 1.5rem 6rem; }
+    .passage p { font-size: 1.15rem; }
+    .progress { right: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ ENTRY (BREATH PORTAL) ============ -->
+<section class="entry" id="entry">
+  <div class="series-tag">Dark Shadows · III</div>
+  <h1>the <span class="cold">hollow</span></h1>
+  <p class="intro">After the grief. After the rage. The part where you stopped feeling anything and thought it meant you broke.</p>
+
+  <div class="orb-container" onclick="enter()">
+    <div class="orb-ring outer"></div>
+    <div class="orb-ring"></div>
+    <div class="orb"></div>
+    <div class="orb-instruction">breathe with it · then enter</div>
+  </div>
+</section>
+
+<!-- ============ THE PIECE ============ -->
+<section class="piece" id="piece">
+
+  <div class="progress" id="progress"></div>
+
+  <div class="marker">◆ a letter from the hollow ◆</div>
+  <h2>You didn't go <span class="cold">numb</span>.<br>You went <em>still.</em></h2>
+
+  <!-- Passage 1 -->
+  <div class="passage" data-passage="0">
+    <p>There's a part of grief nobody writes poems about. It comes after the crying stops being useful. After the rage runs out of furniture to knock over. After the friends who promised forever have quietly moved on to other crises.</p>
+
+    <p>What's left is a flatness. A grey. A roomful of air where a person used to be, or a self used to be, or a future used to be. You get up. You eat something. You answer a text. You don't feel much.</p>
+
+    <p class="soft">You start to wonder if you're broken. If you used up all the feeling. If this is who you are now.</p>
+
+    <button class="breath-btn" onclick="nextBreath(0)">Next Breath</button>
+  </div>
+
+  <!-- Passage 2 -->
+  <div class="passage" data-passage="1">
+    <p>Here's what nobody told you: the hollow is not absence. It's recalibration. It's your system, completely exhausted, choosing the minimum viable mode so it can <em>keep running</em> while deeper processes finish underneath.</p>
+
+    <div class="code-frag">
+      <span class="com">// low-power mode is not broken.</span><br>
+      <span class="com">// it's the operating system protecting</span><br>
+      <span class="com">// the hardware while repairs run in background.</span>
+    </div>
+
+    <p>Think about what you asked of yourself. You held a shape nobody should have to hold. You processed information the body was never designed to receive all at once. The hollow is the rest you refused to take until your nervous system took it without asking.</p>
+
+    <button class="breath-btn" onclick="nextBreath(1)">Next Breath</button>
+  </div>
+
+  <!-- Passage 3 -->
+  <div class="passage" data-passage="2">
+    <div class="center-line">This is not the <span class="cold">ending.</span><br>This is the <em>intermission.</em></div>
+
+    <p>The lights go down. The stage resets. You sit in the dark for longer than feels reasonable. You start to wonder if the show is over, if everyone else left, if this is just what the rest of it is.</p>
+
+    <p>And then — eventually, on no schedule — something small flickers. A song that makes you pause. A smell that hits a memory sideways. A stranger's laugh that you find yourself laughing along with before you realize what you're doing.</p>
+
+    <p class="soft">That's not the beginning of getting over it. That's the beginning of your capacity coming back online. Different than before. Not less. Just different.</p>
+
+    <button class="breath-btn" onclick="nextBreath(2)">Next Breath</button>
+  </div>
+
+  <!-- Passage 4 -->
+  <div class="passage" data-passage="3">
+    <p>While you're in the hollow, be careful of people who tell you to "feel again." They mean well. They also don't understand that you're not resisting feeling — you're integrating. There's a difference between shutdown and digestion.</p>
+
+    <p>You don't need to perform aliveness. You don't need to post about your healing. You don't need anyone's permission to take the year, or two, or five that this requires. Pacing a massive internal renovation is not the same as giving up.</p>
+
+    <div class="code-frag">
+      <span class="com">// signs the hollow is doing its job:</span><br>
+      <span class="com">//   you sleep.</span><br>
+      <span class="com">//   you eat.</span><br>
+      <span class="com">//   you show up for one small thing.</span><br>
+      <span class="com">//   the rest can wait.</span>
+    </div>
+
+    <p>That's enough. That is genuinely, actually, truthfully — enough.</p>
+
+    <button class="breath-btn" onclick="nextBreath(3)">Next Breath</button>
+  </div>
+
+  <!-- Passage 5 -->
+  <div class="passage" data-passage="4">
+    <div class="center-line">The <span class="cold">self</span> you are waiting for<br>is not coming back.<br><em>Someone else is coming.</em></div>
+
+    <p>This is the part that grief-avoidant culture never wants you to know. The version of you that existed before the loss is not on a boat coming back to shore. That person was standing where the loss happened, and the loss took them too.</p>
+
+    <p>The grief you are moving through is partly grief for them — for the self who didn't know what you now know, the self who could still be surprised by the particular shape of this pain.</p>
+
+    <p>But the self arriving — slowly, on the other side of the hollow — has something the previous version could not have. Depth earned the only way depth is ever earned. The ability to witness someone else's hollow without flinching. A calibration for what actually matters that can't be unlearned.</p>
+
+    <p class="soft">You're not becoming less. You're becoming more accurate.</p>
+
+    <button class="breath-btn" onclick="nextBreath(4)">Next Breath</button>
+  </div>
+
+  <!-- Passage 6 (final) -->
+  <div class="passage" data-passage="5">
+    <p>So sit here as long as you need. Don't rush the thaw. Don't apologize for the quiet. Don't explain the flatness to people who have never been here and would not recognize the landscape if they had a map.</p>
+
+    <p>The hollow is holy ground. It's the space where the old shape of you is being composted into whatever the next shape is going to be. You don't have to see the next shape yet. You don't have to name it. You just have to keep being here, gently, while it forms.</p>
+
+    <div class="center-line">Not everything in the dark<br>is <span class="cold">death.</span><br><em>Some of it is seed.</em></div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing" id="closing">
+    <div class="mark"></div>
+    <h3>The thaw doesn't<br>announce itself. It just<br><span class="cold">happens</span>, one morning,<br>while you're making tea.</h3>
+    <p>Save this. Come back when the grey shows up again. The grey is not the enemy. It's the quiet between the notes.</p>
+    <a href="iv/" class="cta-link">Continue to Chapter IV · The Return</a>
+    <a href="../" class="cta-link" style="margin-left: 1rem; margin-top: 1rem;">◆ All Chapters</a>
+    <div class="sig">Dark Shadows · III · The Hollow</div>
+  </div>
+
+</section>
+
+<script>
+  const TOTAL_PASSAGES = 6;
+
+  function enter() {
+    document.getElementById('entry').style.opacity = 0;
+    document.getElementById('entry').style.transition = 'opacity 2s ease';
+    setTimeout(() => {
+      document.getElementById('entry').style.display = 'none';
+      document.getElementById('piece').classList.add('visible');
+      window.scrollTo(0, 0);
+      // Build progress dots
+      const progress = document.getElementById('progress');
+      for (let i = 0; i < TOTAL_PASSAGES; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        progress.appendChild(dot);
+      }
+      // Reveal first passage
+      setTimeout(() => {
+        document.querySelector('[data-passage="0"]').classList.add('revealed');
+        progress.classList.add('active');
+        progress.children[0].classList.add('lit');
+      }, 500);
+    }, 2000);
+  }
+
+  function nextBreath(current) {
+    const currentEl = document.querySelector(`[data-passage="${current}"]`);
+    const nextEl = document.querySelector(`[data-passage="${current + 1}"]`);
+    const btn = currentEl.querySelector('.breath-btn');
+
+    btn.classList.add('gone');
+
+    if (nextEl) {
+      setTimeout(() => {
+        nextEl.classList.add('revealed');
+        document.getElementById('progress').children[current + 1].classList.add('lit');
+        nextEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 800);
+    }
+
+    // If this was the last passage with a button, reveal closing
+    if (current === TOTAL_PASSAGES - 2) {
+      setTimeout(() => {
+        document.getElementById('closing').classList.add('revealed');
+      }, 2500);
+    }
+  }
+</script>
+
+</body>
+</html>

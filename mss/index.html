@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The MSS Protocol — Bootstrap to the Mobile Spark Station</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #050509;
+    --deep: #0a0a14;
+    --panel: #0f0f1a;
+    --border: rgba(212, 169, 86, 0.15);
+    --bone: #e8e4dc;
+    --pale: #a8a8b8;
+    --dim: #6b6b7a;
+    --gold: #d4a956;
+    --forge: #e8b071;
+    --rose: #c4756e;
+    --cyan: #6b8aa8;
+    --green: #7ea870;
+    --whisper: rgba(232, 228, 220, 0.4);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+
+  /* ============ HEADER ============ */
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-top: 2rem;
+  }
+
+  .mark {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .mark::before, .mark::after { content: '◆'; margin: 0 0.8rem; }
+
+  .header h1 {
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .header h1 .accent {
+    background: linear-gradient(135deg, var(--gold), var(--forge));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+
+  .header .subtitle {
+    font-size: 1.1rem;
+    color: var(--whisper);
+    font-style: italic;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  /* ============ THE ROAD (main progress visual) ============ */
+  .road-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .road-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .road-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .road-header .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .road-header h2 {
+    font-size: 1.8rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.1;
+  }
+
+  .road-header h2 .accent {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .road-header .goal-setter {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .road-header .goal-setter label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--whisper);
+    text-transform: uppercase;
+  }
+
+  .road-header .goal-setter input {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.7rem;
+    width: 90px;
+    text-align: right;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .road-header .goal-setter input:focus {
+    border-color: var(--gold);
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 8px;
+    background: rgba(232, 228, 220, 0.06);
+    border: 1px solid var(--border);
+    position: relative;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--forge));
+    width: 0%;
+    transition: width 1s ease;
+    box-shadow: 0 0 15px rgba(212, 169, 86, 0.5);
+    position: relative;
+  }
+
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    right: 0; top: -2px; bottom: -2px;
+    width: 2px;
+    background: var(--forge);
+    box-shadow: 0 0 10px var(--forge);
+  }
+
+  .progress-stats {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--pale);
+    margin-bottom: 1.5rem;
+  }
+
+  .progress-stats .current {
+    color: var(--gold);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .progress-stats .goal {
+    color: var(--whisper);
+  }
+
+  /* Miles display */
+  .miles {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .miles .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--whisper);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .miles .amount {
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--bone);
+  }
+
+  .miles .amount .gold-text {
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* ============ GRID LAYOUT ============ */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============ MATH PANEL ============ */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 2rem 1.8rem;
+    position: relative;
+  }
+
+  .panel-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .panel h3 {
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  /* Math breakdown */
+  .math-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.7rem 0;
+    border-bottom: 1px dashed rgba(232, 228, 220, 0.06);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+  }
+
+  .math-line:last-child { border-bottom: none; }
+
+  .math-line .label {
+    color: var(--pale);
+  }
+
+  .math-line .value {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .math-line.total {
+    margin-top: 0.8rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gold);
+    border-bottom: none;
+  }
+
+  .math-line.total .label {
+    color: var(--bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+
+  .math-line.total .value {
+    color: var(--forge);
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .scenario-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .scenario-tab {
+    flex: 1;
+    padding: 0.6rem 0.3rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--pale);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .scenario-tab:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .scenario-tab.active {
+    background: rgba(212, 169, 86, 0.1);
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+
+  /* ============ LOG PANEL ============ */
+  .log-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .log-input input {
+    flex: 1;
+    background: rgba(232, 228, 220, 0.03);
+    border: 1px solid var(--border);
+    color: var(--bone);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    padding: 0.7rem 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .log-input input:focus {
+    border-color: var(--gold);
+  }
+
+  .log-input input::placeholder { color: var(--dim); }
+
+  .log-input button {
+    background: var(--gold);
+    color: var(--void);
+    border: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    padding: 0 1.2rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .log-input button:hover {
+    background: var(--forge);
+    box-shadow: 0 0 15px rgba(212, 169, 86, 0.4);
+  }
+
+  .log-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--whisper);
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .log-list {
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+
+  .log-list::-webkit-scrollbar { width: 4px; }
+  .log-list::-webkit-scrollbar-track { background: rgba(232, 228, 220, 0.03); }
+  .log-list::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  .log-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 0;
+    border-bottom: 1px dashed rgba(232, 228, 220, 0.06);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+  }
+
+  .log-item:last-child { border-bottom: none; }
+
+  .log-item .date {
+    color: var(--whisper);
+    font-size: 0.7rem;
+  }
+
+  .log-item .what {
+    color: var(--pale);
+    flex: 1;
+    padding: 0 1rem;
+  }
+
+  .log-item .amt {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .log-item .del {
+    color: var(--dim);
+    cursor: pointer;
+    padding: 0 0.3rem;
+    transition: color 0.2s;
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+  }
+
+  .log-item .del:hover { color: var(--rose); }
+
+  .empty-log {
+    text-align: center;
+    color: var(--whisper);
+    font-style: italic;
+    padding: 2rem 0;
+    font-size: 0.95rem;
+  }
+
+  /* ============ TODAY'S ACTIONS ============ */
+  .actions-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 2rem 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .actions-panel h3 {
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .actions-panel h3 .accent {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .actions-panel .today-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .action-list {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
+
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: rgba(232, 228, 220, 0.02);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .action-item:hover {
+    border-color: var(--gold);
+    background: rgba(212, 169, 86, 0.04);
+  }
+
+  .action-item.done {
+    opacity: 0.45;
+  }
+
+  .action-item.done .action-text {
+    text-decoration: line-through;
+    color: var(--dim);
+  }
+
+  .action-check {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .action-item.done .action-check {
+    background: var(--gold);
+  }
+
+  .action-item.done .action-check::after {
+    content: '✓';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--void);
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .action-text {
+    flex: 1;
+    font-size: 1rem;
+    color: var(--bone);
+    line-height: 1.5;
+  }
+
+  .action-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    background: rgba(212, 169, 86, 0.08);
+    padding: 0.2rem 0.6rem;
+    white-space: nowrap;
+    align-self: flex-start;
+  }
+
+  /* ============ WEEKLY RHYTHM ============ */
+  .weeks {
+    margin-top: 2rem;
+  }
+
+  .week {
+    border: 1px solid var(--border);
+    margin-bottom: 1rem;
+    background: var(--panel);
+  }
+
+  .week-header {
+    padding: 1.2rem 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+
+  .week-header:hover {
+    background: rgba(212, 169, 86, 0.04);
+  }
+
+  .week-header .range {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .week-header .title {
+    font-size: 1.2rem;
+    font-style: italic;
+    flex: 1;
+    padding: 0 1.5rem;
+  }
+
+  .week-header .arrow {
+    color: var(--gold);
+    transition: transform 0.3s ease;
+  }
+
+  .week.expanded .week-header .arrow {
+    transform: rotate(180deg);
+  }
+
+  .week-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+
+  .week.expanded .week-body {
+    max-height: 800px;
+  }
+
+  .week-content {
+    padding: 0.5rem 1.8rem 1.8rem;
+    color: var(--pale);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .week-content .focus {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin: 1rem 0 0.7rem;
+    display: block;
+  }
+
+  .week-content .focus:first-child { margin-top: 0; }
+
+  .week-content ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .week-content li {
+    padding: 0.4rem 0 0.4rem 1.5rem;
+    position: relative;
+  }
+
+  .week-content li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.55rem;
+    top: 0.75rem;
+    opacity: 0.6;
+  }
+
+  .week-content .target {
+    display: inline-block;
+    background: rgba(212, 169, 86, 0.1);
+    color: var(--gold);
+    padding: 0.3rem 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    margin-top: 1rem;
+  }
+
+  /* ============ FOOTER REMINDER ============ */
+  .footer-note {
+    margin-top: 4rem;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    color: var(--whisper);
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .footer-note .emphasis {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .footer-sig {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 2rem;
+    opacity: 0.6;
+  }
+
+  /* Section headers */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin: 3rem 0 1.5rem;
+  }
+
+  .section-label::before, .section-label::after {
+    content: '—';
+    margin: 0 0.8rem;
+    color: var(--whisper);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ============ HEADER ============ -->
+  <div class="header">
+    <div class="mark">The First Spark · Bootstrap Protocol</div>
+    <h1>the <span class="accent">MSS</span> protocol</h1>
+    <p class="subtitle">Soul Maps → Mobile Spark Station. The 90-day plan to buy the Class C with your own revenue, no SAFE required.</p>
+  </div>
+
+  <!-- ============ THE ROAD (main progress) ============ -->
+  <div class="road-panel">
+    <div class="road-header">
+      <div>
+        <div class="label">Miles to the MSS</div>
+        <h2>The <span class="accent">Class C</span> Fund</h2>
+      </div>
+      <div class="goal-setter">
+        <label for="goalInput">Goal $</label>
+        <input type="number" id="goalInput" value="30000" min="1000" step="500">
+      </div>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="progress-stats">
+      <span><span class="current" id="currentAmt">$0</span> raised</span>
+      <span class="goal" id="goalDisplay">of $30,000</span>
+    </div>
+
+    <div class="miles">
+      <div class="label">Distance remaining</div>
+      <div class="amount"><span class="gold-text" id="remaining">$30,000</span> · <span id="percentDone">0%</span> complete</div>
+    </div>
+  </div>
+
+  <!-- ============ MATH + LOG GRID ============ -->
+  <div class="grid">
+
+    <!-- MATH -->
+    <div class="panel">
+      <span class="panel-label">◆ The Math</span>
+      <h3>What gets you <em>there</em></h3>
+
+      <div class="scenario-tabs">
+        <button class="scenario-tab" data-scenario="conservative">Conservative</button>
+        <button class="scenario-tab active" data-scenario="realistic">Realistic</button>
+        <button class="scenario-tab" data-scenario="push">Push Mode</button>
+      </div>
+
+      <div id="mathBreakdown">
+        <!-- populated by JS -->
+      </div>
+
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--whisper); margin-top: 1.5rem; line-height: 1.7; letter-spacing: 0.05em;">
+        Numbers assume steady visibility + DM outreach. "Push mode" assumes the Voyage Ohio feature gets leveraged into 2–3 more press placements.
+      </p>
+    </div>
+
+    <!-- LOG -->
+    <div class="panel">
+      <span class="panel-label">◆ Revenue Log</span>
+      <h3>Every dollar <em>counts</em></h3>
+
+      <div class="log-input">
+        <input type="number" id="amountInput" placeholder="Amount ($)" step="0.01">
+        <input type="text" id="sourceInput" placeholder="Source (e.g. Soul Map, OG Spark)">
+        <button onclick="logRevenue()">Log</button>
+      </div>
+      <p class="log-hint">Every sale. Every tip. Every single one. Watch it stack.</p>
+
+      <div class="log-list" id="logList">
+        <div class="empty-log">No entries yet. The first one breaks the spell.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ TODAY'S ACTIONS ============ -->
+  <div class="actions-panel">
+    <div class="today-label">◆ Daily Protocol ◆</div>
+    <h3>Today's <span class="accent">three</span></h3>
+    <p style="color: var(--whisper); font-style: italic; font-size: 1rem; margin-top: 0.3rem;">Three actions every day. That's the whole deal. Do them, check them, close the tab.</p>
+
+    <div class="action-list" id="actionList">
+      <!-- populated by JS -->
+    </div>
+
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--whisper); margin-top: 1.5rem; text-align: center; letter-spacing: 0.1em;">
+      Actions reset at midnight. Streak preserved as long as all three get checked.
+    </p>
+
+    <div id="streakDisplay" style="text-align: center; margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--gold); letter-spacing: 0.15em;">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <!-- ============ THE 90 DAYS ============ -->
+  <div class="section-label">The 90-Day Arc</div>
+
+  <div class="weeks" id="weeksList">
+    <!-- populated by JS -->
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="footer-note">
+    <p>The Class C is not the point. <span class="emphasis">The Class C is the evidence.</span></p>
+    <p style="margin-top: 1rem;">What you are actually building is a business that funded itself without permission — and that is the story that opens every future door.</p>
+    <div class="footer-sig">MSS Protocol · The First Spark · Kate's Paint LLC</div>
+  </div>
+
+</div>
+
+<script>
+  // ============ STATE ============
+  const STORAGE_KEY = 'mss_tracker_v1';
+
+  const defaultState = {
+    goal: 30000,
+    revenue: [],
+    actionsDate: null,
+    actionsCompleted: [false, false, false],
+    streak: 0,
+    lastCompletedDate: null,
+    expandedWeeks: [0]
+  };
+
+  let state = loadState();
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return {...defaultState};
+      return {...defaultState, ...JSON.parse(raw)};
+    } catch(e) {
+      return {...defaultState};
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch(e) {}
+  }
+
+  // ============ MATH SCENARIOS ============
+  const scenarios = {
+    conservative: {
+      name: 'Conservative',
+      lines: [
+        ['Soul Maps @ $22', '15/week', 330],
+        ['Sparkverse $33/mo', '3 new members', 99],
+        ['OG Spark $519', '0.5/month avg', 260],
+        ['Weekly revenue', '', 689],
+      ],
+      monthly: 2756,
+      timeToGoal: '~11 months'
+    },
+    realistic: {
+      name: 'Realistic',
+      lines: [
+        ['Soul Maps @ $22', '30/week', 660],
+        ['Sparkverse $33/mo', '6 new members', 198],
+        ['OG Spark $519', '1/month avg', 520],
+        ['Weekly revenue', '', 1378],
+      ],
+      monthly: 5510,
+      timeToGoal: '~5.5 months'
+    },
+    push: {
+      name: 'Push Mode',
+      lines: [
+        ['Soul Maps @ $22', '50/week', 1100],
+        ['Sparkverse $33/mo', '12 new members', 396],
+        ['OG Spark $519', '2/month avg', 1040],
+        ['Press-amplified drops', '1-2/month', 500],
+        ['Weekly revenue', '', 2536],
+      ],
+      monthly: 10144,
+      timeToGoal: '~3 months'
+    }
+  };
+
+  function renderMath(key) {
+    const s = scenarios[key];
+    const el = document.getElementById('mathBreakdown');
+    let html = '';
+    s.lines.forEach(([label, detail, value]) => {
+      const isTotal = label.toLowerCase().includes('weekly revenue');
+      html += `<div class="math-line${isTotal ? ' total' : ''}">
+        <span class="label">${label}${detail ? ` <span style="color: var(--whisper);">· ${detail}</span>` : ''}</span>
+        <span class="value">$${value.toLocaleString()}</span>
+      </div>`;
+    });
+    html += `<div class="math-line total" style="margin-top: 0.5rem;">
+      <span class="label">Monthly total</span>
+      <span class="value">$${s.monthly.toLocaleString()}</span>
+    </div>`;
+    html += `<div class="math-line" style="border-bottom: none; padding-top: 0.8rem;">
+      <span class="label" style="color: var(--whisper); font-style: italic;">Time to $${state.goal.toLocaleString()} goal</span>
+      <span class="value" style="color: var(--forge);">${s.timeToGoal}</span>
+    </div>`;
+    el.innerHTML = html;
+  }
+
+  // Tab switching
+  document.querySelectorAll('.scenario-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderMath(tab.dataset.scenario);
+    });
+  });
+
+  // ============ GOAL / PROGRESS ============
+  function renderProgress() {
+    const total = state.revenue.reduce((sum, r) => sum + r.amount, 0);
+    const pct = Math.min(100, (total / state.goal) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('currentAmt').textContent = '$' + total.toLocaleString(undefined, {maximumFractionDigits: 0});
+    document.getElementById('goalDisplay').textContent = 'of $' + state.goal.toLocaleString();
+    document.getElementById('remaining').textContent = '$' + Math.max(0, state.goal - total).toLocaleString(undefined, {maximumFractionDigits: 0});
+    document.getElementById('percentDone').textContent = pct.toFixed(1) + '%';
+  }
+
+  document.getElementById('goalInput').addEventListener('change', (e) => {
+    const val = parseFloat(e.target.value);
+    if (val && val > 0) {
+      state.goal = val;
+      saveState();
+      renderProgress();
+      renderMath(document.querySelector('.scenario-tab.active').dataset.scenario);
+    }
+  });
+
+  document.getElementById('goalInput').value = state.goal;
+
+  // ============ LOG ============
+  function logRevenue() {
+    const amt = parseFloat(document.getElementById('amountInput').value);
+    const src = document.getElementById('sourceInput').value.trim() || 'Untitled';
+    if (!amt || amt <= 0) return;
+    
+    state.revenue.unshift({
+      amount: amt,
+      source: src,
+      date: new Date().toISOString()
+    });
+    saveState();
+    renderLog();
+    renderProgress();
+    document.getElementById('amountInput').value = '';
+    document.getElementById('sourceInput').value = '';
+    document.getElementById('amountInput').focus();
+  }
+
+  function deleteEntry(idx) {
+    state.revenue.splice(idx, 1);
+    saveState();
+    renderLog();
+    renderProgress();
+  }
+
+  function renderLog() {
+    const el = document.getElementById('logList');
+    if (state.revenue.length === 0) {
+      el.innerHTML = '<div class="empty-log">No entries yet. The first one breaks the spell.</div>';
+      return;
+    }
+    el.innerHTML = state.revenue.map((r, i) => {
+      const d = new Date(r.date);
+      const dateStr = d.toLocaleDateString('en-US', {month: 'short', day: 'numeric'});
+      return `<div class="log-item">
+        <span class="date">${dateStr}</span>
+        <span class="what">${escapeHtml(r.source)}</span>
+        <span class="amt">$${r.amount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+        <button class="del" onclick="deleteEntry(${i})" title="Remove">×</button>
+      </div>`;
+    }).join('');
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  // Enter key to submit log
+  document.getElementById('sourceInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') logRevenue();
+  });
+  document.getElementById('amountInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') document.getElementById('sourceInput').focus();
+  });
+
+  // ============ DAILY ACTIONS ============
+  const dailyActions = [
+    { text: "Send 3 DMs — to warm contacts, past buyers, or engaged Spark members. Script: 'What drew you to The First Spark?' or a Soul Map soft-offer.", tag: "Outreach" },
+    { text: "Post once — on X, IG, or in Sparkverse. One Selector Model drop, one Soul Map result, or one real moment from the build. Visibility compounds.", tag: "Visibility" },
+    { text: "Ship one asset — a ritual guide, a Soul Map, a blog entry, a new page, a fix. Something that exists at the end of today that didn't this morning.", tag: "Build" }
+  ];
+
+  function checkDailyReset() {
+    const today = new Date().toDateString();
+    if (state.actionsDate !== today) {
+      // Check if we completed all 3 yesterday for streak
+      if (state.actionsDate && state.actionsCompleted.every(x => x)) {
+        // streak continues — handled below
+      } else if (state.actionsDate) {
+        // missed a day; reset streak
+        state.streak = 0;
+      }
+      state.actionsDate = today;
+      state.actionsCompleted = [false, false, false];
+      saveState();
+    }
+  }
+
+  function renderActions() {
+    checkDailyReset();
+    const el = document.getElementById('actionList');
+    el.innerHTML = dailyActions.map((a, i) => `
+      <div class="action-item ${state.actionsCompleted[i] ? 'done' : ''}" onclick="toggleAction(${i})">
+        <div class="action-check"></div>
+        <div class="action-text">${a.text}</div>
+        <span class="action-tag">${a.tag}</span>
+      </div>
+    `).join('');
+
+    // Streak display
+    const streakEl = document.getElementById('streakDisplay');
+    const allDone = state.actionsCompleted.every(x => x);
+    if (state.streak > 0 || allDone) {
+      streakEl.innerHTML = `◆ current streak: <span style="color: var(--forge);">${state.streak} ${state.streak === 1 ? 'day' : 'days'}</span> ◆`;
+    } else {
+      streakEl.innerHTML = `<span style="color: var(--whisper);">check all three to start the streak</span>`;
+    }
+  }
+
+  function toggleAction(idx) {
+    state.actionsCompleted[idx] = !state.actionsCompleted[idx];
+    // If all three just became complete, bump streak
+    if (state.actionsCompleted.every(x => x) && state.lastCompletedDate !== state.actionsDate) {
+      state.streak += 1;
+      state.lastCompletedDate = state.actionsDate;
+    }
+    saveState();
+    renderActions();
+  }
+
+  // ============ WEEKS ============
+  const weeks = [
+    {
+      range: "Weeks 1–2",
+      title: "Fix the leak. Count what matters.",
+      focus: [
+        { label: "Metric baseline", items: [
+          "Install a visible conversion counter on thefirstspark.shop (page visits → Soul Map sales)",
+          "Pin the Voyage Ohio feature somewhere prominent on the homepage",
+          "Audit every Soul Map intake pathway — are there broken steps?"
+        ]},
+        { label: "DM campaign", items: [
+          "Send 5 DMs/day to existing free Sparks (the ask: 'What drew you here?')",
+          "Tag responses in a simple doc — this is your buyer-psychology dataset",
+          "Convert at least 1 to paying before week 2 ends"
+        ]}
+      ],
+      target: "$500 first-two-weeks revenue"
+    },
+    {
+      range: "Weeks 3–4",
+      title: "The Soul Map spotlight.",
+      focus: [
+        { label: "Narrow the offer", items: [
+          "Hero-pin Soul Maps as THE product. Everything else becomes secondary.",
+          "Create a 90-second video: what a Soul Map is, what it's not, what you walk away with",
+          "A/B test two Soul Map sales pages — one story-led, one diagram-led"
+        ]},
+        { label: "Social cadence", items: [
+          "Daily post: one Selector Model drop, one Soul Map reveal, or one personal note",
+          "Weekly: a long-form post (X thread, IG carousel) anchored to one framework piece",
+          "Start replying in 3 niches/day — consciousness, astrology-critical, high-performers"
+        ]}
+      ],
+      target: "$1,500 month-1 total"
+    },
+    {
+      range: "Weeks 5–6",
+      title: "Press amplification.",
+      focus: [
+        { label: "Leverage Voyage Ohio", items: [
+          "Pitch 10 similar local-feature publications with a variation on the original angle",
+          "Apply to 3 podcast guest spots in adjacent spaces (not wellness — consciousness/builders/solo founders)",
+          "Record a short clip from the interview to repurpose across platforms"
+        ]},
+        { label: "Referral mechanic", items: [
+          "Soul Map buyers get a discount code to share — when it's used, they get something free",
+          "Inside Sparkverse: a member who brings a paid Soul Map buyer gets a bonus month",
+          "Track every source — know which channels actually pay"
+        ]}
+      ],
+      target: "$2,500 cumulative"
+    },
+    {
+      range: "Weeks 7–9",
+      title: "The OG Spark push.",
+      focus: [
+        { label: "Lifetime offer emphasis", items: [
+          "OG Spark at $519 is the leverage tier — one sale = 24 Soul Maps worth of revenue",
+          "Email sequence to warm leads positioning OG Spark as founding-member status",
+          "Deadline-free but rolling cap ('first 33 founders') to create honest urgency"
+        ]},
+        { label: "Product stacking", items: [
+          "Launch a companion micro-offer — sigil generation, ritual guide, or short diagnostic",
+          "Bundle options without cheapening the base Soul Map",
+          "Open the first Dark Shadows chapter as a free lead magnet that converts to email"
+        ]}
+      ],
+      target: "$6,000 cumulative"
+    },
+    {
+      range: "Weeks 10–12",
+      title: "Lock the Class C math.",
+      focus: [
+        { label: "Final stretch", items: [
+          "Start actively scouting used Class C listings in 4-state radius (OH, PA, IN, KY)",
+          "Know your target: year, mileage, price ceiling. Be specific so you recognize it when it shows up.",
+          "Budget the full MSS setup: purchase + insurance + first 3 months fuel/parks + conversion costs"
+        ]},
+        { label: "Tell the story", items: [
+          "Publish the 'how I bought the Class C' arc in real time — Soul Map sales paid for consciousness technology on wheels",
+          "This story IS the next marketing engine for the MSS era",
+          "If short of goal: a structured pre-sale of something specific (NOT a SAFE) to close the gap"
+        ]}
+      ],
+      target: "Goal reached + road-ready"
+    }
+  ];
+
+  function renderWeeks() {
+    const el = document.getElementById('weeksList');
+    el.innerHTML = weeks.map((w, i) => {
+      const expanded = state.expandedWeeks.includes(i);
+      return `<div class="week ${expanded ? 'expanded' : ''}" data-week="${i}">
+        <div class="week-header" onclick="toggleWeek(${i})">
+          <span class="range">${w.range}</span>
+          <span class="title">${w.title}</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="week-body">
+          <div class="week-content">
+            ${w.focus.map(f => `
+              <span class="focus">◆ ${f.label}</span>
+              <ul>${f.items.map(it => `<li>${it}</li>`).join('')}</ul>
+            `).join('')}
+            <div class="target">Target: ${w.target}</div>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function toggleWeek(i) {
+    const idx = state.expandedWeeks.indexOf(i);
+    if (idx === -1) state.expandedWeeks.push(i);
+    else state.expandedWeeks.splice(idx, 1);
+    saveState();
+    document.querySelector(`.week[data-week="${i}"]`).classList.toggle('expanded');
+  }
+
+  // ============ INIT ============
+  renderProgress();
+  renderMath('realistic');
+  renderLog();
+  renderActions();
+  renderWeeks();
+</script>
+
+</body>
+</html>

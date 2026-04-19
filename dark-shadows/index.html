@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Shadows — The First Spark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #040407;
+    --deep: #0a0a12;
+    --bone: #e8e4dc;
+    --pale: #a8a8b8;
+    --gold: #b8934f;
+    --forge: #d4a956;
+    --rose: #c4756e;
+    --blood: #6b1a1f;
+    --cold: #6b8aa8;
+    --whisper: rgba(232, 228, 220, 0.4);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* Vignette */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.65) 100%);
+  }
+
+  /* Starfield */
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .stars span {
+    position: absolute;
+    border-radius: 50%;
+    animation: twinkle ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.8; }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(184, 147, 79, 0.1) 0%, transparent 60%);
+    animation: pulse-slow 8s ease-in-out infinite;
+    z-index: -1;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.9; }
+  }
+
+  .brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: appear 2s ease 0.3s forwards;
+  }
+
+  .brand::before, .brand::after {
+    content: '◆';
+    margin: 0 1rem;
+    opacity: 0.6;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.5rem, 13vw, 9rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: appear 3s ease 0.8s forwards;
+  }
+
+  .hero h1 .accent {
+    background: linear-gradient(135deg, var(--blood), var(--rose), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+
+  .hero .tagline {
+    max-width: 560px;
+    font-size: 1.25rem;
+    color: rgba(232, 228, 220, 0.75);
+    font-style: italic;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: appear 2.5s ease 1.5s forwards;
+  }
+
+  .hero .warning {
+    max-width: 480px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--whisper);
+    text-transform: uppercase;
+    line-height: 1.7;
+    opacity: 0;
+    animation: appear 2.5s ease 2.1s forwards;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 3rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: appear 2s ease 2.8s forwards, cue-pulse 3s ease infinite 4s;
+  }
+
+  .scroll-cue::after {
+    content: '  ↓';
+    display: inline-block;
+    animation: bob 2s ease infinite;
+  }
+
+  @keyframes appear { to { opacity: 1; } }
+  @keyframes cue-pulse { 50% { opacity: 0.3; } }
+  @keyframes bob { 50% { transform: translateY(4px); } }
+
+  /* ============ INVITATION ============ */
+  .invitation {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .invitation .opener {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    color: rgba(232, 228, 220, 0.9);
+    line-height: 1.7;
+  }
+
+  .invitation .opener::first-letter {
+    font-size: 3.8rem;
+    float: left;
+    line-height: 0.9;
+    padding-right: 0.6rem;
+    padding-top: 0.3rem;
+    color: var(--gold);
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .invitation p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: rgba(232, 228, 220, 0.85);
+  }
+
+  .invitation .pull-quote {
+    text-align: center;
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--bone);
+    padding: 2.5rem 1rem;
+    margin: 3rem 0;
+    line-height: 1.3;
+    border-top: 1px solid rgba(184, 147, 79, 0.3);
+    border-bottom: 1px solid rgba(184, 147, 79, 0.3);
+  }
+
+  .invitation .pull-quote .accent {
+    background: linear-gradient(135deg, var(--blood), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+
+  /* ============ CHAPTERS GRID ============ */
+  .chapters {
+    max-width: 1000px;
+    margin: 6rem auto 4rem;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .chapters-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .chapters-header .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .chapters-header h2 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .chapters-header h2 .accent {
+    background: linear-gradient(135deg, var(--blood), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+
+  .chapters-header .note {
+    max-width: 520px;
+    margin: 2rem auto 0;
+    font-size: 1.05rem;
+    color: var(--whisper);
+    font-style: italic;
+  }
+
+  /* The chapter cards — each with a unique palette accent */
+  .chapter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .chapter-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 2.5rem 2.5rem 2.5rem 3.5rem;
+    border: 1px solid rgba(232, 228, 220, 0.08);
+    background: linear-gradient(135deg, rgba(232, 228, 220, 0.015), transparent);
+    position: relative;
+    transition: all 0.6s ease;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .chapter-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent, var(--gold));
+    transition: width 0.6s ease;
+  }
+
+  .chapter-card:hover {
+    border-color: rgba(232, 228, 220, 0.2);
+    transform: translateX(8px);
+  }
+
+  .chapter-card:hover::before {
+    width: 6px;
+  }
+
+  .chapter-card::after {
+    content: '→';
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--accent, var(--gold));
+    opacity: 0.4;
+    transition: all 0.4s ease;
+  }
+
+  .chapter-card:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(8px);
+  }
+
+  .chapter-card .roman {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--accent, var(--gold));
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  .chapter-card h3 {
+    font-size: 1.9rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    padding-right: 3rem;
+  }
+
+  .chapter-card p {
+    font-size: 1.05rem;
+    color: var(--whisper);
+    font-style: italic;
+    padding-right: 3rem;
+    line-height: 1.6;
+  }
+
+  .chapter-card .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--accent, var(--gold));
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+    opacity: 0.6;
+  }
+
+  /* Per-chapter accents */
+  .chapter-card[data-ch="1"] { --accent: var(--gold); }
+  .chapter-card[data-ch="2"] { --accent: #c73e1d; }
+  .chapter-card[data-ch="3"] { --accent: var(--cold); }
+  .chapter-card[data-ch="4"] { --accent: var(--rose); }
+  .chapter-card[data-ch="5"] { --accent: var(--forge); }
+
+  /* ============ THE PATH NOTE ============ */
+  .path-note {
+    max-width: 620px;
+    margin: 6rem auto;
+    padding: 0 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .path-note .ornament {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 2.5rem;
+    position: relative;
+  }
+
+  .path-note .ornament::before,
+  .path-note .ornament::after {
+    content: '◆';
+    position: absolute;
+    top: -10px;
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+
+  .path-note .ornament::before { left: -20px; }
+  .path-note .ornament::after { right: -20px; }
+
+  .path-note p {
+    font-size: 1.15rem;
+    color: rgba(232, 228, 220, 0.75);
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+
+  .path-note .emphasis {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* ============ WHO THIS IS FOR ============ */
+  .for-whom {
+    max-width: 720px;
+    margin: 6rem auto;
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(184, 147, 79, 0.15);
+    border-bottom: 1px solid rgba(184, 147, 79, 0.15);
+    position: relative;
+    z-index: 2;
+  }
+
+  .for-whom h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .for-whom-list {
+    display: grid;
+    gap: 1.8rem;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .for-whom-list .item {
+    font-size: 1.15rem;
+    color: rgba(232, 228, 220, 0.85);
+    font-style: italic;
+    padding-left: 2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .for-whom-list .item::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    top: 0.35rem;
+    color: var(--gold);
+    font-size: 0.7rem;
+    opacity: 0.7;
+  }
+
+  /* ============ CLOSING ============ */
+  .closing {
+    text-align: center;
+    max-width: 620px;
+    margin: 6rem auto 0;
+    padding: 4rem 2rem 6rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .closing .seal {
+    width: 36px;
+    height: 36px;
+    transform: rotate(45deg);
+    border: 1px solid var(--gold);
+    margin: 0 auto 3rem;
+    position: relative;
+    box-shadow: 0 0 30px rgba(184, 147, 79, 0.3);
+  }
+
+  .closing .seal::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    background: linear-gradient(135deg, var(--gold), var(--forge));
+  }
+
+  .closing h3 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.25;
+    margin-bottom: 2rem;
+  }
+
+  .closing h3 .accent {
+    background: linear-gradient(135deg, var(--gold), var(--forge));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+
+  .closing .body {
+    color: var(--whisper);
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .closing .cta {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s ease;
+  }
+
+  .closing .cta:hover {
+    background: var(--gold);
+    color: var(--void);
+    box-shadow: 0 0 40px rgba(184, 147, 79, 0.5);
+  }
+
+  .signature {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 4rem;
+    opacity: 0.5;
+  }
+
+  .signature .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: none;
+    color: var(--gold);
+    display: block;
+    margin-top: 0.5rem;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 768px) {
+    .chapter-card { padding: 2rem 2rem 2rem 2.5rem; }
+    .chapter-card h3 { font-size: 1.5rem; padding-right: 2rem; }
+    .chapter-card::after { right: 1.5rem; }
+    .invitation, .chapters, .for-whom, .closing, .path-note { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="brand">The First Spark · Consciousness Technology</div>
+  <h1>dark<br><span class="accent">shadows</span></h1>
+  <p class="tagline">A five-chapter passage through what most people never talk about — written for the ones who are carrying something heavy and tired of being told to be lighter.</p>
+  <p class="warning">Free · No email required · Read in any order · Return as often as needed</p>
+  <div class="scroll-cue">enter</div>
+</section>
+
+<!-- ============ INVITATION ============ -->
+<section class="invitation">
+  <p class="opener">This is not wellness content. This is not a healing journey in seven easy steps. This is an honest passage through the five weathers of grief — written by someone who walked through each of them and came back with the coordinates.</p>
+
+  <p>Most of what you find online about trauma, grief, and the dark places either sanitizes them or romanticizes them. Neither is useful when you are actually in one. You don't need to be told it's beautiful. You don't need to be told to breathe. You need a voice on the other side of the wall saying <em>I know this room. I lived here. You will not be here forever, and while you are, I'll stay.</em></p>
+
+  <div class="pull-quote">Each chapter does not <span class="accent">tell you</span> about an emotion.<br><em>It makes you feel the shape of it,<br>and hands you a way out.</em></div>
+
+  <p>The five pieces together form an arc — grief, rage, hollow, return, integration. They were built to be read in order if you have the time, or visited individually when a specific weather rolls in. Each one is interactive in its own way. Each one is a small room built specifically for the emotion it holds.</p>
+
+  <p>No email wall. No upsell in the middle. Nothing gets stored. This is a gift, placed on the internet, for anyone who needs it — and will still be here the next time the storm comes.</p>
+</section>
+
+<!-- ============ CHAPTERS GRID ============ -->
+<section class="chapters">
+  <div class="chapters-header">
+    <span class="label">◆ the five chapters ◆</span>
+    <h2>Five <span class="accent">weathers.</span> Five rooms.<br>One <em>arc.</em></h2>
+    <p class="note">Each chapter uses a different kind of interaction — built around what the emotion actually needs in order to be held, not just read about.</p>
+  </div>
+
+  <div class="chapter-list">
+
+    <a href="i/" class="chapter-card" data-ch="1">
+      <span class="roman">Chapter I</span>
+      <h3>The things we carry<br>without knowing</h3>
+      <p>The slow recognition that the wound was always there — and that what you called your personality was partly the shape your body took around it. A meditation on inherited grief, with five ink drawings that hold what words can't.</p>
+      <div class="meta">Scroll-paced · Illustrated · 5 min</div>
+    </a>
+
+    <a href="ii/" class="chapter-card" data-ch="2">
+      <span class="roman">Chapter II</span>
+      <h3>The rage chapter</h3>
+      <p>The part of grief nobody wants to host. Includes a private burn ritual — write the sentence you've never said, then watch it dissolve into ash. Nothing stored, nothing sent. A sanctuary for the fury that has nowhere safe to go.</p>
+      <div class="meta">Interactive · Burn ritual · 4 min</div>
+    </a>
+
+    <a href="iii/" class="chapter-card" data-ch="3">
+      <span class="roman">Chapter III</span>
+      <h3>The hollow</h3>
+      <p>When the grey arrives and you think you broke permanently. A breath-paced reveal that will not show itself faster than you ask — built to force stillness in a culture that can't hold any. For the phase between the storm and whatever comes next.</p>
+      <div class="meta">Breath-paced · Six passages · 6 min</div>
+    </a>
+
+    <a href="iv/" class="chapter-card" data-ch="4">
+      <span class="roman">Chapter IV</span>
+      <h3>The return</h3>
+      <p>When feeling comes back, and the world is too loud, and you forgot how to be a person who feels things. The page blooms as you scroll — from dark to warm, from muted to saturated. The interface demonstrates the thing the words are describing.</p>
+      <div class="meta">Scroll-blooming · Sensory · 5 min</div>
+    </a>
+
+    <a href="v/" class="chapter-card" data-ch="5">
+      <span class="roman">Chapter V</span>
+      <h3>The integration</h3>
+      <p>The final movement. Includes The Forge — a three-step ritual where you name the wound that shaped you most, name what it carved into you, and receive it back as a signature line. A coordinate you can return to any time you lose your way back to yourself.</p>
+      <div class="meta">Interactive forge · Signature · 7 min</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ============ PATH NOTE ============ -->
+<section class="path-note">
+  <div class="ornament"></div>
+  <p>There's no right order and no wrong one. <span class="emphasis">If you are in the storm, go to the room that matches the weather.</span></p>
+  <p>Some people read all five in a sitting. Some people return to one chapter for months before touching the next. Some people bookmark the rage chapter for 2am and never need the others. All of that is correct.</p>
+</section>
+
+<!-- ============ WHO THIS IS FOR ============ -->
+<section class="for-whom">
+  <h3>◆ this is for you if ◆</h3>
+  <div class="for-whom-list">
+    <div class="item">You are carrying something you have not been allowed to fully grieve.</div>
+    <div class="item">The wellness content that helps other people makes you want to throw your phone.</div>
+    <div class="item">You suspect your "personality" might be a shape built around a wound, and you want to meet the person underneath.</div>
+    <div class="item">You've been told to "move on" too many times by people who have never had to.</div>
+    <div class="item">You are looking for a voice that doesn't flinch at the dark — one that sits with you instead of rushing you out of it.</div>
+    <div class="item">You are between chapters of your own life and the next one hasn't arrived yet.</div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="closing">
+  <div class="seal"></div>
+  <h3>The wound becomes<br>the <span class="accent">torch.</span></h3>
+  <p class="body">Pick a chapter. Or start at I and walk all the way to V. Whatever the weather is right now — there's a room in here built for it. Come back as many times as you need to. This series is a gift, and gifts don't expire.</p>
+  <a href="i/" class="cta">Begin at Chapter I</a>
+  <div class="signature">
+    The First Spark · Dark Shadows Series
+    <span class="name">— Katelin Jill Puzakulics</span>
+  </div>
+</section>
+
+<script>
+  // Generate starfield with varied sizes
+  const stars = document.getElementById('stars');
+  for (let i = 0; i < 100; i++) {
+    const s = document.createElement('span');
+    const size = Math.random() > 0.85 ? 3 : (Math.random() > 0.5 ? 2 : 1);
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    // Color varies
+    const colors = ['#b8934f', '#d4a956', '#e8e4dc', '#c4756e'];
+    const c = colors[Math.floor(Math.random() * colors.length)];
+    s.style.background = c;
+    s.style.boxShadow = `0 0 ${size * 2}px ${c}`;
+    s.style.animationDuration = (3 + Math.random() * 6) + 's';
+    s.style.animationDelay = Math.random() * 5 + 's';
+    stars.appendChild(s);
+  }
+</script>
+
+</body>
+</html>

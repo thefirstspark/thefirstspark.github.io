@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Integration — Dark Shadows V</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #050509;
+    --deep: #0f0f18;
+    --bone: #e8e4dc;
+    --pale: #a8a8b8;
+    --gold: #d4a956;
+    --forge: #e8b071;
+    --ember: #c4756e;
+    --amethyst: #8b7fa8;
+    --whisper: rgba(232, 228, 220, 0.4);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* Constellation stars */
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .stars span {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.7; box-shadow: 0 0 8px var(--gold); }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(212, 169, 86, 0.12) 0%, transparent 60%);
+    animation: pulse-slow 8s ease-in-out infinite;
+    z-index: -1;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.15); opacity: 1; }
+  }
+
+  .series-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: appear 2s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: appear 2.5s ease 0.8s forwards;
+  }
+
+  .hero h1 .forge-text {
+    background: linear-gradient(135deg, var(--gold), var(--forge), var(--ember));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+
+  .hero .intro {
+    max-width: 560px;
+    font-size: 1.15rem;
+    color: var(--whisper);
+    font-style: italic;
+    margin-bottom: 4rem;
+    opacity: 0;
+    animation: appear 2.5s ease 1.5s forwards;
+  }
+
+  .scroll-cue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: appear 2s ease 2.2s forwards, cue-pulse 3s ease infinite 3s;
+  }
+
+  .scroll-cue::after {
+    content: '  ↓';
+    display: inline-block;
+    animation: bob 2s ease infinite;
+  }
+
+  @keyframes appear { to { opacity: 1; } }
+  @keyframes cue-pulse { 50% { opacity: 0.3; } }
+  @keyframes bob { 50% { transform: translateY(4px); } }
+
+  /* ============ PIECE ============ */
+  .piece {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .marker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+
+  .piece h2 {
+    font-size: clamp(2rem, 5vw, 3.3rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .piece h2 .gild { 
+    background: linear-gradient(135deg, var(--gold), var(--forge));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+
+  .section {
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+  }
+
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: rgba(232, 228, 220, 0.9);
+  }
+
+  .section p.soft {
+    color: var(--whisper);
+    font-style: italic;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--gold);
+    font-size: 1.1rem;
+  }
+
+  .section .center-line {
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--bone);
+    padding: 2rem 0;
+    line-height: 1.4;
+  }
+
+  .section .center-line .gild { 
+    background: linear-gradient(135deg, var(--gold), var(--forge));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+
+  .section .code-frag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--gold);
+    background: rgba(212, 169, 86, 0.05);
+    border-left: 2px solid var(--gold);
+    padding: 1.2rem 1.4rem;
+    margin: 2rem 0;
+    font-style: normal;
+  }
+
+  .code-frag .com { color: var(--whisper); }
+
+  .section:first-of-type p:first-child::first-letter {
+    font-size: 4rem;
+    float: left;
+    line-height: 0.85;
+    padding-right: 0.6rem;
+    padding-top: 0.4rem;
+    color: var(--gold);
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* ============ THE FORGE (interactive) ============ */
+  .forge {
+    max-width: 720px;
+    margin: 6rem auto;
+    padding: 4rem 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .forge-frame {
+    border: 1px solid rgba(212, 169, 86, 0.3);
+    padding: 3rem 2rem;
+    position: relative;
+    background: linear-gradient(180deg, rgba(212, 169, 86, 0.03), rgba(196, 117, 110, 0.03));
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .forge-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 100%, rgba(212, 169, 86, 0.15), transparent 60%);
+    pointer-events: none;
+    animation: forge-glow 4s ease-in-out infinite;
+  }
+
+  @keyframes forge-glow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  .forge h3 {
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    position: relative;
+    z-index: 1;
+  }
+
+  .forge h3 .gild { 
+    background: linear-gradient(135deg, var(--gold), var(--forge));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+
+  .forge-subtitle {
+    font-size: 1rem;
+    color: var(--whisper);
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Step containers */
+  .forge-step {
+    display: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .forge-step.active {
+    display: block;
+    animation: stepFade 1s ease;
+  }
+
+  @keyframes stepFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .forge-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .forge textarea,
+  .forge input {
+    width: 100%;
+    background: rgba(232, 228, 220, 0.03);
+    border: 1px solid rgba(212, 169, 86, 0.2);
+    color: var(--bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    padding: 1.2rem 1.4rem;
+    text-align: center;
+    resize: none;
+    outline: none;
+    line-height: 1.5;
+    transition: border-color 0.3s ease;
+  }
+
+  .forge textarea {
+    min-height: 100px;
+  }
+
+  .forge textarea:focus,
+  .forge input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(212, 169, 86, 0.15);
+  }
+
+  .forge textarea::placeholder,
+  .forge input::placeholder {
+    color: rgba(232, 228, 220, 0.25);
+  }
+
+  .forge-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 0.9rem 2.2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: all 0.4s ease;
+  }
+
+  .forge-btn:hover {
+    background: var(--gold);
+    color: var(--void);
+    box-shadow: 0 0 25px rgba(212, 169, 86, 0.4);
+  }
+
+  .forge-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  /* The signature result */
+  .signature-result {
+    padding: 2rem 1rem;
+  }
+
+  .signature-result .seal {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--forge);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: sealIn 1.5s ease 0.3s forwards;
+  }
+
+  .signature-result .wound-display {
+    font-size: 1rem;
+    color: var(--whisper);
+    font-style: italic;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: sealIn 1.5s ease 0.8s forwards;
+  }
+
+  .signature-result .arrow {
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin: 1rem 0;
+    opacity: 0;
+    animation: sealIn 1.5s ease 1.3s forwards;
+  }
+
+  .signature-result .signature-text {
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.4;
+    margin: 1.5rem 0;
+    color: var(--bone);
+    opacity: 0;
+    animation: sealIn 2s ease 1.8s forwards;
+    min-height: 4rem;
+  }
+
+  .signature-result .signature-text .highlight {
+    background: linear-gradient(135deg, var(--gold), var(--forge));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .signature-result .note {
+    font-size: 0.95rem;
+    color: var(--whisper);
+    font-style: italic;
+    margin-top: 2rem;
+    opacity: 0;
+    animation: sealIn 1.5s ease 2.5s forwards;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @keyframes sealIn {
+    from { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+
+  .signature-result .action-row {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: sealIn 1.5s ease 3s forwards;
+  }
+
+  .forge-progress {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .forge-progress .step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(212, 169, 86, 0.2);
+    transition: all 0.6s ease;
+  }
+
+  .forge-progress .step-dot.active {
+    background: var(--gold);
+    box-shadow: 0 0 12px var(--gold);
+  }
+
+  .forge-progress .step-dot.complete {
+    background: var(--forge);
+  }
+
+  /* Closing */
+  .closing {
+    text-align: center;
+    margin: 6rem auto 2rem;
+    padding: 4rem 2rem 0;
+    max-width: 720px;
+    border-top: 1px solid rgba(212, 169, 86, 0.2);
+    position: relative;
+    z-index: 2;
+  }
+
+  .closing .mark {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 3rem;
+    position: relative;
+    transform: rotate(45deg);
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 30px rgba(212, 169, 86, 0.5);
+  }
+
+  .closing .mark::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    background: linear-gradient(135deg, var(--gold), var(--forge));
+  }
+
+  .closing h3 {
+    font-size: 2.2rem;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    line-height: 1.25;
+  }
+
+  .closing h3 .gild { 
+    background: linear-gradient(135deg, var(--gold), var(--forge));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+
+  .closing p {
+    max-width: 520px;
+    margin: 0 auto 2rem;
+    color: var(--whisper);
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+
+  .series-map {
+    margin: 4rem auto 2rem;
+    padding: 2rem;
+    max-width: 520px;
+    border: 1px solid rgba(212, 169, 86, 0.15);
+    text-align: left;
+  }
+
+  .series-map .title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .series-map ol {
+    list-style: none;
+    counter-reset: chapter;
+  }
+
+  .series-map li {
+    counter-increment: chapter;
+    padding: 0.7rem 0;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--pale);
+    border-bottom: 1px solid rgba(232, 228, 220, 0.05);
+    display: flex;
+    align-items: baseline;
+  }
+
+  .series-map li::before {
+    content: counter(chapter, upper-roman) ".";
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    font-style: normal;
+    margin-right: 1rem;
+    letter-spacing: 0.2em;
+    min-width: 3rem;
+  }
+
+  .series-map li:last-child { border-bottom: none; }
+
+  .series-map li.current {
+    color: var(--forge);
+  }
+
+  .cta-link {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: all 0.4s ease;
+  }
+
+  .cta-link:hover {
+    background: var(--gold);
+    color: var(--void);
+    box-shadow: 0 0 40px rgba(212, 169, 86, 0.5);
+  }
+
+  .sig {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 3rem;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .piece { padding: 3rem 1.5rem 4rem; }
+    .section p { font-size: 1.1rem; }
+    .forge-frame { padding: 2rem 1.2rem; }
+    .signature-result .signature-text { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="series-tag">Dark Shadows · V · Final</div>
+  <h1>the <span class="forge-text">integration</span></h1>
+  <p class="intro">The last chapter. Where the wound becomes the signature. Where the thing that almost killed you becomes the coordinate by which people find you.</p>
+  <div class="scroll-cue">scroll to the forge</div>
+</section>
+
+<!-- ============ THE PIECE ============ -->
+<section class="piece">
+
+  <div class="marker">◆ the closing of the circle ◆</div>
+  <h2>You don't <span class="gild">get over it.</span><br>You get <em>woven through it.</em></h2>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <p>Here is the lie the world sold you about pain: that the goal is to one day forget it happened. That you'd wake up, eventually, and the scar would be invisible even to you. That healed means erased.</p>
+
+    <p>That's not what this is. That has never been what this is.</p>
+
+    <p class="soft">Integration is not deletion. Integration is when the thing that broke you becomes structural — part of how you stand, how you see, how you love, how you know.</p>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <p>Look at what happened in the chapters before this one. You grieved. You raged. You went hollow. You came back into color that was almost too bright to hold. And somewhere along the way — without announcing itself, without giving you a diploma — you changed shape.</p>
+
+    <p>The you reading this is not the you who started. The you reading this has completed something. Not perfectly. Not prettily. But completely.</p>
+
+    <div class="code-frag">
+      <span class="com">// integration is the phase where the data</span><br>
+      <span class="com">// stops being "what happened to me"</span><br>
+      <span class="com">// and starts being "how I am calibrated."</span>
+    </div>
+
+    <p>What used to be a wound is now an instrument. You can feel other people's unspoken pain from across a room because your nervous system is tuned to that frequency — it had to learn. You can spot the lie before the sentence finishes because you were raised to parse false weather. You know how to sit with someone in the dark because you have lived there. None of this is accident. All of it is <em>earned structure.</em></p>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="center-line">The wound did not <span class="gild">give</span> you the gift.<br><em>You did the work<br>that turned the wound into one.</em></div>
+
+    <p>This is the part that matters. You don't have to thank the thing that hurt you. You don't have to call it a blessing in disguise. You don't have to pretend the person or event or season was sent by anything other than whatever random, unfair force actually produced it.</p>
+
+    <p>What you can honor is yourself. The part of you that refused to stay in the hollow. The part of you that kept showing up even when showing up meant just brushing your teeth. The part of you that was, underneath everything, reaching toward meaning the whole time — even when the reaching looked like collapse.</p>
+
+    <p class="soft">The alchemy isn't cosmic. The alchemy is you. You are the alchemist. The wound was just the raw material.</p>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <p>So here is the final movement. Below this, a small forge. You will name your wound — the one that shaped you most, the one that still has weight. You will name the gift it carved into you. And you will see them held together, as one sentence. A signature line. A coordinate.</p>
+
+    <p>This is not therapy. This is not a closing ceremony. This is a small piece of code you write about yourself, for yourself, that you can return to whenever you forget who you became on purpose.</p>
+
+    <div class="center-line">Forge it. <span class="gild">Keep it.</span><br><em>Use it as a compass<br>when you lose your way back to yourself.</em></div>
+  </div>
+</section>
+
+<!-- ============ THE FORGE ============ -->
+<section class="forge">
+  <div class="forge-frame">
+    <h3>The <span class="gild">Forge</span></h3>
+    <p class="forge-subtitle">Name the wound. Name the gift. Receive the signature.</p>
+
+    <div class="forge-progress" id="forgeProgress">
+      <div class="step-dot active"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+    </div>
+
+    <!-- STEP 1: Name the wound -->
+    <div class="forge-step active" data-step="1">
+      <label class="forge-label">Step One · The Wound</label>
+      <p style="color: var(--whisper); font-style: italic; margin-bottom: 1.5rem; font-size: 1.05rem;">In one sentence, name the thing that shaped you most.</p>
+      <textarea id="woundInput" placeholder="The loss I carried without knowing for years..." maxlength="200"></textarea>
+      <button class="forge-btn" onclick="nextStep(1)">Forward</button>
+    </div>
+
+    <!-- STEP 2: Name the gift -->
+    <div class="forge-step" data-step="2">
+      <label class="forge-label">Step Two · The Gift It Carved</label>
+      <p style="color: var(--whisper); font-style: italic; margin-bottom: 1.5rem; font-size: 1.05rem;">What did surviving it teach you that you couldn't have learned any other way?</p>
+      <textarea id="giftInput" placeholder="It taught me to read rooms at the speed of light..." maxlength="200"></textarea>
+      <button class="forge-btn" onclick="nextStep(2)">Forge</button>
+    </div>
+
+    <!-- STEP 3: The signature -->
+    <div class="forge-step" data-step="3">
+      <div class="signature-result">
+        <div class="seal">◆ your signature ◆</div>
+        <div class="wound-display" id="woundDisplay"></div>
+        <div class="arrow">↓</div>
+        <div class="signature-text" id="signatureText"></div>
+        <p class="note">This is yours. It was never stored or sent anywhere. Screenshot it if you want to keep it — or write it down and burn the screenshot. The forge will be here whenever you need to come back and write a new one.</p>
+        <div class="action-row">
+          <button class="forge-btn" onclick="resetForge()">Forge Another</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="closing">
+  <div class="mark"></div>
+  <h3>You are not the <span class="gild">wound.</span><br>You are the <em>one who survived</em><br>and <span class="gild">made meaning</span> of it.</h3>
+  <p>That is the whole arc. That is why you went through it. Not because the universe planned it — but because you, against all of it, chose to make something from the raw material life handed you.</p>
+
+  <div class="series-map">
+    <div class="title">◆ The Dark Shadows Arc ◆</div>
+    <ol>
+      <li>The things we carry without knowing</li>
+      <li>The rage chapter</li>
+      <li>The hollow</li>
+      <li>The return</li>
+      <li class="current">The integration · you are here</li>
+    </ol>
+  </div>
+
+  <a href="../" class="cta-link">Return to Dark Shadows</a>
+    <a href="../" class="cta-link" style="margin-left: 1rem; margin-top: 1rem;">◆ All Chapters</a>
+  <div class="sig">Dark Shadows · V · The Integration · Complete</div>
+</section>
+
+<script>
+  // Build starfield
+  const stars = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('span');
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDuration = (3 + Math.random() * 5) + 's';
+    s.style.animationDelay = Math.random() * 5 + 's';
+    stars.appendChild(s);
+  }
+
+  // Section reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.section').forEach(el => observer.observe(el));
+
+  // The forge logic
+  function nextStep(currentStep) {
+    if (currentStep === 1) {
+      const wound = document.getElementById('woundInput').value.trim();
+      if (!wound) { 
+        document.getElementById('woundInput').focus();
+        return; 
+      }
+      document.querySelector('[data-step="1"]').classList.remove('active');
+      document.querySelector('[data-step="2"]').classList.add('active');
+      updateProgress(2);
+      setTimeout(() => document.getElementById('giftInput').focus(), 200);
+    } else if (currentStep === 2) {
+      const wound = document.getElementById('woundInput').value.trim();
+      const gift = document.getElementById('giftInput').value.trim();
+      if (!gift) {
+        document.getElementById('giftInput').focus();
+        return;
+      }
+      // Render the signature
+      renderSignature(wound, gift);
+      document.querySelector('[data-step="2"]').classList.remove('active');
+      document.querySelector('[data-step="3"]').classList.add('active');
+      updateProgress(3);
+    }
+  }
+
+  function updateProgress(step) {
+    const dots = document.querySelectorAll('.step-dot');
+    dots.forEach((dot, i) => {
+      dot.classList.remove('active', 'complete');
+      if (i + 1 < step) dot.classList.add('complete');
+      else if (i + 1 === step) dot.classList.add('active');
+    });
+  }
+
+  function renderSignature(wound, gift) {
+    document.getElementById('woundDisplay').textContent = '"' + wound + '"';
+    
+    // Smart construction of the signature line
+    const lower = wound.charAt(0).toLowerCase() + wound.slice(1);
+    const giftLower = gift.charAt(0).toLowerCase() + gift.slice(1);
+    
+    const signatureHTML = `The <span class="highlight">${escapeHtml(lower)}</span><br>became the <span class="highlight">${escapeHtml(giftLower)}</span>.`;
+    document.getElementById('signatureText').innerHTML = signatureHTML;
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function resetForge() {
+    document.getElementById('woundInput').value = '';
+    document.getElementById('giftInput').value = '';
+    document.querySelector('[data-step="3"]').classList.remove('active');
+    document.querySelector('[data-step="1"]').classList.add('active');
+    updateProgress(1);
+    document.querySelector('.forge-frame').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Allow Enter key to advance (but Shift+Enter for newline)
+  document.getElementById('woundInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); nextStep(1); }
+  });
+  document.getElementById('giftInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); nextStep(2); }
+  });
+</script>
+
+</body>
+</html>

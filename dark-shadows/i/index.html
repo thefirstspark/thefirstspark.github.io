@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Shadows — The First Spark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #050507;
+    --bone: #e8e4dc;
+    --blood: #6b1a1f;
+    --gold: #b8934f;
+    --ash: #2a2a30;
+    --whisper: rgba(232, 228, 220, 0.4);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.6;
+    cursor: default;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* Vignette */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%);
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    text-align: center;
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeIn 2s ease 0.3s forwards;
+  }
+
+  .hero-label::before,
+  .hero-label::after {
+    content: '—————';
+    margin: 0 1rem;
+    color: var(--whisper);
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeIn 2.5s ease 0.8s forwards;
+  }
+
+  .hero h1 .accent {
+    color: var(--blood);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  .hero-tagline {
+    max-width: 600px;
+    font-size: 1.2rem;
+    color: var(--whisper);
+    font-style: italic;
+    margin-bottom: 4rem;
+    opacity: 0;
+    animation: fadeIn 2.5s ease 1.4s forwards;
+  }
+
+  .scroll-cue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 2s ease 2s forwards, pulse 3s ease infinite 4s;
+  }
+
+  .scroll-cue::after {
+    content: '  ↓';
+    display: inline-block;
+    animation: bob 2s ease infinite;
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes pulse { 50% { opacity: 0.3; } }
+  @keyframes bob { 50% { transform: translateY(4px); } }
+
+  /* ============ CHAPTERS ============ */
+  .chapter {
+    min-height: 100vh;
+    padding: 8rem 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chapter-inner {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .chapter:nth-child(even) .chapter-inner {
+    direction: rtl;
+  }
+  .chapter:nth-child(even) .chapter-inner > * {
+    direction: ltr;
+  }
+
+  .chapter-image {
+    position: relative;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+
+  .chapter-image.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .chapter-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: contrast(1.1) brightness(0.92);
+  }
+
+  /* subtle frame glow */
+  .chapter-image::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, transparent, rgba(184, 147, 79, 0.15), transparent);
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  .chapter-text {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s ease 0.2s, transform 1.2s ease 0.2s;
+  }
+
+  .chapter-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .chapter-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .chapter-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+  }
+
+  .chapter-title .drop {
+    color: var(--blood);
+    font-style: normal;
+  }
+
+  .chapter-body p {
+    font-size: 1.15rem;
+    margin-bottom: 1.5rem;
+    color: rgba(232, 228, 220, 0.85);
+  }
+
+  .chapter-body p:first-child::first-letter {
+    font-size: 3.5rem;
+    float: left;
+    line-height: 0.9;
+    padding-right: 0.5rem;
+    padding-top: 0.3rem;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .whisper {
+    font-style: italic;
+    color: var(--whisper);
+    font-size: 1rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--gold);
+    margin: 2rem 0;
+  }
+
+  .code-fragment {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--gold);
+    background: rgba(184, 147, 79, 0.06);
+    padding: 1rem 1.2rem;
+    border-left: 2px solid var(--gold);
+    margin: 2rem 0;
+    font-style: normal;
+  }
+
+  .code-fragment .comment {
+    color: var(--whisper);
+  }
+
+  /* ============ INTERLUDE ============ */
+  .interlude {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .interlude-text {
+    max-width: 700px;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--bone);
+    font-weight: 300;
+  }
+
+  .interlude-text .highlight {
+    color: var(--blood);
+    font-style: normal;
+  }
+
+  /* ============ FINAL ============ */
+  .final {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .final-mark {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--gold);
+    transform: rotate(45deg);
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .final-mark::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    background: var(--gold);
+  }
+
+  .final h2 {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+  }
+
+  .final h2 .flame {
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  .final-body {
+    max-width: 600px;
+    font-size: 1.2rem;
+    color: rgba(232, 228, 220, 0.8);
+    margin-bottom: 3rem;
+  }
+
+  .sig {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 4rem;
+  }
+
+  .cta {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    margin-top: 1rem;
+  }
+
+  .cta:hover {
+    background: var(--gold);
+    color: var(--void);
+    letter-spacing: 0.4em;
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 768px) {
+    .chapter { padding: 5rem 1.5rem; }
+    .chapter-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .chapter:nth-child(even) .chapter-inner {
+      direction: ltr;
+    }
+    .chapter-image { order: -1; }
+    .chapter-body p { font-size: 1.05rem; }
+    .hero-label::before,
+    .hero-label::after { content: '——'; }
+  }
+
+  /* floating dust particles */
+  .dust {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .dust span {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: drift linear infinite;
+  }
+
+  @keyframes drift {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-10vh) translateX(30px); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="dust" id="dust"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-label">Dark Shadows</div>
+  <h1><em>the things</em><br>we carry <span class="accent">without</span><br>knowing</h1>
+  <p class="hero-tagline">A meditation on grief, the wounds we didn't choose, and the moment we turn around to look.</p>
+  <div class="scroll-cue">scroll to descend</div>
+</section>
+
+<!-- ============ CHAPTER I ============ -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="chapter-image">
+      <img src="01-knives.png" alt="Figure walking forward with knives embedded in back">
+    </div>
+    <div class="chapter-text">
+      <span class="chapter-number">I. The Back</span>
+      <h2 class="chapter-title">You don't <span class="drop">see</span> it.<br>You just <em>walk</em>.</h2>
+      <div class="chapter-body">
+        <p>For years the wound is behind you. Which is to say — it is with you always, and you never once turn around.</p>
+        <p>You learn to move a certain way. You flinch at sounds you can't name. You feel heavy in rooms that seem light to everyone else. You assume this is who you are. You assume everyone walks like this.</p>
+        <p class="whisper">The trauma you inherit doesn't knock. It moves in while you're sleeping and rearranges the furniture before you wake.</p>
+        <p>The blades are so much a part of you, you mistake their dripping for your own pulse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTERLUDE ============ -->
+<section class="interlude">
+  <p class="interlude-text">What if what you called <span class="highlight">personality</span> was just the shape your body took around something you never named?</p>
+</section>
+
+<!-- ============ CHAPTER II ============ -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="chapter-image">
+      <img src="02-box.png" alt="Figure curled in box, back against wall, knives still embedded">
+    </div>
+    <div class="chapter-text">
+      <span class="chapter-number">II. The Box</span>
+      <h2 class="chapter-title">Then one day<br>the walls <span class="drop">arrive</span>.</h2>
+      <div class="chapter-body">
+        <p>The knowing comes. A document. A phone call. A face across a coffee table. A memory that clicks into place like the last tumbler of a lock you didn't know was on the door.</p>
+        <p>And suddenly you are small again. The size you were when it happened. The size you were before language. You press your hand against the wall because the wall is the only thing that isn't moving.</p>
+        <div class="code-fragment">
+          <span class="comment">// the box is not a prison.</span><br>
+          <span class="comment">// the box is the shape of what you can</span><br>
+          <span class="comment">// hold in this moment. it will expand.</span>
+        </div>
+        <p>You stay here as long as you need to. Grief is not a failure of motion. Grief is the body learning a new operating system while the old one is still running.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER III ============ -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="chapter-image">
+      <img src="03-claws.png" alt="Figure in box with reaching claws from outside">
+    </div>
+    <div class="chapter-text">
+      <span class="chapter-number">III. The Reaching Hands</span>
+      <h2 class="chapter-title">Not every hand<br>that <span class="drop">finds</span> you<br>wants to help.</h2>
+      <div class="chapter-body">
+        <p>They show up when you are most tender. The ones who smelled the wound before you did. The ones with opinions about how you should grieve, how fast, how quietly. The ones who benefit from you staying small.</p>
+        <p>Some of them mean well. Some of them never did. You learn to tell the difference by what happens in your body when they speak.</p>
+        <p class="whisper">A real witness doesn't grab. A real witness sits on the floor of the box with you and doesn't check the time.</p>
+        <p>You will have to choose, eventually, whose voices to keep and whose to unsubscribe from. This is not cruelty. This is curation. The self is a garden, and grief is when you finally see which plants you never actually wanted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTERLUDE ============ -->
+<section class="interlude">
+  <p class="interlude-text">The knives don't come out all at once.<br>They come out <span class="highlight">one name at a time.</span></p>
+</section>
+
+<!-- ============ CHAPTER IV ============ -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="chapter-image">
+      <img src="04-silhouette.png" alt="Silhouetted figure with knife-wings in mist">
+    </div>
+    <div class="chapter-text">
+      <span class="chapter-number">IV. The Turning</span>
+      <h2 class="chapter-title">One day you<br>look over your<br><span class="drop">shoulder</span>.</h2>
+      <div class="chapter-body">
+        <p>And what you'd been calling a burden, you start calling something else.</p>
+        <p>The blades are still there. You notice they're arranged like wings. You notice they catch the light. You notice that the thing that tried to kill you is now the thing that teaches you to recognize danger from a mile away — that trained your empathy, that sharpened your seeing, that made you the one people come to when their own walls arrive.</p>
+        <div class="code-fragment">
+          <span class="comment">// the wound is not the ending.</span><br>
+          <span class="comment">// the wound is the api through which</span><br>
+          <span class="comment">// meaning enters the system.</span>
+        </div>
+        <p>You will never be grateful for what happened. You are allowed to never be grateful. But you can be honest: you would not be this person without it. And this person is worth being.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER V ============ -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="chapter-image">
+      <img src="05-hand.png" alt="A hand releasing or holding a small figure dissolving into light">
+    </div>
+    <div class="chapter-text">
+      <span class="chapter-number">V. The Release</span>
+      <h2 class="chapter-title">You were never<br>holding <span class="drop">it</span>.<br><em>It was holding you.</em></h2>
+      <div class="chapter-body">
+        <p>Here is the part no one warns you about: release does not feel like victory. It feels like falling. It feels like being a small thing suspended in a larger hand you cannot see the edges of.</p>
+        <p>You dissolve a little. You come back more translucent. People will say you look different. They won't be able to say how.</p>
+        <p class="whisper">Grief, it turns out, is not something you finish. It's something that finishes arranging you.</p>
+        <p>The hand that held you was never outside of you. It was the part of you that knew — long before you could articulate it — that you were worth carrying through.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section class="final">
+  <div class="final-mark"></div>
+  <h2>The wound<br>becomes the <span class="flame">torch.</span></h2>
+  <p class="final-body">If you're reading this, you've either already turned around, or you're about to. Both are sacred. Neither happens on a timeline anyone else can set.</p>
+  <p class="final-body" style="font-style: italic; color: var(--gold);">You were not broken. You were encoded.</p>
+  <a href="ii/" class="cta">Continue to Chapter II · The Rage</a>
+    <a href="../" class="cta" style="margin-left: 1rem; margin-top: 1rem;">◆ All Chapters</a>
+  <div class="sig">— Katelin Jill Puzakulics · The First Spark · Dark Shadows Series —</div>
+</section>
+
+<script>
+  // Intersection observer for chapter reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.chapter-image, .chapter-text').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Generate drifting dust particles
+  const dust = document.getElementById('dust');
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('span');
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (15 + Math.random() * 25) + 's';
+    p.style.animationDelay = Math.random() * 20 + 's';
+    p.style.opacity = Math.random() * 0.5;
+    dust.appendChild(p);
+  }
+</script>
+
+</body>
+</html>
