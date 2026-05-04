@@ -363,13 +363,17 @@
 <!-- PIN Gate -->
 <div id="pinGate" class="pin-gate">
     <h1>TFS ADMIN LOG</h1>
-    <p>Enter admin PIN to access the event log</p>
-    <div class="pin-input-wrap">
+    <p id="pinGateMsg">Enter admin PIN to access the event log</p>
+    <div class="pin-input-wrap" id="pinLoginWrap">
         <input type="password" id="pinInput" maxlength="6" placeholder="••••••" autocomplete="off">
         <button class="btn btn-gold" onclick="checkPin()">Enter</button>
     </div>
+    <div class="pin-input-wrap" id="pinSetupWrap" style="display:none;flex-direction:column;gap:8px;">
+        <input type="password" id="pinSetup1" maxlength="6" placeholder="Create PIN (4–6 digits)" autocomplete="off">
+        <input type="password" id="pinSetup2" maxlength="6" placeholder="Confirm PIN" autocomplete="off">
+        <button class="btn btn-gold" onclick="createPin()">Set PIN</button>
+    </div>
     <div class="pin-error" id="pinError"></div>
-    <p style="font-size:0.7rem;color:var(--text-muted);margin-top:8px;">Default PIN: 1111 — Change in Settings</p>
 </div>
 
 <!-- Main App -->
@@ -532,8 +536,12 @@ let deleteTargetId = null;
 function init() {
     events = JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
     setupStars();
-    // Prefill date to now
     document.getElementById('fDate').value = localDateTimeValue();
+    if (!localStorage.getItem(PIN_KEY)) {
+        document.getElementById('pinGateMsg').textContent = 'Create an admin PIN to secure this page';
+        document.getElementById('pinLoginWrap').style.display = 'none';
+        document.getElementById('pinSetupWrap').style.display = 'flex';
+    }
 }
 
 function localDateTimeValue(d = new Date()) {
@@ -542,7 +550,18 @@ function localDateTimeValue(d = new Date()) {
 }
 
 // ── PIN ──
-function getPin() { return localStorage.getItem(PIN_KEY) || '1111'; }
+function getPin() { return localStorage.getItem(PIN_KEY); }
+
+function createPin() {
+    const p1 = document.getElementById('pinSetup1').value;
+    const p2 = document.getElementById('pinSetup2').value;
+    if (!p1 || p1.length < 4) { document.getElementById('pinError').textContent = 'PIN must be 4–6 digits.'; return; }
+    if (p1 !== p2) { document.getElementById('pinError').textContent = 'PINs do not match.'; return; }
+    localStorage.setItem(PIN_KEY, p1);
+    document.getElementById('pinGate').style.display = 'none';
+    document.getElementById('mainApp').style.display = 'block';
+    render();
+}
 
 function checkPin() {
     const entered = document.getElementById('pinInput').value;
