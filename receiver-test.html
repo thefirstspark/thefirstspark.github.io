@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Receiver Test | The First Spark</title>
+<meta name="description" content="Three signals. One transmission. Discover the shape of your reception.">
+<meta property="og:title" content="The Receiver Test">
+<meta property="og:description" content="You are the antenna. This is the calibration.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --core:#0B0B0C;
+    --ember:#FF6A3D;
+    --gold:#F3B23A;
+    --violet:#6B4DF2;
+    --cyan:#26E4D8;
+    --bone:#F5F1E8;
+    --display:'Cormorant Garamond', serif;
+    --mono:'Space Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--core);color:var(--bone);font-family:var(--mono);overflow-x:hidden}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(107,77,242,0.18), transparent 50%),
+      radial-gradient(ellipse at 85% 90%, rgba(255,106,61,0.12), transparent 55%),
+      var(--core);
+  }
+
+  /* GRAIN OVERLAY */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0.35;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+  }
+
+  /* SCANLINE */
+  body::after{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:2;
+    background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(255,255,255,0.015) 3px,rgba(255,255,255,0.015) 4px);
+  }
+
+  .stage{
+    position:relative;z-index:3;
+    max-width:780px;margin:0 auto;padding:48px 28px 80px;
+    min-height:100vh;display:flex;flex-direction:column;
+  }
+
+  /* HEADER */
+  .meta{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--mono);font-size:10px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--bone);opacity:0.55;margin-bottom:48px;
+  }
+  .meta .signal{color:var(--cyan);display:flex;align-items:center;gap:8px}
+  .meta .signal::before{
+    content:'';width:8px;height:8px;border-radius:50%;background:var(--cyan);
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 var(--cyan)}50%{opacity:0.4;box-shadow:0 0 0 8px transparent}}
+
+  /* TYPOGRAPHY */
+  h1{
+    font-family:var(--display);font-weight:500;font-style:italic;
+    font-size:clamp(48px,9vw,96px);line-height:0.92;letter-spacing:-0.02em;
+    margin-bottom:24px;
+  }
+  h1 .glitch{color:var(--ember)}
+  .subhead{
+    font-family:var(--display);font-size:clamp(20px,3vw,28px);line-height:1.3;
+    color:var(--bone);opacity:0.85;max-width:560px;margin-bottom:8px;
+  }
+  .tag{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:64px;
+  }
+
+  /* PROMPT CARDS */
+  .prompts{display:flex;flex-direction:column;gap:32px;margin-bottom:48px}
+  .prompt{
+    border:1px solid rgba(245,241,232,0.12);
+    background:rgba(245,241,232,0.02);
+    padding:28px 24px;position:relative;
+    transition:border-color 0.4s, background 0.4s;
+  }
+  .prompt.active{border-color:var(--ember);background:rgba(255,106,61,0.04)}
+  .prompt.done{border-color:var(--cyan);background:rgba(38,228,216,0.03)}
+  .prompt-num{
+    position:absolute;top:-10px;left:20px;background:var(--core);
+    padding:0 10px;font-family:var(--mono);font-size:10px;letter-spacing:0.3em;color:var(--gold);
+  }
+  .prompt-q{
+    font-family:var(--display);font-style:italic;font-weight:400;
+    font-size:clamp(22px,3.5vw,30px);line-height:1.25;margin-bottom:18px;color:var(--bone);
+  }
+  .prompt-hint{
+    font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--bone);opacity:0.45;margin-bottom:14px;
+  }
+
+  /* INPUTS */
+  input[type="text"]{
+    width:100%;background:transparent;border:none;border-bottom:1px solid rgba(245,241,232,0.25);
+    color:var(--bone);font-family:var(--mono);font-size:18px;padding:10px 0;
+    transition:border-color 0.3s;
+  }
+  input[type="text"]:focus{outline:none;border-bottom-color:var(--ember)}
+  input[type="text"]::placeholder{color:rgba(245,241,232,0.25);font-style:italic}
+
+  .shapes{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+  .shape-btn{
+    width:64px;height:64px;border:1px solid rgba(245,241,232,0.2);background:transparent;
+    color:var(--bone);font-size:28px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all 0.25s;
+  }
+  .shape-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+  .shape-btn.selected{border-color:var(--ember);color:var(--ember);background:rgba(255,106,61,0.08)}
+
+  /* CTA */
+  .cta-wrap{text-align:center;margin:24px 0 0}
+  .cta{
+    display:inline-block;padding:18px 48px;
+    background:transparent;border:1px solid var(--ember);color:var(--ember);
+    font-family:var(--mono);font-size:11px;letter-spacing:0.4em;text-transform:uppercase;
+    cursor:pointer;transition:all 0.3s;text-decoration:none;
+  }
+  .cta:hover:not(:disabled){background:var(--ember);color:var(--core)}
+  .cta:disabled{opacity:0.3;cursor:not-allowed;border-color:rgba(245,241,232,0.2);color:rgba(245,241,232,0.3)}
+
+  /* TRANSMISSION */
+  .transmission{
+    display:none;margin-top:40px;padding:48px 28px;
+    border:1px solid var(--gold);
+    background:radial-gradient(ellipse at center, rgba(243,178,58,0.08), rgba(11,11,12,0.6));
+    text-align:center;position:relative;overflow:hidden;
+  }
+  .transmission.show{display:block;animation:tune-in 1.2s ease-out}
+  @keyframes tune-in{
+    0%{opacity:0;filter:blur(8px) hue-rotate(45deg);transform:translateY(20px)}
+    50%{opacity:0.6;filter:blur(2px) hue-rotate(0)}
+    100%{opacity:1;filter:blur(0);transform:translateY(0)}
+  }
+  .trans-label{
+    font-family:var(--mono);font-size:10px;letter-spacing:0.4em;text-transform:uppercase;
+    color:var(--cyan);margin-bottom:24px;
+  }
+  .sigil-frame{
+    width:240px;height:240px;margin:0 auto 28px;position:relative;
+  }
+  .sigil-frame svg{width:100%;height:100%;display:block}
+  .sigil-frame::before,.sigil-frame::after{
+    content:'';position:absolute;width:14px;height:14px;border:1px solid var(--gold);
+  }
+  .sigil-frame::before{top:0;left:0;border-right:none;border-bottom:none}
+  .sigil-frame::after{bottom:0;right:0;border-left:none;border-top:none}
+
+  .frequency-readout{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.25em;color:var(--gold);
+    margin-bottom:20px;
+  }
+
+  .signal-line{
+    font-family:var(--display);font-style:italic;font-size:clamp(22px,3.4vw,30px);
+    line-height:1.35;color:var(--bone);max-width:560px;margin:0 auto 28px;
+  }
+  .signal-line .accent{color:var(--ember)}
+
+  .selector-tie{
+    border-top:1px solid rgba(243,178,58,0.25);padding-top:24px;margin-top:24px;
+    font-family:var(--mono);font-size:11px;line-height:2;letter-spacing:0.15em;
+    text-transform:uppercase;color:var(--bone);opacity:0.75;
+  }
+  .selector-tie b{color:var(--cyan);font-weight:700}
+
+  .actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+  .actions a, .actions button{
+    padding:12px 24px;border:1px solid rgba(245,241,232,0.3);background:transparent;
+    color:var(--bone);font-family:var(--mono);font-size:10px;letter-spacing:0.3em;
+    text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all 0.3s;
+  }
+  .actions a:hover, .actions button:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* FOOTER */
+  footer{
+    margin-top:auto;padding-top:64px;
+    font-family:var(--mono);font-size:10px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--bone);opacity:0.4;text-align:center;
+  }
+  footer a{color:var(--ember);text-decoration:none}
+
+  /* ENTRANCE STAGGER */
+  .reveal{opacity:0;transform:translateY(16px);animation:reveal 0.8s ease-out forwards}
+  .r1{animation-delay:0.1s}.r2{animation-delay:0.3s}.r3{animation-delay:0.5s}
+  .r4{animation-delay:0.7s}.r5{animation-delay:0.9s}.r6{animation-delay:1.1s}
+  @keyframes reveal{to{opacity:1;transform:translateY(0)}}
+
+  @media (max-width:520px){
+    .stage{padding:32px 20px 60px}
+    .prompt{padding:24px 18px}
+    .shape-btn{width:54px;height:54px;font-size:24px}
+    .sigil-frame{width:200px;height:200px}
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <div class="meta reveal r1">
+    <div>THE FIRST SPARK / RECEIVER TEST v01</div>
+    <div class="signal">CALIBRATING</div>
+  </div>
+
+  <h1 class="reveal r2">What <span class="glitch">shape</span><br>is your signal?</h1>
+  <p class="subhead reveal r3">Three impulses. One transmission. The antenna is already tuned — this just shows you the frequency it's been receiving on.</p>
+  <div class="tag reveal r3">— DO NOT THINK. ANSWER FIRST. —</div>
+
+  <div class="prompts">
+
+    <div class="prompt reveal r4" id="p1">
+      <div class="prompt-num">001</div>
+      <div class="prompt-q">Close your eyes. A number arrives. What is it?</div>
+      <div class="prompt-hint">SINGLE DIGIT OR SMALL NUMBER. NO LOGIC.</div>
+      <input type="text" id="num" placeholder="e.g. 7" inputmode="numeric" autocomplete="off">
+    </div>
+
+    <div class="prompt reveal r5" id="p2">
+      <div class="prompt-num">002</div>
+      <div class="prompt-q">First word that landed. Don't second-guess.</div>
+      <div class="prompt-hint">ONE WORD. WHATEVER ARRIVED.</div>
+      <input type="text" id="word" placeholder="e.g. river" autocomplete="off" maxlength="24">
+    </div>
+
+    <div class="prompt reveal r6" id="p3">
+      <div class="prompt-num">003</div>
+      <div class="prompt-q">Which shape just pulled you?</div>
+      <div class="prompt-hint">FELT, NOT CHOSEN.</div>
+      <div class="shapes" id="shapes">
+        <button class="shape-btn" data-shape="circle">◯</button>
+        <button class="shape-btn" data-shape="triangle">△</button>
+        <button class="shape-btn" data-shape="square">□</button>
+        <button class="shape-btn" data-shape="diamond">◇</button>
+        <button class="shape-btn" data-shape="spiral">𖣔</button>
+        <button class="shape-btn" data-shape="cross">✦</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cta-wrap reveal r6">
+    <button class="cta" id="receive" disabled>Receive Transmission</button>
+  </div>
+
+  <!-- TRANSMISSION OUTPUT -->
+  <div class="transmission" id="transmission">
+    <div class="trans-label">// INCOMING TRANSMISSION</div>
+
+    <div class="sigil-frame">
+      <svg id="sigil" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+
+    <div class="frequency-readout" id="freq">FREQUENCY: --- Hz</div>
+
+    <div class="signal-line" id="signal-line">—</div>
+
+    <div class="selector-tie">
+      <div>RECEIVING IS THE <b>SELECT</b></div>
+      <div>NAMING IT IS THE <b>WITNESS</b></div>
+      <div>WHAT YOU DO NEXT IS THE <b>RELEASE</b></div>
+    </div>
+
+    <div class="actions">
+      <button id="save-sigil">Download Sigil</button>
+      <a href="https://thefirstspark.shop/selector-model.html">The Selector Model</a>
+      <a href="https://sigilcraft.thefirstspark.shop">Forge More at Sigilcraft</a>
+      <button id="reset">Recalibrate</button>
+    </div>
+  </div>
+
+  <footer>
+    © The First Spark — <a href="https://thefirstspark.shop">thefirstspark.shop</a> — You are the technology.
+  </footer>
+
+</div>
+
+<script>
+  // ===== STATE =====
+  const state = { num:'', word:'', shape:'' };
+  const $ = (id) => document.getElementById(id);
+  const numEl = $('num'), wordEl = $('word');
+  const p1 = $('p1'), p2 = $('p2'), p3 = $('p3');
+  const receiveBtn = $('receive');
+
+  function checkReady(){
+    const ready = state.num.trim() && state.word.trim() && state.shape;
+    receiveBtn.disabled = !ready;
+    p1.classList.toggle('done', !!state.num.trim());
+    p2.classList.toggle('done', !!state.word.trim());
+    p3.classList.toggle('done', !!state.shape);
+  }
+
+  numEl.addEventListener('input', e => { state.num = e.target.value; checkReady(); });
+  wordEl.addEventListener('input', e => { state.word = e.target.value; checkReady(); });
+
+  document.querySelectorAll('.shape-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.shape = btn.dataset.shape;
+      checkReady();
+    });
+  });
+
+  // ===== DETERMINISTIC SEED =====
+  // Same answers always produce the same sigil.
+  function hash(str){
+    let h = 2166136261;
+    for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return Math.abs(h);
+  }
+  function rng(seed){
+    let s = seed;
+    return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+  }
+
+  // ===== SIGIL GENERATION =====
+  // Build a sigil from the seed. Approach: place N anchor points around a circle,
+  // connect them in a sigil-walk based on hashed letters of the word, then drop
+  // small accent glyphs derived from the chosen shape.
+  function generateSigil(seed, shape, word){
+    const r = rng(seed);
+    const cx = 100, cy = 100;
+    const pointCount = 5 + (seed % 4); // 5–8 anchors
+    const radius = 62 + r() * 10;
+    const points = [];
+    for(let i=0;i<pointCount;i++){
+      const a = (i/pointCount) * Math.PI * 2 - Math.PI/2 + r()*0.4;
+      points.push({ x: cx + Math.cos(a)*radius, y: cy + Math.sin(a)*radius });
+    }
+
+    // Walk path based on letters of word
+    const letters = (word.toLowerCase().replace(/[^a-z]/g,'') || 'spark').split('');
+    let path = '';
+    let last = letters[0].charCodeAt(0) % pointCount;
+    path += `M ${points[last].x.toFixed(1)} ${points[last].y.toFixed(1)} `;
+    for(let i=1;i<Math.max(letters.length, 5);i++){
+      const ch = letters[i % letters.length];
+      const next = (last + ch.charCodeAt(0)) % pointCount;
+      if(next !== last){
+        // alternate straight lines and gentle curves
+        if(i % 2 === 0){
+          path += `L ${points[next].x.toFixed(1)} ${points[next].y.toFixed(1)} `;
+        } else {
+          const mx = (points[last].x + points[next].x)/2 + (r()-0.5)*30;
+          const my = (points[last].y + points[next].y)/2 + (r()-0.5)*30;
+          path += `Q ${mx.toFixed(1)} ${my.toFixed(1)} ${points[next].x.toFixed(1)} ${points[next].y.toFixed(1)} `;
+        }
+        last = next;
+      }
+    }
+
+    // Outer ring + shape-specific anchor glyph
+    let anchor = '';
+    switch(shape){
+      case 'circle':   anchor = `<circle cx="100" cy="100" r="6" fill="#F3B23A"/>`; break;
+      case 'triangle': anchor = `<polygon points="100,90 108,106 92,106" fill="#F3B23A"/>`; break;
+      case 'square':   anchor = `<rect x="93" y="93" width="14" height="14" fill="#F3B23A"/>`; break;
+      case 'diamond':  anchor = `<polygon points="100,88 110,100 100,112 90,100" fill="#F3B23A"/>`; break;
+      case 'spiral':   anchor = `<path d="M100 100 m-3 0 a3 3 0 1 1 6 0 a5 5 0 1 0 -10 0 a7 7 0 1 1 14 0" stroke="#F3B23A" stroke-width="1.2" fill="none"/>`; break;
+      case 'cross':    anchor = `<path d="M100 90 L100 110 M90 100 L110 100" stroke="#F3B23A" stroke-width="2"/>`; break;
+    }
+
+    // Anchor dots
+    let dots = '';
+    points.forEach(p => {
+      dots += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="2" fill="#26E4D8"/>`;
+    });
+
+    return `
+      <defs>
+        <radialGradient id="glow"><stop offset="0%" stop-color="#FF6A3D" stop-opacity="0.25"/><stop offset="100%" stop-color="#FF6A3D" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="92" fill="url(#glow)"/>
+      <circle cx="100" cy="100" r="78" fill="none" stroke="#6B4DF2" stroke-width="0.6" stroke-dasharray="2 4" opacity="0.7"/>
+      <circle cx="100" cy="100" r="68" fill="none" stroke="#F5F1E8" stroke-width="0.4" opacity="0.3"/>
+      <path d="${path}" stroke="#FF6A3D" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      ${dots}
+      ${anchor}
+    `;
+  }
+
+  // ===== TRANSMISSION LINE =====
+  // Seeded selection from on-brand fragment pools — combines into a unique line
+  // for the visitor. No API call needed; everything resolves locally.
+  const openings = [
+    "The signal arrives shaped like",
+    "Your antenna is tuned to",
+    "What's been broadcasting through you is",
+    "The frequency you receive on is",
+    "You've been picking up",
+    "Your channel runs on"
+  ];
+  const middles = {
+    circle:   ["a closed circuit — completion as starting point", "wholeness pretending to be a question", "the loop that knows it's a loop"],
+    triangle: ["compression — three forces becoming one direction", "structure born of tension", "the spark held between three points"],
+    square:   ["the foundation pattern — slow, load-bearing truth", "the matrix you stand on", "right-angle intelligence"],
+    diamond:  ["pressure-formed clarity", "the rotated foundation — same truth, new orientation", "compressed time becoming light"],
+    spiral:   ["return-with-difference — the same place, deeper", "the recursive pattern that built galaxies", "memory folding back into itself"],
+    cross:    ["the intersection — where vertical meets horizontal", "two axes at once, full-spectrum reception", "the crossing where signal meets receiver"]
+  };
+  const closers = [
+    "and you have always known this.",
+    "the static was just rehearsal.",
+    "the question was the answer.",
+    "you were never the noise — you were the band.",
+    "what you called intuition was just better hardware.",
+    "this is the frequency you came in on."
+  ];
+
+  function buildTransmission(seed, shape){
+    const r = rng(seed + 1);
+    const o = openings[Math.floor(r() * openings.length)];
+    const mPool = middles[shape] || middles.circle;
+    const m = mPool[Math.floor(r() * mPool.length)];
+    const c = closers[Math.floor(r() * closers.length)];
+    return `${o} <span class="accent">${m}</span> — ${c}`;
+  }
+
+  // Frequency readout (deterministic, feels meaningful)
+  function buildFrequency(seed){
+    // Anchor on common esoteric numbers, vary by seed
+    const anchors = [432.00, 528.00, 396.00, 639.00, 741.00, 852.00, 963.00];
+    const base = anchors[seed % anchors.length];
+    const drift = ((seed % 100) / 100 - 0.5) * 4; // ±2 Hz drift
+    return (base + drift).toFixed(2);
+  }
+
+  // ===== RUN =====
+  receiveBtn.addEventListener('click', () => {
+    if(receiveBtn.disabled) return;
+    const seedStr = `${state.num}|${state.word.toLowerCase().trim()}|${state.shape}`;
+    const seed = hash(seedStr);
+
+    // Sigil
+    document.getElementById('sigil').innerHTML = generateSigil(seed, state.shape, state.word);
+
+    // Frequency
+    document.getElementById('freq').textContent = `FREQUENCY: ${buildFrequency(seed)} Hz — LOCKED`;
+
+    // Signal line
+    document.getElementById('signal-line').innerHTML = buildTransmission(seed, state.shape);
+
+    // Show
+    const t = document.getElementById('transmission');
+    t.classList.add('show');
+    setTimeout(() => t.scrollIntoView({behavior:'smooth', block:'start'}), 200);
+  });
+
+  // ===== ACTIONS =====
+  $('reset').addEventListener('click', () => {
+    state.num = state.word = state.shape = '';
+    numEl.value = ''; wordEl.value = '';
+    document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('selected'));
+    document.getElementById('transmission').classList.remove('show');
+    checkReady();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  $('save-sigil').addEventListener('click', () => {
+    const svg = document.getElementById('sigil');
+    const serializer = new XMLSerializer();
+    const source = '<?xml version="1.0" standalone="no"?>\n' + serializer.serializeToString(svg);
+    const blob = new Blob([source], {type:'image/svg+xml'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const safeWord = (state.word || 'sigil').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,12);
+    a.href = url; a.download = `receiver-sigil-${safeWord}.svg`;
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  });
+</script>
+
+</body>
+</html>
