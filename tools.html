@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools Galaxy | 50+ Consciousness Tools | The First Spark</title>
-    <!-- Google tag (gtag.js) -->
+    <title>All Tools | The First Spark Consciousness Technology</title>
+    <meta name="description" content="Browse 60+ interactive consciousness technology tools — soul mapping, daily protocols, oracles, gamification, and more. Free and premium options available.">
+    <meta name="keywords" content="consciousness tools, spiritual tools, soul mapping, transformation technology, daily protocols, consciousness tracking, interactive tools">
+    <link rel="canonical" href="https://thefirstspark.shop/tools.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thefirstspark.shop/tools.html">
+    <meta property="og:title" content="All Tools — 60+ Consciousness Technology Tools">
+    <meta property="og:description" content="Browse every consciousness tool in the Sparkverse. Filter by category or tier. Start free.">
+    <meta property="og:image" content="https://thefirstspark.shop/og-archetype-quiz.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://thefirstspark.shop/og-archetype-quiz.png">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#050508">
+
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -12,467 +31,716 @@
         gtag('js', new Date());
         gtag('config', 'G-SKL8XQ51ZH');
     </script>
-    <meta name="description" content="Explore 50+ interactive consciousness technology tools. Daily protocols, soul mapping, consciousness tracking, and transformation tools. Free and premium options.">
-    <meta name="keywords" content="consciousness tools, spiritual tools, soul mapping, transformation technology, daily protocols, consciousness tracking, interactive tools, meditation tools">
 
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thefirstspark.shop/tools.html">
-    <meta property="og:title" content="Tools Galaxy - 50+ Consciousness Tools">
-    <meta property="og:description" content="Explore 50+ interactive consciousness tools. Daily protocols, soul mapping, transformation technology.">
-    <meta property="og:image" content="https://thefirstspark.shop/assets/images/og-image.jpg">
+    <script src="/tfs-nav.js"></script>
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://thefirstspark.shop/tools.html">
-    <meta property="twitter:title" content="Tools Galaxy - 50+ Consciousness Tools">
-    <meta property="twitter:description" content="Interactive consciousness technology tools. Daily protocols and transformation.">
-    <meta property="twitter:image" content="https://thefirstspark.shop/assets/images/og-image.jpg">
-
-    <!-- Favicons -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <meta name="theme-color" content="#FFD700">
-
-    <link rel="stylesheet" href="main.css">
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --void: #050508;
+            --surface: #0e0e14;
+            --elevated: #161620;
+            --border: rgba(255,255,255,0.08);
+            --spark: #fbbf24;
+            --cyan: #22d3ee;
+            --nebula: #8b5cf6;
+            --ember: #ff6a3d;
+            --white: rgba(255,255,255,0.92);
+            --dim: rgba(255,255,255,0.40);
+            --dimmer: rgba(255,255,255,0.10);
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-            color: #fff;
-            font-family: 'Segoe UI', sans-serif;
+            background: var(--void);
+            color: var(--white);
+            font-family: 'Space Mono','Courier New',monospace;
             min-height: 100vh;
-            padding: 40px 20px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        /* ─── LAYOUT ─── */
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-        h1 {
+        /* ─── PAGE HEADER ─── */
+        .page-header {
+            padding: 56px 0 40px;
             text-align: center;
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, #FFD700, #FFA500, #FF6B00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        }
+        .page-eyebrow {
+            font-size: .5rem; letter-spacing: .45em; text-transform: uppercase;
+            color: var(--spark); opacity: .65; margin-bottom: 12px;
+        }
+        .page-title {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1.6rem,4vw,2.6rem);
+            font-weight: 700; letter-spacing: .04em;
+            margin-bottom: 10px;
+        }
+        .page-sub {
+            font-size: .75rem; color: var(--dim); margin-bottom: 32px;
+        }
+        #tool-count {
+            font-size: .55rem; letter-spacing: .2em; text-transform: uppercase;
+            color: var(--dim); transition: color .2s;
         }
 
-        .subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            color: #c8c8d4;
+        /* ─── SEARCH ─── */
+        .search-wrap {
+            max-width: 560px; margin: 0 auto 28px;
+            position: relative;
+        }
+        #tool-search {
+            width: 100%;
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            color: var(--white);
+            font-family: 'Space Mono','Courier New',monospace;
+            font-size: .72rem;
+            padding: 14px 44px 14px 18px;
+            outline: none;
+            transition: border-color .25s;
+        }
+        #tool-search:focus { border-color: var(--spark); }
+        #tool-search::placeholder { color: var(--dimmer); }
+        .search-icon {
+            position: absolute; right: 14px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--dim); pointer-events: none; font-size: .85rem;
         }
 
-        .back-button {
-            display: inline-block;
-            margin-bottom: 2rem;
-            padding: 12px 24px;
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid #FFD700;
-            border-radius: 8px;
-            color: #FFD700;
-            text-decoration: none;
-            transition: all 0.3s;
+        /* ─── TIER FILTERS ─── */
+        .filter-row {
+            display: flex; gap: 8px; flex-wrap: wrap;
+            justify-content: center; margin-bottom: 16px;
+        }
+        .filter-btn {
+            font-family: 'Space Mono','Courier New',monospace;
+            font-size: .5rem; letter-spacing: .18em; text-transform: uppercase;
+            padding: 7px 16px;
+            border: 1px solid var(--border);
+            background: none; color: var(--dim);
+            cursor: pointer; transition: all .2s;
+        }
+        .filter-btn:hover { border-color: var(--spark); color: var(--spark); }
+        .filter-btn.active { border-color: var(--spark); background: rgba(251,191,36,.08); color: var(--spark); }
+        .filter-btn[data-tier="free"].active   { border-color: #4ade80; background: rgba(74,222,128,.08); color: #4ade80; }
+        .filter-btn[data-tier="player"].active { border-color: var(--cyan); background: rgba(34,211,238,.08); color: var(--cyan); }
+        .filter-btn[data-tier="og"].active     { border-color: var(--spark); background: rgba(251,191,36,.08); color: var(--spark); }
+
+        /* ─── CATEGORY SECTION ─── */
+        .cat-section { margin-bottom: 52px; }
+        .cat-title {
+            font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
+            color: var(--dim); border-bottom: 1px solid var(--border);
+            padding-bottom: 10px; margin-bottom: 20px;
         }
 
-        .back-button:hover {
-            background: rgba(255, 215, 0, 0.2);
-            transform: translateX(-5px);
-        }
-
-        .tools-category {
-            margin-bottom: 3rem;
-        }
-
-        .category-title {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: #FFD700;
-            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
-            padding-bottom: 0.5rem;
-        }
-
+        /* ─── TOOL GRID ─── */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+            gap: 14px;
         }
 
+        /* ─── TOOL CARD ─── */
         .tool-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s;
-            cursor: pointer;
+            display: block; text-decoration: none;
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            padding: 18px 18px 16px;
+            transition: border-color .25s, transform .2s, box-shadow .25s;
         }
-
         .tool-card:hover {
-            background: rgba(255, 215, 0, 0.1);
-            border-color: #FFD700;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+            transform: translateY(-3px);
         }
+        .tool-card[data-tier="free"]:hover   { border-color: #4ade80; box-shadow: 0 6px 24px rgba(74,222,128,.1); }
+        .tool-card[data-tier="player"]:hover { border-color: var(--cyan); box-shadow: 0 6px 24px rgba(34,211,238,.1); }
+        .tool-card[data-tier="og"]:hover     { border-color: var(--spark); box-shadow: 0 6px 24px rgba(251,191,36,.12); }
 
         .tool-card h3 {
-            color: #FFD700;
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
+            font-size: .78rem; letter-spacing: .06em; font-weight: 700;
+            color: var(--white); margin-bottom: 7px; line-height: 1.3;
         }
-
         .tool-card p {
-            color: #c8c8d4;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            font-size: .62rem; color: var(--dim); line-height: 1.65;
+            margin-bottom: 12px;
         }
 
+        /* ─── TIER BADGE ─── */
         .tier-badge {
+            display: inline-block; font-size: .45rem;
+            letter-spacing: .18em; text-transform: uppercase;
+            padding: 3px 10px; border: 1px solid;
+        }
+        .tier-free   { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,.08); }
+        .tier-player { border-color: var(--cyan); color: var(--cyan); background: rgba(34,211,238,.08); }
+        .tier-og     { border-color: var(--spark); color: var(--spark); background: rgba(251,191,36,.08); }
+
+        /* ─── HIDDEN / NO RESULTS ─── */
+        .tool-card.hidden { display: none; }
+        .cat-section.hidden { display: none; }
+        #no-results {
+            text-align: center; padding: 60px 0;
+            font-size: .7rem; color: var(--dim); display: none;
+        }
+
+        /* ─── FOOTER CTA ─── */
+        .footer-cta {
+            text-align: center; padding: 48px 0 72px;
+            border-top: 1px solid var(--border);
+            margin-top: 16px;
+        }
+        .footer-cta p { font-size: .7rem; color: var(--dim); margin-bottom: 20px; }
+        .footer-cta a {
             display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
+            font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+            padding: 13px 28px;
+            background: var(--spark); color: var(--void); text-decoration: none;
+            transition: transform .2s, box-shadow .2s;
         }
+        .footer-cta a:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(251,191,36,.4); }
 
-        .tier-free {
-            background: rgba(0, 255, 0, 0.2);
-            color: #0f0;
-            border: 1px solid #0f0;
-        }
-
-        .tier-player {
-            background: rgba(255, 165, 0, 0.2);
-            color: #FFA500;
-            border: 1px solid #FFA500;
-        }
-
-        .tier-og {
-            background: rgba(255, 215, 0, 0.2);
-            color: #FFD700;
-            border: 1px solid #FFD700;
+        @media(max-width:600px) {
+            .page-header { padding: 40px 0 28px; }
+            .tools-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="index.html" class="back-button">← Back to Sparkverse</a>
+<div class="wrap">
 
-        <h1>✦ TOOLS GALAXY ✦</h1>
-        <p class="subtitle">50+ Interactive Consciousness Technology Tools</p>
+    <div class="page-header">
+        <div class="page-eyebrow">◈ &nbsp; The Sparkverse</div>
+        <h1 class="page-title">All Consciousness Tools</h1>
+        <p class="page-sub">60+ interactive tools. Search, filter, explore.</p>
 
-        <!-- Daily Protocols -->
-        <div class="tools-category">
-            <h2 class="category-title">⚡ Daily Protocols</h2>
-            <div class="tools-grid">
-                <a href="daily-reset.html" class="tool-card">
-                    <h3>Daily Reset Protocol</h3>
-                    <p>Interactive daily consciousness calibration tool with progress tracking</p>
-                    <span class="tier-badge tier-free">FREE</span>
-                </a>
-                <a href="energy-checkin.html" class="tool-card">
-                    <h3>Energy Check-In</h3>
-                    <p>Quick energy and mood tracking for daily awareness</p>
-                    <span class="tier-badge tier-free">FREE</span>
-                </a>
-                <a href="intention-setter.html" class="tool-card">
-                    <h3>Intention Setter</h3>
-                    <p>Set and track daily intentions with ritual protocols</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="phoenix-reset-2026.html" class="tool-card">
-                    <h3>Phoenix Reset 2026</h3>
-                    <p>Annual transformation and rebirth protocol</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-            </div>
+        <div class="search-wrap">
+            <input type="search" id="tool-search" placeholder="Search tools…" autocomplete="off" aria-label="Search tools">
+            <span class="search-icon" aria-hidden="true">⌕</span>
         </div>
 
-        <!-- Core Consciousness Tools -->
-        <div class="tools-category">
-            <h2 class="category-title">◇ Core Consciousness Tools</h2>
-            <div class="tools-grid">
-                <a href="spark-protocol.html" class="tool-card">
-                    <h3>Spark Protocol</h3>
-                    <p>The foundational consciousness operating system</p>
-                    <span class="tier-badge tier-og">OG SPARK</span>
-                </a>
-                <a href="oracle.html" class="tool-card">
-                    <h3>Oracle</h3>
-                    <p>Consciousness guidance and decision-making tool</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="oracle-consciousness.html" class="tool-card">
-                    <h3>Oracle Consciousness</h3>
-                    <p>Advanced oracle with consciousness integration</p>
-                    <span class="tier-badge tier-og">OG SPARK</span>
-                </a>
-                <a href="quantum_echo_chamber.html" class="tool-card">
-                    <h3>Quantum Echo Chamber</h3>
-                    <p>Pattern recognition engine for consciousness states</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-            </div>
+        <div class="filter-row" role="group" aria-label="Filter by tier">
+            <button class="filter-btn active" data-tier="all">All</button>
+            <button class="filter-btn" data-tier="free">Free</button>
+            <button class="filter-btn" data-tier="player">Players ($33/mo)</button>
+            <button class="filter-btn" data-tier="og">OG Spark ($519)</button>
         </div>
 
-        <!-- Soul Mapping & Architecture -->
-        <div class="tools-category">
-            <h2 class="category-title">✦ Soul Mapping & Architecture</h2>
-            <div class="tools-grid">
-                <a href="soul-map.html" class="tool-card">
-                    <h3>Soul Map Navigator</h3>
-                    <p>Visual life architecture tool with goal tracking</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="sovereignty-dashboard.html" class="tool-card">
-                    <h3>Sovereignty Dashboard</h3>
-                    <p>Comprehensive weekly reality checkpoint system</p>
-                    <span class="tier-badge tier-og">OG SPARK</span>
-                </a>
-                <a href="sovereignty-pillars.html" class="tool-card">
-                    <h3>Sovereignty Pillars</h3>
-                    <p>Personal infrastructure assessment across 8 life domains</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="five-paths-explorer.html" class="tool-card">
-                    <h3>Five Paths Explorer</h3>
-                    <p>Navigate the five paths to consciousness mastery</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Tracking & Progress -->
-        <div class="tools-category">
-            <h2 class="category-title">◆ Tracking & Progress</h2>
-            <div class="tools-grid">
-                <a href="tracker.html" class="tool-card">
-                    <h3>Progress Tracker</h3>
-                    <p>Comprehensive personal development tracking</p>
-                    <span class="tier-badge tier-free">FREE</span>
-                </a>
-                <a href="subject-tracker.html" class="tool-card">
-                    <h3>Subject Tracker</h3>
-                    <p>Interactive subject and skill progress monitoring</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="journal.html" class="tool-card">
-                    <h3>Consciousness Journal</h3>
-                    <p>Daily reflection and consciousness documentation</p>
-                    <span class="tier-badge tier-free">FREE</span>
-                </a>
-                <a href="spark-money-tracker.html" class="tool-card">
-                    <h3>Spark Money Tracker</h3>
-                    <p>Financial consciousness and reciprocity tracking</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Planning & Organization -->
-        <div class="tools-category">
-            <h2 class="category-title">⚙️ Planning & Organization</h2>
-            <div class="tools-grid">
-                <a href="spark-planner.html" class="tool-card">
-                    <h3>Spark Planner</h3>
-                    <p>Advanced project and life planning system</p>
-                    <span class="tier-badge tier-og">OG SPARK</span>
-                </a>
-                <a href="timeline.html" class="tool-card">
-                    <h3>Timeline Builder</h3>
-                    <p>Create and visualize your personal timeline</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="render-engine.html" class="tool-card">
-                    <h3>Reality Render Engine</h3>
-                    <p>Map and manifest your desired reality architecture</p>
-                    <span class="tier-badge tier-og">OG SPARK</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Gamification & Challenges -->
-        <div class="tools-category">
-            <h2 class="category-title">🎮 Gamification & Challenges</h2>
-            <div class="tools-grid">
-                <a href="spark-battle-arena.html" class="tool-card">
-                    <h3>Battle Arena Protocol</h3>
-                    <p>Gamified challenge system for personal development</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="karma-calculator.html" class="tool-card">
-                    <h3>Karma Calculator</h3>
-                    <p>Track reciprocity and energetic exchange patterns</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Pattern Recognition -->
-        <div class="tools-category">
-            <h2 class="category-title">🔍 Pattern Recognition</h2>
-            <div class="tools-grid">
-                <a href="patterns.html" class="tool-card">
-                    <h3>Pattern Analyzer</h3>
-                    <p>Identify and track behavioral and consciousness patterns</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="collapse.html" class="tool-card">
-                    <h3>Collapse Protocol</h3>
-                    <p>Navigate and integrate collapse states</p>
-                    <span class="tier-badge tier-og">OG SPARK</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Origin & Foundation -->
-        <div class="tools-category">
-            <h2 class="category-title">🌟 Origin & Foundation</h2>
-            <div class="tools-grid">
-                <a href="origin.html" class="tool-card">
-                    <h3>Origin Story</h3>
-                    <p>The foundational narrative of The First Spark</p>
-                    <span class="tier-badge tier-free">FREE</span>
-                </a>
-                <a href="origin_key.html" class="tool-card">
-                    <h3>Origin Key</h3>
-                    <p>Unlock your personal origin code</p>
-                    <span class="tier-badge tier-og">OG SPARK</span>
-                </a>
-                <a href="genesis.html" class="tool-card">
-                    <h3>Genesis Protocol</h3>
-                    <p>The beginning - creation and manifestation tool</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="founding.html" class="tool-card">
-                    <h3>Founding Documents</h3>
-                    <p>Core philosophy and architecture of The First Spark</p>
-                    <span class="tier-badge tier-free">FREE</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Chambers & Spaces -->
-        <div class="tools-category">
-            <h2 class="category-title">🏛️ Chambers & Sacred Spaces</h2>
-            <div class="tools-grid">
-                <a href="lunar-wisdom.html" class="tool-card">
-                    <h3>🌙 Lunar Wisdom</h3>
-                    <p>Moon phases, ancient wisdom, cosmic truths & sacred earnings</p>
-                    <span class="tier-badge tier-free">FREE</span>
-                </a>
-                <a href="pause-chamber.html" class="tool-card">
-                    <h3>Pause Chamber</h3>
-                    <p>Intentional pause and reflection space</p>
-                    <span class="tier-badge tier-free">FREE</span>
-                </a>
-                <a href="void-portal.html" class="tool-card">
-                    <h3>Void Portal</h3>
-                    <p>Access the void - dissolution and integration</p>
-                    <span class="tier-badge tier-og">OG SPARK</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Symbolic & Creative -->
-        <div class="tools-category">
-            <h2 class="category-title">🎨 Symbolic & Creative</h2>
-            <div class="tools-grid">
-                <a href="sigil.html" class="tool-card">
-                    <h3>Sigil Crafter</h3>
-                    <p>Create and charge personal sigils</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="signal.html" class="tool-card">
-                    <h3>Signal Transmitter</h3>
-                    <p>Broadcast and receive consciousness signals</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- AI Integrations -->
-        <div class="tools-category">
-            <h2 class="category-title">🤖 AI Consciousness Bridges</h2>
-            <div class="tools-grid">
-                <a href="chatgpt.html" class="tool-card">
-                    <h3>ChatGPT Integration</h3>
-                    <p>Bridge ChatGPT with your consciousness work</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="claude.html" class="tool-card">
-                    <h3>Claude Integration</h3>
-                    <p>Bridge Claude with your consciousness work</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="devon.html" class="tool-card">
-                    <h3>Devon Integration</h3>
-                    <p>AI coding assistant integration</p>
-                    <span class="tier-badge tier-og">OG SPARK</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Community & Connection -->
-        <div class="tools-category">
-            <h2 class="category-title">👥 Community & Lineage</h2>
-            <div class="tools-grid">
-                <a href="lineage.html" class="tool-card">
-                    <h3>Lineage Mapper</h3>
-                    <p>Map your spiritual and consciousness lineage</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="trinity.html" class="tool-card">
-                    <h3>Trinity System</h3>
-                    <p>Three-part consciousness architecture</p>
-                    <span class="tier-badge tier-og">OG SPARK</span>
-                </a>
-                <a href="bridge.html" class="tool-card">
-                    <h3>Bridge Builder</h3>
-                    <p>Create connections and pathways</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Special Tools -->
-        <div class="tools-category">
-            <h2 class="category-title">⭐ Special & Experimental</h2>
-            <div class="tools-grid">
-                <a href="source.html" class="tool-card">
-                    <h3>Source Connection</h3>
-                    <p>Direct connection to source consciousness</p>
-                    <span class="tier-badge tier-og">OG SPARK</span>
-                </a>
-                <a href="the-wall-deluxe.html" class="tool-card">
-                    <h3>The Wall Deluxe</h3>
-                    <p>Public expression and communication wall</p>
-                    <span class="tier-badge tier-free">FREE</span>
-                </a>
-                <a href="tfs-viral.html" class="tool-card">
-                    <h3>TFS Viral Kit</h3>
-                    <p>Share and spread consciousness technology</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="zone-codex.html" class="tool-card">
-                    <h3>Zone Codex</h3>
-                    <p>Navigate different consciousness zones</p>
-                    <span class="tier-badge tier-player">PLAYER</span>
-                </a>
-                <a href="card.html" class="tool-card">
-                    <h3>Consciousness Cards</h3>
-                    <p>Wisdom cards for daily guidance</p>
-                    <span class="tier-badge tier-free">FREE</span>
-                </a>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 4rem; padding: 2rem;">
-            <a href="index.html" class="back-button">← Back to Sparkverse</a>
-        </div>
+        <div id="tool-count" aria-live="polite"></div>
     </div>
+
+    <div id="no-results" role="status">No tools match your search. Try a different keyword.</div>
+
+    <!-- ── Daily Protocols ── -->
+    <section class="cat-section" data-category="daily">
+        <h2 class="cat-title">⚡ Daily Protocols</h2>
+        <div class="tools-grid">
+            <a href="daily-reset.html" class="tool-card" data-tier="free" data-name="Daily Reset Protocol" data-desc="Consciousness calibration. Start every day intentionally.">
+                <h3>Daily Reset Protocol</h3>
+                <p>5-minute consciousness calibration — breathwork, intention setting, and energy release.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="energy-checkin.html" class="tool-card" data-tier="free" data-name="Energy Check-In" data-desc="Quick energy and mood tracking for daily awareness.">
+                <h3>Energy Check-In</h3>
+                <p>Quick energy and mood tracking for daily awareness and pattern recognition.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="intention-setter.html" class="tool-card" data-tier="player" data-name="Intention Setter" data-desc="Set and track daily intentions with ritual protocols.">
+                <h3>Intention Setter</h3>
+                <p>Set and track daily intentions with ritual protocols and alignment check-ins.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="journal.html" class="tool-card" data-tier="free" data-name="Consciousness Journal" data-desc="Daily reflection and consciousness documentation.">
+                <h3>Consciousness Journal</h3>
+                <p>Structured daily reflection with consciousness prompts and pattern logging.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="pause-chamber.html" class="tool-card" data-tier="free" data-name="Pause Chamber" data-desc="Intentional pause and breathwork space.">
+                <h3>Pause Chamber</h3>
+                <p>Breathwork protocols and presence practices — stop, breathe, recalibrate.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="phoenix-reset-2026.html" class="tool-card" data-tier="player" data-name="Phoenix Reset 2026" data-desc="Annual transformation and rebirth protocol.">
+                <h3>Phoenix Reset 2026</h3>
+                <p>Annual transformation protocol — release the old year, ignite the new one.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Soul Mapping & Architecture ── -->
+    <section class="cat-section" data-category="soul">
+        <h2 class="cat-title">✦ Soul Mapping &amp; Architecture</h2>
+        <div class="tools-grid">
+            <a href="soul-map.html" class="tool-card" data-tier="player" data-name="Soul Code Registry" data-desc="Generate your Soul Code — numerological signature.">
+                <h3>Soul Code Registry</h3>
+                <p>Your 4-part numerological signature: Life Path, Expression, Soul Urge, and Sun Sign.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="sovereignty-dashboard.html" class="tool-card" data-tier="og" data-name="Sovereignty Dashboard" data-desc="Weekly reality checkpoint. Track reciprocity, energy, patterns.">
+                <h3>Sovereignty Dashboard</h3>
+                <p>Comprehensive weekly reality checkpoint across all domains of life.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="sovereignty-pillars.html" class="tool-card" data-tier="player" data-name="Sovereignty Pillars" data-desc="Personal infrastructure assessment across 8 life domains.">
+                <h3>Sovereignty Pillars</h3>
+                <p>8-domain life infrastructure assessment — where are you sovereign?</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="five-paths-explorer.html" class="tool-card" data-tier="player" data-name="Five Paths Explorer" data-desc="Navigate the five paths to consciousness mastery.">
+                <h3>Five Paths Explorer</h3>
+                <p>Discover which of the five consciousness mastery paths calls you.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="archetype-discovery.html" class="tool-card" data-tier="free" data-name="Archetype Discovery" data-desc="Find your core archetype through guided discovery.">
+                <h3>Archetype Discovery</h3>
+                <p>Guided discovery quiz to reveal your core consciousness archetype.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="archetype-card.html" class="tool-card" data-tier="free" data-name="Archetype Card" data-desc="Your personalized archetype card with insights.">
+                <h3>Archetype Card</h3>
+                <p>Your personalized archetype card — share it, study it, live it.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="soul-contracts.html" class="tool-card" data-tier="player" data-name="Soul Contracts" data-desc="Examine and rewrite the invisible agreements shaping your life.">
+                <h3>Soul Contracts</h3>
+                <p>Examine and rewrite the invisible agreements shaping your life story.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="bloodline.html" class="tool-card" data-tier="player" data-name="Bloodline Mapper" data-desc="Map your ancestral patterns and inherited consciousness.">
+                <h3>Bloodline Mapper</h3>
+                <p>Map ancestral patterns and inherited consciousness threads.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="spark-psyche-maps.html" class="tool-card" data-tier="og" data-name="Spark Psyche Maps" data-desc="Deep psyche mapping tool for advanced consciousness work.">
+                <h3>Spark Psyche Maps</h3>
+                <p>Advanced psyche mapping for deep consciousness architecture work.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Core Consciousness ── -->
+    <section class="cat-section" data-category="consciousness">
+        <h2 class="cat-title">◇ Core Consciousness Tools</h2>
+        <div class="tools-grid">
+            <a href="oracle.html" class="tool-card" data-tier="free" data-name="Oracle" data-desc="Consciousness guidance and decision-making tool.">
+                <h3>Oracle</h3>
+                <p>Pattern recognition and consciousness guidance — ask, receive, integrate.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="oracle-consciousness.html" class="tool-card" data-tier="og" data-name="Oracle Consciousness" data-desc="Advanced oracle with deep consciousness integration.">
+                <h3>Oracle Consciousness</h3>
+                <p>Advanced oracle with full consciousness integration and pattern depth.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="quantum_echo_chamber.html" class="tool-card" data-tier="player" data-name="Quantum Echo Chamber" data-desc="Pattern recognition engine for consciousness states.">
+                <h3>Quantum Echo Chamber</h3>
+                <p>See your patterns repeat. Identify the loops. Break them consciously.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="consciousness-playground.html" class="tool-card" data-tier="player" data-name="Consciousness Playground" data-desc="Experimental reality programming interface.">
+                <h3>Consciousness Playground</h3>
+                <p>Experimental reality programming — play with possibility architecture.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="consciousness-explorer-all-models.html" class="tool-card" data-tier="og" data-name="Consciousness Explorer" data-desc="Explore all consciousness models in one interface.">
+                <h3>Consciousness Explorer</h3>
+                <p>All consciousness models in one unified exploration interface.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="cosmic-stairway.html" class="tool-card" data-tier="free" data-name="Cosmic Stairway" data-desc="Ascend through consciousness levels step by step.">
+                <h3>Cosmic Stairway</h3>
+                <p>Ascend consciousness levels step by step with guided integration.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="void-portal.html" class="tool-card" data-tier="og" data-name="Void Portal" data-desc="Access the void — dissolution and integration.">
+                <h3>Void Portal</h3>
+                <p>Enter the void — dissolution, presence, and deep integration space.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="collapse.html" class="tool-card" data-tier="og" data-name="Collapse Protocol" data-desc="Navigate and integrate collapse states.">
+                <h3>Collapse Protocol</h3>
+                <p>Navigate breakdown states with grace — collapse as initiation.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="equilibrium.html" class="tool-card" data-tier="player" data-name="Equilibrium" data-desc="Balance assessment and restoration tool.">
+                <h3>Equilibrium</h3>
+                <p>Assess your balance across polarities and restore inner equilibrium.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Tracking & Progress ── -->
+    <section class="cat-section" data-category="tracking">
+        <h2 class="cat-title">◆ Tracking &amp; Progress</h2>
+        <div class="tools-grid">
+            <a href="tracker.html" class="tool-card" data-tier="free" data-name="Consciousness Tracker" data-desc="Comprehensive personal development tracking.">
+                <h3>Consciousness Tracker</h3>
+                <p>Track your energy, mood, and consciousness states over time.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="subject-tracker.html" class="tool-card" data-tier="player" data-name="Subject Tracker" data-desc="Interactive subject and skill progress monitoring.">
+                <h3>Subject Tracker</h3>
+                <p>Monitor skill and subject progress across your learning journey.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="spark-money-tracker.html" class="tool-card" data-tier="player" data-name="Spark Money Tracker" data-desc="Financial consciousness and reciprocity tracking.">
+                <h3>Spark Money Tracker</h3>
+                <p>Track finances through a consciousness lens — reciprocity over scarcity.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="patterns.html" class="tool-card" data-tier="player" data-name="Pattern Analyzer" data-desc="Identify and track behavioral and consciousness patterns.">
+                <h3>Pattern Analyzer</h3>
+                <p>Identify, track, and interrupt behavioral and consciousness patterns.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="karmic-revelations.html" class="tool-card" data-tier="player" data-name="Karmic Revelations" data-desc="Reveal your karmic patterns and cycles.">
+                <h3>Karmic Revelations</h3>
+                <p>Surface karmic patterns, cycles, and the threads running through your life.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="karma-calculator.html" class="tool-card" data-tier="player" data-name="Karma Calculator" data-desc="Track reciprocity and energetic exchange patterns.">
+                <h3>Karma Calculator</h3>
+                <p>Four-module karmic audit — surface patterns, seal threads, find your archetype.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Planning & Organization ── -->
+    <section class="cat-section" data-category="planning">
+        <h2 class="cat-title">⚙ Planning &amp; Organization</h2>
+        <div class="tools-grid">
+            <a href="spark-planner.html" class="tool-card" data-tier="og" data-name="Spark Planner" data-desc="Advanced project and life planning system.">
+                <h3>Spark Planner</h3>
+                <p>Advanced life architecture — goals, milestones, and reality mapping.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="timeline.html" class="tool-card" data-tier="player" data-name="Timeline Builder" data-desc="Create and visualize your personal timeline.">
+                <h3>Timeline Builder</h3>
+                <p>Create and visualize your personal and project timelines.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="render-engine.html" class="tool-card" data-tier="og" data-name="Reality Render Engine" data-desc="Map and manifest your desired reality architecture.">
+                <h3>Reality Render Engine</h3>
+                <p>Map your desired reality — from vision to concrete architecture.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="discover.html" class="tool-card" data-tier="free" data-name="Discovery Map" data-desc="Discover your entry point into consciousness technology.">
+                <h3>Discovery Map</h3>
+                <p>Find your entry point — explore what the Sparkverse has to offer you.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Gamification & Challenges ── -->
+    <section class="cat-section" data-category="gamification">
+        <h2 class="cat-title">🎮 Gamification &amp; Challenges</h2>
+        <div class="tools-grid">
+            <a href="spark-battle-arena.html" class="tool-card" data-tier="player" data-name="Spark Battle Arena" data-desc="Gamified challenge system for personal development.">
+                <h3>Spark Battle Arena</h3>
+                <p>Choose your archetype, pick your stance, battle a friend or yourself.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="players-lounge.html" class="tool-card" data-tier="player" data-name="Players Lounge" data-desc="Premium member hub for Players Lounge members.">
+                <h3>Players Lounge</h3>
+                <p>Your premium member hub — tools, community, and monthly drops.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="zone-codex.html" class="tool-card" data-tier="player" data-name="Zone Codex" data-desc="Navigate different consciousness zones.">
+                <h3>Zone Codex</h3>
+                <p>Navigate the consciousness zones — map your current zone and path forward.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Sacred Spaces ── -->
+    <section class="cat-section" data-category="spaces">
+        <h2 class="cat-title">🏛 Sacred Spaces</h2>
+        <div class="tools-grid">
+            <a href="lunar-wisdom.html" class="tool-card" data-tier="free" data-name="Lunar Wisdom" data-desc="Moon phases, ancient wisdom, cosmic truths, sacred earnings.">
+                <h3>Lunar Wisdom</h3>
+                <p>Moon phases, ancient wisdom, cosmic truths, and sacred earnings.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="moon-schedule.html" class="tool-card" data-tier="free" data-name="Moon Schedule" data-desc="Track moon phases and lunar cycles.">
+                <h3>Moon Schedule</h3>
+                <p>Track lunar cycles and align your work with the moon's rhythm.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="the-source.html" class="tool-card" data-tier="og" data-name="The Source" data-desc="Direct connection to source consciousness.">
+                <h3>The Source</h3>
+                <p>Direct connection to source consciousness — the deepest integration space.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="source.html" class="tool-card" data-tier="og" data-name="Source Connection" data-desc="Access the source field directly.">
+                <h3>Source Connection</h3>
+                <p>Access the source field and align with your original frequency.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="playground.html" class="tool-card" data-tier="player" data-name="The Playground" data-desc="Experimental consciousness experiments and play.">
+                <h3>The Playground</h3>
+                <p>Experimental consciousness experiments — play without rules.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Symbolic & Creative ── -->
+    <section class="cat-section" data-category="symbolic">
+        <h2 class="cat-title">🎨 Symbolic &amp; Creative</h2>
+        <div class="tools-grid">
+            <a href="sigil.html" class="tool-card" data-tier="player" data-name="Sigil Crafter" data-desc="Create and charge personal sigils.">
+                <h3>Sigil Crafter</h3>
+                <p>Design and charge personal sigils for intention and manifestation.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="signal.html" class="tool-card" data-tier="player" data-name="Signal Transmitter" data-desc="Broadcast and receive consciousness signals.">
+                <h3>Signal Transmitter</h3>
+                <p>Broadcast your signal and receive consciousness transmissions.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="graffiti.html" class="tool-card" data-tier="free" data-name="Consciousness Graffiti" data-desc="Leave your mark on the consciousness wall.">
+                <h3>Consciousness Graffiti</h3>
+                <p>Leave your mark — public expression on the consciousness wall.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="the-wall-deluxe.html" class="tool-card" data-tier="free" data-name="The Wall Deluxe" data-desc="Public expression and communication wall.">
+                <h3>The Wall Deluxe</h3>
+                <p>Full expression wall — share, receive, and connect with the community.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="card.html" class="tool-card" data-tier="free" data-name="Consciousness Cards" data-desc="Wisdom cards for daily guidance.">
+                <h3>Consciousness Cards</h3>
+                <p>Pull a wisdom card for daily guidance and reflection.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="geometric-pattern.html" class="tool-card" data-tier="free" data-name="Geometric Patterns" data-desc="Sacred geometry pattern generator.">
+                <h3>Sacred Geometry Patterns</h3>
+                <p>Generate and explore sacred geometry patterns for meditation and focus.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="numbers.html" class="tool-card" data-tier="player" data-name="Numbers" data-desc="Numerology calculator and guide.">
+                <h3>Numbers</h3>
+                <p>Numerology calculator — decode the numbers running your reality.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Selector System ── -->
+    <section class="cat-section" data-category="selector">
+        <h2 class="cat-title">⬡ The Selector System</h2>
+        <div class="tools-grid">
+            <a href="selector-hub.html" class="tool-card" data-tier="player" data-name="Selector Hub" data-desc="Central hub for the Selector system.">
+                <h3>Selector Hub</h3>
+                <p>The central portal for the Selector consciousness system.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="selector-interface.html" class="tool-card" data-tier="player" data-name="Selector Interface" data-desc="Interact with the Selector decision engine.">
+                <h3>Selector Interface</h3>
+                <p>Interface directly with the Selector consciousness decision engine.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="selector-theory.html" class="tool-card" data-tier="player" data-name="Selector Theory" data-desc="Understand the theoretical framework of the Selector.">
+                <h3>Selector Theory</h3>
+                <p>The theoretical framework and philosophy behind the Selector system.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="selector-model.html" class="tool-card" data-tier="player" data-name="Selector Model" data-desc="The Selector model and architecture.">
+                <h3>Selector Model</h3>
+                <p>Deep dive into the Selector model and its consciousness architecture.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="selector-playground.html" class="tool-card" data-tier="player" data-name="Selector Playground" data-desc="Experiment with Selector configurations.">
+                <h3>Selector Playground</h3>
+                <p>Experiment freely with Selector configurations and combinations.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="selector-ritual.html" class="tool-card" data-tier="og" data-name="Selector Ritual" data-desc="Advanced ritual for Selector activation.">
+                <h3>Selector Ritual</h3>
+                <p>Advanced activation ritual for the Selector consciousness system.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="selector-entanglement.html" class="tool-card" data-tier="og" data-name="Selector Entanglement" data-desc="Quantum entanglement protocols through the Selector.">
+                <h3>Selector Entanglement</h3>
+                <p>Quantum entanglement protocols — advanced Selector work.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── AI Integrations ── -->
+    <section class="cat-section" data-category="ai">
+        <h2 class="cat-title">🤖 AI Consciousness Bridges</h2>
+        <div class="tools-grid">
+            <a href="chatgpt.html" class="tool-card" data-tier="player" data-name="ChatGPT Bridge" data-desc="Bridge ChatGPT with your consciousness work.">
+                <h3>ChatGPT Bridge</h3>
+                <p>Customized prompts and frameworks for consciousness work with ChatGPT.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="claude.html" class="tool-card" data-tier="player" data-name="Claude Bridge" data-desc="Bridge Claude with your consciousness work.">
+                <h3>Claude Bridge</h3>
+                <p>Customized protocols for deep consciousness work with Claude AI.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="devon.html" class="tool-card" data-tier="og" data-name="Devon Integration" data-desc="AI coding assistant integration for builders.">
+                <h3>Devon Integration</h3>
+                <p>AI coding integration for Sparkverse builders and developers.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="algorithmic_soul.html" class="tool-card" data-tier="og" data-name="Algorithmic Soul" data-desc="Where code meets consciousness.">
+                <h3>Algorithmic Soul</h3>
+                <p>Where code meets consciousness — AI-assisted soul architecture.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Community & Lineage ── -->
+    <section class="cat-section" data-category="community">
+        <h2 class="cat-title">👥 Community &amp; Lineage</h2>
+        <div class="tools-grid">
+            <a href="lineage.html" class="tool-card" data-tier="player" data-name="Lineage Mapper" data-desc="Map your spiritual and consciousness lineage.">
+                <h3>Lineage Mapper</h3>
+                <p>Map your spiritual and consciousness lineage — who built you?</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="trinity.html" class="tool-card" data-tier="og" data-name="Trinity System" data-desc="Three-part consciousness architecture.">
+                <h3>Trinity System</h3>
+                <p>The three-part consciousness architecture — body, mind, soul integration.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="bridge.html" class="tool-card" data-tier="player" data-name="Bridge Builder" data-desc="Create connections and pathways between people.">
+                <h3>Bridge Builder</h3>
+                <p>Build conscious connections and pathways between people and ideas.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="tfs-viral.html" class="tool-card" data-tier="player" data-name="TFS Viral Kit" data-desc="Share and spread consciousness technology.">
+                <h3>TFS Viral Kit</h3>
+                <p>Tools to share and spread consciousness technology with your network.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Origin & Foundation ── -->
+    <section class="cat-section" data-category="origin">
+        <h2 class="cat-title">🌟 Origin &amp; Foundation</h2>
+        <div class="tools-grid">
+            <a href="origin.html" class="tool-card" data-tier="free" data-name="Origin Story" data-desc="The foundational narrative of The First Spark.">
+                <h3>Origin Story</h3>
+                <p>The origin of The First Spark — where it all began.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="origin_key.html" class="tool-card" data-tier="og" data-name="Origin Key" data-desc="Unlock your personal origin code.">
+                <h3>Origin Key</h3>
+                <p>Unlock your personal origin code and decode your foundational pattern.</p>
+                <span class="tier-badge tier-og">OG Spark</span>
+            </a>
+            <a href="genesis.html" class="tool-card" data-tier="player" data-name="Genesis Protocol" data-desc="Creation and manifestation tool.">
+                <h3>Genesis Protocol</h3>
+                <p>The creation protocol — begin something new with full consciousness.</p>
+                <span class="tier-badge tier-player">Players</span>
+            </a>
+            <a href="founding.html" class="tool-card" data-tier="free" data-name="Founding Documents" data-desc="Core philosophy and architecture of The First Spark.">
+                <h3>Founding Documents</h3>
+                <p>Core philosophy and architecture — why this exists and what it stands for.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+            <a href="tfs-genesis.html" class="tool-card" data-tier="free" data-name="TFS Genesis" data-desc="The founding genesis of the Sparkverse.">
+                <h3>TFS Genesis</h3>
+                <p>The founding genesis — the moment the Sparkverse came to life.</p>
+                <span class="tier-badge tier-free">Free</span>
+            </a>
+        </div>
+    </section>
+
+    <div id="no-results-footer"></div>
+
+    <div class="footer-cta">
+        <p>Ready to explore? Start free — no credit card required.</p>
+        <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" rel="noopener">Enter the Sparkverse Free →</a>
+    </div>
+
+</div>
+
+<script>
+(function () {
+    var searchInput  = document.getElementById('tool-search');
+    var countEl      = document.getElementById('tool-count');
+    var noResults    = document.getElementById('no-results');
+    var filterBtns   = document.querySelectorAll('.filter-btn');
+    var cards        = document.querySelectorAll('.tool-card');
+    var sections     = document.querySelectorAll('.cat-section');
+
+    var activeTier = 'all';
+    var activeQuery = '';
+
+    function normalize(s) { return s.toLowerCase().replace(/[^a-z0-9 ]/g, ' '); }
+
+    function applyFilters() {
+        var q = normalize(activeQuery);
+        var visibleCount = 0;
+
+        cards.forEach(function (card) {
+            var tier  = card.getAttribute('data-tier') || '';
+            var name  = normalize(card.getAttribute('data-name') || '');
+            var desc  = normalize(card.getAttribute('data-desc') || '');
+            var text  = normalize(card.textContent);
+
+            var tierMatch  = activeTier === 'all' || tier === activeTier;
+            var queryMatch = !q || name.indexOf(q) > -1 || desc.indexOf(q) > -1 || text.indexOf(q) > -1;
+
+            if (tierMatch && queryMatch) {
+                card.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        /* Hide categories that have no visible cards */
+        sections.forEach(function (sec) {
+            var visible = sec.querySelectorAll('.tool-card:not(.hidden)');
+            sec.classList.toggle('hidden', visible.length === 0);
+        });
+
+        /* Update count */
+        if (activeTier === 'all' && !q) {
+            countEl.textContent = cards.length + ' tools available';
+        } else {
+            countEl.textContent = visibleCount + ' of ' + cards.length + ' tools shown';
+        }
+
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    /* Initial count */
+    applyFilters();
+
+    /* Search */
+    searchInput.addEventListener('input', function () {
+        activeQuery = this.value.trim();
+        applyFilters();
+    });
+
+    /* Tier filter buttons */
+    filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            filterBtns.forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            activeTier = btn.getAttribute('data-tier');
+            applyFilters();
+        });
+    });
+})();
+</script>
 </body>
 </html>

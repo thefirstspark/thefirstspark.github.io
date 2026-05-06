@@ -1402,3 +1402,112 @@ footer {
         display: none;
     }
 }
+
+/* ===================================
+   UTILITY CLASSES — shared across pages
+   =================================== */
+
+/* Tier badge utilities */
+.tfs-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid;
+    line-height: 1.4;
+}
+.tfs-badge-free   { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,0.08); }
+.tfs-badge-player { border-color: var(--electric-blue); color: var(--electric-blue); background: rgba(0,212,255,0.08); }
+.tfs-badge-og     { border-color: var(--accent-gold); color: var(--accent-gold); background: rgba(255,215,0,0.08); }
+
+/* Generic tool card base (for pages using main.css) */
+.tfs-tool-card {
+    display: block;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 20px;
+    text-decoration: none;
+    color: var(--white);
+    transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+}
+.tfs-tool-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--electric-blue);
+    box-shadow: 0 6px 24px rgba(0,212,255,0.1);
+}
+.tfs-tool-card h3 { color: var(--electric-blue); margin-bottom: 8px; font-size: 1rem; }
+.tfs-tool-card p  { color: var(--gray-light); font-size: 0.85rem; line-height: 1.6; margin-bottom: 10px; }
+
+/* Tool grid utility */
+.tfs-tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+}
+
+/* Primary CTA button utility */
+.tfs-btn-primary {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    background: var(--electric-blue);
+    color: var(--black);
+    text-decoration: none;
+    border: 2px solid var(--electric-blue);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+}
+.tfs-btn-primary:hover {
+    background: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 6px 24px rgba(0,255,255,0.3);
+    transform: translateY(-2px);
+    color: var(--black);
+}
+
+/* Secondary CTA button utility */
+.tfs-btn-secondary {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 11px 28px;
+    background: transparent;
+    color: var(--electric-blue);
+    text-decoration: none;
+    border: 2px solid var(--electric-blue);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s, color 0.2s;
+    cursor: pointer;
+}
+.tfs-btn-secondary:hover {
+    background: var(--electric-blue);
+    color: var(--black);
+    box-shadow: 0 4px 16px rgba(0,212,255,0.25);
+    transform: translateY(-2px);
+}
+
+/* Section label utility */
+.tfs-section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--electric-blue);
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Divider utility */
+.tfs-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--electric-blue), transparent);
+    opacity: 0.25;
+    margin: 40px 0;
+}
