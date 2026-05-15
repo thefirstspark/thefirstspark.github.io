@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Become an Affiliate · The First Spark</title>
+<meta name="description" content="Share Soul Maps. Keep 35% of every sale. No support load, no inventory. Just real-to-real signal." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0612;
+    --bg-2: #120a22;
+    --ink: #f3ecff;
+    --ink-dim: #b8a8d4;
+    --ink-mute: #6b5b8a;
+    --spark: #ffb547;
+    --spark-2: #ff7a3d;
+    --cosmic: #8b5cf6;
+    --cosmic-2: #c084fc;
+    --line: rgba(192, 132, 252, 0.18);
+    --line-strong: rgba(192, 132, 252, 0.42);
+    --display: "Cormorant Garamond", "Times New Roman", serif;
+    --sans: "Space Grotesk", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 0%, rgba(139, 92, 246, 0.18), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, rgba(255, 181, 71, 0.10), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(192, 132, 252, 0.12), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, white, transparent),
+      radial-gradient(1px 1px at 60% 70%, white, transparent),
+      radial-gradient(1px 1px at 80% 10%, white, transparent),
+      radial-gradient(1px 1px at 30% 80%, white, transparent),
+      radial-gradient(1px 1px at 90% 50%, white, transparent),
+      radial-gradient(1px 1px at 10% 60%, white, transparent),
+      radial-gradient(1px 1px at 50% 20%, white, transparent),
+      radial-gradient(1px 1px at 70% 90%, white, transparent);
+    background-size: 600px 600px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+    animation: drift 120s linear infinite;
+  }
+  @keyframes drift {
+    from { background-position: 0 0; }
+    to { background-position: 600px 600px; }
+  }
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  nav {
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  nav a { color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
+  nav a:hover { color: var(--spark); }
+  .logo { color: var(--spark); font-weight: 500; }
+  .hero { padding: 60px 0 100px; position: relative; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--spark);
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 24px; height: 1px;
+    background: var(--spark);
+    display: inline-block;
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    max-width: 14ch;
+  }
+  h1 em { font-style: italic; color: var(--cosmic-2); font-weight: 500; }
+  .lede {
+    font-family: var(--display);
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.4;
+    color: var(--ink-dim);
+    max-width: 56ch;
+    font-style: italic;
+    margin-bottom: 48px;
+  }
+  .cta-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    border-radius: 2px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary { background: var(--spark); color: var(--bg); }
+  .btn-primary:hover { background: var(--spark-2); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255, 122, 61, 0.3); }
+  .btn-ghost { color: var(--ink); border: 1px solid var(--line-strong); background: transparent; }
+  .btn-ghost:hover { border-color: var(--spark); color: var(--spark); }
+  .btn .arrow { transition: transform 0.25s; }
+  .btn:hover .arrow { transform: translateX(4px); }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 0 0 100px; }
+  .metric { padding: 32px 24px; border-right: 1px solid var(--line); position: relative; }
+  .metric:last-child { border-right: none; }
+  .metric-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 12px; }
+  .metric-value { font-family: var(--display); font-size: clamp(32px, 4vw, 44px); line-height: 1; font-weight: 500; color: var(--ink); }
+  .metric-sub { font-size: 13px; color: var(--ink-dim); margin-top: 8px; }
+  .section { padding: 80px 0; position: relative; }
+  .section-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--cosmic-2); margin-bottom: 16px; }
+  h2 { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 40px; max-width: 18ch; }
+  h2 em { font-style: italic; color: var(--cosmic-2); font-weight: 500; }
+  .who-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .who-card { padding: 28px; border: 1px solid var(--line); background: rgba(18, 10, 34, 0.5); backdrop-filter: blur(8px); border-radius: 4px; transition: all 0.3s; position: relative; overflow: hidden; }
+  .who-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--cosmic-2), transparent); transform: translateX(-100%); transition: transform 0.5s; }
+  .who-card:hover { border-color: var(--line-strong); transform: translateY(-4px); }
+  .who-card:hover::before { transform: translateX(100%); }
+  .who-tier { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--spark); margin-bottom: 12px; }
+  .who-title { font-family: var(--display); font-size: 24px; margin-bottom: 12px; color: var(--ink); }
+  .who-desc { font-size: 14px; color: var(--ink-dim); line-height: 1.6; }
+  .swipe-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  .swipe { border: 1px solid var(--line); border-left: 3px solid var(--spark); background: rgba(18, 10, 34, 0.4); padding: 28px 32px; border-radius: 0 4px 4px 0; position: relative; }
+  .swipe-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .swipe-channel { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--spark); }
+  .copy-btn { background: transparent; border: 1px solid var(--line-strong); color: var(--ink-dim); font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 12px; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+  .copy-btn:hover { color: var(--spark); border-color: var(--spark); }
+  .copy-btn.copied { color: var(--cosmic-2); border-color: var(--cosmic-2); }
+  .swipe-body { font-family: var(--display); font-size: 19px; line-height: 1.55; color: var(--ink); font-style: italic; white-space: pre-wrap; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .step { padding: 32px 24px 32px 0; position: relative; }
+  .step::before { content: ""; position: absolute; top: 40px; right: 24px; width: calc(100% - 60px); height: 1px; background: linear-gradient(90deg, var(--line-strong), transparent); }
+  .step:last-child::before { display: none; }
+  .step-num { font-family: var(--display); font-size: 56px; font-style: italic; color: var(--cosmic-2); line-height: 1; margin-bottom: 20px; }
+  .step-title { font-family: var(--display); font-size: 22px; margin-bottom: 10px; }
+  .step-desc { font-size: 13px; color: var(--ink-dim); line-height: 1.6; }
+  details { border-bottom: 1px solid var(--line); padding: 24px 0; cursor: pointer; }
+  details:first-of-type { border-top: 1px solid var(--line); }
+  summary { font-family: var(--display); font-size: 22px; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 24px; color: var(--ink); transition: color 0.2s; }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { color: var(--spark); }
+  summary::after { content: "+"; font-family: var(--display); font-size: 32px; color: var(--cosmic-2); transition: transform 0.3s; line-height: 1; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details > p { padding-top: 16px; color: var(--ink-dim); font-size: 15px; line-height: 1.7; max-width: 68ch; }
+  .final { text-align: center; padding: 120px 0; border-top: 1px solid var(--line); margin-top: 60px; }
+  .final h2 { margin: 0 auto 32px; }
+  .final .lede { margin: 0 auto 40px; }
+  .final .cta-row { justify-content: center; }
+  footer { border-top: 1px solid var(--line); padding: 40px 0; text-align: center; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); }
+  footer a { color: var(--ink-dim); text-decoration: none; margin: 0 12px; }
+  footer a:hover { color: var(--spark); }
+  .spark-mark { display: inline-block; color: var(--spark); transform: translateY(-0.2em); font-size: 0.5em; }
+  @media (max-width: 800px) {
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .metric:nth-child(2) { border-right: none; }
+    .metric:nth-child(1), .metric:nth-child(2) { border-bottom: 1px solid var(--line); }
+    .who-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .step { padding-right: 0; padding-bottom: 16px; }
+    .step::before { display: none; }
+  }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <a href="https://thefirstspark.shop" class="logo">◇ The First Spark</a>
+  <div>
+    <a href="https://thefirstspark.shop">Home</a>
+    <span style="margin: 0 8px; color: var(--ink-mute);">·</span>
+    <a href="#kit">Kit</a>
+    <span style="margin: 0 8px; color: var(--ink-mute);">·</span>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+<section class="hero">
+  <div class="eyebrow">Affiliate program · Open enrollment</div>
+  <h1>Share the <em>signal</em>.<br/>Keep <em>thirty-five</em> percent. <span class="spark-mark">✦</span></h1>
+  <p class="lede">Soul Maps land in people's hands and crack something open. If your audience is the kind that's been waking up — astrologers, healers, witches, awakeners, simulation-theory weirdos — you already have the audience. We have the product. You take 35% of every sale.</p>
+  <div class="cta-row">
+    <a href="https://whop.com/the-first-spark-soul-maps/affiliates" class="btn btn-primary">Get your link <span class="arrow">→</span></a>
+    <a href="#how" class="btn btn-ghost">How it works</a>
+  </div>
+</section>
+<div class="metrics reveal">
+  <div class="metric"><div class="metric-label">Commission</div><div class="metric-value">35%</div><div class="metric-sub">Of every sale</div></div>
+  <div class="metric"><div class="metric-label">Per sale</div><div class="metric-value">$15.40</div><div class="metric-sub">On $44 one-time</div></div>
+  <div class="metric"><div class="metric-label">Includes</div><div class="metric-value">1 yr</div><div class="metric-sub">Of map updates</div></div>
+  <div class="metric"><div class="metric-label">Support load</div><div class="metric-value">Zero</div><div class="metric-sub">I handle delivery</div></div>
+</div>
+<section class="section" id="who">
+  <div class="section-num">Ⅰ · Who this is for</div>
+  <h2>You probably know already <em>if this is you</em>.</h2>
+  <div class="who-grid reveal">
+    <div class="who-card"><div class="who-tier">Tier 1 · Strongest fit</div><div class="who-title">Astrologers, numerologists, human design readers</div><div class="who-desc">You already sell readings. Soul Maps stack on top — a personalized HTML map your clients can keep forever. Easy upsell.</div></div>
+    <div class="who-card"><div class="who-tier">Tier 1 · Strongest fit</div><div class="who-title">Awakening &amp; simulation-theory creators</div><div class="who-desc">If your content lives anywhere near "reality is programmable," the Selector Model framework lands hard with your people.</div></div>
+    <div class="who-card"><div class="who-tier">Tier 2 · Strong fit</div><div class="who-title">Tarot readers &amp; witchy shop owners</div><div class="who-desc">A $44 personalized digital deliverable to round out your offering. No inventory, no shipping, no DMs at 1am.</div></div>
+    <div class="who-card"><div class="who-tier">Tier 2 · Strong fit</div><div class="who-title">Life &amp; manifestation coaches</div><div class="who-desc">Give clients a Soul Map as a session opener or onboarding gift. They pay, you keep $15.40.</div></div>
+  </div>
+</section>
+<section class="section" id="how">
+  <div class="section-num">Ⅱ · How it works</div>
+  <h2>Four moves. <em>That's the whole thing.</em></h2>
+  <div class="steps reveal">
+    <div class="step"><div class="step-num">i.</div><div class="step-title">Sign up on Whop</div><div class="step-desc">Two minutes. Get your tracked affiliate link.</div></div>
+    <div class="step"><div class="step-num">ii.</div><div class="step-title">Grab the swipe kit</div><div class="step-desc">Pre-written captions, hooks, and DMs below. Use as-is or rewrite in your voice.</div></div>
+    <div class="step"><div class="step-num">iii.</div><div class="step-title">Share your link</div><div class="step-desc">Post, story, email, DM, link-in-bio. Wherever your audience already listens.</div></div>
+    <div class="step"><div class="step-num">iv.</div><div class="step-title">Get paid</div><div class="step-desc">35% of every sale, tracked automatically by Whop. I handle the delivery, the updates, the support.</div></div>
+  </div>
+</section>
+<section class="section" id="kit">
+  <div class="section-num">Ⅲ · Swipe copy</div>
+  <h2>Steal these. <em>Rewrite them in your voice</em>.</h2>
+  <div class="swipe-grid reveal">
+    <div class="swipe"><div class="swipe-label"><span class="swipe-channel">Instagram · Reel caption</span><button class="copy-btn" data-copy="reel">Copy</button></div><div class="swipe-body" id="reel">I got my Soul Map and I'm not okay 🌀
+
+It pulled my full numerology, natal chart, and Chinese zodiac into one personalized page that explained why I am the way I am. Career patterns. Karmic stuff. The pinnacle years I'm walking into.
+
+$44. One-time. Includes a year of updates.
+
+Link in bio if you want yours. Use my code for early-bird pricing.</div></div>
+    <div class="swipe"><div class="swipe-label"><span class="swipe-channel">TikTok · Hook script</span><button class="copy-btn" data-copy="tiktok">Copy</button></div><div class="swipe-body" id="tiktok">"You're telling me a $44 page on the internet read me harder than 12 years of therapy?"
+
+Yeah. That's what I'm telling you.
+
+It's called a Soul Map. Numerology + natal chart + Chinese zodiac + actual interpretation in plain English. Not a generic horoscope. Built for you, from your exact birth data.
+
+Link in my bio.</div></div>
+    <div class="swipe"><div class="swipe-label"><span class="swipe-channel">DM · Warm outreach</span><button class="copy-btn" data-copy="dm">Copy</button></div><div class="swipe-body" id="dm">Hey [name] — I found this thing called a Soul Map and it's exactly what your audience would lose their minds over.
+
+Numerology + astrology + Chinese zodiac, delivered as a personalized HTML page they keep forever. $44 one-time, includes a year of updates.
+
+Founder runs an affiliate program — 35% commission ($15.40/sale), she handles all the delivery and support. You just share your link.
+
+Want me to grab yours? Or here's the signup page: [your link]</div></div>
+    <div class="swipe"><div class="swipe-label"><span class="swipe-channel">Email · One-liner for your newsletter</span><button class="copy-btn" data-copy="email">Copy</button></div><div class="swipe-body" id="email">P.S. — I've been recommending Soul Maps to people for weeks. It's a personalized page mapping your numerology, natal chart, and Chinese zodiac into one readable thing. $44, one-time, a year of updates. If you want one, here's my link: [your link]</div></div>
+  </div>
+</section>
+<section class="section" id="faq">
+  <div class="section-num">Ⅳ · Questions</div>
+  <h2>The <em>real</em> questions, answered.</h2>
+  <details><summary>What exactly is a Soul Map?</summary><p>A personalized HTML page mapping a person's numerology (life path, expression, soul urge, personality, birthday number, karmic debts, pinnacles, maturity number), full natal chart (planets, houses, aspects, Chiron, lunar nodes, Lilith), and Chinese zodiac, plus interpretive guidance written in plain English. They get a link to keep forever. I push updates over the year as the engine improves.</p></details>
+  <details><summary>When and how do I get paid?</summary><p>Whop tracks every sale via your affiliate link and pays out commissions on their schedule. You'll set up payout details when you sign up. 35% of $44 = $15.40 per sale, paid to you.</p></details>
+  <details><summary>What if my person asks for a refund or has a problem?</summary><p>I handle all of it. Delivery, support, refunds, technical issues, updates — none of it touches you. Your job stops at sharing your link.</p></details>
+  <details><summary>Can I use my own copy and visuals?</summary><p>Please do. The swipe copy above is a starting point. Your audience knows your voice — your version will always outperform mine. I'll send a sample Soul Map you can screenshot for content if it helps.</p></details>
+  <details><summary>Is there a quota or minimum?</summary><p>None. Share one link, make one sale, get one commission. No quotas, no contracts, no time pressure.</p></details>
+  <details><summary>Who built this and why should I trust you?</summary><p>I'm Katelin Puzakulics — founder of The First Spark, featured in Voyage Ohio's Hidden Gems series (March 2026). I built the Soul Map engine over the last year, covering 46+ data points across three traditions. Reality is programmable. Consciousness is the code. If that sentence lands for you, we'll get along.</p></details>
+</section>
+<section class="final">
+  <div class="section-num">Ⅴ · Ready</div>
+  <h2>Your link is <em>two minutes away</em>.</h2>
+  <p class="lede">Sign up on Whop. Grab your link. Share it. That's the whole job.</p>
+  <div class="cta-row">
+    <a href="https://whop.com/the-first-spark-soul-maps/affiliates" class="btn btn-primary">Become an affiliate <span class="arrow">→</span></a>
+    <a href="mailto:kate@thefirstspark.shop?subject=Affiliate%20question" class="btn btn-ghost">Ask Kate directly</a>
+  </div>
+</section>
+<footer>
+  <div>
+    <a href="https://thefirstspark.shop">thefirstspark.shop</a> ·
+    <a href="mailto:kate@thefirstspark.shop">kate@thefirstspark.shop</a> ·
+    <a href="https://instagram.com/therealfirstspark">@therealfirstspark</a> ·
+    <a href="https://x.com/OGplayerone">@OGplayerone</a>
+  </div>
+  <div style="margin-top: 16px; color: var(--ink-mute);">© Kate's Paint LLC · Akron, Ohio</div>
+</footer>
+</div>
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var id = btn.getAttribute('data-copy');
+      var text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+      });
+    });
+  });
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+</script>
+</body>
+</html>
