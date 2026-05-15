@@ -455,7 +455,16 @@
             flex: 1;
         }
 
-        /* ─── FOOTER ─── */
+        .tool-card-dashed { border-style: dashed; }
+            display: inline-block;
+            text-decoration: none;
+            margin-top: auto;
+        }
+        .ritual-btn-ghost {
+            background: var(--dimmer);
+            color: var(--dim);
+            border: 1px solid var(--border);
+        }
         .hub-footer {
             padding: 40px 0 28px;
             border-top: 1px solid var(--border);
@@ -765,7 +774,7 @@
                     <div class="tool-desc">Map the agreements you made before this life. Break what needs breaking.</div>
                     <div class="tool-tag">Free</div>
                 </a>
-                <a href="/tools.html" class="tool-card" style="border-style: dashed;">
+                <a href="/tools.html" class="tool-card tool-card-dashed">
                     <div class="tool-icon">✦</div>
                     <div class="tool-name">See All 60+ Tools</div>
                     <div class="tool-desc">Full tool galaxy. Browse everything by category.</div>
@@ -839,19 +848,19 @@
                     <div class="community-card-icon">💬</div>
                     <div class="community-card-title">Players Lounge</div>
                     <div class="community-card-desc">The main community hub. Live drops, group rituals, direct access to KJP. $33/month or upgrade to OG for lifetime access.</div>
-                    <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" class="ritual-btn" style="display:inline-block; text-decoration:none; margin-top:auto;">Join for $33/mo →</a>
+                    <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" class="ritual-btn ritual-btn-link">Join for $33/mo →</a>
                 </div>
                 <div class="community-card">
                     <div class="community-card-icon">👑</div>
                     <div class="community-card-title">OG Spark Circle</div>
                     <div class="community-card-desc">Founding members. Private Telegram. Co-creation rights. 1:1 with KJP. You become part of the origin story.</div>
-                    <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" target="_blank" class="ritual-btn" style="display:inline-block; text-decoration:none; margin-top:auto;">Claim Lifetime Access →</a>
+                    <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" target="_blank" class="ritual-btn ritual-btn-link">Claim Lifetime Access →</a>
                 </div>
                 <div class="community-card">
                     <div class="community-card-icon">🌐</div>
                     <div class="community-card-title">Free Lobby</div>
                     <div class="community-card-desc">No charge, no catch. Browse announcements, see what's dropping, get a feel for the community before committing.</div>
-                    <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" class="ritual-btn" style="display:inline-block; text-decoration:none; margin-top:auto; background: var(--dimmer); color: var(--dim); border: 1px solid var(--border);">Enter Free Lobby →</a>
+                    <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" class="ritual-btn ritual-btn-link ritual-btn-ghost">Enter Free Lobby →</a>
                 </div>
             </div>
         </div>
