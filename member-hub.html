@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The First Spark — Member Hub</title>
+    <title>Member Hub — The First Spark</title>
+    <meta name="description" content="Your home base inside The First Spark. Access tools, track progress, and explore your membership tier.">
+    <meta property="og:title" content="Member Hub — The First Spark">
+    <meta property="og:url" content="https://thefirstspark.shop/member-hub.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
     <script>
@@ -12,379 +18,909 @@
         gtag('js', new Date());
         gtag('config', 'G-SKL8XQ51ZH');
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --void:   #050508;
+            --panel:  #0d0d14;
+            --spark:  #fbbf24;
+            --cyan:   #22d3ee;
+            --nebula: #8b5cf6;
+            --ember:  #f97316;
+            --white:  rgba(255,255,255,0.92);
+            --dim:    rgba(255,255,255,0.4);
+            --dimmer: rgba(255,255,255,0.08);
+            --border: rgba(251,191,36,0.15);
         }
-        
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0E0F1A;
-            color: #F7F1E1;
-            line-height: 1.6;
-            padding: 20px;
+            background: var(--void);
+            font-family: 'Space Mono', 'Courier New', monospace;
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        
-        .container {
-            max-width: 1200px;
+
+        /* ─── TOP NAV ─── */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(5,5,8,.97);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .top-nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: .75rem;
+            letter-spacing: .2em;
+            color: var(--spark);
+            text-decoration: none;
+            text-shadow: 0 0 16px rgba(251,191,36,.3);
+        }
+        .top-nav-label {
+            font-size: .5rem;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--dim);
+        }
+        .top-nav-upgrade {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .55rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: 8px 18px;
+            border: 1px solid var(--spark);
+            color: var(--spark);
+            text-decoration: none;
+            transition: background .2s, color .2s;
+        }
+        .top-nav-upgrade:hover { background: var(--spark); color: var(--void); }
+
+        /* ─── WRAP ─── */
+        .wrap {
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 0 24px;
         }
-        
-        .header {
+
+        /* ─── HERO BANNER ─── */
+        .hub-hero {
+            padding: 60px 0 44px;
             text-align: center;
-            padding: 40px 0;
-            border-bottom: 2px solid #FFC857;
-            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
         }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #FFC857, #FF6B6B);
+        .hub-hero-badge {
+            display: inline-block;
+            font-size: .48rem;
+            letter-spacing: .45em;
+            text-transform: uppercase;
+            border: 1px solid rgba(251,191,36,.3);
+            color: var(--spark);
+            padding: 4px 16px;
+            margin-bottom: 20px;
+        }
+        .hub-hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 900;
+            letter-spacing: .04em;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+        .hub-hero h1 span {
+            background: linear-gradient(135deg, var(--spark), var(--nebula));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        .header p {
-            color: #6FFFE9;
-            font-size: 1.1em;
+        .hub-hero-sub {
+            font-size: .78rem;
+            color: var(--dim);
+            max-width: 540px;
+            margin: 0 auto;
         }
-        
-        .status-bar {
-            background: rgba(111, 255, 233, 0.1);
-            border: 1px solid #6FFFE9;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 40px;
+
+        /* ─── STATS BAR ─── */
+        .stats-bar {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 36px 0;
         }
-        
-        .stat {
+        .stat-cell {
+            background: var(--panel);
+            padding: 20px 16px;
             text-align: center;
         }
-        
-        .stat-value {
-            font-size: 2em;
-            font-weight: bold;
-            color: #FFC857;
+        .stat-val {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--spark);
+            display: block;
         }
-        
-        .stat-label {
-            color: #6FFFE9;
-            font-size: 0.9em;
+        .stat-lbl {
+            font-size: .5rem;
+            letter-spacing: .2em;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            color: var(--dim);
+            margin-top: 4px;
+            display: block;
         }
-        
-        .section {
-            margin-bottom: 40px;
+
+        /* ─── SECTION HEADERS ─── */
+        .sec-label {
+            font-size: .5rem;
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            color: var(--spark);
+            margin-bottom: 8px;
         }
-        
-        .section-title {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            color: #FFC857;
+        .sec-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-weight: 700;
+            letter-spacing: .05em;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        .sec-sub {
+            font-size: .7rem;
+            color: var(--dim);
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        section { padding: 48px 0; }
+        .divider-line { height: 1px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); }
+
+        /* ─── TIER CARDS ─── */
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .tier-card {
+            background: var(--panel);
+            border: 1px solid var(--dimmer);
+            border-radius: 12px;
+            padding: 28px 24px;
+            position: relative;
+            transition: border-color .25s, transform .2s;
+        }
+        .tier-card:hover { border-color: rgba(251,191,36,.35); transform: translateY(-2px); }
+        .tier-card.featured { border-color: var(--spark); }
+        .tier-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -1px; left: 50%; transform: translateX(-50%);
+            font-size: .45rem;
+            letter-spacing: .3em;
+            background: var(--spark);
+            color: var(--void);
+            padding: 3px 14px;
+            font-weight: 700;
+        }
+        .tier-icon { font-size: 1.8rem; margin-bottom: 14px; }
+        .tier-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .85rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+        .tier-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--spark);
+            margin-bottom: 16px;
+        }
+        .tier-price small {
+            font-size: .6rem;
+            color: var(--dim);
+            font-weight: 400;
+        }
+        .tier-features {
+            list-style: none;
+            margin-bottom: 22px;
+        }
+        .tier-features li {
+            font-size: .65rem;
+            color: var(--dim);
+            padding: 5px 0;
+            border-bottom: 1px solid var(--dimmer);
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 8px;
+            align-items: flex-start;
         }
-        
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .card {
-            background: rgba(255, 200, 87, 0.05);
-            border: 1px solid rgba(255, 200, 87, 0.2);
-            border-radius: 12px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .card:hover {
-            border-color: #FFC857;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 200, 87, 0.2);
-        }
-        
-        .card-title {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            color: #F7F1E1;
-        }
-        
-        .card-description {
-            color: rgba(247, 241, 225, 0.7);
-            font-size: 0.95em;
-            margin-bottom: 15px;
-        }
-        
-        .card-badge {
-            display: inline-block;
-            background: rgba(111, 255, 233, 0.2);
-            color: #6FFFE9;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .btn {
-            background: linear-gradient(135deg, #FF6B6B, #FFC857);
-            color: #0E0F1A;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 1em;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 200, 87, 0.4);
-        }
-        
-        .path-selector {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-        
-        .path-btn {
-            background: rgba(199, 146, 234, 0.1);
-            border: 2px solid rgba(199, 146, 234, 0.3);
-            color: #C792EA;
-            padding: 15px;
-            border-radius: 8px;
+        .tier-features li:last-child { border-bottom: none; }
+        .tier-features li .chk { color: var(--spark); flex-shrink: 0; }
+        .tier-features li .lock { color: rgba(255,255,255,.2); flex-shrink: 0; }
+        .tier-btn {
+            display: block;
             text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .55rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: 12px;
+            text-decoration: none;
+            transition: all .2s;
+            border-radius: 6px;
+        }
+        .tier-btn-primary { background: var(--spark); color: var(--void); }
+        .tier-btn-primary:hover { box-shadow: 0 0 20px rgba(251,191,36,.4); }
+        .tier-btn-outline { border: 1px solid var(--border); color: var(--dim); }
+        .tier-btn-outline:hover { border-color: var(--spark); color: var(--spark); }
+        .tier-btn-current {
+            background: var(--dimmer);
+            border: 1px solid var(--border);
+            color: var(--dim);
+            cursor: default;
+            pointer-events: none;
+        }
+
+        /* ─── TOOLS GRID ─── */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+        }
+        .tool-card {
+            background: var(--panel);
+            border: 1px solid var(--dimmer);
+            border-radius: 10px;
+            padding: 18px 16px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: border-color .2s, transform .15s;
+        }
+        .tool-card:hover { border-color: rgba(251,191,36,.35); transform: translateY(-2px); }
+        .tool-icon { font-size: 1.4rem; }
+        .tool-name {
+            font-size: .7rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .05em;
+        }
+        .tool-desc {
+            font-size: .58rem;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+        .tool-tag {
+            font-size: .48rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--spark);
+            margin-top: 4px;
+        }
+        .tool-tag.locked { color: rgba(255,255,255,.2); }
+
+        /* ─── RITUALS / GAMIFICATION ─── */
+        .ritual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+        .ritual-card {
+            background: var(--panel);
+            border: 1px solid var(--dimmer);
+            border-radius: 10px;
+            padding: 22px 20px;
+            transition: border-color .2s;
+        }
+        .ritual-card:hover { border-color: rgba(251,191,36,.3); }
+        .ritual-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .75rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        .ritual-desc {
+            font-size: .62rem;
+            color: var(--dim);
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+        .ritual-btn {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .52rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: 9px 20px;
+            background: linear-gradient(135deg, var(--spark), var(--ember));
+            color: var(--void);
+            border: none;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
+            text-decoration: none;
+            transition: transform .15s, box-shadow .15s;
         }
-        
-        .path-btn:hover {
-            border-color: #C792EA;
-            background: rgba(199, 146, 234, 0.2);
+        .ritual-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(251,191,36,.3); }
+        .ritual-badge {
+            display: inline-block;
+            font-size: .48rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(251,191,36,.12);
+            color: var(--spark);
         }
-        
-        .path-btn.active {
-            background: #C792EA;
-            color: #0E0F1A;
+        .ritual-badge.locked {
+            background: var(--dimmer);
+            color: rgba(255,255,255,.2);
         }
-        
-        .ritual-log {
-            background: rgba(255, 107, 107, 0.1);
-            border: 1px solid rgba(255, 107, 107, 0.3);
-            border-radius: 12px;
-            padding: 25px;
+
+        /* ─── ACTIVITY LOG ─── */
+        .activity-log {
+            background: var(--panel);
+            border: 1px solid var(--dimmer);
+            border-radius: 10px;
+            padding: 20px;
         }
-        
-        .ritual-entry {
+        .activity-entry {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            background: rgba(247, 241, 225, 0.05);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--dimmer);
+            font-size: .62rem;
+        }
+        .activity-entry:last-child { border-bottom: none; }
+        .activity-entry .xp-gain { color: var(--spark); font-weight: 700; }
+        .activity-empty {
+            text-align: center;
+            color: var(--dim);
+            font-size: .6rem;
+            padding: 20px 0;
+            font-style: italic;
+        }
+
+        /* ─── PATH SELECTOR ─── */
+        .path-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 36px;
+        }
+        .path-btn {
+            background: var(--panel);
+            border: 1px solid var(--dimmer);
             border-radius: 8px;
+            padding: 14px 10px;
+            text-align: center;
+            cursor: pointer;
+            font-size: .62rem;
+            color: var(--dim);
+            transition: all .2s;
+            font-family: 'Space Mono', monospace;
+        }
+        .path-btn:hover { border-color: rgba(139,92,246,.4); color: var(--white); }
+        .path-btn.active { border-color: var(--nebula); background: rgba(139,92,246,.1); color: var(--white); }
+
+        /* ─── COMMUNITY ─── */
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+        .community-card {
+            background: var(--panel);
+            border: 1px solid var(--dimmer);
+            border-radius: 10px;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: border-color .2s, transform .15s;
+        }
+        .community-card:hover { border-color: rgba(251,191,36,.3); transform: translateY(-2px); }
+        .community-card-icon { font-size: 2rem; }
+        .community-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .75rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        .community-card-desc {
+            font-size: .62rem;
+            color: var(--dim);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        /* ─── FOOTER ─── */
+        .hub-footer {
+            padding: 40px 0 28px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .hub-footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .7rem;
+            font-weight: 900;
+            letter-spacing: .2em;
+            color: var(--spark);
+            text-decoration: none;
+            opacity: .6;
+            display: inline-block;
             margin-bottom: 10px;
         }
-        
-        .ritual-entry:last-child {
-            margin-bottom: 0;
+        .hub-footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
         }
-        
-        .footer {
-            text-align: center;
-            padding: 40px 0;
-            border-top: 2px solid #FFC857;
-            margin-top: 60px;
-            color: rgba(247, 241, 225, 0.6);
+        .hub-footer-links a {
+            font-size: .5rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.2);
+            text-decoration: none;
+            transition: color .2s;
         }
-        
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .status-bar {
-                grid-template-columns: 1fr;
-            }
+        .hub-footer-links a:hover { color: var(--dim); }
+        .hub-footer-copy {
+            font-size: .48rem;
+            letter-spacing: .15em;
+            color: rgba(255,255,255,.1);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 600px) {
+            .top-nav { padding: 12px 16px; }
+            .wrap { padding: 0 16px; }
+            .hub-hero { padding: 40px 0 32px; }
+            .tier-card.featured::before { font-size: .38rem; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ─── SECTION SPACING ─── */
+        .hub-section { padding: 48px 0; }
+
+        /* ─── PROGRESS BAR ─── */
+        .xp-bar-wrap {
+            background: var(--dimmer);
+            border-radius: 4px;
+            height: 6px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .xp-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--spark), var(--nebula));
+            border-radius: 4px;
+            transition: width .6s ease;
+        }
+        .xp-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: .5rem;
+            color: var(--dim);
+            margin-top: 4px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>🔥 The First Spark</h1>
-            <p>Member Hub — Your Practice. Your Momentum. Your World.</p>
-        </div>
-        
-        <!-- Status Bar -->
-        <div class="status-bar">
-            <div class="stat">
-                <div class="stat-value" id="xp-count">0</div>
-                <div class="stat-label">XP Earned</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value" id="ritual-count">0</div>
-                <div class="stat-label">Press Starts</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value" id="ship-count">0</div>
-                <div class="stat-label">Save Rings</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value" id="rank">Ember</div>
-                <div class="stat-label">Current Rank</div>
-            </div>
-        </div>
-        
-        <!-- Your Path -->
-        <div class="section">
-            <h2 class="section-title">🗺️ Your Path</h2>
-            <div class="path-selector">
-                <div class="path-btn" data-path="mirror">🪞 Mirror</div>
-                <div class="path-btn" data-path="glitch">⚡ Glitch</div>
-                <div class="path-btn" data-path="fire">🔥 Fire</div>
-                <div class="path-btn" data-path="garden">🌱 Garden</div>
-                <div class="path-btn" data-path="source">🌀 Source</div>
-            </div>
-        </div>
-        
-        <!-- Current Drop -->
-        <div class="section">
-            <h2 class="section-title">🎯 Current Drop</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">⚡ Hidden Spark (Artifact 00)</h3>
-                    <p class="card-description">
-                        Your private, momentum-gated micro-world. Tracks rituals, evolves your sigil, 
-                        unlocks your personal parable after 7 evolutions.
-                    </p>
-                    <span class="card-badge">Live Now</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Core Rituals -->
-        <div class="section">
-            <h2 class="section-title">🛠️ Core Rituals</h2>
-            <div class="cards">
-                <div class="card" onclick="logRitual('press-start')">
-                    <h3 class="card-title">⚡ Press Start</h3>
-                    <p class="card-description">
-                        33 breaths or 1 minute of focused presence. The entry point that anchors everything.
-                    </p>
-                    <button class="btn">Complete Ritual</button>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">🔮 Magnetic Quiet</h3>
-                    <p class="card-description">
-                        11-minute practice to call back scattered energy and stabilize your revenue field.
-                    </p>
-                    <span class="card-badge">Pro33</span>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">💫 Save Ring</h3>
-                    <p class="card-description">
-                        Log what you actually ship. Not plans, not intentions — completed work only.
-                    </p>
-                    <button class="btn" onclick="logShipment()">Log Save Ring</button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Artifact Library -->
-        <div class="section">
-            <h2 class="section-title">📦 Your Artifacts</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">🜏 Revenue Circle Sigil</h3>
-                    <p class="card-description">Stabilize revenue and expand the circle. Three variants available.</p>
-                    <span class="card-badge">Free</span>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">📖 Sigilcraft Workbook</h3>
-                    <p class="card-description">Sacred geometry for practical magic. Create your first 10 sigils.</p>
-                    <span class="card-badge">Pro33</span>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">🎮 Core Code Survival Guide</h3>
-                    <p class="card-description">First principles for staying awake in the system.</p>
-                    <span class="card-badge">Free</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Recent Activity -->
-        <div class="section">
-            <h2 class="section-title">📊 Recent Activity</h2>
-            <div class="ritual-log">
-                <div id="activity-log">
-                    <p style="text-align: center; color: rgba(247, 241, 225, 0.5);">
-                        No activity yet. Complete your first Press Start to begin.
-                    </p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Quick Actions -->
-        <div class="section">
-            <h2 class="section-title">⚡ Quick Actions</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3 class="card-title">🔗 Connect Wallet</h3>
-                    <p class="card-description">Link your wallet to claim NFT drops and on-chain perks.</p>
-                    <button class="btn">Connect</button>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">💬 Join Discord</h3>
-                    <p class="card-description">Connect with other Sparked Ones. Share seals, witness momentum.</p>
-                    <button class="btn">Join Server</button>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">📧 Update Email</h3>
-                    <p class="card-description">Stay updated on new drops, rituals, and community events.</p>
-                    <button class="btn">Update</button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Footer -->
-        <div class="footer">
-            <p>🔥 The First Spark — Turn consciousness into code.</p>
-            <p style="margin-top: 10px;">Remember the signal. Rewrite the system.</p>
+
+    <!-- TOP NAV -->
+    <nav class="top-nav">
+        <a href="/" class="top-nav-logo">THE FIRST SPARK</a>
+        <span class="top-nav-label">◈ &nbsp; Member Hub</span>
+        <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" target="_blank" class="top-nav-upgrade">Upgrade →</a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hub-hero">
+        <div class="wrap">
+            <div class="hub-hero-badge">◈ &nbsp; Member Hub &nbsp; ◈</div>
+            <h1>Your <span>Home Base.</span></h1>
+            <p class="hub-hero-sub">Every tool. Every ritual. Every path. Right here — no Whop required.</p>
         </div>
     </div>
-    
+
+    <!-- STATS BAR -->
+    <div class="wrap">
+        <div class="stats-bar">
+            <div class="stat-cell">
+                <span class="stat-val" id="xp-count">0</span>
+                <span class="stat-lbl">XP Earned</span>
+                <div class="xp-bar-wrap"><div class="xp-bar-fill" id="xp-bar" style="width:0%"></div></div>
+                <div class="xp-label"><span id="rank-label">Ember</span><span id="rank-next">→ Flame at 34 XP</span></div>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-val" id="ritual-count">0</span>
+                <span class="stat-lbl">Press Starts</span>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-val" id="ship-count">0</span>
+                <span class="stat-lbl">Save Rings</span>
+            </div>
+            <div class="stat-cell">
+                <span class="stat-val" id="rank-display">Ember</span>
+                <span class="stat-lbl">Current Rank</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <!-- ─── START HERE ─── -->
+    <section class="hub-section">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; Quick Start</div>
+            <h2 class="sec-title">New Here? Start With These.</h2>
+            <p class="sec-sub">Four tools that unlock everything else. Free. Right now. No signup needed.</p>
+            <div class="tools-grid">
+                <a href="/ebook.html" class="tool-card">
+                    <div class="tool-icon">📖</div>
+                    <div class="tool-name">The First Spark Ebook</div>
+                    <div class="tool-desc">Foundation philosophy: consciousness as code. Where everything begins.</div>
+                    <div class="tool-tag">Free · 20 min read</div>
+                </a>
+                <a href="/oracle.html" class="tool-card">
+                    <div class="tool-icon">🔮</div>
+                    <div class="tool-name">Ask the Oracle</div>
+                    <div class="tool-desc">Instant consciousness guidance. Any question, pattern-recognized wisdom.</div>
+                    <div class="tool-tag">Free · Instant</div>
+                </a>
+                <a href="/journal.html" class="tool-card">
+                    <div class="tool-icon">📋</div>
+                    <div class="tool-name">Daily Journal</div>
+                    <div class="tool-desc">AI-guided prompts. Reflect daily, track patterns, step into yourself.</div>
+                    <div class="tool-tag">Free · 10 min/day</div>
+                </a>
+                <a href="/daily-reset.html" class="tool-card">
+                    <div class="tool-icon">🌅</div>
+                    <div class="tool-name">Daily Reset</div>
+                    <div class="tool-desc">5-minute morning ritual. Breathwork and intention. Streak-tracked.</div>
+                    <div class="tool-tag">Free · Daily</div>
+                </a>
+                <a href="/soul-map.html" class="tool-card">
+                    <div class="tool-icon">🪞</div>
+                    <div class="tool-name">Soul Map</div>
+                    <div class="tool-desc">Visualize your inner landscape. Map consciousness. See the patterns.</div>
+                    <div class="tool-tag">Free · Interactive</div>
+                </a>
+                <a href="/archetype-discovery.html" class="tool-card">
+                    <div class="tool-icon">🧬</div>
+                    <div class="tool-name">Archetype Discovery</div>
+                    <div class="tool-desc">Find your signal. Discover the code you're running right now.</div>
+                    <div class="tool-tag">Free · Quiz</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- ─── MEMBERSHIP TIERS ─── -->
+    <section class="hub-section">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; Your Tier</div>
+            <h2 class="sec-title">Pick Your Level.</h2>
+            <p class="sec-sub">Everything valuable is free. Paid tiers unlock deeper tools and live access to KJP.</p>
+            <div class="tier-grid">
+
+                <!-- FREE -->
+                <div class="tier-card">
+                    <div class="tier-icon">🆓</div>
+                    <div class="tier-name">Free Spark</div>
+                    <div class="tier-price">$0 <small>/ forever</small></div>
+                    <ul class="tier-features">
+                        <li><span class="chk">✓</span> All 60+ consciousness tools</li>
+                        <li><span class="chk">✓</span> Daily Reset ritual</li>
+                        <li><span class="chk">✓</span> Oracle guidance (unlimited)</li>
+                        <li><span class="chk">✓</span> Journal (AI-guided)</li>
+                        <li><span class="chk">✓</span> Archetype discovery</li>
+                        <li><span class="chk">✓</span> Ebook + Survival Guide</li>
+                        <li><span class="chk">✓</span> Revenue Circle Sigil</li>
+                        <li><span class="lock">🔒</span> Players Lounge access</li>
+                        <li><span class="lock">🔒</span> Live group rituals</li>
+                    </ul>
+                    <span class="tier-btn tier-btn-current">You're Here</span>
+                </div>
+
+                <!-- PLAYERS LOUNGE -->
+                <div class="tier-card featured">
+                    <div class="tier-icon">🎮</div>
+                    <div class="tier-name">Players Lounge</div>
+                    <div class="tier-price">$33 <small>/ month</small></div>
+                    <ul class="tier-features">
+                        <li><span class="chk">✓</span> Everything in Free</li>
+                        <li><span class="chk">✓</span> Magnetic Quiet (11-min ritual)</li>
+                        <li><span class="chk">✓</span> Sigilcraft Workbook</li>
+                        <li><span class="chk">✓</span> Monthly live ritual with KJP</li>
+                        <li><span class="chk">✓</span> Private Players Lounge feed</li>
+                        <li><span class="chk">✓</span> Early access to new drops</li>
+                        <li><span class="chk">✓</span> Direct community chat</li>
+                        <li><span class="lock">🔒</span> Lifetime vault access</li>
+                        <li><span class="lock">🔒</span> OG Spark NFT</li>
+                    </ul>
+                    <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" class="tier-btn tier-btn-primary">Join Players →</a>
+                </div>
+
+                <!-- OG SPARK -->
+                <div class="tier-card">
+                    <div class="tier-icon">👑</div>
+                    <div class="tier-name">OG Spark</div>
+                    <div class="tier-price">$519 <small>/ lifetime</small></div>
+                    <ul class="tier-features">
+                        <li><span class="chk">✓</span> Everything in Players Lounge</li>
+                        <li><span class="chk">✓</span> Lifetime vault access</li>
+                        <li><span class="chk">✓</span> OG Spark Genesis NFT</li>
+                        <li><span class="chk">✓</span> 1:1 reading with KJP</li>
+                        <li><span class="chk">✓</span> All future drops free</li>
+                        <li><span class="chk">✓</span> Founding member status</li>
+                        <li><span class="chk">✓</span> Private Telegram channel</li>
+                        <li><span class="chk">✓</span> Earthship community priority</li>
+                        <li><span class="chk">✓</span> Co-creation rights</li>
+                    </ul>
+                    <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" target="_blank" class="tier-btn tier-btn-outline">Become OG →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- ─── ALL TOOLS ─── -->
+    <section class="hub-section">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; Tool Library</div>
+            <h2 class="sec-title">All 60+ Tools.</h2>
+            <p class="sec-sub">Every tool lives right here. No external app, no platform hop.</p>
+            <div class="tools-grid">
+                <a href="/pressstart.html" class="tool-card">
+                    <div class="tool-icon">⚡</div>
+                    <div class="tool-name">Press Start</div>
+                    <div class="tool-desc">33 breaths. 1 minute of presence. The entry ritual.</div>
+                    <div class="tool-tag">Free · Core Ritual</div>
+                </a>
+                <a href="/karma-calculator.html" class="tool-card">
+                    <div class="tool-icon">⚖️</div>
+                    <div class="tool-name">Karma Calculator</div>
+                    <div class="tool-desc">Debug your karmic loop. Find the pattern. Break the cycle.</div>
+                    <div class="tool-tag">Free</div>
+                </a>
+                <a href="/spark-battle-arena.html" class="tool-card">
+                    <div class="tool-icon">⚔️</div>
+                    <div class="tool-name">Spark Battle Arena</div>
+                    <div class="tool-desc">Challenge a friend. Archetypes collide. Depth unlocked.</div>
+                    <div class="tool-tag">Free · Multiplayer</div>
+                </a>
+                <a href="/sigil.html" class="tool-card">
+                    <div class="tool-icon">🜏</div>
+                    <div class="tool-name">Sigil Craft</div>
+                    <div class="tool-desc">Create your sacred geometry sigil. Personal symbol of intent.</div>
+                    <div class="tool-tag">Free</div>
+                </a>
+                <a href="/five-paths-explorer.html" class="tool-card">
+                    <div class="tool-icon">🗺️</div>
+                    <div class="tool-name">Five Paths Explorer</div>
+                    <div class="tool-desc">Mirror, Glitch, Fire, Garden, Source — find your path.</div>
+                    <div class="tool-tag">Free</div>
+                </a>
+                <a href="/lunar-wisdom.html" class="tool-card">
+                    <div class="tool-icon">🌙</div>
+                    <div class="tool-name">Lunar Wisdom</div>
+                    <div class="tool-desc">Align with lunar cycles. Navigate by the moon's energy.</div>
+                    <div class="tool-tag">Free</div>
+                </a>
+                <a href="/consciousness-explorer-all-models.html" class="tool-card">
+                    <div class="tool-icon">🧠</div>
+                    <div class="tool-name">Consciousness Explorer</div>
+                    <div class="tool-desc">Multi-model consciousness map. See where you are.</div>
+                    <div class="tool-tag">Free · Deep</div>
+                </a>
+                <a href="/intention-setter.html" class="tool-card">
+                    <div class="tool-icon">🎯</div>
+                    <div class="tool-name">Intention Setter</div>
+                    <div class="tool-desc">Set your signal. Anchor your reality. Code your day.</div>
+                    <div class="tool-tag">Free</div>
+                </a>
+                <a href="/energy-checkin.html" class="tool-card">
+                    <div class="tool-icon">🔋</div>
+                    <div class="tool-name">Energy Check-In</div>
+                    <div class="tool-desc">Scan your current field. Name the frequency you're running.</div>
+                    <div class="tool-tag">Free</div>
+                </a>
+                <a href="/pause-chamber.html" class="tool-card">
+                    <div class="tool-icon">⏸️</div>
+                    <div class="tool-name">Pause Chamber</div>
+                    <div class="tool-desc">Emergency decompression. Reset the nervous system now.</div>
+                    <div class="tool-tag">Free</div>
+                </a>
+                <a href="/soul-contracts.html" class="tool-card">
+                    <div class="tool-icon">📜</div>
+                    <div class="tool-name">Soul Contracts</div>
+                    <div class="tool-desc">Map the agreements you made before this life. Break what needs breaking.</div>
+                    <div class="tool-tag">Free</div>
+                </a>
+                <a href="/tools.html" class="tool-card" style="border-style: dashed;">
+                    <div class="tool-icon">✦</div>
+                    <div class="tool-name">See All 60+ Tools</div>
+                    <div class="tool-desc">Full tool galaxy. Browse everything by category.</div>
+                    <div class="tool-tag">Free · Full Library</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- ─── DAILY RITUALS / GAMIFICATION ─── -->
+    <section class="hub-section">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; Daily Practice</div>
+            <h2 class="sec-title">Your Rituals.</h2>
+            <p class="sec-sub">Track XP. Build streaks. Level up your rank.</p>
+
+            <!-- Path Selector -->
+            <div style="margin-bottom: 24px;">
+                <p style="font-size:.6rem; color: var(--dim); margin-bottom: 10px; letter-spacing: .1em;">SELECT YOUR PATH</p>
+                <div class="path-grid">
+                    <div class="path-btn" data-path="mirror">🪞 Mirror</div>
+                    <div class="path-btn" data-path="glitch">⚡ Glitch</div>
+                    <div class="path-btn" data-path="fire">🔥 Fire</div>
+                    <div class="path-btn" data-path="garden">🌱 Garden</div>
+                    <div class="path-btn" data-path="source">🌀 Source</div>
+                </div>
+            </div>
+
+            <div class="ritual-grid">
+                <div class="ritual-card">
+                    <div class="ritual-title">⚡ Press Start</div>
+                    <div class="ritual-desc">33 breaths or 1 minute of focused presence. The entry point that anchors everything. Do this first. Do this every day.</div>
+                    <button class="ritual-btn" onclick="logRitual('press-start')">Complete Ritual &nbsp; +33 XP</button>
+                </div>
+                <div class="ritual-card">
+                    <div class="ritual-title">💫 Save Ring</div>
+                    <div class="ritual-desc">Log what you actually shipped. Not plans — completed work only. Every ring counts.</div>
+                    <button class="ritual-btn" onclick="logShipment()">Log What You Shipped &nbsp; +55 XP</button>
+                </div>
+                <div class="ritual-card">
+                    <div class="ritual-title">🔮 Magnetic Quiet</div>
+                    <div class="ritual-desc">11-minute practice to call back scattered energy and stabilize your field. Players Lounge ritual.</div>
+                    <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" class="ritual-badge">Unlock in Players Lounge</a>
+                </div>
+            </div>
+
+            <!-- Activity Log -->
+            <div style="margin-top: 28px;">
+                <p style="font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:var(--dim); margin-bottom:12px;">Recent Activity</p>
+                <div class="activity-log">
+                    <div id="activity-log">
+                        <div class="activity-empty">No activity yet. Complete your first Press Start to begin.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- ─── COMMUNITY ─── -->
+    <section class="hub-section">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; Community</div>
+            <h2 class="sec-title">Connect with the Collective.</h2>
+            <p class="sec-sub">You are not alone in this. Thousands of Sparked Ones are doing the work alongside you.</p>
+            <div class="community-grid">
+                <div class="community-card">
+                    <div class="community-card-icon">💬</div>
+                    <div class="community-card-title">Players Lounge</div>
+                    <div class="community-card-desc">The main community hub. Live drops, group rituals, direct access to KJP. $33/month or upgrade to OG for lifetime access.</div>
+                    <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" class="ritual-btn" style="display:inline-block; text-decoration:none; margin-top:auto;">Join for $33/mo →</a>
+                </div>
+                <div class="community-card">
+                    <div class="community-card-icon">👑</div>
+                    <div class="community-card-title">OG Spark Circle</div>
+                    <div class="community-card-desc">Founding members. Private Telegram. Co-creation rights. 1:1 with KJP. You become part of the origin story.</div>
+                    <a href="https://whop.com/sparkverse-511c/og-spark-lifetime-access/" target="_blank" class="ritual-btn" style="display:inline-block; text-decoration:none; margin-top:auto;">Claim Lifetime Access →</a>
+                </div>
+                <div class="community-card">
+                    <div class="community-card-icon">🌐</div>
+                    <div class="community-card-title">Free Lobby</div>
+                    <div class="community-card-desc">No charge, no catch. Browse announcements, see what's dropping, get a feel for the community before committing.</div>
+                    <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" class="ritual-btn" style="display:inline-block; text-decoration:none; margin-top:auto; background: var(--dimmer); color: var(--dim); border: 1px solid var(--border);">Enter Free Lobby →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- ─── FEATURED READS ─── -->
+    <section class="hub-section">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; Deep Dives</div>
+            <h2 class="sec-title">Go Deeper.</h2>
+            <p class="sec-sub">Long-form content, systems, and the origin story behind all of it.</p>
+            <div class="tools-grid">
+                <a href="/ebook.html" class="tool-card">
+                    <div class="tool-icon">📖</div>
+                    <div class="tool-name">The First Spark Ebook</div>
+                    <div class="tool-desc">Start here. The core philosophy. The foundation everything else builds on.</div>
+                    <div class="tool-tag">Free</div>
+                </a>
+                <a href="/players_guide_to_survival.html" class="tool-card">
+                    <div class="tool-icon">🎮</div>
+                    <div class="tool-name">Player's Guide to Survival</div>
+                    <div class="tool-desc">First principles for staying awake in a system designed to put you to sleep.</div>
+                    <div class="tool-tag">Free</div>
+                </a>
+                <a href="/spark-protocol.html" class="tool-card">
+                    <div class="tool-icon">⚡</div>
+                    <div class="tool-name">The Spark Protocol</div>
+                    <div class="tool-desc">Full interactive ritual system. The complete activation sequence.</div>
+                    <div class="tool-tag">Free · Interactive</div>
+                </a>
+                <a href="https://whop.com/sparkverse-511c/the-first-spark-genesis-of-the-sparkverse-the-novel/" target="_blank" class="tool-card">
+                    <div class="tool-icon">🌌</div>
+                    <div class="tool-name">Genesis — The Novel</div>
+                    <div class="tool-desc">The origin story. Where consciousness technology meets fiction. Out now.</div>
+                    <div class="tool-tag">New Release</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── FOOTER ─── -->
+    <footer class="hub-footer">
+        <div class="wrap">
+            <a href="/" class="hub-footer-logo">THE FIRST SPARK</a>
+            <div class="hub-footer-links">
+                <a href="/">Home</a>
+                <a href="/tools.html">All Tools</a>
+                <a href="/oracle.html">Oracle</a>
+                <a href="/soul-map.html">Soul Map</a>
+                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank">Players Lounge</a>
+                <a href="/privacy-policy.html">Privacy</a>
+                <a href="/terms-of-service.html">Terms</a>
+            </div>
+            <div class="hub-footer-copy">© 2026 The First Spark &nbsp;·&nbsp; Built by Katelin &nbsp;·&nbsp; Akron, Ohio</div>
+        </div>
+    </footer>
+
     <script>
-        // Initialize user data from localStorage
+        // ─── MEMBER HUB GAMIFICATION ───
+        const RANKS = [
+            { name: 'Ember',  xp: 0,   next: 34,  label: '→ Flame at 34 XP' },
+            { name: 'Flame',  xp: 34,  next: 109, label: '→ Torch at 109 XP' },
+            { name: 'Torch',  xp: 109, next: 334, label: '→ Beacon at 334 XP' },
+            { name: 'Beacon', xp: 334, next: 778, label: '→ Signal at 778 XP' },
+            { name: 'Signal', xp: 778, next: 778, label: '✦ Max Rank' }
+        ];
+
         let userData = JSON.parse(localStorage.getItem('sparkUserData')) || {
             xp: 0,
             pressStarts: 0,
@@ -393,81 +929,86 @@
             path: null,
             activity: []
         };
-        
-        // Update display
+
+        function getRank(xp) {
+            for (let i = RANKS.length - 1; i >= 0; i--) {
+                if (xp >= RANKS[i].xp) return RANKS[i];
+            }
+            return RANKS[0];
+        }
+
         function updateDisplay() {
+            const rank = getRank(userData.xp);
+            userData.rank = rank.name;
+
             document.getElementById('xp-count').textContent = userData.xp;
             document.getElementById('ritual-count').textContent = userData.pressStarts;
             document.getElementById('ship-count').textContent = userData.saveRings;
-            document.getElementById('rank').textContent = userData.rank;
-            
-            // Update rank based on XP
-            if (userData.xp >= 778) userData.rank = 'Signal';
-            else if (userData.xp >= 334) userData.rank = 'Beacon';
-            else if (userData.xp >= 109) userData.rank = 'Torch';
-            else if (userData.xp >= 34) userData.rank = 'Flame';
-            else userData.rank = 'Ember';
-            
-            // Update activity log
-            const activityLog = document.getElementById('activity-log');
+            document.getElementById('rank-display').textContent = rank.name;
+            document.getElementById('rank-label').textContent = rank.name;
+            document.getElementById('rank-next').textContent = rank.label;
+
+            // XP progress bar
+            const nextRankIdx = RANKS.findIndex(r => r.name === rank.name);
+            const nextRank = RANKS[Math.min(nextRankIdx + 1, RANKS.length - 1)];
+            const pct = rank.name === 'Signal'
+                ? 100
+                : Math.min(100, Math.round(((userData.xp - rank.xp) / (nextRank.xp - rank.xp)) * 100));
+            document.getElementById('xp-bar').style.width = pct + '%';
+
+            // Activity log
+            const logEl = document.getElementById('activity-log');
             if (userData.activity.length > 0) {
-                activityLog.innerHTML = userData.activity.slice(-5).reverse().map(entry => `
-                    <div class="ritual-entry">
-                        <span>${entry.action}</span>
-                        <span style="color: #FFC857;">+${entry.xp} XP</span>
-                    </div>
-                `).join('');
+                logEl.innerHTML = userData.activity.slice(-8).reverse().map(e =>
+                    `<div class="activity-entry"><span>${e.action}</span><span class="xp-gain">+${e.xp} XP</span></div>`
+                ).join('');
+            } else {
+                logEl.innerHTML = '<div class="activity-empty">No activity yet. Complete your first Press Start to begin.</div>';
             }
-            
-            // Highlight selected path
+
+            // Path buttons
             document.querySelectorAll('.path-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.path === userData.path) {
-                    btn.classList.add('active');
-                }
+                btn.classList.toggle('active', btn.dataset.path === userData.path);
             });
-            
+
             localStorage.setItem('sparkUserData', JSON.stringify(userData));
         }
-        
-        // Log ritual completion
+
         function logRitual(type) {
             userData.pressStarts++;
             userData.xp += 33;
-            userData.activity.push({
-                action: '⚡ Completed Press Start',
-                xp: 33,
-                timestamp: new Date().toISOString()
-            });
+            userData.activity.push({ action: '⚡ Completed Press Start', xp: 33, timestamp: new Date().toISOString() });
             updateDisplay();
-            alert('✨ Press Start completed! +33 XP');
+            // Brief flash feedback — no blocking alert
+            const btn = document.querySelector('[onclick="logRitual(\'press-start\')"]');
+            if (btn) {
+                const orig = btn.textContent;
+                btn.textContent = '✨ Done! +33 XP';
+                setTimeout(() => { btn.textContent = orig; }, 1800);
+            }
         }
-        
-        // Log shipment
+
         function logShipment() {
-            const shipment = prompt('What did you ship?');
+            const shipment = prompt('What did you ship today?');
             if (shipment && shipment.trim()) {
                 userData.saveRings++;
                 userData.xp += 55;
                 userData.activity.push({
-                    action: `💫 Shipped: ${shipment.substring(0, 30)}...`,
+                    action: `💫 Shipped: ${shipment.trim().substring(0, 40)}`,
                     xp: 55,
                     timestamp: new Date().toISOString()
                 });
                 updateDisplay();
-                alert('🎉 Save Ring logged! +55 XP');
             }
         }
-        
-        // Path selection
+
         document.querySelectorAll('.path-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 userData.path = this.dataset.path;
                 updateDisplay();
             });
         });
-        
-        // Initialize on load
+
         updateDisplay();
     </script>
 </body>
