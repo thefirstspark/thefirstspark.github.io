@@ -701,6 +701,166 @@
             color: rgba(255,255,255,.12);
             letter-spacing: .15em;
         }
+
+        /* ===== NOVEL SHOWCASE ===== */
+        .novel-showcase {
+            position: relative;
+            z-index: 10;
+            padding: 4rem 2rem 6rem;
+        }
+
+        .novel-showcase-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            background: linear-gradient(135deg, rgba(20,20,30,0.7), rgba(30,20,40,0.7));
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+            box-shadow:
+                0 0 60px rgba(236, 72, 153, 0.15),
+                0 0 120px rgba(139, 92, 246, 0.08);
+        }
+
+        .novel-cover-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .novel-cover-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 360px;
+            background: radial-gradient(ellipse, rgba(236, 72, 153, 0.3), rgba(139, 92, 246, 0.15), transparent 70%);
+            filter: blur(30px);
+            animation: coverGlow 4s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes coverGlow {
+            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .novel-cover-img {
+            position: relative;
+            z-index: 1;
+            width: 220px;
+            border-radius: 0.75rem;
+            box-shadow:
+                0 8px 32px rgba(0,0,0,0.6),
+                0 0 20px rgba(236, 72, 153, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .novel-cover-img:hover {
+            transform: scale(1.04) translateY(-4px);
+            box-shadow:
+                0 12px 40px rgba(0,0,0,0.7),
+                0 0 30px rgba(236, 72, 153, 0.5),
+                0 0 60px rgba(139, 92, 246, 0.2);
+        }
+
+        .novel-info {
+            flex: 1;
+        }
+
+        .novel-tagline {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.35em;
+            color: var(--hot-pink);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .novel-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+            text-shadow:
+                0 0 20px rgba(236, 72, 153, 0.4),
+                0 0 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .novel-subtitle {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.05em;
+        }
+
+        .novel-description {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 2rem;
+        }
+
+        .novel-description em {
+            color: var(--hot-pink);
+            font-style: italic;
+        }
+
+        .btn-purchase {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--hot-pink), var(--nebula-purple), var(--cosmic-cyan));
+            background-size: 200% 200%;
+            border: none;
+            border-radius: 0.75rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            cursor: pointer;
+            animation: btnGradient 3s ease infinite;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(236, 72, 153, 0.4);
+        }
+
+        .btn-purchase:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow:
+                0 8px 30px rgba(236, 72, 153, 0.5),
+                0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .novel-showcase-inner {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+                gap: 2rem;
+            }
+
+            .novel-cover-img {
+                width: 180px;
+            }
+
+            .novel-cover-glow {
+                width: 220px;
+                height: 300px;
+            }
+
+            .btn-purchase {
+                padding: 0.875rem 2rem;
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -926,6 +1086,29 @@
                     <div class="soul-price">$44</div>
                     <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" class="btn-p">Claim Your Map →</a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Novel Showcase: The Genesis -->
+    <section class="novel-showcase" id="novelShowcase">
+        <div class="novel-showcase-inner">
+            <div class="novel-cover-wrapper">
+                <div class="novel-cover-glow"></div>
+                <img src="novel-cover.avif" alt="The Genesis — A Novel by Kate" class="novel-cover-img" />
+            </div>
+            <div class="novel-info">
+                <p class="novel-tagline">A SPARKVERSE NOVEL</p>
+                <h2 class="novel-title gradient-text">THE GENESIS</h2>
+                <p class="novel-subtitle">The Lineage Layer — What moved through us</p>
+                <p class="novel-description">
+                    What moved through us — and what stops here? <em>The Genesis</em> traces the bloodline of fire,
+                    silence, and reinvention across generations. Part origin story, part awakening,
+                    this is the novel that started everything.
+                </p>
+                <a href="https://whop.com/checkout/plan_hW8GlMaVgyLCu" target="_blank" rel="noopener" class="btn btn-purchase">
+                    PURCHASE IT NOW
+                </a>
             </div>
         </div>
     </section>
