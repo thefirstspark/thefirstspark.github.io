@@ -384,7 +384,7 @@
         <div class="gate-features">
             <div class="gate-feature">
                 <span class="gf-icon">🧰</span>
-                <div><strong>60+ Tools</strong>Free to access. Oracle, Journal, Soul Map + more.</div>
+                <div><strong>60+ Tools</strong> — Free to access. Oracle, Journal, Soul Map + more.</div>
             </div>
             <div class="gate-feature">
                 <span class="gf-icon">⚡</span>
@@ -847,7 +847,7 @@ async function genChallenge(v) {
 /* ---- OAuth flow ------------------------------------------ */
 async function whopLogin() {
     if (WHOP_CLIENT_ID === 'YOUR_WHOP_CLIENT_ID') {
-        showError('Whop Client ID not configured. See the CONFIGURATION comment at the top of the &lt;script&gt; block in member-hub.html.');
+        showError('Whop Client ID not configured. Open member-hub.html, find the CONFIGURATION comment at the top of the script block, and replace YOUR_WHOP_CLIENT_ID with your real Client ID from dev.whop.com.');
         return;
     }
     const verifier  = genVerifier();
@@ -893,7 +893,7 @@ async function handleCallback(code, retState) {
         }
     } catch (err) {
         console.error('Token exchange failed:', err);
-        showLogin('Could not complete sign-in. This may be a network or CORS issue — check the browser console. A serverless proxy (Cloudflare Worker) on the redirect URI resolves CORS if needed.');
+        showLogin('Could not complete sign-in. Please try again. If the problem persists, contact support.');
     }
 }
 
@@ -907,11 +907,18 @@ async function fetchMemberships(token) {
     if (!r.ok) return { data: [] };
     return r.json();
 }
+function getItemRoute(item) {
+    return (
+        (item.product && item.product.route) ||
+        (item.plan && item.plan.route) ||
+        (item.access_pass && item.access_pass.route) || ''
+    ).toLowerCase();
+}
 function detectTier(m) {
     if (!m || !m.data || !m.data.length) return 'free';
     for (const item of m.data) {
         if (!item.valid) continue;
-        const route = (item.product && item.product.route || item.plan && item.plan.route || item.access_pass && item.access_pass.route || '').toLowerCase();
+        const route = getItemRoute(item);
         if (PLAN_IDS.og.some(k => route.includes(k)))      return 'og';
         if (PLAN_IDS.players.some(k => route.includes(k))) return 'players';
     }
@@ -1025,7 +1032,11 @@ let GAME_KEY = 'sparkUserData', userData = null;
 
 function initGameData(uid) {
     GAME_KEY = 'sparkUserData_' + uid;
-    userData = JSON.parse(localStorage.getItem(GAME_KEY)) || { xp: 0, pressStarts: 0, saveRings: 0, path: null, activity: [] };
+    try {
+        userData = JSON.parse(localStorage.getItem(GAME_KEY)) || { xp: 0, pressStarts: 0, saveRings: 0, path: null, activity: [] };
+    } catch (e) {
+        userData = { xp: 0, pressStarts: 0, saveRings: 0, path: null, activity: [] };
+    }
     document.querySelectorAll('.path-btn').forEach(btn => {
         btn.addEventListener('click', function() { userData.path = this.dataset.path; updateDisplay(); });
     });
