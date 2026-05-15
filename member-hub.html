@@ -812,13 +812,12 @@
 /* =============================================================
    WHOP OAUTH — PKCE CONFIGURATION
    -------------------------------------------------------------
-   To activate Whop login:
-   1. Go to https://dev.whop.com → OAuth Apps → Create App
-   2. Set redirect URI to: https://thefirstspark.shop/member-hub.html
-   3. Copy your Client ID and replace YOUR_WHOP_CLIENT_ID below
-   4. Optionally update PLAN_IDS to match your Whop product routes
+   App ID: app_SPUYaOFKHxKqYa  (NEXT_PUBLIC_WHOP_APP_ID)
+   Redirect URI must be registered at dev.whop.com → OAuth Apps
+   as: https://thefirstspark.shop/member-hub.html
+   Optionally update PLAN_IDS below to match your Whop product routes.
 ============================================================= */
-const WHOP_CLIENT_ID = 'YOUR_WHOP_CLIENT_ID'; // ← replace with your Client ID
+const WHOP_CLIENT_ID = 'app_SPUYaOFKHxKqYa';
 const REDIRECT_URI   = 'https://thefirstspark.shop/member-hub.html';
 const WHOP_AUTH_URL  = 'https://api.whop.com/oauth/authorize';
 const WHOP_TOKEN_URL = 'https://api.whop.com/oauth/token';
@@ -846,10 +845,6 @@ async function genChallenge(v) {
 
 /* ---- OAuth flow ------------------------------------------ */
 async function whopLogin() {
-    if (WHOP_CLIENT_ID === 'YOUR_WHOP_CLIENT_ID') {
-        showError('Whop Client ID not configured. Open member-hub.html, find the CONFIGURATION comment at the top of the script block, and replace YOUR_WHOP_CLIENT_ID with your real Client ID from dev.whop.com.');
-        return;
-    }
     const verifier  = genVerifier();
     const challenge = await genChallenge(verifier);
     const state     = genVerifier().substring(0, 16);
