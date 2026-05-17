@@ -668,10 +668,10 @@
         }
         .feel-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 16px;
         }
-        @media(max-width: 680px) {
+        @media(max-width: 580px) {
             .feel-grid { grid-template-columns: 1fr; }
         }
         .feel-card {
@@ -779,6 +779,58 @@
             transition: opacity .25s;
         }
         .feel-card:hover .feel-card-enter { opacity: .7; }
+
+        /* Tools card — ember variant */
+        .feel-card.fc-ember { border-color: rgba(255,106,61,.2); }
+        .feel-card.fc-ember:hover { border-color: #FF6A3D; box-shadow: 0 8px 32px rgba(255,106,61,.18); }
+        .fc-ember .feel-card-title { color: #FF6A3D; }
+        .fc-ember .feel-card-anim {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            align-items: center;
+        }
+        .fc-ember .feel-card-anim .tool-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            animation: toolPop 2s ease-in-out infinite;
+        }
+        .fc-ember .feel-card-anim .tool-dot:nth-child(1) { background: #fbbf24; animation-delay: 0s; }
+        .fc-ember .feel-card-anim .tool-dot:nth-child(2) { background: #8b5cf6; animation-delay: 0.3s; }
+        .fc-ember .feel-card-anim .tool-dot:nth-child(3) { background: #22d3ee; animation-delay: 0.6s; }
+        .fc-ember .feel-card-anim .tool-dot:nth-child(4) { background: #ff0096; animation-delay: 0.9s; }
+        .fc-ember .feel-card-anim .tool-dot:nth-child(5) { background: #FF6A3D; animation-delay: 1.2s; }
+        @keyframes toolPop {
+            0%,100% { transform: scale(.7); opacity:.4; }
+            50% { transform: scale(1.2); opacity:1; }
+        }
+        .tool-links {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0;
+            text-align: left;
+            width: 100%;
+        }
+        .tool-links li {
+            margin: 6px 0;
+        }
+        .tool-links a {
+            font-size: .62em;
+            letter-spacing: .1em;
+            color: var(--dim);
+            text-decoration: none;
+            transition: color .2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tool-links a:hover { color: var(--white); }
+        .tool-links .tl-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
 
         /* ─── FOOTER ─── */
         footer {
@@ -1150,6 +1202,25 @@
                     <div class="feel-card-desc">Free expression canvas. Leave your mark. No rules. No limits.</div>
                     <div class="feel-card-enter">Enter →</div>
                 </a>
+
+                <div class="feel-card fc-ember">
+                    <div class="feel-card-anim">
+                        <span class="tool-dot"></span>
+                        <span class="tool-dot"></span>
+                        <span class="tool-dot"></span>
+                        <span class="tool-dot"></span>
+                        <span class="tool-dot"></span>
+                    </div>
+                    <div class="feel-card-title">Test The Tools</div>
+                    <div class="feel-card-desc">Live apps. All free to try.</div>
+                    <ul class="tool-links">
+                        <li><a href="https://soul-maps.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#fbbf24"></span>Soul Maps</a></li>
+                        <li><a href="https://see-your-frequency.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#8b5cf6"></span>See Your Frequency</a></li>
+                        <li><a href="https://frequency.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#22d3ee"></span>Frequency Match</a></li>
+                        <li><a href="https://sigilcraft.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#ff0096"></span>Sigilcraft</a></li>
+                        <li><a href="https://sparkverse.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#FF6A3D"></span>Sparkverse</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
