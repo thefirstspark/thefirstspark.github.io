@@ -632,6 +632,154 @@
             letter-spacing: .15em;
         }
 
+        /* ─── FEEL IT SECTION ─── */
+        .feel-it {
+            position: relative;
+            z-index: 1;
+            padding: 80px 0;
+        }
+        .feel-it-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .feel-it-canvas-wrap {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            border: 1px solid var(--dimmer);
+            margin-bottom: 16px;
+            overflow: hidden;
+            cursor: crosshair;
+            background: rgba(5,5,8,.9);
+        }
+        #feelCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .feel-it-hint {
+            text-align: center;
+            font-size: .5em;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.2);
+            margin-bottom: 48px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        .feel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        @media(max-width: 680px) {
+            .feel-grid { grid-template-columns: 1fr; }
+        }
+        .feel-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 36px 20px;
+            border: 1px solid var(--dimmer);
+            background: rgba(255,255,255,.015);
+            text-decoration: none;
+            overflow: hidden;
+            transition: transform .25s, border-color .25s, box-shadow .25s;
+        }
+        .feel-card:hover { transform: translateY(-4px); }
+        .feel-card.fc-gold { border-color: rgba(251,191,36,.2); }
+        .feel-card.fc-cyan { border-color: rgba(34,211,238,.2); }
+        .feel-card.fc-pink { border-color: rgba(255,0,150,.2); }
+        .feel-card.fc-gold:hover { border-color: var(--spark); box-shadow: 0 8px 32px rgba(251,191,36,.18); }
+        .feel-card.fc-cyan:hover { border-color: var(--cyan); box-shadow: 0 8px 32px rgba(34,211,238,.18); }
+        .feel-card.fc-pink:hover { border-color: #ff0096; box-shadow: 0 8px 32px rgba(255,0,150,.18); }
+
+        .feel-card-anim {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        /* Playground 1 — orbiting dots */
+        .fc-gold .feel-card-anim::before,
+        .fc-gold .feel-card-anim::after {
+            content: '';
+            position: absolute;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--spark);
+            top: 50%; left: 50%;
+            animation: orbit 3s linear infinite;
+        }
+        .fc-gold .feel-card-anim::after {
+            background: var(--nebula);
+            animation-delay: -1.5s;
+            width: 6px; height: 6px;
+        }
+        @keyframes orbit {
+            0%   { transform: translate(-50%,-50%) rotate(0deg) translateX(22px) rotate(0deg); }
+            100% { transform: translate(-50%,-50%) rotate(360deg) translateX(22px) rotate(-360deg); }
+        }
+        /* Playground 2 — pulsing layers */
+        .fc-cyan .feel-card-anim::before,
+        .fc-cyan .feel-card-anim::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1.5px solid var(--cyan);
+            animation: layerPulse 2.5s ease-in-out infinite;
+        }
+        .fc-cyan .feel-card-anim::after {
+            inset: 10px;
+            border-color: var(--nebula);
+            animation-delay: -0.8s;
+        }
+        @keyframes layerPulse {
+            0%,100% { transform: scale(.85); opacity:.4; }
+            50% { transform: scale(1.1); opacity:1; }
+        }
+        /* Wall — spray effect */
+        .fc-pink .feel-card-anim {
+            background: radial-gradient(circle at 60% 40%, rgba(255,0,150,.6) 0%, rgba(255,0,150,.2) 30%, transparent 60%),
+                        radial-gradient(circle at 35% 65%, rgba(0,255,255,.4) 0%, rgba(0,255,255,.15) 25%, transparent 50%);
+            border-radius: 50%;
+            animation: sprayGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes sprayGlow {
+            0% { filter: blur(2px) brightness(0.8); transform: scale(.95); }
+            100% { filter: blur(3px) brightness(1.3); transform: scale(1.05); }
+        }
+
+        .feel-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .fc-gold .feel-card-title { color: var(--spark); }
+        .fc-cyan .feel-card-title { color: var(--cyan); }
+        .fc-pink .feel-card-title { color: #ff0096; }
+        .feel-card-desc {
+            font-size: .72em;
+            color: var(--dim);
+            line-height: 1.7;
+            max-width: 200px;
+        }
+        .feel-card-enter {
+            margin-top: 16px;
+            font-size: .5em;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            opacity: 0;
+            color: var(--white);
+            transition: opacity .25s;
+        }
+        .feel-card:hover .feel-card-enter { opacity: .7; }
+
         /* ─── FOOTER ─── */
         footer {
             position: relative;
@@ -960,6 +1108,47 @@
                     <div class="card-name">Your Frequency</div>
                     <div class="card-desc">See your energetic signature. Discover the frequency you embody and how it resonates with the cosmos.</div>
                     <div class="card-tag">Exploration · Free · Discover Now</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- FEEL IT — INTERACTIVE PREVIEW -->
+    <section class="feel-it">
+        <div class="wrap">
+            <div class="feel-it-header">
+                <div class="sec-label">◈ &nbsp; Feel It First</div>
+                <h2 class="sec-title">Touch The Void</h2>
+                <p class="sec-sub">Don't take our word for it. Move your cursor. Tap the dark. This is what we build.</p>
+            </div>
+
+            <div class="feel-it-canvas-wrap">
+                <canvas id="feelCanvas"></canvas>
+            </div>
+            <div class="feel-it-hint">Move · Click · Feel</div>
+
+            <div class="feel-grid">
+                <a href="https://sparkverse.thefirstspark.shop/the-playground.html" target="_blank" class="feel-card fc-gold">
+                    <div class="feel-card-anim"></div>
+                    <div class="feel-card-title">The Playground</div>
+                    <div class="feel-card-desc">Draw constellations. Summon sparks. Five modes of cosmic play.</div>
+                    <div class="feel-card-enter">Enter →</div>
+                </a>
+
+                <a href="https://sparkverse.thefirstspark.shop/consciousness-playground.html" target="_blank" class="feel-card fc-cyan">
+                    <div class="feel-card-anim"></div>
+                    <div class="feel-card-title">Consciousness Playground</div>
+                    <div class="feel-card-desc">Click to awaken. Each interaction unlocks a new layer. How deep can you go?</div>
+                    <div class="feel-card-enter">Enter →</div>
+                </a>
+
+                <a href="https://thefirstspark.shop/the-wall-deluxe.html" target="_blank" class="feel-card fc-pink">
+                    <div class="feel-card-anim"></div>
+                    <div class="feel-card-title">The Graffiti Wall</div>
+                    <div class="feel-card-desc">Free expression canvas. Leave your mark. No rules. No limits.</div>
+                    <div class="feel-card-enter">Enter →</div>
                 </a>
             </div>
         </div>
@@ -1581,6 +1770,102 @@
 
         const el = document.getElementById('counterQuizzes');
         if (el) observer.observe(el.closest('section'));
+    })();
+    </script>
+
+    <!-- Feel It Canvas — interactive particle field -->
+    <script>
+    (function(){
+        const canvas = document.getElementById('feelCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let W, H, particles = [], mouse = { x: -100, y: -100 };
+
+        function resize() {
+            const r = canvas.parentElement.getBoundingClientRect();
+            W = canvas.width = r.width;
+            H = canvas.height = r.height;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const colors = ['#fbbf24','#8b5cf6','#22d3ee','#ff0096','#fff'];
+
+        function spawn(x, y, count) {
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 2.5 + 0.5;
+                particles.push({
+                    x: x, y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    life: 1,
+                    decay: Math.random() * 0.015 + 0.008,
+                    size: Math.random() * 3 + 1,
+                    color: colors[Math.floor(Math.random() * colors.length)]
+                });
+            }
+        }
+
+        canvas.addEventListener('mousemove', (e) => {
+            const r = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - r.left;
+            mouse.y = e.clientY - r.top;
+            spawn(mouse.x, mouse.y, 3);
+        });
+
+        canvas.addEventListener('click', (e) => {
+            const r = canvas.getBoundingClientRect();
+            spawn(e.clientX - r.left, e.clientY - r.top, 30);
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const r = canvas.getBoundingClientRect();
+            const t = e.touches[0];
+            mouse.x = t.clientX - r.left;
+            mouse.y = t.clientY - r.top;
+            spawn(mouse.x, mouse.y, 3);
+        }, { passive: false });
+
+        canvas.addEventListener('touchstart', (e) => {
+            const r = canvas.getBoundingClientRect();
+            const t = e.touches[0];
+            spawn(t.clientX - r.left, t.clientY - r.top, 20);
+        });
+
+        function draw() {
+            ctx.fillStyle = 'rgba(5,5,8,0.15)';
+            ctx.fillRect(0, 0, W, H);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.02;
+                p.life -= p.decay;
+
+                if (p.life <= 0) { particles.splice(i, 1); continue; }
+
+                ctx.globalAlpha = p.life;
+                ctx.fillStyle = p.color;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+            ctx.shadowBlur = 0;
+
+            // Ambient idle particles
+            if (Math.random() < 0.3) {
+                spawn(Math.random() * W, Math.random() * H, 1);
+            }
+
+            requestAnimationFrame(draw);
+        }
+        draw();
     })();
     </script>
 </body>
