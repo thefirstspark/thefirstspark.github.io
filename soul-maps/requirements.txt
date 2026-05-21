@@ -1,0 +1,6 @@
+flask
+flask-cors
+gunicorn
+python-dotenv
+kerykeion
+apscheduler
