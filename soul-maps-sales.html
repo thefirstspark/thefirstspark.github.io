@@ -56,7 +56,13 @@
             background-image:
                 radial-gradient(ellipse at 18% 12%, rgba(107, 77, 242, 0.3), transparent 48%),
                 radial-gradient(ellipse at 86% 28%, rgba(255, 106, 61, 0.2), transparent 44%),
-                radial-gradient(ellipse at 52% 92%, rgba(38, 228, 216, 0.18), transparent 50%);
+                radial-gradient(ellipse at 52% 92%, rgba(38, 228, 216, 0.18), transparent 50%),
+                linear-gradient(180deg, rgba(5, 8, 24, 0.42), rgba(5, 8, 24, 0.7)),
+                url('preview-soulmaps.png');
+            background-size: auto, auto, auto, cover, 72vw;
+            background-position: center, center, center, center, center top;
+            background-repeat: no-repeat;
+            opacity: 0.92;
             pointer-events: none;
             z-index: -2;
         }
@@ -71,12 +77,12 @@
 
         #aurora {
             position: absolute;
-            inset: -18%;
+            inset: -24%;
             background:
-                radial-gradient(ellipse 60% 40% at 28% 18%, rgba(107, 77, 242, 0.28), transparent 60%),
-                radial-gradient(ellipse 50% 34% at 72% 62%, rgba(38, 228, 216, 0.22), transparent 60%),
-                radial-gradient(ellipse 46% 32% at 52% 88%, rgba(255, 106, 61, 0.2), transparent 60%);
-            filter: blur(34px);
+                radial-gradient(ellipse 60% 40% at 28% 18%, rgba(107, 77, 242, 0.42), transparent 60%),
+                radial-gradient(ellipse 50% 34% at 72% 62%, rgba(38, 228, 216, 0.3), transparent 60%),
+                radial-gradient(ellipse 46% 32% at 52% 88%, rgba(255, 106, 61, 0.26), transparent 60%);
+            filter: blur(46px);
             mix-blend-mode: screen;
             animation: auroraShift 24s ease-in-out infinite alternate;
         }
@@ -97,8 +103,8 @@
             width: var(--s, 2px);
             height: var(--s, 2px);
             border-radius: 50%;
-            background: rgba(240, 245, 255, 0.85);
-            box-shadow: 0 0 14px rgba(140, 128, 255, 0.55);
+            background: rgba(240, 245, 255, 0.95);
+            box-shadow: 0 0 18px rgba(140, 128, 255, 0.72), 0 0 24px rgba(255, 191, 105, 0.2);
             opacity: 0.28;
             animation: twinkle var(--d, 4s) ease-in-out infinite;
         }
@@ -118,8 +124,8 @@
             width: var(--w, 10px);
             height: var(--w, 10px);
             border-radius: 50%;
-            filter: blur(0.3px);
-            opacity: 0.45;
+            filter: blur(0.1px);
+            opacity: 0.8;
             animation: floatDot var(--f, 12s) ease-in-out infinite;
         }
 
@@ -136,9 +142,9 @@
         .soul-float {
             position: absolute;
             width: var(--size, 120px);
-            opacity: var(--o, 0.14);
+            opacity: var(--o, 0.22);
             mix-blend-mode: screen;
-            filter: drop-shadow(0 0 16px rgba(121, 170, 255, 0.35));
+            filter: drop-shadow(0 0 24px rgba(121, 170, 255, 0.5)) saturate(1.15);
             animation: driftSoul var(--t, 28s) ease-in-out infinite;
         }
 
@@ -152,7 +158,7 @@
             inset: 0;
             background-image: radial-gradient(rgba(206, 218, 255, 0.12) 0.65px, transparent 0.7px);
             background-size: 3px 3px;
-            opacity: 0.28;
+            opacity: 0.18;
             pointer-events: none;
             z-index: 1;
         }
@@ -235,17 +241,26 @@
             overflow: hidden;
         }
 
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(5, 8, 24, 0.14), rgba(5, 8, 24, 0.62));
+            z-index: 0;
+        }
+
         .hero::after {
             content: "";
             position: absolute;
-            width: 540px;
-            height: 540px;
+            width: 760px;
+            height: 760px;
             border-radius: 50%;
-            right: -140px;
-            bottom: -220px;
-            background: radial-gradient(circle at center, rgba(241, 127, 58, 0.5), transparent 70%);
-            filter: blur(8px);
+            right: -190px;
+            bottom: -300px;
+            background: radial-gradient(circle at center, rgba(241, 127, 58, 0.44), transparent 58%);
+            filter: blur(16px);
             animation: pulseOrb 8s ease-in-out infinite;
+            z-index: 0;
         }
 
         @keyframes pulseOrb {
@@ -259,6 +274,8 @@
             gap: 34px;
             padding: 92px 0;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
@@ -326,7 +343,7 @@
 
         .section {
             padding: 92px 0;
-            background: linear-gradient(180deg, rgba(8, 12, 34, 0.48), rgba(8, 12, 34, 0.34));
+            background: linear-gradient(180deg, rgba(8, 12, 34, 0.58), rgba(8, 12, 34, 0.48));
             backdrop-filter: blur(1px);
         }
 
@@ -339,6 +356,7 @@
             font-size: clamp(2rem, 5vw, 3.6rem);
             margin-bottom: 12px;
             color: #edf2ff;
+            text-shadow: 0 0 18px rgba(126, 141, 255, 0.16);
         }
 
         .what-grid {
@@ -348,8 +366,8 @@
         }
 
         .what-card {
-            background: var(--card);
-            border: 1px solid var(--border);
+            background: rgba(10, 16, 43, 0.7);
+            border: 1px solid rgba(161, 183, 255, 0.28);
             padding: 18px;
             min-height: 210px;
             transition: transform 0.2s ease, border-color 0.2s ease;
@@ -411,8 +429,8 @@
 
         .stack,
         .who {
-            background: var(--card);
-            border: 1px solid var(--border);
+            background: rgba(10, 16, 43, 0.7);
+            border: 1px solid rgba(161, 183, 255, 0.28);
             padding: 24px;
             box-shadow: 0 10px 34px rgba(17, 11, 30, 0.08);
         }
@@ -483,8 +501,8 @@
         }
 
         .faq {
-            background: rgba(10, 16, 43, 0.82);
-            border: 1px solid var(--border);
+            background: rgba(10, 16, 43, 0.86);
+            border: 1px solid rgba(161, 183, 255, 0.28);
             padding: 24px;
             box-shadow: 0 10px 36px rgba(17, 11, 30, 0.08);
         }
@@ -513,12 +531,25 @@
         }
 
         .final {
-            background: #120f20;
+            background: linear-gradient(180deg, rgba(10, 14, 32, 0.72), rgba(6, 8, 24, 0.96));
             color: #f7f4ef;
             text-align: center;
             padding: 86px 0 94px;
             position: relative;
             overflow: hidden;
+        }
+
+        .final::after {
+            content: "";
+            position: absolute;
+            inset: -20px auto auto 50%;
+            width: min(820px, 90vw);
+            height: 460px;
+            transform: translateX(-50%);
+            background: url('preview-soulmaps.png') center top / contain no-repeat;
+            opacity: 0.22;
+            filter: blur(0.2px) drop-shadow(0 0 18px rgba(121, 170, 255, 0.25));
+            pointer-events: none;
         }
 
         .final::before {
