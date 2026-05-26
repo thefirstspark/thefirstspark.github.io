@@ -44,6 +44,10 @@
             scroll-behavior: smooth;
         }
 
+        body {
+            position: relative;
+        }
+
         body::before {
             content: "";
             position: fixed;
@@ -60,7 +64,7 @@
             position: fixed;
             inset: 0;
             pointer-events: none;
-            z-index: -1;
+            z-index: 0;
             overflow: hidden;
         }
 
@@ -149,7 +153,16 @@
             background-size: 3px 3px;
             opacity: 0.28;
             pointer-events: none;
-            z-index: -1;
+            z-index: 1;
+        }
+
+        header,
+        main,
+        .final,
+        .footer-note,
+        .sticky-cta {
+            position: relative;
+            z-index: 2;
         }
 
         .wrap {
@@ -312,6 +325,8 @@
 
         .section {
             padding: 92px 0;
+            background: linear-gradient(180deg, rgba(8, 12, 34, 0.48), rgba(8, 12, 34, 0.34));
+            backdrop-filter: blur(1px);
         }
 
         .section-head {
