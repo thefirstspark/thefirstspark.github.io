@@ -18,18 +18,18 @@
     <style>
         :root {
             --ink: #0c0b12;
-            --paper: #f7f4ef;
+            --paper: #050818;
             --sand: #e9dccb;
             --gold: #d9a441;
             --amber: #f17f3a;
             --teal: #1f8f8a;
             --wine: #7f2f4e;
-            --text: #211b2f;
-            --muted: #645b72;
-            --card: rgba(255, 255, 255, 0.82);
-            --border: rgba(33, 27, 47, 0.14);
-            --shadow: 0 20px 60px rgba(17, 11, 30, 0.16);
-            --hero: linear-gradient(120deg, #0f0d18 0%, #1a1630 35%, #26375c 100%);
+            --text: #e4e9ff;
+            --muted: #b3bddf;
+            --card: rgba(14, 18, 48, 0.62);
+            --border: rgba(161, 183, 255, 0.22);
+            --shadow: 0 20px 60px rgba(7, 10, 30, 0.45);
+            --hero: linear-gradient(120deg, #0a0d24 0%, #1a1630 35%, #102852 100%);
             --accent: linear-gradient(135deg, var(--gold), var(--amber));
         }
 
@@ -49,19 +49,105 @@
             position: fixed;
             inset: 0;
             background-image:
-                radial-gradient(circle at 12% 15%, rgba(241, 127, 58, 0.12), transparent 28%),
-                radial-gradient(circle at 82% 20%, rgba(31, 143, 138, 0.16), transparent 33%),
-                radial-gradient(circle at 50% 90%, rgba(127, 47, 78, 0.14), transparent 36%);
+                radial-gradient(ellipse at 18% 12%, rgba(107, 77, 242, 0.3), transparent 48%),
+                radial-gradient(ellipse at 86% 28%, rgba(255, 106, 61, 0.2), transparent 44%),
+                radial-gradient(ellipse at 52% 92%, rgba(38, 228, 216, 0.18), transparent 50%);
             pointer-events: none;
             z-index: -2;
+        }
+
+        #cosmic-field {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        #aurora {
+            position: absolute;
+            inset: -18%;
+            background:
+                radial-gradient(ellipse 60% 40% at 28% 18%, rgba(107, 77, 242, 0.28), transparent 60%),
+                radial-gradient(ellipse 50% 34% at 72% 62%, rgba(38, 228, 216, 0.22), transparent 60%),
+                radial-gradient(ellipse 46% 32% at 52% 88%, rgba(255, 106, 61, 0.2), transparent 60%);
+            filter: blur(34px);
+            mix-blend-mode: screen;
+            animation: auroraShift 24s ease-in-out infinite alternate;
+        }
+
+        @keyframes auroraShift {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-2.5%, 2%) scale(1.06); }
+            100% { transform: translate(2%, -3%) scale(1.03); }
+        }
+
+        #starfield {
+            position: absolute;
+            inset: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: var(--s, 2px);
+            height: var(--s, 2px);
+            border-radius: 50%;
+            background: rgba(240, 245, 255, 0.85);
+            box-shadow: 0 0 14px rgba(140, 128, 255, 0.55);
+            opacity: 0.28;
+            animation: twinkle var(--d, 4s) ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.22; }
+            50% { opacity: 0.86; }
+        }
+
+        #color-dots {
+            position: absolute;
+            inset: 0;
+        }
+
+        .dot {
+            position: absolute;
+            width: var(--w, 10px);
+            height: var(--w, 10px);
+            border-radius: 50%;
+            filter: blur(0.3px);
+            opacity: 0.45;
+            animation: floatDot var(--f, 12s) ease-in-out infinite;
+        }
+
+        @keyframes floatDot {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.36; }
+            50% { transform: translateY(-18px) scale(1.15); opacity: 0.78; }
+        }
+
+        #soul-floats {
+            position: absolute;
+            inset: 0;
+        }
+
+        .soul-float {
+            position: absolute;
+            width: var(--size, 120px);
+            opacity: var(--o, 0.14);
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 0 16px rgba(121, 170, 255, 0.35));
+            animation: driftSoul var(--t, 28s) ease-in-out infinite;
+        }
+
+        @keyframes driftSoul {
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            50% { transform: translate(24px, -36px) rotate(7deg) scale(1.08); }
         }
 
         .grain {
             position: fixed;
             inset: 0;
-            background-image: radial-gradient(rgba(12, 11, 18, 0.06) 0.7px, transparent 0.7px);
+            background-image: radial-gradient(rgba(206, 218, 255, 0.12) 0.65px, transparent 0.7px);
             background-size: 3px 3px;
-            opacity: 0.45;
+            opacity: 0.28;
             pointer-events: none;
             z-index: -1;
         }
@@ -191,8 +277,8 @@
         }
 
         .hero-card {
-            background: rgba(247, 244, 239, 0.08);
-            border: 1px solid rgba(247, 244, 239, 0.24);
+            background: rgba(12, 18, 45, 0.55);
+            border: 1px solid rgba(197, 211, 255, 0.3);
             backdrop-filter: blur(10px);
             padding: 24px;
             box-shadow: var(--shadow);
@@ -236,7 +322,7 @@
         .section-head h2 {
             font-size: clamp(2rem, 5vw, 3.6rem);
             margin-bottom: 12px;
-            color: #1a1630;
+            color: #edf2ff;
         }
 
         .what-grid {
@@ -270,7 +356,7 @@
         .what-card h3 {
             font-size: 1.35rem;
             margin-bottom: 8px;
-            color: #20192f;
+            color: #eef2ff;
         }
 
         .outcomes {
@@ -286,14 +372,14 @@
         }
 
         .out-item {
-            background: rgba(255, 255, 255, 0.72);
+            background: rgba(10, 16, 43, 0.72);
             border: 1px solid var(--border);
             padding: 18px;
         }
 
         .out-item strong {
             display: block;
-            color: #1b1530;
+            color: #f1f4ff;
             margin-bottom: 8px;
             font-size: 12px;
             letter-spacing: 1.5px;
@@ -338,19 +424,19 @@
 
         .value-box {
             margin-top: 16px;
-            border: 1px solid rgba(33, 27, 47, 0.22);
-            background: #f3eadf;
+            border: 1px solid rgba(170, 192, 255, 0.3);
+            background: rgba(27, 22, 56, 0.72);
             padding: 16px;
         }
 
         .value-box p {
             font-size: 12px;
             line-height: 1.7;
-            color: #3a2f50;
+            color: #d0d8f6;
         }
 
         .value-box strong {
-            color: #190f2d;
+            color: #ffcf72;
         }
 
         .testimonials {
@@ -381,7 +467,7 @@
         }
 
         .faq {
-            background: #fff;
+            background: rgba(10, 16, 43, 0.82);
             border: 1px solid var(--border);
             padding: 24px;
             box-shadow: 0 10px 36px rgba(17, 11, 30, 0.08);
@@ -399,7 +485,15 @@
         .faq h3 {
             font-size: 1.1rem;
             margin-bottom: 6px;
-            color: #1e1731;
+            color: #eef2ff;
+        }
+
+        .stack li,
+        .who li,
+        .out-item p,
+        .what-card p,
+        .faq p {
+            color: #c4ceed;
         }
 
         .final {
@@ -503,9 +597,49 @@
             .sticky-cta { display: flex; }
             .footer-note { padding-bottom: 100px; }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            #aurora,
+            .star,
+            .dot,
+            .soul-float {
+                animation: none !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <div id="cosmic-field" aria-hidden="true">
+        <div id="aurora"></div>
+        <div id="starfield">
+            <span class="star" style="top:7%;left:9%;--s:2px;--d:3.2s;"></span>
+            <span class="star" style="top:18%;left:21%;--s:1px;--d:4.1s;"></span>
+            <span class="star" style="top:12%;left:74%;--s:2px;--d:5s;"></span>
+            <span class="star" style="top:32%;left:63%;--s:1.5px;--d:3.4s;"></span>
+            <span class="star" style="top:44%;left:15%;--s:2px;--d:4.6s;"></span>
+            <span class="star" style="top:58%;left:82%;--s:1px;--d:3.9s;"></span>
+            <span class="star" style="top:72%;left:38%;--s:1.5px;--d:4.8s;"></span>
+            <span class="star" style="top:83%;left:67%;--s:2px;--d:3.5s;"></span>
+            <span class="star" style="top:89%;left:24%;--s:1px;--d:4.4s;"></span>
+        </div>
+        <div id="color-dots">
+            <span class="dot" style="top:14%;left:84%;--w:10px;--f:13s;background:rgba(255,106,61,.75);"></span>
+            <span class="dot" style="top:26%;left:12%;--w:8px;--f:11s;background:rgba(107,77,242,.72);"></span>
+            <span class="dot" style="top:47%;left:89%;--w:12px;--f:15s;background:rgba(38,228,216,.62);"></span>
+            <span class="dot" style="top:63%;left:7%;--w:9px;--f:10s;background:rgba(243,178,58,.7);"></span>
+            <span class="dot" style="top:77%;left:78%;--w:11px;--f:16s;background:rgba(179,120,255,.68);"></span>
+            <span class="dot" style="top:90%;left:48%;--w:8px;--f:12s;background:rgba(88,206,255,.7);"></span>
+        </div>
+        <div id="soul-floats">
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:8%;left:4%;--size:140px;--o:.15;--t:32s;" />
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:19%;left:80%;--size:118px;--o:.13;--t:28s;" />
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:40%;left:2%;--size:132px;--o:.14;--t:30s;" />
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:56%;left:86%;--size:122px;--o:.12;--t:33s;" />
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:74%;left:9%;--size:128px;--o:.14;--t:27s;" />
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:82%;left:72%;--size:136px;--o:.13;--t:31s;" />
+        </div>
+    </div>
+
     <div class="grain" aria-hidden="true"></div>
 
     <header class="hero" id="top">
@@ -600,7 +734,7 @@
 
             <div class="stack-wrap">
                 <article class="stack" data-reveal>
-                    <h3 style="font-size:1.6rem; margin-bottom:10px; color:#1d1630;">OG Soul Map Deluxe Edition — $44</h3>
+                    <h3 style="font-size:1.6rem; margin-bottom:10px; color:#eef2ff;">OG Soul Map Deluxe Edition — $44</h3>
                     <ul>
                         <li>Full Soul Code decode: Life Path, Expression, Soul Urge, Sun Sign</li>
                         <li>Interpretation of your strongest gifts and likely friction points</li>
@@ -617,7 +751,7 @@
                 </article>
 
                 <article class="who" data-reveal>
-                    <h3 style="font-size:1.6rem; margin-bottom:10px; color:#1d1630;">Best For You If...</h3>
+                    <h3 style="font-size:1.6rem; margin-bottom:10px; color:#eef2ff;">Best For You If...</h3>
                     <ul>
                         <li>You are in a transition and need direction now</li>
                         <li>You overthink decisions and want a grounded framework</li>
