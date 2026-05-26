@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soul Maps | The First Spark</title>
+    <meta name="description" content="Get your Soul Map and decode your Life Path, Expression, Soul Urge, and Sun Sign into a practical map for decisions, relationships, and next moves.">
+    <meta property="og:title" content="Soul Maps | The First Spark">
+    <meta property="og:description" content="Your numbers are not random. Get your Soul Map and turn your code into direction.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thefirstspark.shop/soul-maps-sales.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Soul Maps | The First Spark">
+    <meta name="twitter:description" content="Decode your Soul Code into a practical map for your next chapter.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0c0b12;
+            --paper: #f7f4ef;
+            --sand: #e9dccb;
+            --gold: #d9a441;
+            --amber: #f17f3a;
+            --teal: #1f8f8a;
+            --wine: #7f2f4e;
+            --text: #211b2f;
+            --muted: #645b72;
+            --card: rgba(255, 255, 255, 0.82);
+            --border: rgba(33, 27, 47, 0.14);
+            --shadow: 0 20px 60px rgba(17, 11, 30, 0.16);
+            --hero: linear-gradient(120deg, #0f0d18 0%, #1a1630 35%, #26375c 100%);
+            --accent: linear-gradient(135deg, var(--gold), var(--amber));
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+            color: var(--text);
+            font-family: "JetBrains Mono", monospace;
+            scroll-behavior: smooth;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 12% 15%, rgba(241, 127, 58, 0.12), transparent 28%),
+                radial-gradient(circle at 82% 20%, rgba(31, 143, 138, 0.16), transparent 33%),
+                radial-gradient(circle at 50% 90%, rgba(127, 47, 78, 0.14), transparent 36%);
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .grain {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(rgba(12, 11, 18, 0.06) 0.7px, transparent 0.7px);
+            background-size: 3px 3px;
+            opacity: 0.45;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .wrap {
+            width: min(1120px, 92vw);
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: 2.8px;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 14px;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            font-family: "Fraunces", serif;
+            line-height: 1.04;
+            letter-spacing: 0.2px;
+        }
+
+        p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.75;
+            font-size: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 0;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 12px;
+            letter-spacing: 2.1px;
+            text-transform: uppercase;
+            padding: 16px 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #130f1f;
+            box-shadow: 0 16px 34px rgba(217, 164, 65, 0.34);
+            font-weight: 700;
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            color: #f7f4ef;
+            background: transparent;
+        }
+
+        .hero {
+            min-height: 92vh;
+            background: var(--hero);
+            color: #f7f4ef;
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 540px;
+            height: 540px;
+            border-radius: 50%;
+            right: -140px;
+            bottom: -220px;
+            background: radial-gradient(circle at center, rgba(241, 127, 58, 0.5), transparent 70%);
+            filter: blur(8px);
+            animation: pulseOrb 8s ease-in-out infinite;
+        }
+
+        @keyframes pulseOrb {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 34px;
+            padding: 92px 0;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8.5vw, 6.4rem);
+            max-width: 11ch;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 .hot {
+            color: #ffbe6a;
+        }
+
+        .hero-sub {
+            max-width: 55ch;
+            color: rgba(247, 244, 239, 0.83);
+            margin-bottom: 28px;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .hero-proof {
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: rgba(247, 244, 239, 0.7);
+        }
+
+        .hero-card {
+            background: rgba(247, 244, 239, 0.08);
+            border: 1px solid rgba(247, 244, 239, 0.24);
+            backdrop-filter: blur(10px);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            animation: riseIn 700ms ease both;
+        }
+
+        .hero-price {
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 0.8px;
+            font-size: 62px;
+            color: #ffbe6a;
+            line-height: 0.95;
+            margin: 6px 0 10px;
+        }
+
+        .hero-price small {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 14px;
+            color: rgba(247, 244, 239, 0.78);
+            text-decoration: line-through;
+            margin-left: 6px;
+        }
+
+        .countdown {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(247, 244, 239, 0.2);
+            font-size: 11px;
+            color: rgba(247, 244, 239, 0.82);
+        }
+
+        .section {
+            padding: 92px 0;
+        }
+
+        .section-head {
+            max-width: 690px;
+            margin-bottom: 34px;
+        }
+
+        .section-head h2 {
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            margin-bottom: 12px;
+            color: #1a1630;
+        }
+
+        .what-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .what-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 18px;
+            min-height: 210px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 8px 30px rgba(17, 11, 30, 0.07);
+        }
+
+        .what-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(31, 143, 138, 0.45);
+        }
+
+        .what-tag {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 12px;
+        }
+
+        .what-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 8px;
+            color: #20192f;
+        }
+
+        .outcomes {
+            background: linear-gradient(120deg, rgba(127, 47, 78, 0.08), rgba(31, 143, 138, 0.08));
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .out-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .out-item {
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid var(--border);
+            padding: 18px;
+        }
+
+        .out-item strong {
+            display: block;
+            color: #1b1530;
+            margin-bottom: 8px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .stack-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .stack,
+        .who {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 24px;
+            box-shadow: 0 10px 34px rgba(17, 11, 30, 0.08);
+        }
+
+        .stack ul,
+        .who ul,
+        .faq ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .stack li,
+        .who li {
+            padding: 11px 0;
+            border-bottom: 1px dashed rgba(33, 27, 47, 0.2);
+            color: #312948;
+            font-size: 13px;
+        }
+
+        .stack li:last-child,
+        .who li:last-child {
+            border-bottom: 0;
+        }
+
+        .value-box {
+            margin-top: 16px;
+            border: 1px solid rgba(33, 27, 47, 0.22);
+            background: #f3eadf;
+            padding: 16px;
+        }
+
+        .value-box p {
+            font-size: 12px;
+            line-height: 1.7;
+            color: #3a2f50;
+        }
+
+        .value-box strong {
+            color: #190f2d;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .quote {
+            background: #1a1630;
+            border: 1px solid rgba(247, 244, 239, 0.16);
+            color: rgba(247, 244, 239, 0.9);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .quote p {
+            color: rgba(247, 244, 239, 0.9);
+            font-size: 13px;
+        }
+
+        .quote .name {
+            margin-top: 12px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: #ffbe6a;
+            text-transform: uppercase;
+        }
+
+        .faq {
+            background: #fff;
+            border: 1px solid var(--border);
+            padding: 24px;
+            box-shadow: 0 10px 36px rgba(17, 11, 30, 0.08);
+        }
+
+        .faq li {
+            padding: 14px 0;
+            border-bottom: 1px dashed rgba(33, 27, 47, 0.2);
+        }
+
+        .faq li:last-child {
+            border-bottom: 0;
+        }
+
+        .faq h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            color: #1e1731;
+        }
+
+        .final {
+            background: #120f20;
+            color: #f7f4ef;
+            text-align: center;
+            padding: 86px 0 94px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final::before {
+            content: "";
+            position: absolute;
+            inset: auto -70px -90px auto;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(31, 143, 138, 0.5), transparent 70%);
+            filter: blur(10px);
+        }
+
+        .final h2 {
+            color: #fff;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            margin-bottom: 14px;
+        }
+
+        .final p {
+            max-width: 62ch;
+            margin: 0 auto 28px;
+            color: rgba(247, 244, 239, 0.86);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 11px;
+            color: #786f87;
+            padding: 24px 0 34px;
+        }
+
+        .sticky-cta {
+            position: fixed;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            z-index: 80;
+            display: none;
+            background: #130f1f;
+            border: 1px solid rgba(247, 244, 239, 0.2);
+            box-shadow: var(--shadow);
+            padding: 10px;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sticky-cta span {
+            color: #f7f4ef;
+            font-size: 11px;
+            letter-spacing: 1px;
+            line-height: 1.5;
+        }
+
+        .sticky-cta .btn {
+            flex: 1;
+            padding: 13px 14px;
+            font-size: 10px;
+            letter-spacing: 1.4px;
+        }
+
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        [data-reveal].show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 500ms ease, transform 500ms ease;
+        }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1020px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .what-grid { grid-template-columns: repeat(2, 1fr); }
+            .out-grid { grid-template-columns: 1fr; }
+            .stack-wrap { grid-template-columns: 1fr; }
+            .testimonials { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 700px) {
+            .section { padding: 74px 0; }
+            .hero { min-height: auto; }
+            .hero-grid { padding: 80px 0 50px; }
+            .hero h1 { max-width: none; }
+            .what-grid { grid-template-columns: 1fr; }
+            .sticky-cta { display: flex; }
+            .footer-note { padding-bottom: 100px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="hero" id="top">
+        <div class="wrap hero-grid">
+            <div>
+                <div class="eyebrow">The First Spark | Soul Maps</div>
+                <h1>Stop guessing your next move.<br><span class="hot">Read your code.</span></h1>
+                <p class="hero-sub">Your Soul Map translates your Life Path, Expression, Soul Urge, and Sun Sign into one practical map you can use for decisions, relationships, business moves, and your next chapter.</p>
+                <div class="hero-cta">
+                    <a class="btn btn-primary" href="https://whop.com/checkout/plan_SOULMAP_BASE/" target="_blank" rel="noopener noreferrer">Get My Soul Map</a>
+                    <a class="btn btn-secondary" href="#what-you-get">See What You Get</a>
+                </div>
+                <p class="hero-proof">Used by creators, founders, and deep-feelers who want clarity fast, not another vague reading.</p>
+            </div>
+
+            <aside class="hero-card" aria-label="Offer summary card">
+                <div class="eyebrow" style="margin-bottom:8px;color:#ffbe6a;">Offer</div>
+                <h2 style="font-size:1.9rem; color:#fff;">Base Soul Map</h2>
+                <div class="hero-price">$22 <small>$55</small></div>
+                <p style="color:rgba(247,244,239,0.83);">Complete decode of your core signature and what to do with it next.</p>
+                <ul style="margin:14px 0 0; padding-left:18px; color:rgba(247,244,239,0.9); font-size:12px; line-height:1.8;">
+                    <li>Life Path breakdown</li>
+                    <li>Expression + Soul Urge decode</li>
+                    <li>Sun Sign filter for your code</li>
+                    <li>Action prompts for your next phase</li>
+                </ul>
+                <div class="countdown">Price window ends in <strong id="countdownText">--:--:--</strong></div>
+            </aside>
+        </div>
+    </header>
+
+    <main>
+        <section class="section wrap" id="what-you-get">
+            <div class="section-head" data-reveal>
+                <div class="eyebrow">What Is In A Soul Map?</div>
+                <h2>The Exact Components We Compute For You</h2>
+                <p>No fluff. Your Soul Map is built from your birth date and full birth name, then decoded into specific numerological and archetypal guidance.</p>
+            </div>
+
+            <div class="what-grid">
+                <article class="what-card" data-reveal>
+                    <div class="what-tag">01 | Life Path</div>
+                    <h3>Your Core Journey</h3>
+                    <p>Calculated from birth date reduction. Shows the central lesson and trajectory of your life arc.</p>
+                </article>
+                <article class="what-card" data-reveal>
+                    <div class="what-tag">02 | Expression</div>
+                    <h3>Your Natural Gift</h3>
+                    <p>Calculated from full birth name letter values. Reveals your strongest mode of impact and creation.</p>
+                </article>
+                <article class="what-card" data-reveal>
+                    <div class="what-tag">03 | Soul Urge</div>
+                    <h3>Your Inner Desire</h3>
+                    <p>Calculated from vowel values in your birth name. Exposes what actually fulfills you beneath goals.</p>
+                </article>
+                <article class="what-card" data-reveal>
+                    <div class="what-tag">04 | Sun Sign Filter</div>
+                    <h3>Your Expression Lens</h3>
+                    <p>Mapped from date ranges to zodiac archetype. Shows how your code tends to show up in the world.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section outcomes">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <div class="eyebrow" style="color:var(--wine);">What Buyers Use It For</div>
+                    <h2>Practical Outcomes, Not Just Insight</h2>
+                </div>
+                <div class="out-grid">
+                    <div class="out-item" data-reveal>
+                        <strong>Decisions</strong>
+                        <p>Know which opportunities fit your actual path versus what just looks good in the moment.</p>
+                    </div>
+                    <div class="out-item" data-reveal>
+                        <strong>Relationships</strong>
+                        <p>Understand your emotional pattern and communication style so you stop repeating the same loop.</p>
+                    </div>
+                    <div class="out-item" data-reveal>
+                        <strong>Momentum</strong>
+                        <p>Turn confusion into a concrete next move based on your code, not external pressure.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section wrap" id="offer">
+            <div class="section-head" data-reveal>
+                <div class="eyebrow">Offer Stack</div>
+                <h2>What You Get Today</h2>
+            </div>
+
+            <div class="stack-wrap">
+                <article class="stack" data-reveal>
+                    <h3 style="font-size:1.6rem; margin-bottom:10px; color:#1d1630;">Base Soul Map — $22</h3>
+                    <ul>
+                        <li>Full Soul Code decode: Life Path, Expression, Soul Urge, Sun Sign</li>
+                        <li>Interpretation of your strongest gifts and likely friction points</li>
+                        <li>Clear written prompts to apply your map in real life this week</li>
+                        <li>Immediate checkout access via Whop</li>
+                    </ul>
+                    <div class="value-box">
+                        <p><strong>Fast decision:</strong> start with Base Soul Map now, then add Compatibility, Family Constellation, or Personal Sigil when you want to go deeper.</p>
+                    </div>
+                    <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
+                        <a class="btn btn-primary" href="https://whop.com/checkout/plan_SOULMAP_BASE/" target="_blank" rel="noopener noreferrer">Buy Base Soul Map</a>
+                    </div>
+                </article>
+
+                <article class="who" data-reveal>
+                    <h3 style="font-size:1.6rem; margin-bottom:10px; color:#1d1630;">Best For You If...</h3>
+                    <ul>
+                        <li>You are in a transition and need direction now</li>
+                        <li>You overthink decisions and want a grounded framework</li>
+                        <li>You know you are repeating patterns and want to break them</li>
+                        <li>You are building something meaningful and want alignment</li>
+                        <li>You want insight that actually changes your behavior</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="section wrap" id="social-proof">
+            <div class="section-head" data-reveal>
+                <div class="eyebrow">Social Proof</div>
+                <h2>What People Say After They Get Their Map</h2>
+            </div>
+
+            <div class="testimonials">
+                <blockquote class="quote" data-reveal>
+                    <p>"I expected a vibe reading. I got a clear blueprint for why I make decisions the way I do. I changed two offers in my business within 24 hours."</p>
+                    <div class="name">Founder, wellness brand</div>
+                </blockquote>
+                <blockquote class="quote" data-reveal>
+                    <p>"The Soul Urge section called me out exactly. It explained the friction I kept creating in relationships and gave me a next step that actually worked."</p>
+                    <div class="name">Creator, Los Angeles</div>
+                </blockquote>
+                <blockquote class="quote" data-reveal>
+                    <p>"This felt practical, not abstract. I used my map to choose one path and finally stopped spinning in five directions at once."</p>
+                    <div class="name">Operator, startup team</div>
+                </blockquote>
+            </div>
+        </section>
+
+        <section class="section wrap" id="faq">
+            <div class="section-head" data-reveal>
+                <div class="eyebrow">FAQ</div>
+                <h2>Before You Buy</h2>
+            </div>
+
+            <div class="faq" data-reveal>
+                <ul>
+                    <li>
+                        <h3>What information do I need?</h3>
+                        <p>Your birth date and your full birth name as it appears on your birth certificate.</p>
+                    </li>
+                    <li>
+                        <h3>How is this different from the free Soul Code tool?</h3>
+                        <p>The free tool gives your numbers. The paid Soul Map gives the strategic interpretation and application layer.</p>
+                    </li>
+                    <li>
+                        <h3>Can I buy this for someone else?</h3>
+                        <p>Yes. You can purchase and provide their correct birth details for the map.</p>
+                    </li>
+                    <li>
+                        <h3>What if I want relationship or family analysis?</h3>
+                        <p>Start with Base Soul Map, then add Compatibility or Family Constellation as your next layer.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <section class="final" id="buy-now">
+        <div class="wrap" data-reveal>
+            <div class="eyebrow" style="color:#ffbe6a;">Ready?</div>
+            <h2>Get Your Soul Map Now</h2>
+            <p>Your map will not make the decision for you. It will make your decision obvious. If you are done circling, this is your moment.</p>
+            <a class="btn btn-primary" href="https://whop.com/checkout/plan_SOULMAP_BASE/" target="_blank" rel="noopener noreferrer">Yes, I Want My Soul Map</a>
+        </div>
+    </section>
+
+    <div class="footer-note">The First Spark | Soul Map Sales Page</div>
+
+    <div class="sticky-cta" aria-label="Sticky purchase bar">
+        <span>Base Soul Map: $22<br>Decode your core signature now.</span>
+        <a class="btn btn-primary" href="https://whop.com/checkout/plan_SOULMAP_BASE/" target="_blank" rel="noopener noreferrer">Buy Now</a>
+    </div>
+
+    <script>
+        (function revealOnScroll() {
+            const els = document.querySelectorAll('[data-reveal]');
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.16 });
+
+            els.forEach((el, i) => {
+                el.style.transitionDelay = (i % 5) * 55 + 'ms';
+                io.observe(el);
+            });
+        })();
+
+        (function countdown72h() {
+            const key = 'soulMapSaleEndsAt';
+            const now = Date.now();
+            let end = parseInt(localStorage.getItem(key), 10);
+            if (!end || Number.isNaN(end) || end < now) {
+                end = now + (72 * 60 * 60 * 1000);
+                localStorage.setItem(key, String(end));
+            }
+
+            const target = document.getElementById('countdownText');
+            function tick() {
+                const diff = Math.max(0, end - Date.now());
+                const hrs = Math.floor(diff / 3600000);
+                const mins = Math.floor((diff % 3600000) / 60000);
+                const secs = Math.floor((diff % 60000) / 1000);
+                target.textContent =
+                    String(hrs).padStart(2, '0') + ':' +
+                    String(mins).padStart(2, '0') + ':' +
+                    String(secs).padStart(2, '0');
+            }
+
+            tick();
+            setInterval(tick, 1000);
+        })();
+    </script>
+</body>
+</html>
