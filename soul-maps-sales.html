@@ -212,7 +212,7 @@
             font-family: "JetBrains Mono", monospace;
             font-size: 14px;
             color: rgba(247, 244, 239, 0.78);
-            text-decoration: line-through;
+            text-decoration: none;
             margin-left: 6px;
         }
 
@@ -523,16 +523,16 @@
 
             <aside class="hero-card" aria-label="Offer summary card">
                 <div class="eyebrow" style="margin-bottom:8px;color:#ffbe6a;">Offer</div>
-                <h2 style="font-size:1.9rem; color:#fff;">Base Soul Map</h2>
-                <div class="hero-price">$22 <small>$55</small></div>
-                <p style="color:rgba(247,244,239,0.83);">Complete decode of your core signature and what to do with it next.</p>
+                <h2 style="font-size:1.9rem; color:#fff;">OG Soul Map Deluxe Edition</h2>
+                <div class="hero-price">$44 <small>SOULSALE: -$22</small></div>
+                <p style="color:rgba(247,244,239,0.83);">Your full Soul Map decode plus monthly updates to keep your next moves aligned.</p>
                 <ul style="margin:14px 0 0; padding-left:18px; color:rgba(247,244,239,0.9); font-size:12px; line-height:1.8;">
                     <li>Life Path breakdown</li>
                     <li>Expression + Soul Urge decode</li>
                     <li>Sun Sign filter for your code</li>
-                    <li>Action prompts for your next phase</li>
+                    <li>Monthly updates included</li>
                 </ul>
-                <div class="countdown">Price window ends in <strong id="countdownText">--:--:--</strong></div>
+                <div class="countdown">Only offer live: OG Soul Map Deluxe Edition at $44.</div>
             </aside>
         </div>
     </header>
@@ -600,18 +600,19 @@
 
             <div class="stack-wrap">
                 <article class="stack" data-reveal>
-                    <h3 style="font-size:1.6rem; margin-bottom:10px; color:#1d1630;">Base Soul Map — $22</h3>
+                    <h3 style="font-size:1.6rem; margin-bottom:10px; color:#1d1630;">OG Soul Map Deluxe Edition — $44</h3>
                     <ul>
                         <li>Full Soul Code decode: Life Path, Expression, Soul Urge, Sun Sign</li>
                         <li>Interpretation of your strongest gifts and likely friction points</li>
                         <li>Clear written prompts to apply your map in real life this week</li>
+                        <li>Monthly updates included</li>
                         <li>Immediate checkout access via Whop</li>
                     </ul>
                     <div class="value-box">
-                        <p><strong>Fast decision:</strong> start with Base Soul Map now, then add Compatibility, Family Constellation, or Personal Sigil when you want to go deeper.</p>
+                        <p><strong>Offer note:</strong> The current and only public price is $44. If someone finds the hidden code <strong>SOULSALE</strong>, it takes $22 off at checkout.</p>
                     </div>
                     <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
-                        <a class="btn btn-primary" href="https://whop.com/checkout/plan_SOULMAP_BASE/" target="_blank" rel="noopener noreferrer">Buy Base Soul Map</a>
+                        <a class="btn btn-primary" href="https://whop.com/checkout/plan_SOULMAP_BASE/" target="_blank" rel="noopener noreferrer">Buy OG Soul Map Deluxe</a>
                     </div>
                 </article>
 
@@ -671,8 +672,12 @@
                         <p>Yes. You can purchase and provide their correct birth details for the map.</p>
                     </li>
                     <li>
-                        <h3>What if I want relationship or family analysis?</h3>
-                        <p>Start with Base Soul Map, then add Compatibility or Family Constellation as your next layer.</p>
+                        <h3>Do I get updates after I buy?</h3>
+                        <p>Yes. Monthly updates are included with the OG Soul Map Deluxe Edition.</p>
+                    </li>
+                    <li>
+                        <h3>Is there a promo code?</h3>
+                        <p>The standard price is $44. There is a hidden promo code, <strong>SOULSALE</strong>, that takes $22 off if entered at checkout.</p>
                     </li>
                 </ul>
             </div>
@@ -691,7 +696,7 @@
     <div class="footer-note">The First Spark | Soul Map Sales Page</div>
 
     <div class="sticky-cta" aria-label="Sticky purchase bar">
-        <span>Base Soul Map: $22<br>Decode your core signature now.</span>
+        <span>OG Soul Map Deluxe: $44<br>Monthly updates included.</span>
         <a class="btn btn-primary" href="https://whop.com/checkout/plan_SOULMAP_BASE/" target="_blank" rel="noopener noreferrer">Buy Now</a>
     </div>
 
@@ -713,30 +718,7 @@
             });
         })();
 
-        (function countdown72h() {
-            const key = 'soulMapSaleEndsAt';
-            const now = Date.now();
-            let end = parseInt(localStorage.getItem(key), 10);
-            if (!end || Number.isNaN(end) || end < now) {
-                end = now + (72 * 60 * 60 * 1000);
-                localStorage.setItem(key, String(end));
-            }
-
-            const target = document.getElementById('countdownText');
-            function tick() {
-                const diff = Math.max(0, end - Date.now());
-                const hrs = Math.floor(diff / 3600000);
-                const mins = Math.floor((diff % 3600000) / 60000);
-                const secs = Math.floor((diff % 60000) / 1000);
-                target.textContent =
-                    String(hrs).padStart(2, '0') + ':' +
-                    String(mins).padStart(2, '0') + ':' +
-                    String(secs).padStart(2, '0');
-            }
-
-            tick();
-            setInterval(tick, 1000);
-        })();
+        // Countdown removed because this offer is now a single stable price with optional promo code.
     </script>
 </body>
 </html>
