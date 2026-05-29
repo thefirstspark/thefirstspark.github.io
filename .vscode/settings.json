@@ -1,3 +1,4 @@
 {
-    "claudeCodeChat.permissions.yoloMode": true
+    "claudeCodeChat.permissions.yoloMode": true,
+    "chat.permissions.default": "autoApprove"
 }

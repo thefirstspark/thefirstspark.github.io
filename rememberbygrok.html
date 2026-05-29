@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rent Tracker</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #6c63ff;
+      --accent-hover: #5a52e0;
+      --green: #34d399;
+      --red: #f87171;
+      --yellow: #fbbf24;
+      --text: #e4e4e7;
+      --text-muted: #9ca3af;
+      --radius: 10px;
+      --kevin: #6c63ff;
+      --katie: #f472b6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 0 1.5rem;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: .25rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: .9rem;
+    }
+
+    /* ---- Tabs ---- */
+    .tabs {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tab {
+      flex: 1;
+      padding: .65rem;
+      text-align: center;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: .95rem;
+      font-weight: 600;
+      transition: border-color .15s, background .15s;
+    }
+
+    .tab:hover { background: var(--border); }
+
+    .tab.active-kevin {
+      border-color: var(--kevin);
+      background: rgba(108,99,255,.1);
+    }
+
+    .tab.active-katie {
+      border-color: var(--katie);
+      background: rgba(244,114,182,.1);
+    }
+
+    .tab .tab-status {
+      display: block;
+      font-size: .7rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-top: .15rem;
+    }
+
+    /* ---- Week Navigation ---- */
+    .week-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .week-nav button {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s;
+    }
+
+    .week-nav button:hover { background: var(--border); }
+
+    .week-nav .week-label {
+      font-size: 1rem;
+      font-weight: 600;
+      min-width: 220px;
+      text-align: center;
+    }
+
+    .week-nav .due-day {
+      display: block;
+      font-size: .75rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-top: .15rem;
+    }
+
+    /* ---- Progress Card ---- */
+    .progress-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: .75rem;
+    }
+
+    .progress-header .paid {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .progress-header .of-total {
+      color: var(--text-muted);
+      font-size: .95rem;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 12px;
+      background: var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: .5rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width .4s ease, background .3s;
+    }
+
+    .progress-status {
+      font-size: .85rem;
+      font-weight: 500;
+    }
+
+    .status-paid { color: var(--green); }
+    .status-partial { color: var(--yellow); }
+    .status-none { color: var(--text-muted); }
+
+    /* ---- Add Payment Form ---- */
+    .add-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .add-form h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: .75rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .form-group label {
+      font-size: .75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .form-group input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      padding: .55rem .75rem;
+      font-size: .95rem;
+      outline: none;
+      transition: border-color .15s;
+    }
+
+    .form-group input:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-add {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: .55rem 1.25rem;
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+      white-space: nowrap;
+    }
+
+    .btn-add:hover { background: var(--accent-hover); }
+
+    /* ---- Payment History ---- */
+    .history {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .history h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: .75rem;
+    }
+
+    .history-empty {
+      color: var(--text-muted);
+      font-size: .9rem;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .payment-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .payment-item:last-child { border-bottom: none; }
+
+    .payment-date {
+      color: var(--text-muted);
+      font-size: .85rem;
+      min-width: 90px;
+    }
+
+    .payment-note {
+      flex: 1;
+      font-size: .9rem;
+      padding: 0 .75rem;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .payment-amount {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--green);
+      white-space: nowrap;
+    }
+
+    .payment-delete {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      margin-left: .5rem;
+      font-size: .85rem;
+      padding: .2rem .4rem;
+      border-radius: 4px;
+      transition: color .15s, background .15s;
+    }
+
+    .payment-delete:hover {
+      color: var(--red);
+      background: rgba(248,113,113,.1);
+    }
+
+    /* ---- All-Time Summary ---- */
+    .summary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .summary h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: .75rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: .75rem;
+      text-align: center;
+    }
+
+    .summary-stat .label {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--text-muted);
+      margin-bottom: .2rem;
+    }
+
+    .summary-stat .value {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .value-green { color: var(--green); }
+    .value-red { color: var(--red); }
+    .value-yellow { color: var(--yellow); }
+
+    @media (max-width: 480px) {
+      .form-row { flex-direction: column; }
+      .btn-add { width: 100%; }
+      .summary-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Rent Tracker</h1>
+    <p>$80 / week each &bull; due every Monday</p>
+  </header>
+
+  <!-- Person Tabs -->
+  <div class="tabs">
+    <div class="tab" id="tab-kevin" data-person="kevin">
+      Kevin
+      <span class="tab-status" id="tab-kevin-status"></span>
+    </div>
+    <div class="tab" id="tab-katie" data-person="katie">
+      Katie
+      <span class="tab-status" id="tab-katie-status"></span>
+    </div>
+  </div>
+
+  <!-- Week Nav -->
+  <div class="week-nav">
+    <button id="prev-week">&larr;</button>
+    <span class="week-label" id="week-label"></span>
+    <button id="next-week">&rarr;</button>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-card">
+    <div class="progress-header">
+      <span class="paid" id="paid-amount">$0</span>
+      <span class="of-total">of $80</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+    <div class="progress-status" id="progress-status"></div>
+  </div>
+
+  <!-- Add Payment -->
+  <div class="add-form">
+    <h2 id="add-form-title">Add Payment</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="pay-amount">Amount ($)</label>
+        <input type="number" id="pay-amount" min="0.01" step="0.01" placeholder="20" />
+      </div>
+      <div class="form-group">
+        <label for="pay-date">Date</label>
+        <input type="date" id="pay-date" />
+      </div>
+      <div class="form-group">
+        <label for="pay-note">Note (optional)</label>
+        <input type="text" id="pay-note" placeholder="cash, Venmo, etc." />
+      </div>
+      <button class="btn-add" id="btn-add">Add</button>
+    </div>
+  </div>
+
+  <!-- Payment History for Week -->
+  <div class="history">
+    <h2 id="history-title">Payments This Week</h2>
+    <div id="payments-list"></div>
+  </div>
+
+  <!-- All-Time Summary -->
+  <div class="summary">
+    <h2 id="summary-title">All-Time Summary</h2>
+    <div class="summary-grid">
+      <div class="summary-stat">
+        <div class="label">Total Paid</div>
+        <div class="value value-green" id="sum-total-paid">$0</div>
+      </div>
+      <div class="summary-stat">
+        <div class="label">Total Owed</div>
+        <div class="value value-red" id="sum-total-owed">$0</div>
+      </div>
+      <div class="summary-stat">
+        <div class="label">Weeks Tracked</div>
+        <div class="value value-yellow" id="sum-weeks">0</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const RENT = 80;
+  const STORAGE_KEY = 'rent_tracker_data';
+  const PEOPLE = ['kevin', 'katie'];
+
+  // ---- State ----
+  let viewMonday = '';
+  let activePerson = 'kevin';
+  let data = { kevin: [], katie: [] };
+
+  function loadData() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (saved && saved.kevin) {
+        data = saved;
+      } else {
+        // Migrate from old single-person format
+        const old = JSON.parse(localStorage.getItem('rent_tracker_payments'));
+        if (Array.isArray(old) && old.length > 0) {
+          data.kevin = old;
+        }
+      }
+    } catch { /* use defaults */ }
+  }
+
+  function saveData() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function payments() { return data[activePerson]; }
+
+  // ---- Week Helpers ----
+  function getMonday(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00');
+    const day = d.getDay();
+    const diff = day === 0 ? -6 : 1 - day;
+    d.setDate(d.getDate() + diff);
+    return toDateStr(d);
+  }
+
+  function toDateStr(d) {
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
+  }
+
+  function addDays(dateStr, n) {
+    const d = new Date(dateStr + 'T00:00:00');
+    d.setDate(d.getDate() + n);
+    return toDateStr(d);
+  }
+
+  function getSunday(mondayStr) { return addDays(mondayStr, 6); }
+
+  function weekLabel(mondayStr) {
+    const mon = new Date(mondayStr + 'T00:00:00');
+    const sun = new Date(getSunday(mondayStr) + 'T00:00:00');
+    const opts = { month: 'short', day: 'numeric' };
+    return mon.toLocaleDateString('default', opts) + ' \u2013 ' +
+      sun.toLocaleDateString('default', { ...opts, year: 'numeric' });
+  }
+
+  function dueLabel(mondayStr) {
+    const mon = new Date(mondayStr + 'T00:00:00');
+    return 'Due ' + mon.toLocaleDateString('default', { weekday: 'long', month: 'short', day: 'numeric' });
+  }
+
+  function paymentsForWeek(person, mondayStr) {
+    const sunday = getSunday(mondayStr);
+    return data[person].filter(p => p.date >= mondayStr && p.date <= sunday);
+  }
+
+  function totalForWeek(person, mondayStr) {
+    return paymentsForWeek(person, mondayStr).reduce((s, p) => s + p.amount, 0);
+  }
+
+  function formatMoney(n) {
+    return '$' + n.toFixed(2).replace(/\.00$/, '');
+  }
+
+  function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  // ---- Render ----
+  function render() {
+    const name = capitalize(activePerson);
+
+    // Tabs
+    PEOPLE.forEach(person => {
+      const tab = document.getElementById('tab-' + person);
+      tab.className = 'tab' + (person === activePerson ? ' active-' + person : '');
+      const weekPaid = totalForWeek(person, viewMonday);
+      const statusEl = document.getElementById('tab-' + person + '-status');
+      if (weekPaid >= RENT) {
+        statusEl.textContent = 'Paid this week';
+        statusEl.style.color = 'var(--green)';
+      } else if (weekPaid > 0) {
+        statusEl.textContent = formatMoney(weekPaid) + ' of $' + RENT;
+        statusEl.style.color = 'var(--yellow)';
+      } else {
+        statusEl.textContent = 'Nothing this week';
+        statusEl.style.color = '';
+      }
+    });
+
+    // Week label
+    const labelEl = document.getElementById('week-label');
+    labelEl.innerHTML = weekLabel(viewMonday) +
+      '<span class="due-day">' + dueLabel(viewMonday) + '</span>';
+
+    // Progress
+    const paid = totalForWeek(activePerson, viewMonday);
+    const pct = Math.min((paid / RENT) * 100, 100);
+    document.getElementById('paid-amount').textContent = formatMoney(paid);
+
+    const fill = document.getElementById('progress-fill');
+    fill.style.width = pct + '%';
+    if (pct >= 100) {
+      fill.style.background = 'var(--green)';
+    } else if (pct > 0) {
+      fill.style.background = activePerson === 'kevin' ? 'var(--kevin)' : 'var(--katie)';
+    } else {
+      fill.style.background = 'var(--border)';
+    }
+
+    const status = document.getElementById('progress-status');
+    if (pct >= 100) {
+      const over = paid - RENT;
+      status.className = 'progress-status status-paid';
+      status.textContent = over > 0
+        ? 'Paid in full (+' + formatMoney(over) + ' over)'
+        : 'Paid in full';
+    } else if (pct > 0) {
+      status.className = 'progress-status status-partial';
+      status.textContent = formatMoney(RENT - paid) + ' remaining';
+    } else {
+      status.className = 'progress-status status-none';
+      status.textContent = 'No payments yet';
+    }
+
+    // Form title
+    document.getElementById('add-form-title').textContent = 'Add Payment for ' + name;
+
+    // Payment list
+    document.getElementById('history-title').textContent = name + "'s Payments This Week";
+    const list = document.getElementById('payments-list');
+    const items = paymentsForWeek(activePerson, viewMonday)
+      .sort((a, b) => a.date.localeCompare(b.date));
+
+    if (items.length === 0) {
+      list.innerHTML = '<div class="history-empty">No payments recorded for this week.</div>';
+    } else {
+      list.innerHTML = items.map(p => {
+        const d = new Date(p.date + 'T00:00:00');
+        const dateStr = d.toLocaleDateString('default', { weekday: 'short', month: 'short', day: 'numeric' });
+        const noteHtml = p.note
+          ? '<span class="payment-note">' + escapeHtml(p.note) + '</span>'
+          : '<span class="payment-note"></span>';
+        return '<div class="payment-item">' +
+          '<span class="payment-date">' + dateStr + '</span>' +
+          noteHtml +
+          '<span class="payment-amount">+' + formatMoney(p.amount) + '</span>' +
+          '<button class="payment-delete" data-id="' + p.id + '" title="Delete">&times;</button>' +
+          '</div>';
+      }).join('');
+    }
+
+    // All-time summary for active person
+    document.getElementById('summary-title').textContent = name + "'s All-Time Summary";
+    const allPayments = data[activePerson];
+    const totalPaid = allPayments.reduce((s, p) => s + p.amount, 0);
+
+    let totalOwed = 0;
+    let weekCount = 0;
+    if (allPayments.length > 0) {
+      const dates = allPayments.map(p => p.date).sort();
+      const firstMonday = getMonday(dates[0]);
+      const currentMonday = getMonday(toDateStr(new Date()));
+      let m = firstMonday;
+      while (m <= currentMonday) {
+        weekCount++;
+        m = addDays(m, 7);
+      }
+      totalOwed = Math.max(0, (weekCount * RENT) - totalPaid);
+    }
+
+    document.getElementById('sum-total-paid').textContent = formatMoney(totalPaid);
+    document.getElementById('sum-total-owed').textContent = formatMoney(totalOwed);
+    document.getElementById('sum-weeks').textContent = weekCount;
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  // ---- Events ----
+  PEOPLE.forEach(person => {
+    document.getElementById('tab-' + person).addEventListener('click', () => {
+      activePerson = person;
+      render();
+    });
+  });
+
+  document.getElementById('prev-week').addEventListener('click', () => {
+    viewMonday = addDays(viewMonday, -7);
+    render();
+  });
+
+  document.getElementById('next-week').addEventListener('click', () => {
+    viewMonday = addDays(viewMonday, 7);
+    render();
+  });
+
+  document.getElementById('btn-add').addEventListener('click', addPayment);
+
+  document.querySelectorAll('.add-form input').forEach(input => {
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') addPayment();
+    });
+  });
+
+  function addPayment() {
+    const amountInput = document.getElementById('pay-amount');
+    const dateInput = document.getElementById('pay-date');
+    const noteInput = document.getElementById('pay-note');
+
+    const amount = parseFloat(amountInput.value);
+    if (!amount || amount <= 0) { amountInput.focus(); return; }
+
+    const date = dateInput.value || toDateStr(new Date());
+
+    data[activePerson].push({
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      amount,
+      date,
+      note: noteInput.value.trim()
+    });
+
+    saveData();
+
+    viewMonday = getMonday(date);
+
+    amountInput.value = '';
+    noteInput.value = '';
+    dateInput.value = toDateStr(new Date());
+
+    render();
+  }
+
+  document.getElementById('payments-list').addEventListener('click', e => {
+    const btn = e.target.closest('.payment-delete');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    data[activePerson] = data[activePerson].filter(p => p.id !== id);
+    saveData();
+    render();
+  });
+
+  // ---- Init ----
+  viewMonday = getMonday(toDateStr(new Date()));
+  document.getElementById('pay-date').value = toDateStr(new Date());
+
+  loadData();
+  render();
+</script>
+
+</body>
+</html>

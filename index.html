@@ -15,6 +15,7 @@
     <title>The First Spark — Consciousness Technology</title>
     <meta name="description" content="Tools, maps, and community for people who know reality is programmable. Built from lived truth.">
     <meta name="facebook-domain-verification" content="5cz1minfp6hkdht48gujoo3gjibrkl" />
+    <meta name="p:domain_verify" content="46b8440e13cfadfd6dca4cdb2e82ec7c"/>
     <meta property="og:title" content="The First Spark — Consciousness Technology">
     <meta property="og:description" content="Tools, maps, and community for people who know reality is programmable.">
     <meta property="og:type" content="website">
@@ -631,6 +632,226 @@
             letter-spacing: .15em;
         }
 
+        /* ─── SELECTOR THESIS SECTION ─── */
+        #selector-thesis {
+            background: rgba(139,92,246,.04);
+            border-top: 1px solid rgba(139,92,246,.12);
+            border-bottom: 1px solid rgba(139,92,246,.12);
+        }
+        .thesis-container {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+        .thesis-header {
+            margin-bottom: 44px;
+        }
+        .thesis-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ─── FEEL IT SECTION ─── */
+        .feel-it {
+            position: relative;
+            z-index: 1;
+            padding: 80px 0;
+        }
+        .feel-it-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .feel-it-canvas-wrap {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            border: 1px solid var(--dimmer);
+            margin-bottom: 16px;
+            overflow: hidden;
+            cursor: crosshair;
+            background: rgba(5,5,8,.9);
+        }
+        #feelCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .feel-it-hint {
+            text-align: center;
+            font-size: .5em;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.2);
+            margin-bottom: 48px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        .feel-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media(max-width: 580px) {
+            .feel-grid { grid-template-columns: 1fr; }
+        }
+        .feel-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 36px 20px;
+            border: 1px solid var(--dimmer);
+            background: rgba(255,255,255,.015);
+            text-decoration: none;
+            overflow: hidden;
+            transition: transform .25s, border-color .25s, box-shadow .25s;
+        }
+        .feel-card:hover { transform: translateY(-4px); }
+        .feel-card.fc-gold { border-color: rgba(251,191,36,.2); }
+        .feel-card.fc-cyan { border-color: rgba(34,211,238,.2); }
+        .feel-card.fc-pink { border-color: rgba(255,0,150,.2); }
+        .feel-card.fc-gold:hover { border-color: var(--spark); box-shadow: 0 8px 32px rgba(251,191,36,.18); }
+        .feel-card.fc-cyan:hover { border-color: var(--cyan); box-shadow: 0 8px 32px rgba(34,211,238,.18); }
+        .feel-card.fc-pink:hover { border-color: #ff0096; box-shadow: 0 8px 32px rgba(255,0,150,.18); }
+
+        .feel-card-anim {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        /* Playground 1 — orbiting dots */
+        .fc-gold .feel-card-anim::before,
+        .fc-gold .feel-card-anim::after {
+            content: '';
+            position: absolute;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--spark);
+            top: 50%; left: 50%;
+            animation: orbit 3s linear infinite;
+        }
+        .fc-gold .feel-card-anim::after {
+            background: var(--nebula);
+            animation-delay: -1.5s;
+            width: 6px; height: 6px;
+        }
+        @keyframes orbit {
+            0%   { transform: translate(-50%,-50%) rotate(0deg) translateX(22px) rotate(0deg); }
+            100% { transform: translate(-50%,-50%) rotate(360deg) translateX(22px) rotate(-360deg); }
+        }
+        /* Playground 2 — pulsing layers */
+        .fc-cyan .feel-card-anim::before,
+        .fc-cyan .feel-card-anim::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1.5px solid var(--cyan);
+            animation: layerPulse 2.5s ease-in-out infinite;
+        }
+        .fc-cyan .feel-card-anim::after {
+            inset: 10px;
+            border-color: var(--nebula);
+            animation-delay: -0.8s;
+        }
+        @keyframes layerPulse {
+            0%,100% { transform: scale(.85); opacity:.4; }
+            50% { transform: scale(1.1); opacity:1; }
+        }
+        /* Wall — spray effect */
+        .fc-pink .feel-card-anim {
+            background: radial-gradient(circle at 60% 40%, rgba(255,0,150,.6) 0%, rgba(255,0,150,.2) 30%, transparent 60%),
+                        radial-gradient(circle at 35% 65%, rgba(0,255,255,.4) 0%, rgba(0,255,255,.15) 25%, transparent 50%);
+            border-radius: 50%;
+            animation: sprayGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes sprayGlow {
+            0% { filter: blur(2px) brightness(0.8); transform: scale(.95); }
+            100% { filter: blur(3px) brightness(1.3); transform: scale(1.05); }
+        }
+
+        .feel-card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .fc-gold .feel-card-title { color: var(--spark); }
+        .fc-cyan .feel-card-title { color: var(--cyan); }
+        .fc-pink .feel-card-title { color: #ff0096; }
+        .feel-card-desc {
+            font-size: .72em;
+            color: var(--dim);
+            line-height: 1.7;
+            max-width: 200px;
+        }
+        .feel-card-enter {
+            margin-top: 16px;
+            font-size: .5em;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            opacity: 0;
+            color: var(--white);
+            transition: opacity .25s;
+        }
+        .feel-card:hover .feel-card-enter { opacity: .7; }
+
+        /* Tools card — ember variant */
+        .feel-card.fc-ember { border-color: rgba(255,106,61,.2); }
+        .feel-card.fc-ember:hover { border-color: #FF6A3D; box-shadow: 0 8px 32px rgba(255,106,61,.18); }
+        .fc-ember .feel-card-title { color: #FF6A3D; }
+        .fc-ember .feel-card-anim {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            align-items: center;
+        }
+        .fc-ember .feel-card-anim .tool-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            animation: toolPop 2s ease-in-out infinite;
+        }
+        .fc-ember .feel-card-anim .tool-dot:nth-child(1) { background: #fbbf24; animation-delay: 0s; }
+        .fc-ember .feel-card-anim .tool-dot:nth-child(2) { background: #8b5cf6; animation-delay: 0.3s; }
+        .fc-ember .feel-card-anim .tool-dot:nth-child(3) { background: #22d3ee; animation-delay: 0.6s; }
+        .fc-ember .feel-card-anim .tool-dot:nth-child(4) { background: #ff0096; animation-delay: 0.9s; }
+        .fc-ember .feel-card-anim .tool-dot:nth-child(5) { background: #FF6A3D; animation-delay: 1.2s; }
+        @keyframes toolPop {
+            0%,100% { transform: scale(.7); opacity:.4; }
+            50% { transform: scale(1.2); opacity:1; }
+        }
+        .tool-links {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0;
+            text-align: left;
+            width: 100%;
+        }
+        .tool-links li {
+            margin: 6px 0;
+        }
+        .tool-links a {
+            font-size: .62em;
+            letter-spacing: .1em;
+            color: var(--dim);
+            text-decoration: none;
+            transition: color .2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tool-links a:hover { color: var(--white); }
+        .tool-links .tl-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
         /* ─── FOOTER ─── */
         footer {
             position: relative;
@@ -700,6 +921,166 @@
             color: rgba(255,255,255,.12);
             letter-spacing: .15em;
         }
+
+        /* ===== NOVEL SHOWCASE ===== */
+        .novel-showcase {
+            position: relative;
+            z-index: 10;
+            padding: 4rem 2rem 6rem;
+        }
+
+        .novel-showcase-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            background: linear-gradient(135deg, rgba(20,20,30,0.7), rgba(30,20,40,0.7));
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+            box-shadow:
+                0 0 60px rgba(236, 72, 153, 0.15),
+                0 0 120px rgba(139, 92, 246, 0.08);
+        }
+
+        .novel-cover-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .novel-cover-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 360px;
+            background: radial-gradient(ellipse, rgba(236, 72, 153, 0.3), rgba(139, 92, 246, 0.15), transparent 70%);
+            filter: blur(30px);
+            animation: coverGlow 4s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes coverGlow {
+            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .novel-cover-img {
+            position: relative;
+            z-index: 1;
+            width: 220px;
+            border-radius: 0.75rem;
+            box-shadow:
+                0 8px 32px rgba(0,0,0,0.6),
+                0 0 20px rgba(236, 72, 153, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .novel-cover-img:hover {
+            transform: scale(1.04) translateY(-4px);
+            box-shadow:
+                0 12px 40px rgba(0,0,0,0.7),
+                0 0 30px rgba(236, 72, 153, 0.5),
+                0 0 60px rgba(139, 92, 246, 0.2);
+        }
+
+        .novel-info {
+            flex: 1;
+        }
+
+        .novel-tagline {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.35em;
+            color: var(--hot-pink);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .novel-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+            text-shadow:
+                0 0 20px rgba(236, 72, 153, 0.4),
+                0 0 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .novel-subtitle {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.05em;
+        }
+
+        .novel-description {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 2rem;
+        }
+
+        .novel-description em {
+            color: var(--hot-pink);
+            font-style: italic;
+        }
+
+        .btn-purchase {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--hot-pink), var(--nebula-purple), var(--cosmic-cyan));
+            background-size: 200% 200%;
+            border: none;
+            border-radius: 0.75rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            cursor: pointer;
+            animation: btnGradient 3s ease infinite;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(236, 72, 153, 0.4);
+        }
+
+        .btn-purchase:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow:
+                0 8px 30px rgba(236, 72, 153, 0.5),
+                0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .novel-showcase-inner {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+                gap: 2rem;
+            }
+
+            .novel-cover-img {
+                width: 180px;
+            }
+
+            .novel-cover-glow {
+                width: 220px;
+                height: 300px;
+            }
+
+            .btn-purchase {
+                padding: 0.875rem 2rem;
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -729,7 +1110,7 @@
             <p class="hero-story">In 2020, I solved my mother's 1991 cold case. Her killer lived across my street. This is what I built from that fracture.</p>
             <div class="hero-ctas">
                 <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" class="btn-p">Join Free →</a>
-                <a href="https://whop.com/sparkverse-511c/get-your-personal-soul-map/" target="_blank" class="btn-g">Get Your Soul Map</a>
+                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" class="btn-g">Get Your Soul Map</a>
                 <a href="https://soul-maps.thefirstspark.shop/" target="_blank" class="btn-g">See The Maps ✦</a>
             </div>
             <div class="scroll-hint">Explore</div>
@@ -746,7 +1127,7 @@
             <p class="sec-sub">Start wherever you are. Every path leads to the same place.</p>
 
             <div class="cards">
-                <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" class="card gold">
+                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" class="card gold">
                     <div class="card-icon">◈</div>
                     <div class="card-name">Community</div>
                     <div class="card-desc">Tools, rituals, ebooks, oracle pulls, and monthly drops. Free to start. Upgrade when you're ready.</div>
@@ -779,6 +1160,67 @@
                         <div class="card-tag">New Release · Available Now</div>
                     </div>
                 </a>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- FEEL IT — INTERACTIVE PREVIEW -->
+    <section class="feel-it">
+        <div class="wrap">
+            <div class="feel-it-header">
+                <div class="sec-label">◈ &nbsp; Feel It First</div>
+                <h2 class="sec-title">Touch The Void</h2>
+                <p class="sec-sub">Don't take our word for it. Move your cursor. Tap the dark. This is what we build.</p>
+            </div>
+
+            <div class="feel-it-canvas-wrap">
+                <canvas id="feelCanvas"></canvas>
+            </div>
+            <div class="feel-it-hint">Move · Click · Feel</div>
+
+            <div class="feel-grid">
+                <a href="https://sparkverse.thefirstspark.shop/the-playground.html" target="_blank" class="feel-card fc-gold">
+                    <div class="feel-card-anim"></div>
+                    <div class="feel-card-title">The Playground</div>
+                    <div class="feel-card-desc">Draw constellations. Summon sparks. Five modes of cosmic play.</div>
+                    <div class="feel-card-enter">Enter →</div>
+                </a>
+
+                <a href="https://sparkverse.thefirstspark.shop/consciousness-playground.html" target="_blank" class="feel-card fc-cyan">
+                    <div class="feel-card-anim"></div>
+                    <div class="feel-card-title">Consciousness Playground</div>
+                    <div class="feel-card-desc">Click to awaken. Each interaction unlocks a new layer. How deep can you go?</div>
+                    <div class="feel-card-enter">Enter →</div>
+                </a>
+
+                <a href="https://thefirstspark.shop/the-wall-deluxe.html" target="_blank" class="feel-card fc-pink">
+                    <div class="feel-card-anim"></div>
+                    <div class="feel-card-title">The Graffiti Wall</div>
+                    <div class="feel-card-desc">Free expression canvas. Leave your mark. No rules. No limits.</div>
+                    <div class="feel-card-enter">Enter →</div>
+                </a>
+
+                <div class="feel-card fc-ember">
+                    <div class="feel-card-anim">
+                        <span class="tool-dot"></span>
+                        <span class="tool-dot"></span>
+                        <span class="tool-dot"></span>
+                        <span class="tool-dot"></span>
+                        <span class="tool-dot"></span>
+                    </div>
+                    <div class="feel-card-title">Test The Tools</div>
+                    <div class="feel-card-desc">Live apps. All free to try.</div>
+                    <ul class="tool-links">
+                        <li><a href="https://soul-maps.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#fbbf24"></span>Soul Maps</a></li>
+                        <li><a href="https://see-your-frequency.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#8b5cf6"></span>See Your Frequency</a></li>
+                        <li><a href="https://frequency.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#22d3ee"></span>Frequency Match</a></li>
+                        <li><a href="https://sigilcraft.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#ff0096"></span>Sigilcraft</a></li>
+                        <li><a href="https://sparkverse.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#FF6A3D"></span>Sparkverse</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -905,11 +1347,53 @@
                     <div class="sec-label">◈ &nbsp; Featured</div>
                     <div class="soul-title">Your Numbers Decoded.</div>
                     <p class="soul-desc">Every soul map is hand-decoded by KJP — your Life Path, Expression Number, Soul Urge, Personality, and Personal Year, woven together with astrology and the specific questions your soul is carrying right now.</p>
-                    <div class="soul-meta">$22 &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; Secure checkout</div>
+                    <div class="soul-meta">$44 &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; Secure checkout</div>
                 </div>
                 <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
-                    <div class="soul-price">$22</div>
-                    <a href="https://soul-maps.thefirstspark.shop" target="_blank" class="btn-p">Claim Your Map →</a>
+                    <div class="soul-price">$44</div>
+                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" class="btn-p">Claim Your Map →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Novel Showcase: The Genesis -->
+    <section class="novel-showcase" id="novelShowcase">
+        <div class="novel-showcase-inner">
+            <div class="novel-cover-wrapper">
+                <div class="novel-cover-glow"></div>
+                <img src="novel-cover.avif" alt="The Genesis — A Novel by Kate" class="novel-cover-img" />
+            </div>
+            <div class="novel-info">
+                <p class="novel-tagline">A SPARKVERSE NOVEL</p>
+                <h2 class="novel-title gradient-text">THE GENESIS</h2>
+                <p class="novel-subtitle">The Lineage Layer — What moved through us</p>
+                <p class="novel-description">
+                    What moved through us — and what stops here? <em>The Genesis</em> traces the bloodline of fire,
+                    silence, and reinvention across generations. Part origin story, part awakening,
+                    this is the novel that started everything.
+                </p>
+                <a href="https://whop.com/checkout/plan_hW8GlMaVgyLCu" target="_blank" rel="noopener" class="btn btn-purchase">
+                    PURCHASE IT NOW
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- THE SELECTOR MODEL THESIS -->
+    <section id="selector-thesis">
+        <div class="wrap">
+            <div class="thesis-container">
+                <div class="thesis-header">
+                    <div class="sec-label">◈ &nbsp; The Framework</div>
+                    <h2 class="sec-title">The Selector Model</h2>
+                    <p class="sec-sub">Four layers. One framework. Reality is programmable — consciousness is the code. Download the complete thesis or explore the interactive hub.</p>
+                </div>
+                <div class="thesis-ctas">
+                    <a href="https://thefirstspark.shop/selector-hub.html" target="_blank" class="btn-p">Explore The Hub →</a>
+                    <a href="https://thefirstspark.shop/selector-model.html" download class="btn-g">Download PDF ⬇</a>
                 </div>
             </div>
         </div>
@@ -933,7 +1417,7 @@
         <div class="wrap">
             <a href="/" class="footer-logo">THE FIRST SPARK</a>
             <div class="footer-links">
-                <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank">Community</a>
+                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank">Community</a>
                 <a href="https://soul-maps.thefirstspark.shop" target="_blank">Soul Maps</a>
                 <a href="https://sparkverse.thefirstspark.shop" target="_blank">Live Prototype</a>
                 <a href="investor-deck-v3.html">Invest</a>
@@ -1376,6 +1860,102 @@
 
         const el = document.getElementById('counterQuizzes');
         if (el) observer.observe(el.closest('section'));
+    })();
+    </script>
+
+    <!-- Feel It Canvas — interactive particle field -->
+    <script>
+    (function(){
+        const canvas = document.getElementById('feelCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let W, H, particles = [], mouse = { x: -100, y: -100 };
+
+        function resize() {
+            const r = canvas.parentElement.getBoundingClientRect();
+            W = canvas.width = r.width;
+            H = canvas.height = r.height;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const colors = ['#fbbf24','#8b5cf6','#22d3ee','#ff0096','#fff'];
+
+        function spawn(x, y, count) {
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 2.5 + 0.5;
+                particles.push({
+                    x: x, y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    life: 1,
+                    decay: Math.random() * 0.015 + 0.008,
+                    size: Math.random() * 3 + 1,
+                    color: colors[Math.floor(Math.random() * colors.length)]
+                });
+            }
+        }
+
+        canvas.addEventListener('mousemove', (e) => {
+            const r = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - r.left;
+            mouse.y = e.clientY - r.top;
+            spawn(mouse.x, mouse.y, 3);
+        });
+
+        canvas.addEventListener('click', (e) => {
+            const r = canvas.getBoundingClientRect();
+            spawn(e.clientX - r.left, e.clientY - r.top, 30);
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const r = canvas.getBoundingClientRect();
+            const t = e.touches[0];
+            mouse.x = t.clientX - r.left;
+            mouse.y = t.clientY - r.top;
+            spawn(mouse.x, mouse.y, 3);
+        }, { passive: false });
+
+        canvas.addEventListener('touchstart', (e) => {
+            const r = canvas.getBoundingClientRect();
+            const t = e.touches[0];
+            spawn(t.clientX - r.left, t.clientY - r.top, 20);
+        });
+
+        function draw() {
+            ctx.fillStyle = 'rgba(5,5,8,0.15)';
+            ctx.fillRect(0, 0, W, H);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.02;
+                p.life -= p.decay;
+
+                if (p.life <= 0) { particles.splice(i, 1); continue; }
+
+                ctx.globalAlpha = p.life;
+                ctx.fillStyle = p.color;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+            ctx.shadowBlur = 0;
+
+            // Ambient idle particles
+            if (Math.random() < 0.3) {
+                spawn(Math.random() * W, Math.random() * H, 1);
+            }
+
+            requestAnimationFrame(draw);
+        }
+        draw();
     })();
     </script>
 </body>

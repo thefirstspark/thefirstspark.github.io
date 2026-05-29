@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- deploy-stamp: 2026-05-26-cosmic-refresh-2 -->
+    <title>Soul Maps | The First Spark</title>
+    <meta name="description" content="Get your Soul Map and decode your Life Path, Expression, Soul Urge, and Sun Sign into a practical map for decisions, relationships, and next moves.">
+    <meta property="og:title" content="Soul Maps | The First Spark">
+    <meta property="og:description" content="Your numbers are not random. Get your Soul Map and turn your code into direction.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thefirstspark.shop/soul-maps-sales.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Soul Maps | The First Spark">
+    <meta name="twitter:description" content="Decode your Soul Code into a practical map for your next chapter.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0c0b12;
+            --paper: #050818;
+            --sand: #e9dccb;
+            --gold: #d9a441;
+            --amber: #f17f3a;
+            --teal: #1f8f8a;
+            --wine: #7f2f4e;
+            --text: #e4e9ff;
+            --muted: #b3bddf;
+            --card: rgba(14, 18, 48, 0.62);
+            --border: rgba(161, 183, 255, 0.22);
+            --shadow: 0 20px 60px rgba(7, 10, 30, 0.45);
+            --hero: linear-gradient(120deg, #0a0d24 0%, #1a1630 35%, #102852 100%);
+            --accent: linear-gradient(135deg, var(--gold), var(--amber));
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+            color: var(--text);
+            font-family: "JetBrains Mono", monospace;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse at 18% 12%, rgba(107, 77, 242, 0.3), transparent 48%),
+                radial-gradient(ellipse at 86% 28%, rgba(255, 106, 61, 0.2), transparent 44%),
+                radial-gradient(ellipse at 52% 92%, rgba(38, 228, 216, 0.18), transparent 50%),
+                linear-gradient(180deg, rgba(5, 8, 24, 0.42), rgba(5, 8, 24, 0.7)),
+                url('preview-soulmaps.png');
+            background-size: auto, auto, auto, cover, 72vw;
+            background-position: center, center, center, center, center top;
+            background-repeat: no-repeat;
+            opacity: 0.92;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        #cosmic-field {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        #aurora {
+            position: absolute;
+            inset: -24%;
+            background:
+                radial-gradient(ellipse 60% 40% at 28% 18%, rgba(107, 77, 242, 0.42), transparent 60%),
+                radial-gradient(ellipse 50% 34% at 72% 62%, rgba(38, 228, 216, 0.3), transparent 60%),
+                radial-gradient(ellipse 46% 32% at 52% 88%, rgba(255, 106, 61, 0.26), transparent 60%);
+            filter: blur(46px);
+            mix-blend-mode: screen;
+            animation: auroraShift 24s ease-in-out infinite alternate;
+        }
+
+        @keyframes auroraShift {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-2.5%, 2%) scale(1.06); }
+            100% { transform: translate(2%, -3%) scale(1.03); }
+        }
+
+        #starfield {
+            position: absolute;
+            inset: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: var(--s, 2px);
+            height: var(--s, 2px);
+            border-radius: 50%;
+            background: rgba(240, 245, 255, 0.95);
+            box-shadow: 0 0 18px rgba(140, 128, 255, 0.72), 0 0 24px rgba(255, 191, 105, 0.2);
+            opacity: 0.28;
+            animation: twinkle var(--d, 4s) ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.22; }
+            50% { opacity: 0.86; }
+        }
+
+        #color-dots {
+            position: absolute;
+            inset: 0;
+        }
+
+        .dot {
+            position: absolute;
+            width: var(--w, 10px);
+            height: var(--w, 10px);
+            border-radius: 50%;
+            filter: blur(0.1px);
+            opacity: 0.8;
+            animation: floatDot var(--f, 12s) ease-in-out infinite;
+        }
+
+        @keyframes floatDot {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.36; }
+            50% { transform: translateY(-18px) scale(1.15); opacity: 0.78; }
+        }
+
+        #soul-floats {
+            position: absolute;
+            inset: 0;
+        }
+
+        .soul-float {
+            position: absolute;
+            width: var(--size, 120px);
+            opacity: var(--o, 0.22);
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 0 24px rgba(121, 170, 255, 0.5)) saturate(1.15);
+            animation: driftSoul var(--t, 28s) ease-in-out infinite;
+        }
+
+        @keyframes driftSoul {
+            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            50% { transform: translate(24px, -36px) rotate(7deg) scale(1.08); }
+        }
+
+        .grain {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(rgba(206, 218, 255, 0.12) 0.65px, transparent 0.7px);
+            background-size: 3px 3px;
+            opacity: 0.18;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        header,
+        main,
+        .final,
+        .footer-note,
+        .sticky-cta {
+            position: relative;
+            z-index: 2;
+        }
+
+        .wrap {
+            width: min(1120px, 92vw);
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: 2.8px;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 14px;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            font-family: "Fraunces", serif;
+            line-height: 1.04;
+            letter-spacing: 0.2px;
+        }
+
+        p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.75;
+            font-size: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 0;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 12px;
+            letter-spacing: 2.1px;
+            text-transform: uppercase;
+            padding: 16px 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #130f1f;
+            box-shadow: 0 16px 34px rgba(217, 164, 65, 0.34);
+            font-weight: 700;
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            color: #f7f4ef;
+            background: transparent;
+        }
+
+        .hero {
+            min-height: 92vh;
+            background: var(--hero);
+            color: #f7f4ef;
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(5, 8, 24, 0.14), rgba(5, 8, 24, 0.62));
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 760px;
+            height: 760px;
+            border-radius: 50%;
+            right: -190px;
+            bottom: -300px;
+            background: radial-gradient(circle at center, rgba(241, 127, 58, 0.44), transparent 58%);
+            filter: blur(16px);
+            animation: pulseOrb 8s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes pulseOrb {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 34px;
+            padding: 92px 0;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8.5vw, 6.4rem);
+            max-width: 11ch;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 .hot {
+            color: #ffbe6a;
+        }
+
+        .hero-sub {
+            max-width: 55ch;
+            color: rgba(247, 244, 239, 0.83);
+            margin-bottom: 28px;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .hero-proof {
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: rgba(247, 244, 239, 0.7);
+        }
+
+        .hero-card {
+            background: rgba(12, 18, 45, 0.55);
+            border: 1px solid rgba(197, 211, 255, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            animation: riseIn 700ms ease both;
+        }
+
+        .hero-price {
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 0.8px;
+            font-size: 62px;
+            color: #ffbe6a;
+            line-height: 0.95;
+            margin: 6px 0 10px;
+        }
+
+        .hero-price small {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 14px;
+            color: rgba(247, 244, 239, 0.78);
+            text-decoration: none;
+            margin-left: 6px;
+        }
+
+        .countdown {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(247, 244, 239, 0.2);
+            font-size: 11px;
+            color: rgba(247, 244, 239, 0.82);
+        }
+
+        .section {
+            padding: 92px 0;
+            background: linear-gradient(180deg, rgba(8, 12, 34, 0.58), rgba(8, 12, 34, 0.48));
+            backdrop-filter: blur(1px);
+        }
+
+        .section-head {
+            max-width: 690px;
+            margin-bottom: 34px;
+        }
+
+        .section-head h2 {
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            margin-bottom: 12px;
+            color: #edf2ff;
+            text-shadow: 0 0 18px rgba(126, 141, 255, 0.16);
+        }
+
+        .what-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .what-card {
+            background: rgba(10, 16, 43, 0.7);
+            border: 1px solid rgba(161, 183, 255, 0.28);
+            padding: 18px;
+            min-height: 210px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 8px 30px rgba(17, 11, 30, 0.07);
+        }
+
+        .what-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(31, 143, 138, 0.45);
+        }
+
+        .what-tag {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 12px;
+        }
+
+        .what-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 8px;
+            color: #eef2ff;
+        }
+
+        .outcomes {
+            background: linear-gradient(120deg, rgba(127, 47, 78, 0.08), rgba(31, 143, 138, 0.08));
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .out-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .out-item {
+            background: rgba(10, 16, 43, 0.72);
+            border: 1px solid var(--border);
+            padding: 18px;
+        }
+
+        .out-item strong {
+            display: block;
+            color: #f1f4ff;
+            margin-bottom: 8px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .stack-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .stack,
+        .who {
+            background: rgba(10, 16, 43, 0.7);
+            border: 1px solid rgba(161, 183, 255, 0.28);
+            padding: 24px;
+            box-shadow: 0 10px 34px rgba(17, 11, 30, 0.08);
+        }
+
+        .stack ul,
+        .who ul,
+        .faq ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .stack li,
+        .who li {
+            padding: 11px 0;
+            border-bottom: 1px dashed rgba(33, 27, 47, 0.2);
+            color: #312948;
+            font-size: 13px;
+        }
+
+        .stack li:last-child,
+        .who li:last-child {
+            border-bottom: 0;
+        }
+
+        .value-box {
+            margin-top: 16px;
+            border: 1px solid rgba(170, 192, 255, 0.3);
+            background: rgba(27, 22, 56, 0.72);
+            padding: 16px;
+        }
+
+        .value-box p {
+            font-size: 12px;
+            line-height: 1.7;
+            color: #d0d8f6;
+        }
+
+        .value-box strong {
+            color: #ffcf72;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .quote {
+            background: #1a1630;
+            border: 1px solid rgba(247, 244, 239, 0.16);
+            color: rgba(247, 244, 239, 0.9);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .quote p {
+            color: rgba(247, 244, 239, 0.9);
+            font-size: 13px;
+        }
+
+        .quote .name {
+            margin-top: 12px;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: #ffbe6a;
+            text-transform: uppercase;
+        }
+
+        .faq {
+            background: rgba(10, 16, 43, 0.86);
+            border: 1px solid rgba(161, 183, 255, 0.28);
+            padding: 24px;
+            box-shadow: 0 10px 36px rgba(17, 11, 30, 0.08);
+        }
+
+        .faq li {
+            padding: 14px 0;
+            border-bottom: 1px dashed rgba(33, 27, 47, 0.2);
+        }
+
+        .faq li:last-child {
+            border-bottom: 0;
+        }
+
+        .faq h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            color: #eef2ff;
+        }
+
+        .stack li,
+        .who li,
+        .out-item p,
+        .what-card p,
+        .faq p {
+            color: #c4ceed;
+        }
+
+        .final {
+            background: linear-gradient(180deg, rgba(10, 14, 32, 0.72), rgba(6, 8, 24, 0.96));
+            color: #f7f4ef;
+            text-align: center;
+            padding: 86px 0 94px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final::after {
+            content: "";
+            position: absolute;
+            inset: -20px auto auto 50%;
+            width: min(820px, 90vw);
+            height: 460px;
+            transform: translateX(-50%);
+            background: url('preview-soulmaps.png') center top / contain no-repeat;
+            opacity: 0.22;
+            filter: blur(0.2px) drop-shadow(0 0 18px rgba(121, 170, 255, 0.25));
+            pointer-events: none;
+        }
+
+        .final::before {
+            content: "";
+            position: absolute;
+            inset: auto -70px -90px auto;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(31, 143, 138, 0.5), transparent 70%);
+            filter: blur(10px);
+        }
+
+        .final h2 {
+            color: #fff;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            margin-bottom: 14px;
+        }
+
+        .final p {
+            max-width: 62ch;
+            margin: 0 auto 28px;
+            color: rgba(247, 244, 239, 0.86);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 11px;
+            color: #786f87;
+            padding: 24px 0 34px;
+        }
+
+        .sticky-cta {
+            position: fixed;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            z-index: 80;
+            display: none;
+            background: #130f1f;
+            border: 1px solid rgba(247, 244, 239, 0.2);
+            box-shadow: var(--shadow);
+            padding: 10px;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sticky-cta span {
+            color: #f7f4ef;
+            font-size: 11px;
+            letter-spacing: 1px;
+            line-height: 1.5;
+        }
+
+        .sticky-cta .btn {
+            flex: 1;
+            padding: 13px 14px;
+            font-size: 10px;
+            letter-spacing: 1.4px;
+        }
+
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        [data-reveal].show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 500ms ease, transform 500ms ease;
+        }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1020px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .what-grid { grid-template-columns: repeat(2, 1fr); }
+            .out-grid { grid-template-columns: 1fr; }
+            .stack-wrap { grid-template-columns: 1fr; }
+            .testimonials { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 700px) {
+            .section { padding: 74px 0; }
+            .hero { min-height: auto; }
+            .hero-grid { padding: 80px 0 50px; }
+            .hero h1 { max-width: none; }
+            .what-grid { grid-template-columns: 1fr; }
+            .sticky-cta { display: flex; }
+            .footer-note { padding-bottom: 100px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #aurora,
+            .star,
+            .dot,
+            .soul-float {
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="cosmic-field" aria-hidden="true">
+        <div id="aurora"></div>
+        <div id="starfield">
+            <span class="star" style="top:7%;left:9%;--s:2px;--d:3.2s;"></span>
+            <span class="star" style="top:18%;left:21%;--s:1px;--d:4.1s;"></span>
+            <span class="star" style="top:12%;left:74%;--s:2px;--d:5s;"></span>
+            <span class="star" style="top:32%;left:63%;--s:1.5px;--d:3.4s;"></span>
+            <span class="star" style="top:44%;left:15%;--s:2px;--d:4.6s;"></span>
+            <span class="star" style="top:58%;left:82%;--s:1px;--d:3.9s;"></span>
+            <span class="star" style="top:72%;left:38%;--s:1.5px;--d:4.8s;"></span>
+            <span class="star" style="top:83%;left:67%;--s:2px;--d:3.5s;"></span>
+            <span class="star" style="top:89%;left:24%;--s:1px;--d:4.4s;"></span>
+        </div>
+        <div id="color-dots">
+            <span class="dot" style="top:14%;left:84%;--w:10px;--f:13s;background:rgba(255,106,61,.75);"></span>
+            <span class="dot" style="top:26%;left:12%;--w:8px;--f:11s;background:rgba(107,77,242,.72);"></span>
+            <span class="dot" style="top:47%;left:89%;--w:12px;--f:15s;background:rgba(38,228,216,.62);"></span>
+            <span class="dot" style="top:63%;left:7%;--w:9px;--f:10s;background:rgba(243,178,58,.7);"></span>
+            <span class="dot" style="top:77%;left:78%;--w:11px;--f:16s;background:rgba(179,120,255,.68);"></span>
+            <span class="dot" style="top:90%;left:48%;--w:8px;--f:12s;background:rgba(88,206,255,.7);"></span>
+        </div>
+        <div id="soul-floats">
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:8%;left:4%;--size:140px;--o:.15;--t:32s;" />
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:19%;left:80%;--size:118px;--o:.13;--t:28s;" />
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:40%;left:2%;--size:132px;--o:.14;--t:30s;" />
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:56%;left:86%;--size:122px;--o:.12;--t:33s;" />
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:74%;left:9%;--size:128px;--o:.14;--t:27s;" />
+            <img class="soul-float" src="preview-soulmaps.png" alt="" style="top:82%;left:72%;--size:136px;--o:.13;--t:31s;" />
+        </div>
+    </div>
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <div style="position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:6;padding:8px 14px;border:1px solid rgba(161,183,255,0.28);background:rgba(10,16,43,0.72);backdrop-filter:blur(10px);color:#f3f6ff;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;box-shadow:0 0 24px rgba(107,77,242,0.18);">Cosmic Mode: Archive Layer Active</div>
+
+    <header class="hero" id="top">
+        <div class="wrap hero-grid">
+            <div>
+                <div class="eyebrow">The First Spark | Soul Maps</div>
+                <h1>Stop guessing your next move.<br><span class="hot">Read your code.</span></h1>
+                <p class="hero-sub">Your Soul Map translates your Life Path, Expression, Soul Urge, and Sun Sign into one practical map you can use for decisions, relationships, business moves, and your next chapter.</p>
+                <div class="hero-cta">
+                    <a class="btn btn-primary" href="https://whop.com/checkout/plan_SOULMAP_BASE/" target="_blank" rel="noopener noreferrer">Get My Soul Map</a>
+                    <a class="btn btn-secondary" href="#what-you-get">See What You Get</a>
+                </div>
+                <p class="hero-proof">Used by creators, founders, and deep-feelers who want clarity fast, not another vague reading.</p>
+            </div>
+
+            <aside class="hero-card" aria-label="Offer summary card">
+                <div class="eyebrow" style="margin-bottom:8px;color:#ffbe6a;">Offer</div>
+                <h2 style="font-size:1.9rem; color:#fff;">OG Soul Map Deluxe Edition</h2>
+                <div class="hero-price">$44 <small>Monthly updates included</small></div>
+                <p style="color:rgba(247,244,239,0.83);">Your full Soul Map decode plus monthly updates to keep your next moves aligned.</p>
+                <ul style="margin:14px 0 0; padding-left:18px; color:rgba(247,244,239,0.9); font-size:12px; line-height:1.8;">
+                    <li>Life Path breakdown</li>
+                    <li>Expression + Soul Urge decode</li>
+                    <li>Sun Sign filter for your code</li>
+                    <li>Monthly updates included</li>
+                </ul>
+                <div class="countdown">Only offer live: OG Soul Map Deluxe Edition at $44.</div>
+            </aside>
+        </div>
+    </header>
+
+    <main>
+        <section class="section wrap" id="what-you-get">
+            <div class="section-head" data-reveal>
+                <div class="eyebrow">What Is In A Soul Map?</div>
+                <h2>The Exact Components We Compute For You</h2>
+                <p>No fluff. Your Soul Map is built from your birth date and full birth name, then decoded into specific numerological and archetypal guidance.</p>
+            </div>
+
+            <div class="what-grid">
+                <article class="what-card" data-reveal>
+                    <div class="what-tag">01 | Life Path</div>
+                    <h3>Your Core Journey</h3>
+                    <p>Calculated from birth date reduction. Shows the central lesson and trajectory of your life arc.</p>
+                </article>
+                <article class="what-card" data-reveal>
+                    <div class="what-tag">02 | Expression</div>
+                    <h3>Your Natural Gift</h3>
+                    <p>Calculated from full birth name letter values. Reveals your strongest mode of impact and creation.</p>
+                </article>
+                <article class="what-card" data-reveal>
+                    <div class="what-tag">03 | Soul Urge</div>
+                    <h3>Your Inner Desire</h3>
+                    <p>Calculated from vowel values in your birth name. Exposes what actually fulfills you beneath goals.</p>
+                </article>
+                <article class="what-card" data-reveal>
+                    <div class="what-tag">04 | Sun Sign Filter</div>
+                    <h3>Your Expression Lens</h3>
+                    <p>Mapped from date ranges to zodiac archetype. Shows how your code tends to show up in the world.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section outcomes">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <div class="eyebrow" style="color:var(--wine);">What Buyers Use It For</div>
+                    <h2>Practical Outcomes, Not Just Insight</h2>
+                </div>
+                <div class="out-grid">
+                    <div class="out-item" data-reveal>
+                        <strong>Decisions</strong>
+                        <p>Know which opportunities fit your actual path versus what just looks good in the moment.</p>
+                    </div>
+                    <div class="out-item" data-reveal>
+                        <strong>Relationships</strong>
+                        <p>Understand your emotional pattern and communication style so you stop repeating the same loop.</p>
+                    </div>
+                    <div class="out-item" data-reveal>
+                        <strong>Momentum</strong>
+                        <p>Turn confusion into a concrete next move based on your code, not external pressure.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section wrap" id="offer">
+            <div class="section-head" data-reveal>
+                <div class="eyebrow">Offer Stack</div>
+                <h2>What You Get Today</h2>
+            </div>
+
+            <div class="stack-wrap">
+                <article class="stack" data-reveal>
+                    <h3 style="font-size:1.6rem; margin-bottom:10px; color:#eef2ff;">OG Soul Map Deluxe Edition — $44</h3>
+                    <ul>
+                        <li>Full Soul Code decode: Life Path, Expression, Soul Urge, Sun Sign</li>
+                        <li>Interpretation of your strongest gifts and likely friction points</li>
+                        <li>Clear written prompts to apply your map in real life this week</li>
+                        <li>Monthly updates included</li>
+                        <li>Immediate checkout access via Whop</li>
+                    </ul>
+                    <div class="value-box">
+                        <p><strong>Offer note:</strong> The current and only public price is $44, and monthly updates are included.</p>
+                    </div>
+                    <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
+                        <a class="btn btn-primary" href="https://whop.com/checkout/plan_SOULMAP_BASE/" target="_blank" rel="noopener noreferrer">Buy OG Soul Map Deluxe</a>
+                    </div>
+                </article>
+
+                <article class="who" data-reveal>
+                    <h3 style="font-size:1.6rem; margin-bottom:10px; color:#eef2ff;">Best For You If...</h3>
+                    <ul>
+                        <li>You are in a transition and need direction now</li>
+                        <li>You overthink decisions and want a grounded framework</li>
+                        <li>You know you are repeating patterns and want to break them</li>
+                        <li>You are building something meaningful and want alignment</li>
+                        <li>You want insight that actually changes your behavior</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="section wrap" id="social-proof">
+            <div class="section-head" data-reveal>
+                <div class="eyebrow">Social Proof</div>
+                <h2>What People Say After They Get Their Map</h2>
+            </div>
+
+            <div class="testimonials">
+                <blockquote class="quote" data-reveal>
+                    <p>"I expected a vibe reading. I got a clear blueprint for why I make decisions the way I do. I changed two offers in my business within 24 hours."</p>
+                    <div class="name">Founder, wellness brand</div>
+                </blockquote>
+                <blockquote class="quote" data-reveal>
+                    <p>"The Soul Urge section called me out exactly. It explained the friction I kept creating in relationships and gave me a next step that actually worked."</p>
+                    <div class="name">Creator, Los Angeles</div>
+                </blockquote>
+                <blockquote class="quote" data-reveal>
+                    <p>"This felt practical, not abstract. I used my map to choose one path and finally stopped spinning in five directions at once."</p>
+                    <div class="name">Operator, startup team</div>
+                </blockquote>
+            </div>
+        </section>
+
+        <section class="section wrap" id="faq">
+            <div class="section-head" data-reveal>
+                <div class="eyebrow">FAQ</div>
+                <h2>Before You Buy</h2>
+            </div>
+
+            <div class="faq" data-reveal>
+                <ul>
+                    <li>
+                        <h3>What information do I need?</h3>
+                        <p>Your birth date and your full birth name as it appears on your birth certificate.</p>
+                    </li>
+                    <li>
+                        <h3>How is this different from the free Soul Code tool?</h3>
+                        <p>The free tool gives your numbers. The paid Soul Map gives the strategic interpretation and application layer.</p>
+                    </li>
+                    <li>
+                        <h3>Can I buy this for someone else?</h3>
+                        <p>Yes. You can purchase and provide their correct birth details for the map.</p>
+                    </li>
+                    <li>
+                        <h3>Do I get updates after I buy?</h3>
+                        <p>Yes. Monthly updates are included with the OG Soul Map Deluxe Edition.</p>
+                    </li>
+                    <li>
+                        <h3>Is there a promo code?</h3>
+                        <p>If you made it this far, you found it: use <strong>SOULSALE</strong> for $22 off the $44 OG Soul Map Deluxe Edition.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <section class="final" id="buy-now">
+        <div class="wrap" data-reveal>
+            <div class="eyebrow" style="color:#ffbe6a;">Ready?</div>
+            <h2>Get Your Soul Map Now</h2>
+            <p>Your map will not make the decision for you. It will make your decision obvious. If you are done circling, this is your moment.</p>
+            <a class="btn btn-primary" href="https://whop.com/checkout/plan_SOULMAP_BASE/" target="_blank" rel="noopener noreferrer">Yes, I Want My Soul Map</a>
+        </div>
+    </section>
+
+    <div class="footer-note">The First Spark | Soul Map Sales Page</div>
+
+    <div class="sticky-cta" aria-label="Sticky purchase bar">
+        <span>OG Soul Map Deluxe: $44<br>Monthly updates included.</span>
+        <a class="btn btn-primary" href="https://whop.com/checkout/plan_SOULMAP_BASE/" target="_blank" rel="noopener noreferrer">Buy Now</a>
+    </div>
+
+    <script>
+        (function revealOnScroll() {
+            const els = document.querySelectorAll('[data-reveal]');
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.16 });
+
+            els.forEach((el, i) => {
+                el.style.transitionDelay = (i % 5) * 55 + 'ms';
+                io.observe(el);
+            });
+        })();
+
+        // Countdown removed because this offer is now a single stable price with optional promo code.
+    </script>
+</body>
+</html>

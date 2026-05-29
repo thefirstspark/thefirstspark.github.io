@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Davey | The Patron Saint of Salvage</title>
+    <meta name="description" content="Soul Map for David Norton Ferris — Virgo Sun, Leo Moon, Scorpio Rising. The warrior-craftsman who turns trash into treasure.">
+    <meta property="og:title" content="Davey | The Patron Saint of Salvage">
+    <meta property="og:description" content="A Soul Map from The First Spark — for the best man friend who builds, rides, and reclaims what the world threw away.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thefirstspark.shop/davey.html">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♍</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --steel: #1a1a1f;
+            --gunmetal: #2a2a30;
+            --ember: #ff5722;
+            --ember-glow: rgba(255, 87, 34, 0.35);
+            --worn-gold: #c9a14a;
+            --bone: #d8d2c4;
+            --rust: #8b3a1f;
+            --grease: #5a5550;
+            --heading: 'Cormorant Garamond', serif;
+            --body: 'Space Mono', monospace;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--body);
+            background: var(--void);
+            color: var(--bone);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* Sparks drifting up like from a forge */
+        .sparks {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                radial-gradient(1px 1px at 20px 30px, var(--ember), transparent),
+                radial-gradient(1px 1px at 40px 70px, var(--worn-gold), transparent),
+                radial-gradient(1.5px 1.5px at 90px 40px, var(--ember), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,87,34,0.6), transparent),
+                radial-gradient(1px 1px at 200px 150px, var(--worn-gold), transparent),
+                radial-gradient(1.5px 1.5px at 280px 180px, var(--ember), transparent),
+                radial-gradient(1px 1px at 320px 60px, var(--bone), transparent);
+            background-size: 400px 250px;
+            animation: forge 80s linear infinite;
+            opacity: 0.5;
+        }
+        @keyframes forge {
+            from { transform: translateY(0); }
+            to { transform: translateY(-250px); }
+        }
+
+        /* Sacred geometry — gear/circle hybrid */
+        .geometry {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.07;
+        }
+        .geometry svg {
+            width: 90vmin;
+            height: 90vmin;
+            animation: rotate 240s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .card {
+            position: relative;
+            z-index: 2;
+            max-width: 640px;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(26,26,31,0.85), rgba(10,10,10,0.95));
+            border: 1px solid rgba(201, 161, 74, 0.2);
+            border-radius: 4px;
+            padding: 60px 40px;
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.6),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            text-align: center;
+        }
+
+        .eyebrow {
+            font-family: var(--body);
+            font-size: 10px;
+            letter-spacing: 5px;
+            color: var(--ember);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .glyph {
+            font-size: 2.4rem;
+            color: var(--worn-gold);
+            margin-bottom: 18px;
+            text-shadow: 0 0 20px var(--ember-glow);
+        }
+
+        h1.name {
+            font-family: var(--heading);
+            font-size: clamp(3rem, 9vw, 5rem);
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            background: linear-gradient(135deg, var(--worn-gold) 0%, var(--ember) 60%, var(--rust) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .full-name {
+            font-family: var(--body);
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--grease);
+            text-transform: uppercase;
+            margin-bottom: 36px;
+        }
+
+        .archetype {
+            font-family: var(--heading);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--bone);
+            margin-bottom: 8px;
+        }
+
+        .archetype-sub {
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--worn-gold);
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .birth-info {
+            font-family: var(--body);
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--grease);
+            margin-bottom: 36px;
+            line-height: 2;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--worn-gold), transparent);
+            margin: 36px auto;
+        }
+
+        .astro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 36px;
+        }
+        .astro-item {
+            background: rgba(255, 87, 34, 0.04);
+            border: 1px solid rgba(201, 161, 74, 0.12);
+            border-radius: 2px;
+            padding: 14px 8px;
+        }
+        .astro-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--grease);
+            margin-bottom: 6px;
+        }
+        .astro-value {
+            font-family: var(--heading);
+            font-size: 1rem;
+            color: var(--worn-gold);
+            letter-spacing: 0.04em;
+        }
+
+        .section-label {
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: var(--ember);
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            margin-top: 8px;
+        }
+
+        .selector-block {
+            text-align: left;
+            background: rgba(0,0,0,0.4);
+            border-left: 2px solid var(--ember);
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            border-radius: 0 2px 2px 0;
+        }
+        .selector-block h4 {
+            font-family: var(--heading);
+            font-size: 1.1rem;
+            color: var(--worn-gold);
+            margin-bottom: 6px;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+        }
+        .selector-block p {
+            font-size: 12px;
+            color: var(--bone);
+            line-height: 1.7;
+        }
+        .selector-block .read {
+            display: block;
+            font-size: 10px;
+            color: var(--grease);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .message {
+            font-family: var(--heading);
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--bone);
+            font-style: italic;
+            margin: 32px 0;
+            text-align: left;
+        }
+        .message .hl {
+            color: var(--ember);
+            font-style: normal;
+            font-family: var(--body);
+            font-size: 0.9em;
+            letter-spacing: 0.04em;
+        }
+        .message .gold {
+            color: var(--worn-gold);
+            font-style: normal;
+            font-family: var(--body);
+            font-size: 0.9em;
+        }
+
+        .from {
+            font-family: var(--body);
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: var(--worn-gold);
+            text-transform: uppercase;
+            margin-top: 30px;
+        }
+
+        .numerology {
+            margin-top: 40px;
+            padding-top: 36px;
+            border-top: 1px solid rgba(201, 161, 74, 0.15);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .num {
+            text-align: center;
+        }
+        .num-label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--grease);
+            margin-bottom: 8px;
+        }
+        .num-value {
+            font-family: var(--heading);
+            font-size: 2.6rem;
+            color: var(--ember);
+            text-shadow: 0 0 25px var(--ember-glow);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .num-meaning {
+            font-size: 9px;
+            letter-spacing: 1px;
+            color: var(--bone);
+            text-transform: uppercase;
+        }
+
+        .signature {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(201, 161, 74, 0.15);
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--grease);
+            text-transform: uppercase;
+        }
+        .signature a {
+            color: var(--worn-gold);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--worn-gold);
+        }
+
+        .footer-mantra {
+            font-family: var(--heading);
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--worn-gold);
+            margin-top: 14px;
+            letter-spacing: 0.04em;
+        }
+
+        @media (max-width: 600px) {
+            .card { padding: 40px 24px; }
+            .astro-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .astro-item { padding: 10px 4px; }
+            .astro-value { font-size: 0.85rem; }
+            .numerology { gap: 8px; }
+            .num-value { font-size: 2rem; }
+            .selector-block { padding: 14px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparks"></div>
+    <div class="geometry">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Gear-like sacred geometry -->
+            <circle cx="200" cy="200" r="180" fill="none" stroke="#c9a14a" stroke-width="0.5"/>
+            <circle cx="200" cy="200" r="140" fill="none" stroke="#ff5722" stroke-width="0.5"/>
+            <circle cx="200" cy="200" r="100" fill="none" stroke="#c9a14a" stroke-width="0.5"/>
+            <circle cx="200" cy="200" r="60" fill="none" stroke="#ff5722" stroke-width="0.5"/>
+            <!-- Cross / four directions -->
+            <line x1="20" y1="200" x2="380" y2="200" stroke="#c9a14a" stroke-width="0.3"/>
+            <line x1="200" y1="20" x2="200" y2="380" stroke="#c9a14a" stroke-width="0.3"/>
+            <!-- Star of warrior -->
+            <polygon points="200,40 235,165 360,165 260,235 295,360 200,290 105,360 140,235 40,165 165,165"
+                fill="none" stroke="#ff5722" stroke-width="0.4"/>
+        </svg>
+    </div>
+
+    <div class="card">
+        <div class="eyebrow">Soul Map · The First Spark</div>
+        <div class="glyph">♍ ♌ ♏</div>
+
+        <h1 class="name">Davey</h1>
+        <p class="full-name">David Norton Ferris</p>
+
+        <p class="archetype">The Patron Saint of Salvage</p>
+        <p class="archetype-sub">Warrior · Craftsman · Reclaimer</p>
+
+        <p class="birth-info">
+            September 7, 1988 · 11:23 AM<br>
+            Akron City Hospital · Akron, Ohio
+        </p>
+
+        <div class="astro-grid">
+            <div class="astro-item">
+                <p class="astro-label">Sun</p>
+                <p class="astro-value">Virgo 15°</p>
+            </div>
+            <div class="astro-item">
+                <p class="astro-label">Moon</p>
+                <p class="astro-value">Leo 6°</p>
+            </div>
+            <div class="astro-item">
+                <p class="astro-label">Rising</p>
+                <p class="astro-value">Scorpio 6°</p>
+            </div>
+            <div class="astro-item">
+                <p class="astro-label">Mars</p>
+                <p class="astro-value">Aries 10°</p>
+            </div>
+            <div class="astro-item">
+                <p class="astro-label">Venus</p>
+                <p class="astro-value">Leo 0°</p>
+            </div>
+            <div class="astro-item">
+                <p class="astro-label">Mercury</p>
+                <p class="astro-value">Libra 10°</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="section-label">— The Selector Read —</p>
+
+        <div class="selector-block">
+            <h4>Physics Layer · The Body Knows</h4>
+            <p>Mars in Aries — pure warrior code, undiluted. This is the placement of someone whose hands know the answer before the mind does. Built to ride, to fight, to fix. The body isn't the vehicle; <em>it's the instrument</em>.</p>
+            <span class="read">Motorcycles. Iron. Speed. Forge.</span>
+        </div>
+
+        <div class="selector-block">
+            <h4>Metaphysics Layer · Scorpio Rising + Pluto in the 1st</h4>
+            <p>The mask is intensity. People feel him before they meet him. Pluto sitting on the ascendant means he's been through the underworld and came back with something. He doesn't broadcast it. He carries it in the eyes.</p>
+            <span class="read">Survivor frequency. Reads a room in 3 seconds.</span>
+        </div>
+
+        <div class="selector-block">
+            <h4>Relational Layer · Leo Moon, Venus in Leo</h4>
+            <p>Underneath the gunmetal exterior — a heart that runs hot and gold. Leo Moon needs to be the loyal one, the one who shows up, the one whose word is the contract. Best man friend isn't a title — <em>it's the operating system</em>.</p>
+            <span class="read">Loves loud, even when he speaks low.</span>
+        </div>
+
+        <div class="selector-block">
+            <h4>Temporal Layer · Virgo Sun, Saturn-Uranus in Sagittarius</h4>
+            <p>Virgo Sun = the craftsman who sees the broken thing and starts cataloging the fix. Saturn conjunct Uranus in his 2nd house of resources means he was born under the sign of <em>"the system says throw it away — I say it still works."</em> Dumpster diving isn't a hobby. It's a philosophy. He's a one-man recycling sigil for the simulation.</p>
+            <span class="read">What the world discards, he resurrects.</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="message">
+            Davey — you came in with <span class="hl">warrior hands</span> and a <span class="gold">lion's heart</span>. Most people see the iron, the leather, the workshop, the loaded chamber. They don't see the <span class="gold">Virgo precision</span> behind every bolt you tighten, every bike you bring back from the dead, every piece of "trash" you turn into something that runs again.<br><br>
+            The world was built by people like you — the ones who <span class="hl">do the hard thing</span> because the hard thing is the right thing. Who keep the engines running while everyone else is staring at screens. Who'd give the shirt off their back and the last bullet in the magazine to the people they call their own.<br><br>
+            You don't need a Soul Map to tell you who you are. You already know. <span class="gold">This is just the receipt.</span>
+        </p>
+
+        <p class="from">— Kate · The First Spark</p>
+
+        <div class="numerology">
+            <div class="num">
+                <p class="num-label">Life Path</p>
+                <p class="num-value">6</p>
+                <p class="num-meaning">The Loyal · The Protector</p>
+            </div>
+            <div class="num">
+                <p class="num-label">Expression</p>
+                <p class="num-value">4</p>
+                <p class="num-meaning">The Builder · Foundation</p>
+            </div>
+            <div class="num">
+                <p class="num-label">Soul Urge</p>
+                <p class="num-value">9</p>
+                <p class="num-meaning">The Old Soul · Completion</p>
+            </div>
+        </div>
+
+        <div class="signature">
+            <p>Generated at <a href="https://thefirstspark.shop">thefirstspark.shop</a></p>
+            <p class="footer-mantra">"Reality is programmable. He just programs it with his hands."</p>
+        </div>
+    </div>
+</body>
+</html>

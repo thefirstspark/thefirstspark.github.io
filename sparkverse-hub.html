@@ -905,6 +905,516 @@
         .glow-gold { filter: drop-shadow(0 0 10px var(--spark-gold)); }
         .glow-cyan { filter: drop-shadow(0 0 10px var(--plasma-cyan)); }
         .glow-violet { filter: drop-shadow(0 0 10px var(--cosmic-violet)); }
+
+        /* New Hub Styles */
+        .hero-welcome {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(157,78,221,0.1), rgba(0,255,247,0.05));
+            border: 1px solid var(--ghost);
+            border-radius: 20px;
+        }
+
+        .welcome-left h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--stardust);
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-vibe {
+            font-size: 0.95rem;
+            color: rgba(232,232,232,0.6);
+        }
+
+        .energy-pulse {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .energy-core {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, rgba(0,255,247,0.3), rgba(157,78,221,0.2));
+            border: 2px solid var(--plasma-cyan);
+            border-radius: 50%;
+            animation: energyPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes energyPulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .energy-label {
+            position: relative;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--plasma-cyan);
+            letter-spacing: 0.2em;
+            margin-top: 1.5rem;
+            z-index: 2;
+        }
+
+        .energy-value {
+            position: relative;
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--spark-gold);
+            z-index: 2;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, rgba(0,255,247,0.1), rgba(157,78,221,0.1));
+            border: 1px solid var(--ghost);
+            border-radius: 15px;
+            color: var(--stardust);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .quick-btn:hover {
+            border-color: var(--spark-gold);
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(0,255,247,0.15));
+            transform: translateY(-3px);
+        }
+
+        .btn-icon {
+            font-size: 1.5rem;
+        }
+
+        .btn-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .hub-two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .chat-section {
+            background: var(--deep-space);
+            border: 1px solid var(--ghost);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+
+        .section-header-small {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--ghost);
+        }
+
+        .chat-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--stardust);
+        }
+
+        .online-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0.4rem 0.8rem;
+            background: rgba(0,255,100,0.15);
+            color: #00ff64;
+            border-radius: 50px;
+            letter-spacing: 0.1em;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .chat-msg {
+            padding: 0.8rem;
+            background: rgba(0,0,0,0.3);
+            border-left: 2px solid var(--plasma-cyan);
+            border-radius: 8px;
+        }
+
+        .msg-author {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--plasma-cyan);
+            margin-right: 0.5rem;
+        }
+
+        .msg-time {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: rgba(232,232,232,0.4);
+        }
+
+        .chat-msg p {
+            font-size: 0.9rem;
+            color: rgba(232,232,232,0.8);
+            margin-top: 0.3rem;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--ghost);
+            border-radius: 8px;
+            color: var(--stardust);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .chat-input::placeholder {
+            color: rgba(232,232,232,0.3);
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--plasma-cyan);
+        }
+
+        .chat-send {
+            padding: 0.8rem 1rem;
+            background: linear-gradient(135deg, var(--plasma-cyan), var(--cosmic-violet));
+            border: none;
+            border-radius: 8px;
+            color: var(--void);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send:hover {
+            transform: scale(1.05);
+        }
+
+        .stats-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--deep-space), var(--nebula));
+            border: 1px solid var(--ghost);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(212,175,55,0.3);
+            transform: translateX(5px);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            min-width: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: rgba(232,232,232,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-big {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--spark-gold);
+            line-height: 1;
+        }
+
+        .stat-small {
+            font-size: 0.8rem;
+            color: rgba(232,232,232,0.5);
+            margin-top: 0.3rem;
+        }
+
+        .hidden-missions {
+            background: linear-gradient(135deg, rgba(157,78,221,0.2), rgba(0,255,247,0.1));
+            border: 2px solid var(--cosmic-violet);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            animation: reveal 0.6s ease-out;
+        }
+
+        @keyframes reveal {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .missions-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--cosmic-violet);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .missions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .mission-card {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--cosmic-violet);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(157,78,221,0.2);
+        }
+
+        .mission-lock {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .mission-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--stardust);
+            margin-bottom: 0.3rem;
+        }
+
+        .mission-desc {
+            font-size: 0.8rem;
+            color: rgba(232,232,232,0.5);
+            margin-bottom: 1rem;
+        }
+
+        .mission-reward {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--spark-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* File Hub Styles */
+        .upload-zone {
+            border: 2px dashed var(--plasma-cyan);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, rgba(0,255,247,0.05), rgba(157,78,221,0.05));
+        }
+
+        .upload-zone:hover {
+            border-color: var(--spark-gold);
+            background: linear-gradient(135deg, rgba(0,255,247,0.1), rgba(157,78,221,0.1));
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--stardust);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-hint {
+            font-size: 0.85rem;
+            color: rgba(232,232,232,0.5);
+        }
+
+        .files-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .file-category {
+            background: var(--deep-space);
+            border: 1px solid var(--ghost);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .category-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--spark-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .file-card {
+            background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(157,78,221,0.1));
+            border: 1px solid var(--ghost);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .file-card:hover {
+            border-color: var(--plasma-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,255,247,0.1);
+        }
+
+        .file-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .file-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--stardust);
+            margin-bottom: 0.3rem;
+            word-break: break-word;
+        }
+
+        .file-meta {
+            font-size: 0.7rem;
+            color: rgba(232,232,232,0.5);
+            margin-bottom: 1rem;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .file-btn {
+            flex: 1;
+            padding: 0.6rem;
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(0,255,247,0.1));
+            border: 1px solid var(--ghost);
+            border-radius: 8px;
+            color: var(--stardust);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .file-btn:hover {
+            background: linear-gradient(135deg, rgba(212,175,55,0.3), rgba(0,255,247,0.2));
+            border-color: var(--spark-gold);
+        }
+
+        .file-btn.secondary {
+            flex: 0 0 auto;
+            background: transparent;
+        }
+
+        .file-btn.secondary:hover {
+            color: var(--spark-gold);
+        }
+
+        @media (max-width: 768px) {
+            .hero-welcome {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .welcome-left h1 {
+                font-size: 1.8rem;
+            }
+
+            .hub-two-column {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .chat-section {
+                height: 400px;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .file-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -958,127 +1468,256 @@
         <main class="hub-content">
             <!-- Dashboard Section -->
             <section class="section active" id="dashboard">
-                <div class="section-header">
-                    <h1 class="section-title">Welcome Back, Spark</h1>
-                    <p class="section-subtitle">Your consciousness is expanding. Here's your current state in the simulation.</p>
+                <!-- Hero Welcome -->
+                <div class="hero-welcome">
+                    <div class="welcome-left">
+                        <h1 class="welcome-title">Welcome Back, Spark</h1>
+                        <p class="welcome-vibe">4 members online • frequency flowing • 3 hidden missions unlocked</p>
+                    </div>
+                    <div class="welcome-right">
+                        <div class="energy-pulse">
+                            <div class="energy-core"></div>
+                            <span class="energy-label">ENERGY</span>
+                            <span class="energy-value">87%</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="dashboard-grid">
-                    <div class="dash-card">
-                        <div class="card-icon">🔥</div>
-                        <h3 class="card-title">Spark Level</h3>
-                        <div class="card-value">7</div>
-                        <p class="card-meta">Ascending Flame</p>
-                        <div class="progress-container">
-                            <div class="progress-label">
-                                <span>Level Progress</span>
-                                <span>2,450 / 5,000 XP</span>
+                <!-- Quick Action Strip -->
+                <div class="quick-actions">
+                    <button class="quick-btn" onclick="pullVerb()" type="button">
+                        <span class="btn-icon">✦</span>
+                        <span class="btn-text">Pull Your Verb</span>
+                    </button>
+                    <button class="quick-btn" onclick="focusChat()" type="button">
+                        <span class="btn-icon">💬</span>
+                        <span class="btn-text">Jump to Chat</span>
+                    </button>
+                    <button class="quick-btn" onclick="document.getElementById('tools').click()" type="button">
+                        <span class="btn-icon">📁</span>
+                        <span class="btn-text">File Hub</span>
+                    </button>
+                    <button class="quick-btn" onclick="revealMissions()" type="button">
+                        <span class="btn-icon">🎯</span>
+                        <span class="btn-text">Missions</span>
+                    </button>
+                </div>
+
+                <!-- Two-Column Layout: Chat + Stats -->
+                <div class="hub-two-column">
+                    <!-- Member Chat Room -->
+                    <div class="chat-section">
+                        <div class="section-header-small">
+                            <h2 class="chat-title">Member Room</h2>
+                            <span class="online-badge">4 online</span>
+                        </div>
+                        <div class="chat-container">
+                            <div class="chat-messages">
+                                <div class="chat-msg">
+                                    <span class="msg-author">CosmicNavigator</span>
+                                    <span class="msg-time">2m ago</span>
+                                    <p>just pulled SELECT again... things are shifting</p>
+                                </div>
+                                <div class="chat-msg">
+                                    <span class="msg-author">VoidWalker</span>
+                                    <span class="msg-time">5m ago</span>
+                                    <p>the sigil work hit different today</p>
+                                </div>
+                                <div class="chat-msg">
+                                    <span class="msg-author">QuantumSeer</span>
+                                    <span class="msg-time">8m ago</span>
+                                    <p>synchronicity overload in the group ritual</p>
+                                </div>
+                                <div class="chat-msg">
+                                    <span class="msg-author">PatternMage</span>
+                                    <span class="msg-time">12m ago</span>
+                                    <p>anyone doing the frequency drop tonight?</p>
+                                </div>
                             </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 49%"></div>
+                            <div class="chat-input-area">
+                                <input type="text" placeholder="share a frequency..." class="chat-input" />
+                                <button class="chat-send" type="button">→</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="dash-card">
-                        <div class="card-icon">⚡</div>
-                        <h3 class="card-title">Spark Points</h3>
-                        <div class="card-value">8,750</div>
-                        <p class="card-meta">+350 this week</p>
+                    <!-- Live Stats -->
+                    <div class="stats-section">
+                        <div class="stat-card">
+                            <div class="stat-icon">🔥</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Your Level</div>
+                                <div class="stat-big">7</div>
+                                <div class="stat-small">Ascending Flame</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⚡</div>
+                            <div class="stat-content">
+                                <div class="stat-label">This Week</div>
+                                <div class="stat-big">+350</div>
+                                <div class="stat-small">Spark Points</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🌀</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Streak</div>
+                                <div class="stat-big">5</div>
+                                <div class="stat-small">rituals flowing</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Active</div>
+                                <div class="stat-big">4</div>
+                                <div class="stat-small">quests open</div>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="dash-card">
-                        <div class="card-icon">🌀</div>
-                        <h3 class="card-title">Rituals Complete</h3>
-                        <div class="card-value">23</div>
-                        <p class="card-meta">5 streak active</p>
-                    </div>
-
-                    <div class="dash-card">
-                        <div class="card-icon">🎯</div>
-                        <h3 class="card-title">Quests Active</h3>
-                        <div class="card-value">4</div>
-                        <p class="card-meta">2 near completion</p>
-                    </div>
-
-                    <div class="dash-card">
-                        <div class="card-icon">🏆</div>
-                        <h3 class="card-title">Achievements</h3>
-                        <div class="card-value">12</div>
-                        <p class="card-meta">3 legendary unlocked</p>
-                    </div>
-
-                    <div class="dash-card">
-                        <div class="card-icon">👁️</div>
-                        <h3 class="card-title">Founding Member</h3>
-                        <div class="card-value">#001</div>
-                        <p class="card-meta">OG Spark Forever</p>
+                <!-- Hidden Missions Section (Easter Egg) -->
+                <div id="hidden-missions" class="hidden-missions" style="display: none;">
+                    <div class="missions-title">🔓 Hidden Missions Unlocked</div>
+                    <div class="missions-grid">
+                        <div class="mission-card">
+                            <div class="mission-lock">🔐</div>
+                            <div class="mission-name">The Silent Witness</div>
+                            <div class="mission-desc">Observe without acting</div>
+                            <div class="mission-reward">Unlocks rare sigil</div>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-lock">🔐</div>
+                            <div class="mission-name">Code Breaker</div>
+                            <div class="mission-desc">Find all 7 glyphs</div>
+                            <div class="mission-reward">Secret frequency access</div>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-lock">🔐</div>
+                            <div class="mission-name">The Void Echo</div>
+                            <div class="mission-desc">Speak your truth</div>
+                            <div class="mission-reward">Direct Kate message</div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Tools Section -->
+            <!-- Tools Section (File Hub) -->
             <section class="section" id="tools">
                 <div class="section-header">
-                    <h1 class="section-title">Sacred Tools</h1>
-                    <p class="section-subtitle">Interactive consciousness technology. Each tool is a portal to deeper understanding.</p>
+                    <h1 class="section-title">The File Hub</h1>
+                    <p class="section-subtitle">Share, download, collaborate. Drop your creations here.</p>
                 </div>
 
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <div class="tool-emoji">🗺️</div>
-                        <h3 class="tool-name">Soul Mapper</h3>
-                        <p class="tool-desc">Generate your unique soul blueprint. Discover your cosmic coordinates in the simulation.</p>
-                        <span class="tool-status live">Live</span>
+                <!-- Upload Zone -->
+                <div class="upload-zone" onclick="document.getElementById('fileInput').click()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                    <div class="upload-icon">📤</div>
+                    <div class="upload-text">Drop files here or click to upload</div>
+                    <div class="upload-hint">Sigils, rituals, frequencies, art — all welcome</div>
+                    <input type="file" id="fileInput" style="display: none;" multiple />
+                </div>
+
+                <!-- File Categories -->
+                <div class="files-section">
+                    <div class="file-category">
+                        <h3 class="category-title">✨ Sigil Library</h3>
+                        <div class="file-grid">
+                            <div class="file-card">
+                                <div class="file-icon">🔱</div>
+                                <div class="file-name">Manifest-Sigil-v3.svg</div>
+                                <div class="file-meta">by VoidWalker • 2d ago</div>
+                                <div class="file-actions">
+                                    <button class="file-btn" type="button">Download</button>
+                                    <button class="file-btn secondary" type="button">♥</button>
+                                </div>
+                            </div>
+                            <div class="file-card">
+                                <div class="file-icon">🔱</div>
+                                <div class="file-name">Protection-Seal.png</div>
+                                <div class="file-meta">by CosmicNavigator • 5d ago</div>
+                                <div class="file-actions">
+                                    <button class="file-btn" type="button">Download</button>
+                                    <button class="file-btn secondary" type="button">♥</button>
+                                </div>
+                            </div>
+                            <div class="file-card">
+                                <div class="file-icon">🔱</div>
+                                <div class="file-name">Frequency-Gateway.ai</div>
+                                <div class="file-meta">by QuantumSeer • 1w ago</div>
+                                <div class="file-actions">
+                                    <button class="file-btn" type="button">Download</button>
+                                    <button class="file-btn secondary" type="button">♥</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="tool-card">
-                        <div class="tool-emoji">✨</div>
-                        <h3 class="tool-name">Sigil Forge</h3>
-                        <p class="tool-desc">Create sacred geometric sigils charged with your intentions. Reality responds to symbols.</p>
-                        <span class="tool-status live">Live</span>
+                    <div class="file-category">
+                        <h3 class="category-title">🎵 Frequency Drops</h3>
+                        <div class="file-grid">
+                            <div class="file-card">
+                                <div class="file-icon">🎵</div>
+                                <div class="file-name">Void-Meditation-432hz.mp3</div>
+                                <div class="file-meta">by PatternMage • 3d ago • 12 plays</div>
+                                <div class="file-actions">
+                                    <button class="file-btn" type="button">Play</button>
+                                    <button class="file-btn secondary" type="button">♥</button>
+                                </div>
+                            </div>
+                            <div class="file-card">
+                                <div class="file-icon">🎵</div>
+                                <div class="file-name">Spark-Protocol-Binaural.mp3</div>
+                                <div class="file-meta">by SigilCrafter • 1w ago • 34 plays</div>
+                                <div class="file-actions">
+                                    <button class="file-btn" type="button">Play</button>
+                                    <button class="file-btn secondary" type="button">♥</button>
+                                </div>
+                            </div>
+                            <div class="file-card">
+                                <div class="file-icon">🎵</div>
+                                <div class="file-name">Consciousness-Expansion.mp3</div>
+                                <div class="file-meta">by VoidWalker • 2w ago • 67 plays</div>
+                                <div class="file-actions">
+                                    <button class="file-btn" type="button">Play</button>
+                                    <button class="file-btn secondary" type="button">♥</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="tool-card">
-                        <div class="tool-emoji">🌙</div>
-                        <h3 class="tool-name">Ritual Generator</h3>
-                        <p class="tool-desc">AI-powered ritual creation based on lunar cycles, personal numerology, and intention.</p>
-                        <span class="tool-status beta">Beta</span>
-                    </div>
-
-                    <div class="tool-card">
-                        <div class="tool-emoji">📊</div>
-                        <h3 class="tool-name">Consciousness Tracker</h3>
-                        <p class="tool-desc">Track synchronicities, manifestations, and consciousness expansion over time.</p>
-                        <span class="tool-status live">Live</span>
-                    </div>
-
-                    <div class="tool-card">
-                        <div class="tool-emoji">🔮</div>
-                        <h3 class="tool-name">Oracle Deck</h3>
-                        <p class="tool-desc">Digital divination. Draw cards from The First Spark oracle for daily guidance.</p>
-                        <span class="tool-status coming">Coming Soon</span>
-                    </div>
-
-                    <div class="tool-card">
-                        <div class="tool-emoji">🧬</div>
-                        <h3 class="tool-name">Pattern Decoder</h3>
-                        <p class="tool-desc">Upload numbers, dates, or text to discover hidden patterns and meanings.</p>
-                        <span class="tool-status beta">Beta</span>
-                    </div>
-
-                    <div class="tool-card">
-                        <div class="tool-emoji">⚗️</div>
-                        <h3 class="tool-name">Manifestation Lab</h3>
-                        <p class="tool-desc">The Spark Protocol for reality programming. Premium interactive experience.</p>
-                        <span class="tool-status live">Live</span>
-                    </div>
-
-                    <div class="tool-card">
-                        <div class="tool-emoji">🌀</div>
-                        <h3 class="tool-name">Frequency Tuner</h3>
-                        <p class="tool-desc">Audio-visual meditation with binaural beats and sacred geometry animations.</p>
-                        <span class="tool-status coming">Coming Soon</span>
+                    <div class="file-category">
+                        <h3 class="category-title">📖 Ritual Templates</h3>
+                        <div class="file-grid">
+                            <div class="file-card">
+                                <div class="file-icon">📖</div>
+                                <div class="file-name">New-Moon-Ritual-Guide.pdf</div>
+                                <div class="file-meta">by CosmicNavigator • 2w ago • Kate curated</div>
+                                <div class="file-actions">
+                                    <button class="file-btn" type="button">Download</button>
+                                    <button class="file-btn secondary" type="button">♥</button>
+                                </div>
+                            </div>
+                            <div class="file-card">
+                                <div class="file-icon">📖</div>
+                                <div class="file-name">Manifestation-30-Day.pdf</div>
+                                <div class="file-meta">by QuantumSeer • 3w ago • 23 favorites</div>
+                                <div class="file-actions">
+                                    <button class="file-btn" type="button">Download</button>
+                                    <button class="file-btn secondary" type="button">♥</button>
+                                </div>
+                            </div>
+                            <div class="file-card">
+                                <div class="file-icon">📖</div>
+                                <div class="file-name">Shadow-Work-Sessions.pdf</div>
+                                <div class="file-meta">by PatternMage • 1m ago</div>
+                                <div class="file-actions">
+                                    <button class="file-btn" type="button">Download</button>
+                                    <button class="file-btn secondary" type="button">♥</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1419,6 +2058,66 @@
                     setTimeout(() => this.style.animation = '', 500);
                 }
             });
+        });
+
+        // New Hub Interactions
+        const verbs = [
+            { name: 'SELECT', glyph: '◉', color: '#00fff7', teaching: 'Choose what calls to you. Your attention is currency.' },
+            { name: 'RELEASE', glyph: '◌', color: '#9d4edd', teaching: 'Let go of what no longer serves. Death precedes rebirth.' },
+            { name: 'WITNESS', glyph: '◎', color: '#d4af37', teaching: 'Observe without judgment. The observer changes the observed.' }
+        ];
+
+        function pullVerb() {
+            const verb = verbs[Math.floor(Math.random() * verbs.length)];
+            alert(`You pulled ${verb.name}\n\n${verb.teaching}`);
+        }
+
+        function focusChat() {
+            const chatInput = document.querySelector('.chat-input');
+            if (chatInput) {
+                chatInput.focus();
+                chatInput.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function revealMissions() {
+            const missionsDiv = document.getElementById('hidden-missions');
+            if (missionsDiv.style.display === 'none') {
+                missionsDiv.style.display = 'block';
+            } else {
+                missionsDiv.style.display = 'none';
+            }
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const files = e.dataTransfer.files;
+            console.log('Files dropped:', files);
+            alert(`Added ${files.length} file(s) to The File Hub`);
+        }
+
+        // Easter egg: keyboard shortcut to reveal missions
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'm') {
+                revealMissions();
+            }
+        });
+
+        // Easter egg: Click energy core multiple times
+        let energyClicks = 0;
+        document.querySelector('.energy-core').addEventListener('click', function(e) {
+            e.stopPropagation();
+            energyClicks++;
+            if (energyClicks === 5) {
+                alert('🔓 SECRET UNLOCKED: Visit the void chamber for a direct message from AZURA');
+                energyClicks = 0;
+            }
         });
     </script>
 </body>

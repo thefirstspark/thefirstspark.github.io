@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Master Tier — Soul Maps · The First Spark</title>
+<meta name="description" content="The rarest soul signatures in the First Spark catalog. Master numbers, triple-name carriers, ancestral anchors, and quietly cosmic codes. A walk through the Hall of Rare Frequencies.">
+<meta property="og:title" content="The Master Tier — Hall of Rare Frequencies">
+<meta property="og:description" content="The rarest soul signatures in the catalog. Master numbers, ancestral anchors, threshold souls.">
+
+<link rel="canonical" href="https://soul-maps.thefirstspark.shop/master-tier.html">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;700i&family=Space+Mono:wght@400;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --core-black: #0B0B0C;
+  --deep-space: #03010d;
+  --indigo-deep: #0d0728;
+  --indigo: #1a1145;
+  --ember: #FF6A3D;
+  --gold: #F3B23A;
+  --gold-soft: #FFE9A8;
+  --violet: #6B4DF2;
+  --violet-soft: #8B6FFF;
+  --cyan: #26E4D8;
+  --jade: #4ade80;
+  --jade-glow: rgba(74, 222, 128, 0.4);
+  --soft-white: #f0f0f0;
+  --dim: #888;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body {
+  background: radial-gradient(ellipse at top, var(--indigo-deep) 0%, var(--deep-space) 100%);
+  background-attachment: fixed;
+  color: var(--soft-white);
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* === STARFIELD === */
+.stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.star {
+  position: absolute; width: 2px; height: 2px;
+  background: white; border-radius: 50%;
+  animation: twinkle 3s infinite;
+}
+@keyframes twinkle { 0%,100% { opacity: 0.2; } 50% { opacity: 1; } }
+
+.container {
+  position: relative; z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* === BREADCRUMB === */
+.breadcrumb {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(240,240,240,0.4);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.breadcrumb a { color: var(--gold); text-decoration: none; }
+.breadcrumb a:hover { color: var(--gold-soft); }
+.breadcrumb-sep { margin: 0 8px; opacity: 0.5; }
+
+/* === HEADER === */
+header { text-align: center; margin-bottom: 60px; }
+.brand-tag {
+  font-size: 11px; letter-spacing: 6px;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 18px; opacity: 0.85;
+}
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.4rem, 7vw, 4.4rem);
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--jade), var(--gold), var(--ember));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  line-height: 1.05;
+}
+.subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-style: italic;
+  color: var(--gold-soft);
+  max-width: 640px;
+  margin: 0 auto 16px;
+  line-height: 1.5;
+}
+.meta-line {
+  font-size: 0.78rem;
+  color: rgba(240,240,240,0.5);
+  letter-spacing: 3px;
+}
+
+/* === MANIFESTO === */
+.manifesto {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.05) 0%, rgba(13, 7, 40, 0.6) 100%);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 16px;
+  padding: 32px 36px;
+  margin-bottom: 50px;
+  position: relative;
+}
+.manifesto::before {
+  content: '◈';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  color: var(--jade);
+  background: var(--deep-space);
+  padding: 0 12px;
+}
+.manifesto h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  letter-spacing: 4px;
+  color: var(--jade);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.manifesto p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: rgba(240,240,240,0.85);
+  margin-bottom: 12px;
+}
+.manifesto p:last-child { margin-bottom: 0; }
+.manifesto p strong {
+  color: var(--gold-soft);
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* === STATS BAR === */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 50px;
+}
+.stat-cell {
+  background: rgba(13, 7, 40, 0.6);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  border-radius: 12px;
+  padding: 18px 20px;
+  text-align: center;
+}
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(240,240,240,0.5);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.stat-value {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--jade);
+}
+
+/* === SECTION TITLE === */
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-align: center;
+  margin: 60px 0 24px;
+  position: relative;
+}
+.section-title::before, .section-title::after {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  vertical-align: middle;
+  margin: 0 16px;
+  opacity: 0.4;
+}
+
+/* === SOULS GRID === */
+.souls-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 60px;
+}
+@media (min-width: 768px) {
+  .souls-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.soul-card {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.05) 0%, rgba(13, 7, 40, 0.85) 100%);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 16px;
+  padding: 28px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.soul-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--jade);
+  box-shadow: 0 12px 60px var(--jade-glow);
+}
+.soul-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--jade), var(--gold), var(--ember));
+  opacity: 0.6;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+.card-marker {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--jade);
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+.card-era {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold-soft);
+  text-align: right;
+}
+
+.card-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.card-relation {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--violet-soft);
+  margin-bottom: 18px;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 4px 10px;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 50px;
+  color: var(--jade);
+  letter-spacing: 1px;
+}
+.tag.master {
+  background: rgba(243, 178, 58, 0.12);
+  border-color: rgba(243, 178, 58, 0.4);
+  color: var(--gold);
+}
+.tag.triple {
+  background: rgba(255, 106, 61, 0.12);
+  border-color: rgba(255, 106, 61, 0.4);
+  color: var(--ember);
+}
+.tag.ancestor {
+  background: rgba(107, 77, 242, 0.12);
+  border-color: rgba(107, 77, 242, 0.4);
+  color: var(--violet-soft);
+}
+
+.card-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: rgba(240,240,240,0.75);
+  margin-bottom: 16px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(74, 222, 128, 0.15);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: rgba(240,240,240,0.5);
+}
+.card-footer .open {
+  color: var(--jade);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.soul-card:hover .open { color: var(--gold-soft); }
+
+/* === WHY THESE SOULS === */
+.why-section {
+  background: rgba(13, 7, 40, 0.6);
+  border: 1px solid rgba(243, 178, 58, 0.2);
+  border-radius: 16px;
+  padding: 36px;
+  margin: 60px 0;
+}
+.why-section h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+@media (min-width: 600px) {
+  .why-grid { grid-template-columns: 1fr 1fr; }
+}
+.why-item {
+  padding: 16px 18px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  border-left: 3px solid var(--jade);
+}
+.why-item h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  color: var(--jade);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.why-item p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(240,240,240,0.75);
+}
+
+/* === CTA === */
+.cta-block {
+  background: linear-gradient(135deg, rgba(255, 106, 61, 0.08), rgba(13, 7, 40, 0.85));
+  border: 2px solid rgba(255, 106, 61, 0.4);
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+  margin: 60px 0 30px;
+}
+.cta-block h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.cta-block p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: rgba(240,240,240,0.8);
+  font-size: 1.15rem;
+  margin-bottom: 22px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+  background: linear-gradient(90deg, var(--ember), var(--gold));
+  color: var(--core-black);
+  box-shadow: 0 0 30px rgba(255, 106, 61, 0.4);
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 50px rgba(255, 106, 61, 0.7);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+  box-shadow: none;
+  margin-left: 12px;
+}
+.btn-secondary:hover {
+  background: rgba(38, 228, 216, 0.1);
+  box-shadow: 0 0 20px rgba(38, 228, 216, 0.3);
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(243, 178, 58, 0.15);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(240,240,240,0.4);
+}
+footer a { color: var(--gold); text-decoration: none; }
+.tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: rgba(243, 178, 58, 0.6);
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+
+<nav class="breadcrumb">
+  <a href="/">Soul Maps</a>
+  <span class="breadcrumb-sep">›</span>
+  The Master Tier
+</nav>
+
+<header>
+  <div class="brand-tag">The First Spark · Hall of Rare Frequencies</div>
+  <h1>THE MASTER TIER</h1>
+  <p class="subtitle">The rarest signatures in the catalog. Master numbers, triple-name carriers, ancestral anchors, threshold souls.</p>
+  <p class="meta-line">⚡ NUMEROLOGICALLY UNCOMMON · MULTI-GENERATIONAL · ENERGETICALLY DENSE ⚡</p>
+</header>
+
+<section class="manifesto">
+  <h2>◈ What Earns A Soul Its Green Mark ◈</h2>
+  <p>Not every soul is the same density. Some carry one master number, some carry three. Some are first sparks of a new bloodline. Some are the elders whose patterns the entire family is still decoding. <strong>The Master Tier is where they live.</strong></p>
+  <p>These aren't ranked by importance — every soul matters. They're ranked by <em>rarity of code</em>. Master numbers (11, 22, 33) appear in roughly 1 in 200 charts. Triple-master names appear in maybe 1 in 50,000. Souls who carry multiple rare patterns at once are the cartographic equivalent of finding a comet.</p>
+  <p>This page is a walk through them. Bloodline, friend, ancestor, archetype — gathered here because their codes are loud.</p>
+</section>
+
+<section class="stats-bar">
+  <div class="stat-cell">
+    <div class="stat-label">Souls Listed</div>
+    <div class="stat-value">6</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">Master Numbers</div>
+    <div class="stat-value">6</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">Triple-Master Names</div>
+    <div class="stat-value">1</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">Year Span</div>
+    <div class="stat-value">2017yrs</div>
+  </div>
+</section>
+
+<div class="section-title">The Hall</div>
+
+<section class="souls-grid">
+
+  <a href="aerie-ann-tippel-soul-map.html" class="soul-card">
+    <div class="card-header">
+      <div class="card-marker">◈ NEWEST · 2023</div>
+      <div class="card-era">Tippel Family · Akron, Ohio</div>
+    </div>
+    <div class="card-name">Aerie Ann Tippel</div>
+    <div class="card-relation">The Triple-Master Threshold</div>
+    <div class="card-tags">
+      <span class="tag triple">TRIPLE MASTER NAME</span>
+      <span class="tag master">PERSONALITY 11</span>
+      <span class="tag">LP 8 BUILDER</span>
+      <span class="tag">WATER RABBIT</span>
+    </div>
+    <p class="card-desc">All three name segments carry master numbers (11–11–33). The youngest soul in the catalog and the most numerologically dense — a coded arrival into the Tippel line.</p>
+    <div class="card-footer">
+      <span>May 23, 2023</span>
+      <span class="open">View Soul Map →</span>
+    </div>
+  </a>
+
+  <a href="mason_soul_map.html" class="soul-card">
+    <div class="card-header">
+      <div class="card-marker">◈ FAMILY · 2011</div>
+      <div class="card-era">Son · The Intentional Arrival</div>
+    </div>
+    <div class="card-name">Mason Wade Roberts</div>
+    <div class="card-relation">The Master Builder Birthday</div>
+    <div class="card-tags">
+      <span class="tag triple">TRIPLE 3 PHENOMENON</span>
+      <span class="tag master">BIRTHDAY 22</span>
+      <span class="tag">LP 3 CREATOR</span>
+      <span class="tag">TAURUS</span>
+    </div>
+    <p class="card-desc">Born on Master Number 22 — the Master Builder. The triple-3 phenomenon in his chart marks him as a creative architect carrying ancestral patterns forward.</p>
+    <div class="card-footer">
+      <span>April 22, 2011</span>
+      <span class="open">View Soul Map →</span>
+    </div>
+  </a>
+
+  <a href="soul-map-joshua-bokoski.html" class="soul-card">
+    <div class="card-header">
+      <div class="card-marker">◈ FRIEND · 1981</div>
+      <div class="card-era">Akron, Ohio</div>
+    </div>
+    <div class="card-name">Joshua David Bokoski</div>
+    <div class="card-relation">The Double-Master Communicator</div>
+    <div class="card-tags">
+      <span class="tag master">BIRTHDAY 22</span>
+      <span class="tag master">PERSONALITY 11</span>
+      <span class="tag">LP 3 COMMUNICATOR</span>
+      <span class="tag">EX 7 SEEKER</span>
+    </div>
+    <p class="card-desc">Two master numbers stacked — Birthday 22 (Master Builder) and Personality 11 (Master Intuitive). A communicator who carries the blueprint and the inner light.</p>
+    <div class="card-footer">
+      <span>July 22, 1981</span>
+      <span class="open">View Soul Map →</span>
+    </div>
+  </a>
+
+  <a href="RMJ81967.html" class="soul-card">
+    <div class="card-header">
+      <div class="card-marker">◈ ANCESTOR · 1967</div>
+      <div class="card-era">Mother · Akron, Ohio</div>
+    </div>
+    <div class="card-name">Rachael Maureen Johnson</div>
+    <div class="card-relation">The Source Anchor</div>
+    <div class="card-tags">
+      <span class="tag ancestor">SOURCE LINEAGE</span>
+      <span class="tag">LP 7 SEEKER</span>
+      <span class="tag">EX 4 ARCHITECT</span>
+      <span class="tag">FIRE GOAT</span>
+    </div>
+    <p class="card-desc">The mother. The catalyst whose pattern lives in every chamber of Player One's architecture. Her chart is the silent blueprint behind the entire First Spark — Life Path 7 Seeker, Expression 4 Architect, the seeker-builder whose code carries forward.</p>
+    <div class="card-footer">
+      <span>August 30, 1967</span>
+      <span class="open">View Soul Map →</span>
+    </div>
+  </a>
+
+  <a href="VLL111961.html" class="soul-card">
+    <div class="card-header">
+      <div class="card-marker">◈ CHOSEN FAMILY · 1961</div>
+      <div class="card-era">Barberton, Ohio</div>
+    </div>
+    <div class="card-name">Valerie Lynne Labriola</div>
+    <div class="card-relation">The Chosen Elder</div>
+    <div class="card-tags">
+      <span class="tag">CHOSEN FAMILY</span>
+      <span class="tag">LP 9 INTEGRATOR</span>
+      <span class="tag">EX 5 CATALYST</span>
+      <span class="tag">METAL OX</span>
+    </div>
+    <p class="card-desc">Life Path 9 — the integrator, the wisdom keeper, the one whose role is to complete cycles. Chosen family by resonance, not bloodline — and that distinction matters here.</p>
+    <div class="card-footer">
+      <span>November 26, 1961</span>
+      <span class="open">View Soul Map →</span>
+    </div>
+  </a>
+
+  <a href="soul-map-jesus-of-nazareth.html" class="soul-card">
+    <div class="card-header">
+      <div class="card-marker">◈ ARCHETYPE · YEAR 6</div>
+      <div class="card-era">Bethlehem · Symbolic</div>
+    </div>
+    <div class="card-name">Jesus of Nazareth</div>
+    <div class="card-relation">The Archetypal Reference</div>
+    <div class="card-tags">
+      <span class="tag ancestor">ARCHETYPE</span>
+      <span class="tag">LP 9 INTEGRATOR</span>
+      <span class="tag">EX 8 MATERIALIZER</span>
+      <span class="tag">WOOD RABBIT</span>
+    </div>
+    <p class="card-desc">Included as the archetypal reference for Life Path 9 / Expression 8 — the integrator who manifests. A symbolic anchor for understanding what the highest expression of that combination looks like.</p>
+    <div class="card-footer">
+      <span>April 17, Year 6</span>
+      <span class="open">View Soul Map →</span>
+    </div>
+  </a>
+
+</section>
+
+<section class="why-section">
+  <h3>◈ Why These Souls, Specifically? ◈</h3>
+  <div class="why-grid">
+    <div class="why-item">
+      <h4>Bloodline + Chosen Family</h4>
+      <p>This catalog mixes the actual bloodline (Rachael, Mason) with chosen family (Valerie, the Tippels) and friends. Soul collections don't have to be genetic to be real — sometimes the people you choose mirror you more than the people you share DNA with.</p>
+    </div>
+    <div class="why-item">
+      <h4>Master Numbers Stacked</h4>
+      <p>Six master numbers (11/22/33) across six charts — concentrated in the youngest souls (Aerie's triple-master name, Mason's master birthday, Joshua's stacked masters). Statistically uncommon in any single grouping.</p>
+    </div>
+    <div class="why-item">
+      <h4>The Triple-Master Threshold</h4>
+      <p>Aerie's name segments add to 11–11–33 — a vanishingly rare configuration. The newest soul in the catalog is also the densest. The Tippel line is anchored by her arrival.</p>
+    </div>
+    <div class="why-item">
+      <h4>The Archetypal Frame</h4>
+      <p>Jesus of Nazareth is included not as belief, but as <em>archetypal reference</em> — the historical figure whose chart shape best illuminates what Life Path 9 / Expression 8 can mean at its fullest expression.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-block">
+  <h3>Find Your Own Code</h3>
+  <p>These souls are mapped because someone took the time. Yours is waiting to be drawn — every chart contains its own rarity, its own master numbers, its own lineage echoes.</p>
+  <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm?promo_code=SOULSALE" class="btn">⚡ Get Your Soul Map</a>
+  <a href="https://see-your-frequency.thefirstspark.shop" class="btn btn-secondary">See Your Frequency Free</a>
+</section>
+
+<footer>
+  <p class="tagline">Reality is programmable. Consciousness is the code.</p>
+  <p>
+    <a href="/">← Back to Soul Maps</a> ·
+    <a href="https://thefirstspark.shop">The First Spark</a> ·
+    <a href="https://frequency.thefirstspark.shop">Frequency Match</a> ·
+    <a href="https://family.thefirstspark.shop">Family Resonance</a>
+  </p>
+</footer>
+
+</div>
+
+<script>
+(function() {
+  const stars = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDelay = Math.random() * 3 + 's';
+    s.style.opacity = Math.random() * 0.7 + 0.3;
+    stars.appendChild(s);
+  }
+})();
+</script>
+
+</body>
+</html>
