@@ -812,13 +812,16 @@
 /* =============================================================
    WHOP OAUTH — PKCE CONFIGURATION
    -------------------------------------------------------------
-   App ID: app_SPUYaOFKHxKqYa  (NEXT_PUBLIC_WHOP_APP_ID)
-   Redirect URI must be registered at dev.whop.com → OAuth Apps
-   as: https://thefirstspark.shop/member-hub.html
-   Optionally update PLAN_IDS below to match your Whop product routes.
+   App ID: app_SPUYaOFKHxKqYa
+   The redirect_uri is computed dynamically from the current page
+   (window.location.origin + pathname). This must EXACTLY match
+   a registered redirect URI for this App in the Whop dashboard
+   (dev.whop.com or your OAuth Apps settings).
+   Example to register: https://thefirstspark.shop/member-hub.html
+   For local dev you can also register e.g. http://localhost:5500/member-hub.html
 ============================================================= */
 const WHOP_CLIENT_ID = 'app_SPUYaOFKHxKqYa';
-const REDIRECT_URI   = 'https://thefirstspark.shop/member-hub.html';
+const REDIRECT_URI   = window.location.origin + window.location.pathname;
 const WHOP_AUTH_URL  = 'https://api.whop.com/oauth/authorize';
 const WHOP_TOKEN_URL = 'https://api.whop.com/oauth/token';
 const WHOP_API       = 'https://api.whop.com/v5';
@@ -881,10 +884,14 @@ async function handleCallback(code, retState) {
             if (data.refresh_token) localStorage.setItem('whop_refresh', data.refresh_token);
             sessionStorage.removeItem('pkce_verifier');
             sessionStorage.removeItem('oauth_state');
-            window.history.replaceState({}, '', '/member-hub.html');
+            window.history.replaceState({}, '', window.location.pathname);
             await initDashboard(data.access_token);
         } else {
-            showLogin(data.error_description || data.error || 'Authentication failed.');
+            let errMsg = data.error_description || data.error || 'Authentication failed.';
+            if (data.error === 'invalid_request' || /redirect|uri|url/i.test(errMsg)) {
+                errMsg += '<br><br>Redirect URI problem — make sure <code>' + REDIRECT_URI + '</code> is registered in the Whop OAuth app settings.';
+            }
+            showLogin(errMsg);
         }
     } catch (err) {
         console.error('Token exchange failed:', err);
@@ -1095,7 +1102,16 @@ function logShipment() {
     const code  = p.get('code');
     const error = p.get('error');
     const state = p.get('state');
-    if (error) { window.history.replaceState({}, '', '/member-hub.html'); showLogin(p.get('error_description') || 'Auth error: ' + error); return; }
+    if (error) {
+        window.history.replaceState({}, '', window.location.pathname);
+        let msg = p.get('error_description') || 'Auth error: ' + error;
+        if (error === 'invalid_request' || (msg && /redirect|url|uri/i.test(msg))) {
+            msg += '<br><br><strong>Fix:</strong> In your Whop dashboard, register this exact URL as a Redirect URI for the OAuth app:<br>' +
+                   '<code style="background:#111;font-size:0.9em;padding:2px 6px;">' + window.location.origin + window.location.pathname + '</code>';
+        }
+        showLogin(msg);
+        return;
+    }
     if (code)  { await handleCallback(code, state); return; }
     const token = localStorage.getItem('whop_token');
     if (token)  { await initDashboard(token); return; }
