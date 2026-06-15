@@ -105,7 +105,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -216,7 +216,18 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 140px 0 100px;
+            padding: 120px 0 80px;
+        }
+        .wrap-hero { max-width: 1120px; }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 40px;
+            align-items: center;
+        }
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+            #hero { min-height: auto; padding: 120px 0 60px; }
         }
 
         .hero-badge {
@@ -261,12 +272,155 @@
         }
 
         .hero-story {
-            font-size: .78em;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1rem, 2vw, 1.15rem);
             font-style: italic;
-            color: rgba(255,255,255,.38);
-            margin-bottom: 44px;
-            letter-spacing: .04em;
+            color: rgba(255,255,255,.52);
+            margin-bottom: 28px;
+            line-height: 1.55;
+            max-width: 520px;
         }
+
+        .grasp-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .grasp-item {
+            font-size: .52em;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            border: 1px solid rgba(251,191,36,.22);
+            background: rgba(251,191,36,.04);
+            color: rgba(255,255,255,.55);
+            padding: 8px 14px;
+        }
+        .grasp-item strong { color: var(--spark); font-weight: 400; }
+
+        .hero-proof-id {
+            display: block;
+            text-decoration: none;
+            border: 1px solid rgba(255,106,61,.35);
+            background: rgba(255,106,61,.06);
+            padding: 16px 18px;
+            margin-bottom: 14px;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .hero-proof-id:hover {
+            border-color: rgba(255,106,61,.55);
+            box-shadow: 0 6px 24px rgba(255,106,61,.15);
+        }
+        .hero-proof-id-label {
+            font-size: .48em;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: #ff6a3d;
+            margin-bottom: 6px;
+        }
+        .hero-proof-id-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .68rem;
+            letter-spacing: .08em;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+        .hero-proof-id-sub {
+            font-size: .58em;
+            color: var(--dim);
+            letter-spacing: .06em;
+        }
+
+        .hero-proof-visual {
+            position: relative;
+            border: 1px solid rgba(139,92,246,.3);
+            background: rgba(139,92,246,.05);
+            padding: 14px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        .hero-proof-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            opacity: .92;
+            box-shadow: 0 12px 40px rgba(0,0,0,.45);
+        }
+        .hero-proof-map {
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            bottom: 14px;
+            display: block;
+            text-decoration: none;
+            padding: 14px 16px;
+            background: rgba(5,5,8,.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(251,191,36,.28);
+            transition: border-color .2s, transform .2s;
+        }
+        .hero-proof-map:hover {
+            border-color: var(--spark);
+            transform: translateY(-2px);
+        }
+        .hero-proof-map-label {
+            font-size: .46em;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+            margin-bottom: 4px;
+        }
+        .hero-proof-map-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .62rem;
+            letter-spacing: .1em;
+            color: var(--spark);
+            margin-bottom: 4px;
+        }
+        .hero-proof-map-desc {
+            font-size: .58em;
+            color: var(--dim);
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+        .hero-proof-map-enter {
+            font-size: .48em;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--cyan);
+        }
+
+        .hero-proof-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .hero-proof-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 12px 20px;
+            background: var(--spark);
+            color: var(--void);
+            transition: box-shadow .2s;
+        }
+        .hero-proof-price:hover { box-shadow: 0 8px 28px rgba(251,191,36,.4); }
+        .hero-proof-archive {
+            font-size: .52em;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--dim);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,.15);
+            padding-bottom: 2px;
+        }
+        .hero-proof-archive:hover { color: var(--white); }
 
         .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 
@@ -1389,17 +1543,27 @@
 
     <!-- HERO -->
     <section id="hero">
-        <div class="wrap">
-            <div class="hero-badge">◈ &nbsp; Consciousness Technology &nbsp; ◈</div>
-            <h1 class="hero-headline">
-                The First<br><span>Spark.</span>
-            </h1>
-            <p class="hero-sub">Get your OG Edition Soul Map — personalized numerology and astrology on a private page you keep forever. Free Sparkverse community access included with every map.</p>
-            <p class="hero-story">In 2020, I solved my mother's 1991 cold case. Her killer lived across my street. This is what I built from that fracture.</p>
-            <div class="hero-ctas">
-                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Claim OG Edition · $44 →</a>
-                <a href="#soul-maps" class="btn-g">See Sample Maps</a>
-                <span class="hero-cta-note">Step 1: Soul Map · Step 2: Free community included · 12 months of updates · ~5 min delivery</span>
+        <div class="wrap wrap-hero">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <div class="hero-badge">◈ &nbsp; Soul Maps · $44 OG Edition · ID True Crime</div>
+                    <h1 class="hero-headline">
+                        Your numbers<br>aren't random.<br><span>Read your code.</span>
+                    </h1>
+                    <p class="hero-sub">A private Soul Map page — Life Path, Expression, Soul Urge, astrology — hand-decoded by KJP. Delivered in ~5 minutes. Free Sparkverse community included.</p>
+                    <div class="grasp-strip" aria-label="How it works">
+                        <div class="grasp-item"><strong>①</strong> Read real maps free</div>
+                        <div class="grasp-item"><strong>②</strong> Get yours · $44</div>
+                        <div class="grasp-item"><strong>③</strong> Community included</div>
+                    </div>
+                    <p class="hero-story">Cold case solved in 2020 — killer across the street. 60+ consciousness tools built from that fracture, not a psychic hotline.</p>
+                    <div class="hero-ctas">
+                        <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Claim OG Edition · $44 →</a>
+                        <a href="https://soul-maps.thefirstspark.shop/kjp519.html" target="_blank" rel="noopener noreferrer" class="btn-g">Read A Real Map</a>
+                        <span class="hero-cta-note">Private URL · 12 months of updates · ~5 min delivery · Whop checkout</span>
+                    </div>
+                </div>
+                <div class="hero-proof" id="heroProof" aria-label="Proof: Investigation Discovery feature and live Soul Map preview"></div>
             </div>
             <div class="scroll-hint">Explore</div>
         </div>
@@ -2180,6 +2344,7 @@
     <script src="/js/soul-map-rotation.js"></script>
     <script src="/js/soul-map-rotation-ui.js"></script>
     <script>
+    SoulMapRotation.renderHeroProof(document.getElementById('heroProof'));
     SoulMapRotation.renderSpotlight(document.getElementById('mapSpotlight'), { count: 3 });
     </script>
 

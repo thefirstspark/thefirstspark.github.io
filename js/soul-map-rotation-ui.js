@@ -21,6 +21,46 @@
         return { featured, day, start, total: maps.length };
     }
 
+    function renderHeroProof(container, options) {
+        if (!container) return;
+        const maps = global.SOUL_MAP_ROTATION || [];
+        const checkoutUrl = options.checkoutUrl || 'https://whop.com/checkout/plan_anQKP3Pzf1cGm';
+        const { featured } = getFeaturedMaps(maps, 1, options.date);
+        const map = featured[0];
+        const mapBlock = map
+            ? (
+                '<a href="' + BASE + map.href + '" class="hero-proof-map" target="_blank" rel="noopener noreferrer">' +
+                    '<div class="hero-proof-map-label">Today\u2019s featured map</div>' +
+                    '<div class="hero-proof-map-name">' + map.name + '</div>' +
+                    '<div class="hero-proof-map-desc">' + map.desc + '</div>' +
+                    '<div class="hero-proof-map-enter">Read full map \u2192</div>' +
+                '</a>'
+            )
+            : (
+                '<a href="' + BASE + 'kjp519.html" class="hero-proof-map" target="_blank" rel="noopener noreferrer">' +
+                    '<div class="hero-proof-map-label">Founder map</div>' +
+                    '<div class="hero-proof-map-name">KJP \u00b7 Life Path 5</div>' +
+                    '<div class="hero-proof-map-desc">The map routing Book Zero and the tour.</div>' +
+                    '<div class="hero-proof-map-enter">Read KJP\u2019s map \u2192</div>' +
+                '</a>'
+            );
+
+        container.innerHTML =
+            '<a href="https://www.investigationdiscovery.com/video/on-the-case-with-paula-zahn-investigation-discovery-atve-us/two-fires-one-match" class="hero-proof-id" target="_blank" rel="noopener noreferrer">' +
+                '<div class="hero-proof-id-label">As seen on Investigation Discovery</div>' +
+                '<div class="hero-proof-id-title">Two Fires, One Match</div>' +
+                '<div class="hero-proof-id-sub">Paula Zahn \u00b7 29-year cold case solved</div>' +
+            '</a>' +
+            '<div class="hero-proof-visual">' +
+                '<img src="/preview-soulmaps.png" alt="Soul Map page preview" class="hero-proof-img" width="600" height="400" loading="eager">' +
+                mapBlock +
+            '</div>' +
+            '<div class="hero-proof-footer">' +
+                '<a href="' + checkoutUrl + '" class="hero-proof-price" target="_blank" rel="noopener noreferrer">OG Edition \u00b7 $44 \u2192</a>' +
+                '<a href="' + BASE.replace(/\/$/, '') + '/" class="hero-proof-archive" target="_blank" rel="noopener noreferrer">48 maps in archive</a>' +
+            '</div>';
+    }
+
     function renderSpotlight(container, options) {
         if (!container) return;
         const maps = global.SOUL_MAP_ROTATION || [];
@@ -67,6 +107,7 @@
     global.SoulMapRotation = {
         dayOfYear: dayOfYear,
         getFeaturedMaps: getFeaturedMaps,
+        renderHeroProof: renderHeroProof,
         renderSpotlight: renderSpotlight,
         BASE: BASE
     };

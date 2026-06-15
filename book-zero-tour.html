@@ -252,6 +252,55 @@
         }
         .follow-bar p { font-size: .78em; color: var(--dim); line-height: 1.8; max-width: 520px; margin: 0 auto 24px; }
 
+        .grasp-strip {
+            display: flex; flex-wrap: wrap; gap: 10px;
+            margin-bottom: 24px;
+        }
+        .grasp-chip {
+            font-size: .5em; letter-spacing: .14em; text-transform: uppercase;
+            border: 1px solid rgba(251,191,36,.22);
+            background: rgba(251,191,36,.04);
+            color: rgba(255,255,255,.55);
+            padding: 8px 14px;
+        }
+        .grasp-chip strong { color: var(--spark); font-weight: 400; }
+
+        .product-bridge {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 28px;
+            align-items: center;
+            border: 1px solid rgba(251,191,36,.25);
+            background: rgba(251,191,36,.03);
+            padding: 28px;
+            margin-top: 36px;
+        }
+        @media (max-width: 720px) { .product-bridge { grid-template-columns: 1fr; } }
+        .product-bridge-img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid rgba(139,92,246,.25);
+            box-shadow: 0 12px 36px rgba(0,0,0,.4);
+        }
+        .product-bridge-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .85rem;
+            letter-spacing: .08em;
+            margin-bottom: 10px;
+        }
+        .product-bridge-desc {
+            font-size: .74em;
+            color: var(--dim);
+            line-height: 1.75;
+            margin-bottom: 18px;
+        }
+        .product-bridge-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: var(--spark);
+            margin-bottom: 14px;
+        }
+
         .waitlist-panel {
             border: 1px solid rgba(255,106,61,.35);
             background: rgba(255,106,61,.04);
@@ -334,7 +383,12 @@
                 <div>
                     <div class="badge">◈ Camper Chronicles · Book Zero · 2026</div>
                     <h1>Book Zero.<br><em>Written from the road.</em></h1>
-                    <p class="hero-sub">My mother's killer lived across the street. He inserted himself into our lives while we grew up not knowing. I solved her 1991 cold case in 2020. Now I'm taking that story — and everything I built from the fracture — on tour in a solar camper with satellite internet, letting my Soul Map choose where I write next.</p>
+                    <p class="hero-sub">My mother's killer lived across the street. I solved her 1991 cold case in 2020. Now I'm writing Book Zero from a solar camper — and my Soul Map picks every stop on the route.</p>
+                    <div class="grasp-strip">
+                        <span class="grasp-chip"><strong>①</strong> True crime · ID</span>
+                        <span class="grasp-chip"><strong>②</strong> Memoir from the road</span>
+                        <span class="grasp-chip"><strong>③</strong> Soul Map routes the tour</span>
+                    </div>
                     <a href="https://youtube.com/@therealfirstspark" target="_blank" rel="noopener noreferrer" class="btn-p">Follow The Tour →</a>
                     <a href="#waitlist" class="btn-g">Chapter Waitlist →</a>
                     <a href="mailto:kate@thefirstspark.shop?subject=Book%20Zero%20Tour%20—%20Press%20%2F%20Event" class="btn-g">Book A Stop</a>
@@ -357,7 +411,17 @@
             <div class="book-block">
                 <p>Book Zero is the memoir I've been carrying since I was a child — the story of a killer who lived across from us, who wove himself into our lives, and who remained hidden in plain sight for decades. It's about solving what law enforcement couldn't close for 29 years. It's about what you build when the worst thing already happened and you're still here. Every chapter gets written from the camper, in real places, on the route my code says I'm supposed to be.</p>
             </div>
-            <a href="https://soul-maps.thefirstspark.shop/kjp519.html" target="_blank" rel="noopener noreferrer" class="btn-g">Read KJP's Soul Map →</a>
+            <div class="product-bridge">
+                <img src="/preview-soulmaps.png" alt="Soul Map page example" class="product-bridge-img" width="500" height="320" loading="lazy">
+                <div>
+                    <div class="sec-label">◈ The Product Behind The Tour</div>
+                    <div class="product-bridge-title">This is what routes the camper.</div>
+                    <p class="product-bridge-desc">Every tour stop is scored against KJP's Soul Map — Life Path 5, Expression 11, Soul Urge 7. The same decode you can get for yourself: numerology + astrology on a private page, hand-built, delivered in minutes.</p>
+                    <div class="product-bridge-price">OG Edition · $44</div>
+                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Get Your Soul Map →</a>
+                    <a href="https://soul-maps.thefirstspark.shop/kjp519.html" target="_blank" rel="noopener noreferrer" class="btn-g" style="margin-left:12px;">Read KJP's Map</a>
+                </div>
+            </div>
         </div>
     </section>
 
