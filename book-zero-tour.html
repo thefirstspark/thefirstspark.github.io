@@ -131,6 +131,29 @@
             color: var(--spark); text-decoration: none;
             border-bottom: 1px solid rgba(251,191,36,.3);
         }
+        .press-link.secondary {
+            color: var(--dim);
+            border-color: rgba(255,255,255,.15);
+            margin-top: 8px;
+        }
+        .press-link.secondary:hover { color: var(--white); }
+        .press-video {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin: 16px 0 12px;
+            border: 1px solid rgba(255,106,61,.28);
+            background: #000;
+            overflow: hidden;
+        }
+        .press-video iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .press-watch-links { display: flex; flex-direction: column; align-items: flex-start; }
 
         .sec-label {
             font-size: .55em; letter-spacing: .42em; text-transform: uppercase;
@@ -397,7 +420,13 @@
                     <div class="press-label">As Seen On · Investigation Discovery</div>
                     <div class="press-title">On The Case With Paula Zahn</div>
                     <p class="press-desc"><strong>Two Fires, One Match</strong> — the case that started everything. Rachael Maureen Johnson. Akron, Ohio. 29 years. One truth that refused to stay buried.</p>
-                    <a href="https://www.investigationdiscovery.com/video/on-the-case-with-paula-zahn-investigation-discovery-atve-us/two-fires-one-match" target="_blank" rel="noopener noreferrer" class="press-link">Watch the episode →</a>
+                    <div class="press-video">
+                        <iframe src="https://www.youtube.com/embed/-DaJ6J_PBe0" title="Two Fires, One Match — On The Case With Paula Zahn" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="press-watch-links">
+                        <a href="https://youtu.be/-DaJ6J_PBe0" target="_blank" rel="noopener noreferrer" class="press-link">Watch on YouTube →</a>
+                        <a href="https://www.investigationdiscovery.com/video/on-the-case-with-paula-zahn-investigation-discovery-atve-us/two-fires-one-match" target="_blank" rel="noopener noreferrer" class="press-link secondary">Also on Investigation Discovery →</a>
+                    </div>
                 </aside>
             </div>
         </div>

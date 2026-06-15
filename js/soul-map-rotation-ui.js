@@ -42,10 +42,10 @@
         const mapDesc = map ? map.desc : 'The map routing Book Zero and the tour.';
 
         container.innerHTML =
-            '<a href="https://www.investigationdiscovery.com/video/on-the-case-with-paula-zahn-investigation-discovery-atve-us/two-fires-one-match" class="hero-proof-id" target="_blank" rel="noopener noreferrer">' +
+            '<a href="https://youtu.be/-DaJ6J_PBe0" class="hero-proof-id" target="_blank" rel="noopener noreferrer">' +
                 '<div class="hero-proof-id-label">As seen on Investigation Discovery</div>' +
                 '<div class="hero-proof-id-title">Two Fires, One Match</div>' +
-                '<div class="hero-proof-id-sub">Paula Zahn \u00b7 29-year cold case solved</div>' +
+                '<div class="hero-proof-id-sub">Paula Zahn \u00b7 Watch on YouTube \u00b7 29-year cold case</div>' +
             '</a>' +
             '<div class="hero-proof-visual">' +
                 '<img src="/preview-soulmaps.png" alt="Soul Map page preview" class="hero-proof-img" width="600" height="400" loading="eager">' +

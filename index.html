@@ -1207,6 +1207,22 @@
             color: var(--white);
             margin-bottom: 4px;
         }
+        .featured-video {
+            max-width: 720px;
+            margin: 32px auto 0;
+            position: relative;
+            padding-bottom: 56.25%;
+            border: 1px solid rgba(255,106,61,.28);
+            background: #000;
+            box-shadow: 0 12px 40px rgba(0,0,0,.45);
+        }
+        .featured-video iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
         .featured-in-date {
             font-size: .55em;
             color: var(--dim);
@@ -1991,11 +2007,11 @@
         <div class="wrap">
             <div class="featured-in-label">As Featured In</div>
             <div style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center;">
-                <a href="https://www.investigationdiscovery.com/video/on-the-case-with-paula-zahn-investigation-discovery-atve-us/two-fires-one-match" target="_blank" rel="noopener noreferrer" class="featured-in-card">
+                <a href="https://youtu.be/-DaJ6J_PBe0" target="_blank" rel="noopener noreferrer" class="featured-in-card">
                     <div class="featured-in-logo">ID<br>PAULA ZAHN</div>
                     <div class="featured-in-text">
                         <div class="featured-in-title">"Two Fires, One Match"</div>
-                        <div class="featured-in-date">On The Case · True Crime</div>
+                        <div class="featured-in-date">On The Case · YouTube</div>
                     </div>
                 </a>
                 <a href="https://voyageohio.com/interview/conversations-with-katelin-puzakulics/" target="_blank" rel="noopener noreferrer" class="featured-in-card">
@@ -2006,6 +2022,12 @@
                     </div>
                 </a>
             </div>
+            <div class="featured-video">
+                <iframe src="https://www.youtube.com/embed/-DaJ6J_PBe0" title="Two Fires, One Match — On The Case With Paula Zahn" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <p style="text-align:center; margin-top:20px; font-size:.58em; letter-spacing:.14em;">
+                <a href="https://www.investigationdiscovery.com/video/on-the-case-with-paula-zahn-investigation-discovery-atve-us/two-fires-one-match" target="_blank" rel="noopener noreferrer" style="color:var(--dim); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.12); padding-bottom:2px;">Also on Investigation Discovery →</a>
+            </p>
             <p style="text-align:center; margin-top:28px;">
                 <a href="book-zero-tour.html" style="font-family:'Orbitron',sans-serif; font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--spark); text-decoration:none; border-bottom:1px solid rgba(251,191,36,.3); padding-bottom:2px;">Book Zero Tour · Camper Chronicles →</a>
             </p>
