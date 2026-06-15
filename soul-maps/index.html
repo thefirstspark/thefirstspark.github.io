@@ -398,22 +398,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
         .cta-pay-btn:hover { background:#f59e0b; color:#070a18; }
         .cta-fine { margin-top:14px; font-size:.6em; letter-spacing:2px; color:#6b7280; text-transform:uppercase; }
-        .cta-promo {
-            margin-top:18px;
-            padding:10px 20px;
-            border:1px dashed rgba(139,92,246,.5);
-            background:rgba(139,92,246,.06);
-            display:inline-block;
+        .cta-edition { margin-top:8px; font-size:.55em; letter-spacing:3px; color:#d97706; text-transform:uppercase; opacity:.85; }
+
+        /* ── ROTATING SPOTLIGHT ── */
+        .spotlight-wrap { margin: 36px 0 10px; }
+        .spotlight-head { text-align:center; margin-bottom: 22px; }
+        .spotlight-head h2 { font-family:'Orbitron',sans-serif; font-size:1rem; letter-spacing:.14em; color:#e0e7ff; margin-bottom:8px; }
+        .spotlight-head p { font-size:.75em; color:#9ca3af; letter-spacing:.08em; }
+        .map-spotlight-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; margin-bottom:14px; }
+        .map-spotlight-card { display:block; padding:22px 20px; border:1px solid rgba(107,77,242,.35); background:rgba(107,77,242,.08); text-decoration:none; transition:transform .2s,border-color .2s,box-shadow .2s; }
+        .map-spotlight-card:hover { transform:translateY(-3px); border-color:#a78bfa; box-shadow:0 8px 28px rgba(107,77,242,.22); }
+        .map-spotlight-sub { font-size:.55em; letter-spacing:.12em; text-transform:uppercase; color:rgba(224,231,255,.45); margin-bottom:6px; }
+        .map-spotlight-name { font-family:'Orbitron',sans-serif; font-size:.72rem; letter-spacing:.08em; color:#c4b5fd; margin-bottom:8px; }
+        .map-spotlight-desc { font-size:.72em; color:#9ca3af; line-height:1.65; margin-bottom:12px; }
+        .map-spotlight-enter { font-size:.52em; letter-spacing:.2em; text-transform:uppercase; color:#fbbf24; }
+        .map-spotlight-meta { text-align:center; font-size:.58em; letter-spacing:.16em; text-transform:uppercase; color:rgba(156,163,175,.75); margin-bottom:0; }
+        .card.featured-today { border-color: rgba(251,191,36,.55) !important; box-shadow: 0 0 24px rgba(251,191,36,.12); }
+        .card.featured-today::before {
+            content: 'Featured today';
+            position: absolute;
+            top: 12px;
+            right: 44px;
+            font-size: .48em;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: #fbbf24;
+            opacity: .85;
         }
-        .cta-promo-label { font-size:.55em; letter-spacing:3px; text-transform:uppercase; color:#8b5cf6; opacity:.7; margin-bottom:4px; }
-        .cta-promo-code {
-            font-size:1.1em;
-            font-weight:700;
-            color:#c084fc;
-            letter-spacing:6px;
-            text-shadow:0 0 20px rgba(139,92,246,.4);
-        }
-        .cta-promo-desc { font-size:.6em; color:#9ca3af; letter-spacing:2px; text-transform:uppercase; margin-top:4px; }
+        .card { position: relative; }
 
         /* ── FOOTER ── */
         .footer { text-align: center; margin-top: 50px; color: #374151; font-size: .75em; letter-spacing: 2px; }
@@ -540,16 +552,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="cta-wrap">
         <div class="cta-lbl">◈ Ready for yours?</div>
         <div class="cta-price-big">$44</div>
+        <div class="cta-edition">OG Edition Soul Map</div>
         <div class="cta-heading">Get Your Personal Soul Map</div>
         <p class="cta-copy">Your full numerological blueprint — Life Path, Expression, Soul Urge, Personality, and Personal Year — decoded alongside your astrology, Chinese zodiac, and the specific soul questions you carry. Includes 12 months of monthly energy updates delivered to your personal soul map page.</p>
-        <a id="ind<a id="index-soul-map-btn" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="cta-pay-btn" target="_blank">✦ &nbsp; Claim Your Soul Map &nbsp; ✦</a>
+        <a id="index-soul-map-btn" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="cta-pay-btn" target="_blank" rel="noopener noreferrer">✦ &nbsp; Claim OG Edition &nbsp; ✦</a>
 
-        <div class="cta-fine">One-time payment &nbsp;·&nbsp; Full year of monthly updates included</div>
-        <div class="cta-promo">
-            <div class="cta-promo-label">✦ Limited time</div>
-            <div class="cta-promo-code">SOULSALE</div>
-            <div class="cta-promo-desc">Use at checkout for 50% off</div>
+        <div class="cta-fine">One-time $44 &nbsp;·&nbsp; Full year of monthly updates included</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="spotlight-wrap">
+        <div class="spotlight-head">
+            <h2>◈ TODAY'S FEATURED MAPS ◈</h2>
+            <p>Three souls from the archive, spotlighted daily — everyone gets featured.</p>
         </div>
+        <div id="mapSpotlight"></div>
     </div>
 
     <div class="divider"></div>
@@ -942,6 +960,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
 </div>
+
+<script src="https://thefirstspark.shop/js/soul-map-rotation.js"></script>
+<script src="https://thefirstspark.shop/js/soul-map-rotation-ui.js"></script>
+<script>
+(function () {
+    SoulMapRotation.renderSpotlight(document.getElementById('mapSpotlight'), {
+        count: 3,
+        showArchiveLink: false,
+        showRotationMeta: true
+    });
+
+    var result = SoulMapRotation.getFeaturedMaps(window.SOUL_MAP_ROTATION || [], 3);
+    var featuredHrefs = new Set(result.featured.map(function (m) { return m.href; }));
+
+    document.querySelectorAll('#cards-list .card').forEach(function (card) {
+        var href = card.getAttribute('href');
+        if (href && featuredHrefs.has(href)) card.classList.add('featured-today');
+    });
+})();
+</script>
 
 <script>
     const input   = document.getElementById('search');

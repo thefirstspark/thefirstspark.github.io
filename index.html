@@ -520,6 +520,84 @@
             white-space: nowrap;
         }
 
+        .soul-edition-tag {
+            font-size: .52em;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: rgba(251,191,36,.55);
+            margin-bottom: 8px;
+        }
+
+        /* ─── MAP SPOTLIGHT (rotating archive) ─── */
+        .map-spotlight {
+            padding: 70px 0 40px;
+        }
+        .map-spotlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .map-spotlight-card {
+            display: block;
+            padding: 24px 22px;
+            border: 1px solid rgba(139,92,246,.22);
+            background: rgba(139,92,246,.04);
+            text-decoration: none;
+            transition: transform .25s, border-color .25s, box-shadow .25s;
+        }
+        .map-spotlight-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--nebula);
+            box-shadow: 0 8px 28px rgba(139,92,246,.18);
+        }
+        .map-spotlight-sub {
+            font-size: .52em;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+            margin-bottom: 8px;
+        }
+        .map-spotlight-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            color: var(--nebula);
+            margin-bottom: 10px;
+        }
+        .map-spotlight-desc {
+            font-size: .72em;
+            color: var(--dim);
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+        .map-spotlight-enter {
+            font-size: .5em;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--spark);
+            opacity: .75;
+        }
+        .map-spotlight-meta {
+            font-size: .55em;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.28);
+            margin-bottom: 14px;
+        }
+        .map-spotlight-archive {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .58rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--spark);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(251,191,36,.25);
+            padding-bottom: 2px;
+        }
+        .map-spotlight-archive:hover { border-color: var(--spark); }
+
         /* ─── INVESTOR BRIEF ─── */
         .invest-brief {
             text-align: center;
@@ -1202,7 +1280,7 @@
             <div class="hero-ctas">
                 <a href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener noreferrer" class="btn-p">Claim Your Soul Map →</a>
                 <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer" class="btn-g">Join Free →</a>
-                <span class="hero-cta-note">$44 one-time · 12 months of updates · Delivered in ~5 minutes</span>
+                <span class="hero-cta-note">OG Edition Soul Map · $44 one-time · 12 months of updates · ~5 min delivery</span>
             </div>
             <div class="scroll-hint">Explore</div>
         </div>
@@ -1230,7 +1308,7 @@
                     <div class="card-content">
                         <div class="card-name">Soul Maps</div>
                         <div class="card-desc">Your personal numerological blueprint — Life Path, Expression, Soul Urge — decoded by hand, just for you.</div>
-                        <div class="card-tag">$44 · One-time · 12 months of updates</div>
+                        <div class="card-tag">OG Edition · $44 · 12 months of updates</div>
                     </div>
                 </a>
 
@@ -1264,14 +1342,22 @@
             <div class="soul-callout">
                 <div class="soul-callout-left">
                     <div class="sec-label">◈ &nbsp; Featured</div>
+                    <div class="soul-edition-tag">OG Edition Soul Map</div>
                     <div class="soul-title">Your Numbers Decoded.</div>
                     <p class="soul-desc">Every soul map is hand-decoded by KJP — your Life Path, Expression Number, Soul Urge, Personality, and Personal Year, woven together with astrology and the specific questions your soul is carrying right now.</p>
                     <div class="soul-meta">$44 &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; 12 months of updates included</div>
                 </div>
                 <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
                     <div class="soul-price">$44</div>
-                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Claim Your Map →</a>
+                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Claim OG Edition →</a>
                 </div>
+            </div>
+
+            <div class="map-spotlight">
+                <div class="sec-label">◈ &nbsp; Proof, Not Promises</div>
+                <h2 class="sec-title" style="margin-bottom:10px;">See Real Maps From The Archive</h2>
+                <p class="sec-sub" style="margin-bottom:28px;">A new trio featured every day — everyone in the archive gets the spotlight.</p>
+                <div id="mapSpotlight"></div>
             </div>
         </div>
     </section>
@@ -1931,6 +2017,12 @@
             nav.classList.toggle('scrolled', window.scrollY > 40);
         });
     })();
+    </script>
+
+    <script src="/js/soul-map-rotation.js"></script>
+    <script src="/js/soul-map-rotation-ui.js"></script>
+    <script>
+    SoulMapRotation.renderSpotlight(document.getElementById('mapSpotlight'), { count: 3 });
     </script>
 
     <!-- Live Counter Animation -->
