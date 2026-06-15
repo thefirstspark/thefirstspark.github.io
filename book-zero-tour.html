@@ -252,6 +252,65 @@
         }
         .follow-bar p { font-size: .78em; color: var(--dim); line-height: 1.8; max-width: 520px; margin: 0 auto 24px; }
 
+        .waitlist-panel {
+            border: 1px solid rgba(255,106,61,.35);
+            background: rgba(255,106,61,.04);
+            padding: 40px 32px;
+            max-width: 560px;
+        }
+        .waitlist-panel h2 { margin-bottom: 10px; }
+        .waitlist-panel .sec-sub { margin-bottom: 28px; max-width: none; }
+        .waitlist-form { display: flex; flex-direction: column; gap: 12px; }
+        .waitlist-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 520px) { .waitlist-row { grid-template-columns: 1fr; } }
+        .waitlist-form label {
+            font-size: .48em; letter-spacing: .22em; text-transform: uppercase;
+            color: var(--dim); margin-bottom: -6px;
+        }
+        .waitlist-form input {
+            width: 100%;
+            font-family: 'Space Mono', monospace;
+            font-size: .78em;
+            padding: 14px 16px;
+            background: rgba(5,5,8,.7);
+            border: 1px solid var(--line);
+            color: var(--white);
+            outline: none;
+            transition: border-color .2s;
+        }
+        .waitlist-form input::placeholder { color: rgba(255,255,255,.22); }
+        .waitlist-form input:focus { border-color: rgba(251,191,36,.45); }
+        .waitlist-form button[type="submit"] {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .62rem; font-weight: 700;
+            letter-spacing: .16em; text-transform: uppercase;
+            padding: 14px 28px;
+            background: var(--ember);
+            color: var(--void);
+            border: none;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: box-shadow .2s;
+        }
+        .waitlist-form button[type="submit"]:hover:not(:disabled) {
+            box-shadow: 0 8px 28px rgba(255,106,61,.35);
+        }
+        .waitlist-form button[type="submit"]:disabled { opacity: .55; cursor: wait; }
+        .waitlist-note {
+            font-size: .58em; color: rgba(255,255,255,.28);
+            line-height: 1.7; margin-top: 14px;
+        }
+        .waitlist-status {
+            font-size: .68em; line-height: 1.6; margin-top: 12px; min-height: 1.2em;
+        }
+        .waitlist-status.success { color: var(--cyan); }
+        .waitlist-status.warning { color: var(--spark); }
+        .waitlist-status.error { color: #f87171; }
+
         footer {
             text-align: center; padding: 40px 0;
             font-size: .55em; letter-spacing: .15em;
@@ -277,6 +336,7 @@
                     <h1>Book Zero.<br><em>Written from the road.</em></h1>
                     <p class="hero-sub">My mother's killer lived across the street. He inserted himself into our lives while we grew up not knowing. I solved her 1991 cold case in 2020. Now I'm taking that story — and everything I built from the fracture — on tour in a solar camper with satellite internet, letting my Soul Map choose where I write next.</p>
                     <a href="https://youtube.com/@therealfirstspark" target="_blank" rel="noopener noreferrer" class="btn-p">Follow The Tour →</a>
+                    <a href="#waitlist" class="btn-g">Chapter Waitlist →</a>
                     <a href="mailto:kate@thefirstspark.shop?subject=Book%20Zero%20Tour%20—%20Press%20%2F%20Event" class="btn-g">Book A Stop</a>
                 </div>
                 <aside class="press-card">
@@ -298,6 +358,43 @@
                 <p>Book Zero is the memoir I've been carrying since I was a child — the story of a killer who lived across from us, who wove himself into our lives, and who remained hidden in plain sight for decades. It's about solving what law enforcement couldn't close for 29 years. It's about what you build when the worst thing already happened and you're still here. Every chapter gets written from the camper, in real places, on the route my code says I'm supposed to be.</p>
             </div>
             <a href="https://soul-maps.thefirstspark.shop/kjp519.html" target="_blank" rel="noopener noreferrer" class="btn-g">Read KJP's Soul Map →</a>
+        </div>
+    </section>
+
+    <section id="waitlist" style="background: rgba(255,106,61,.02); border-top: 1px solid rgba(255,106,61,.12); border-bottom: 1px solid rgba(255,106,61,.12);">
+        <div class="wrap">
+            <div class="waitlist-panel">
+                <div class="sec-label">◈ Early Access</div>
+                <h2>Book Zero Chapter Waitlist</h2>
+                <p class="sec-sub">Get draft chapters as they're written from the road — before public release. One email when a new drop lands. No funnels. No spam.</p>
+                <form class="waitlist-form"
+                      id="bookZeroWaitlist"
+                      action="https://formspree.io/f/YOUR_FORM_ID"
+                      method="POST"
+                      data-form="book-zero-waitlist"
+                      aria-label="Book Zero chapter waitlist signup">
+                    <div class="waitlist-row">
+                        <div>
+                            <label for="wl-name">Name</label>
+                            <input type="text" id="wl-name" name="name" placeholder="Your name" autocomplete="name" required>
+                        </div>
+                        <div>
+                            <label for="wl-email">Email</label>
+                            <input type="email" id="wl-email" name="email" placeholder="you@email.com" autocomplete="email" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="wl-city">City (optional — request a tour stop)</label>
+                        <input type="text" id="wl-city" name="city" placeholder="Akron, OH" autocomplete="address-level2">
+                    </div>
+                    <input type="hidden" name="_subject" value="Book Zero Chapter Waitlist">
+                    <input type="hidden" name="source" value="book-zero-tour">
+                    <input type="hidden" name="interest" value="book-zero-chapters">
+                    <button type="submit">Join The Waitlist →</button>
+                    <p class="waitlist-status" id="waitlistStatus" role="status" aria-live="polite"></p>
+                    <p class="waitlist-note">◈ First chapters ship from wherever the Soul Map lands. Unsubscribe anytime.</p>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -361,6 +458,7 @@
                 <div class="sec-label" style="margin-bottom:16px;">◈ Ride Along</div>
                 <h2 style="margin-bottom:14px;">The Tour Is The Work</h2>
                 <p>Watch chapters get written in real time. Request a stop in your city. Press, bookstores, true crime communities, and spark-aligned spaces — the door is open.</p>
+                <a href="#waitlist" class="btn-p" style="margin-right:12px;">Chapter Waitlist →</a>
                 <a href="https://youtube.com/@therealfirstspark" target="_blank" rel="noopener noreferrer" class="btn-p">YouTube · Camper Chronicles</a>
                 <a href="https://streamelements.com/kjpthefirstspark/tip" target="_blank" rel="noopener noreferrer" class="btn-g">Fuel The Rig</a>
                 <p style="margin-top:24px; font-size:.62em;"><a href="mailto:kate@thefirstspark.shop?subject=Book%20Zero%20Tour">kate@thefirstspark.shop</a> · press &amp; tour bookings</p>
@@ -498,6 +596,59 @@
     }
 
     renderRoute();
+
+    // Book Zero waitlist
+    (function() {
+        const form = document.getElementById('bookZeroWaitlist');
+        const status = document.getElementById('waitlistStatus');
+        if (!form || !status) return;
+
+        function setStatus(text, type) {
+            status.textContent = text;
+            status.className = 'waitlist-status' + (type ? ' ' + type : '');
+        }
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formAction = form.getAttribute('action');
+
+            if (!formAction || formAction.includes('YOUR_FORM_ID')) {
+                setStatus('Waitlist not live yet — email kate@thefirstspark.shop with subject "Book Zero Waitlist".', 'warning');
+                return;
+            }
+
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = 'Joining…';
+            btn.disabled = true;
+            setStatus('', '');
+
+            try {
+                const res = await fetch(formAction, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { Accept: 'application/json' }
+                });
+                if (res.ok) {
+                    setStatus("You're on the list. First chapter drop hits your inbox from the road.", 'success');
+                    form.reset();
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'signup', {
+                            event_category: 'engagement',
+                            event_label: 'book_zero_chapter_waitlist'
+                        });
+                    }
+                } else {
+                    throw new Error('submit failed');
+                }
+            } catch (err) {
+                setStatus('Something went wrong — email kate@thefirstspark.shop to join the waitlist.', 'error');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+    })();
 
     // Starfield
     (function() {
