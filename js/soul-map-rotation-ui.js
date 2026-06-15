@@ -21,29 +21,25 @@
         return { featured, day, start, total: maps.length };
     }
 
+    function descToChips(desc) {
+        if (!desc) return [];
+        return desc.split('\u00b7').map(function(s) { return s.trim(); }).filter(Boolean).slice(0, 4);
+    }
+
     function renderHeroProof(container, options) {
         if (!container) return;
         const maps = global.SOUL_MAP_ROTATION || [];
         const checkoutUrl = options.checkoutUrl || 'https://whop.com/checkout/plan_anQKP3Pzf1cGm';
         const { featured } = getFeaturedMaps(maps, 1, options.date);
         const map = featured[0];
-        const mapBlock = map
-            ? (
-                '<a href="' + BASE + map.href + '" class="hero-proof-map" target="_blank" rel="noopener noreferrer">' +
-                    '<div class="hero-proof-map-label">Today\u2019s featured map</div>' +
-                    '<div class="hero-proof-map-name">' + map.name + '</div>' +
-                    '<div class="hero-proof-map-desc">' + map.desc + '</div>' +
-                    '<div class="hero-proof-map-enter">Read full map \u2192</div>' +
-                '</a>'
-            )
-            : (
-                '<a href="' + BASE + 'kjp519.html" class="hero-proof-map" target="_blank" rel="noopener noreferrer">' +
-                    '<div class="hero-proof-map-label">Founder map</div>' +
-                    '<div class="hero-proof-map-name">KJP \u00b7 Life Path 5</div>' +
-                    '<div class="hero-proof-map-desc">The map routing Book Zero and the tour.</div>' +
-                    '<div class="hero-proof-map-enter">Read KJP\u2019s map \u2192</div>' +
-                '</a>'
-            );
+        const chips = map ? descToChips(map.desc) : ['Life Path 5', 'Expression 11', 'Soul Urge 7', 'Taurus/Gemini'];
+        const chipsHtml = '<div class="hero-proof-chips">' +
+            chips.map(function(c) { return '<span class="hero-proof-chip">' + c + '</span>'; }).join('') +
+            '</div>';
+        const mapHref = map ? (BASE + map.href) : (BASE + 'kjp519.html');
+        const mapLabel = map ? 'Today\u2019s featured map' : 'Founder map';
+        const mapName = map ? map.name : 'KJP \u00b7 Life Path 5';
+        const mapDesc = map ? map.desc : 'The map routing Book Zero and the tour.';
 
         container.innerHTML =
             '<a href="https://www.investigationdiscovery.com/video/on-the-case-with-paula-zahn-investigation-discovery-atve-us/two-fires-one-match" class="hero-proof-id" target="_blank" rel="noopener noreferrer">' +
@@ -53,7 +49,13 @@
             '</a>' +
             '<div class="hero-proof-visual">' +
                 '<img src="/preview-soulmaps.png" alt="Soul Map page preview" class="hero-proof-img" width="600" height="400" loading="eager">' +
-                mapBlock +
+                chipsHtml +
+                '<a href="' + mapHref + '" class="hero-proof-map" target="_blank" rel="noopener noreferrer">' +
+                    '<div class="hero-proof-map-label">' + mapLabel + '</div>' +
+                    '<div class="hero-proof-map-name">' + mapName + '</div>' +
+                    '<div class="hero-proof-map-desc">' + mapDesc + '</div>' +
+                    '<div class="hero-proof-map-enter">Read full map \u2192</div>' +
+                '</a>' +
             '</div>' +
             '<div class="hero-proof-footer">' +
                 '<a href="' + checkoutUrl + '" class="hero-proof-price" target="_blank" rel="noopener noreferrer">Get yours \u00b7 $44</a>' +

@@ -255,13 +255,102 @@
             margin-bottom: 22px;
             color: var(--white);
         }
-        .hero-headline span {
+        .hero-headline .hero-rotate {
             display: block;
-            background: linear-gradient(135deg, var(--spark), var(--nebula));
+            background: linear-gradient(120deg, var(--spark), var(--nebula), var(--cyan), var(--spark));
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: heroGrad 8s ease infinite;
+            min-height: 1.15em;
+            transition: opacity .35s ease, transform .35s ease;
         }
+        .hero-rotate.is-out { opacity: 0; transform: translateY(8px); }
+        @keyframes heroGrad {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-decode {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+            padding: 10px 14px;
+            border: 1px solid rgba(34,211,238,.18);
+            background: rgba(34,211,238,.04);
+            max-width: 520px;
+        }
+        .hero-decode-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 12px var(--cyan);
+            animation: decodePulse 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        @keyframes decodePulse {
+            0%, 100% { opacity: .45; transform: scale(.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        .hero-decode-label {
+            font-size: .48em;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: rgba(34,211,238,.65);
+        }
+        .hero-decode-text {
+            font-size: .62em;
+            color: rgba(255,255,255,.62);
+            letter-spacing: .06em;
+            transition: opacity .3s ease;
+        }
+        .hero-decode-text.is-out { opacity: 0; }
+
+        .hero-copy > * {
+            animation: heroIn .7s ease both;
+        }
+        .hero-copy > *:nth-child(1) { animation-delay: .05s; }
+        .hero-copy > *:nth-child(2) { animation-delay: .12s; }
+        .hero-copy > *:nth-child(3) { animation-delay: .2s; }
+        .hero-copy > *:nth-child(4) { animation-delay: .28s; }
+        .hero-copy > *:nth-child(5) { animation-delay: .36s; }
+        .hero-copy > *:nth-child(6) { animation-delay: .44s; }
+        .hero-copy > *:nth-child(7) { animation-delay: .52s; }
+        @keyframes heroIn {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-proof-wrap {
+            position: relative;
+            animation: heroIn .9s ease .25s both;
+        }
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(48px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .hero-orb-a {
+            width: 180px; height: 180px;
+            top: -30px; right: -20px;
+            background: rgba(139,92,246,.35);
+            animation: orbDrift 14s ease-in-out infinite;
+        }
+        .hero-orb-b {
+            width: 140px; height: 140px;
+            bottom: 20px; left: -30px;
+            background: rgba(251,191,36,.22);
+            animation: orbDrift 18s ease-in-out infinite reverse;
+        }
+        @keyframes orbDrift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-12px, 10px) scale(1.08); }
+        }
+        .hero-proof { position: relative; z-index: 1; }
 
         .hero-sub {
             font-size: clamp(.85rem, 1.8vw, 1rem);
@@ -295,6 +384,14 @@
             background: rgba(251,191,36,.04);
             color: rgba(255,255,255,.55);
             padding: 8px 14px;
+            transition: transform .25s, border-color .25s, background .25s, color .25s;
+            cursor: default;
+        }
+        .grasp-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(251,191,36,.45);
+            background: rgba(251,191,36,.09);
+            color: rgba(255,255,255,.78);
         }
         .grasp-item strong { color: var(--spark); font-weight: 400; }
 
@@ -338,6 +435,24 @@
             padding: 14px;
             margin-bottom: 12px;
             overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform .15s ease-out;
+            will-change: transform;
+        }
+        .hero-proof-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(34,211,238,.12) 48%, transparent 52%, transparent 100%);
+            background-size: 100% 220%;
+            animation: heroScan 5s linear infinite;
+            pointer-events: none;
+            z-index: 2;
+            mix-blend-mode: screen;
+        }
+        @keyframes heroScan {
+            0% { background-position: 0 -120%; }
+            100% { background-position: 0 220%; }
         }
         .hero-proof-img {
             width: 100%;
@@ -346,12 +461,38 @@
             border-radius: 4px;
             opacity: .92;
             box-shadow: 0 12px 40px rgba(0,0,0,.45);
+            transition: transform .4s ease;
+        }
+        .hero-proof-visual:hover .hero-proof-img { transform: scale(1.02); }
+        .hero-proof-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0 8px;
+            position: relative;
+            z-index: 3;
+        }
+        .hero-proof-chip {
+            font-size: .44em;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: 5px 9px;
+            border: 1px solid rgba(139,92,246,.28);
+            color: rgba(255,255,255,.48);
+            background: rgba(5,5,8,.5);
+            animation: chipIn .5s ease both;
+        }
+        .hero-proof-chip:nth-child(2) { animation-delay: .08s; }
+        .hero-proof-chip:nth-child(3) { animation-delay: .16s; }
+        .hero-proof-chip:nth-child(4) { animation-delay: .24s; }
+        @keyframes chipIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .hero-proof-map {
-            position: absolute;
-            left: 14px;
-            right: 14px;
-            bottom: 14px;
+            position: relative;
+            display: block;
+            margin-top: 4px;
             display: block;
             text-decoration: none;
             padding: 14px 16px;
@@ -423,6 +564,12 @@
             font-size: .56rem;
             padding: 9px 18px;
             letter-spacing: .14em;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-rotate, .hero-proof-visual::before, .hero-orb, .hero-decode-dot,
+            .hero-copy > *, .hero-proof-wrap, .hero-proof-chip { animation: none !important; }
+            .hero-rotate.is-out, .hero-decode-text.is-out { opacity: 1; transform: none; }
         }
 
         .hero-cta-note {
@@ -1549,8 +1696,13 @@
                 <div class="hero-copy">
                     <div class="hero-badge">◈ &nbsp; Soul Maps · $44 OG Edition · ID True Crime</div>
                     <h1 class="hero-headline">
-                        Your numbers<br>aren't random.<br><span>Read your code.</span>
+                        Your numbers<br>aren't random.<br><span class="hero-rotate" id="heroRotate" aria-live="polite">Read your code.</span>
                     </h1>
+                    <div class="hero-decode" aria-label="Live archive decode">
+                        <span class="hero-decode-dot" aria-hidden="true"></span>
+                        <span class="hero-decode-label">Live decode</span>
+                        <span class="hero-decode-text" id="heroDecodeText">Scanning today's featured map…</span>
+                    </div>
                     <p class="hero-sub">A private Soul Map page — Life Path, Expression, Soul Urge, astrology — hand-decoded by KJP. Delivered in ~5 minutes. Free Sparkverse community included.</p>
                     <div class="grasp-strip" aria-label="How it works">
                         <div class="grasp-item"><strong>①</strong> Read real maps free</div>
@@ -1564,7 +1716,11 @@
                         <span class="hero-cta-note">Private URL · 12 months of updates · ~5 min delivery · Whop checkout</span>
                     </div>
                 </div>
-                <div class="hero-proof" id="heroProof" aria-label="Proof: Investigation Discovery feature and live Soul Map preview"></div>
+                <div class="hero-proof-wrap">
+                    <div class="hero-orb hero-orb-a" aria-hidden="true"></div>
+                    <div class="hero-orb hero-orb-b" aria-hidden="true"></div>
+                    <div class="hero-proof" id="heroProof" aria-label="Proof: Investigation Discovery feature and live Soul Map preview"></div>
+                </div>
             </div>
             <div class="scroll-hint">Explore</div>
         </div>
@@ -2347,6 +2503,65 @@
     <script>
     SoulMapRotation.renderHeroProof(document.getElementById('heroProof'));
     SoulMapRotation.renderSpotlight(document.getElementById('mapSpotlight'), { count: 3 });
+
+    (function initHeroMotion() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        var rotateEl = document.getElementById('heroRotate');
+        var decodeEl = document.getElementById('heroDecodeText');
+        var phrases = ['Read your code.', 'Know your path.', 'Decode the fracture.', 'Map what\u2019s next.'];
+        var phraseIdx = 0;
+
+        if (rotateEl) {
+            setInterval(function() {
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+                rotateEl.classList.add('is-out');
+                setTimeout(function() {
+                    rotateEl.textContent = phrases[phraseIdx];
+                    rotateEl.classList.remove('is-out');
+                }, 320);
+            }, 3800);
+        }
+
+        var maps = window.SOUL_MAP_ROTATION || [];
+        var featured = SoulMapRotation.getFeaturedMaps(maps, 1).featured;
+        var map = featured[0];
+        var decodeLines = [];
+        if (map) {
+            decodeLines.push(map.name + ' \u00b7 ' + map.sub.replace(/^Soul Map \u00b7 /, ''));
+            map.desc.split('\u00b7').forEach(function(part) {
+                var t = part.trim();
+                if (t) decodeLines.push(t);
+            });
+        } else {
+            decodeLines = ['Life Path 5 Catalyst', 'Expression 11 Master Illuminator', 'Akron origin \u2192 nationwide archive'];
+        }
+        var decodeIdx = 0;
+        if (decodeEl && decodeLines.length) {
+            decodeEl.textContent = decodeLines[0];
+            setInterval(function() {
+                decodeIdx = (decodeIdx + 1) % decodeLines.length;
+                decodeEl.classList.add('is-out');
+                setTimeout(function() {
+                    decodeEl.textContent = decodeLines[decodeIdx];
+                    decodeEl.classList.remove('is-out');
+                }, 280);
+            }, 3200);
+        }
+
+        var visual = document.querySelector('.hero-proof-visual');
+        if (visual && window.matchMedia('(pointer: fine)').matches) {
+            visual.addEventListener('mousemove', function(e) {
+                var r = visual.getBoundingClientRect();
+                var x = (e.clientX - r.left) / r.width - 0.5;
+                var y = (e.clientY - r.top) / r.height - 0.5;
+                visual.style.transform = 'perspective(900px) rotateY(' + (x * 7) + 'deg) rotateX(' + (-y * 5) + 'deg)';
+            });
+            visual.addEventListener('mouseleave', function() {
+                visual.style.transform = '';
+            });
+        }
+    })();
     </script>
 
     <!-- Live Counter Animation -->
