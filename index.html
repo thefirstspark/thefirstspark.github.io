@@ -2120,6 +2120,12 @@
         let isMobile = window.innerWidth < 768;
         let touchActive = false;
         let touchRipples = [];
+        let dropBursts = [];
+        let lockFrame = 0;
+        let frozenBeatTime = 0;
+        let lastDropBeat = -1;
+        const BPM = 92;
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         function resize(){
             W = canvas.width = window.innerWidth;
@@ -2128,23 +2134,89 @@
         }
 
         // ═══════════════════════════════════════════
-        // DESKTOP: DNA HELIXES (unchanged awesomeness)
+        // DESKTOP: DNA HELIXES — pop · lock · drop
         // ═══════════════════════════════════════════
         const helixes = [];
+        const helixPalette = [
+            { c1: [251, 191, 36], c2: [139, 92, 246] },
+            { c1: [139, 92, 246], c2: [34, 211, 238] },
+            { c1: [255, 106, 61], c2: [251, 191, 36] },
+            { c1: [34, 211, 238], c2: [255, 106, 61] },
+            { c1: [236, 72, 153], c2: [251, 191, 36] }
+        ];
+
         function initHelixes() {
             helixes.length = 0;
-            const count = isMobile ? 0 : 3;
-            for(let i = 0; i < count; i++) {
+            const count = isMobile ? 0 : 5;
+            for (let i = 0; i < count; i++) {
+                const pal = helixPalette[i % helixPalette.length];
                 helixes.push({
-                    offsetX: W * (0.2 + i * 0.3),
-                    amplitude: 80 + i * 30,
-                    frequency: 0.008 + i * 0.002,
-                    phase: i * Math.PI * 0.6,
-                    speed: 0.015 + i * 0.005,
-                    color1: i === 0 ? [251, 191, 36] : i === 1 ? [139, 92, 246] : [255, 106, 61],
-                    color2: i === 0 ? [139, 92, 246] : i === 1 ? [34, 211, 238] : [251, 191, 36]
+                    offsetX: W * (0.12 + i * 0.19),
+                    amplitude: 70 + i * 22,
+                    frequency: 0.007 + i * 0.0018,
+                    phase: i * Math.PI * 0.55,
+                    speed: 0.018 + i * 0.004,
+                    color1: pal.c1,
+                    color2: pal.c2
                 });
             }
+        }
+
+        function getBeatState(t) {
+            const beatTime = t * BPM / 60;
+            const beatPhase = beatTime % 1;
+            const beatIndex = Math.floor(beatTime);
+            const isLock = !reducedMotion && beatIndex % 4 === 0 && beatPhase < 0.07;
+            const isDrop = !reducedMotion && beatPhase > 0.7;
+            const dropIntensity = isDrop
+                ? Math.sin(((beatPhase - 0.7) / 0.3) * Math.PI)
+                : 0;
+            return { beatTime, beatPhase, beatIndex, isLock, isDrop, dropIntensity };
+        }
+
+        function spawnDropBursts(beat) {
+            if (beat.beatIndex === lastDropBeat) return;
+            if (beat.beatPhase < 0.7 || beat.beatPhase > 0.74) return;
+            lastDropBeat = beat.beatIndex;
+            helixes.forEach(function(h) {
+                dropBursts.push({
+                    x: h.offsetX,
+                    y: H * (0.35 + Math.random() * 0.3),
+                    r: 8,
+                    alpha: 0.95,
+                    color: h.color1,
+                    ring: 0
+                });
+            });
+        }
+
+        function drawDropBursts() {
+            dropBursts = dropBursts.filter(function(b) { return b.alpha > 0.02; });
+            dropBursts.forEach(function(b) {
+                b.r += 6;
+                b.ring += 0.08;
+                b.alpha -= 0.028;
+                ctx.save();
+                ctx.globalCompositeOperation = 'lighter';
+                for (let i = 0; i < 3; i++) {
+                    ctx.beginPath();
+                    ctx.arc(b.x, b.y, b.r + i * 18, 0, Math.PI * 2);
+                    ctx.strokeStyle = 'rgba(' + b.color.join(',') + ',' + (b.alpha * (0.55 - i * 0.15)) + ')';
+                    ctx.lineWidth = 2.5 - i * 0.5;
+                    ctx.stroke();
+                }
+                const rays = 8;
+                for (let i = 0; i < rays; i++) {
+                    const a = (i / rays) * Math.PI * 2 + b.ring;
+                    ctx.beginPath();
+                    ctx.moveTo(b.x, b.y);
+                    ctx.lineTo(b.x + Math.cos(a) * b.r * 1.2, b.y + Math.sin(a) * b.r * 1.2);
+                    ctx.strokeStyle = 'rgba(255,255,255,' + (b.alpha * 0.35) + ')';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+                ctx.restore();
+            });
         }
 
         // ═══════════════════════════════════════════
@@ -2235,7 +2307,8 @@
         // Draw the mobile energy spine
         function drawEnergySpine() {
             const centerX = W / 2;
-            const breathe = Math.sin(time * 0.8) * 0.3 + 1;
+            const beat = getBeatState(time);
+            const breathe = Math.sin(time * 0.8) * 0.3 + 1 + beat.dropIntensity * 0.45;
             const scrollInfluence = (scrollY % H) / H;
             
             // Main spine glow
@@ -2257,9 +2330,9 @@
             }
             
             ctx.strokeStyle = spineGrad;
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 2 + beat.dropIntensity * 2.5;
             ctx.stroke();
-            
+
             // Outer energy field
             ctx.beginPath();
             ctx.moveTo(centerX - 30, 0);
@@ -2356,119 +2429,207 @@
             });
         }
 
-        // Desktop helix functions (kept from before)
-        function drawHelixStrand(helix, offset, isSecondary) {
+        function buildHelixPoints(helix, offset, helixTime, beat) {
             const points = [];
-            const segments = 80;
-            for(let i = 0; i < segments; i++) {
+            const segments = 96;
+            const ampMult = 1 + beat.dropIntensity * 0.5;
+            const popWave = beat.isLock ? 0 : Math.sin(beat.beatTime * Math.PI * 2) * 0.08;
+            for (let i = 0; i < segments; i++) {
                 const t = i / segments;
-                const y = t * H * 1.4 - H * 0.2;
-                const wave = Math.sin(y * helix.frequency + time * helix.speed + helix.phase + offset) * helix.amplitude;
+                const y = t * H * 1.45 - H * 0.22;
+                const wave = Math.sin(y * helix.frequency + helixTime * helix.speed + helix.phase + offset + popWave)
+                    * helix.amplitude * ampMult;
                 const x = helix.offsetX + wave;
-                const dx = x - mouse.x, dy = y - mouse.y;
+                const dx = x - mouse.x;
+                const dy = y - mouse.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                const influence = Math.max(0, 1 - dist / 200) * 40;
+                const influence = Math.max(0, 1 - dist / 260) * (55 + beat.dropIntensity * 35);
                 const bendX = dx / (dist || 1) * influence;
-                points.push({ x: x + bendX, y, t });
+                points.push({ x: x + bendX, y, t, i });
             }
-            const col = isSecondary ? helix.color2 : helix.color1;
+            return points;
+        }
+
+        function strokeHelixCurve(points) {
             ctx.beginPath();
             ctx.moveTo(points[0].x, points[0].y);
-            for(let i = 1; i < points.length - 1; i++) {
+            for (let i = 1; i < points.length - 1; i++) {
                 const xc = (points[i].x + points[i + 1].x) / 2;
                 const yc = (points[i].y + points[i + 1].y) / 2;
                 ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
             }
-            const gradient = ctx.createLinearGradient(0, 0, 0, H);
-            gradient.addColorStop(0, `rgba(${col[0]}, ${col[1]}, ${col[2]}, 0)`);
-            gradient.addColorStop(0.3, `rgba(${col[0]}, ${col[1]}, ${col[2]}, 0.3)`);
-            gradient.addColorStop(0.5, `rgba(${col[0]}, ${col[1]}, ${col[2]}, 0.5)`);
-            gradient.addColorStop(0.7, `rgba(${col[0]}, ${col[1]}, ${col[2]}, 0.3)`);
-            gradient.addColorStop(1, `rgba(${col[0]}, ${col[1]}, ${col[2]}, 0)`);
-            ctx.strokeStyle = gradient;
-            ctx.lineWidth = isSecondary ? 1 : 1.5;
             ctx.stroke();
+        }
+
+        function drawHelixStrand(helix, offset, isSecondary, helixTime, beat) {
+            const points = buildHelixPoints(helix, offset, helixTime, beat);
+            const col = isSecondary ? helix.color2 : helix.color1;
+            const peakA = 0.42 + beat.dropIntensity * 0.48;
+            const coreW = (isSecondary ? 1.2 : 2.2) + beat.dropIntensity * 1.2;
+            const glowW = coreW * 4.5;
+
+            const gradient = ctx.createLinearGradient(0, 0, 0, H);
+            gradient.addColorStop(0, 'rgba(' + col.join(',') + ',0)');
+            gradient.addColorStop(0.25, 'rgba(' + col.join(',') + ',' + (peakA * 0.55) + ')');
+            gradient.addColorStop(0.5, 'rgba(' + col.join(',') + ',' + peakA + ')');
+            gradient.addColorStop(0.75, 'rgba(' + col.join(',') + ',' + (peakA * 0.55) + ')');
+            gradient.addColorStop(1, 'rgba(' + col.join(',') + ',0)');
+
+            ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+            ctx.strokeStyle = 'rgba(' + col.join(',') + ',' + (peakA * 0.22) + ')';
+            ctx.lineWidth = glowW;
+            ctx.lineCap = 'round';
+            strokeHelixCurve(points);
+            ctx.strokeStyle = 'rgba(' + col.join(',') + ',' + (peakA * 0.45) + ')';
+            ctx.lineWidth = glowW * 0.45;
+            strokeHelixCurve(points);
+            ctx.restore();
+
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = coreW;
+            ctx.lineCap = 'round';
+            strokeHelixCurve(points);
+
+            if (beat.dropIntensity > 0.2) {
+                ctx.save();
+                ctx.globalCompositeOperation = 'lighter';
+                ctx.strokeStyle = 'rgba(255,255,255,' + (beat.dropIntensity * 0.35) + ')';
+                ctx.lineWidth = coreW * 0.6;
+                strokeHelixCurve(points);
+                ctx.restore();
+            }
             return points;
         }
 
-        function drawConnectors(points1, points2, helix) {
-            const step = 8;
-            for(let i = 0; i < points1.length; i += step) {
-                const p1 = points1[i], p2 = points2[i];
-                if(!p1 || !p2) continue;
-                const midX = (p1.x + p2.x) / 2, midY = (p1.y + p2.y) / 2;
-                const pulse = Math.sin(i * 0.1 + time * 2) * 0.5 + 0.5;
-                const alpha = 0.1 + pulse * 0.15;
+        function drawConnectors(points1, points2, helix, helixTime, beat) {
+            const step = beat.isLock ? 10 : 6;
+            for (let i = 0; i < points1.length; i += step) {
+                const p1 = points1[i];
+                const p2 = points2[i];
+                if (!p1 || !p2) continue;
+                const midX = (p1.x + p2.x) / 2;
+                const midY = (p1.y + p2.y) / 2;
+                const pulse = Math.sin(i * 0.12 + helixTime * 2.4) * 0.5 + 0.5;
+                const alpha = 0.14 + pulse * 0.22 + beat.dropIntensity * 0.35;
                 const gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
-                gradient.addColorStop(0, `rgba(${helix.color1[0]}, ${helix.color1[1]}, ${helix.color1[2]}, ${alpha})`);
-                gradient.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.5})`);
-                gradient.addColorStop(1, `rgba(${helix.color2[0]}, ${helix.color2[1]}, ${helix.color2[2]}, ${alpha})`);
+                gradient.addColorStop(0, 'rgba(' + helix.color1.join(',') + ',' + alpha + ')');
+                gradient.addColorStop(0.5, 'rgba(255,255,255,' + (alpha * 0.65) + ')');
+                gradient.addColorStop(1, 'rgba(' + helix.color2.join(',') + ',' + alpha + ')');
                 ctx.beginPath();
                 ctx.moveTo(p1.x, p1.y);
                 ctx.lineTo(p2.x, p2.y);
                 ctx.strokeStyle = gradient;
-                ctx.lineWidth = 0.5;
+                ctx.lineWidth = beat.isLock ? 1.2 : 0.8 + beat.dropIntensity;
                 ctx.stroke();
+
+                const nodeR = (beat.isLock ? 3.5 : 2 + pulse * 1.5) + beat.dropIntensity * 4;
+                const glow = ctx.createRadialGradient(midX, midY, 0, midX, midY, nodeR * 3);
+                glow.addColorStop(0, 'rgba(255,255,255,' + (alpha * 1.8) + ')');
+                glow.addColorStop(0.45, 'rgba(' + helix.color1.join(',') + ',' + (alpha * 1.2) + ')');
+                glow.addColorStop(1, 'transparent');
+                ctx.fillStyle = glow;
                 ctx.beginPath();
-                ctx.arc(midX, midY, 1.5 + pulse, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 2})`;
+                ctx.arc(midX, midY, nodeR * 3, 0, Math.PI * 2);
                 ctx.fill();
+                ctx.beginPath();
+                ctx.arc(midX, midY, nodeR, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,' + (alpha * 2.2) + ')';
+                ctx.fill();
+            }
+        }
+
+        function drawStellarMotes(beat) {
+            const count = 55;
+            for (let i = 0; i < count; i++) {
+                const seed = i * 1.618;
+                const sparkX = (Math.sin(time * 0.55 + seed) * 0.5 + 0.5) * W;
+                const sparkY = (Math.cos(time * 0.38 + seed * 0.7) * 0.5 + 0.5) * H;
+                const sparkAlpha = (Math.sin(time * 2.2 + seed) * 0.35 + 0.45) * (1 + beat.dropIntensity * 0.6);
+                const r = 0.8 + (i % 3) * 0.6 + beat.dropIntensity * 1.2;
+                ctx.beginPath();
+                ctx.arc(sparkX, sparkY, r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,' + sparkAlpha + ')';
+                ctx.fill();
+                if (beat.dropIntensity > 0.4 && i % 9 === 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(sparkX, sparkY);
+                    ctx.lineTo(sparkX - Math.cos(seed) * 12, sparkY - Math.sin(seed) * 12);
+                    ctx.strokeStyle = 'rgba(251,191,36,' + (beat.dropIntensity * 0.4) + ')';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
             }
         }
 
         // Main draw loop
         function draw() {
             ctx.clearRect(0, 0, W, H);
-            time += 0.016;
-            
-            // Background nebulas
-            const bg1 = ctx.createRadialGradient(W * 0.3, H * 0.2, 0, W * 0.3, H * 0.2, W * 0.5);
-            bg1.addColorStop(0, 'rgba(139, 92, 246, 0.03)');
+            time += reducedMotion ? 0.004 : 0.016;
+
+            const beat = getBeatState(time);
+            let helixTime = time;
+            if (beat.isLock) {
+                if (lockFrame === 0) frozenBeatTime = time;
+                lockFrame++;
+                helixTime = frozenBeatTime;
+            } else {
+                lockFrame = 0;
+            }
+            if (beat.isDrop) spawnDropBursts(beat);
+
+            const bg1 = ctx.createRadialGradient(W * 0.3, H * 0.2, 0, W * 0.3, H * 0.2, W * 0.55);
+            bg1.addColorStop(0, 'rgba(139, 92, 246, ' + (0.06 + beat.dropIntensity * 0.05) + ')');
             bg1.addColorStop(1, 'transparent');
             ctx.fillStyle = bg1;
             ctx.fillRect(0, 0, W, H);
-            
-            const bg2 = ctx.createRadialGradient(W * 0.8, H * 0.7, 0, W * 0.8, H * 0.7, W * 0.4);
-            bg2.addColorStop(0, 'rgba(251, 191, 36, 0.02)');
+
+            const bg2 = ctx.createRadialGradient(W * 0.8, H * 0.7, 0, W * 0.8, H * 0.7, W * 0.45);
+            bg2.addColorStop(0, 'rgba(251, 191, 36, ' + (0.05 + beat.dropIntensity * 0.04) + ')');
             bg2.addColorStop(1, 'transparent');
             ctx.fillStyle = bg2;
             ctx.fillRect(0, 0, W, H);
 
-            if(isMobile) {
-                // MOBILE: Energy spine + orbiting sigils
+            const bg3 = ctx.createRadialGradient(W * 0.5, H * 0.5, 0, W * 0.5, H * 0.5, W * 0.35);
+            bg3.addColorStop(0, 'rgba(255, 106, 61, ' + (beat.dropIntensity * 0.07) + ')');
+            bg3.addColorStop(1, 'transparent');
+            ctx.fillStyle = bg3;
+            ctx.fillRect(0, 0, W, H);
+
+            if (isMobile) {
                 drawEnergySpine();
                 drawOrbitingSigils();
                 drawTouchRipples();
+                drawDropBursts();
             } else {
-                // DESKTOP: DNA helixes
-                helixes.forEach(helix => {
-                    const strand1 = drawHelixStrand(helix, 0, false);
-                    const strand2 = drawHelixStrand(helix, Math.PI, true);
-                    drawConnectors(strand1, strand2, helix);
+                helixes.forEach(function(helix) {
+                    const strand1 = drawHelixStrand(helix, 0, false, helixTime, beat);
+                    const strand2 = drawHelixStrand(helix, Math.PI, true, helixTime, beat);
+                    drawConnectors(strand1, strand2, helix, helixTime, beat);
                 });
-                
-                // Floating sparks
-                for(let i = 0; i < 30; i++) {
-                    const sparkX = (Math.sin(time * 0.5 + i * 0.5) * 0.5 + 0.5) * W;
-                    const sparkY = (Math.cos(time * 0.3 + i * 0.7) * 0.5 + 0.5) * H;
-                    const sparkAlpha = Math.sin(time * 2 + i) * 0.3 + 0.3;
-                    ctx.beginPath();
-                    ctx.arc(sparkX, sparkY, 1, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${sparkAlpha})`;
-                    ctx.fill();
-                }
+                drawDropBursts();
+                drawStellarMotes(beat);
+                drawTouchRipples();
             }
-            
+
             requestAnimationFrame(draw);
         }
 
         // Touch/click handlers
         function handleInteraction(x, y) {
-            if(isMobile) {
-                touchRipples.push({ x, y, radius: 5, alpha: 0.8 });
+            touchRipples.push({ x: x, y: y, radius: 5, alpha: isMobile ? 0.8 : 0.95 });
+            if (isMobile) {
                 touchActive = true;
-                setTimeout(() => touchActive = false, 300);
+                setTimeout(function() { touchActive = false; }, 300);
             }
+            dropBursts.push({
+                x: x,
+                y: y,
+                r: 4,
+                alpha: 0.85,
+                color: [251, 191, 36],
+                ring: 0
+            });
         }
 
         document.addEventListener('click', e => handleInteraction(e.clientX, e.clientY));

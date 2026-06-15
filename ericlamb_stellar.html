@@ -531,10 +531,133 @@
             sparkles.push(new Sparkle());
         }
 
+        // === STELLAR DNA HELIX (pop · lock · drop) ===
+        let dnaTime = 0;
+        const dnaBpm = 88;
+        let dnaLockFrame = 0;
+        let dnaFrozen = 0;
+        let dnaBursts = [];
+        let dnaLastDrop = -1;
+        const dnaHelixes = [
+            { x: 0.22, amp: 58, freq: 0.009, phase: 0, speed: 0.02, c1: [199, 125, 170], c2: [139, 92, 246] },
+            { x: 0.78, amp: 64, freq: 0.008, phase: 1.4, speed: 0.017, c1: [232, 160, 192], c2: [107, 77, 242] }
+        ];
+
+        function dnaBeat(t) {
+            const bt = t * dnaBpm / 60;
+            const phase = bt % 1;
+            const idx = Math.floor(bt);
+            return {
+                t: bt,
+                phase: phase,
+                idx: idx,
+                lock: idx % 4 === 0 && phase < 0.07,
+                drop: phase > 0.7,
+                dropI: phase > 0.7 ? Math.sin(((phase - 0.7) / 0.3) * Math.PI) : 0
+            };
+        }
+
+        function drawDnaStrand(h, offset, secondary, t, beat) {
+            const pts = [];
+            const amp = h.amp * (1 + beat.dropI * 0.45);
+            const col = secondary ? h.c2 : h.c1;
+            const ox = canvas.width * h.x;
+            for (let i = 0; i <= 80; i++) {
+                const p = i / 80;
+                const y = p * canvas.height * 1.35 - canvas.height * 0.15;
+                const wave = Math.sin(y * h.freq + t * h.speed + h.phase + offset) * amp;
+                pts.push({ x: ox + wave, y: y });
+            }
+            const peak = 0.38 + beat.dropI * 0.42;
+            ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+            ctx.strokeStyle = 'rgba(' + col.join(',') + ',' + (peak * 0.25) + ')';
+            ctx.lineWidth = secondary ? 7 : 9;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(pts[0].x, pts[0].y);
+            for (let i = 1; i < pts.length - 1; i++) {
+                const xc = (pts[i].x + pts[i + 1].x) / 2;
+                const yc = (pts[i].y + pts[i + 1].y) / 2;
+                ctx.quadraticCurveTo(pts[i].x, pts[i].y, xc, yc);
+            }
+            ctx.stroke();
+            ctx.restore();
+            ctx.strokeStyle = 'rgba(' + col.join(',') + ',' + peak + ')';
+            ctx.lineWidth = secondary ? 1.2 : 2;
+            ctx.stroke();
+            return pts;
+        }
+
+        function drawDnaRungs(a, b, h, beat) {
+            const step = beat.lock ? 9 : 6;
+            for (let i = 0; i < a.length; i += step) {
+                const p1 = a[i];
+                const p2 = b[i];
+                if (!p1 || !p2) continue;
+                const mx = (p1.x + p2.x) / 2;
+                const my = (p1.y + p2.y) / 2;
+                const pulse = Math.sin(i * 0.1 + dnaTime * 2) * 0.5 + 0.5;
+                const alpha = 0.12 + pulse * 0.2 + beat.dropI * 0.3;
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = 'rgba(255,255,255,' + alpha + ')';
+                ctx.lineWidth = beat.lock ? 1 : 0.7;
+                ctx.stroke();
+                const r = (beat.lock ? 3 : 2 + pulse) + beat.dropI * 3.5;
+                ctx.beginPath();
+                ctx.arc(mx, my, r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(240,212,232,' + (alpha * 2) + ')';
+                ctx.fill();
+            }
+        }
+
+        function drawDnaScene() {
+            dnaTime += 0.016;
+            const beat = dnaBeat(dnaTime);
+            let t = dnaTime;
+            if (beat.lock) {
+                if (dnaLockFrame === 0) dnaFrozen = dnaTime;
+                dnaLockFrame++;
+                t = dnaFrozen;
+            } else {
+                dnaLockFrame = 0;
+            }
+            if (beat.drop && beat.idx !== dnaLastDrop && beat.phase > 0.7 && beat.phase < 0.74) {
+                dnaLastDrop = beat.idx;
+                dnaHelixes.forEach(function(h) {
+                    dnaBursts.push({ x: canvas.width * h.x, y: canvas.height * 0.5, r: 6, a: 0.9, c: h.c1 });
+                });
+            }
+            const neb = ctx.createRadialGradient(canvas.width * 0.5, canvas.height * 0.45, 0, canvas.width * 0.5, canvas.height * 0.45, canvas.width * 0.5);
+            neb.addColorStop(0, 'rgba(139,92,246,' + (0.04 + beat.dropI * 0.05) + ')');
+            neb.addColorStop(1, 'transparent');
+            ctx.fillStyle = neb;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            dnaHelixes.forEach(function(h) {
+                const s1 = drawDnaStrand(h, 0, false, t, beat);
+                const s2 = drawDnaStrand(h, Math.PI, true, t, beat);
+                drawDnaRungs(s1, s2, h, beat);
+            });
+            dnaBursts = dnaBursts.filter(function(b) { return b.a > 0.02; });
+            dnaBursts.forEach(function(b) {
+                b.r += 5;
+                b.a -= 0.03;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(' + b.c.join(',') + ',' + b.a + ')';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            });
+        }
+
         // === ANIMATION LOOP ===
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
+            drawDnaScene();
+
             // Draw sparkles first (background)
             sparkles.forEach(s => {
                 s.update();
@@ -600,7 +723,9 @@
             arrow.x = 0;
             arrow.speed = 8;
             arrows.push(arrow);
-            
+
+            dnaBursts.push({ x: e.clientX, y: e.clientY, r: 4, a: 0.85, c: [199, 125, 170] });
+
             if (arrows.length > 8) {
                 arrows.shift();
             }
