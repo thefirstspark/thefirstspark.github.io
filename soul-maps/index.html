@@ -406,8 +406,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .spotlight-head h2 { font-family:'Orbitron',sans-serif; font-size:1rem; letter-spacing:.14em; color:#e0e7ff; margin-bottom:8px; }
         .spotlight-head p { font-size:.75em; color:#9ca3af; letter-spacing:.08em; }
         .map-spotlight-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; margin-bottom:14px; }
-        .map-spotlight-card { display:block; padding:22px 20px; border:1px solid rgba(107,77,242,.35); background:rgba(107,77,242,.08); text-decoration:none; transition:transform .2s,border-color .2s,box-shadow .2s; }
+        .map-spotlight-card { display:flex; flex-direction:column; padding:22px 20px; border:1px solid rgba(107,77,242,.35); background:rgba(107,77,242,.08); transition:transform .2s,border-color .2s,box-shadow .2s; }
         .map-spotlight-card:hover { transform:translateY(-3px); border-color:#a78bfa; box-shadow:0 8px 28px rgba(107,77,242,.22); }
+        .map-spotlight-link { display:block; text-decoration:none; flex:1; }
+        .map-spotlight-buy { margin-top:12px; padding-top:12px; border-top:1px solid rgba(251,191,36,.2); font-family:'Orbitron',sans-serif; font-size:.48rem; letter-spacing:.12em; text-transform:uppercase; color:#fbbf24; text-decoration:none; }
+        .map-spotlight-buy:hover { color:#fff; }
         .map-spotlight-sub { font-size:.55em; letter-spacing:.12em; text-transform:uppercase; color:rgba(224,231,255,.45); margin-bottom:6px; }
         .map-spotlight-name { font-family:'Orbitron',sans-serif; font-size:.72rem; letter-spacing:.08em; color:#c4b5fd; margin-bottom:8px; }
         .map-spotlight-desc { font-size:.72em; color:#9ca3af; line-height:1.65; margin-bottom:12px; }

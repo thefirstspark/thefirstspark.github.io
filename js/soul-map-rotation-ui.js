@@ -35,14 +35,18 @@
         const archiveUrl = options.archiveUrl || (BASE.replace(/\/$/, '') + '/');
         const showMeta = options.showRotationMeta !== false;
         const showArchiveLink = options.showArchiveLink !== false;
+        const checkoutUrl = options.checkoutUrl || 'https://whop.com/checkout/plan_anQKP3Pzf1cGm';
         const cards = featured.map(function (map) {
             return (
-                '<a href="' + BASE + map.href + '" class="map-spotlight-card" target="_blank" rel="noopener noreferrer">' +
-                    '<div class="map-spotlight-sub">' + map.sub + '</div>' +
-                    '<div class="map-spotlight-name">' + map.name + '</div>' +
-                    '<div class="map-spotlight-desc">' + map.desc + '</div>' +
-                    '<div class="map-spotlight-enter">Read map →</div>' +
-                '</a>'
+                '<div class="map-spotlight-card">' +
+                    '<a href="' + BASE + map.href + '" class="map-spotlight-link" target="_blank" rel="noopener noreferrer">' +
+                        '<div class="map-spotlight-sub">' + map.sub + '</div>' +
+                        '<div class="map-spotlight-name">' + map.name + '</div>' +
+                        '<div class="map-spotlight-desc">' + map.desc + '</div>' +
+                        '<div class="map-spotlight-enter">Read map →</div>' +
+                    '</a>' +
+                    '<a href="' + checkoutUrl + '" class="map-spotlight-buy" target="_blank" rel="noopener noreferrer">Get yours · OG Edition $44 →</a>' +
+                '</div>'
             );
         }).join('');
 

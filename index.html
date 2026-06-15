@@ -370,7 +370,45 @@
             margin-bottom: 52px;
         }
 
-        /* ─── CARDS (3 only) ─── */
+        /* ─── FUNNEL CARDS ─── */
+        .cards-funnel {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+        @media(max-width: 680px) {
+            .cards-funnel { grid-template-columns: 1fr; }
+        }
+
+        .cards-more {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media(max-width: 680px) {
+            .cards-more { grid-template-columns: 1fr; }
+        }
+
+        .cards-more .card {
+            padding: 24px 22px;
+            opacity: .92;
+        }
+
+        .card-step {
+            font-size: .5em;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.32);
+            margin-bottom: 12px;
+        }
+        .card.primary-funnel {
+            border-color: rgba(251,191,36,.45);
+            background: rgba(251,191,36,.04);
+            box-shadow: 0 0 40px rgba(251,191,36,.06);
+        }
+        .card.primary-funnel .card-name { color: var(--spark); }
+
         .cards {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -379,6 +417,69 @@
         @media(max-width: 680px) {
             .cards { grid-template-columns: 1fr; }
         }
+
+        .more-label {
+            font-size: .52em;
+            letter-spacing: .32em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.22);
+            margin-bottom: 14px;
+        }
+
+        /* ─── COMMUNITY STEP 2 ─── */
+        #community {
+            background: rgba(251,191,36,.03);
+            border-top: 1px solid rgba(251,191,36,.1);
+            border-bottom: 1px solid rgba(251,191,36,.1);
+        }
+        .community-step {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            padding: 20px 0 10px;
+        }
+        .community-step-left { flex: 1; min-width: 280px; }
+        .community-step-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 700;
+            letter-spacing: .08em;
+            margin-bottom: 12px;
+        }
+        .community-step-desc {
+            font-size: .8em;
+            color: var(--dim);
+            line-height: 1.8;
+            max-width: 520px;
+        }
+        .community-included {
+            margin-top: 14px;
+            font-size: .58em;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(251,191,36,.5);
+        }
+
+        .feel-cta-bar {
+            margin-top: 36px;
+            padding: 22px 24px;
+            border: 1px solid rgba(251,191,36,.22);
+            background: rgba(251,191,36,.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .feel-cta-text {
+            font-size: .78em;
+            color: var(--dim);
+            line-height: 1.7;
+            max-width: 480px;
+        }
+        .feel-cta-text strong { color: var(--white); font-weight: 400; }
 
         .card {
             padding: 32px 26px;
@@ -539,11 +640,11 @@
             margin-bottom: 20px;
         }
         .map-spotlight-card {
-            display: block;
+            display: flex;
+            flex-direction: column;
             padding: 24px 22px;
             border: 1px solid rgba(139,92,246,.22);
             background: rgba(139,92,246,.04);
-            text-decoration: none;
             transition: transform .25s, border-color .25s, box-shadow .25s;
         }
         .map-spotlight-card:hover {
@@ -551,6 +652,24 @@
             border-color: var(--nebula);
             box-shadow: 0 8px 28px rgba(139,92,246,.18);
         }
+        .map-spotlight-link {
+            display: block;
+            text-decoration: none;
+            flex: 1;
+        }
+        .map-spotlight-buy {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(251,191,36,.15);
+            font-family: 'Orbitron', sans-serif;
+            font-size: .5rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--spark);
+            text-decoration: none;
+        }
+        .map-spotlight-buy:hover { color: var(--white); }
         .map-spotlight-sub {
             font-size: .52em;
             letter-spacing: .14em;
@@ -1263,8 +1382,8 @@
         <a href="/" class="nav-logo">THE FIRST SPARK</a>
         <div class="nav-right">
             <a href="affiliate-kit.html" class="nav-invest">Affiliate Kit</a>
-            <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer" class="nav-invest">Join Free</a>
-            <a href="#soul-maps" class="nav-cta">Soul Maps →</a>
+            <a href="#community" class="nav-invest">Free Community</a>
+            <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="nav-cta">Soul Map · $44</a>
         </div>
     </nav>
 
@@ -1275,12 +1394,12 @@
             <h1 class="hero-headline">
                 The First<br><span>Spark.</span>
             </h1>
-            <p class="hero-sub">Tools, maps, and community for people who know reality is programmable. Built from lived truth — not venture capital theory.</p>
+            <p class="hero-sub">Get your OG Edition Soul Map — personalized numerology and astrology on a private page you keep forever. Free Sparkverse community access included with every map.</p>
             <p class="hero-story">In 2020, I solved my mother's 1991 cold case. Her killer lived across my street. This is what I built from that fracture.</p>
             <div class="hero-ctas">
-                <a href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener noreferrer" class="btn-p">Claim Your Soul Map →</a>
-                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer" class="btn-g">Join Free →</a>
-                <span class="hero-cta-note">OG Edition Soul Map · $44 one-time · 12 months of updates · ~5 min delivery</span>
+                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Claim OG Edition · $44 →</a>
+                <a href="#soul-maps" class="btn-g">See Sample Maps</a>
+                <span class="hero-cta-note">Step 1: Soul Map · Step 2: Free community included · 12 months of updates · ~5 min delivery</span>
             </div>
             <div class="scroll-hint">Explore</div>
         </div>
@@ -1291,45 +1410,49 @@
     <!-- WHAT YOU'LL FIND -->
     <section id="explore">
         <div class="wrap">
-            <div class="sec-label">◈ &nbsp; What's Here</div>
-            <h2 class="sec-title">Four Ways In</h2>
-            <p class="sec-sub">Start wherever you are. Every path leads to the same place.</p>
+            <div class="sec-label">◈ &nbsp; Start Here</div>
+            <h2 class="sec-title">Soul Map First. Community Second.</h2>
+            <p class="sec-sub">One path, two steps. Claim your map, then join the free Sparkverse — included with every OG Edition purchase.</p>
 
-            <div class="cards">
-                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" class="card gold">
-                    <div class="card-icon">◈</div>
-                    <div class="card-name">Community</div>
-                    <div class="card-desc">Tools, rituals, ebooks, oracle pulls, and monthly drops. Free to start. Upgrade when you're ready.</div>
-                    <div class="card-tag">Free · Players Lounge · OG Spark</div>
-                </a>
-
-                <a href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener noreferrer" class="card purple has-preview">
+            <div class="cards-funnel">
+                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="card purple primary-funnel has-preview">
                     <img src="/preview-soulmaps.png" alt="Soul Maps Archive" class="card-preview">
                     <div class="card-content">
-                        <div class="card-name">Soul Maps</div>
-                        <div class="card-desc">Your personal numerological blueprint — Life Path, Expression, Soul Urge — decoded by hand, just for you.</div>
-                        <div class="card-tag">OG Edition · $44 · 12 months of updates</div>
+                        <div class="card-step">Step 1 · Primary</div>
+                        <div class="card-name">OG Edition Soul Map</div>
+                        <div class="card-desc">Life Path, Expression, Soul Urge, Personality, and Personal Year — woven with astrology and your soul questions. Private URL. 12 months of updates.</div>
+                        <div class="card-tag">$44 one-time · ~5 min delivery · Community included</div>
                     </div>
                 </a>
 
-                <a href="https://sparkverse.thefirstspark.shop" target="_blank" class="card cyan has-preview">
+                <a href="#community" class="card gold">
+                    <div class="card-step">Step 2 · Included</div>
+                    <div class="card-icon">◈</div>
+                    <div class="card-name">Free Sparkverse Community</div>
+                    <div class="card-desc">Tools, rituals, ebooks, oracle pulls, and monthly drops. Unlocked with your Soul Map — or join free if you're exploring first.</div>
+                    <div class="card-tag">Free access · After your map</div>
+                </a>
+            </div>
+
+            <div class="more-label">Also in the Sparkverse</div>
+            <div class="cards-more">
+                <a href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener noreferrer" class="card cyan has-preview">
+                    <img src="/preview-soulmaps.png" alt="Soul Maps Archive" class="card-preview">
+                    <div class="card-content">
+                        <div class="card-name">Browse The Archive</div>
+                        <div class="card-desc">Read real maps before you buy. A new trio featured every day.</div>
+                        <div class="card-tag">Free to explore</div>
+                    </div>
+                </a>
+
+                <a href="https://sparkverse.thefirstspark.shop" target="_blank" rel="noopener noreferrer" class="card cyan has-preview">
                     <img src="/preview-sparkverse.png" alt="Sparkverse Interface" class="card-preview">
                     <div class="card-content">
-                        <div class="card-name">Sparkverse</div>
-                        <div class="card-desc">Interactive consciousness tools and orbital interfaces. Live prototype — the foundation is already built.</div>
-                        <div class="card-tag">Live Prototype · More coming</div>
+                        <div class="card-name">Sparkverse Tools</div>
+                        <div class="card-desc">Interactive consciousness apps — playgrounds, quizzes, and prototypes.</div>
+                        <div class="card-tag">Free to try</div>
                     </div>
                 </a>
-
-                <a href="https://whop.com/sparkverse-511c/the-first-spark-genesis-of-the-sparkverse-the-novel/" target="_blank" class="card ember has-preview">
-                    <img src="/novel-cover.avif" alt="The First Spark: Genesis of the Sparkverse" class="card-preview book-cover">
-                    <div class="card-content">
-                        <div class="card-name">The Novel</div>
-                        <div class="card-desc">Genesis of the Sparkverse — the origin story. Where consciousness technology meets fiction. Out now.</div>
-                        <div class="card-tag">New Release · Available Now</div>
-                    </div>
-                </a>
-
             </div>
         </div>
     </section>
@@ -1344,8 +1467,8 @@
                     <div class="sec-label">◈ &nbsp; Featured</div>
                     <div class="soul-edition-tag">OG Edition Soul Map</div>
                     <div class="soul-title">Your Numbers Decoded.</div>
-                    <p class="soul-desc">Every soul map is hand-decoded by KJP — your Life Path, Expression Number, Soul Urge, Personality, and Personal Year, woven together with astrology and the specific questions your soul is carrying right now.</p>
-                    <div class="soul-meta">$44 &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; 12 months of updates included</div>
+                    <p class="soul-desc">Every soul map is hand-decoded by KJP — your Life Path, Expression Number, Soul Urge, Personality, and Personal Year, woven together with astrology and the specific questions your soul is carrying right now. Every purchase includes free Sparkverse community access.</p>
+                    <div class="soul-meta">$44 &nbsp;·&nbsp; OG Edition &nbsp;·&nbsp; 12 months of updates &nbsp;·&nbsp; Community included</div>
                 </div>
                 <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
                     <div class="soul-price">$44</div>
@@ -1419,6 +1542,11 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="feel-cta-bar">
+                <p class="feel-cta-text"><strong>Ready for your own decode?</strong> OG Edition Soul Map — $44 one-time, delivered in ~5 minutes, free community included.</p>
+                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Claim OG Edition →</a>
+            </div>
         </div>
     </section>
 
@@ -1457,6 +1585,11 @@
             <h2 class="sec-title">Sparks Speak</h2>
             <div class="testimonial-track">
                 <div class="testimonial-card">
+                    <div class="testimonial-quote">"My soul map reading was scarily accurate. KJP broke down my numbers in a way that actually made sense of the chaos."</div>
+                    <div class="testimonial-author">Mia L.</div>
+                    <div class="testimonial-role">Entrepreneur</div>
+                </div>
+                <div class="testimonial-card">
                     <div class="testimonial-quote">"The archetype quiz nailed me. Signal Architect — I've never felt so seen by a quiz before. Shared it with my entire team."</div>
                     <div class="testimonial-author">Jordan M.</div>
                     <div class="testimonial-role">Creative Director</div>
@@ -1472,11 +1605,6 @@
                     <div class="testimonial-role">Software Engineer</div>
                 </div>
                 <div class="testimonial-card">
-                    <div class="testimonial-quote">"My soul map reading was scarily accurate. KJP broke down my numbers in a way that actually made sense of the chaos."</div>
-                    <div class="testimonial-author">Mia L.</div>
-                    <div class="testimonial-role">Entrepreneur</div>
-                </div>
-                <div class="testimonial-card">
                     <div class="testimonial-quote">"I came for the tools, stayed for the community. The Karma Debugger helped me finally process something I'd been carrying for years."</div>
                     <div class="testimonial-author">Chris A.</div>
                     <div class="testimonial-role">Therapist</div>
@@ -1486,6 +1614,23 @@
                     <div class="testimonial-author">Sam R.</div>
                     <div class="testimonial-role">Podcast Host</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- STEP 2: FREE COMMUNITY -->
+    <section id="community">
+        <div class="wrap">
+            <div class="community-step">
+                <div class="community-step-left">
+                    <div class="sec-label">◈ &nbsp; Step 2</div>
+                    <h2 class="community-step-title">Join The Free Sparkverse</h2>
+                    <p class="community-step-desc">Every OG Soul Map includes community access — tools, rituals, drops, and mapped souls building together. Already exploring? You can also join free while you decide on your map.</p>
+                    <div class="community-included">Included with Soul Map purchase · Free to join anytime</div>
+                </div>
+                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer" class="btn-g">Join Free Community →</a>
             </div>
         </div>
     </section>
@@ -1596,9 +1741,10 @@
         <div class="wrap">
             <a href="/" class="footer-logo">THE FIRST SPARK</a>
             <div class="footer-links">
-                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank">Community</a>
-                <a href="https://soul-maps.thefirstspark.shop" target="_blank">Soul Maps</a>
-                <a href="https://sparkverse.thefirstspark.shop" target="_blank">Live Prototype</a>
+                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer">Soul Map · $44</a>
+                <a href="https://soul-maps.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Map Archive</a>
+                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer">Free Community</a>
+                <a href="https://sparkverse.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Tools</a>
                 <a href="investor-deck-v3.html">Invest</a>
                 <a href="privacy-policy.html">Privacy</a>
                 <a href="terms-of-service.html">Terms</a>
