@@ -138,14 +138,15 @@
             inset: 0;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.2;
         }
         .cosmos-veil {
             position: fixed;
             inset: 0;
             z-index: 0;
             pointer-events: none;
-            background: rgba(5, 5, 8, 0.82);
+            background:
+                radial-gradient(ellipse 90% 70% at 50% 45%, rgba(5, 5, 8, 0.38) 0%, rgba(5, 5, 8, 0.62) 100%),
+                rgba(5, 5, 8, 0.48);
         }
 
         /* ─── LAYOUT ─── */
@@ -345,13 +346,13 @@
         .hero-orb-a {
             width: 180px; height: 180px;
             top: -30px; right: -20px;
-            background: rgba(139,92,246,.12);
+            background: rgba(139,92,246,.22);
             animation: orbDrift 14s ease-in-out infinite;
         }
         .hero-orb-b {
             width: 140px; height: 140px;
             bottom: 20px; left: -30px;
-            background: rgba(251,191,36,.08);
+            background: rgba(251,191,36,.14);
             animation: orbDrift 18s ease-in-out infinite reverse;
         }
         @keyframes orbDrift {
@@ -656,18 +657,6 @@
             z-index: 1;
             scroll-margin-top: 88px;
         }
-        section .wrap {
-            background: rgba(5, 5, 8, 0.45);
-            border-radius: 2px;
-            padding-top: 8px;
-            padding-bottom: 8px;
-        }
-        #hero .wrap {
-            background: transparent;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-
         .sec-label {
             font-size: .55em;
             letter-spacing: .45em;
@@ -2194,11 +2183,11 @@
 
         function initHelixes() {
             helixes.length = 0;
-            const count = isMobile ? 0 : (ambientMode ? 2 : 5);
+            const count = isMobile ? 0 : (ambientMode ? 3 : 5);
             for (let i = 0; i < count; i++) {
                 const pal = helixPalette[i % helixPalette.length];
                 helixes.push({
-                    offsetX: W * (0.12 + i * 0.19),
+                    offsetX: W * (ambientMode ? (0.18 + i * 0.32) : (0.12 + i * 0.19)),
                     amplitude: 70 + i * 22,
                     frequency: 0.007 + i * 0.0018,
                     phase: i * Math.PI * 0.55,
@@ -2368,9 +2357,9 @@
             // Main spine glow
             const spineGrad = ctx.createLinearGradient(centerX, 0, centerX, H);
             spineGrad.addColorStop(0, 'rgba(139, 92, 246, 0)');
-            spineGrad.addColorStop(0.2, 'rgba(139, 92, 246, 0.15)');
-            spineGrad.addColorStop(0.5, `rgba(251, 191, 36, ${(ambientMode ? 0.06 : 0.2) * breathe})`);
-            spineGrad.addColorStop(0.8, 'rgba(255, 106, 61, 0.15)');
+            spineGrad.addColorStop(0.2, 'rgba(139, 92, 246, ' + (ambientMode ? 0.1 : 0.15) + ')');
+            spineGrad.addColorStop(0.5, `rgba(251, 191, 36, ${(ambientMode ? 0.12 : 0.2) * breathe})`);
+            spineGrad.addColorStop(0.8, 'rgba(255, 106, 61, ' + (ambientMode ? 0.1 : 0.15) + ')');
             spineGrad.addColorStop(1, 'rgba(255, 106, 61, 0)');
             
             // Draw spine core
@@ -2384,10 +2373,22 @@
             }
             
             ctx.strokeStyle = spineGrad;
-            ctx.lineWidth = ambientMode ? 1 : 2 + beat.dropIntensity * 2.5;
+            ctx.lineWidth = ambientMode ? 1.5 : 2 + beat.dropIntensity * 2.5;
             ctx.stroke();
 
-            if (ambientMode) return;
+            if (ambientMode) {
+                spineNodes.forEach(function(node) {
+                    const pulse = Math.sin(time * 1.6 + node.pulse) * 0.5 + 0.5;
+                    const wave = Math.sin(node.y * 0.015 + time * 1.5) * 15;
+                    const x = node.baseX + wave;
+                    const size = node.size * (0.7 + pulse * 0.3);
+                    ctx.beginPath();
+                    ctx.arc(x, node.y, size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(' + node.color.join(',') + ',' + (0.35 + pulse * 0.25) + ')';
+                    ctx.fill();
+                });
+                return;
+            }
 
             // Outer energy field
             ctx.beginPath();
@@ -2500,7 +2501,7 @@
                 const dy = y - mouse.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 const influence = ambientMode
-                    ? Math.max(0, 1 - dist / 200) * 12
+                    ? Math.max(0, 1 - dist / 220) * 22
                     : Math.max(0, 1 - dist / 260) * (55 + beat.dropIntensity * 35);
                 const bendX = dx / (dist || 1) * influence;
                 points.push({ x: x + bendX, y, t, i });
@@ -2523,12 +2524,12 @@
             const points = buildHelixPoints(helix, offset, helixTime, beat);
             const col = isSecondary ? helix.color2 : helix.color1;
             const peakA = ambientMode
-                ? 0.12
+                ? 0.3
                 : 0.42 + beat.dropIntensity * 0.48;
             const coreW = ambientMode
-                ? (isSecondary ? 0.8 : 1.1)
+                ? (isSecondary ? 1 : 1.5)
                 : (isSecondary ? 1.2 : 2.2) + beat.dropIntensity * 1.2;
-            const glowW = ambientMode ? coreW * 2 : coreW * 4.5;
+            const glowW = ambientMode ? coreW * 3 : coreW * 4.5;
 
             const gradient = ctx.createLinearGradient(0, 0, 0, H);
             gradient.addColorStop(0, 'rgba(' + col.join(',') + ',0)');
@@ -2565,7 +2566,7 @@
         }
 
         function drawConnectors(points1, points2, helix, helixTime, beat) {
-            const step = ambientMode ? 14 : (beat.isLock ? 10 : 6);
+            const step = ambientMode ? 10 : (beat.isLock ? 10 : 6);
             for (let i = 0; i < points1.length; i += step) {
                 const p1 = points1[i];
                 const p2 = points2[i];
@@ -2574,7 +2575,7 @@
                 const midY = (p1.y + p2.y) / 2;
                 const pulse = Math.sin(i * 0.12 + helixTime * 2.4) * 0.5 + 0.5;
                 const alpha = ambientMode
-                    ? 0.04 + pulse * 0.05
+                    ? 0.1 + pulse * 0.12
                     : 0.14 + pulse * 0.22 + beat.dropIntensity * 0.35;
                 const gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
                 gradient.addColorStop(0, 'rgba(' + helix.color1.join(',') + ',' + alpha + ')');
@@ -2588,18 +2589,16 @@
                 ctx.stroke();
 
                 const nodeR = ambientMode
-                    ? 1 + pulse * 0.5
+                    ? 1.5 + pulse * 0.8
                     : (beat.isLock ? 3.5 : 2 + pulse * 1.5) + beat.dropIntensity * 4;
-                if (!ambientMode) {
-                    const glow = ctx.createRadialGradient(midX, midY, 0, midX, midY, nodeR * 3);
-                    glow.addColorStop(0, 'rgba(255,255,255,' + (alpha * 1.8) + ')');
-                    glow.addColorStop(0.45, 'rgba(' + helix.color1.join(',') + ',' + (alpha * 1.2) + ')');
-                    glow.addColorStop(1, 'transparent');
-                    ctx.fillStyle = glow;
-                    ctx.beginPath();
-                    ctx.arc(midX, midY, nodeR * 3, 0, Math.PI * 2);
-                    ctx.fill();
-                }
+                const glow = ctx.createRadialGradient(midX, midY, 0, midX, midY, nodeR * (ambientMode ? 2 : 3));
+                glow.addColorStop(0, 'rgba(255,255,255,' + (alpha * (ambientMode ? 1.2 : 1.8)) + ')');
+                glow.addColorStop(0.45, 'rgba(' + helix.color1.join(',') + ',' + (alpha * (ambientMode ? 0.7 : 1.2)) + ')');
+                glow.addColorStop(1, 'transparent');
+                ctx.fillStyle = glow;
+                ctx.beginPath();
+                ctx.arc(midX, midY, nodeR * (ambientMode ? 2 : 3), 0, Math.PI * 2);
+                ctx.fill();
                 ctx.beginPath();
                 ctx.arc(midX, midY, nodeR, 0, Math.PI * 2);
                 ctx.fillStyle = 'rgba(255,255,255,' + (ambientMode ? alpha * 1.2 : alpha * 2.2) + ')';
@@ -2608,14 +2607,17 @@
         }
 
         function drawStellarMotes(beat) {
-            if (ambientMode) return;
-            const count = 55;
+            const count = ambientMode ? 28 : 55;
             for (let i = 0; i < count; i++) {
                 const seed = i * 1.618;
                 const sparkX = (Math.sin(time * 0.55 + seed) * 0.5 + 0.5) * W;
                 const sparkY = (Math.cos(time * 0.38 + seed * 0.7) * 0.5 + 0.5) * H;
-                const sparkAlpha = (Math.sin(time * 2.2 + seed) * 0.35 + 0.45) * (1 + beat.dropIntensity * 0.6);
-                const r = 0.8 + (i % 3) * 0.6 + beat.dropIntensity * 1.2;
+                const sparkAlpha = ambientMode
+                    ? (Math.sin(time * 1.4 + seed) * 0.15 + 0.22)
+                    : (Math.sin(time * 2.2 + seed) * 0.35 + 0.45) * (1 + beat.dropIntensity * 0.6);
+                const r = ambientMode
+                    ? 0.6 + (i % 3) * 0.35
+                    : 0.8 + (i % 3) * 0.6 + beat.dropIntensity * 1.2;
                 ctx.beginPath();
                 ctx.arc(sparkX, sparkY, r, 0, Math.PI * 2);
                 ctx.fillStyle = 'rgba(255,255,255,' + sparkAlpha + ')';
@@ -2626,7 +2628,7 @@
         // Main draw loop
         function draw() {
             ctx.clearRect(0, 0, W, H);
-            time += reducedMotion ? 0.003 : (ambientMode ? 0.007 : 0.016);
+            time += reducedMotion ? 0.003 : (ambientMode ? 0.011 : 0.016);
 
             const beat = getBeatState(time);
             let helixTime = time;
@@ -2639,19 +2641,19 @@
             }
             if (beat.isDrop) spawnDropBursts(beat);
 
-            if (!ambientMode) {
-                const bg1 = ctx.createRadialGradient(W * 0.3, H * 0.2, 0, W * 0.3, H * 0.2, W * 0.55);
-                bg1.addColorStop(0, 'rgba(139, 92, 246, ' + (0.06 + beat.dropIntensity * 0.05) + ')');
-                bg1.addColorStop(1, 'transparent');
-                ctx.fillStyle = bg1;
-                ctx.fillRect(0, 0, W, H);
+            const nebA = ambientMode ? 0.045 : (0.06 + beat.dropIntensity * 0.05);
+            const nebB = ambientMode ? 0.035 : (0.05 + beat.dropIntensity * 0.04);
+            const bg1 = ctx.createRadialGradient(W * 0.3, H * 0.2, 0, W * 0.3, H * 0.2, W * 0.55);
+            bg1.addColorStop(0, 'rgba(139, 92, 246, ' + nebA + ')');
+            bg1.addColorStop(1, 'transparent');
+            ctx.fillStyle = bg1;
+            ctx.fillRect(0, 0, W, H);
 
-                const bg2 = ctx.createRadialGradient(W * 0.8, H * 0.7, 0, W * 0.8, H * 0.7, W * 0.45);
-                bg2.addColorStop(0, 'rgba(251, 191, 36, ' + (0.05 + beat.dropIntensity * 0.04) + ')');
-                bg2.addColorStop(1, 'transparent');
-                ctx.fillStyle = bg2;
-                ctx.fillRect(0, 0, W, H);
-            }
+            const bg2 = ctx.createRadialGradient(W * 0.8, H * 0.7, 0, W * 0.8, H * 0.7, W * 0.45);
+            bg2.addColorStop(0, 'rgba(251, 191, 36, ' + nebB + ')');
+            bg2.addColorStop(1, 'transparent');
+            ctx.fillStyle = bg2;
+            ctx.fillRect(0, 0, W, H);
 
             if (isMobile) {
                 drawEnergySpine();
