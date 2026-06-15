@@ -48,6 +48,9 @@
             --white:  rgba(255,255,255,0.92);
             --dim:    rgba(255,255,255,0.4);
             --dimmer: rgba(255,255,255,0.1);
+            --hot-pink: #ec4899;
+            --nebula-purple: #8b5cf6;
+            --cosmic-cyan: #22d3ee;
         }
 
         html { scroll-behavior: smooth; }
@@ -1012,6 +1015,14 @@
                 0 0 40px rgba(139, 92, 246, 0.2);
         }
 
+        .gradient-text {
+            background: linear-gradient(135deg, var(--hot-pink), var(--nebula), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+        }
+
         .novel-subtitle {
             font-size: 0.95rem;
             font-style: italic;
@@ -1140,7 +1151,7 @@
                     <div class="card-content">
                         <div class="card-name">Soul Maps</div>
                         <div class="card-desc">Your personal numerological blueprint — Life Path, Expression, Soul Urge — decoded by hand, just for you.</div>
-                        <div class="card-tag">$22 · One-time · Yours forever</div>
+                        <div class="card-tag">$44 · One-time · 12 months of updates</div>
                     </div>
                 </a>
 
@@ -1233,15 +1244,15 @@
         <div class="wrap">
             <div class="counters">
                 <div class="counter-item">
-                    <div class="counter-value" id="counterQuizzes">0</div>
+                    <div class="counter-value" id="counterQuizzes">847+</div>
                     <div class="counter-label">Archetypes Discovered</div>
                 </div>
                 <div class="counter-item">
-                    <div class="counter-value" id="counterBattles">0</div>
+                    <div class="counter-value" id="counterBattles">312+</div>
                     <div class="counter-label">Battles Fought</div>
                 </div>
                 <div class="counter-item">
-                    <div class="counter-value" id="counterResets">0</div>
+                    <div class="counter-value" id="counterResets">1,243+</div>
                     <div class="counter-label">Resets Completed</div>
                 </div>
                 <div class="counter-item">
@@ -1348,7 +1359,7 @@
                     <div class="sec-label">◈ &nbsp; Featured</div>
                     <div class="soul-title">Your Numbers Decoded.</div>
                     <p class="soul-desc">Every soul map is hand-decoded by KJP — your Life Path, Expression Number, Soul Urge, Personality, and Personal Year, woven together with astrology and the specific questions your soul is carrying right now.</p>
-                    <div class="soul-meta">$44 &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; Secure checkout</div>
+                    <div class="soul-meta">$44 &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; 12 months of updates included</div>
                 </div>
                 <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
                     <div class="soul-price">$44</div>
@@ -1422,6 +1433,8 @@
                 <a href="https://soul-maps.thefirstspark.shop" target="_blank">Soul Maps</a>
                 <a href="https://sparkverse.thefirstspark.shop" target="_blank">Live Prototype</a>
                 <a href="investor-deck-v3.html">Invest</a>
+                <a href="privacy-policy.html">Privacy</a>
+                <a href="terms-of-service.html">Terms</a>
             </div>
             <div class="footer-socials">
                 <a href="https://x.com/OGplayerone" target="_blank" title="X / Twitter">
@@ -1852,10 +1865,16 @@
             }, 25);
         }
 
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
         let fired = false;
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting && !fired) {
                 fired = true;
+                ['counterQuizzes', 'counterBattles', 'counterResets'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = '0';
+                });
                 animateCounter(document.getElementById('counterQuizzes'), 847, '+');
                 animateCounter(document.getElementById('counterBattles'), 312, '+');
                 animateCounter(document.getElementById('counterResets'), 1243, '+');
