@@ -41,14 +41,20 @@
         const mapName = map ? map.name : 'KJP \u00b7 Life Path 5';
         const mapDesc = map ? map.desc : 'The map routing Book Zero and the tour.';
 
+        const ytWatch = 'https://youtu.be/-DaJ6J_PBe0?si=JBe_eLUiEgmq3tdd';
+        const ytEmbed = 'https://www.youtube.com/embed/-DaJ6J_PBe0';
+
         container.innerHTML =
-            '<a href="https://youtu.be/-DaJ6J_PBe0" class="hero-proof-id" target="_blank" rel="noopener noreferrer">' +
+            '<div class="hero-proof-yt">' +
+                '<iframe src="' + ytEmbed + '" title="Two Fires, One Match \u2014 On The Case With Paula Zahn" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>' +
+            '</div>' +
+            '<a href="' + ytWatch + '" class="hero-proof-id" target="_blank" rel="noopener noreferrer">' +
                 '<div class="hero-proof-id-label">As seen on Investigation Discovery</div>' +
                 '<div class="hero-proof-id-title">Two Fires, One Match</div>' +
-                '<div class="hero-proof-id-sub">Paula Zahn \u00b7 Watch on YouTube \u00b7 29-year cold case</div>' +
+                '<div class="hero-proof-id-sub">Paula Zahn \u00b7 29-year cold case \u00b7 Open on YouTube</div>' +
             '</a>' +
             '<div class="hero-proof-visual">' +
-                '<img src="/preview-soulmaps.png" alt="Soul Map page preview" class="hero-proof-img" width="600" height="400" loading="eager">' +
+                '<img src="/preview-soulmaps.png" alt="Soul Map page preview" class="hero-proof-img" width="600" height="400" loading="lazy">' +
                 chipsHtml +
                 '<a href="' + mapHref + '" class="hero-proof-map" target="_blank" rel="noopener noreferrer">' +
                     '<div class="hero-proof-map-label">' + mapLabel + '</div>' +
