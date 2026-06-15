@@ -193,12 +193,20 @@
         .hero-story {
             font-size: .78em;
             font-style: italic;
-            color: rgba(255,255,255,.25);
+            color: rgba(255,255,255,.38);
             margin-bottom: 44px;
             letter-spacing: .04em;
         }
 
-        .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+        .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+
+        .hero-cta-note {
+            flex: 1 1 100%;
+            font-size: .58em;
+            letter-spacing: .12em;
+            color: rgba(255,255,255,.28);
+            margin-top: 4px;
+        }
 
         .btn-p {
             font-family: 'Orbitron', sans-serif;
@@ -263,6 +271,7 @@
             padding: 90px 0;
             position: relative;
             z-index: 1;
+            scroll-margin-top: 88px;
         }
 
         .sec-label {
@@ -1105,9 +1114,9 @@
     <nav id="nav">
         <a href="/" class="nav-logo">THE FIRST SPARK</a>
         <div class="nav-right">
-            <a href="#invest" class="nav-invest">Invest</a>
             <a href="affiliate-kit.html" class="nav-invest">Affiliate Kit</a>
-            <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" class="nav-cta">Join Free →</a>
+            <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer" class="nav-invest">Join Free</a>
+            <a href="#soul-maps" class="nav-cta">Soul Maps →</a>
         </div>
     </nav>
 
@@ -1121,9 +1130,9 @@
             <p class="hero-sub">Tools, maps, and community for people who know reality is programmable. Built from lived truth — not venture capital theory.</p>
             <p class="hero-story">In 2020, I solved my mother's 1991 cold case. Her killer lived across my street. This is what I built from that fracture.</p>
             <div class="hero-ctas">
-                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" class="btn-p">Join Free →</a>
-                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" class="btn-g">Get Your Soul Map</a>
-                <a href="https://soul-maps.thefirstspark.shop/" target="_blank" class="btn-g">See The Maps ✦</a>
+                <a href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener noreferrer" class="btn-p">Claim Your Soul Map →</a>
+                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer" class="btn-g">Join Free →</a>
+                <span class="hero-cta-note">$44 one-time · 12 months of updates · Delivered in ~5 minutes</span>
             </div>
             <div class="scroll-hint">Explore</div>
         </div>
@@ -1146,7 +1155,7 @@
                     <div class="card-tag">Free · Players Lounge · OG Spark</div>
                 </a>
 
-                <a href="https://soul-maps.thefirstspark.shop" target="_blank" class="card purple has-preview">
+                <a href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener noreferrer" class="card purple has-preview">
                     <img src="/preview-soulmaps.png" alt="Soul Maps Archive" class="card-preview">
                     <div class="card-content">
                         <div class="card-name">Soul Maps</div>
@@ -1173,6 +1182,26 @@
                     </div>
                 </a>
 
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- SOUL MAP CALLOUT -->
+    <section id="soul-maps">
+        <div class="wrap">
+            <div class="soul-callout">
+                <div class="soul-callout-left">
+                    <div class="sec-label">◈ &nbsp; Featured</div>
+                    <div class="soul-title">Your Numbers Decoded.</div>
+                    <p class="soul-desc">Every soul map is hand-decoded by KJP — your Life Path, Expression Number, Soul Urge, Personality, and Personal Year, woven together with astrology and the specific questions your soul is carrying right now.</p>
+                    <div class="soul-meta">$44 &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; 12 months of updates included</div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
+                    <div class="soul-price">$44</div>
+                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Claim Your Map →</a>
+                </div>
             </div>
         </div>
     </section>
@@ -1350,24 +1379,6 @@
     </section>
 
     <div class="divider-line"></div>
-
-    <!-- SOUL MAP CALLOUT -->
-    <section id="soul-maps">
-        <div class="wrap">
-            <div class="soul-callout">
-                <div class="soul-callout-left">
-                    <div class="sec-label">◈ &nbsp; Featured</div>
-                    <div class="soul-title">Your Numbers Decoded.</div>
-                    <p class="soul-desc">Every soul map is hand-decoded by KJP — your Life Path, Expression Number, Soul Urge, Personality, and Personal Year, woven together with astrology and the specific questions your soul is carrying right now.</p>
-                    <div class="soul-meta">$44 &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; 12 months of updates included</div>
-                </div>
-                <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
-                    <div class="soul-price">$44</div>
-                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" class="btn-p">Claim Your Map →</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Novel Showcase: The Genesis -->
     <section class="novel-showcase" id="novelShowcase">
