@@ -249,10 +249,10 @@
         .hero-headline {
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            font-size: clamp(2.8rem, 8vw, 6rem);
+            font-size: clamp(2.2rem, 5.5vw, 3.8rem);
             letter-spacing: .04em;
-            line-height: 1.0;
-            margin-bottom: 28px;
+            line-height: 1.08;
+            margin-bottom: 22px;
             color: var(--white);
         }
         .hero-headline span {
@@ -398,19 +398,7 @@
             gap: 12px;
             flex-wrap: wrap;
         }
-        .hero-proof-price {
-            font-family: 'Orbitron', sans-serif;
-            font-size: .62rem;
-            font-weight: 700;
-            letter-spacing: .14em;
-            text-transform: uppercase;
-            text-decoration: none;
-            padding: 12px 20px;
-            background: var(--spark);
-            color: var(--void);
-            transition: box-shadow .2s;
-        }
-        .hero-proof-price:hover { box-shadow: 0 8px 28px rgba(251,191,36,.4); }
+        .hero-proof-price,
         .hero-proof-archive {
             font-size: .52em;
             letter-spacing: .16em;
@@ -419,10 +407,23 @@
             text-decoration: none;
             border-bottom: 1px solid rgba(255,255,255,.15);
             padding-bottom: 2px;
+            transition: color .2s, border-color .2s;
         }
-        .hero-proof-archive:hover { color: var(--white); }
+        .hero-proof-price { color: rgba(251,191,36,.7); border-color: rgba(251,191,36,.25); }
+        .hero-proof-price:hover,
+        .hero-proof-archive:hover { color: var(--white); border-color: var(--spark); }
 
-        .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+        .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        #hero .btn-p {
+            font-size: .56rem;
+            padding: 10px 20px;
+            letter-spacing: .14em;
+        }
+        #hero .btn-g {
+            font-size: .56rem;
+            padding: 9px 18px;
+            letter-spacing: .14em;
+        }
 
         .hero-cta-note {
             flex: 1 1 100%;
@@ -1558,8 +1559,8 @@
                     </div>
                     <p class="hero-story">Cold case solved in 2020 — killer across the street. 60+ consciousness tools built from that fracture, not a psychic hotline.</p>
                     <div class="hero-ctas">
-                        <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Claim OG Edition · $44 →</a>
-                        <a href="https://soul-maps.thefirstspark.shop/kjp519.html" target="_blank" rel="noopener noreferrer" class="btn-g">Read A Real Map</a>
+                        <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">OG Edition · $44</a>
+                        <a href="https://soul-maps.thefirstspark.shop/kjp519.html" target="_blank" rel="noopener noreferrer" class="btn-g">Read a map</a>
                         <span class="hero-cta-note">Private URL · 12 months of updates · ~5 min delivery · Whop checkout</span>
                     </div>
                 </div>

@@ -56,7 +56,7 @@
                 mapBlock +
             '</div>' +
             '<div class="hero-proof-footer">' +
-                '<a href="' + checkoutUrl + '" class="hero-proof-price" target="_blank" rel="noopener noreferrer">OG Edition \u00b7 $44 \u2192</a>' +
+                '<a href="' + checkoutUrl + '" class="hero-proof-price" target="_blank" rel="noopener noreferrer">Get yours \u00b7 $44</a>' +
                 '<a href="' + BASE.replace(/\/$/, '') + '/" class="hero-proof-archive" target="_blank" rel="noopener noreferrer">48 maps in archive</a>' +
             '</div>';
     }
