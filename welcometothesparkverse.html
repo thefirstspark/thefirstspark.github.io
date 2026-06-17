@@ -823,7 +823,8 @@
     // ╠═══════════════════════════════════════════════════════╣
     // ║  Whop paid product checkout URL                       ║
     const UPGRADE_URL = 'https://whop.com/sparkverse-511c/the-sparkverse-lobby/';
-    // ║  Optional: audio URL for "Tune In" (loops). Leave ''. ║
+    // ║  Optional: mp3 URL for "Tune In" (loops). Leave ''   ║
+    // ║  to use built-in cosmic room synth.                    ║
     const AUDIO_URL   = '';
     // ╚═══════════════════════════════════════════════════════╝
 
@@ -1146,7 +1147,93 @@
       setTimeout(() => { btn.innerHTML = original; }, 3500);
     });
 
-    // ── TUNE IN: animate equalizer + (optionally) play audio ──
+    // ── Cosmic room synth (used when AUDIO_URL is empty) ─────
+    const RoomSynth = (function () {
+      let ctx = null;
+      let master = null;
+      let kickTimer = null;
+      let running = false;
+      const BEAT_MS = 1600;
+
+      function playKick() {
+        if (!ctx || !running) return;
+        const t = ctx.currentTime;
+        const kick = ctx.createOscillator();
+        const kickGain = ctx.createGain();
+        kick.type = 'sine';
+        kick.frequency.setValueAtTime(92, t);
+        kick.frequency.exponentialRampToValueAtTime(44, t + 0.14);
+        kickGain.gain.setValueAtTime(0.2, t);
+        kickGain.gain.exponentialRampToValueAtTime(0.001, t + 0.38);
+        kick.connect(kickGain);
+        kickGain.connect(master);
+        kick.start(t);
+        kick.stop(t + 0.42);
+
+        const hatBuf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.04), ctx.sampleRate);
+        const hatData = hatBuf.getChannelData(0);
+        for (let i = 0; i < hatData.length; i++) hatData[i] = Math.random() * 2 - 1;
+        const hat = ctx.createBufferSource();
+        hat.buffer = hatBuf;
+        const hatFilter = ctx.createBiquadFilter();
+        hatFilter.type = 'highpass';
+        hatFilter.frequency.value = 7000;
+        const hatGain = ctx.createGain();
+        hatGain.gain.setValueAtTime(0.035, t);
+        hatGain.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+        hat.connect(hatFilter);
+        hatFilter.connect(hatGain);
+        hatGain.connect(master);
+        hat.start(t);
+        hat.stop(t + 0.06);
+      }
+
+      function start() {
+        if (running) return;
+        ctx = new (window.AudioContext || window.webkitAudioContext)();
+        master = ctx.createGain();
+        master.gain.value = 0.24;
+        master.connect(ctx.destination);
+
+        [[55, 'sine', 0.1], [82.5, 'triangle', 0.07], [110, 'triangle', 0.05], [165, 'sine', 0.035]].forEach(([freq, type, vol]) => {
+          const osc = ctx.createOscillator();
+          const g = ctx.createGain();
+          osc.type = type;
+          osc.frequency.value = freq;
+          g.gain.value = vol;
+          osc.connect(g);
+          g.connect(master);
+          osc.start();
+        });
+
+        const lfo = ctx.createOscillator();
+        const lfoGain = ctx.createGain();
+        lfo.frequency.value = 0.06;
+        lfoGain.gain.value = 0.05;
+        lfo.connect(lfoGain);
+        lfoGain.connect(master.gain);
+        lfo.start();
+
+        running = true;
+        playKick();
+        kickTimer = setInterval(playKick, BEAT_MS);
+      }
+
+      function stop() {
+        running = false;
+        if (kickTimer) clearInterval(kickTimer);
+        kickTimer = null;
+        if (ctx) {
+          ctx.close().catch(function () {});
+          ctx = null;
+        }
+        master = null;
+      }
+
+      return { start: start, stop: stop };
+    })();
+
+    // ── TUNE IN: animate equalizer + play audio ──────────────
     (function tuneIn() {
       const btn = document.getElementById('tuneInBtn');
       const eq  = document.getElementById('eq');
@@ -1154,10 +1241,9 @@
       const audio = document.getElementById('roomAudio');
       let on = false;
 
-      // set audio source if provided
       if (AUDIO_URL) audio.querySelector('source').src = AUDIO_URL;
 
-      btn.addEventListener('click', async () => {
+      btn.addEventListener('click', async function () {
         on = !on;
         document.body.classList.toggle('tuned', on);
         eq.classList.toggle('dim', !on);
@@ -1166,9 +1252,15 @@
         if (AUDIO_URL) {
           try {
             if (on) { audio.load(); await audio.play(); }
-            else    { audio.pause(); }
-          } catch (err) { /* autoplay blocked — that's fine */ }
+            else { audio.pause(); audio.currentTime = 0; }
+          } catch (err) {
+            lbl.textContent = 'Tap again · unmute';
+          }
+          return;
         }
+
+        if (on) RoomSynth.start();
+        else RoomSynth.stop();
       });
     })();
 
