@@ -1,0 +1,87 @@
+/**
+ * Color Codex — canonical tier palette
+ * Source of truth for color-codex.html, archive cards, and soul maps.
+ */
+:root {
+  /* Spectrum — nine frequencies of light */
+  --codex-red: #e24b4a;
+  --codex-red-light: #f87171;
+  --codex-ember: #ff6a3d;
+  --codex-ember-light: #ff8a5d;
+  --codex-yellow: #f5c842;
+  --codex-yellow-light: #fde047;
+  --codex-green: #10b981;
+  --codex-green-light: #34d399;
+  --codex-cyan: #22d3ee;
+  --codex-blue: #3b82f6;
+  --codex-blue-light: #60a5fa;
+  --codex-purple: #8b5cf6;
+  --codex-purple-light: #c084fc;
+  --codex-gold: #d4af37;
+  --codex-gold-light: #e8c85a;
+  --codex-white: #f0f0ff;
+
+  /* Structural frequencies */
+  --codex-rose: #f43f5e;
+  --codex-rose-light: #fb7185;
+  --codex-silver: #c4c8d4;
+  --codex-silver-light: #e2e8f0;
+
+  /* Aliases used across soul maps and site chrome */
+  --red: var(--codex-red);
+  --ember: var(--codex-ember);
+  --yellow: var(--codex-yellow);
+  --green: var(--codex-green);
+  --green-light: var(--codex-green-light);
+  --cyan: var(--codex-cyan);
+  --blue: var(--codex-blue);
+  --purple: var(--codex-purple);
+  --violet: var(--codex-purple);
+  --gold: var(--codex-gold);
+  --rose: var(--codex-rose);
+  --silver: var(--codex-silver);
+}
+
+/* Archive index card tiers */
+.card.red    { border-color: var(--codex-red); }
+.card.ember  { border-color: var(--codex-ember); }
+.card.yellow { border-color: var(--codex-yellow); }
+.card.green  { border-color: var(--codex-green); }
+.card.cyan   { border-color: var(--codex-cyan); }
+.card.blue   { border-color: var(--codex-blue); }
+.card.violet,
+.card.purple { border-color: var(--codex-purple); }
+.card.gold   { border-color: var(--codex-gold); }
+.card.white  { border-color: var(--codex-white); }
+.card.rose   { border-color: var(--codex-rose); }
+.card.silver { border-color: var(--codex-silver); }
+
+.card.red:hover    { box-shadow: 0 8px 30px rgba(226, 75, 74, .28); }
+.card.ember:hover  { box-shadow: 0 8px 30px rgba(255, 106, 61, .28); }
+.card.yellow:hover { box-shadow: 0 8px 30px rgba(245, 200, 66, .28); }
+.card.green:hover  { box-shadow: 0 8px 30px rgba(16, 185, 129, .25); }
+.card.cyan:hover   { box-shadow: 0 8px 30px rgba(34, 211, 238, .25); }
+.card.blue:hover   { box-shadow: 0 8px 30px rgba(59, 130, 246, .25); }
+.card.violet:hover,
+.card.purple:hover { box-shadow: 0 8px 30px rgba(139, 92, 246, .28); }
+.card.gold:hover   { box-shadow: 0 8px 30px rgba(212, 175, 55, .25); }
+.card.white:hover  { box-shadow: 0 8px 30px rgba(240, 240, 255, .18); }
+.card.rose:hover   { box-shadow: 0 8px 30px rgba(244, 63, 94, .28); }
+.card.silver:hover { box-shadow: 0 8px 30px rgba(196, 200, 212, .22); }
+
+.card.red .card-name    { color: var(--codex-red-light); }
+.card.ember .card-name  { color: var(--codex-ember-light); }
+.card.yellow .card-name { color: var(--codex-yellow-light); }
+.card.green .card-name  { color: var(--codex-green); }
+.card.cyan .card-name   { color: var(--codex-cyan); }
+.card.blue .card-name   { color: var(--codex-blue-light); }
+.card.violet .card-name,
+.card.purple .card-name { color: var(--codex-purple-light); }
+.card.gold .card-name   { color: var(--codex-gold-light); }
+.card.white .card-name  { color: var(--codex-white); }
+.card.rose .card-name   { color: var(--codex-rose-light); }
+.card.silver .card-name { color: var(--codex-silver-light); }
+
+.card.ember  { background-color: rgba(255, 106, 61, .04); }
+.card.red    { background-color: rgba(226, 75, 74, .04); }
+.card.rose   { background-color: rgba(244, 63, 94, .04); }

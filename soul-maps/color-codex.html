@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Color Codex — Soul Map Frequencies | The First Spark</title>
+<meta name="description" content="Eleven frequencies that sort every Soul Map. Find your color, read the spectrum, browse souls in the archive.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Color Codex | The First Spark">
+<meta property="og:description" content="The key to the Soul Map spectrum — what each color means and where to find it in the archive.">
+<meta property="og:url" content="https://soul-maps.thefirstspark.shop/color-codex.html">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://soul-maps.thefirstspark.shop/color-codex.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Orbitron:wght@600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="codex-colors.css">
+<style>
+  :root {
+    --bg: #050818;
+    --panel: rgba(10, 8, 25, 0.92);
+    --ink: #e0e7ff;
+    --muted: #9ca3af;
+    --border: rgba(139, 92, 246, 0.22);
+    --amber: #f59e0b;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(ellipse at 18% 8%, rgba(107, 77, 242, 0.16), transparent 52%),
+      radial-gradient(ellipse at 82% 24%, rgba(255, 106, 61, 0.1), transparent 48%),
+      var(--bg);
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  .wrap { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 0 20px 80px; }
+
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    padding: 22px 0; border-bottom: 1px solid var(--border); margin-bottom: 36px;
+    font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .topbar a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .topbar a:hover { color: var(--amber); }
+  .topbar .brand { font-family: 'Orbitron', sans-serif; color: var(--ink); font-weight: 700; }
+
+  .hero { text-align: center; padding: 12px 0 28px; }
+  .kicker {
+    display: inline-block; font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.4rem);
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .hero-lead {
+    font-size: 0.84rem;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto 22px;
+    line-height: 1.75;
+  }
+  .hero-actions {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 28px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn:hover { background: var(--amber); color: var(--bg); }
+  .btn-ghost { border-color: var(--border); color: #c4b5fd; }
+  .btn-ghost:hover { background: rgba(139, 92, 246, 0.15); color: #fff; border-color: #a78bfa; }
+
+  .quick-read {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .quick-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 18px 16px;
+    text-align: left;
+  }
+  .quick-card strong {
+    display: block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .quick-card p { font-size: 0.72rem; color: var(--muted); line-height: 1.6; }
+
+  .spectrum-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(5, 8, 24, 0.94);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 32px;
+  }
+  .spectrum-nav-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .spectrum-pills {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: thin;
+  }
+  .spectrum-pills a {
+    flex: 1 0 52px;
+    min-width: 52px;
+    text-align: center;
+    padding: 8px 4px 6px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.72);
+    font-weight: 700;
+    transition: transform 0.15s, filter 0.15s;
+  }
+  .spectrum-pills a:hover { transform: translateY(-2px); filter: brightness(1.1); }
+  .spectrum-pills a:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+  .section-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 36px 0 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-note { font-size: 0.72rem; color: var(--muted); margin-bottom: 18px; }
+
+  .tier {
+    display: grid;
+    grid-template-columns: 6px 1fr;
+    gap: 0;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    overflow: hidden;
+    scroll-margin-top: 100px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .tier:hover { transform: translateY(-1px); }
+  .tier .accent { width: 6px; }
+  .tier .body { padding: 20px 22px; }
+  .tier-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .tier-head h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .tier-role {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .status {
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .status.live { border-color: rgba(16, 185, 129, 0.4); color: #34d399; }
+  .status.open { border-color: rgba(245, 158, 11, 0.35); color: var(--amber); }
+
+  .tier-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .tier-desc {
+    font-size: 0.76rem;
+    color: var(--muted);
+    margin-bottom: 14px;
+    max-width: 62ch;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .chip {
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    padding: 5px 10px;
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    color: #a5b4fc;
+  }
+  .tier-link {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+  .tier-link.muted { color: var(--muted); border-color: rgba(156, 163, 175, 0.35); font-style: italic; }
+
+  .t-red .accent { background: var(--red); } .t-red .tier-role, .t-red .tier-tagline, .t-red .tier-link { color: var(--red); }
+  .t-ember .accent { background: var(--ember); } .t-ember .tier-role, .t-ember .tier-tagline, .t-ember .tier-link { color: var(--ember); }
+  .t-yellow .accent { background: var(--yellow); } .t-yellow .tier-role, .t-yellow .tier-tagline, .t-yellow .tier-link { color: #e8c85a; }
+  .t-green .accent { background: var(--green); } .t-green .tier-role, .t-green .tier-tagline, .t-green .tier-link { color: var(--green); }
+  .t-cyan .accent { background: var(--cyan); } .t-cyan .tier-role, .t-cyan .tier-tagline, .t-cyan .tier-link { color: var(--cyan); }
+  .t-blue .accent { background: var(--blue); } .t-blue .tier-role, .t-blue .tier-tagline, .t-blue .tier-link { color: var(--blue); }
+  .t-purple .accent { background: var(--purple); } .t-purple .tier-role, .t-purple .tier-tagline, .t-purple .tier-link { color: var(--purple); }
+  .t-gold .accent { background: var(--gold); } .t-gold .tier-role, .t-gold .tier-tagline, .t-gold .tier-link { color: var(--gold); }
+  .t-white .accent { background: var(--white); } .t-white .tier-role, .t-white .tier-tagline, .t-white .tier-link { color: #d4d4f0; }
+  .t-rose .accent { background: var(--rose); } .t-rose .tier-role, .t-rose .tier-tagline, .t-rose .tier-link { color: var(--rose); }
+  .t-silver .accent { background: var(--silver); } .t-silver .tier-role, .t-silver .tier-tagline, .t-silver .tier-link { color: var(--silver); }
+
+  .closing-cta {
+    text-align: center;
+    margin-top: 44px;
+    padding: 32px 20px;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    background: rgba(245, 158, 11, 0.04);
+  }
+  .closing-cta h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .closing-cta p { font-size: 0.74rem; color: var(--muted); margin-bottom: 18px; }
+
+  footer {
+    text-align: center;
+    padding-top: 40px;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  footer a { color: #c4b5fd; text-decoration: none; }
+  footer a:hover { color: var(--amber); }
+
+  @media (max-width: 600px) {
+    .tier .body { padding: 16px 14px; }
+    .tier-head h2 { font-size: 1.45rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="topbar">
+    <a href="index.html" class="brand">◈ Soul Maps</a>
+    <div style="display:flex;gap:18px;">
+      <a href="index.html">Archive</a>
+      <a href="codex-spectrum.html">Spectrum view</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <span class="kicker">The Color Codex</span>
+    <h1>What your color means</h1>
+    <p class="hero-lead">Every Soul Map is tagged with a color — your core frequency from birth numerology. It does not change. Use this codex to read the archive and find souls on your wavelength.</p>
+    <div class="hero-actions">
+      <a class="btn" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer">Get My Soul Map — $22</a>
+      <a class="btn btn-ghost" href="index.html">Browse archive</a>
+    </div>
+  </header>
+
+  <div class="quick-read">
+    <div class="quick-card">
+      <strong>Born color</strong>
+      <p>Assigned from your birth chart math. This is the tier on your map card — not your mood today.</p>
+    </div>
+    <div class="quick-card">
+      <strong>Nine + two</strong>
+      <p>Nine spectrum colors from Red to White. Rose and Silver are structural — they map to relational and witness layers.</p>
+    </div>
+    <div class="quick-card">
+      <strong>Live vs open</strong>
+      <p><span style="color:#34d399">Live</span> tiers already hold mapped souls. <span style="color:var(--amber)">Open</span> tiers are real frequencies still waiting for their first entry.</p>
+    </div>
+  </div>
+
+  <nav class="spectrum-nav" aria-label="Jump to color">
+    <div class="spectrum-nav-label">Jump to color</div>
+    <div class="spectrum-pills">
+      <a href="#red" style="background:var(--red)" title="Red">Red</a>
+      <a href="#ember" style="background:var(--ember)" title="Ember">Ember</a>
+      <a href="#yellow" style="background:var(--yellow)" title="Yellow">Yel</a>
+      <a href="#green" style="background:var(--green)" title="Green">Grn</a>
+      <a href="#cyan" style="background:var(--cyan)" title="Cyan">Cyan</a>
+      <a href="#blue" style="background:var(--blue)" title="Blue">Blue</a>
+      <a href="#purple" style="background:var(--purple)" title="Purple">Pur</a>
+      <a href="#gold" style="background:var(--gold)" title="Gold">Gold</a>
+      <a href="#white" style="background:var(--white)" title="White">Wht</a>
+      <a href="#rose" style="background:var(--rose)" title="Rose">Rose</a>
+      <a href="#silver" style="background:var(--silver)" title="Silver">Slv</a>
+    </div>
+  </nav>
+
+  <h2 class="section-label">The light spectrum</h2>
+  <p class="section-note">Root drive → integrated wholeness. Click a pill above or scroll the list.</p>
+
+  <article class="tier t-red" id="red">
+    <div class="accent"></div>
+    <div class="body">
+      <div class="tier-head">
+        <div><span class="tier-role">The Will</span><h2>Red</h2></div>
+        <span class="status open">Open tier</span>
+      </div>
+      <p class="tier-tagline">"Reds move."</p>
+      <p class="tier-desc">Raw will and momentum — acts before it reflects. The engine at the base of the spectrum.</p>
+      <div class="chips"><span class="chip">Drive · power</span><span class="chip">Numerology 1 · 8</span><span class="chip">Fire (root)</span></div>
+      <span class="tier-link muted">Awaiting first mapped soul</span>
+    </div>
+  </article>
+
+  <article class="tier t-ember" id="ember">
+    <div class="accent"></div>
+    <div class="body">
+      <div class="tier-head">
+        <div><span class="tier-role">The Ignition</span><h2>Ember</h2></div>
+        <span class="status live">Live · 8 souls</span>
+      </div>
+      <p class="tier-tagline">"Embers begin."</p>
+      <p class="tier-desc">Founders and catalysts — the spark before the structure. Action over maintenance.</p>
+      <div class="chips"><span class="chip">Catalyst · ignite</span><span class="chip">Numerology 1 · 5</span><span class="chip">Fire</span></div>
+      <a class="tier-link" href="index.html">Search ember maps in archive →</a>
+    </div>
+  </article>
+
+  <article class="tier t-yellow" id="yellow">
+    <div class="accent"></div>
+    <div class="body">
+      <div class="tier-head">
+        <div><span class="tier-role">The Joy</span><h2>Yellow</h2></div>
+        <span class="status open">Open tier</span>
+      </div>
+      <p class="tier-tagline">"Yellows shine."</p>
+      <p class="tier-desc">Joy as a native frequency — warmth and play without effort. Rare as a primary color.</p>
+      <div class="chips"><span class="chip">Radiance · play</span><span class="chip">Numerology 3</span><span class="chip">Fire / Air</span></div>
+      <span class="tier-link muted">Awaiting first mapped soul</span>
+    </div>
+  </article>
+
+  <article class="tier t-green" id="green">
+    <div class="accent"></div>
+    <div class="body">
+      <div class="tier-head">
+        <div><span class="tier-role">The Field</span><h2>Green</h2></div>
+        <span class="status live">Live</span>
+      </div>
+      <p class="tier-tagline">"Fields hold."</p>
+      <p class="tier-desc">Stabilizers and grounders — the container that keeps what others build from collapsing. Often the youngest souls and master-number carriers.</p>
+      <div class="chips"><span class="chip">Hold · stabilize</span><span class="chip">Master carriers</span><span class="chip">Earth</span></div>
+      <a class="tier-link" href="the-field-path.html">Enter the Field Path →</a>
+    </div>
+  </article>
+
+  <article class="tier t-cyan" id="cyan">
+    <div class="accent"></div>
+    <div class="body">
+      <div class="tier-head">
+        <div><span class="tier-role">The Signal</span><h2>Cyan</h2></div>
+        <span class="status live">Live · 4 souls</span>
+      </div>
+      <p class="tier-tagline">"Signals connect."</p>
+      <p class="tier-desc">The network layer — translators who move information between worlds so the field can talk to itself.</p>
+      <div class="chips"><span class="chip">Interface · connect</span><span class="chip">Numerology 3 · 5</span><span class="chip">Water / Air</span></div>
+      <a class="tier-link" href="index.html">Search cyan maps in archive →</a>
+    </div>
+  </article>
+
+  <article class="tier t-blue" id="blue">
+    <div class="accent"></div>
+    <div class="body">
+      <div class="tier-head">
+        <div><span class="tier-role">The Mind</span><h2>Blue</h2></div>
+        <span class="status live">Live · 8 souls</span>
+      </div>
+      <p class="tier-tagline">"Minds witness."</p>
+      <p class="tier-desc">Clarity and strategy — sees the whole board before moving a piece. Stillness as power.</p>
+      <div class="chips"><span class="chip">Thought · observe</span><span class="chip">Numerology 4 · 7</span><span class="chip">Air</span></div>
+      <a class="tier-link" href="index.html">Search blue maps in archive →</a>
+    </div>
+  </article>
+
+  <article class="tier t-purple" id="purple">
+    <div class="accent"></div>
+    <div class="body">
+      <div class="tier-head">
+        <div><span class="tier-role">The Transformer</span><h2>Purple</h2></div>
+        <span class="status live">Live</span>
+      </div>
+      <p class="tier-tagline">"Purples transform."</p>
+      <p class="tier-desc">Alchemists and lineage-holders — transmute one state into another. Deep pattern memory.</p>
+      <div class="chips"><span class="chip">Transform · transmute</span><span class="chip">Numerology 11</span><span class="chip">Spirit</span></div>
+      <a class="tier-link" href="purple-soul-journey.html">Purple Soul Journey →</a>
+    </div>
+  </article>
+
+  <article class="tier t-gold" id="gold">
+    <div class="accent"></div>
+    <div class="body">
+      <div class="tier-head">
+        <div><span class="tier-role">The Orchestrator</span><h2>Gold</h2></div>
+        <span class="status live">Live</span>
+      </div>
+      <p class="tier-tagline">"Masters orchestrate."</p>
+      <p class="tier-desc">Coherence and command — conducts the whole field instead of solo execution. Master numbers 11, 22, 33.</p>
+      <div class="chips"><span class="chip">Mastery · orchestrate</span><span class="chip">11 · 22 · 33</span><span class="chip">Light</span></div>
+      <a class="tier-link" href="master-tier.html">Master Tier hall →</a>
+    </div>
+  </article>
+
+  <article class="tier t-white" id="white">
+    <div class="accent"></div>
+    <div class="body">
+      <div class="tier-head">
+        <div><span class="tier-role">The All</span><h2>White</h2></div>
+        <span class="status open">Open tier</span>
+      </div>
+      <p class="tier-tagline">"White holds it all."</p>
+      <p class="tier-desc">Integration endpoint — every frequency present at once. The arc the spectrum moves toward.</p>
+      <div class="chips"><span class="chip">Wholeness · unity</span><span class="chip">All colors integrated</span><span class="chip">Aether</span></div>
+      <span class="tier-link muted">Awaiting first mapped soul</span>
+    </div>
+  </article>
+
+  <h2 class="section-label">Structural frequencies</h2>
+  <p class="section-note">Beside the visible spectrum — mapped to Selector Model layers, not rainbow order.</p>
+
+  <article class="tier t-rose" id="rose">
+    <div class="accent"></div>
+    <div class="body">
+      <div class="tier-head">
+        <div><span class="tier-role">The Bond</span><h2>Rose</h2></div>
+        <span class="status open">Open tier</span>
+      </div>
+      <p class="tier-tagline">"Bonds connect."</p>
+      <p class="tier-desc">Relational frequency — devotion, loyalty, weaving people into belonging.</p>
+      <div class="chips"><span class="chip">Relate · bind</span><span class="chip">Numerology 2 · 6</span><span class="chip">Relational layer</span></div>
+      <span class="tier-link muted">Awaiting first mapped soul</span>
+    </div>
+  </article>
+
+  <article class="tier t-silver" id="silver">
+    <div class="accent"></div>
+    <div class="body">
+      <div class="tier-head">
+        <div><span class="tier-role">The Mirror</span><h2>Silver</h2></div>
+        <span class="status open">Open tier</span>
+      </div>
+      <p class="tier-tagline">"Mirrors reflect."</p>
+      <p class="tier-desc">Witness frequency — holds space without filling it. Shows you yourself undistorted.</p>
+      <div class="chips"><span class="chip">Witness · reflect</span><span class="chip">Numerology 7 · 9</span><span class="chip">Core Code layer</span></div>
+      <span class="tier-link muted">Awaiting first mapped soul</span>
+    </div>
+  </article>
+
+  <div class="closing-cta">
+    <h2>Don't know your color yet?</h2>
+    <p>Get your Soul Map — we'll calculate your code and show you where you sit on the spectrum.</p>
+    <a class="btn" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer">Get My Soul Map — $22</a>
+  </div>
+
+  <footer>
+    <p>The First Spark · <a href="index.html">Soul Map Archive</a> · <a href="codex-spectrum.html">Animated spectrum</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
