@@ -532,6 +532,152 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             max-width: 440px;
             margin: 0 auto;
         }
+
+        /* ── COLOR CODEX CTA ── */
+        .codex-cta {
+            display: block;
+            position: relative;
+            margin: 44px auto 0;
+            max-width: 560px;
+            padding: 32px 26px 28px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(107, 77, 242, 0.18), transparent 58%),
+                rgba(10, 8, 25, 0.88);
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.25s, box-shadow 0.3s;
+        }
+        .codex-cta::before {
+            content: '';
+            position: absolute;
+            inset: -40% -20%;
+            background: conic-gradient(
+                from 0deg,
+                #e24b4a, #ff6a3d, #f5c842, #10b981, #22d3ee,
+                #3b82f6, #8b5cf6, #d4af37, #f0f0ff, #f43f5e, #c4c8d4,
+                #e24b4a
+            );
+            opacity: 0.07;
+            animation: codex-spin 18s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes codex-spin {
+            to { transform: rotate(360deg); }
+        }
+        .codex-cta:hover {
+            border-color: rgba(167, 139, 250, 0.65);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(107, 77, 242, 0.22), 0 0 60px rgba(139, 92, 246, 0.08);
+        }
+        .codex-cta-inner { position: relative; z-index: 1; }
+        .codex-cta-tag {
+            display: inline-block;
+            font-size: .58em;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: #a78bfa;
+            margin-bottom: 12px;
+        }
+        .codex-cta h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1rem, 4vw, 1.35rem);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: #f0f0ff;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .codex-cta-desc {
+            font-size: .74em;
+            color: #9ca3af;
+            line-height: 1.65;
+            max-width: 400px;
+            margin: 0 auto 22px;
+        }
+        .codex-spectrum-interactive {
+            display: flex;
+            height: 14px;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto 14px;
+            max-width: 440px;
+            box-shadow: 0 0 24px rgba(255, 255, 255, 0.06);
+        }
+        .codex-spectrum-interactive span {
+            flex: 1;
+            cursor: crosshair;
+            transition: flex 0.35s ease, filter 0.25s;
+            position: relative;
+        }
+        .codex-spectrum-interactive span:hover {
+            flex: 2.2;
+            filter: brightness(1.25);
+            z-index: 2;
+        }
+        .codex-spectrum-interactive span::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,.35), transparent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .codex-spectrum-interactive span:hover::after { opacity: 1; }
+        .codex-cta-reveal {
+            min-height: 2.8em;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .62em;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 18px;
+            transition: color 0.2s;
+        }
+        .codex-cta-reveal strong {
+            display: block;
+            font-size: 1.35em;
+            letter-spacing: .06em;
+            margin-bottom: 4px;
+            transition: color 0.2s;
+        }
+        .codex-cta-btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border: 1px solid #8b5cf6;
+            color: #c4b5fd;
+            font-size: .68em;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            transition: background 0.25s, color 0.25s, border-color 0.25s;
+        }
+        .codex-cta:hover .codex-cta-btn {
+            background: #8b5cf6;
+            color: #fff;
+            border-color: #a78bfa;
+        }
+        .codex-cta-wave {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                transparent, #e24b4a, #ff6a3d, #f5c842, #10b981, #22d3ee,
+                #3b82f6, #8b5cf6, #d4af37, #f0f0ff, transparent);
+            background-size: 200% 100%;
+            animation: codex-wave 4s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        @keyframes codex-wave {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .codex-cta::before, .codex-cta-wave { animation: none; }
+        }
         .sticky-buy {
             display: none;
             position: fixed;
@@ -1158,11 +1304,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="no-results" id="no-results">No soul maps match that search.<br><span style="opacity:.5">Try a name, life path number, or zodiac sign.</span></div>
 
-    <div style="text-align:center; margin: 40px auto 0; padding: 24px 20px; max-width: 480px; border: 1px solid rgba(139,92,246,.28); background: rgba(107,77,242,.06);">
-        <div style="font-family:'Orbitron',sans-serif; font-size:0.55rem; letter-spacing:0.2em; color:#a78bfa; text-transform:uppercase; margin-bottom:8px;">Color Codex</div>
-        <div style="font-size:0.78em; color:#9ca3af; line-height:1.65; margin-bottom:14px;">What the color on your map means — all eleven frequencies, plain and browsable.</div>
-        <a href="color-codex.html" style="display:inline-block; padding:10px 22px; border:1px solid #8b5cf6; color:#c4b5fd; font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.12em; text-decoration:none; text-transform:uppercase;">Read the Color Codex →</a>
-    </div>
+    <a href="color-codex.html" class="codex-cta" id="codex-cta">
+        <div class="codex-cta-wave" aria-hidden="true"></div>
+        <div class="codex-cta-inner">
+            <span class="codex-cta-tag">◈ The Color Codex</span>
+            <h3>What's your frequency?</h3>
+            <p class="codex-cta-desc">Every Soul Map glows a color — set at birth, never changed. Eleven frequencies sort the whole archive.</p>
+            <div class="codex-spectrum-interactive" id="codex-spectrum-cta" aria-label="Hover to preview spectrum colors">
+                <span style="background:#e24b4a" data-color="Red" data-role="The Will" title="Red"></span>
+                <span style="background:#ff6a3d" data-color="Ember" data-role="The Ignition" title="Ember"></span>
+                <span style="background:#f5c842" data-color="Yellow" data-role="The Joy" title="Yellow"></span>
+                <span style="background:#10b981" data-color="Green" data-role="The Field" title="Green"></span>
+                <span style="background:#22d3ee" data-color="Cyan" data-role="The Signal" title="Cyan"></span>
+                <span style="background:#3b82f6" data-color="Blue" data-role="The Mind" title="Blue"></span>
+                <span style="background:#8b5cf6" data-color="Purple" data-role="The Transformer" title="Purple"></span>
+                <span style="background:#d4af37" data-color="Gold" data-role="The Orchestrator" title="Gold"></span>
+                <span style="background:#f0f0ff" data-color="White" data-role="The All" title="White"></span>
+                <span style="background:#f43f5e" data-color="Rose" data-role="The Bond" title="Rose"></span>
+                <span style="background:#c4c8d4" data-color="Silver" data-role="The Mirror" title="Silver"></span>
+            </div>
+            <div class="codex-cta-reveal" id="codex-reveal" aria-live="polite">
+                <strong style="color:#6b7280">?</strong>
+                Hover the spectrum
+            </div>
+            <span class="codex-cta-btn">Decode the spectrum →</span>
+        </div>
+    </a>
 
     <div style="text-align:center; margin: 20px auto 0; padding: 28px 20px; max-width: 480px; border: 1px solid #F3B23A30; border-radius: 4px; background: #F3B23A08;">
         <div style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; color:#F3B23A; text-transform:uppercase; margin-bottom:10px;">New · Hall of Rare Frequencies</div>
@@ -1234,6 +1401,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             input.blur();
         }
     });
+
+    // Color Codex spectrum hover reveal
+    const spectrumCta = document.getElementById('codex-spectrum-cta');
+    const codexReveal = document.getElementById('codex-reveal');
+    const colorHex = {
+        Red:'#e24b4a', Ember:'#ff6a3d', Yellow:'#f5c842', Green:'#10b981', Cyan:'#22d3ee',
+        Blue:'#3b82f6', Purple:'#8b5cf6', Gold:'#d4af37', White:'#f0f0ff', Rose:'#f43f5e', Silver:'#c4c8d4'
+    };
+    if (spectrumCta && codexReveal) {
+        const defaultHtml = codexReveal.innerHTML;
+        spectrumCta.querySelectorAll('span').forEach(function (band) {
+            band.addEventListener('mouseenter', function () {
+                const name = band.dataset.color;
+                const role = band.dataset.role;
+                const hex = colorHex[name] || '#a78bfa';
+                codexReveal.innerHTML =
+                    '<strong style="color:' + hex + '">' + name + '</strong>' + role;
+            });
+        });
+        spectrumCta.addEventListener('mouseleave', function () {
+            codexReveal.innerHTML = defaultHtml;
+        });
+        // Gentle auto-demo on first view
+        const ctaEl = document.getElementById('codex-cta');
+        if (ctaEl && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const bands = spectrumCta.querySelectorAll('span');
+            let i = 0;
+            const demo = setInterval(function () {
+                if (i >= bands.length) { clearInterval(demo); codexReveal.innerHTML = defaultHtml; return; }
+                const b = bands[i++];
+                codexReveal.innerHTML =
+                    '<strong style="color:' + (colorHex[b.dataset.color] || '#a78bfa') + '">' +
+                    b.dataset.color + '</strong>' + b.dataset.role;
+            }, 420);
+            ctaEl.addEventListener('mouseenter', function () { clearInterval(demo); }, { once: true });
+        }
+    }
 
     // Show sticky buy bar after scrolling past hero
     const stickyBuy = document.getElementById('sticky-buy');
