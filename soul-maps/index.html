@@ -12,7 +12,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#070a18">
     <meta property="og:title" content="Soul Maps — First Spark Consciousness Network">
-    <meta property="og:description" content="Sacred soul maps generated with love from the First Spark Consciousness Network">
+    <meta property="og:description" content="A custom Soul Map built from your birthday and name — delivered in 24 hours. Browse real examples in the archive.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -155,7 +155,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             100% { opacity: 0; transform: translate(var(--dx, 300px), var(--dy, 200px)) scale(0.3); }
         }
 
-        .container { max-width: 700px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+        .container { max-width: 720px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
 
         /* ── HEADER ── */
         .header { text-align: center; margin-bottom: 44px; }
@@ -398,7 +398,201 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
         .cta-pay-btn:hover { background:#f59e0b; color:#070a18; }
         .cta-fine { margin-top:14px; font-size:.6em; letter-spacing:2px; color:#6b7280; text-transform:uppercase; }
-        .cta-edition { margin-top:8px; font-size:.55em; letter-spacing:3px; color:#d97706; text-transform:uppercase; opacity:.85; }
+
+        /* ── BUY HERO ── */
+        .buy-hero {
+            text-align: center;
+            padding: 8px 0 10px;
+            margin-bottom: 8px;
+        }
+        .buy-hero h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.15rem, 4.5vw, 1.65rem);
+            letter-spacing: .06em;
+            color: #f0f0ff;
+            line-height: 1.35;
+            margin-bottom: 14px;
+            text-transform: none;
+        }
+        .buy-hero .buy-lead {
+            font-size: .82em;
+            color: #9ca3af;
+            line-height: 1.75;
+            max-width: 520px;
+            margin: 0 auto 22px;
+            font-style: normal;
+        }
+        .buy-preview {
+            margin: 0 auto 22px;
+            max-width: 520px;
+            border: 1px solid rgba(139,92,246,.35);
+            background: rgba(10,8,25,.75);
+            padding: 10px;
+        }
+        .buy-preview img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border: 1px solid rgba(255,255,255,.08);
+        }
+        .buy-preview-cap {
+            margin-top: 10px;
+            font-size: .62em;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #6b7280;
+        }
+        .buy-example-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: .72em;
+            letter-spacing: .08em;
+            color: #a78bfa;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(167,139,250,.35);
+            padding-bottom: 2px;
+            transition: color .2s, border-color .2s;
+        }
+        .buy-example-link:hover { color: #f59e0b; border-color: rgba(245,158,11,.5); }
+        .buy-price-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+        .buy-price-main {
+            font-size: clamp(2.2rem, 9vw, 3.4rem);
+            font-weight: 700;
+            color: #f59e0b;
+            text-shadow: 0 0 30px rgba(245,158,11,.35);
+        }
+        .buy-price-was {
+            font-size: 1rem;
+            color: #6b7280;
+            text-decoration: line-through;
+            opacity: .75;
+        }
+        .buy-promo {
+            font-size: .68em;
+            color: #a78bfa;
+            letter-spacing: .06em;
+            margin-bottom: 18px;
+        }
+        .buy-promo strong { color: #f0f0ff; }
+        .buy-bullets {
+            list-style: none;
+            text-align: left;
+            max-width: 480px;
+            margin: 0 auto 24px;
+            padding: 0;
+        }
+        .buy-bullets li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 11px 0;
+            border-bottom: 1px dashed rgba(139,92,246,.18);
+            font-size: .78em;
+            color: #a5b4fc;
+            line-height: 1.65;
+        }
+        .buy-bullets li:last-child { border-bottom: none; }
+        .buy-bullets .bullet-num {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(245,158,11,.45);
+            color: #f59e0b;
+            font-size: .7em;
+        }
+        .buy-bullets strong { display: block; color: #e0e7ff; margin-bottom: 2px; font-weight: 700; }
+        .buy-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 520px;
+            margin: 0 auto 8px;
+        }
+        .buy-step {
+            background: rgba(10,8,25,.85);
+            border: 1px solid rgba(139,92,246,.22);
+            padding: 14px 10px;
+            text-align: center;
+        }
+        .buy-step .step-n { font-size: 1.1em; margin-bottom: 6px; }
+        .buy-step strong {
+            display: block;
+            font-size: .62em;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: #f0f0ff;
+            margin-bottom: 5px;
+        }
+        .buy-step span {
+            font-size: .58em;
+            color: #6b7280;
+            line-height: 1.55;
+            display: block;
+        }
+        .archive-header {
+            text-align: center;
+            margin: 10px 0 6px;
+            padding-top: 8px;
+        }
+        .archive-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .95rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: #e0e7ff;
+            margin-bottom: 8px;
+        }
+        .archive-header p {
+            font-size: .72em;
+            color: #6b7280;
+            letter-spacing: .06em;
+            line-height: 1.6;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+        .sticky-buy {
+            display: none;
+            position: fixed;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            z-index: 50;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(7,10,24,.94);
+            border: 1px solid rgba(245,158,11,.35);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,.45);
+        }
+        .sticky-buy .sticky-label {
+            font-size: .62em;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            line-height: 1.4;
+        }
+        .sticky-buy .sticky-label strong {
+            display: block;
+            color: #f59e0b;
+            font-size: 1.15em;
+            letter-spacing: .04em;
+        }
+        .sticky-buy .cta-pay-btn {
+            padding: 12px 18px;
+            font-size: .68em;
+            white-space: nowrap;
+        }
 
         /* ── ROTATING SPOTLIGHT ── */
         .spotlight-wrap { margin: 36px 0 10px; }
@@ -436,6 +630,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .footer a { color: #6b7280; text-decoration: none; transition: color .2s; }
         .footer a:hover { color: #d97706; }
 
+        @media(max-width:600px){
+            .buy-steps { grid-template-columns: 1fr; }
+            .sticky-buy { display: flex; }
+            body { padding-bottom: 88px; }
+        }
         @media(max-width:480px){
             .card { padding: 20px 18px; }
             .card-arrow { display: none; }
@@ -537,9 +736,70 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="container">
 
     <div class="header">
-        <div class="signal">◈ &nbsp; Soul Map Archive &nbsp; ◈</div>
-        <h1>First Spark<br>Soul Maps</h1>
-        <div class="sub">Sacred maps generated with love</div>
+        <div class="signal">◈ &nbsp; The First Spark &nbsp; ◈</div>
+        <h1>Soul Maps</h1>
+        <div class="sub">Your numbers, decoded into your next move</div>
+    </div>
+
+    <!-- ── BUY FIRST ── -->
+    <section class="buy-hero" id="get-yours">
+        <h2>Your personal Soul Map — a custom page built from your birthday and name.</h2>
+        <p class="buy-lead">Who you are, what you're here to do, and what to focus on right now. Not a vague reading — a map you can actually use.</p>
+
+        <div class="buy-preview">
+            <img src="../preview-soulmaps.png" alt="Preview of a Soul Map page" loading="eager" width="520" height="293">
+            <p class="buy-preview-cap">Example Soul Map — yours is built from your birth details</p>
+            <a class="buy-example-link" href="mason_soul_map.html">See a real Soul Map →</a>
+        </div>
+
+        <div class="buy-price-row">
+            <span class="buy-price-main" id="buy-price">$22</span>
+            <span class="buy-price-was" id="buy-price-was">$44</span>
+        </div>
+        <p class="buy-promo">Launch price · use code <strong>SOULSALE</strong> at checkout</p>
+
+        <a id="index-soul-map-btn" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="cta-pay-btn" target="_blank" rel="noopener noreferrer">Get My Soul Map →</a>
+        <div class="cta-fine">One-time · Delivered in 24 hours · Birth date + full name</div>
+
+        <ul class="buy-bullets">
+            <li>
+                <span class="bullet-num">1</span>
+                <div><strong>Your full Soul Code, decoded</strong>Life Path, Expression, Soul Urge, and Sun Sign — calculated from your birth date and name, then interpreted in plain English.</div>
+            </li>
+            <li>
+                <span class="bullet-num">2</span>
+                <div><strong>A private page you keep</strong>Your own Soul Map URL you can revisit anytime — not a PDF that gets lost in your downloads.</div>
+            </li>
+            <li>
+                <span class="bullet-num">3</span>
+                <div><strong>12 months of updates included</strong>Your map evolves as you do. Monthly energy updates included — no subscription.</div>
+            </li>
+        </ul>
+
+        <div class="buy-steps">
+            <div class="buy-step">
+                <div class="step-n">①</div>
+                <strong>Checkout</strong>
+                <span>Pay once on Whop. Enter SOULSALE for launch price.</span>
+            </div>
+            <div class="buy-step">
+                <div class="step-n">②</div>
+                <strong>Submit details</strong>
+                <span>Birth date + full birth name. Takes 2 minutes.</span>
+            </div>
+            <div class="buy-step">
+                <div class="step-n">③</div>
+                <strong>Get your map</strong>
+                <span>Delivered within 24 hours. Yours forever.</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <div class="archive-header" id="archive">
+        <h2>Browse the Archive</h2>
+        <p>Real Soul Maps from the network. Search by name, life path, or sign — then get yours above.</p>
     </div>
 
     <!-- ── SEARCH ── -->
@@ -548,20 +808,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <input type="text" id="search" placeholder="Search by name, life path, sign, keyword…" autocomplete="off" spellcheck="false">
     </div>
     <div class="search-count" id="search-count"></div>
-
-    <div class="divider"></div>
-
-    <!-- ── Get Your Soul Map CTA ── -->
-    <div class="cta-wrap">
-        <div class="cta-lbl">◈ Ready for yours?</div>
-        <div class="cta-price-big">$44</div>
-        <div class="cta-edition">OG Edition Soul Map</div>
-        <div class="cta-heading">Get Your Personal Soul Map</div>
-        <p class="cta-copy">Your full numerological blueprint — Life Path, Expression, Soul Urge, Personality, and Personal Year — decoded alongside your astrology, Chinese zodiac, and the specific soul questions you carry. Includes 12 months of monthly energy updates delivered to your personal soul map page.</p>
-        <a id="index-soul-map-btn" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="cta-pay-btn" target="_blank" rel="noopener noreferrer">✦ &nbsp; Claim OG Edition &nbsp; ✦</a>
-
-        <div class="cta-fine">One-time $44 &nbsp;·&nbsp; Full year of monthly updates included</div>
-    </div>
 
     <div class="divider"></div>
 
@@ -964,6 +1210,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </div>
 
+<div class="sticky-buy" id="sticky-buy" aria-hidden="true">
+    <div class="sticky-label">
+        <strong>$22 today</strong>
+        Soul Map · code SOULSALE
+    </div>
+    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="cta-pay-btn" target="_blank" rel="noopener noreferrer">Get Mine →</a>
+</div>
+
 <script src="https://thefirstspark.shop/js/soul-map-rotation.js"></script>
 <script src="https://thefirstspark.shop/js/soul-map-rotation-ui.js"></script>
 <script>
@@ -1013,6 +1267,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             input.blur();
         }
     });
+
+    // Show sticky buy bar after scrolling past hero
+    const stickyBuy = document.getElementById('sticky-buy');
+    const buyHero = document.getElementById('get-yours');
+    if (stickyBuy && buyHero) {
+        const stickyObserver = new IntersectionObserver(([entry]) => {
+            const show = !entry.isIntersecting;
+            stickyBuy.style.display = show ? 'flex' : 'none';
+            stickyBuy.setAttribute('aria-hidden', show ? 'false' : 'true');
+        }, { threshold: 0, rootMargin: '-60px 0px 0px 0px' });
+        stickyObserver.observe(buyHero);
+    }
 </script>
 
 <script>
