@@ -1,5 +1,6 @@
 (function (global) {
     const BASE = 'https://soul-maps.thefirstspark.shop/';
+    const SOUL_MAP_PRICE = '$22';
 
     function dayOfYear(date) {
         const d = date || new Date();
@@ -64,7 +65,7 @@
                 '</a>' +
             '</div>' +
             '<div class="hero-proof-footer">' +
-                '<a href="' + checkoutUrl + '" class="hero-proof-price" target="_blank" rel="noopener noreferrer">Get yours \u00b7 $44</a>' +
+                '<a href="' + checkoutUrl + '" class="hero-proof-price" target="_blank" rel="noopener noreferrer">Get yours \u00b7 ' + SOUL_MAP_PRICE + '</a>' +
                 '<a href="' + BASE.replace(/\/$/, '') + '/" class="hero-proof-archive" target="_blank" rel="noopener noreferrer">48 maps in archive</a>' +
             '</div>';
     }
@@ -93,7 +94,7 @@
                         '<div class="map-spotlight-desc">' + map.desc + '</div>' +
                         '<div class="map-spotlight-enter">Read map →</div>' +
                     '</a>' +
-                    '<a href="' + checkoutUrl + '" class="map-spotlight-buy" target="_blank" rel="noopener noreferrer">Get yours · OG Edition $44 →</a>' +
+                    '<a href="' + checkoutUrl + '" class="map-spotlight-buy" target="_blank" rel="noopener noreferrer">Get yours · ' + SOUL_MAP_PRICE + ' →</a>' +
                 '</div>'
             );
         }).join('');
