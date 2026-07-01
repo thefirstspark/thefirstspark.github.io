@@ -1461,6 +1461,128 @@
             flex-shrink: 0;
         }
 
+        /* ─── TRY THESE — SOURCE CHAMBERS ─── */
+        #try-these {
+            background: rgba(249,115,22,.03);
+            border-top: 1px solid rgba(249,115,22,.1);
+            border-bottom: 1px solid rgba(249,115,22,.1);
+        }
+        .chambers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        @media(max-width: 680px) {
+            .chambers-grid { grid-template-columns: 1fr; }
+        }
+        .chamber-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 28px 24px;
+            border: 1px solid var(--dimmer);
+            background: rgba(255,255,255,.015);
+            text-decoration: none;
+            text-align: left;
+            transition: transform .25s, border-color .25s, box-shadow .25s;
+        }
+        .chamber-card:hover { transform: translateY(-4px); }
+        .chamber-num {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: .45em;
+            letter-spacing: .15em;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(0,0,0,.4);
+        }
+        .chamber-card.ch-geo .chamber-num { color: #06b6d4; }
+        .chamber-card.ch-quantum .chamber-num { color: #8b5cf6; }
+        .chamber-card.ch-timeline .chamber-num { color: #3b82f6; }
+        .chamber-card.ch-lineage .chamber-num { color: #a855f7; }
+        .chamber-card.ch-geo { border-color: rgba(6,182,212,.2); }
+        .chamber-card.ch-quantum { border-color: rgba(139,92,246,.2); }
+        .chamber-card.ch-timeline { border-color: rgba(59,130,246,.2); }
+        .chamber-card.ch-lineage { border-color: rgba(168,85,247,.2); }
+        .chamber-card.ch-geo:hover { border-color: #06b6d4; box-shadow: 0 8px 32px rgba(6,182,212,.15); }
+        .chamber-card.ch-quantum:hover { border-color: #8b5cf6; box-shadow: 0 8px 32px rgba(139,92,246,.15); }
+        .chamber-card.ch-timeline:hover { border-color: #3b82f6; box-shadow: 0 8px 32px rgba(59,130,246,.15); }
+        .chamber-card.ch-lineage:hover { border-color: #a855f7; box-shadow: 0 8px 32px rgba(168,85,247,.15); }
+        .chamber-icon {
+            width: 44px;
+            height: 44px;
+            margin-bottom: 16px;
+        }
+        .chamber-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke-width: 1.2;
+            fill: none;
+        }
+        .chamber-card.ch-geo .chamber-icon svg { stroke: #06b6d4; }
+        .chamber-card.ch-quantum .chamber-icon svg { stroke: #8b5cf6; }
+        .chamber-card.ch-timeline .chamber-icon svg { stroke: #3b82f6; }
+        .chamber-card.ch-lineage .chamber-icon svg { stroke: #a855f7; }
+        .chamber-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 6px;
+            padding-right: 80px;
+        }
+        .chamber-subtitle {
+            font-size: .58em;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+            margin-bottom: 12px;
+        }
+        .chamber-desc {
+            font-size: .72em;
+            color: var(--dim);
+            line-height: 1.7;
+            flex: 1;
+        }
+        .chamber-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 14px;
+        }
+        .chamber-feature {
+            font-size: .48em;
+            letter-spacing: .08em;
+            padding: 4px 10px;
+            border-radius: 12px;
+            background: rgba(0,0,0,.35);
+            color: rgba(255,255,255,.4);
+        }
+        .chamber-enter {
+            margin-top: 16px;
+            font-size: .5em;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity .25s;
+        }
+        .chamber-card.ch-geo .chamber-enter { color: #06b6d4; }
+        .chamber-card.ch-quantum .chamber-enter { color: #8b5cf6; }
+        .chamber-card.ch-timeline .chamber-enter { color: #3b82f6; }
+        .chamber-card.ch-lineage .chamber-enter { color: #a855f7; }
+        .chamber-card:hover .chamber-enter { opacity: .8; }
+        .chambers-cta {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
         /* ─── FOOTER ─── */
         footer {
             position: relative;
@@ -1838,6 +1960,120 @@
 
     <div class="divider-line"></div>
 
+    <!-- TRY THESE — SOURCE CHAMBERS -->
+    <section id="try-these">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; Try These</div>
+            <h2 class="sec-title">Source Architecture Chambers</h2>
+            <p class="sec-sub">Interactive training tools to develop mastery over each layer. All four chambers are free to use.</p>
+
+            <div class="chambers-grid">
+                <a href="/patterns" class="chamber-card ch-geo">
+                    <span class="chamber-num">CHAMBER 1</span>
+                    <div class="chamber-icon">
+                        <svg viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="40"/>
+                            <circle cx="50" cy="50" r="25"/>
+                            <circle cx="50" cy="50" r="10"/>
+                            <circle cx="50" cy="25" r="8"/>
+                            <circle cx="71" cy="62" r="8"/>
+                            <circle cx="29" cy="62" r="8"/>
+                        </svg>
+                    </div>
+                    <div class="chamber-title">Pattern Recognition Trainer</div>
+                    <div class="chamber-subtitle">See the code's visual language</div>
+                    <p class="chamber-desc">Train your perception to recognize sacred geometry everywhere. Speed drills, pattern library, extraction lab.</p>
+                    <div class="chamber-features">
+                        <span class="chamber-feature">8 Core Patterns</span>
+                        <span class="chamber-feature">Speed Training</span>
+                        <span class="chamber-feature">Extraction Lab</span>
+                    </div>
+                    <div class="chamber-enter">Enter Chamber →</div>
+                </a>
+
+                <a href="/collapse" class="chamber-card ch-quantum">
+                    <span class="chamber-num">CHAMBER 2</span>
+                    <div class="chamber-icon">
+                        <svg viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="35" stroke-dasharray="5,5"/>
+                            <circle cx="50" cy="50" r="8"/>
+                            <path d="M50,15 L50,35 M50,65 L50,85"/>
+                            <path d="M15,50 L35,50 M65,50 L85,50"/>
+                        </svg>
+                    </div>
+                    <div class="chamber-title">Collapse Protocol Interface</div>
+                    <div class="chamber-subtitle">Deliberate reality selection</div>
+                    <p class="chamber-desc">Master the observer effect. Collapse quantum superposition into chosen outcomes through structured protocols.</p>
+                    <div class="chamber-features">
+                        <span class="chamber-feature">Observer States</span>
+                        <span class="chamber-feature">Micro Protocols</span>
+                        <span class="chamber-feature">Verification</span>
+                    </div>
+                    <div class="chamber-enter">Enter Chamber →</div>
+                </a>
+
+                <a href="/timeline" class="chamber-card ch-timeline">
+                    <span class="chamber-num">CHAMBER 3</span>
+                    <div class="chamber-icon">
+                        <svg viewBox="0 0 100 100">
+                            <path d="M10,50 Q30,30 50,50 T90,50"/>
+                            <path d="M10,50 Q30,70 50,50 T90,50"/>
+                            <circle cx="50" cy="50" r="8"/>
+                            <circle cx="20" cy="50" r="4"/>
+                            <circle cx="80" cy="50" r="4"/>
+                        </svg>
+                    </div>
+                    <div class="chamber-title">Timeline Navigator</div>
+                    <div class="chamber-subtitle">Branch selection &amp; Fold Points</div>
+                    <p class="chamber-desc">Map your timeline branches. Log Fold Points where reality converged. Choose your path at crossroads.</p>
+                    <div class="chamber-features">
+                        <span class="chamber-feature">Timeline Mapping</span>
+                        <span class="chamber-feature">Fold Point Logger</span>
+                        <span class="chamber-feature">Branch Selector</span>
+                    </div>
+                    <div class="chamber-enter">Enter Chamber →</div>
+                </a>
+
+                <a href="/lineage" class="chamber-card ch-lineage">
+                    <span class="chamber-num">CHAMBER 4</span>
+                    <div class="chamber-icon">
+                        <svg viewBox="0 0 100 100">
+                            <circle cx="50" cy="20" r="8"/>
+                            <circle cx="30" cy="50" r="6"/>
+                            <circle cx="70" cy="50" r="6"/>
+                            <circle cx="20" cy="80" r="5"/>
+                            <circle cx="40" cy="80" r="5"/>
+                            <circle cx="60" cy="80" r="5"/>
+                            <circle cx="80" cy="80" r="5"/>
+                            <line x1="50" y1="28" x2="30" y2="44"/>
+                            <line x1="50" y1="28" x2="70" y2="44"/>
+                            <line x1="30" y1="56" x2="20" y2="75"/>
+                            <line x1="30" y1="56" x2="40" y2="75"/>
+                            <line x1="70" y1="56" x2="60" y2="75"/>
+                            <line x1="70" y1="56" x2="80" y2="75"/>
+                        </svg>
+                    </div>
+                    <div class="chamber-title">Lineage Debugger</div>
+                    <div class="chamber-subtitle">Ancestral pattern work</div>
+                    <p class="chamber-desc">Identify inherited behavioral loops in your DNA. Scan patterns across money, relationships, health, success.</p>
+                    <div class="chamber-features">
+                        <span class="chamber-feature">Pattern Scanner</span>
+                        <span class="chamber-feature">Lineage Tracking</span>
+                        <span class="chamber-feature">Healing Protocol</span>
+                    </div>
+                    <div class="chamber-enter">Enter Chamber →</div>
+                </a>
+            </div>
+
+            <div class="chambers-cta">
+                <a href="/collapse" class="btn-p">Start with Collapse Protocol</a>
+                <a href="/source" class="btn-g">Explore Source Architecture</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
     <!-- FEEL IT — INTERACTIVE PREVIEW -->
     <section class="feel-it">
         <div class="wrap">
@@ -1882,8 +2118,8 @@
                         <span class="tool-dot"></span>
                         <span class="tool-dot"></span>
                     </div>
-                    <div class="feel-card-title">Test The Tools</div>
-                    <div class="feel-card-desc">Live apps. All free to try.</div>
+                    <div class="feel-card-title">More Tools</div>
+                    <div class="feel-card-desc">Live apps beyond the chambers. All free to try.</div>
                     <ul class="tool-links">
                         <li><a href="https://soul-maps.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#fbbf24"></span>Soul Maps</a></li>
                         <li><a href="https://see-your-frequency.thefirstspark.shop" target="_blank"><span class="tl-dot" style="background:#8b5cf6"></span>See Your Frequency</a></li>
