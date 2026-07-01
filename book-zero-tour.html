@@ -11,7 +11,7 @@
     <meta property="og:description" content="Writing the memoir from the road. AI picks the route from KJP's Soul Map. Solar power. Starlink. The story America needs to hear.">
     <meta property="og:url" content="https://thefirstspark.shop/book-zero-tour.html">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://thefirstspark.shop/og-home.png">
+    <meta property="og:image" content="https://thefirstspark.shop/kateandrach91.jpg">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -170,10 +170,34 @@
             max-width: 620px; margin-bottom: 36px;
         }
 
+        .origin-grid {
+            display: grid;
+            grid-template-columns: minmax(240px, 340px) 1fr;
+            gap: 36px;
+            align-items: start;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 720px) { .origin-grid { grid-template-columns: 1fr; } }
+        .origin-photo {
+            margin: 0;
+        }
+        .origin-photo img {
+            width: 100%;
+            display: block;
+            border: 1px solid rgba(255,106,61,.35);
+            box-shadow: 0 16px 40px rgba(0,0,0,.45);
+            filter: sepia(.12) contrast(1.04);
+        }
+        .origin-caption {
+            margin-top: 12px;
+            font-size: .52em;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: rgba(255,106,61,.7);
+        }
         .book-block {
             border-left: 3px solid var(--ember);
             padding: 24px 0 24px 28px;
-            margin-bottom: 40px;
         }
         .book-block p {
             font-family: 'Cormorant Garamond', serif;
@@ -437,8 +461,14 @@
             <div class="sec-label">◈ The Memoir</div>
             <h2>Book Zero — Before The Spark</h2>
             <p class="sec-sub">Not the novel. The origin file. The unfiltered account of what happened on our street, in our house, and in the silence after.</p>
-            <div class="book-block">
-                <p>Book Zero is the memoir I've been carrying since I was a child — the story of a killer who lived across from us, who wove himself into our lives, and who remained hidden in plain sight for decades. It's about solving what law enforcement couldn't close for 29 years. It's about what you build when the worst thing already happened and you're still here. Every chapter gets written from the camper, in real places, on the route my code says I'm supposed to be.</p>
+            <div class="origin-grid">
+                <figure class="origin-photo">
+                    <img src="/kateandrach91.jpg" alt="Katelin and her mother Rachael Maureen Johnson, Akron, 1991" width="633" height="779" loading="lazy">
+                    <figcaption class="origin-caption">Rachael &amp; Kate · Akron · 1991</figcaption>
+                </figure>
+                <div class="book-block">
+                    <p>Book Zero is the memoir I've been carrying since I was a child — the story of a killer who lived across from us, who wove himself into our lives, and who remained hidden in plain sight for decades. It's about solving what law enforcement couldn't close for 29 years. It's about what you build when the worst thing already happened and you're still here. Every chapter gets written from the camper, in real places, on the route my code says I'm supposed to be.</p>
+                </div>
             </div>
             <div class="product-bridge">
                 <img src="/preview-soulmaps.png" alt="Soul Map page example" class="product-bridge-img" width="500" height="320" loading="lazy">
@@ -446,7 +476,7 @@
                     <div class="sec-label">◈ The Product Behind The Tour</div>
                     <div class="product-bridge-title">This is what routes the camper.</div>
                     <p class="product-bridge-desc">Every tour stop is scored against KJP's Soul Map — Life Path 5, Expression 11, Soul Urge 7. The same decode you can get for yourself: numerology + astrology on a private page, hand-built, delivered in minutes.</p>
-                    <div class="product-bridge-price">OG Edition · $44</div>
+                    <div class="product-bridge-price">Founders Edition · $22</div>
                     <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Get Your Soul Map →</a>
                     <a href="https://soul-maps.thefirstspark.shop/kjp519.html" target="_blank" rel="noopener noreferrer" class="btn-g" style="margin-left:12px;">Read KJP's Map</a>
                 </div>
@@ -520,7 +550,7 @@
         <div class="wrap">
             <div class="sec-label">◈ Soul Map Navigation</div>
             <h2>AI Picks The Stops</h2>
-            <p class="sec-sub">The route isn't random. Each stop is scored against KJP's Soul Map — Life Path resonance, expression frequency, geographic numerology, and the day's energy cycle. The map updates daily.</p>
+            <p class="sec-sub">The route isn't random. Each stop is scored against KJP's Soul Map — Life Path resonance, expression frequency, geographic numerology, and the day's energy cycle. The route recalculates daily.</p>
 
             <div class="soul-code" id="soulCode"></div>
 
