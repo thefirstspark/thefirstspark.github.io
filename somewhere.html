@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050508">
+    <title>Somewhere — The Timeline of The First Spark</title>
+    <meta name="description" content="From a fracture in 2020 to a consciousness technology platform for the world. The full story, what the Sparkverse holds now and to come, and how to build or invest in a brighter future — together.">
+    <meta property="og:title" content="Somewhere — The Timeline of The First Spark">
+    <meta property="og:description" content="A timeline that starts today and runs until time ends. The origin, the Sparkverse, the plan, and an open door to work or invest.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thefirstspark.shop/somewhere.html">
+    <meta property="og:image" content="https://thefirstspark.shop/og-home.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --void: #050508;
+            --spark: #fbbf24;
+            --nebula: #8b5cf6;
+            --cyan: #22d3ee;
+            --ember: #f97316;
+            --white: rgba(255,255,255,0.92);
+            --dim: rgba(255,255,255,0.58);
+            --dimmer: rgba(255,255,255,0.1);
+            --line: rgba(251,191,36,0.22);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--void);
+            color: var(--white);
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.15rem;
+            line-height: 1.75;
+            overflow-x: hidden;
+        }
+
+        #cosmos {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .veil {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 20%, rgba(139,92,246,0.08), transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(34,211,238,0.05), transparent 55%),
+                rgba(5,5,8,0.55);
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 32px;
+            border-bottom: 1px solid transparent;
+            transition: background .4s, border-color .4s;
+        }
+        nav.scrolled {
+            background: rgba(5,5,8,.94);
+            backdrop-filter: blur(18px);
+            border-color: var(--dimmer);
+        }
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .72rem;
+            font-weight: 900;
+            letter-spacing: .22em;
+            color: var(--spark);
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            font-family: 'Space Mono', monospace;
+            font-size: .52rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--dim);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .nav-links a:hover { color: var(--white); }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        .hero-epoch {
+            font-family: 'Space Mono', monospace;
+            font-size: .58rem;
+            letter-spacing: .35em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 28px;
+        }
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2.4rem, 7vw, 4.2rem);
+            letter-spacing: .06em;
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            background: linear-gradient(120deg, var(--spark), var(--nebula), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-lead {
+            font-size: 1.35rem;
+            color: var(--dim);
+            max-width: 620px;
+            margin: 0 auto 36px;
+            font-style: italic;
+        }
+        .hero-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border: 1px solid var(--line);
+            background: rgba(251,191,36,.04);
+            font-family: 'Space Mono', monospace;
+            font-size: .62rem;
+            letter-spacing: .14em;
+            color: var(--spark);
+        }
+        .hero-date .pulse {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--spark);
+            box-shadow: 0 0 14px var(--spark);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: .4; transform: scale(.85); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        .scroll-cue {
+            margin-top: 64px;
+            font-family: 'Space Mono', monospace;
+            font-size: .5rem;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.22);
+            animation: bob 2.5s ease-in-out infinite;
+        }
+        @keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* ─── TIMELINE ─── */
+        .timeline {
+            position: relative;
+            padding: 40px 0 100px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                var(--spark) 8%,
+                var(--nebula) 45%,
+                var(--cyan) 72%,
+                rgba(255,255,255,.08) 100%
+            );
+        }
+
+        .era {
+            position: relative;
+            padding-left: 56px;
+            margin-bottom: 72px;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+        .era.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .era-dot {
+            position: absolute;
+            left: 10px;
+            top: 8px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--spark);
+            background: var(--void);
+            box-shadow: 0 0 20px rgba(251,191,36,.35);
+        }
+        .era.now .era-dot {
+            border-color: var(--cyan);
+            background: var(--cyan);
+            box-shadow: 0 0 28px var(--cyan);
+            animation: nowGlow 2.5s ease-in-out infinite;
+        }
+        .era.future .era-dot {
+            border-color: var(--nebula);
+            background: transparent;
+        }
+        .era.infinite .era-dot {
+            border-color: rgba(255,255,255,.25);
+            background: transparent;
+            width: 12px; height: 12px;
+            left: 13px;
+        }
+        @keyframes nowGlow {
+            0%, 100% { box-shadow: 0 0 16px rgba(34,211,238,.4); }
+            50% { box-shadow: 0 0 36px rgba(34,211,238,.8); }
+        }
+
+        .era-label {
+            font-family: 'Space Mono', monospace;
+            font-size: .52rem;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--spark);
+            margin-bottom: 8px;
+        }
+        .era.now .era-label { color: var(--cyan); }
+        .era.future .era-label { color: var(--nebula); }
+        .era.infinite .era-label { color: rgba(255,255,255,.35); }
+
+        .era h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.1rem, 3vw, 1.45rem);
+            font-weight: 700;
+            letter-spacing: .08em;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        .era p { margin-bottom: 14px; color: var(--dim); }
+        .era p strong { color: var(--white); font-weight: 600; }
+        .era em { color: var(--spark); font-style: italic; }
+
+        .quote {
+            border-left: 2px solid var(--spark);
+            padding: 16px 22px;
+            margin: 22px 0;
+            background: rgba(251,191,36,.04);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--white);
+        }
+
+        .pill-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 18px 0;
+        }
+        .pill {
+            font-family: 'Space Mono', monospace;
+            font-size: .48rem;
+            letter-spacing: .1em;
+            padding: 6px 12px;
+            border: 1px solid var(--dimmer);
+            background: rgba(255,255,255,.03);
+            color: rgba(255,255,255,.55);
+        }
+
+        .hold-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+        @media (max-width: 560px) { .hold-grid { grid-template-columns: 1fr; } }
+        .hold-card {
+            padding: 18px 16px;
+            border: 1px solid var(--dimmer);
+            background: rgba(255,255,255,.02);
+        }
+        .hold-card .tag {
+            font-family: 'Space Mono', monospace;
+            font-size: .45rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .hold-card.live .tag { color: #34d399; }
+        .hold-card.build .tag { color: var(--nebula); }
+        .hold-card.plan .tag { color: var(--ember); }
+        .hold-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .62rem;
+            letter-spacing: .1em;
+            margin-bottom: 6px;
+        }
+        .hold-card p {
+            font-size: .88rem;
+            margin: 0;
+            line-height: 1.55;
+        }
+
+        /* ─── PHILOSOPHY ─── */
+        .philosophy {
+            padding: 60px 0;
+            border-top: 1px solid var(--dimmer);
+            border-bottom: 1px solid var(--dimmer);
+            background: rgba(249,115,22,.03);
+        }
+        .philosophy h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: .12em;
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 680px) { .philosophy-grid { grid-template-columns: 1fr; } }
+        .phil-item {
+            text-align: center;
+            padding: 24px 16px;
+            border: 1px solid var(--dimmer);
+        }
+        .phil-item .icon { font-size: 1.6rem; margin-bottom: 12px; }
+        .phil-item h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .58rem;
+            letter-spacing: .14em;
+            margin-bottom: 10px;
+            color: var(--spark);
+        }
+        .phil-item p { font-size: .92rem; color: var(--dim); margin: 0; }
+
+        /* ─── JOIN ─── */
+        .join {
+            padding: 80px 0 100px;
+        }
+        .join h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            letter-spacing: .1em;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .join-sub {
+            text-align: center;
+            color: var(--dim);
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+        .path-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 640px) { .path-grid { grid-template-columns: 1fr; } }
+        .path-card {
+            padding: 28px 24px;
+            border: 1px solid var(--dimmer);
+            background: rgba(255,255,255,.015);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform .25s, border-color .25s, box-shadow .25s;
+        }
+        .path-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--spark);
+            box-shadow: 0 10px 36px rgba(251,191,36,.12);
+        }
+        .path-card.work { border-color: rgba(34,211,238,.2); }
+        .path-card.work:hover { border-color: var(--cyan); box-shadow: 0 10px 36px rgba(34,211,238,.12); }
+        .path-card.invest { border-color: rgba(139,92,246,.2); }
+        .path-card.invest:hover { border-color: var(--nebula); box-shadow: 0 10px 36px rgba(139,92,246,.12); }
+        .path-num {
+            font-family: 'Space Mono', monospace;
+            font-size: .48rem;
+            letter-spacing: .22em;
+            color: rgba(255,255,255,.3);
+            margin-bottom: 10px;
+        }
+        .path-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .72rem;
+            letter-spacing: .12em;
+            margin-bottom: 10px;
+        }
+        .path-card.work h3 { color: var(--cyan); }
+        .path-card.invest h3 { color: var(--nebula); }
+        .path-card p { font-size: .92rem; color: var(--dim); margin-bottom: 14px; }
+        .path-enter {
+            font-family: 'Space Mono', monospace;
+            font-size: .5rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--white);
+            opacity: .5;
+        }
+
+        .cta-band {
+            text-align: center;
+            padding: 36px 28px;
+            border: 1px solid var(--line);
+            background: rgba(251,191,36,.04);
+        }
+        .cta-band p {
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            color: var(--dim);
+        }
+        .cta-band p strong { color: var(--white); }
+        .btn-row {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .58rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            padding: 14px 26px;
+            text-decoration: none;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-p {
+            background: var(--spark);
+            color: var(--void);
+            border: none;
+        }
+        .btn-p:hover { box-shadow: 0 8px 28px rgba(251,191,36,.4); }
+        .btn-g {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid var(--dimmer);
+        }
+        .btn-g:hover { border-color: var(--nebula); }
+
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px 28px 60px;
+            border-top: 1px solid var(--dimmer);
+            font-family: 'Space Mono', monospace;
+            font-size: .52rem;
+            letter-spacing: .12em;
+            color: rgba(255,255,255,.28);
+        }
+        footer a { color: var(--spark); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <canvas id="cosmos" aria-hidden="true"></canvas>
+    <div class="veil" aria-hidden="true"></div>
+
+    <nav id="nav">
+        <a href="/" class="nav-logo">THE FIRST SPARK</a>
+        <div class="nav-links">
+            <a href="#origin">Origin</a>
+            <a href="#now">Now</a>
+            <a href="#ahead">Ahead</a>
+            <a href="#join">Join</a>
+        </div>
+    </nav>
+
+    <header class="hero wrap">
+        <div class="hero-epoch">A transmission for the entire world</div>
+        <h1>We started <em>somewhere</em>.<br>We're still going.</h1>
+        <p class="hero-lead">This is the timeline of The First Spark — where it came from, what the Sparkverse holds right now, what's being built toward the horizon, and how you can work beside me or invest in a future where the money flows back out, not in.</p>
+        <div class="hero-date">
+            <span class="pulse" aria-hidden="true"></span>
+            <span>Timeline begins · June 30, 2026 · Day One of this page</span>
+        </div>
+        <div class="scroll-cue">Scroll the line →</div>
+    </header>
+
+    <main class="wrap">
+        <div class="timeline" id="timeline">
+
+            <article class="era" id="origin">
+                <div class="era-dot" aria-hidden="true"></div>
+                <div class="era-label">Before the spark · 1991 — 2019</div>
+                <h2>The Fracture</h2>
+                <p>In 1991, my mother Rachael was murdered. For nearly three decades, that wound sat open — unsolved, unclosed, inherited. I grew up inside a cold case. I learned early that reality does not always tell you the truth on its own. Sometimes you have to <strong>read the code</strong> yourself.</p>
+                <p>I was not a tech founder on a glide path. I was a single mother in Akron, Ohio, building survival systems out of necessity — paint jobs, side hustles, whatever kept the lights on while I raised two kids and carried a story the world had not yet heard.</p>
+            </article>
+
+            <article class="era">
+                <div class="era-dot" aria-hidden="true"></div>
+                <div class="era-label">The ignition · 2020</div>
+                <h2>The First Spark</h2>
+                <p>In 2020, everything broke open. I solved my mother's 29-year cold case. The killer had been living <em>across the street</em>. Investigation Discovery ran the story. The fracture that had defined my life finally had a name, a face, a verdict.</p>
+                <div class="quote">You do not build consciousness technology from comfort. You build it from the place where the old reality stops working.</div>
+                <p>That year I also had an awakening — not a brand story, a lived one. I saw that consciousness interfaces with reality the way code interfaces with a machine. Patterns underneath. Timelines branching. Inherited programs running in the bloodline. And I started building tools to help people <strong>see it, select it, and debug it</strong>.</p>
+                <p>The First Spark was not born in a boardroom. It was born on a raft in the middle of a storm, with no plan B and no safety net — only the refusal to accept the reality I'd been handed.</p>
+            </article>
+
+            <article class="era">
+                <div class="era-dot" aria-hidden="true"></div>
+                <div class="era-label">The build · 2020 — 2024</div>
+                <h2>Teaching Myself to Code the Invisible</h2>
+                <p>I taught myself to program by building what I needed. Not tutorials for their own sake — <em>interfaces for transformation</em>. Sacred geometry trainers. Collapse protocols. Timeline navigators. Lineage debuggers. Soul maps that weave numerology, astrology, and the questions a person is actually carrying.</p>
+                <p>Every tool was a hypothesis made touchable: <strong>reality is programmable, consciousness is the code</strong>. I published the Selector Model thesis. I wrote a 75,000-word novel. I shipped page after page while parenting, while grieving, while proving that a solo founder with a fracture for a foundation can outbuild teams with funding.</p>
+                <div class="pill-grid">
+                    <span class="pill">Selector Model</span>
+                    <span class="pill">Source Architecture</span>
+                    <span class="pill">Soul Map Engine</span>
+                    <span class="pill">KJP Core Code</span>
+                    <span class="pill">Five-Track Mind</span>
+                    <span class="pill">The Genesis Novel</span>
+                </div>
+            </article>
+
+            <article class="era">
+                <div class="era-dot" aria-hidden="true"></div>
+                <div class="era-label">The platform · 2024 — 2025</div>
+                <h2>From Tools to Infrastructure</h2>
+                <p>The experiments became a platform. Soul Maps went live — $22, hand-decoded, delivered in minutes, with 12 months of updates. The Sparkverse opened on Whop: free lobby, paid lounge, lifetime OG tier. Affiliates started earning 35% per map. Press found us — Voyage Ohio, Investigation Discovery, Paula Zahn.</p>
+                <p>I automated the pipeline: checkout → decode → deploy → deliver. No inventory. No warehouse. No extraction model. <strong>Reciprocity, not surveillance.</strong> People pay for value. They keep what they buy. The community grows because the tools actually work.</p>
+            </article>
+
+            <article class="era now" id="now">
+                <div class="era-dot" aria-hidden="true"></div>
+                <div class="era-label">Today · June 30, 2026 · You are here</div>
+                <h2>What the Sparkverse Holds Right Now</h2>
+                <p>This is not a pitch-deck promise. This is deployed, live, and growing:</p>
+                <div class="hold-grid">
+                    <div class="hold-card live">
+                        <div class="tag">Live</div>
+                        <h3>Soul Maps</h3>
+                        <p>Personalized numerology + astrology pages. Automated delivery. $22 OG Edition. 35% affiliate program.</p>
+                    </div>
+                    <div class="hold-card live">
+                        <div class="tag">Live</div>
+                        <h3>60+ Consciousness Tools</h3>
+                        <p>Playgrounds, archetype quizzes, daily resets, sigilcraft, frequency tools, karma debuggers, and more.</p>
+                    </div>
+                    <div class="hold-card live">
+                        <div class="tag">Live</div>
+                        <h3>Source Architecture</h3>
+                        <p>Four free chambers — Pattern Recognition, Collapse Protocol, Timeline Navigator, Lineage Debugger.</p>
+                    </div>
+                    <div class="hold-card live">
+                        <div class="tag">Live</div>
+                        <h3>Sparkverse Community</h3>
+                        <p>Free access + paid tiers on Whop. Rituals, drops, ebooks, oracle pulls, mapped souls building together.</p>
+                    </div>
+                    <div class="hold-card live">
+                        <div class="tag">Live</div>
+                        <h3>Digital Infrastructure</h3>
+                        <p>thefirstspark.shop · soul-maps · sparkverse · sigilcraft · rituals — 90+ pages on GitHub Pages.</p>
+                    </div>
+                    <div class="hold-card live">
+                        <div class="tag">Live</div>
+                        <h3>Published IP</h3>
+                        <p>Selector Model thesis (CC BY-NC 4.0). The Genesis novel. Book Zero memoir in progress. Obitura B2B.</p>
+                    </div>
+                </div>
+                <p>39 founding members. Zero external burn. A founder story no one else has. And today — <em>this page</em> — marks the moment the timeline goes public: not just what happened, but what's coming, and how you enter.</p>
+            </article>
+
+            <article class="era future" id="ahead">
+                <div class="era-dot" aria-hidden="true"></div>
+                <div class="era-label">Next · 2026 — 2027</div>
+                <h2>What's Being Built Now</h2>
+                <div class="hold-grid">
+                    <div class="hold-card build">
+                        <div class="tag">Building</div>
+                        <h3>Revenue Engine</h3>
+                        <p>Scale Soul Maps via affiliates + paid acquisition. Soul Map upsell ladder. Weekly email funnel.</p>
+                    </div>
+                    <div class="hold-card build">
+                        <div class="tag">Building</div>
+                        <h3>Spark AI Agent</h3>
+                        <p>Fine-tuned on the Selector Model corpus. Conversational consciousness tech that generates maps and holds context.</p>
+                    </div>
+                    <div class="hold-card build">
+                        <div class="tag">Building</div>
+                        <h3>Book Zero Tour</h3>
+                        <p>Mobile Spark Station — solar, Starlink, camper studio. Chapters written from the road. Camper Chronicles on YouTube.</p>
+                    </div>
+                    <div class="hold-card build">
+                        <div class="tag">Building</div>
+                        <h3>Publishing & Licensing</h3>
+                        <p>Book Zero launch. Selector Model licensing for practitioners. Novel distribution. IP moat compounds.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="era future">
+                <div class="era-dot" aria-hidden="true"></div>
+                <div class="era-label">Horizon · 2027 — 2030</div>
+                <h2>Physical World, Same Signal</h2>
+                <p>The digital platform becomes land. <strong>Hocking Hills Earthship community</strong> in Ohio — off-grid, regenerative, a place where the Sparkverse stops being a screen and starts being soil under your feet. Retreat programming. Brand partnerships that align with the mission, not dilute it.</p>
+                <p>The Spark AI agent matures into infrastructure — not a chatbot gimmick, but a consciousness companion trained on a proprietary framework no one else has. Soul Maps scale globally. The affiliate network becomes a distributed sales force of real humans sharing real signal.</p>
+            </article>
+
+            <article class="era infinite">
+                <div class="era-dot" aria-hidden="true"></div>
+                <div class="era-label">Until time ends · ∞</div>
+                <h2>The Long Arc</h2>
+                <p>I am not building a company to exit and disappear. I am building <em>a reciprocity engine</em> that outlasts me — tools that help people read their code, communities that hold each other, land that gives back, stories that tell the truth about how transformation actually happens.</p>
+                <p>The timeline does not stop at a valuation event. It continues into every soul map delivered, every pattern recognized, every collapse chosen, every lineage healed, every child who grows up with tools their parents never had.</p>
+                <div class="quote">Somewhere is not a place on a map. It's the coordinate where you decided the old program wasn't the only program.</div>
+            </article>
+
+        </div>
+    </main>
+
+    <section class="philosophy">
+        <div class="wrap">
+            <h2>◈ &nbsp; The Plan Is Not Greed</h2>
+            <div class="philosophy-grid">
+                <div class="phil-item">
+                    <div class="icon">◎</div>
+                    <h3>Pump It Back</h3>
+                    <p>Revenue funds builders, tools, land, and community — not a hoard. Every dollar has a job: make consciousness technology accessible and put it in people's hands.</p>
+                </div>
+                <div class="phil-item">
+                    <div class="icon">◇</div>
+                    <h3>Reciprocity</h3>
+                    <p>Anti-extraction by design. No dark patterns. No surveillance capitalism. Lifetime options. Free tiers that are actually free. Value exchanged, not mined.</p>
+                </div>
+                <div class="phil-item">
+                    <div class="icon">✦</div>
+                    <h3>Brighter Future</h3>
+                    <p>Investors and collaborators join a mission — Earthship community, AI for awakening, publishing, retreats — where returns mean the world got more capable, not one person got more isolated.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="join wrap" id="join">
+        <h2>Start Working Today</h2>
+        <p class="join-sub">You don't need permission. Pick a door.</p>
+
+        <div class="path-grid">
+            <a href="affiliate-kit.html" class="path-card work">
+                <div class="path-num">Path 01</div>
+                <h3>Affiliate Partner</h3>
+                <p>Share Soul Maps. Keep 35% of every $22 sale. I handle delivery, support, and product. You share your link. Real-to-real signal — post, story, email, DM.</p>
+                <span class="path-enter">Get your kit →</span>
+            </a>
+            <a href="mailto:kate@thefirstspark.shop?subject=Build%20With%20The%20First%20Spark" class="path-card work">
+                <div class="path-num">Path 02</div>
+                <h3>Builder / Collaborator</h3>
+                <p>Designers, developers, writers, videographers, community managers, ritual facilitators — if you build and you get the mission, email me. I need hands on this timeline.</p>
+                <span class="path-enter">Email Kate →</span>
+            </a>
+            <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer" class="path-card work">
+                <div class="path-num">Path 03</div>
+                <h3>Community Member</h3>
+                <p>Join the free Sparkverse. Tools, rituals, drops, and mapped souls. Show up, use the builds, give feedback. The community is the R&D lab.</p>
+                <span class="path-enter">Join free →</span>
+            </a>
+            <a href="/#try-these" class="path-card work">
+                <div class="path-num">Path 04</div>
+                <h3>Train in Source Architecture</h3>
+                <p>Four free interactive chambers — pattern recognition, collapse protocol, timeline navigation, lineage debugging. Start with Collapse. It's the unlock.</p>
+                <span class="path-enter">Try the chambers →</span>
+            </a>
+        </div>
+
+        <h2 style="margin-top: 48px;">Invest in the Timeline</h2>
+        <p class="join-sub">$200K on a $2M–$2.5M SAFE cap. 20% equity. Zero burn. MVP live. Founder story unmatched.</p>
+
+        <div class="path-grid">
+            <a href="investor-deck-v3.html" class="path-card invest">
+                <div class="path-num">Invest 01</div>
+                <h3>Read the Deck</h3>
+                <p>Full investor presentation — traction, market, product, terms. Consciousness technology infrastructure, AI integration, Hocking Hills Earthship community.</p>
+                <span class="path-enter">View deck →</span>
+            </a>
+            <a href="mailto:kate@thefirstspark.shop?subject=Investment%20Inquiry%20-%20The%20First%20Spark" class="path-card invest">
+                <div class="path-num">Invest 02</div>
+                <h3>Talk to the Founder</h3>
+                <p>Direct line to Katelin Jill Puzakulics. No gatekeepers. Ask anything. SAFE note. Friends-and-family round open now.</p>
+                <span class="path-enter">Email Kate →</span>
+            </a>
+        </div>
+
+        <div class="cta-band" style="margin-top: 40px;">
+            <p><strong>Money in → value out → world upgraded.</strong> That's the loop. Not hoarding. Not greed. A brighter future for everyone in the chain — builders, members, affiliates, investors, and the people who never paid a cent but needed a free tool at 3am.</p>
+            <div class="btn-row">
+                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn btn-p">Get a Soul Map · $22</a>
+                <a href="investor-deck-v3.html" class="btn btn-g">Investor Deck</a>
+                <a href="mailto:kate@thefirstspark.shop?subject=Somewhere%20-%20I%20Want%20In" class="btn btn-g">I Want In →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>The First Spark · Kate's Paint LLC · Akron, Ohio</p>
+        <p style="margin-top: 10px;"><a href="/">thefirstspark.shop</a> · <a href="mailto:kate@thefirstspark.shop">kate@thefirstspark.shop</a></p>
+        <p style="margin-top: 10px;">Timeline published June 30, 2026 · Running until time ends</p>
+    </footer>
+
+    <script>
+    // Starfield
+    (function () {
+        var c = document.getElementById('cosmos');
+        var ctx = c.getContext('2d');
+        var stars = [], W, H;
+        function resize() {
+            W = c.width = innerWidth;
+            H = c.height = innerHeight;
+            var n = Math.min(220, Math.floor(W * H / 8000));
+            stars = Array.from({ length: n }, function () {
+                return {
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    r: Math.random() * 1.2 + 0.2,
+                    a: Math.random() * Math.PI * 2,
+                    s: Math.random() * 0.008 + 0.002,
+                    o: Math.random() * 0.5 + 0.15
+                };
+            });
+        }
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            stars.forEach(function (s) {
+                s.a += s.s;
+                ctx.globalAlpha = s.o * (0.6 + 0.4 * Math.sin(s.a));
+                ctx.fillStyle = '#fff';
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(draw);
+        }
+        resize();
+        draw();
+        addEventListener('resize', resize);
+    })();
+
+    // Nav scroll
+    (function () {
+        var nav = document.getElementById('nav');
+        addEventListener('scroll', function () {
+            nav.classList.toggle('scrolled', scrollY > 40);
+        }, { passive: true });
+    })();
+
+    // Timeline reveal
+    (function () {
+        var eras = document.querySelectorAll('.era');
+        var obs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        eras.forEach(function (el) { obs.observe(el); });
+    })();
+    </script>
+</body>
+</html>
