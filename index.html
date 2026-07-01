@@ -1582,6 +1582,120 @@
             gap: 16px;
             flex-wrap: wrap;
         }
+        .chambers-gate {
+            max-width: 560px;
+            margin: 0 auto 32px;
+            padding: 28px 26px;
+            border: 1px solid rgba(249,115,22,.35);
+            background: rgba(249,115,22,.05);
+            text-align: center;
+        }
+        .chambers-gate.unlocked {
+            padding: 16px 20px;
+            border-color: rgba(34,211,238,.25);
+            background: rgba(34,211,238,.04);
+        }
+        .chambers-gate-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: #f97316;
+            margin-bottom: 10px;
+        }
+        .chambers-gate.unlocked .chambers-gate-title { color: var(--cyan); }
+        .chambers-gate-copy {
+            font-size: .76em;
+            color: var(--dim);
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+        .chambers-email-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .chambers-email-form input[type="email"] {
+            flex: 1;
+            min-width: 200px;
+            font-family: 'Space Mono', monospace;
+            font-size: .78em;
+            padding: 14px 16px;
+            background: rgba(5,5,8,.7);
+            border: 1px solid var(--dimmer);
+            color: var(--white);
+            outline: none;
+            transition: border-color .2s;
+        }
+        .chambers-email-form input[type="email"]::placeholder { color: rgba(255,255,255,.22); }
+        .chambers-email-form input[type="email"]:focus { border-color: rgba(249,115,22,.5); }
+        .chambers-email-form button[type="submit"] {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .58rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            padding: 14px 22px;
+            background: #f97316;
+            color: var(--void);
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: box-shadow .2s, opacity .2s;
+        }
+        .chambers-email-form button[type="submit"]:hover:not(:disabled) {
+            box-shadow: 0 8px 28px rgba(249,115,22,.35);
+        }
+        .chambers-email-form button[type="submit"]:disabled { opacity: .55; cursor: wait; }
+        .chambers-gate-note {
+            font-size: .52em;
+            color: rgba(255,255,255,.28);
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+        .chambers-gate-status {
+            font-size: .68em;
+            line-height: 1.6;
+            margin-top: 12px;
+            min-height: 1.2em;
+        }
+        .chambers-gate-status.success { color: var(--cyan); }
+        .chambers-gate-status.error { color: #ff6a3d; }
+        .chambers-content {
+            position: relative;
+            transition: filter .4s ease, opacity .4s ease;
+        }
+        .chambers-content.chambers-locked .chambers-grid,
+        .chambers-content.chambers-locked .chambers-cta {
+            filter: blur(3px);
+            opacity: .45;
+            pointer-events: none;
+            user-select: none;
+        }
+        .chambers-lock-overlay {
+            display: none;
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+        .chambers-content.chambers-locked .chambers-lock-overlay {
+            display: flex;
+        }
+        .chambers-lock-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .55rem;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.5);
+            padding: 10px 18px;
+            border: 1px solid rgba(255,255,255,.15);
+            background: rgba(5,5,8,.75);
+        }
 
         /* ─── FOOTER ─── */
         footer {
@@ -1965,8 +2079,30 @@
         <div class="wrap">
             <div class="sec-label">◈ &nbsp; Try These</div>
             <h2 class="sec-title">Source Architecture Chambers</h2>
-            <p class="sec-sub">Interactive training tools to develop mastery over each layer. All four chambers are free to use.</p>
+            <p class="sec-sub">Interactive training tools to develop mastery over each layer. Drop your email once — all four chambers unlock free.</p>
 
+            <div class="chambers-gate" id="chambersGate">
+                <div class="chambers-gate-title" id="chambersGateTitle">Unlock the Chambers</div>
+                <p class="chambers-gate-copy" id="chambersGateCopy">Enter your email to access Pattern Recognition, Collapse Protocol, Timeline Navigator, and Lineage Debugger. Free tools — one signal to get in.</p>
+                <form class="chambers-email-form"
+                      id="chambersEmailForm"
+                      action="https://formspree.io/f/xpqeboba"
+                      method="POST"
+                      aria-label="Email signup to unlock Source Architecture chambers">
+                    <input type="email" id="chambersEmail" name="email" placeholder="you@email.com" autocomplete="email" required>
+                    <button type="submit" id="chambersEmailBtn">Unlock Chambers →</button>
+                    <input type="hidden" name="_subject" value="Source Chambers Access">
+                    <input type="hidden" name="source" value="homepage-try-these">
+                    <input type="hidden" name="interest" value="source-chambers">
+                </form>
+                <p class="chambers-gate-note">No spam. Unsubscribe anytime. We only email when something worth your attention drops.</p>
+                <p class="chambers-gate-status" id="chambersGateStatus" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="chambers-content chambers-locked" id="chambersContent">
+            <div class="chambers-lock-overlay" aria-hidden="true">
+                <span class="chambers-lock-badge">◈ Email unlocks access</span>
+            </div>
             <div class="chambers-grid">
                 <a href="/patterns" class="chamber-card ch-geo">
                     <span class="chamber-num">CHAMBER 1</span>
@@ -2066,8 +2202,9 @@
             </div>
 
             <div class="chambers-cta">
-                <a href="/collapse" class="btn-p">Start with Collapse Protocol</a>
-                <a href="/source" class="btn-g">Explore Source Architecture</a>
+                <a href="/collapse" class="btn-p" data-chamber-cta>Start with Collapse Protocol</a>
+                <a href="/source" class="btn-g" data-chamber-cta>Explore Source Architecture</a>
+            </div>
             </div>
         </div>
     </section>
@@ -3150,6 +3287,87 @@
             requestAnimationFrame(draw);
         }
         draw();
+    })();
+
+    // Source chambers email gate
+    (function () {
+        var STORAGE_KEY = 'spark_chambers_unlocked';
+        var gate = document.getElementById('chambersGate');
+        var content = document.getElementById('chambersContent');
+        var form = document.getElementById('chambersEmailForm');
+        var status = document.getElementById('chambersGateStatus');
+        var gateTitle = document.getElementById('chambersGateTitle');
+        var gateCopy = document.getElementById('chambersGateCopy');
+        var emailInput = document.getElementById('chambersEmail');
+        if (!gate || !content || !form) return;
+
+        function setStatus(text, type) {
+            if (!status) return;
+            status.textContent = text;
+            status.className = 'chambers-gate-status' + (type ? ' ' + type : '');
+        }
+
+        function unlockChambers() {
+            content.classList.remove('chambers-locked');
+            gate.classList.add('unlocked');
+            if (gateTitle) gateTitle.textContent = 'Chambers Unlocked';
+            if (gateCopy) gateCopy.textContent = 'All four training tools are open. Start with Collapse Protocol — it makes the others actually work.';
+            form.style.display = 'none';
+            var note = gate.querySelector('.chambers-gate-note');
+            if (note) note.style.display = 'none';
+            localStorage.setItem(STORAGE_KEY, '1');
+        }
+
+        if (localStorage.getItem(STORAGE_KEY) === '1') {
+            unlockChambers();
+        }
+
+        content.addEventListener('click', function (e) {
+            if (!content.classList.contains('chambers-locked')) return;
+            e.preventDefault();
+            emailInput.focus();
+            gate.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            var formAction = form.getAttribute('action');
+            if (!formAction || formAction.includes('YOUR_FORM_ID')) {
+                setStatus('Form not live yet — email kate@thefirstspark.shop with subject "Source Chambers".', 'error');
+                return;
+            }
+
+            var btn = document.getElementById('chambersEmailBtn');
+            var originalText = btn.textContent;
+            btn.textContent = 'Unlocking…';
+            btn.disabled = true;
+            setStatus('', '');
+
+            try {
+                var res = await fetch(formAction, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { Accept: 'application/json' }
+                });
+                if (res.ok) {
+                    unlockChambers();
+                    setStatus('You\'re in. Pick a chamber below and start training.', 'success');
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'signup', {
+                            event_category: 'engagement',
+                            event_label: 'source_chambers_unlock'
+                        });
+                    }
+                } else {
+                    throw new Error('submit failed');
+                }
+            } catch (err) {
+                setStatus('Something went wrong — try again or email kate@thefirstspark.shop.', 'error');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
     })();
     </script>
     <script src="spark-mailchimp-config.js"></script>
