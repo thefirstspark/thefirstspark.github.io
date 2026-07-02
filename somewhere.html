@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#030308">
     <title>Somewhere</title>
-    <meta name="description" content="A place neither here nor there. Touch the void. Receive a truth and two lies. Do not guess wrong.">
+    <meta name="description" content="Neither here nor there. Descend. Touch nothing you trust. Find what was left for you.">
     <meta property="og:title" content="Somewhere">
-    <meta property="og:description" content="Neither here nor there. Touch the void. One truth. Two lies. Don't guess wrong.">
+    <meta property="og:description" content="A place between coordinates. Cryptic clues in the void.">
     <meta property="og:url" content="https://thefirstspark.shop/somewhere.html">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,12 +18,12 @@
 
         :root {
             --void: #030308;
-            --mist: rgba(180, 170, 220, 0.06);
-            --truth: #a8f0d8;
-            --lie: #c47a8a;
-            --gold: #d4b87a;
-            --dim: rgba(220, 215, 240, 0.45);
-            --text: rgba(235, 230, 255, 0.88);
+            --glow: #a8f0d8;
+            --violet: #9a7ec8;
+            --gold: #c9a85c;
+            --ember: #c46a7a;
+            --dim: rgba(210, 205, 235, 0.35);
+            --text: rgba(235, 230, 255, 0.82);
         }
 
         html { scroll-behavior: auto; }
@@ -34,14 +34,6 @@
             font-family: 'Cormorant Garamond', Georgia, serif;
             overflow-x: hidden;
             cursor: crosshair;
-        }
-
-        body.guessing { cursor: default; }
-        body.wrong { animation: wrongFlash .6s ease; }
-        @keyframes wrongFlash {
-            0%, 100% { filter: none; }
-            30% { filter: invert(.08) hue-rotate(40deg); }
-            60% { filter: brightness(.4); }
         }
 
         #void-canvas {
@@ -57,10 +49,25 @@
             z-index: 1;
             pointer-events: none;
             background:
-                radial-gradient(ellipse 100% 60% at 50% 100%, rgba(60, 40, 100, 0.15), transparent 70%),
-                radial-gradient(ellipse 80% 40% at 20% 30%, rgba(30, 60, 90, 0.08), transparent 60%),
-                radial-gradient(ellipse 60% 50% at 80% 60%, rgba(90, 50, 80, 0.06), transparent 55%);
+                radial-gradient(ellipse 100% 55% at 50% 110%, rgba(50, 35, 90, 0.2), transparent 65%),
+                radial-gradient(ellipse 70% 45% at 15% 25%, rgba(25, 55, 85, 0.07), transparent 55%),
+                radial-gradient(ellipse 55% 40% at 88% 55%, rgba(80, 45, 75, 0.06), transparent 50%);
         }
+
+        /* cursor halo */
+        #halo {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 5;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(168, 240, 216, 0.06) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity .4s;
+        }
+        body.in-void #halo { opacity: 1; }
 
         .entry {
             position: relative;
@@ -78,220 +85,202 @@
             font-size: clamp(3rem, 12vw, 7rem);
             font-weight: 400;
             font-style: italic;
-            letter-spacing: 0.08em;
-            color: rgba(255,255,255,0.12);
-            margin-bottom: 24px;
-            animation: breathe 8s ease-in-out infinite;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.1);
+            animation: breathe 9s ease-in-out infinite;
         }
         @keyframes breathe {
-            0%, 100% { opacity: 0.5; letter-spacing: 0.08em; }
-            50% { opacity: 0.85; letter-spacing: 0.14em; }
+            0%, 100% { opacity: 0.45; letter-spacing: 0.1em; }
+            50% { opacity: 0.9; letter-spacing: 0.16em; }
+        }
+
+        .entry .coords {
+            margin-top: 28px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.55rem;
+            letter-spacing: 0.28em;
+            color: rgba(168, 240, 216, 0.25);
         }
 
         .entry .sub {
+            margin-top: 20px;
             font-family: 'Space Mono', monospace;
-            font-size: 0.62rem;
-            letter-spacing: 0.35em;
+            font-size: 0.58rem;
+            letter-spacing: 0.32em;
             text-transform: uppercase;
             color: var(--dim);
-            max-width: 340px;
-            line-height: 2;
-        }
-
-        .entry .warn {
-            margin-top: 48px;
-            font-size: 1.05rem;
-            font-style: italic;
-            color: rgba(196, 122, 138, 0.7);
-            max-width: 300px;
+            line-height: 2.2;
         }
 
         .scroll-glyph {
-            margin-top: 72px;
-            font-family: 'Space Mono', monospace;
+            margin-top: 64px;
             font-size: 0.5rem;
             letter-spacing: 0.4em;
-            color: rgba(255,255,255,0.15);
-            animation: drift 3s ease-in-out infinite;
+            color: rgba(255,255,255,0.12);
+            font-family: 'Space Mono', monospace;
+            animation: drift 3.5s ease-in-out infinite;
         }
         @keyframes drift {
-            0%, 100% { transform: translateY(0); opacity: 0.3; }
-            50% { transform: translateY(10px); opacity: 0.6; }
+            50% { transform: translateY(8px); opacity: 0.5; }
         }
 
-        /* ─── THE ABYSS ─── */
+        /* ─── ABYSS ─── */
         #abyss {
             position: relative;
             z-index: 2;
-            min-height: 400vh;
-            pointer-events: none;
+            min-height: 500vh;
         }
 
         #touch-zone {
             position: absolute;
             inset: 0;
             z-index: 3;
-            pointer-events: auto;
-            cursor: crosshair;
         }
 
-        .depth-marker {
+        /* hidden glyphs — only visible near cursor or when found */
+        .glyph {
+            position: absolute;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.48rem;
+            letter-spacing: 0.22em;
+            color: rgba(255,255,255,0.04);
+            pointer-events: none;
+            user-select: none;
+            transition: color .6s, text-shadow .6s;
+            white-space: nowrap;
+        }
+        .glyph.near {
+            color: rgba(168, 240, 216, 0.35);
+            text-shadow: 0 0 20px rgba(168, 240, 216, 0.2);
+        }
+        .glyph.found {
+            color: rgba(201, 168, 92, 0.55);
+            text-shadow: 0 0 24px rgba(201, 168, 92, 0.25);
+        }
+
+        .rift {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(154, 126, 200, 0.15), transparent);
+            pointer-events: none;
+        }
+
+        .static-verse {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-style: italic;
+            font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+            color: rgba(200, 190, 230, 0.12);
+            max-width: 280px;
+            line-height: 1.7;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* touch burst clue */
+        .burst {
+            position: fixed;
+            z-index: 20;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            text-align: center;
+            max-width: 260px;
+            animation: burstLife 4.5s ease forwards;
+        }
+        @keyframes burstLife {
+            0% { opacity: 0; filter: blur(8px); transform: translate(-50%, -50%) scale(0.85); }
+            12% { opacity: 1; filter: blur(0); transform: translate(-50%, -50%) scale(1); }
+            70% { opacity: 0.7; }
+            100% { opacity: 0; filter: blur(6px); transform: translate(-50%, -70%) scale(1.02); }
+        }
+        .burst .tag {
             font-family: 'Space Mono', monospace;
-            font-size: 0.48rem;
+            font-size: 0.42rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.06);
-            white-space: nowrap;
-            pointer-events: none;
-            user-select: none;
+            color: rgba(154, 126, 200, 0.6);
+            margin-bottom: 10px;
         }
-
-        .whisper {
-            position: absolute;
+        .burst .line {
+            font-size: 1.05rem;
             font-style: italic;
-            font-size: clamp(0.9rem, 2.5vw, 1.15rem);
-            color: rgba(200, 190, 230, 0.18);
-            max-width: 200px;
-            line-height: 1.6;
-            pointer-events: none;
-            user-select: none;
-            animation: whisperFade 12s ease-in-out infinite;
+            line-height: 1.55;
+            color: rgba(235, 230, 255, 0.75);
         }
-        @keyframes whisperFade {
-            0%, 100% { opacity: 0; }
-            40%, 60% { opacity: 1; }
-        }
-
-        /* ─── ORACLE PANEL ─── */
-        #oracle {
-            position: fixed;
-            z-index: 50;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%) scale(0.92);
-            width: min(480px, calc(100vw - 40px));
-            padding: 36px 32px 32px;
-            background: rgba(8, 6, 18, 0.92);
-            border: 1px solid rgba(168, 240, 216, 0.15);
-            backdrop-filter: blur(24px);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .45s ease, transform .45s ease;
-        }
-        #oracle.open {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translate(-50%, -50%) scale(1);
-        }
-        #oracle.wrong-state {
-            border-color: rgba(196, 122, 138, 0.4);
-        }
-
-        .oracle-kicker {
+        .burst .cipher {
+            margin-top: 12px;
             font-family: 'Space Mono', monospace;
             font-size: 0.5rem;
-            letter-spacing: 0.32em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 16px;
-            text-align: center;
+            letter-spacing: 0.18em;
+            color: rgba(168, 240, 216, 0.45);
         }
 
-        .oracle-prompt {
-            font-size: 1.15rem;
-            font-style: italic;
-            text-align: center;
-            color: var(--dim);
-            margin-bottom: 28px;
-            line-height: 1.6;
-        }
-
-        .choices {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .choice {
-            display: block;
-            width: 100%;
-            text-align: left;
-            padding: 18px 20px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.08);
-            color: var(--text);
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 1.05rem;
-            line-height: 1.55;
-            cursor: pointer;
-            transition: border-color .25s, background .25s, transform .2s;
-        }
-        .choice:hover:not(:disabled) {
-            border-color: rgba(168, 240, 216, 0.35);
-            background: rgba(168, 240, 216, 0.04);
-            transform: translateX(4px);
-        }
-        .choice:disabled { cursor: default; opacity: 0.7; }
-        .choice.correct {
-            border-color: var(--truth);
-            background: rgba(168, 240, 216, 0.08);
-            color: var(--truth);
-        }
-        .choice.incorrect {
-            border-color: var(--lie);
-            background: rgba(196, 122, 138, 0.06);
-            color: var(--lie);
-            text-decoration: line-through;
-            opacity: 0.45;
-        }
-
-        .oracle-close {
-            display: block;
-            margin: 24px auto 0;
-            background: none;
-            border: none;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.48rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.2);
-            cursor: pointer;
-            padding: 8px;
-            transition: color .2s;
-        }
-        .oracle-close:hover { color: rgba(255,255,255,0.5); }
-
-        .oracle-result {
-            text-align: center;
-            font-size: 1.2rem;
-            font-style: italic;
-            line-height: 1.7;
-            display: none;
-        }
-        .oracle-result.show { display: block; }
-        .oracle-result.good { color: var(--truth); }
-        .oracle-result.bad { color: var(--lie); }
-
-        /* ─── RIPPLE ON TOUCH ─── */
         .ripple {
             position: fixed;
             z-index: 4;
-            width: 0;
-            height: 0;
             border-radius: 50%;
-            border: 1px solid rgba(168, 240, 216, 0.4);
+            border: 1px solid rgba(168, 240, 216, 0.25);
             transform: translate(-50%, -50%);
             pointer-events: none;
-            animation: rippleOut 1.2s ease-out forwards;
+            animation: rippleOut 1.4s ease-out forwards;
         }
         @keyframes rippleOut {
-            to { width: 200px; height: 200px; opacity: 0; margin: -100px 0 0 -100px; }
+            from { width: 0; height: 0; opacity: 0.7; margin: 0; }
+            to { width: 160px; height: 160px; opacity: 0; margin: -80px 0 0 -80px; }
         }
 
-        /* ─── BOTTOM ─── */
+        /* secret panel — assembled from found glyphs */
+        #cache {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 30;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.42rem;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.08);
+            max-width: 200px;
+            line-height: 1.9;
+            pointer-events: none;
+            transition: color .5s;
+        }
+        #cache.warm { color: rgba(201, 168, 92, 0.35); }
+        #cache.hot {
+            color: rgba(168, 240, 216, 0.55);
+            text-shadow: 0 0 16px rgba(168, 240, 216, 0.15);
+        }
+
+        /* depth-locked secrets */
+        .seal {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.4em;
+            color: transparent;
+            border: 1px solid transparent;
+            padding: 14px 22px;
+            cursor: pointer;
+            transition: color 1s, border-color 1s, box-shadow 1s;
+            z-index: 4;
+        }
+        .seal.revealed {
+            color: rgba(196, 106, 122, 0.5);
+            border-color: rgba(196, 106, 122, 0.2);
+            box-shadow: 0 0 40px rgba(196, 106, 122, 0.08);
+        }
+        .seal.open {
+            color: var(--gold);
+            border-color: rgba(201, 168, 92, 0.35);
+            letter-spacing: 0.2em;
+        }
+
         .floor {
             position: relative;
             z-index: 2;
@@ -303,429 +292,419 @@
             text-align: center;
             padding: 60px 28px;
         }
-        .floor p {
-            font-size: 1.3rem;
+        .floor .final {
+            font-size: 1.25rem;
             font-style: italic;
-            color: rgba(255,255,255,0.2);
-            max-width: 400px;
-            line-height: 1.8;
+            color: rgba(255,255,255,0.15);
+            max-width: 360px;
+            line-height: 1.85;
+            min-height: 3em;
         }
         .floor a {
-            margin-top: 40px;
+            margin-top: 48px;
             font-family: 'Space Mono', monospace;
-            font-size: 0.52rem;
-            letter-spacing: 0.28em;
+            font-size: 0.5rem;
+            letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: rgba(212, 184, 122, 0.4);
+            color: rgba(201, 168, 92, 0.25);
             text-decoration: none;
             transition: color .3s;
         }
         .floor a:hover { color: var(--gold); }
 
-        .streak {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 40;
+        .floor .hidden-door {
+            margin-top: 24px;
             font-family: 'Space Mono', monospace;
             font-size: 0.45rem;
             letter-spacing: 0.2em;
-            color: rgba(255,255,255,0.12);
-            pointer-events: none;
+            color: transparent;
+            text-decoration: none;
+            transition: color 1.2s;
         }
+        .floor .hidden-door.show {
+            color: rgba(168, 240, 216, 0.4);
+        }
+        .floor .hidden-door.show:hover { color: var(--glow); }
 
-        @media (max-width: 480px) {
-            #oracle { padding: 28px 20px 24px; }
-            .choice { padding: 14px 16px; font-size: 0.98rem; }
+        /* konami flicker */
+        .signal-flash {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(168, 240, 216, 0.03);
+            pointer-events: none;
+            opacity: 0;
+            animation: flash .3s ease;
+        }
+        @keyframes flash {
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
     <canvas id="void-canvas" aria-hidden="true"></canvas>
     <div class="fog" aria-hidden="true"></div>
+    <div id="halo" aria-hidden="true"></div>
+    <div id="cache" aria-live="polite"></div>
 
     <header class="entry">
         <h1>Somewhere</h1>
-        <p class="sub">Neither here<br>nor there</p>
-        <p class="warn">Touch the void below.<br>It will offer one truth and two lies.<br>Do not guess wrong.</p>
-        <p class="scroll-glyph">descend ↓</p>
+        <p class="coords" id="live-coords">???° ???' — · — ???° ???'</p>
+        <p class="sub">neither here<br>nor there</p>
+        <p class="scroll-glyph">descend ↓ · touch the dark</p>
     </header>
 
-    <section id="abyss" aria-label="The mystic void">
-        <div id="touch-zone" aria-label="Touch the void"></div>
+    <section id="abyss" aria-label="The void">
+        <div id="touch-zone"></div>
     </section>
 
     <footer class="floor">
-        <p id="floor-text">You reached the floor of somewhere. Most people never do. The void remembers what you chose.</p>
-        <a href="/">return to here</a>
+        <p class="final" id="final-verse">the floor is not ground. it is a door pretending to be tired.</p>
+        <a href="/" class="exit">↑ return to here</a>
+        <a href="/source" class="hidden-door" id="hidden-door">chamber protocol detected →</a>
     </footer>
-
-    <div id="oracle" role="dialog" aria-modal="true" aria-labelledby="oracle-prompt">
-        <div class="oracle-kicker" id="oracle-kicker">The void speaks</div>
-        <p class="oracle-prompt" id="oracle-prompt">Three paths. One is real.</p>
-        <div class="choices" id="choices"></div>
-        <p class="oracle-result" id="oracle-result"></p>
-        <button class="oracle-close" id="oracle-close" type="button">dissolve</button>
-    </div>
-
-    <div class="streak" id="streak" aria-live="polite"></div>
 
     <script>
     (function () {
         'use strict';
 
-        /* ─── VOID PARTICLES ─── */
+        /* ─── particles ─── */
         var canvas = document.getElementById('void-canvas');
         var ctx = canvas.getContext('2d');
-        var motes = [];
-        var W, H, scrollY = 0;
+        var motes = [], W, H, scrollY = 0, mouse = { x: -999, y: -999 };
 
         function resize() {
             W = canvas.width = innerWidth;
             H = canvas.height = innerHeight;
-            var n = Math.min(180, Math.floor(W * H / 6000));
             motes = [];
+            var n = Math.min(200, Math.floor(W * H / 5500));
             for (var i = 0; i < n; i++) {
                 motes.push({
                     x: Math.random() * W,
                     y: Math.random() * H,
-                    r: Math.random() * 1.4 + 0.3,
-                    vx: (Math.random() - 0.5) * 0.15,
-                    vy: Math.random() * 0.25 + 0.05,
-                    phase: Math.random() * Math.PI * 2,
-                    hue: Math.random() < 0.3 ? 160 : (Math.random() < 0.5 ? 270 : 40)
+                    r: Math.random() * 1.3 + 0.2,
+                    vx: (Math.random() - 0.5) * 0.12,
+                    vy: Math.random() * 0.2 + 0.04,
+                    p: Math.random() * 6.28,
+                    t: Math.floor(Math.random() * 3)
                 });
             }
         }
 
-        function drawVoid() {
-            scrollY = window.scrollY;
-            ctx.fillStyle = 'rgba(3, 3, 8, 0.18)';
+        function draw() {
+            scrollY = scrollY;
+            ctx.fillStyle = 'rgba(3,3,8,0.2)';
             ctx.fillRect(0, 0, W, H);
-
             motes.forEach(function (m) {
-                m.x += m.vx + Math.sin(m.phase) * 0.08;
-                m.y += m.vy + scrollY * 0.0003;
-                m.phase += 0.012;
-
-                if (m.x < -10) m.x = W + 10;
-                if (m.x > W + 10) m.x = -10;
-                if (m.y > H + 10) { m.y = -10; m.x = Math.random() * W; }
-
-                var depth = 0.15 + 0.35 * (m.y / H);
-                var alpha = depth * (0.4 + 0.6 * Math.sin(m.phase));
+                m.x += m.vx + Math.sin(m.p) * 0.06;
+                m.y += m.vy;
+                m.p += 0.01;
+                if (m.x < 0) m.x = W;
+                if (m.x > W) m.x = 0;
+                if (m.y > H) { m.y = 0; m.x = Math.random() * W; }
+                var dx = m.x - mouse.x, dy = m.y - mouse.y;
+                var near = dx * dx + dy * dy < 14000;
+                var a = (near ? 0.55 : 0.2) * (0.5 + 0.5 * Math.sin(m.p));
                 ctx.beginPath();
-                ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
-                if (m.hue === 160) ctx.fillStyle = 'rgba(168, 240, 216, ' + alpha + ')';
-                else if (m.hue === 270) ctx.fillStyle = 'rgba(180, 140, 220, ' + alpha + ')';
-                else ctx.fillStyle = 'rgba(212, 184, 122, ' + alpha + ')';
+                ctx.arc(m.x, m.y, near ? m.r * 1.6 : m.r, 0, 6.28);
+                var cols = ['rgba(168,240,216,', 'rgba(154,126,200,', 'rgba(201,168,92,'];
+                ctx.fillStyle = cols[m.t] + a + ')';
                 ctx.fill();
             });
+            requestAnimationFrame(draw);
+        }
+        resize(); draw();
+        addEventListener('resize', resize);
 
-            requestAnimationFrame(drawVoid);
+        document.addEventListener('mousemove', function (e) {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            var halo = document.getElementById('halo');
+            halo.style.left = e.clientX + 'px';
+            halo.style.top = e.clientY + 'px';
+        });
+
+        /* ─── live fake coordinates from scroll ─── */
+        var coordsEl = document.getElementById('live-coords');
+        function updateCoords() {
+            var d = scrollY / (document.body.scrollHeight - innerHeight);
+            var lat = (41.08 + Math.sin(d * 8.4) * 0.31).toFixed(2);
+            var lng = (-81.52 + Math.cos(d * 5.7) * 0.44).toFixed(2);
+            var alt = Math.floor(d * 9999);
+            coordsEl.textContent = lat + '° ' + alt + "' — · — " + lng + '° ???′';
         }
 
-        resize();
-        drawVoid();
-        window.addEventListener('resize', resize);
-
-        /* ─── ABYSS DECOR ─── */
+        /* ─── hidden glyphs in the void ─── */
         var abyss = document.getElementById('abyss');
-        var depths = [
-            'shallow doubt', 'the almost', 'unmarked coordinates',
-            'where maps end', 'the between', 'negative space',
-            'the unsaid', 'liminal drift', 'soft gravity',
-            'the other side of sleep', 'untranslated', 'the fold'
+        var glyphs = [
+            { t: 'S-0', top: 6, left: 12 },
+            { t: 'ELECT', top: 11, left: 78 },
+            { t: '41.081', top: 18, left: 8 },
+            { t: 'RACHAEL', top: 22, left: 70 },
+            { t: '◈ 519', top: 28, left: 22 },
+            { t: 'COLLAPSE', top: 34, left: 65 },
+            { t: '29Y', top: 40, left: 15 },
+            { t: 'FOLD·PT', top: 46, left: 72 },
+            { t: 'KJP', top: 52, left: 10 },
+            { t: 'LINEAGE', top: 58, left: 68 },
+            { t: '2020', top: 64, left: 18 },
+            { t: 'PATTERN', top: 70, left: 75 },
+            { t: 'RV·STUDIO', top: 76, left: 14 },
+            { t: 'HOCKING', top: 82, left: 62 },
+            { t: 'SPARK', top: 88, left: 20 }
         ];
-        var whispers = [
-            'you have been here before',
-            'this is not a test. yes it is.',
-            'the lie wears your face',
-            'truth has no temperature',
-            'wrong answers echo',
-            'somewhere is listening',
-            'do not rush',
-            'the void keeps score gently',
-            'three doors. one opens.',
-            'what you believe becomes terrain'
-        ];
+        var foundGlyphs = JSON.parse(localStorage.getItem('somewhere_found') || '[]');
+        var glyphEls = [];
 
-        depths.forEach(function (label, i) {
+        glyphs.forEach(function (g, i) {
             var el = document.createElement('div');
-            el.className = 'depth-marker';
-            el.style.top = (12 + i * 7.5) + '%';
-            el.textContent = '— ' + label + ' —';
+            el.className = 'glyph' + (foundGlyphs.indexOf(i) !== -1 ? ' found' : '');
+            el.style.top = g.top + '%';
+            el.style.left = g.left + '%';
+            el.textContent = g.t;
+            el.dataset.i = i;
+            abyss.appendChild(el);
+            glyphEls.push(el);
+        });
+
+        /* static verses at depths */
+        var verses = [
+            { top: 8, text: 'maps end where willingness begins' },
+            { top: 20, text: 'the killer was closer than the story allowed' },
+            { top: 33, text: 'consciousness compiles in the dark' },
+            { top: 48, text: 'you are not lost. you are unlabeled.' },
+            { top: 61, text: 'reciprocity is the only stable orbit' },
+            { top: 74, text: 'the earthship is not a metaphor. look up Hocking Hills.' },
+            { top: 86, text: 'somewhere keeps what here forgets' }
+        ];
+        verses.forEach(function (v) {
+            var el = document.createElement('p');
+            el.className = 'static-verse';
+            el.style.top = v.top + '%';
+            el.textContent = v.text;
             abyss.appendChild(el);
         });
 
-        whispers.forEach(function (text, i) {
-            var el = document.createElement('div');
-            el.className = 'whisper';
-            el.style.top = (8 + i * 9) + '%';
-            el.style.left = (i % 2 === 0 ? 8 : 62) + '%';
-            el.style.animationDelay = (i * 1.7) + 's';
-            el.textContent = text;
-            abyss.appendChild(el);
-        });
+        /* vertical rift */
+        var rift = document.createElement('div');
+        rift.className = 'rift';
+        rift.style.top = '5%';
+        rift.style.height = '90%';
+        abyss.appendChild(rift);
 
-        /* ─── ORACLE DATA ─── */
-        var oracles = [
-            {
-                prompt: 'What lives in the space between two heartbeats?',
-                truth: 'The only moment that is actually yours.',
-                lies: ['A countdown you cannot hear.', 'Nothing. The body is a machine.']
-            },
-            {
-                prompt: 'Why did you come to somewhere?',
-                truth: 'Because some part of you already knew the answer and needed the void to say it back.',
-                lies: ['Curiosity. That is always safe.', 'You were sent by someone who has never been here.']
-            },
-            {
-                prompt: 'What is The First Spark, really?',
-                truth: 'A fracture that refused to stay closed — turned into infrastructure for anyone still inside one.',
-                lies: ['A brand built for investors.', 'A metaphor with good typography.']
-            },
-            {
-                prompt: 'What does the Sparkverse hold?',
-                truth: 'Tools, maps, rituals, and people building a language for what they already feel but cannot name.',
-                lies: ['Content. Subscription tiers. Exit strategy.', 'Only games for people who believe in astrology.']
-            },
-            {
-                prompt: 'What happens if you guess wrong?',
-                truth: 'The void folds that version of you shut for a breath — and you descend anyway, lighter or heavier, your choice.',
-                lies: ['You are locked out forever.', 'Nothing. There are no consequences in places that do not exist.']
-            },
-            {
-                prompt: 'Where is somewhere on a map?',
-                truth: 'Nowhere coordinates can reach — which is why only the lost and the deliberate find it.',
-                lies: ['Ohio. Always Ohio.', 'Exactly halfway between hope and habit.']
-            },
-            {
-                prompt: 'What is money to the one who built this?',
-                truth: 'Fuel sent back out — builders paid, land healed, tools free where they need to be free.',
-                lies: ['The only score that matters.', 'A necessary evil she has made peace with hoarding.']
-            },
-            {
-                prompt: 'What is a Soul Map?',
-                truth: 'Your numbers and stars translated into a page that reads like someone finally saw the pattern you were living.',
-                lies: ['A personality quiz with better fonts.', 'Data harvested for a funnel you cannot see.']
-            },
-            {
-                prompt: 'Who is allowed to work here?',
-                truth: 'Anyone whose signal matches — affiliates, builders, skeptics who ship, believers who doubt out loud.',
-                lies: ['Only those who have already paid.', 'Only the founder. Always only the founder.']
-            },
-            {
-                prompt: 'What is the Selector Model?',
-                truth: 'A framework: reality is programmable, consciousness is the code, and you can learn to read what runs underneath.',
-                lies: ['A philosophy degree compressed into jargon.', 'Copyrighted language with no application.']
-            },
-            {
-                prompt: 'What sits at the bottom of the scroll?',
-                truth: 'Not an ending — a mirror polished by every truth you chose correctly.',
-                lies: ['A sales page disguised as mysticism.', 'The same place you started, but upside down.']
-            },
-            {
-                prompt: 'What is the Earthship dream?',
-                truth: 'Land in Hocking Hills where the digital signal becomes soil — off-grid, reciprocal, built to outlast greed.',
-                lies: ['A real estate play with crystals.', 'A metaphor she will never actually build.']
-            },
-            {
-                prompt: 'What did 2020 leave behind?',
-                truth: 'A solved cold case, an awakening, and a woman who decided the rest of her life would be code for healing.',
-                lies: ['Trauma content for a podcast.', 'A clean slate with no baggage attached.']
-            },
-            {
-                prompt: 'What is the Collapse Protocol?',
-                truth: 'Training the observer effect — learning to select outcomes from possibility without forcing the universe to flinch.',
-                lies: ['Manifestation with a science lab coat.', 'A game that does nothing when you close the tab.']
-            },
-            {
-                prompt: 'Why two lies and not one?',
-                truth: 'Because a single falsehood is easy to spot — but two plausible ones split your certainty and reveal what you worship.',
-                lies: ['Because the void is cruel.', 'Because three options look better in UI design.']
-            },
-            {
-                prompt: 'What does the void want from you?',
-                truth: 'Discernment — the willingness to feel which sentence rings like a bell and which ones merely echo.',
-                lies: ['Submission.', 'Your email address. It always comes back to that.']
-            },
-            {
-                prompt: 'Can you invest in somewhere?',
-                truth: 'You can invest in the timeline it opens into — $200K SAFE, zero burn, tools live, money meant to circulate back into the world.',
-                lies: ['Only if you know the founder personally.', 'No. Somewhere has no relationship to the physical economy.']
-            },
-            {
-                prompt: 'What is Book Zero?',
-                truth: 'The memoir still being written — from a murder solved to a platform built, mile by mile, in public.',
-                lies: ['A prequel to the novel. Nothing more.', 'Marketing copy for a tour that will never leave the driveway.']
-            },
-            {
-                prompt: 'What happens when you touch the void?',
-                truth: 'It answers — not with comfort, with triangulation. You learn what you are willing to believe.',
-                lies: ['Nothing. It is decorative.', 'It tracks your cursor for retargeting ads.']
-            },
-            {
-                prompt: 'Is somewhere real?',
-                truth: 'As real as any place that only exists when you stop insisting you already know where you are.',
-                lies: ['No. It is a web page.', 'Yes. It has a ZIP code and business hours.']
-            }
-        ];
+        /* depth seal — triple click when scroll > 75% */
+        var seal = document.createElement('button');
+        seal.className = 'seal';
+        seal.style.top = '78%';
+        seal.textContent = '···';
+        seal.setAttribute('aria-label', 'sealed coordinate');
+        abyss.appendChild(seal);
+        var sealClicks = 0;
+        var sealOpen = localStorage.getItem('somewhere_seal') === '1';
 
-        function shuffle(arr) {
-            var a = arr.slice();
-            for (var i = a.length - 1; i > 0; i--) {
-                var j = Math.floor(Math.random() * (i + 1));
-                var t = a[i]; a[i] = a[j]; a[j] = t;
-            }
-            return a;
+        if (sealOpen) {
+            seal.className = 'seal open';
+            seal.textContent = 'WHOP·SPARK·ACCESS';
         }
 
-        /* ─── STATE ─── */
-        var touchZone = document.getElementById('touch-zone');
-        var oracle = document.getElementById('oracle');
-        var choicesEl = document.getElementById('choices');
-        var promptEl = document.getElementById('oracle-prompt');
-        var kickerEl = document.getElementById('oracle-kicker');
-        var resultEl = document.getElementById('oracle-result');
-        var closeBtn = document.getElementById('oracle-close');
-        var streakEl = document.getElementById('streak');
-        var floorText = document.getElementById('floor-text');
-
-        var correct = parseInt(localStorage.getItem('somewhere_correct') || '0', 10);
-        var wrong = parseInt(localStorage.getItem('somewhere_wrong') || '0', 10);
-        var used = JSON.parse(localStorage.getItem('somewhere_used') || '[]');
-        var open = false;
-        var current = null;
-
-        function updateStreak() {
-            if (correct + wrong === 0) {
-                streakEl.textContent = '';
+        seal.addEventListener('click', function () {
+            var depth = scrollY / (document.body.scrollHeight - innerHeight);
+            if (depth < 0.62) {
+                spawnBurst(innerWidth / 2, innerHeight / 2, 'depth', 'not deep enough.', 'descend further');
                 return;
             }
-            streakEl.textContent = correct + ' true · ' + wrong + ' wrong';
-        }
-        updateStreak();
-
-        function pickOracle() {
-            var pool = oracles.filter(function (_, i) { return used.indexOf(i) === -1; });
-            if (pool.length === 0) {
-                used = [];
-                pool = oracles.slice();
+            sealClicks++;
+            seal.classList.add('revealed');
+            if (sealClicks >= 3) {
+                seal.className = 'seal open';
+                seal.textContent = 'WHOP·SPARK·ACCESS';
+                localStorage.setItem('somewhere_seal', '1');
+                document.getElementById('hidden-door').classList.add('show');
+                spawnBurst(innerWidth / 2, innerHeight * 0.7, 'unsealed', 'the lobby was always free.', 'sparkverse-511c');
             }
-            var item = pool[Math.floor(Math.random() * pool.length)];
-            var idx = oracles.indexOf(item);
-            used.push(idx);
-            localStorage.setItem('somewhere_used', JSON.stringify(used));
-            return item;
+        });
+
+        /* ─── touch clues pool ─── */
+        var clues = [
+            { tag: 'fragment', line: 'the first spark was not inspiration. it was refusal.', cipher: '41.081 · -81.519 · akron' },
+            { tag: 'signal', line: 'your life path is not random. it is running.', cipher: 'LP + EP + SU + PY' },
+            { tag: 'echo', line: 'she solved what the system could not.', cipher: 'ID · two fires · 2020' },
+            { tag: 'void-note', line: 'four chambers. one operating system.', cipher: '/source → /collapse first' },
+            { tag: 'drift', line: 'money that does not circulate rots.', cipher: 'pump · back · out' },
+            { tag: 'static', line: 'the map updates for twelve moons.', cipher: '$22 · OG · edition' },
+            { tag: 'fold', line: 'timelines branch at the moment you almost quit.', cipher: 'fold·point·logger' },
+            { tag: 'blood', line: 'inherited code can be debugged.', cipher: 'chamber 4 · lineage' },
+            { tag: 'geometry', line: 'see the pattern before thought arrives.', cipher: '8 core · sacred · shapes' },
+            { tag: 'rig', line: 'solar on roof. starlink on dash. chapters from the road.', cipher: 'book·zero·tour' },
+            { tag: 'selector', line: 'reality is programmable. you are the runtime.', cipher: 'SELECT · RELEASE · WITNESS' },
+            { tag: 'whisper', line: 'somewhere is where the coordinate failed.', cipher: 'null · island · ∞' },
+            { tag: 'affiliate', line: 'share the map. keep thirty-five percent.', cipher: 'real·to·real·signal' },
+            { tag: 'invest', line: 'two hundred K. zero burn. story unmatched.', cipher: 'SAFE · earthship · AI' },
+            { tag: 'genesis', line: 'the novel came before the platform had a name.', cipher: '75K words · lineage layer' },
+            { tag: 'glitch', line: 'player one was never a username. it was a diagnosis.', cipher: 'OG · spark · 519' },
+            { tag: 'frequency', line: 'you were broadcasting before you had language.', cipher: 'see·your·frequency' },
+            { tag: 'wall', line: 'leave a mark where rules dissolve.', cipher: 'graffiti · deluxe · void' },
+            { tag: 'reset', line: 'five minutes in the morning rewires the day.', cipher: '1,243+ · completed' },
+            { tag: 'cipher', line: 'the answer is not hidden. it is unchosen.', cipher: '◈ ◈ ◈' }
+        ];
+        var clueIdx = parseInt(localStorage.getItem('somewhere_clue_idx') || '0', 10);
+        var touchCount = parseInt(localStorage.getItem('somewhere_touches') || '0', 10);
+
+        function spawnBurst(x, y, tag, line, cipher) {
+            var el = document.createElement('div');
+            el.className = 'burst';
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            el.innerHTML = '<div class="tag">' + tag + '</div><div class="line">' + line + '</div>' +
+                (cipher ? '<div class="cipher">' + cipher + '</div>' : '');
+            document.body.appendChild(el);
+            setTimeout(function () { el.remove(); }, 4500);
         }
 
         function ripple(x, y) {
-            var el = document.createElement('div');
-            el.className = 'ripple';
-            el.style.left = x + 'px';
-            el.style.top = y + 'px';
-            document.body.appendChild(el);
-            setTimeout(function () { el.remove(); }, 1200);
+            var r = document.createElement('div');
+            r.className = 'ripple';
+            r.style.left = x + 'px';
+            r.style.top = y + 'px';
+            document.body.appendChild(r);
+            setTimeout(function () { r.remove(); }, 1400);
         }
 
-        function openOracle(x, y) {
-            if (open) return;
-            open = true;
-            current = pickOracle();
-            ripple(x, y);
-
-            document.body.classList.add('guessing');
-            oracle.classList.remove('wrong-state');
-            resultEl.classList.remove('show', 'good', 'bad');
-            resultEl.textContent = '';
-            closeBtn.style.display = 'block';
-            kickerEl.textContent = 'The void speaks';
-            promptEl.textContent = current.prompt;
-            choicesEl.innerHTML = '';
-
-            var options = shuffle([
-                { text: current.truth, isTruth: true },
-                { text: current.lies[0], isTruth: false },
-                { text: current.lies[1], isTruth: false }
-            ]);
-
-            options.forEach(function (opt, i) {
-                var btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'choice';
-                btn.textContent = opt.text;
-                btn.dataset.truth = opt.isTruth ? '1' : '0';
-                btn.addEventListener('click', function () { resolve(btn); });
-                choicesEl.appendChild(btn);
+        function nearGlyph(x, y) {
+            var rect = abyss.getBoundingClientRect();
+            var relX = ((x - rect.left) / rect.width) * 100;
+            var relY = ((y - rect.top + scrollY) / abyss.offsetHeight) * 100;
+            var hit = false;
+            glyphEls.forEach(function (el, i) {
+                var g = glyphs[i];
+                var dx = relX - g.left, dy = relY - g.top;
+                if (dx * dx + dy * dy < 36) {
+                    if (foundGlyphs.indexOf(i) === -1) {
+                        foundGlyphs.push(i);
+                        localStorage.setItem('somewhere_found', JSON.stringify(foundGlyphs));
+                        el.classList.add('found');
+                        spawnBurst(x, y, 'recovered', 'signal fragment archived.', g.t);
+                        hit = true;
+                    }
+                }
             });
-
-            oracle.classList.add('open');
+            updateCache();
+            return hit;
         }
 
-        function resolve(btn) {
-            var buttons = choicesEl.querySelectorAll('.choice');
-            buttons.forEach(function (b) { b.disabled = true; });
-
-            var isTruth = btn.dataset.truth === '1';
-
-            buttons.forEach(function (b) {
-                if (b.dataset.truth === '1') b.classList.add('correct');
-                else if (b === btn && !isTruth) b.classList.add('incorrect');
-                else if (b !== btn) b.style.opacity = '0.35';
-            });
-
-            if (isTruth) {
-                correct++;
-                localStorage.setItem('somewhere_correct', correct);
-                resultEl.textContent = 'The void opens. You may descend further.';
-                resultEl.className = 'oracle-result show good';
-                kickerEl.textContent = 'True';
+        function updateCache() {
+            var cache = document.getElementById('cache');
+            var n = foundGlyphs.length;
+            if (n === 0) {
+                cache.textContent = 'cache: empty';
+                cache.className = '';
+            } else if (n < 8) {
+                cache.textContent = 'cache: ' + n + '/' + glyphs.length + ' fragments';
+                cache.className = 'warm';
+            } else if (n < glyphs.length) {
+                cache.textContent = 'cache: ' + n + '/' + glyphs.length + ' — pattern forming';
+                cache.className = 'warm';
             } else {
-                wrong++;
-                localStorage.setItem('somewhere_wrong', wrong);
-                oracle.classList.add('wrong-state');
-                document.body.classList.add('wrong');
-                setTimeout(function () { document.body.classList.remove('wrong'); }, 600);
-                resultEl.textContent = 'Wrong. The fold remembers. Touch again when you are ready to listen closer.';
-                resultEl.className = 'oracle-result show bad';
-                kickerEl.textContent = 'Folded';
+                cache.textContent = 'cache: FULL · S·E·L·E·C·T unlocked';
+                cache.className = 'hot';
+                document.getElementById('hidden-door').classList.add('show');
+                document.getElementById('final-verse').textContent =
+                    'you mapped somewhere without a map. the void considers that sufficient.';
+            }
+        }
+        updateCache();
+        if (localStorage.getItem('somewhere_seal') === '1') {
+            document.getElementById('hidden-door').classList.add('show');
+        }
+
+        function onTouch(x, y) {
+            ripple(x, y);
+            touchCount++;
+            localStorage.setItem('somewhere_touches', touchCount);
+
+            if (!nearGlyph(x, y)) {
+                var c = clues[clueIdx % clues.length];
+                clueIdx++;
+                localStorage.setItem('somewhere_clue_idx', clueIdx);
+                spawnBurst(x, y, c.tag, c.line, c.cipher);
             }
 
-            updateStreak();
-            closeBtn.textContent = isTruth ? 'descend' : 'dissolve';
-
-            if (correct >= 7) {
-                floorText.textContent = 'The floor is not a floor anymore. You have heard the void often enough — it considers you a resident of somewhere.';
-            } else if (wrong >= 5) {
-                floorText.textContent = 'The floor feels further than before. Wrong guesses add weight. The void is patient, but not infinite.';
+            if (touchCount === 7) {
+                setTimeout(function () {
+                    spawnBurst(innerWidth / 2, innerHeight * 0.4, 'void', 'seven touches. the void knows your rhythm now.', 'keep going');
+                }, 800);
             }
         }
 
-        function closeOracle() {
-            oracle.classList.remove('open', 'wrong-state');
-            open = false;
-            document.body.classList.remove('guessing');
-            closeBtn.textContent = 'dissolve';
-        }
-
-        touchZone.addEventListener('click', function (e) {
-            openOracle(e.clientX, e.clientY);
+        document.getElementById('touch-zone').addEventListener('click', function (e) {
+            onTouch(e.clientX, e.clientY);
         });
-
-        touchZone.addEventListener('touchstart', function (e) {
-            if (e.touches.length) {
+        document.getElementById('touch-zone').addEventListener('touchstart', function (e) {
+            if (e.touches[0]) {
                 e.preventDefault();
-                var t = e.touches[0];
-                openOracle(t.clientX, t.clientY);
+                onTouch(e.touches[0].clientX, e.touches[0].clientY);
             }
         }, { passive: false });
 
-        closeBtn.addEventListener('click', closeOracle);
+        /* glyph proximity on scroll */
+        function checkGlyphProximity() {
+            var rect = abyss.getBoundingClientRect();
+            glyphEls.forEach(function (el, i) {
+                var g = glyphs[i];
+                var gx = rect.left + (g.left / 100) * rect.width;
+                var gy = rect.top + (g.top / 100) * rect.height;
+                var dx = mouse.x - gx, dy = mouse.y - gy;
+                el.classList.toggle('near', dx * dx + dy * dy < 18000 && gy > 0 && gy < innerHeight);
+            });
+        }
 
+        /* scroll depth secrets */
+        var depthSecrets = [
+            { at: 0.15, msg: 'something watches at 15% depth' },
+            { at: 0.42, msg: 'the between is loudest at 42' },
+            { at: 0.66, msg: 'ancestral code runs below 66' },
+            { at: 0.91, msg: 'floor is a lie. door is real.' }
+        ];
+        var fired = JSON.parse(localStorage.getItem('somewhere_depth') || '[]');
+
+        addEventListener('scroll', function () {
+            scrollY = scrollY;
+            updateCoords();
+            checkGlyphProximity();
+            document.body.classList.toggle('in-void', scrollY > innerHeight * 0.4);
+
+            var depth = scrollY / Math.max(1, document.body.scrollHeight - innerHeight);
+            depthSecrets.forEach(function (s, i) {
+                if (depth >= s.at && fired.indexOf(i) === -1) {
+                    fired.push(i);
+                    localStorage.setItem('somewhere_depth', JSON.stringify(fired));
+                    var cache = document.getElementById('cache');
+                    var prev = cache.textContent;
+                    cache.textContent = '⌁ ' + s.msg;
+                    cache.className = 'warm';
+                    setTimeout(function () { updateCache(); }, 4000);
+                }
+            });
+        }, { passive: true });
+
+        /* idle secret — type SOMETHING */
+        var typed = '';
+        var target = 'somewhere';
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && open) closeOracle();
+            if (e.key.length === 1) {
+                typed = (typed + e.key.toLowerCase()).slice(-9);
+                if (typed === target) {
+                    var f = document.createElement('div');
+                    f.className = 'signal-flash';
+                    document.body.appendChild(f);
+                    setTimeout(function () { f.remove(); }, 300);
+                    spawnBurst(innerWidth / 2, innerHeight / 2, 'keyed', 'you named the place. it answers.', 'neither·here·nor·there·both');
+                    typed = '';
+                }
+            }
         });
+
+        updateCoords();
     })();
     </script>
 </body>
