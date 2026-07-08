@@ -776,6 +776,190 @@
             color: rgba(251,191,36,.5);
         }
 
+        /* ─── MOVEMENT ─── */
+        #movement {
+            background:
+                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139,92,246,.08), transparent 60%),
+                rgba(139,92,246,.02);
+            border-top: 1px solid rgba(139,92,246,.12);
+            border-bottom: 1px solid rgba(139,92,246,.12);
+        }
+        .movement-welcome {
+            display: none;
+            margin-bottom: 28px;
+            padding: 18px 22px;
+            border: 1px solid rgba(251,191,36,.35);
+            border-radius: 8px;
+            background: rgba(251,191,36,.06);
+            font-size: .78em;
+            line-height: 1.7;
+            color: var(--dim);
+        }
+        .movement-welcome.visible { display: block; }
+        .movement-welcome strong { color: var(--spark); font-weight: 400; }
+        .movement-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+        @media(max-width: 780px) {
+            .movement-pillars { grid-template-columns: 1fr; }
+        }
+        .movement-pillar {
+            padding: 24px 20px;
+            border: 1px solid var(--dimmer);
+            background: rgba(255,255,255,.02);
+            border-radius: 6px;
+        }
+        .movement-pillar h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .68rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--nebula);
+            margin-bottom: 10px;
+        }
+        .movement-pillar p {
+            font-size: .74em;
+            color: var(--dim);
+            line-height: 1.75;
+        }
+        .movement-beliefs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-bottom: 40px;
+        }
+        @media(max-width: 680px) {
+            .movement-beliefs { grid-template-columns: 1fr; }
+        }
+        .belief-item {
+            display: flex;
+            gap: 14px;
+            padding: 16px 18px;
+            border-left: 2px solid rgba(251,191,36,.4);
+            background: rgba(255,255,255,.015);
+        }
+        .belief-num {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .55rem;
+            color: var(--spark);
+            letter-spacing: .1em;
+            flex-shrink: 0;
+            padding-top: 2px;
+        }
+        .belief-item p {
+            font-size: .74em;
+            color: var(--dim);
+            line-height: 1.7;
+        }
+        .movement-paths {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 36px;
+        }
+        @media(max-width: 900px) {
+            .movement-paths { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media(max-width: 520px) {
+            .movement-paths { grid-template-columns: 1fr; }
+        }
+        .path-card {
+            padding: 22px 18px;
+            border: 1px solid var(--dimmer);
+            text-decoration: none;
+            display: block;
+            transition: transform .25s, border-color .25s;
+            border-radius: 6px;
+            background: rgba(255,255,255,.02);
+        }
+        .path-card:hover { transform: translateY(-3px); border-color: rgba(139,92,246,.4); }
+        .path-tier {
+            font-size: .48em;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.35);
+            margin-bottom: 8px;
+        }
+        .path-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .72rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        .path-desc {
+            font-size: .68em;
+            color: var(--dim);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+        .path-action {
+            font-size: .52em;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--spark);
+        }
+        .intern-preview {
+            padding: 28px 26px;
+            border: 1px solid rgba(251,191,36,.28);
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(139,92,246,.06), rgba(251,191,36,.04));
+            margin-bottom: 28px;
+        }
+        .intern-preview h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .85rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .intern-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        @media(max-width: 780px) {
+            .intern-steps { grid-template-columns: 1fr; }
+        }
+        .intern-step {
+            text-align: center;
+            padding: 14px 10px;
+            border: 1px solid var(--dimmer);
+            border-radius: 6px;
+            background: rgba(5,5,8,.5);
+        }
+        .intern-step-num {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .5rem;
+            letter-spacing: .14em;
+            color: var(--nebula);
+            margin-bottom: 6px;
+        }
+        .intern-step-label {
+            font-size: .62em;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+        .recruit-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-top: 16px;
+        }
+        .recruit-note {
+            flex: 1;
+            min-width: 220px;
+            font-size: .74em;
+            color: var(--dim);
+            line-height: 1.65;
+        }
+
         .feel-cta-bar {
             margin-top: 36px;
             padding: 22px 24px;
@@ -1948,6 +2132,7 @@
     <nav id="nav">
         <a href="/" class="nav-logo">THE FIRST SPARK</a>
         <div class="nav-right">
+            <a href="#movement" class="nav-invest">Join Movement</a>
             <a href="affiliate-kit.html" class="nav-invest">Affiliate Kit</a>
             <a href="#community" class="nav-invest">Free Community</a>
             <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="nav-cta">Soul Map · $22</a>
@@ -2357,6 +2542,91 @@
 
     <div class="divider-line"></div>
 
+    <!-- THE MOVEMENT -->
+    <section id="movement">
+        <div class="wrap">
+            <div class="movement-welcome" id="movementWelcome" aria-live="polite"></div>
+
+            <div class="sec-label">◈ &nbsp; The Movement</div>
+            <h2 class="sec-title">What The Sparkverse Actually Is</h2>
+            <p class="sec-sub" style="max-width:640px;">Not a wellness app. Not a psychic hotline. A consciousness technology movement — built from a 29-year cold case solved in 2020, now 60+ live tools, mapped souls, and a community rewriting what healing looks like online.</p>
+
+            <div class="movement-pillars">
+                <div class="movement-pillar">
+                    <h3>The Platform</h3>
+                    <p>60+ interactive consciousness tools — Soul Maps, archetype systems, collapse protocols, playgrounds. HTML experiences you can touch, share, and keep. Reality is programmable. Consciousness is the code.</p>
+                </div>
+                <div class="movement-pillar">
+                    <h3>The Movement</h3>
+                    <p>People who stopped waiting for permission to decode themselves. Mapped souls building in public. A founder who turned fracture into infrastructure. Ground-level entry — no degree, no gate, no performative spirituality required.</p>
+                </div>
+                <div class="movement-pillar">
+                    <h3>The Community</h3>
+                    <p>The Sparkverse on Whop — free Lobby access, drops, build logs, rituals, and mapped souls comparing notes. Soul Map buyers get full access. Explorers can join free while they decide.</p>
+                </div>
+            </div>
+
+            <div class="sec-label" style="color:var(--cyan);">◈ &nbsp; What We Stand For</div>
+            <h2 class="sec-title" style="font-size:clamp(1.1rem,2.8vw,1.6rem);">Four Beliefs Running The Signal</h2>
+            <div class="movement-beliefs">
+                <div class="belief-item"><span class="belief-num">01</span><p><strong style="color:var(--white);font-weight:400;">Your numbers aren't random.</strong> Birth data is a frequency signature — numerology and astrology are interfaces, not entertainment.</p></div>
+                <div class="belief-item"><span class="belief-num">02</span><p><strong style="color:var(--white);font-weight:400;">Tools before theory.</strong> Touch the void, take the quiz, read a real map. Feel it first — then decide if it's yours.</p></div>
+                <div class="belief-item"><span class="belief-num">03</span><p><strong style="color:var(--white);font-weight:400;">Built from lived truth.</strong> ID true crime credibility meets consciousness tech. No borrowed mysticism — only what survived the fire.</p></div>
+                <div class="belief-item"><span class="belief-num">04</span><p><strong style="color:var(--white);font-weight:400;">The movement grows sideways.</strong> Not top-down marketing — sparks recruiting sparks, interns building in public, affiliates earning on real product.</p></div>
+            </div>
+
+            <div class="sec-label">◈ &nbsp; Ground Level Entry</div>
+            <h2 class="sec-title" style="font-size:clamp(1.1rem,2.8vw,1.6rem);">Four Ways In. Start Where You Are.</h2>
+            <p class="sec-sub">No application needed for the first three. The intern track opens once you've run the signal.</p>
+
+            <div class="movement-paths">
+                <a href="free-tools.html" class="path-card">
+                    <div class="path-tier">Tier 0 · Free</div>
+                    <div class="path-name">Explorer</div>
+                    <div class="path-desc">Run the 8 free tools. Find your numbers, archetype, daily reset. See if the code reads you back.</div>
+                    <div class="path-action">Start exploring →</div>
+                </a>
+                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer" class="path-card">
+                    <div class="path-tier">Tier 1 · Free</div>
+                    <div class="path-name">Community Spark</div>
+                    <div class="path-desc">Join the Sparkverse Lobby. Drops, chat, build logs, monthly rituals. 30 seconds to get in.</div>
+                    <div class="path-action">Join free →</div>
+                </a>
+                <a href="affiliate-kit.html" class="path-card">
+                    <div class="path-tier">Tier 2 · Earn</div>
+                    <div class="path-name">Signal Carrier</div>
+                    <div class="path-desc">Share Soul Maps or tools with your link. 35% commission ($7.70/sale). Swipe copy included.</div>
+                    <div class="path-action">Get affiliate kit →</div>
+                </a>
+                <a href="spark-interns.html" class="path-card">
+                    <div class="path-tier">Tier 3 · Build</div>
+                    <div class="path-name">Spark Intern</div>
+                    <div class="path-desc">Formal ground-level track. Complete the checklist, get on the roster, early tool access, direct line to KJP.</div>
+                    <div class="path-action">Apply as intern →</div>
+                </a>
+            </div>
+
+            <div class="intern-preview">
+                <h3>◈ Spark Intern System</h3>
+                <p style="font-size:.78em;color:var(--dim);line-height:1.75;max-width:600px;">Ground-level recruiting for people who want to build the movement — not just consume it. Five steps. Self-paced. No resume required.</p>
+                <div class="intern-steps">
+                    <div class="intern-step"><div class="intern-step-num">Step 1</div><div class="intern-step-label">Join free Sparkverse</div></div>
+                    <div class="intern-step"><div class="intern-step-num">Step 2</div><div class="intern-step-label">Complete Starter Trinity</div></div>
+                    <div class="intern-step"><div class="intern-step-num">Step 3</div><div class="intern-step-label">Post intro in Lobby</div></div>
+                    <div class="intern-step"><div class="intern-step-num">Step 4</div><div class="intern-step-label">Share one public signal</div></div>
+                    <div class="intern-step"><div class="intern-step-num">Step 5</div><div class="intern-step-label">Submit intern application</div></div>
+                </div>
+                <div class="recruit-row">
+                    <p class="recruit-note"><strong style="color:var(--white);font-weight:400;">Recruiting is the movement.</strong> Every Soul Map shared, every tool link posted, every person you bring to the Lobby grows the network. Interns are the ones who do it intentionally.</p>
+                    <a href="spark-interns.html" class="btn-p">Open Intern Checklist →</a>
+                    <a href="affiliate-kit.html" class="btn-g">Recruit &amp; Earn →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
     <!-- STEP 2: FREE COMMUNITY -->
     <section id="community">
         <div class="wrap">
@@ -2498,6 +2768,8 @@
             <div class="footer-links">
                 <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer">Soul Map · $22</a>
                 <a href="https://soul-maps.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Map Archive</a>
+                <a href="#movement">Join Movement</a>
+                <a href="spark-interns.html">Spark Interns</a>
                 <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer">Free Community</a>
                 <a href="https://sparkverse.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Tools</a>
                 <a href="investor-deck-v3.html">Invest</a>
@@ -3381,6 +3653,35 @@
                 btn.disabled = false;
             }
         });
+    })();
+
+    (function initMovementWelcome() {
+        var params = new URLSearchParams(window.location.search);
+        var fromNumbers = params.get('from') === 'numbers';
+        var welcome = document.getElementById('movementWelcome');
+        if (!welcome) return;
+
+        var stored = null;
+        try {
+            stored = JSON.parse(sessionStorage.getItem('spark_user_numbers') || 'null');
+        } catch (e) {}
+
+        if (fromNumbers || stored) {
+            var lp = stored && stored.lifePath;
+            var ex = stored && stored.expression;
+            var msg = lp
+                ? 'You found your code — <strong>Life Path ' + lp + '</strong>' + (ex ? ', <strong>Expression ' + ex + '</strong>' : '') + '. Here\'s what the Sparkverse is, what the movement stands for, and exactly how to plug in at ground level.'
+                : 'You found your numbers. Here\'s what the Sparkverse is, what the movement stands for, and exactly how to plug in at ground level.';
+            welcome.innerHTML = msg;
+            welcome.classList.add('visible');
+        }
+
+        if (fromNumbers || (stored && window.location.hash === '#movement')) {
+            requestAnimationFrame(function() {
+                var section = document.getElementById('movement');
+                if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
     })();
     </script>
     <script src="spark-mailchimp-config.js"></script>

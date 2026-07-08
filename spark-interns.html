@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spark Intern Program — Join The Movement | The First Spark</title>
+    <meta name="description" content="Ground-level track into the Sparkverse movement. Five steps, self-paced checklist, early tool access, and a direct line to KJP. No resume required.">
+    <meta property="og:title" content="Spark Intern Program — The First Spark">
+    <meta property="og:description" content="Build the consciousness technology movement from ground level. Complete the checklist and apply.">
+    <meta property="og:url" content="https://thefirstspark.shop/spark-interns.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SKL8XQ51ZH');
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --void: #050508;
+            --spark: #fbbf24;
+            --nebula: #8b5cf6;
+            --cyan: #22d3ee;
+            --white: rgba(255,255,255,0.92);
+            --dim: rgba(255,255,255,0.58);
+            --dimmer: rgba(255,255,255,0.1);
+            --line: rgba(139, 92, 246, 0.25);
+        }
+        body {
+            background: var(--void);
+            color: var(--white);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(900px 500px at 15% 0%, rgba(139, 92, 246, 0.14), transparent 60%),
+                radial-gradient(700px 500px at 90% 30%, rgba(251, 191, 36, 0.06), transparent 55%);
+        }
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 0 28px 96px;
+        }
+        #nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 28px;
+            background: rgba(5,5,8,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(251,191,36,0.1);
+            margin: 0 -28px 48px;
+        }
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            color: var(--spark);
+        }
+        .nav-link {
+            font-size: 0.55rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--dim);
+            text-decoration: none;
+        }
+        .nav-link:hover { color: var(--spark); }
+        .badge {
+            display: inline-block;
+            font-size: 0.52rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--nebula);
+            border: 1px solid var(--line);
+            padding: 8px 14px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 7vw, 3.8rem);
+            font-weight: 600;
+            line-height: 1.05;
+            margin-bottom: 14px;
+            background: linear-gradient(110deg, var(--white) 20%, var(--spark) 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .lede {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+            color: var(--dim);
+            line-height: 1.5;
+            max-width: 560px;
+            margin-bottom: 40px;
+        }
+        .sec-label {
+            font-size: 0.52rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--spark);
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .sec-sub {
+            font-size: 0.74em;
+            color: var(--dim);
+            line-height: 1.75;
+            margin-bottom: 28px;
+            max-width: 560px;
+        }
+        section { margin-bottom: 56px; }
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 640px) { .tier-grid { grid-template-columns: 1fr; } }
+        .tier-card {
+            padding: 22px 20px;
+            border: 1px solid var(--dimmer);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.02);
+        }
+        .tier-card.highlight {
+            border-color: rgba(251,191,36,0.35);
+            background: linear-gradient(135deg, rgba(139,92,246,0.06), rgba(251,191,36,0.04));
+        }
+        .tier-label {
+            font-size: 0.48rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 6px;
+        }
+        .tier-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .tier-card p {
+            font-size: 0.68em;
+            color: var(--dim);
+            line-height: 1.65;
+        }
+        .tier-perks {
+            margin-top: 10px;
+            font-size: 0.58em;
+            color: var(--spark);
+            letter-spacing: 0.06em;
+        }
+        .checklist-panel {
+            padding: 28px;
+            border: 1px solid rgba(251,191,36,0.28);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.02);
+        }
+        .progress-bar {
+            height: 4px;
+            background: var(--dimmer);
+            border-radius: 2px;
+            margin: 16px 0 24px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--nebula), var(--spark));
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        .progress-text {
+            font-size: 0.58em;
+            letter-spacing: 0.14em;
+            color: var(--dim);
+            margin-bottom: 8px;
+        }
+        .check-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--dimmer);
+        }
+        .check-item:last-child { border-bottom: none; }
+        .check-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: var(--spark);
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        .check-body { flex: 1; }
+        .check-title {
+            font-size: 0.72em;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+        .check-desc {
+            font-size: 0.62em;
+            color: var(--dim);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        .check-link {
+            font-size: 0.55em;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--nebula);
+            text-decoration: none;
+        }
+        .check-link:hover { color: var(--spark); }
+        .apply-panel {
+            margin-top: 28px;
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .apply-panel p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--dim);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .btn-p {
+            display: inline-flex;
+            padding: 12px 22px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, var(--spark), #f59e0b);
+            color: var(--void);
+            font-size: 0.58rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-p:hover { transform: translateY(-1px); }
+        .btn-p:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-g {
+            display: inline-flex;
+            padding: 11px 20px;
+            border-radius: 6px;
+            border: 1px solid var(--dimmer);
+            color: var(--dim);
+            font-size: 0.56rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+        .btn-g:hover { border-color: var(--nebula); color: var(--nebula); }
+        .numbers-banner {
+            display: none;
+            padding: 16px 20px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(251,191,36,0.3);
+            border-radius: 8px;
+            background: rgba(251,191,36,0.05);
+            font-size: 0.68em;
+            color: var(--dim);
+            line-height: 1.6;
+        }
+        .numbers-banner.visible { display: block; }
+        .numbers-banner strong { color: var(--spark); font-weight: 400; }
+        footer {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--dimmer);
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.1em;
+        }
+        footer a { color: var(--dim); text-decoration: none; margin: 0 8px; }
+        footer a:hover { color: var(--spark); }
+    </style>
+    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/3f69bab8ef6446338dce0b642/00b83e9d1853cf9c1078884a5.js");</script>
+</head>
+<body>
+    <div class="wrap">
+        <nav id="nav">
+            <a href="/" class="nav-logo">THE FIRST SPARK</a>
+            <a href="/#movement" class="nav-link">← The Movement</a>
+        </nav>
+
+        <div class="numbers-banner" id="numbersBanner"></div>
+
+        <span class="badge">◈ Ground Level · Build Track</span>
+        <h1>Spark Intern Program</h1>
+        <p class="lede">For people who want to grow the movement — not just consume it. Five steps. Self-paced. Your numbers, your signal, your contribution.</p>
+
+        <section>
+            <div class="sec-label">◈ The Ladder</div>
+            <h2>Four Tiers. One Movement.</h2>
+            <p class="sec-sub">Everyone starts at Explorer. Intern is the first formal build track — the on-ramp to recruiting, collaborating, and eventually earning on the platform.</p>
+            <div class="tier-grid">
+                <div class="tier-card">
+                    <div class="tier-label">Tier 0</div>
+                    <div class="tier-name">Explorer</div>
+                    <p>Try the free tools. Find your numbers. No commitment. See if the code reads you.</p>
+                    <div class="tier-perks">8 free tools · No signup</div>
+                </div>
+                <div class="tier-card">
+                    <div class="tier-label">Tier 1</div>
+                    <div class="tier-name">Community Spark</div>
+                    <p>Join the free Sparkverse Lobby. Drops, chat, rituals, build logs. The room where the movement talks.</p>
+                    <div class="tier-perks">Free Whop access · 30 sec to join</div>
+                </div>
+                <div class="tier-card">
+                    <div class="tier-label">Tier 2</div>
+                    <div class="tier-name">Signal Carrier</div>
+                    <p>Share tools or Soul Maps with your affiliate link. 35% commission. Recruit by sharing what actually worked on you.</p>
+                    <div class="tier-perks">$7.70/sale · Swipe copy included</div>
+                </div>
+                <div class="tier-card highlight">
+                    <div class="tier-label">Tier 3 · You are here</div>
+                    <div class="tier-name">Spark Intern</div>
+                    <p>Complete the checklist below. Get on the intern roster, early tool access, and a direct line to KJP in the Lobby.</p>
+                    <div class="tier-perks">Roster listing · Early drops · Build in public</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="checklist-panel">
+                <div class="sec-label">◈ Intern Checklist</div>
+                <h2>Five Steps To Apply</h2>
+                <p class="sec-sub" style="margin-bottom:0;">Check off as you go. Progress saves in your browser. Apply when all five are done.</p>
+                <div class="progress-text" id="progressText">0 of 5 complete</div>
+                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+                <div class="check-item">
+                    <input type="checkbox" id="step1" data-step="1">
+                    <div class="check-body">
+                        <div class="check-title">Step 1 — Join the free Sparkverse</div>
+                        <div class="check-desc">Enter the Lobby on Whop. This is where drops land, interns coordinate, and the movement talks in real time.</div>
+                        <a href="https://whop.com/sparkverse-511c/spark-acces/" class="check-link" target="_blank" rel="noopener">Join free community →</a>
+                    </div>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="step2" data-step="2">
+                    <div class="check-body">
+                        <div class="check-title">Step 2 — Complete the Starter Trinity</div>
+                        <div class="check-desc">Run all three: Numbers Decoder (your code), Archetype Discovery (your class), Daily Reset (your calibration).</div>
+                        <a href="numbers.html" class="check-link">Numbers →</a>
+                        <a href="archetype-discovery.html" class="check-link" style="margin-left:12px">Archetype →</a>
+                        <a href="daily-reset.html" class="check-link" style="margin-left:12px">Daily Reset →</a>
+                    </div>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="step3" data-step="3">
+                    <div class="check-body">
+                        <div class="check-title">Step 3 — Post your intro in the Lobby</div>
+                        <div class="check-desc">Format: "I'm [name], Life Path [X], [Archetype] — here to [one sentence on why you're in]." Tag @kjp if you want a direct read.</div>
+                        <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" class="check-link" target="_blank" rel="noopener">Open Lobby →</a>
+                    </div>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="step4" data-step="4">
+                    <div class="check-body">
+                        <div class="check-title">Step 4 — Share one public signal</div>
+                        <div class="check-desc">Post one tool link, Soul Map, or Player Card on social, a group chat, or your newsletter. Recruiting is the movement — one real share counts.</div>
+                        <a href="affiliate-kit.html" class="check-link">Get swipe copy →</a>
+                    </div>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="step5" data-step="5">
+                    <div class="check-body">
+                        <div class="check-title">Step 5 — Submit your intern application</div>
+                        <div class="check-desc">Hit apply below. Your checklist progress auto-includes in the email. KJP reviews weekly — you'll hear back in the Lobby.</div>
+                    </div>
+                </div>
+
+                <div class="apply-panel">
+                    <p id="applyMessage">Complete all five steps to unlock your application.</p>
+                    <div class="btn-row">
+                        <button type="button" class="btn-p" id="applyBtn" disabled>Apply as Spark Intern →</button>
+                        <a href="/#movement" class="btn-g">Back to Movement</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="sec-label">◈ After Intern</div>
+            <h2>What Happens Next</h2>
+            <p class="sec-sub">Accepted interns get listed on the roster, early access to new tool drops, and a direct coordination channel. Top contributors move toward Signal Carrier affiliate status or Builder collaborations — content, events, code, Earthship community build.</p>
+            <div class="btn-row" style="justify-content:flex-start">
+                <a href="affiliate-kit.html" class="btn-g">Recruit &amp; earn →</a>
+                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="btn-g" target="_blank" rel="noopener">Get your Soul Map · $22</a>
+            </div>
+        </section>
+
+        <footer>
+            <a href="/">Home</a>·
+            <a href="/#movement">Movement</a>·
+            <a href="free-tools.html">Free Tools</a>·
+            <a href="affiliate-kit.html">Affiliate Kit</a>
+            <p style="margin-top:12px;">© The First Spark · Reality is programmable.</p>
+        </footer>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'spark_intern_checklist';
+        const steps = [1, 2, 3, 4, 5];
+
+        function loadState() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            } catch (e) {
+                return {};
+            }
+        }
+
+        function saveState(state) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function updateUI() {
+            const state = loadState();
+            let done = 0;
+            steps.forEach(n => {
+                const el = document.getElementById('step' + n);
+                if (!el) return;
+                el.checked = !!state['step' + n];
+                if (el.checked) done++;
+            });
+
+            const pct = (done / steps.length) * 100;
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('progressText').textContent = done + ' of 5 complete';
+
+            const applyBtn = document.getElementById('applyBtn');
+            const applyMsg = document.getElementById('applyMessage');
+            const allDone = done === steps.length;
+
+            applyBtn.disabled = !allDone;
+            applyMsg.textContent = allDone
+                ? 'All steps complete. Submit your application — KJP reviews weekly.'
+                : 'Complete all five steps to unlock your application.';
+        }
+
+        steps.forEach(n => {
+            const el = document.getElementById('step' + n);
+            el.addEventListener('change', () => {
+                const state = loadState();
+                state['step' + n] = el.checked;
+                saveState(state);
+                updateUI();
+            });
+        });
+
+        document.getElementById('applyBtn').addEventListener('click', () => {
+            const state = loadState();
+            let stored = null;
+            try {
+                stored = JSON.parse(sessionStorage.getItem('spark_user_numbers') || 'null');
+            } catch (e) {}
+
+            const completed = steps.filter(n => state['step' + n]).map(n => 'Step ' + n).join(', ');
+            let body = 'Spark Intern Application\n\n';
+            body += 'Checklist complete: ' + completed + '\n\n';
+            if (stored) {
+                body += 'My Numbers:\n';
+                body += '- Life Path: ' + (stored.lifePath || '—') + '\n';
+                body += '- Expression: ' + (stored.expression || '—') + '\n';
+                body += '- Soul Urge: ' + (stored.soulUrge || '—') + '\n';
+                body += '- Personality: ' + (stored.personality || '—') + '\n\n';
+            }
+            body += 'Why I want to be a Spark Intern:\n[Write 2-3 sentences here]\n\n';
+            body += 'My Whop / social handle:\n[Your handle]\n\n';
+            body += 'One link I shared publicly:\n[URL or platform]';
+
+            if (typeof gtag === 'function') {
+                gtag('event', 'spark_intern_apply', { checklist_complete: true });
+            }
+
+            window.location.href = 'mailto:kate@thefirstspark.shop?subject=' +
+                encodeURIComponent('Spark Intern Application') +
+                '&body=' + encodeURIComponent(body);
+        });
+
+        (function showNumbers() {
+            let stored = null;
+            try {
+                stored = JSON.parse(sessionStorage.getItem('spark_user_numbers') || 'null');
+            } catch (e) {}
+            if (!stored || !stored.lifePath) return;
+            const banner = document.getElementById('numbersBanner');
+            banner.innerHTML = 'Your code is loaded — <strong>Life Path ' + stored.lifePath + '</strong>' +
+                (stored.expression ? ', <strong>Expression ' + stored.expression + '</strong>' : '') +
+                '. Use these in your Lobby intro (Step 3).';
+            banner.classList.add('visible');
+        })();
+
+        updateUI();
+    </script>
+    <script src="spark-lobby-cta.js" defer></script>
+    <script src="spark-mailchimp-config.js"></script>
+    <script src="spark-mailchimp-popup.js" defer></script>
+</body>
+</html>

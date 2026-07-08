@@ -839,9 +839,9 @@
                 <div class="code-cards" id="codeCards"></div>
                 <p class="fit-note" id="fitNote"></p>
                 <div class="cta-row">
-                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="btn-primary" target="_blank" rel="noopener" id="soulMapCta">Get Your Full Soul Map · $22</a>
-                    <a href="https://soul-maps.thefirstspark.shop/" class="btn-ghost" target="_blank" rel="noopener">Browse the Archive</a>
-                    <a href="https://soul-maps.thefirstspark.shop/kjp519.html" class="btn-ghost" target="_blank" rel="noopener">Read KJP's Map</a>
+                    <a href="/?from=numbers#movement" class="btn-primary" id="movementCta">See Where You Fit In →</a>
+                    <a href="spark-interns.html" class="btn-ghost">Apply as Spark Intern</a>
+                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="btn-ghost" target="_blank" rel="noopener">Full Soul Map · $22</a>
                 </div>
             </div>
         </section>
@@ -889,15 +889,16 @@
 
     <footer class="cosmic-footer">
         <div class="footer-cta">
-            <h3>Ready for the full decode?</h3>
-            <p>Life Path, Expression, Soul Urge, Personality, Personal Year — woven with astrology on a private page you keep forever. Delivered in ~5 minutes.</p>
+            <h3>Your numbers are the entry point.</h3>
+            <p>The Sparkverse is the movement. See what it stands for, how to join at ground level, recruit others, or apply as a Spark Intern.</p>
             <div class="cta-row" style="justify-content:center">
-                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="btn-primary" target="_blank" rel="noopener">Claim Founders Edition →</a>
-                <a href="free-tools.html" class="btn-ghost">All 8 Free Tools</a>
+                <a href="/?from=numbers#movement" class="btn-primary">Enter The Movement →</a>
+                <a href="spark-interns.html" class="btn-ghost">Spark Intern Program</a>
             </div>
         </div>
         <div class="footer-links">
             <a href="/">Home</a>
+            <a href="/#movement">The Movement</a>
             <a href="free-tools.html">Free Tools</a>
             <a href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener">Soul Maps Archive</a>
             <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener">Free Community</a>
@@ -1183,7 +1184,11 @@
 
             const lp = userNumbers.lifePath;
             const ex = userNumbers.expression;
-            fitNote.innerHTML = `You're running <strong>Life Path ${lp}</strong> (${getKeyword(lp)}) with <strong>Expression ${ex}</strong> (${getKeyword(ex)}). Thousands of mapped souls share fragments of your code — browse the archive to find your frequency twins, or get your full decode with astrology woven in.`;
+            fitNote.innerHTML = `You're running <strong>Life Path ${lp}</strong> (${getKeyword(lp)}) with <strong>Expression ${ex}</strong> (${getKeyword(ex)}). Next: see what the Sparkverse movement is, how to join at ground level, and where recruiting fits in.`;
+
+            try {
+                sessionStorage.setItem('spark_user_numbers', JSON.stringify(userNumbers));
+            } catch (e) {}
 
             panel.classList.add('visible');
             highlightUserNumbers();

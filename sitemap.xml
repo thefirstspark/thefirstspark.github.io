@@ -335,8 +335,13 @@
   </url>
   <url>
     <loc>https://thefirstspark.shop/numbers.html</loc>
-    <lastmod>2026-02-28</lastmod>
+    <lastmod>2026-07-07</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thefirstspark.shop/spark-interns.html</loc>
+    <lastmod>2026-07-07</lastmod>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://thefirstspark.shop/oracle-consciousness.html</loc>
