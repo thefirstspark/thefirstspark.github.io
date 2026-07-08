@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numbers | The First Spark</title>
+    <title>Numbers Decoder — Find Your Code | The First Spark</title>
+    <meta name="description" content="Free numerology decoder. Enter your birth date and name to find your Life Path, Expression, and Soul Urge — then see how you fit in the Soul Map network.">
+    <meta property="og:title" content="Numbers Decoder — The First Spark">
+    <meta property="og:description" content="Your numbers aren't random. Find your Life Path, Expression, and Soul Urge — free, no signup.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thefirstspark.shop/numbers.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
     <script>
@@ -12,7 +20,9 @@
         gtag('js', new Date());
         gtag('config', 'G-SKL8XQ51ZH');
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -21,22 +31,30 @@
         }
 
         :root {
-            --void: #0a0a0f;
+            --void: #050508;
+            --spark: #fbbf24;
+            --nebula: #8b5cf6;
+            --cyan: #22d3ee;
+            --white: rgba(255,255,255,0.92);
+            --dim: rgba(255,255,255,0.58);
+            --dimmer: rgba(255,255,255,0.1);
             --nebula-pink: #ff2d7533;
             --nebula-blue: #2d7fff33;
             --nebula-gold: #ffd02d33;
             --star-white: #f0f0ff;
-            --cosmic-purple: #6b3fa0;
+            --cosmic-purple: #8b5cf6;
             --deep-violet: #1a0a2e;
+            --line: rgba(139, 92, 246, 0.25);
         }
 
         body {
             background: var(--void);
             min-height: 100vh;
             overflow-x: hidden;
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--star-white);
+            font-family: 'Space Mono', monospace;
+            color: var(--white);
             cursor: crosshair;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Cosmic Background */
@@ -74,32 +92,65 @@
             50% { opacity: 1; transform: scale(1.5); }
         }
 
-        /* Header */
-        .cosmic-header {
+        /* Nav */
+        #nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
-            padding: 2rem 3rem;
+            z-index: 200;
+            padding: 18px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(to bottom, rgba(10,10,15,0.9) 0%, transparent 100%);
+            background: rgba(5,5,8,0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(251,191,36,0.1);
         }
 
-        .logo {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-            letter-spacing: 0.3em;
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 0.78rem;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            color: var(--spark);
+            text-shadow: 0 0 20px rgba(251,191,36,0.4);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            opacity: 0.7;
+            color: var(--dim);
+            text-decoration: none;
+            transition: color 0.3s;
         }
 
-        .nav-hint {
-            font-size: 0.85rem;
-            opacity: 0.5;
-            font-style: italic;
+        .nav-link:hover { color: var(--spark); }
+
+        .nav-cta {
+            font-size: 0.58rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--void);
+            background: linear-gradient(135deg, var(--spark), #f59e0b);
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(251,191,36,0.35);
         }
 
         /* Main Content */
@@ -107,31 +158,326 @@
             position: relative;
             z-index: 10;
             min-height: 100vh;
-            padding: 8rem 2rem 4rem;
+            padding: 6.5rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .title-section {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.58rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--nebula);
+            border: 1px solid var(--line);
+            padding: 8px 14px;
+            border-radius: 4px;
+            margin-bottom: 1.25rem;
         }
 
         .title-section h1 {
-            font-size: clamp(3rem, 10vw, 8rem);
-            font-weight: 300;
-            letter-spacing: 0.2em;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 600;
+            letter-spacing: 0.04em;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff 0%, #a0a0ff 50%, #ffd0d0 100%);
+            background: linear-gradient(110deg, var(--white) 20%, var(--spark) 80%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 60px rgba(255,255,255,0.3);
+            line-height: 1.05;
         }
 
         .title-section p {
-            font-size: 1.2rem;
-            opacity: 0.6;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+            color: var(--dim);
             font-style: italic;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.02em;
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Calculator */
+        .code-panel {
+            max-width: 720px;
+            margin: 0 auto 3rem;
+            padding: 28px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(251,191,36,0.04));
+        }
+
+        .code-panel h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .code-panel .panel-lede {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--dim);
+            margin-bottom: 1.5rem;
+            line-height: 1.45;
+        }
+
+        .code-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field-group.full { grid-column: 1 / -1; }
+
+        .field-label {
+            font-size: 0.55rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--spark);
+        }
+
+        .code-input {
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--dimmer);
+            border-radius: 6px;
+            color: var(--white);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .code-input:focus { border-color: var(--spark); }
+        .code-input::placeholder { color: rgba(255,255,255,0.25); }
+
+        .btn-reveal {
+            grid-column: 1 / -1;
+            padding: 16px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(135deg, var(--nebula), #7c3aed);
+            color: var(--white);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-reveal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(139,92,246,0.4);
+        }
+
+        .your-code {
+            display: none;
+            margin-top: 1.75rem;
+            padding-top: 1.75rem;
+            border-top: 1px solid var(--line);
+        }
+
+        .your-code.visible { display: block; }
+
+        .code-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 1.25rem;
+        }
+
+        .code-card {
+            text-align: center;
+            padding: 18px 12px;
+            border: 1px solid var(--dimmer);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.02);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .code-card.active {
+            border-color: var(--spark);
+            box-shadow: 0 0 24px rgba(251,191,36,0.2);
+        }
+
+        .code-card .card-role {
+            font-size: 0.5rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 8px;
+        }
+
+        .code-card .card-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .code-card .card-keyword {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--dim);
+        }
+
+        .fit-note {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--dim);
+            line-height: 1.55;
+            margin-bottom: 1.25rem;
+        }
+
+        .fit-note strong { color: var(--spark); font-style: normal; }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, var(--spark), #f59e0b);
+            color: var(--void);
+            font-size: 0.6rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(251,191,36,0.35);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            padding: 11px 18px;
+            border-radius: 6px;
+            border: 1px solid var(--dimmer);
+            color: var(--dim);
+            font-size: 0.58rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--nebula);
+            color: var(--nebula);
+        }
+
+        /* Fit-in explainer */
+        .fit-section {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .fit-section .sec-label {
+            font-size: 0.58rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--nebula);
+            margin-bottom: 0.75rem;
+        }
+
+        .fit-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .fit-section > p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--dim);
+            max-width: 520px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.5;
+        }
+
+        .fit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            text-align: left;
+        }
+
+        .fit-item {
+            padding: 16px;
+            border: 1px solid var(--dimmer);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .fit-item .fit-num {
+            font-size: 0.5rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--spark);
+            margin-bottom: 6px;
+        }
+
+        .fit-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .fit-item p {
+            font-size: 0.62rem;
+            color: var(--dim);
+            line-height: 1.55;
+        }
+
+        .galaxy-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .galaxy-intro h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .galaxy-intro p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--dim);
+            font-size: 1rem;
         }
 
         /* Number Galaxy Grid */
@@ -189,6 +535,51 @@
         .celestial-body:hover .number-display {
             transform: scale(1.2);
             text-shadow: 0 0 40px currentColor, 0 0 80px currentColor;
+        }
+
+        .celestial-body.yours {
+            z-index: 20;
+        }
+
+        .celestial-body.yours::before {
+            inset: 0;
+            opacity: 1;
+            box-shadow:
+                0 0 50px var(--glow-color, rgba(251,191,36,0.5)),
+                inset 0 0 30px var(--glow-color, rgba(251,191,36,0.2));
+            animation: yours-pulse 2.5s ease-in-out infinite;
+        }
+
+        .celestial-body.yours .number-display {
+            transform: scale(1.15);
+            text-shadow: 0 0 40px currentColor, 0 0 80px currentColor;
+        }
+
+        .celestial-body.yours .yours-tag {
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.45rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--spark);
+            background: rgba(5,5,8,0.85);
+            padding: 3px 8px;
+            border-radius: 3px;
+            border: 1px solid rgba(251,191,36,0.35);
+            z-index: 5;
+            white-space: nowrap;
+        }
+
+        @keyframes yours-pulse {
+            0%, 100% { box-shadow: 0 0 40px var(--glow-color), inset 0 0 20px var(--glow-color); }
+            50% { box-shadow: 0 0 70px var(--glow-color), inset 0 0 40px var(--glow-color); }
+        }
+
+        .celestial-body.dimmed {
+            opacity: 0.35;
+            filter: grayscale(0.4);
         }
 
         /* Orbit Rings */
@@ -313,29 +704,75 @@
             position: relative;
             z-index: 10;
             text-align: center;
-            padding: 4rem 2rem;
-            opacity: 0.5;
+            padding: 3rem 2rem 6rem;
+            border-top: 1px solid var(--dimmer);
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .cosmic-footer a {
-            color: inherit;
+        .footer-cta {
+            margin-bottom: 2rem;
+            padding: 24px;
+            border: 1px solid rgba(251,191,36,0.25);
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(139,92,246,0.06), rgba(251,191,36,0.04));
+        }
+
+        .footer-cta h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-cta p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--dim);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            line-height: 1.45;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 20px;
+            font-size: 0.58rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .footer-links a {
+            color: var(--dim);
             text-decoration: none;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-            letter-spacing: 0.2em;
-            transition: opacity 0.3s ease;
+            transition: color 0.3s;
         }
 
-        .cosmic-footer a:hover {
-            opacity: 1;
+        .footer-links a:hover { color: var(--spark); }
+
+        .footer-copy {
+            margin-top: 1.5rem;
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.1em;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .cosmic-header {
-                padding: 1.5rem;
-                flex-direction: column;
-                gap: 0.5rem;
+            #nav {
+                padding: 14px 16px;
+            }
+
+            .nav-link { display: none; }
+
+            .code-form {
+                grid-template-columns: 1fr;
+            }
+
+            .cosmos {
+                padding-top: 5.5rem;
             }
 
             .galaxy-grid {
@@ -368,22 +805,105 @@
     <div class="universe"></div>
     <div class="stars" id="starField"></div>
 
-    <header class="cosmic-header">
-        <div class="logo">The First Spark</div>
-        <div class="nav-hint">hover to reveal cosmic meaning</div>
-    </header>
+    <nav id="nav">
+        <a href="/" class="nav-logo">THE FIRST SPARK</a>
+        <div class="nav-right">
+            <a href="free-tools.html" class="nav-link">Free Tools</a>
+            <a href="https://soul-maps.thefirstspark.shop/" class="nav-link" target="_blank" rel="noopener">Archive</a>
+            <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="nav-cta" target="_blank" rel="noopener">Soul Map · $22</a>
+        </div>
+    </nav>
 
     <main class="cosmos">
         <section class="title-section">
-            <h1>NUMBERS</h1>
-            <p>cosmic frequencies encoded in form</p>
+            <div class="hero-badge">◈ Free Tool · No signup</div>
+            <h1>Your Numbers Aren't Random</h1>
+            <p>Every digit in your birth data carries a frequency. Find yours, then see where you fit in the Soul Map network.</p>
         </section>
+
+        <section class="code-panel" aria-labelledby="code-heading">
+            <h2 id="code-heading">Find Your Code</h2>
+            <p class="panel-lede">Enter your birth date and full name — the same inputs that power every Soul Map in the archive.</p>
+            <form class="code-form" id="codeForm">
+                <div class="field-group">
+                    <label class="field-label" for="birthDate">Birth Date</label>
+                    <input class="code-input" type="date" id="birthDate" name="birthDate" required>
+                </div>
+                <div class="field-group">
+                    <label class="field-label" for="birthName">Full Birth Name</label>
+                    <input class="code-input" type="text" id="birthName" name="birthName" placeholder="As it appears on your birth certificate" required autocomplete="name">
+                </div>
+                <button type="submit" class="btn-reveal">Reveal My Numbers →</button>
+            </form>
+            <div class="your-code" id="yourCode" aria-live="polite">
+                <div class="code-cards" id="codeCards"></div>
+                <p class="fit-note" id="fitNote"></p>
+                <div class="cta-row">
+                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="btn-primary" target="_blank" rel="noopener" id="soulMapCta">Get Your Full Soul Map · $22</a>
+                    <a href="https://soul-maps.thefirstspark.shop/" class="btn-ghost" target="_blank" rel="noopener">Browse the Archive</a>
+                    <a href="https://soul-maps.thefirstspark.shop/kjp519.html" class="btn-ghost" target="_blank" rel="noopener">Read KJP's Map</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="fit-section">
+            <div class="sec-label">◈ How You Fit In</div>
+            <h2>Five Numbers. One Soul Map.</h2>
+            <p>Your free preview shows three core frequencies. A Founders Edition Soul Map weaves all five with your full natal chart.</p>
+            <div class="fit-grid">
+                <div class="fit-item">
+                    <div class="fit-num">01 · Life Path</div>
+                    <h3>Your Journey</h3>
+                    <p>Calculated from birth date. Your soul's primary lesson and direction in this lifetime.</p>
+                </div>
+                <div class="fit-item">
+                    <div class="fit-num">02 · Expression</div>
+                    <h3>Your Voice</h3>
+                    <p>From your full name. How you show up, create, and move through the world.</p>
+                </div>
+                <div class="fit-item">
+                    <div class="fit-num">03 · Soul Urge</div>
+                    <h3>Your Core Desire</h3>
+                    <p>Vowels in your name. What your inner self actually wants — beneath the surface.</p>
+                </div>
+                <div class="fit-item">
+                    <div class="fit-num">04 · Personality</div>
+                    <h3>Your Mask</h3>
+                    <p>Consonants in your name. How others first experience you before they know the whole story.</p>
+                </div>
+                <div class="fit-item">
+                    <div class="fit-num">05 · Personal Year</div>
+                    <h3>Your Current Cycle</h3>
+                    <p>Where you are right now in your 9-year numerological rhythm. Changes every birthday.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="galaxy-intro" id="galaxy">
+            <h2>The Number Galaxy</h2>
+            <p>Hover any frequency to decode its meaning. Your numbers glow gold once revealed above.</p>
+        </div>
 
         <div class="galaxy-grid" id="galaxyGrid"></div>
     </main>
 
     <footer class="cosmic-footer">
-        <a href="https://thefirstspark.shop">thefirstspark.shop</a>
+        <div class="footer-cta">
+            <h3>Ready for the full decode?</h3>
+            <p>Life Path, Expression, Soul Urge, Personality, Personal Year — woven with astrology on a private page you keep forever. Delivered in ~5 minutes.</p>
+            <div class="cta-row" style="justify-content:center">
+                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="btn-primary" target="_blank" rel="noopener">Claim Founders Edition →</a>
+                <a href="free-tools.html" class="btn-ghost">All 8 Free Tools</a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="free-tools.html">Free Tools</a>
+            <a href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener">Soul Maps Archive</a>
+            <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener">Free Community</a>
+            <a href="https://sparkverse.thefirstspark.shop" target="_blank" rel="noopener">Sparkverse</a>
+        </div>
+        <p class="footer-copy">© The First Spark · Reality is programmable.</p>
     </footer>
 
     <script>
@@ -557,10 +1077,148 @@
             }
         }
 
+        const LETTER_VALUES = {
+            A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,
+            J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,
+            S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8
+        };
+
+        let userNumbers = {};
+        const bodyByNumber = {};
+
+        function reduceToDigit(n) {
+            while (n > 9 && n !== 11 && n !== 22 && n !== 33) {
+                n = String(n).split('').reduce((a, b) => a + parseInt(b, 10), 0);
+            }
+            return n;
+        }
+
+        function calculateLifePath(birthDate) {
+            const d = new Date(birthDate + 'T12:00:00');
+            const m = d.getMonth() + 1;
+            const day = d.getDate();
+            const y = d.getFullYear();
+            return reduceToDigit(reduceToDigit(m) + reduceToDigit(day) + reduceToDigit(y));
+        }
+
+        function calculateExpression(name) {
+            const letters = name.toUpperCase().replace(/[^A-Z]/g, '');
+            return reduceToDigit([...letters].reduce((s, l) => s + (LETTER_VALUES[l] || 0), 0));
+        }
+
+        function calculateSoulUrge(name) {
+            const vowels = name.toUpperCase().replace(/[^AEIOU]/g, '');
+            return reduceToDigit([...vowels].reduce((s, l) => s + (LETTER_VALUES[l] || 0), 0));
+        }
+
+        function calculatePersonality(name) {
+            const consonants = name.toUpperCase().replace(/[^BCDFGHJKLMNPQRSTVWXYZ]/g, '');
+            return reduceToDigit([...consonants].reduce((s, l) => s + (LETTER_VALUES[l] || 0), 0));
+        }
+
+        function getKeyword(num) {
+            const data = numberMeanings[num];
+            return data ? data.keyword : 'Your Frequency';
+        }
+
+        function getColor(num) {
+            const data = numberMeanings[num];
+            return data ? data.color : '#fbbf24';
+        }
+
+        function highlightUserNumbers() {
+            const nums = new Set(Object.values(userNumbers).filter(Boolean));
+            Object.entries(bodyByNumber).forEach(([num, body]) => {
+                const n = Number(num);
+                const roles = [];
+                if (userNumbers.lifePath === n) roles.push('Life Path');
+                if (userNumbers.expression === n) roles.push('Expression');
+                if (userNumbers.soulUrge === n) roles.push('Soul Urge');
+                if (userNumbers.personality === n) roles.push('Personality');
+
+                body.classList.toggle('yours', roles.length > 0);
+                body.classList.toggle('dimmed', nums.size > 0 && roles.length === 0);
+
+                const existingTag = body.querySelector('.yours-tag');
+                if (existingTag) existingTag.remove();
+                if (roles.length) {
+                    const tag = document.createElement('div');
+                    tag.className = 'yours-tag';
+                    tag.textContent = roles.join(' · ');
+                    body.appendChild(tag);
+                }
+            });
+
+            const firstYours = document.querySelector('.celestial-body.yours');
+            if (firstYours) {
+                setTimeout(() => {
+                    firstYours.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            }
+        }
+
+        function renderYourCode() {
+            const panel = document.getElementById('yourCode');
+            const cards = document.getElementById('codeCards');
+            const fitNote = document.getElementById('fitNote');
+
+            const entries = [
+                { key: 'lifePath', role: 'Life Path' },
+                { key: 'expression', role: 'Expression' },
+                { key: 'soulUrge', role: 'Soul Urge' },
+                { key: 'personality', role: 'Personality' }
+            ];
+
+            cards.innerHTML = entries.map(({ key, role }) => {
+                const num = userNumbers[key];
+                const color = getColor(num);
+                return `
+                    <div class="code-card active" style="--card-color:${color}">
+                        <div class="card-role">${role}</div>
+                        <div class="card-num" style="color:${color}">${num}</div>
+                        <div class="card-keyword">${getKeyword(num)}</div>
+                    </div>
+                `;
+            }).join('');
+
+            const lp = userNumbers.lifePath;
+            const ex = userNumbers.expression;
+            fitNote.innerHTML = `You're running <strong>Life Path ${lp}</strong> (${getKeyword(lp)}) with <strong>Expression ${ex}</strong> (${getKeyword(ex)}). Thousands of mapped souls share fragments of your code — browse the archive to find your frequency twins, or get your full decode with astrology woven in.`;
+
+            panel.classList.add('visible');
+            highlightUserNumbers();
+
+            if (typeof gtag === 'function') {
+                gtag('event', 'numbers_revealed', {
+                    life_path: lp,
+                    expression: ex,
+                    soul_urge: userNumbers.soulUrge
+                });
+            }
+        }
+
+        function handleCodeSubmit(e) {
+            e.preventDefault();
+            const birthDate = document.getElementById('birthDate').value;
+            const birthName = document.getElementById('birthName').value.trim();
+            if (!birthDate || !birthName) return;
+
+            userNumbers = {
+                lifePath: calculateLifePath(birthDate),
+                expression: calculateExpression(birthName),
+                soulUrge: calculateSoulUrge(birthName),
+                personality: calculatePersonality(birthName)
+            };
+
+            renderYourCode();
+            document.getElementById('galaxy').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
         // Create celestial body for each number
         function createCelestialBody(num, data) {
             const body = document.createElement('div');
             body.className = 'celestial-body';
+            body.dataset.number = num;
             body.style.setProperty('--glow-color', data.color + '66');
             body.style.setProperty('--accent-color', data.color);
 
@@ -619,8 +1277,11 @@
             
             numbers.forEach(num => {
                 const body = createCelestialBody(num, numberMeanings[num]);
+                bodyByNumber[num] = body;
                 grid.appendChild(body);
             });
+
+            document.getElementById('codeForm').addEventListener('submit', handleCodeSubmit);
         }
 
         // Parallax effect on mouse move
