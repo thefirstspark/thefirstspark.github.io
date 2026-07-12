@@ -223,12 +223,44 @@
 
         /* ─── HERO ─── */
         #hero {
+            position: relative;
+            overflow: hidden;
             min-height: 100vh;
             display: flex;
             align-items: center;
             padding: 120px 0 80px;
         }
-        .wrap-hero { max-width: 1120px; }
+        .wrap-hero { max-width: 1120px; position: relative; z-index: 1; }
+        .hero-center {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .hero-center > * { animation: heroIn .8s ease both; }
+        .hero-center > *:nth-child(2) { animation-delay: .18s; }
+        .hero-question {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2rem, 5.6vw, 4rem);
+            line-height: 1.12;
+            letter-spacing: .01em;
+            color: var(--white);
+            margin: 0 auto 44px;
+            text-wrap: balance;
+        }
+        .hero-question .hero-em {
+            display: block;
+            margin-top: .12em;
+            background: linear-gradient(120deg, var(--spark), var(--nebula), var(--cyan), var(--spark));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: heroGrad 9s ease-in-out infinite;
+        }
+        @media (max-width: 900px) {
+            .hero-question { margin-bottom: 36px; }
+        }
         .hero-grid {
             display: grid;
             grid-template-columns: 1.05fr 0.95fr;
@@ -340,21 +372,21 @@
         .hero-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(48px);
+            filter: blur(80px);
             pointer-events: none;
             z-index: 0;
         }
         .hero-orb-a {
-            width: 180px; height: 180px;
-            top: -30px; right: -20px;
-            background: rgba(139,92,246,.22);
-            animation: orbDrift 14s ease-in-out infinite;
+            width: 460px; height: 460px;
+            top: 8%; right: 6%;
+            background: rgba(139,92,246,.20);
+            animation: orbDrift 16s ease-in-out infinite;
         }
         .hero-orb-b {
-            width: 140px; height: 140px;
-            bottom: 20px; left: -30px;
-            background: rgba(251,191,36,.14);
-            animation: orbDrift 18s ease-in-out infinite reverse;
+            width: 380px; height: 380px;
+            bottom: 6%; left: 4%;
+            background: rgba(251,191,36,.12);
+            animation: orbDrift 20s ease-in-out infinite reverse;
         }
         @keyframes orbDrift {
             0%, 100% { transform: translate(0, 0) scale(1); }
@@ -567,16 +599,17 @@
         .hero-proof-price:hover,
         .hero-proof-archive:hover { color: var(--white); border-color: var(--spark); }
 
-        .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+        .hero-center .hero-ctas { justify-content: center; }
         #hero .btn-p {
-            font-size: .56rem;
-            padding: 10px 20px;
-            letter-spacing: .14em;
+            font-size: .72rem;
+            padding: 18px 40px;
+            letter-spacing: .16em;
         }
         #hero .btn-g {
-            font-size: .56rem;
-            padding: 9px 18px;
-            letter-spacing: .14em;
+            font-size: .72rem;
+            padding: 17px 38px;
+            letter-spacing: .16em;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -591,6 +624,42 @@
             letter-spacing: .12em;
             color: rgba(255,255,255,.28);
             margin-top: 4px;
+        }
+
+        /* Origin story */
+        #origin-story { padding: 96px 0; }
+        .origin-inner { max-width: 760px; margin: 0 auto; }
+        .origin-body {
+            margin-top: 28px;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+        }
+        .origin-body p {
+            font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+            line-height: 1.7;
+            color: var(--dim);
+            margin-bottom: 22px;
+        }
+        .origin-body strong { color: var(--white); font-weight: 600; }
+        .origin-body em { color: var(--spark); font-style: italic; }
+        .origin-line {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 1.9rem) !important;
+            font-weight: 700;
+            line-height: 1.3 !important;
+            color: var(--white) !important;
+            letter-spacing: .01em;
+            padding: 6px 0 6px 22px;
+            border-left: 2px solid var(--spark);
+            margin: 34px 0 !important;
+        }
+        .origin-ctas {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        @media (max-width: 640px) {
+            #origin-story { padding: 68px 0; }
         }
 
         .btn-p {
@@ -2141,40 +2210,47 @@
 
     <!-- HERO -->
     <section id="hero">
+        <div class="hero-orb hero-orb-a" aria-hidden="true"></div>
+        <div class="hero-orb hero-orb-b" aria-hidden="true"></div>
         <div class="wrap wrap-hero">
-            <div class="hero-grid">
-                <div class="hero-copy">
-                    <div class="hero-badge">◈ &nbsp; Soul Maps · $22 Founders Edition · ID True Crime</div>
-                    <h1 class="hero-headline">
-                        Your numbers<br>aren't random.<br><span class="hero-rotate" id="heroRotate" aria-live="polite">Read your code.</span>
-                    </h1>
-                    <div class="hero-decode" aria-label="Live archive decode">
-                        <span class="hero-decode-dot" aria-hidden="true"></span>
-                        <span class="hero-decode-label">Live decode</span>
-                        <span class="hero-decode-text" id="heroDecodeText">Scanning today's featured map…</span>
-                    </div>
-                    <p class="hero-sub">A private Soul Map page — Life Path, Expression, Soul Urge, astrology — hand-decoded by KJP. Delivered in ~5 minutes. Free Sparkverse community included.</p>
-                    <div class="grasp-strip" aria-label="How it works">
-                        <div class="grasp-item"><strong>①</strong> Read real maps free</div>
-                        <div class="grasp-item"><strong>②</strong> Get yours · $22</div>
-                        <div class="grasp-item"><strong>③</strong> Community included</div>
-                    </div>
-                    <p class="hero-story">Cold case solved in 2020 — killer across the street. 60+ consciousness tools built from that fracture, not a psychic hotline.</p>
-                    <div class="hero-ctas">
-                        <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Founders Edition · $22</a>
-                        <a href="https://youtu.be/-DaJ6J_PBe0?si=JBe_eLUiEgmq3tdd" target="_blank" rel="noopener noreferrer" class="btn-g">Two Fires · Watch</a>
-                        <a href="numbers.html" class="btn-g">Find your numbers</a>
-                        <a href="https://soul-maps.thefirstspark.shop/kjp519.html" target="_blank" rel="noopener noreferrer" class="btn-g">Read a map</a>
-                        <span class="hero-cta-note">Private URL · Founders Edition · ~5 min delivery · Whop checkout</span>
-                    </div>
-                </div>
-                <div class="hero-proof-wrap">
-                    <div class="hero-orb hero-orb-a" aria-hidden="true"></div>
-                    <div class="hero-orb hero-orb-b" aria-hidden="true"></div>
-                    <div class="hero-proof" id="heroProof" aria-label="Proof: Investigation Discovery feature and live Soul Map preview"></div>
+            <div class="hero-center">
+                <h1 class="hero-question">
+                    What if your entire life was written in
+                    <span class="hero-em">code you never learned to read?</span>
+                </h1>
+                <div class="hero-ctas">
+                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Decode My Soul Map</a>
+                    <a href="free-tools.html" class="btn-g">Explore The Free Tools</a>
                 </div>
             </div>
             <div class="scroll-hint">Explore</div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- ORIGIN STORY -->
+    <section id="origin-story">
+        <div class="wrap">
+            <div class="origin-inner">
+                <div class="sec-label">◈ &nbsp; The Origin</div>
+                <h2 class="sec-title">It started with a code no one could read.</h2>
+
+                <div class="origin-body">
+                    <p>In 2020, a cold case near my home was finally cracked — decades after it went dark. <strong>I didn't solve it.</strong> Detectives did, using forensic DNA technology that could finally read what had been sitting in plain sight the whole time.</p>
+
+                    <p class="origin-line">The killer had been living across the street.</p>
+
+                    <p>That broke something open in me. If the truth could hide that long — encoded in data no one had the tools to read until the right technology arrived — what else is written in code we walk past every day? Our numbers. Our patterns. Our lives.</p>
+
+                    <p>I didn't start a psychic hotline. I started building. 60+ consciousness tools later, The First Spark exists to answer one question: <em>what if you could finally read your own code?</em></p>
+                </div>
+
+                <div class="origin-ctas">
+                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Decode My Soul Map</a>
+                    <a href="free-tools.html" class="btn-g">Explore The Free Tools</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -3382,7 +3458,8 @@
     <script src="/js/soul-map-rotation.js"></script>
     <script src="/js/soul-map-rotation-ui.js"></script>
     <script>
-    SoulMapRotation.renderHeroProof(document.getElementById('heroProof'));
+    var heroProofEl = document.getElementById('heroProof');
+    if (heroProofEl) SoulMapRotation.renderHeroProof(heroProofEl);
     SoulMapRotation.renderSpotlight(document.getElementById('mapSpotlight'), { count: 3 });
 
     (function initHeroMotion() {
