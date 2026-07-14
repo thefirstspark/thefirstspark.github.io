@@ -141,6 +141,80 @@
             pointer-events: none;
         }
 
+        /* Twinkling starfield — two parallax layers */
+        .cosmos-stars {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-repeat: repeat;
+            background-size: 340px 340px;
+            background-image:
+                radial-gradient(1px 1px at 24% 18%, rgba(255,255,255,.9), transparent),
+                radial-gradient(1px 1px at 68% 42%, rgba(125,249,255,.8), transparent),
+                radial-gradient(1.4px 1.4px at 41% 77%, rgba(255,255,255,.85), transparent),
+                radial-gradient(1px 1px at 85% 23%, rgba(255,255,255,.7), transparent),
+                radial-gradient(1px 1px at 12% 62%, rgba(183,148,255,.8), transparent),
+                radial-gradient(1.2px 1.2px at 55% 9%, rgba(255,255,255,.75), transparent),
+                radial-gradient(1px 1px at 91% 71%, rgba(255,255,255,.7), transparent),
+                radial-gradient(1px 1px at 33% 38%, rgba(255,255,255,.6), transparent);
+            opacity: .55;
+            animation: starTwinkle 7s ease-in-out infinite, starDrift 240s linear infinite;
+        }
+        .cosmos-stars-2 {
+            background-size: 500px 500px;
+            background-image:
+                radial-gradient(1.6px 1.6px at 15% 55%, rgba(255,255,255,.95), transparent),
+                radial-gradient(1px 1px at 78% 15%, rgba(255,255,255,.7), transparent),
+                radial-gradient(1.8px 1.8px at 52% 84%, rgba(125,249,255,.9), transparent),
+                radial-gradient(1px 1px at 37% 27%, rgba(255,255,255,.65), transparent),
+                radial-gradient(1.4px 1.4px at 88% 60%, rgba(251,191,36,.7), transparent);
+            opacity: .7;
+            animation: starTwinkle 5s ease-in-out .8s infinite, starDrift 160s linear infinite reverse;
+        }
+        @keyframes starTwinkle {
+            0%, 100% { opacity: .35; }
+            50%      { opacity: .8; }
+        }
+        @keyframes starDrift {
+            from { background-position: 0 0; }
+            to   { background-position: 340px 200px; }
+        }
+
+        /* Occasional shooting stars */
+        .cosmos-shooting { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+        .shooting-star {
+            position: absolute;
+            width: 3px; height: 3px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 8px 2px rgba(255,255,255,.7);
+            opacity: 0;
+        }
+        .shooting-star::after {
+            content: '';
+            position: absolute;
+            top: 50%; right: 3px;
+            width: 140px; height: 1px;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, rgba(255,255,255,.75), transparent);
+        }
+        .shooting-star.s1 { top: 12%; left: 70%; animation: shoot 9s ease-in 3s infinite; }
+        .shooting-star.s2 { top: 28%; left: 88%; animation: shoot 11s ease-in 7s infinite; }
+        .shooting-star.s3 { top: 6%;  left: 45%; animation: shoot 14s ease-in 12s infinite; }
+        @keyframes shoot {
+            0%      { opacity: 0; transform: translate(0, 0) rotate(18deg); }
+            2%      { opacity: 1; }
+            9%      { opacity: 1; }
+            16%     { opacity: 0; transform: translate(-460px, 150px) rotate(18deg); }
+            100%    { opacity: 0; transform: translate(-460px, 150px) rotate(18deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cosmos-stars { animation: none !important; }
+            .shooting-star { display: none; }
+        }
+
         /* Drifting nebula — living aurora blobs */
         .cosmos-aurora {
             position: fixed;
@@ -1240,6 +1314,8 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
+    <div class="cosmos-stars" aria-hidden="true"></div>
+    <div class="cosmos-stars cosmos-stars-2" aria-hidden="true"></div>
     <div class="cosmos-aurora" aria-hidden="true">
         <span class="aurora-blob b1"></span>
         <span class="aurora-blob b2"></span>
@@ -1249,12 +1325,17 @@
     <canvas id="cosmos"></canvas>
     <div class="cosmos-veil" aria-hidden="true"></div>
     <div class="cosmos-grain" aria-hidden="true"></div>
+    <div class="cosmos-shooting" aria-hidden="true">
+        <span class="shooting-star s1"></span>
+        <span class="shooting-star s2"></span>
+        <span class="shooting-star s3"></span>
+    </div>
 
     <!-- NAV -->
     <nav id="nav">
         <a href="/" class="nav-logo">THE FIRST SPARK</a>
         <div class="nav-right">
-            <a href="#movement" class="nav-invest">Join Movement</a>
+            <a href="#origin-story" class="nav-invest">The Story</a>
             <a href="affiliate-kit.html" class="nav-invest">Affiliate Kit</a>
             <a href="#community" class="nav-invest">Free Community</a>
             <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="nav-cta">Soul Map · $22</a>
