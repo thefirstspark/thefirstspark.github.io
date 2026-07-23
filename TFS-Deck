@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The First Spark — Soul Maps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,900&family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#07070F;
+  --field:#0C0C18;
+  --panel:#13132A;
+  --panel-2:#1B1B36;
+  --edge:#26264A;
+  --bone:#F4F5FA;
+  --silver:#C6CBDA;
+  --dim:#6E7590;
+
+  /* Color Codex — 11 canonical tiers */
+  --c1:#E03B3B; --c2:#F07A2D; --c3:#F2B33D; --c4:#4CB963; --c5:#2FC6C6;
+  --c6:#3D7BE0; --c7:#5A4BE0; --c8:#8B4BE0; --c9:#C24BD6; --c10:#F26D9B; --c11:#F4F5FA;
+
+  --display:'Fraunces',Georgia,'Times New Roman',serif;
+  --body:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+
+  --gutter:clamp(1.25rem,5vw,5.5rem);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void); color:var(--bone);
+  font-family:var(--body); font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--c8);color:#fff}
+:focus-visible{outline:2px solid var(--c5);outline-offset:4px;border-radius:2px}
+
+/* ---------- ambient field ---------- */
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.nebula{
+  position:fixed;z-index:0;pointer-events:none;border-radius:50%;
+  filter:blur(90px);opacity:.5;
+}
+.nebula.a{width:44vw;height:44vw;top:-12vw;left:-8vw;
+  background:radial-gradient(circle,rgba(139,75,224,.42),transparent 68%)}
+.nebula.b{width:52vw;height:52vw;bottom:-20vw;right:-14vw;
+  background:radial-gradient(circle,rgba(47,198,198,.26),transparent 68%)}
+.nebula.c{width:34vw;height:34vw;top:38%;right:24%;
+  background:radial-gradient(circle,rgba(242,109,155,.18),transparent 70%)}
+
+/* ---------- scaffold ---------- */
+.deck{position:relative;z-index:2;scroll-snap-type:y proximity}
+.slide{
+  min-height:100vh;scroll-snap-align:start;
+  padding:clamp(4.5rem,9vh,7rem) var(--gutter) clamp(3.5rem,7vh,5rem);
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;max-width:1500px;margin:0 auto;
+}
+
+/* ---------- HUD ---------- */
+.hud{
+  position:fixed;right:clamp(.65rem,2vw,1.6rem);top:50%;transform:translateY(-50%);
+  z-index:40;display:flex;flex-direction:column;gap:.68rem;align-items:center;
+}
+.hud button{
+  width:9px;height:9px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:#2A2A4C;transition:transform .3s cubic-bezier(.2,.9,.3,1),box-shadow .3s,background .3s;
+}
+.hud button:hover{transform:scale(1.65)}
+.hud button[aria-current="true"]{transform:scale(1.9)}
+.mark{
+  position:fixed;left:var(--gutter);top:1.7rem;z-index:40;
+  font-family:var(--body);font-size:.62rem;font-weight:500;
+  letter-spacing:.42em;color:var(--silver);text-transform:uppercase;
+  display:flex;align-items:center;gap:.7rem;
+}
+.mark i{width:7px;height:7px;border-radius:50%;background:var(--c3);display:block;
+  box-shadow:0 0 14px var(--c3);animation:pulse 3.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.32}}
+.store{
+  position:fixed;right:var(--gutter);top:1.42rem;z-index:41;
+  display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;
+  font-family:var(--body);font-size:.62rem;font-weight:500;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--silver);
+  border:1px solid var(--edge);border-radius:999px;padding:.52rem 1rem .52rem .85rem;
+  background:rgba(12,12,24,.62);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+  transition:color .4s ease,border-color .4s ease,transform .4s cubic-bezier(.16,1,.3,1),
+             box-shadow .4s ease;
+}
+.store i{
+  width:6px;height:6px;border-radius:50%;background:var(--c3);flex:none;
+  box-shadow:0 0 10px var(--c3);transition:box-shadow .4s ease;
+}
+.store u{text-decoration:none;transition:transform .4s cubic-bezier(.16,1,.3,1);display:block}
+.store:hover{
+  color:var(--bone);border-color:var(--c3);transform:translateY(-2px);
+  box-shadow:0 10px 30px -12px rgba(242,179,61,.55);
+}
+.store:hover i{box-shadow:0 0 18px 3px var(--c3)}
+.store:hover u{transform:translate(2px,-2px)}
+
+.counter{
+  position:fixed;right:clamp(.65rem,2vw,1.6rem);bottom:1.6rem;z-index:40;
+  font-family:var(--mono);font-size:.62rem;color:var(--dim);letter-spacing:.14em;
+}
+
+/* ---------- type ---------- */
+.eyebrow{
+  font-size:.6rem;font-weight:500;letter-spacing:.42em;text-transform:uppercase;
+  margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:currentColor;opacity:.55}
+h1{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(3.1rem,10.5vw,9.4rem);line-height:.82;letter-spacing:-.035em;
+}
+h2{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(1.85rem,4.6vw,3.7rem);line-height:1.02;letter-spacing:-.022em;
+  max-width:17ch;
+}
+h2 em{font-style:italic;font-weight:300}
+.lede{
+  font-size:clamp(.94rem,1.28vw,1.13rem);line-height:1.62;color:var(--silver);
+  max-width:62ch;margin-top:1.4rem;font-weight:300;
+}
+.note{font-size:.72rem;color:var(--dim);letter-spacing:.04em;line-height:1.6}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* =========================================================
+   01 — SINGULARITY / COVER
+   ========================================================= */
+.cover{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.cover-l{position:relative;z-index:3}
+h1 .glow{
+  display:block;
+  background:linear-gradient(96deg,var(--c11) 6%,var(--c8) 46%,var(--c5) 78%,var(--c3) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.tagline{
+  font-family:var(--display);font-style:italic;font-weight:300;
+  font-size:clamp(1.05rem,2.05vw,1.62rem);color:var(--c3);
+  margin-top:1.7rem;letter-spacing:-.01em;
+}
+.byline{margin-top:2.6rem;padding-top:1.5rem;border-top:1px solid var(--edge);max-width:34rem}
+.byline strong{font-weight:500;font-size:.88rem;letter-spacing:.02em}
+.byline span{display:block;color:var(--dim);font-size:.78rem;margin-top:.42rem;letter-spacing:.05em}
+
+/* the black hole */
+.hole-wrap{position:relative;display:grid;place-items:center;aspect-ratio:1;
+  min-height:min(56vh,460px);perspective:900px}
+.hole{position:relative;width:min(30vw,340px);aspect-ratio:1;display:grid;place-items:center;
+  cursor:crosshair}
+.disk{
+  position:absolute;inset:-34%;border-radius:50%;
+  background:conic-gradient(from 0deg,
+    transparent 0deg,var(--c1) 24deg,var(--c3) 62deg,var(--c11) 96deg,
+    var(--c5) 138deg,var(--c8) 196deg,var(--c9) 246deg,transparent 316deg);
+  filter:blur(20px);opacity:.72;
+  animation:spin 16s linear infinite;
+  transition:filter .6s ease,opacity .6s ease;
+}
+.disk.two{inset:-14%;filter:blur(9px);opacity:.62;animation-duration:9s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.photon{
+  position:absolute;inset:2%;border-radius:50%;
+  box-shadow:0 0 0 1px rgba(244,245,250,.55),0 0 42px 5px rgba(139,75,224,.55),
+             inset 0 0 34px 3px rgba(47,198,198,.28);
+}
+.core{
+  position:relative;width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,#000 62%,rgba(0,0,0,.86) 82%,transparent 100%);
+  display:grid;place-items:center;z-index:2;
+}
+.core small{
+  font-family:var(--mono);font-size:.56rem;letter-spacing:.32em;color:var(--dim);
+  text-transform:uppercase;opacity:0;transition:opacity .5s ease;text-align:center;line-height:1.9
+}
+.hole:hover .core small{opacity:1}
+.hole:hover .disk{filter:blur(11px);opacity:1}
+.hole-cap{
+  position:absolute;bottom:-.4rem;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;color:var(--dim);white-space:nowrap
+}
+
+/* =========================================================
+   shared cards
+   ========================================================= */
+.grid{display:grid;gap:clamp(.7rem,1.1vw,1rem);margin-top:clamp(1.8rem,4vh,3rem)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+
+.card{
+  position:relative;background:var(--panel);border:1px solid var(--edge);
+  border-radius:15px;padding:1.5rem 1.35rem;overflow:hidden;
+  transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .45s,background .45s;
+}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:15px;pointer-events:none;
+  background:radial-gradient(340px circle at var(--mx,50%) var(--my,0%),
+    color-mix(in srgb,var(--tone) 20%,transparent),transparent 62%);
+  opacity:0;transition:opacity .45s ease;
+}
+.card:hover{transform:translateY(-7px);border-color:color-mix(in srgb,var(--tone) 55%,var(--edge));
+  background:var(--panel-2)}
+.card:hover::after{opacity:1}
+.card h3{
+  font-family:var(--display);font-weight:600;font-size:1.06rem;letter-spacing:-.01em;
+  margin-bottom:.6rem;display:flex;align-items:center;gap:.62rem;
+}
+.card h3 i{width:9px;height:9px;border-radius:50%;background:var(--tone);flex:none;
+  box-shadow:0 0 0 0 var(--tone);transition:box-shadow .45s ease}
+.card:hover h3 i{box-shadow:0 0 16px 2px var(--tone)}
+.card p{font-size:.815rem;line-height:1.68;color:var(--silver);font-weight:300}
+.card .k{
+  position:absolute;top:1.15rem;right:1.25rem;font-family:var(--mono);
+  font-size:.58rem;color:var(--dim);letter-spacing:.1em;
+  opacity:0;transform:translateX(6px);transition:opacity .4s ease,transform .4s ease;
+}
+.card:hover .k{opacity:1;transform:none}
+
+/* =========================================================
+   04 — the specimen (sample Soul Map)
+   ========================================================= */
+.spec-wrap{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(1.2rem,3vw,2.6rem);
+  margin-top:clamp(1.4rem,3.5vh,2.4rem);align-items:start}
+
+.layers{display:flex;flex-direction:column;gap:2px}
+.layer{
+  display:flex;align-items:center;gap:.75rem;padding:.62rem .8rem;border-radius:9px;
+  cursor:pointer;border:1px solid transparent;
+  transition:background .35s ease,border-color .35s ease,transform .35s cubic-bezier(.16,1,.3,1);
+}
+.layer:hover,.layer.on{background:var(--panel);border-color:color-mix(in srgb,var(--tone) 46%,var(--edge));
+  transform:translateX(5px)}
+.layer i{width:8px;height:8px;border-radius:50%;background:var(--tone);flex:none;
+  transition:box-shadow .35s ease}
+.layer:hover i,.layer.on i{box-shadow:0 0 13px 2px var(--tone)}
+.layer b{font-family:var(--body);font-weight:400;font-size:.83rem;letter-spacing:.01em}
+.layer em{margin-left:auto;font-family:var(--mono);font-size:.55rem;color:var(--dim);
+  font-style:normal;letter-spacing:.12em}
+
+.spec{
+  border:1px solid var(--edge);border-radius:18px;overflow:hidden;
+  background:linear-gradient(168deg,var(--panel) 0%,rgba(12,12,24,.94) 100%);
+  box-shadow:0 32px 90px -30px rgba(0,0,0,.9);
+}
+.spec-head{
+  padding:1.15rem 1.4rem;border-bottom:1px solid var(--edge);
+  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;
+}
+.spec-head h3{font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:-.01em}
+.spec-head p{font-family:var(--mono);font-size:.55rem;color:var(--dim);letter-spacing:.14em;
+  text-transform:uppercase}
+.spec-body{padding:1.25rem 1.4rem 1.5rem}
+
+.blk{
+  padding:.85rem .95rem;border-radius:11px;border:1px solid transparent;margin-bottom:.42rem;
+  transition:background .4s ease,border-color .4s ease;
+}
+.blk.on{background:rgba(255,255,255,.032);border-color:color-mix(in srgb,var(--tone) 52%,transparent)}
+.blk h5{
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dim);font-weight:400;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem;
+}
+.blk.on h5{color:var(--tone)}
+
+.hero-row{display:flex;gap:1.5rem;align-items:flex-end;flex-wrap:wrap}
+.hero-row .sigval{
+  font-family:var(--mono);font-weight:700;font-size:clamp(1.15rem,2.5vw,1.7rem);
+  letter-spacing:.05em;color:var(--bone);
+}
+.hero-row .hz{font-family:var(--display);font-weight:900;font-size:clamp(1.3rem,2.9vw,2rem);
+  color:var(--c8);letter-spacing:-.02em;line-height:1}
+
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:.55rem .9rem}
+.pair{display:flex;flex-direction:column;gap:.2rem}
+.pair span{font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;color:var(--dim);
+  text-transform:uppercase}
+.pair b{font-size:.88rem;font-weight:500;letter-spacing:.01em}
+
+.swatch-row{display:flex;align-items:center;gap:.7rem}
+.awaiting{
+  display:inline-flex;align-items:center;gap:.55rem;
+  border:1px dashed #33335C;border-radius:8px;padding:.4rem .75rem;
+  font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;color:var(--dim);
+  text-transform:uppercase;
+}
+.awaiting::before{content:"";width:14px;height:14px;border-radius:4px;
+  background:repeating-linear-gradient(45deg,#22224A 0 4px,transparent 4px 8px)}
+
+.lineage{display:flex;flex-direction:column;gap:.3rem}
+.lineage b{font-size:.9rem;font-weight:500}
+.lineage span{font-size:.75rem;color:var(--silver);font-weight:300;line-height:1.55}
+.lineage .same{
+  margin-top:.5rem;font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;color:var(--c5);
+}
+.interp{font-size:.815rem;line-height:1.7;color:var(--silver);font-weight:300}
+.interp em{font-style:italic;color:var(--bone)}
+
+/* =========================================================
+   05 — Codex spectrum
+   ========================================================= */
+.codex{display:flex;gap:5px;height:clamp(9rem,26vh,15rem);margin-top:2.4rem}
+.tier{
+  flex:1;border-radius:11px;position:relative;cursor:pointer;
+  transition:flex .55s cubic-bezier(.16,1,.3,1),opacity .45s ease,box-shadow .45s ease;
+  display:flex;align-items:flex-end;padding:.85rem;overflow:hidden;
+}
+.tier span{
+  font-family:var(--mono);font-size:.6rem;color:rgba(7,7,15,.78);font-weight:700;
+  letter-spacing:.08em;opacity:0;transform:translateY(8px);
+  transition:opacity .4s ease .1s,transform .4s ease .1s;white-space:nowrap;
+}
+.codex:hover .tier{opacity:.34}
+.codex .tier:hover{flex:3.1;opacity:1;box-shadow:0 16px 46px -12px currentColor}
+.tier:hover span{opacity:1;transform:none}
+
+/* =========================================================
+   05 — Quantum signature
+   ========================================================= */
+.sigbox{
+  margin-top:2.2rem;border:1px solid var(--edge);border-radius:19px;
+  background:linear-gradient(180deg,var(--panel) 0%,rgba(19,19,42,.4) 100%);
+  padding:clamp(1.8rem,4.5vh,3.1rem) clamp(1.2rem,3vw,2.6rem);
+  text-align:center;cursor:pointer;position:relative;overflow:hidden;
+  transition:border-color .5s ease;
+}
+.sigbox:hover{border-color:var(--c8)}
+.sig{
+  font-family:var(--mono);font-weight:700;
+  font-size:clamp(1.7rem,6.4vw,4.4rem);letter-spacing:.055em;line-height:1;
+  display:flex;justify-content:center;align-items:center;gap:clamp(.5rem,2vw,1.5rem);
+  flex-wrap:wrap;
+}
+.sig b{font-weight:700}
+.sig .b1{color:var(--c5)} .sig .b2{color:var(--c8)} .sig .b3{color:var(--c3)}
+.sig .dot{color:var(--dim);font-weight:400}
+.siglabels{
+  display:flex;justify-content:center;gap:clamp(1rem,6vw,5.4rem);margin-top:1.15rem;
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.24em;color:var(--dim);
+  text-transform:uppercase;flex-wrap:wrap;
+}
+.sighint{margin-top:1.5rem;font-size:.74rem;color:var(--dim);letter-spacing:.03em}
+.sighint b{color:var(--c5);font-weight:400}
+
+/* =========================================================
+   06 — souls on chain
+   ========================================================= */
+.chain{
+  position:relative;margin-top:clamp(2rem,5vh,3.4rem);
+  padding:clamp(2.2rem,6vh,3.6rem) 0;
+}
+.rail{
+  position:absolute;left:0;right:0;top:50%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--edge) 12%,var(--edge) 88%,transparent);
+}
+.pulse{
+  position:absolute;top:50%;left:0;width:7px;height:7px;margin-top:-3px;border-radius:50%;
+  background:var(--c5);box-shadow:0 0 18px 4px var(--c5);
+  animation:travel 6.5s cubic-bezier(.6,0,.4,1) infinite;
+}
+@keyframes travel{0%{left:2%;opacity:0}8%{opacity:1}92%{opacity:1}100%{left:98%;opacity:0}}
+.souls{position:relative;display:flex;justify-content:space-between;align-items:center}
+.soul{
+  position:relative;width:clamp(46px,7vw,74px);aspect-ratio:1;border-radius:50%;
+  background:var(--field);border:1px solid var(--edge);
+  display:grid;place-items:center;cursor:pointer;
+  transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .45s,box-shadow .45s;
+}
+.soul i{width:38%;aspect-ratio:1;border-radius:50%;background:var(--tone);
+  transition:box-shadow .45s ease,transform .45s ease}
+.soul:hover{transform:scale(1.18);border-color:var(--tone);
+  box-shadow:0 0 0 6px color-mix(in srgb,var(--tone) 12%,transparent)}
+.soul:hover i{box-shadow:0 0 22px 5px var(--tone)}
+.soul::before{
+  content:"BOUND";position:absolute;top:-1.9rem;left:50%;transform:translateX(-50%) translateY(5px);
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.24em;color:var(--tone);
+  opacity:0;transition:opacity .4s ease,transform .4s ease;pointer-events:none;
+}
+.soul:hover::before{opacity:1;transform:translateX(-50%)}
+.soul::after{
+  content:attr(data-sig);position:absolute;bottom:-2.05rem;left:50%;
+  transform:translateX(-50%) translateY(-5px);
+  font-family:var(--mono);font-size:.53rem;letter-spacing:.1em;color:var(--dim);
+  opacity:0;transition:opacity .4s ease,transform .4s ease;white-space:nowrap;pointer-events:none;
+}
+.soul:hover::after{opacity:1;transform:translateX(-50%)}
+.soul.void{border-style:dashed;border-color:#2A2A4C;opacity:.42}
+.soul.void i{background:transparent;box-shadow:inset 0 0 0 1px #2A2A4C}
+.soul.void::before{content:"ERASED";color:var(--dim)}
+
+.versus{display:grid;grid-template-columns:1fr 1fr;gap:clamp(.7rem,1.1vw,1rem);margin-top:2.6rem}
+.vs{border:1px solid var(--edge);border-radius:15px;padding:1.4rem 1.35rem;background:var(--panel)}
+.vs h4{font-family:var(--display);font-weight:600;font-size:1rem;margin-bottom:.55rem;
+  display:flex;align-items:center;gap:.55rem}
+.vs h4 b{font-family:var(--mono);font-size:.9rem;font-weight:700}
+.vs.no h4 b{color:var(--c1)} .vs.yes h4 b{color:var(--c4)}
+.vs p{font-size:.805rem;line-height:1.68;color:var(--silver);font-weight:300}
+
+/* =========================================================
+   07 — pipeline
+   ========================================================= */
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem;margin-top:2.4rem}
+.step{
+  background:var(--panel);border:1px solid var(--edge);border-radius:14px;
+  padding:1.3rem 1.05rem;position:relative;
+  transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .45s,background .45s;
+}
+.step:hover{transform:translateY(-7px);border-color:var(--tone);background:var(--panel-2)}
+.step .n{font-family:var(--mono);font-size:.58rem;color:var(--dim);letter-spacing:.14em}
+.step h3{font-family:var(--display);font-weight:600;font-size:1.02rem;margin:.6rem 0 .5rem}
+.step p{font-size:.755rem;line-height:1.6;color:var(--silver);font-weight:300}
+.step .st{
+  margin-top:.95rem;font-family:var(--mono);font-size:.53rem;letter-spacing:.16em;
+  color:var(--tone);display:flex;align-items:center;gap:.4rem;
+}
+.step .st::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--tone);
+  box-shadow:0 0 9px var(--tone)}
+
+/* =========================================================
+   08 — traction
+   ========================================================= */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(.7rem,1.1vw,1rem)}
+.stat{border:1px solid var(--edge);border-radius:15px;background:var(--panel);
+  padding:1.5rem 1.3rem;transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .45s}
+.stat:hover{transform:translateY(-7px);border-color:var(--tone)}
+.stat b{
+  font-family:var(--display);font-weight:900;display:block;
+  font-size:clamp(2.1rem,4.6vw,3.5rem);line-height:1;color:var(--tone);letter-spacing:-.03em;
+}
+.stat span{display:block;margin-top:.85rem;font-size:.755rem;line-height:1.55;color:var(--silver)}
+
+.proof{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.3rem}
+.chip{
+  border:1px solid var(--edge);border-radius:999px;padding:.5rem 1rem;
+  font-size:.7rem;color:var(--silver);letter-spacing:.02em;
+  transition:border-color .4s ease,color .4s ease;
+}
+.chip:hover{border-color:var(--c5);color:var(--bone)}
+
+/* =========================================================
+   09/10 — ask + close
+   ========================================================= */
+.ask{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2.4vw,2.2rem);margin-top:2.4rem}
+.terms{border:1px solid var(--edge);border-radius:15px;background:var(--panel);padding:1.7rem 1.6rem}
+.terms dl{display:grid;grid-template-columns:auto 1fr;gap:.95rem 1.6rem}
+.terms dt{font-size:.755rem;color:var(--dim)}
+.terms dd{font-size:.815rem;font-weight:500;text-align:right}
+.backing{border:1px solid var(--edge);border-radius:15px;background:var(--panel);padding:1.7rem 1.6rem}
+.backing li{list-style:none;font-size:.83rem;line-height:1.62;color:var(--silver);
+  padding-left:1.15rem;position:relative;margin-bottom:1rem;font-weight:300}
+.backing li::before{content:"";position:absolute;left:0;top:.58em;width:5px;height:5px;
+  border-radius:50%;background:var(--tone)}
+.terms h4,.backing h4{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--c5);margin-bottom:1.3rem;font-weight:400;
+}
+.backing h4{color:var(--c3)}
+
+.cta{
+  display:inline-flex;align-items:center;gap:.75rem;margin-top:2.4rem;
+  font-family:var(--body);font-size:.85rem;font-weight:500;letter-spacing:.03em;
+  color:var(--void);background:var(--bone);border:0;border-radius:999px;
+  padding:.95rem 1.9rem;cursor:pointer;text-decoration:none;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 14px 40px -10px rgba(244,245,250,.42)}
+.cta i{width:7px;height:7px;border-radius:50%;background:var(--c8)}
+
+.closing h2{max-width:14ch}
+.spectrum-rule{display:flex;gap:5px;margin:2.6rem 0 1.8rem;max-width:22rem}
+.spectrum-rule i{height:4px;flex:1;border-radius:2px}
+
+/* ---------- responsive ---------- */
+@media(max-width:1080px){
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .pipe{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:820px){
+  .deck{scroll-snap-type:none}
+  .slide{min-height:auto;padding-top:6rem;padding-bottom:4rem}
+  .cover{grid-template-columns:1fr}
+  .hole-wrap{min-height:44vh;order:-1;margin-bottom:1.5rem}
+  .hole{width:min(58vw,240px)}
+  .g3,.g2,.versus,.ask,.spec-wrap{grid-template-columns:1fr}
+  .layer:hover,.layer.on{transform:none}
+  .hud{display:none}
+  .mark{font-size:.55rem;letter-spacing:.26em;top:1.5rem}
+  .store{font-size:.55rem;letter-spacing:.18em;padding:.46rem .8rem .46rem .7rem;top:1.28rem}
+  .codex{height:auto;flex-direction:column;gap:4px}
+  .tier{height:2.9rem;flex:none;align-items:center}
+  .tier span{opacity:1;transform:none}
+  .codex:hover .tier{opacity:1}
+  .codex .tier:hover{flex:none;box-shadow:none}
+  .souls{flex-wrap:wrap;gap:1.6rem;justify-content:center}
+  .rail,.pulse{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+<div class="nebula a"></div><div class="nebula b"></div><div class="nebula c"></div>
+
+<div class="mark"><i></i>The First Spark</div>
+<a class="store" href="https://thefirstspark.shop" target="_blank" rel="noopener"
+   aria-label="Open the store at thefirstspark.shop"><i></i>Store<u>↗</u></a>
+<nav class="hud" id="hud" aria-label="Slides"></nav>
+<div class="counter" id="counter">01 / 10</div>
+
+<main class="deck" id="deck">
+
+  <!-- 01 ============================================= -->
+  <section class="slide cover" id="s1" data-label="Singularity">
+    <div class="cover-l">
+      <p class="eyebrow rv" style="color:var(--c5)">Investor Brief · July 2026</p>
+      <h1 class="rv">Soul<span class="glow">Maps</span></h1>
+      <p class="tagline rv">Reality is programmable. Consciousness is the code.</p>
+      <p class="lede rv">A deterministic identity engine. Every human birth resolves to one permanent,
+         reproducible signature — mapped, rendered, and bound to its holder so it cannot be erased.</p>
+      <div class="byline rv">
+        <strong>Katelin Jill Puzakulics — Founder &amp; CEO</strong>
+        <span>Player One · The Original Glitch · Akron, Ohio</span>
+      </div>
+    </div>
+    <div class="hole-wrap rv">
+      <div class="hole" tabindex="0" aria-label="The void — everything unbound falls in">
+        <div class="disk"></div><div class="disk two"></div>
+        <div class="photon"></div>
+        <div class="core"><small>everything<br>unbound<br>falls in</small></div>
+      </div>
+      <p class="hole-cap">THE VOID · EVENT HORIZON OF ERASURE</p>
+    </div>
+  </section>
+
+  <!-- 02 ============================================= -->
+  <section class="slide" id="s2" data-label="The void">
+    <p class="eyebrow rv" style="color:var(--c1)">The problem</p>
+    <h2 class="rv">Identity is inherited, rented, and <em>erasable.</em></h2>
+    <p class="lede rv">People are handed a self by biology, algorithm, and platform — then given
+       no tool to author it, no way to verify it, and no guarantee it survives.</p>
+    <div class="grid g3">
+      <article class="card rv" style="--tone:var(--c1)" data-tilt>
+        <span class="k">01</span>
+        <h3><i></i>Inherited, not authored</h3>
+        <p>Most people never examine the operating assumptions running their life. Self-help sells
+           feelings. Nothing hands them the source code.</p>
+      </article>
+      <article class="card rv" style="--tone:var(--c2)" data-tilt>
+        <span class="k">02</span>
+        <h3><i></i>Unverifiable</h3>
+        <p>Astrology apps and personality quizzes output vibes. Nothing is deterministic,
+           reproducible, or checkable by a third party.</p>
+      </article>
+      <article class="card rv" style="--tone:var(--c9)" data-tilt>
+        <span class="k">03</span>
+        <h3><i></i>Erasable</h3>
+        <p>Profiles, archives, and years of self live at platform mercy. One shutdown or ban
+           and the record is gone.</p>
+      </article>
+    </div>
+    <p class="lede rv" style="margin-top:2.2rem;color:var(--bone)">
+      Each half of the fix exists somewhere. Nobody has assembled all three:
+      <b style="font-weight:500;color:var(--c3)">spiritually resonant</b>,
+      <b style="font-weight:500;color:var(--c5)">computationally deterministic</b>,
+      <b style="font-weight:500;color:var(--c8)">permanently ownable</b>.
+    </p>
+  </section>
+
+  <!-- 03 ============================================= -->
+  <section class="slide" id="s3" data-label="Selector Model">
+    <p class="eyebrow rv" style="color:var(--c8)">The IP core</p>
+    <h2 class="rv">The Selector Model</h2>
+    <p class="lede rv">An original four-layer framework describing how a consciousness selects the
+       reality it occupies. Published under CC BY-NC 4.0 — attributed, timestamped, and encoded
+       directly into the generation logic. The model is not decoration. It is the schema.</p>
+    <div class="grid g4">
+      <article class="card rv" style="--tone:var(--c1)" data-tilt><span class="k">I</span>
+        <h3><i></i>Physics</h3>
+        <p>The measurable substrate. Matter, time, biology — the rules the game runs on.</p></article>
+      <article class="card rv" style="--tone:var(--c5)" data-tilt><span class="k">II</span>
+        <h3><i></i>Metaphysical</h3>
+        <p>Frequency, intention, and the selection mechanism itself. Where choice acts on the field.</p></article>
+      <article class="card rv" style="--tone:var(--c3)" data-tilt><span class="k">III</span>
+        <h3><i></i>Relational</h3>
+        <p>Other selectors. Entanglement, mirrors, contracts, and inherited patterning.</p></article>
+      <article class="card rv" style="--tone:var(--c8)" data-tilt><span class="k">IV</span>
+        <h3><i></i>Temporal</h3>
+        <p>Sequence and timing. Why the same selection lands differently at different moments.</p></article>
+    </div>
+  </section>
+
+  <!-- 04 ============================================= -->
+  <section class="slide" id="s4" data-label="Soul Map">
+    <p class="eyebrow rv" style="color:var(--c5)">The product</p>
+    <h2 class="rv">Inside a Soul Map</h2>
+    <p class="lede rv">One input — exact birth data. Eight linked layers resolve out of it.
+       Same input, same map, every time. Below is a real specimen: Player One's own map.
+       Hover a layer to find it.</p>
+
+    <div class="spec-wrap">
+      <!-- layer index -->
+      <div class="layers rv" id="layers">
+        <div class="layer" data-blk="b1" style="--tone:var(--c3)"><i></i>
+          <b>Quantum signature</b><em>KEY</em></div>
+        <div class="layer" data-blk="b1" style="--tone:var(--c8)"><i></i>
+          <b>Frequency</b><em>HZ</em></div>
+        <div class="layer" data-blk="b2" style="--tone:var(--c8)"><i></i>
+          <b>Numerology stack</b><em>5 VALUES</em></div>
+        <div class="layer" data-blk="b3" style="--tone:var(--c6)"><i></i>
+          <b>Astrological triad</b><em>SUN MOON RISE</em></div>
+        <div class="layer" data-blk="b4" style="--tone:var(--c1)"><i></i>
+          <b>Color Codex tier</b><em>1 OF 11</em></div>
+        <div class="layer" data-blk="b5" style="--tone:var(--c9)"><i></i>
+          <b>Birth card</b><em>ARCHETYPE</em></div>
+        <div class="layer" data-blk="b6" style="--tone:var(--c10)"><i></i>
+          <b>Soul lineage</b><em>PRIOR ENTRY</em></div>
+        <div class="layer" data-blk="b7" style="--tone:var(--c4)"><i></i>
+          <b>Interpretation</b><em>READING</em></div>
+      </div>
+
+      <!-- the artifact -->
+      <div class="spec rv">
+        <div class="spec-head">
+          <h3>Katelin Jill Puzakulics</h3>
+          <p>Player One · Specimen</p>
+        </div>
+        <div class="spec-body">
+
+          <div class="blk" id="b1" style="--tone:var(--c3)">
+            <h5>Quantum signature · Frequency</h5>
+            <div class="hero-row">
+              <div><div class="sigval">3058 · 7C40 · 4</div></div>
+              <div class="hz">1337 Hz</div>
+            </div>
+          </div>
+
+          <div class="blk" id="b2" style="--tone:var(--c8)">
+            <h5>Numerology stack</h5>
+            <div class="pairs">
+              <div class="pair"><span>Life Path</span><b>5</b></div>
+              <div class="pair"><span>Expression</span><b>11/2</b></div>
+              <div class="pair"><span>Soul Urge</span><b>4</b></div>
+              <div class="pair"><span>Personality</span><b>7</b></div>
+              <div class="pair"><span>Birthday</span><b>19/1</b></div>
+            </div>
+          </div>
+
+          <div class="blk" id="b3" style="--tone:var(--c6)">
+            <h5>Astrological triad</h5>
+            <div class="pairs">
+              <div class="pair"><span>Sun</span><b>Taurus</b></div>
+              <div class="pair"><span>Moon</span><b>Sagittarius</b></div>
+              <div class="pair"><span>Rising</span><b>Libra</b></div>
+            </div>
+          </div>
+
+          <div class="blk" id="b4" style="--tone:var(--c1)">
+            <h5>Color Codex tier</h5>
+            <div class="swatch-row"><span class="awaiting">Awaiting canon value</span></div>
+          </div>
+
+          <div class="blk" id="b5" style="--tone:var(--c9)">
+            <h5>Birth card</h5>
+            <div class="swatch-row"><span class="awaiting">Awaiting canon value</span></div>
+          </div>
+
+          <div class="blk" id="b6" style="--tone:var(--c10)">
+            <h5>Soul lineage · prior entry</h5>
+            <div class="lineage">
+              <b>Elizabeth Zubaly</b>
+              <span>b. 16 March 1894 · Life Path 5 · 1147 Hz · Birth card: The Hierophant</span>
+              <span class="same">SIGNATURE PERSISTS ACROSS ENTRIES — 3058 · 7C40 · 4</span>
+            </div>
+          </div>
+
+          <div class="blk" id="b7" style="--tone:var(--c4)">
+            <h5>Interpretation · excerpt</h5>
+            <p class="interp">Life Path 5 runs on motion. The curriculum is freedom; the failure
+              mode is scattering. Expression 11/2 means the outward channel is a transmitter —
+              what moves through you lands harder than what you say about it. Soul Urge 4 is the
+              quiet contradiction: a builder's heart inside a runner's path.
+              <em>You were never meant to choose between them. You were meant to build the thing
+              that moves.</em></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <p class="note rv" style="margin-top:1.2rem">
+      Delivered as a standalone HTML artifact — [initials][mmddyyyy].html
+    </p>
+  </section>
+
+  <!-- 05 ============================================= -->
+  <section class="slide" id="s5" data-label="Color Codex">
+    <p class="eyebrow rv" style="color:var(--c10)">The Color Codex</p>
+    <h2 class="rv">Eleven tiers. Resolved by code, <em>not by taste.</em></h2>
+    <p class="lede rv">Red through White, plus Rose and Silver as structural frequencies. The mapping
+       from numerology to color lives in a deterministic resolver, shipped in both repos and
+       exhaustively tested across every valid combination.</p>
+    <div class="codex" id="codex"></div>
+    <p class="note rv" style="margin-top:1.5rem">
+      color_resolver.py · colorResolver.js — canon-locked, in production, mirrored across repos.
+      Hover a tier.
+    </p>
+  </section>
+
+  <!-- 06 ============================================= -->
+  <section class="slide" id="s6" data-label="Signature">
+    <p class="eyebrow rv" style="color:var(--c3)">The key</p>
+    <h2 class="rv">The Quantum Signature</h2>
+    <p class="lede rv">A fixed-format triad derived from the complete numerological and temporal
+       stack. Not generated. <em style="font-style:normal;color:var(--bone)">Resolved.</em></p>
+
+    <div class="sigbox rv" id="sigbox" tabindex="0" role="button"
+         aria-label="Re-resolve the signature">
+      <div class="sig" aria-hidden="true">
+        <b class="b1" data-target="3058">····</b><span class="dot">·</span>
+        <b class="b2" data-target="7C40">····</b><span class="dot">·</span>
+        <b class="b3" data-target="4">·</b>
+      </div>
+      <div class="siglabels">
+        <span>Temporal block</span><span>Resonance block</span><span>Check digit</span>
+      </div>
+      <p class="sighint">Scramble it as many times as you like.
+        <b>It always lands on the same value.</b> That is the whole business.</p>
+    </div>
+
+    <div class="grid g4" style="margin-top:1.4rem">
+      <article class="card rv" style="--tone:var(--c5)" data-tilt><h3><i></i>Deterministic</h3>
+        <p>Same birth data, same signature. No randomness, no drift, no model call.</p></article>
+      <article class="card rv" style="--tone:var(--c8)" data-tilt><h3><i></i>Unique</h3>
+        <p>The combined keyspace makes collisions negligible at any realistic population scale.</p></article>
+      <article class="card rv" style="--tone:var(--c3)" data-tilt><h3><i></i>Verifiable</h3>
+        <p>A third party can independently recompute it. That is what separates this from astrology.</p></article>
+      <article class="card rv" style="--tone:var(--c10)" data-tilt><h3><i></i>Portable</h3>
+        <p>A compact identifier that travels — into a wallet, a registry, or a token ID.</p></article>
+    </div>
+  </section>
+
+  <!-- 07 ============================================= -->
+  <section class="slide" id="s7" data-label="Souls on chain">
+    <p class="eyebrow rv" style="color:var(--c4)">The permanence layer</p>
+    <h2 class="rv">Souls on chain. <em>Bound, not traded.</em></h2>
+    <p class="lede rv">A soul you can sell is not a soul. Each map mints once as a non-transferable
+       token, keyed to its Quantum Signature and bound permanently to its holder.
+       Hover the chain — the last one never made it.</p>
+
+    <div class="chain rv">
+      <div class="rail"></div><div class="pulse"></div>
+      <div class="souls" id="souls"></div>
+    </div>
+
+    <div class="versus">
+      <div class="vs no rv"><h4><b>✕</b> What this is not</h4>
+        <p>A tradable JPEG collection. Floor prices, flipping, and speculative supply mechanics are
+           incompatible with the premise — and are what burned credibility in the last cycle.</p></div>
+      <div class="vs yes rv"><h4><b>✓</b> What this is</h4>
+        <p>A soulbound registry. The signature is the on-chain identifier, the record is the asset,
+           and ownership gates the deeper realms of the Sparkverse.</p></div>
+    </div>
+  </section>
+
+  <!-- 08 ============================================= -->
+  <section class="slide" id="s8" data-label="Running">
+    <p class="eyebrow rv" style="color:var(--c5)">Architecture</p>
+    <h2 class="rv">The pipeline is <em>already running.</em></h2>
+    <p class="lede rv">Soul Maps are generated and delivered end to end today. The chain layer attaches
+       to a working system — it does not replace a hypothetical one.</p>
+    <div class="pipe">
+      <div class="step rv" style="--tone:var(--c4)"><p class="n">01</p><h3>Purchase</h3>
+        <p>Stripe checkout captures the order and the birth data.</p><p class="st">Live</p></div>
+      <div class="step rv" style="--tone:var(--c4)"><p class="n">02</p><h3>Generate</h3>
+        <p>Python engine resolves the full stack and renders the map.</p><p class="st">Live</p></div>
+      <div class="step rv" style="--tone:var(--c4)"><p class="n">03</p><h3>Deliver</h3>
+        <p>Artifact published to repo, delivery email dispatched.</p><p class="st">Live</p></div>
+      <div class="step rv" style="--tone:var(--c3)"><p class="n">04</p><h3>Interpret</h3>
+        <p>Written reading layer bundled with every map.</p><p class="st">In build</p></div>
+      <div class="step rv" style="--tone:var(--c8)"><p class="n">05</p><h3>Mint</h3>
+        <p>Wallet connect, soulbound contract, on-chain registry.</p><p class="st">Funded by raise</p></div>
+    </div>
+    <p class="note rv" style="margin-top:1.8rem">
+      Owned infrastructure throughout — Supabase auth, Stripe billing, in-house generation engine.
+      No dependency on a third-party creator platform.
+    </p>
+  </section>
+
+  <!-- 09 ============================================= -->
+  <section class="slide" id="s9" data-label="Traction">
+    <p class="eyebrow rv" style="color:var(--c4)">Traction</p>
+    <h2 class="rv">Built solo. <em>Zero outside capital.</em></h2>
+    <p class="lede rv">Every number below was reached without a raise, a team, or paid acquisition.</p>
+    <div class="stats rv" style="margin-top:2.2rem">
+      <div class="stat" style="--tone:var(--c5)"><b>70+</b><span>Browser-native consciousness tools, built and shipped</span></div>
+      <div class="stat" style="--tone:var(--c8)"><b>~124</b><span>Soul Maps generated and delivered to paying users</span></div>
+      <div class="stat" style="--tone:var(--c3)"><b>46</b><span>Sparkverse free-tier members seeded</span></div>
+      <div class="stat" style="--tone:var(--c10)"><b>$0</b><span>Outside capital raised to date</span></div>
+    </div>
+    <div class="proof rv">
+      <span class="chip">Delaware C-Corp · Stripe Atlas</span>
+      <span class="chip">LvlUp Labs — accepted, no cost, no equity</span>
+      <span class="chip">Selector Model published CC BY-NC 4.0</span>
+      <span class="chip">Voyage Ohio Hidden Gems, March 2026</span>
+    </div>
+    <p class="lede rv" style="margin-top:2rem">
+      Revenue compounds on one artifact: <b style="font-weight:500;color:var(--c5)">Soul Maps</b> as the
+      entry purchase, <b style="font-weight:500;color:var(--c8)">memberships</b> as the recurring base,
+      <b style="font-weight:500;color:var(--c3)">mint and evolution</b> on top, and
+      <b style="font-weight:500;color:var(--c10)">tools and Codex access</b> alongside. Generation is
+      automated and near-zero marginal cost.
+    </p>
+  </section>
+
+  <!-- 10 ============================================= -->
+  <section class="slide closing" id="s10" data-label="The ask">
+    <p class="eyebrow rv" style="color:var(--c10)">The ask</p>
+    <h2 class="rv">Fund the first <em>permanent souls.</em></h2>
+    <div class="ask">
+      <div class="terms rv">
+        <h4>Instrument</h4>
+        <dl>
+          <dt>Instrument</dt><dd>YC Post-Money SAFE v1.1</dd>
+          <dt>Entity</dt><dd>Delaware C-Corp</dd>
+          <dt>Round</dt><dd>Friends &amp; family</dd>
+          <dt>Valuation cap</dt><dd>Per signed instrument</dd>
+          <dt>Use of funds</dt><dd>Funnel · Mint · Spark AI</dd>
+        </dl>
+      </div>
+      <div class="backing rv" style="--tone:var(--c3)">
+        <h4>What you are backing</h4>
+        <ul>
+          <li>A founder who shipped 70+ tools and 124 paid Soul Maps with no capital and no team.</li>
+          <li>An original framework already published, licensed, and encoded in production software.</li>
+          <li>A deterministic identity engine running today — where the chain layer is an upgrade, not a promise.</li>
+          <li>A category that does not yet have an owner.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="spectrum-rule rv" id="rule"></div>
+    <p class="lede rv" style="margin-top:0">
+      The fastest way to understand what we built is to be run through it.
+    </p>
+    <a class="cta rv" href="mailto:Kate@thefirstspark.shop?subject=Soul%20Maps%20—%20let's%20talk">
+      <i></i>Generate your Soul Map
+    </a>
+    <p class="note rv" style="margin-top:2.4rem">
+      Kate@thefirstspark.shop · thefirstspark.shop · @OGplayerone · Akron, Ohio<br>
+      Terms confirmed against the signed instrument prior to close. Confidential.
+    </p>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const TIERS = ['--c1','--c2','--c3','--c4','--c5','--c6','--c7','--c8','--c9','--c10','--c11'];
+  const cssv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+  /* ---------- starfield ---------- */
+  const cv = document.getElementById('stars'), cx = cv.getContext('2d');
+  let stars = [], W = 0, H = 0, mx = 0, my = 0;
+  function sizeStars(){
+    W = cv.width = innerWidth; H = cv.height = innerHeight;
+    const n = Math.min(200, Math.round(innerWidth * innerHeight / 9500));
+    stars = Array.from({length:n}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      r: Math.random()*1.25 + .25, d: Math.random()*.55 + .18,
+      t: Math.random()*Math.PI*2
+    }));
+  }
+  function drawStars(){
+    cx.clearRect(0,0,W,H);
+    for (const s of stars){
+      s.t += 0.012;
+      const tw = 0.45 + Math.sin(s.t)*0.35;
+      cx.beginPath();
+      cx.arc(s.x + mx*s.d*14, s.y + my*s.d*14, s.r, 0, Math.PI*2);
+      cx.fillStyle = 'rgba(244,245,250,' + (tw*s.d).toFixed(3) + ')';
+      cx.fill();
+    }
+    requestAnimationFrame(drawStars);
+  }
+  sizeStars();
+  addEventListener('resize', sizeStars);
+  if (!reduce){
+    addEventListener('mousemove', e => {
+      mx = (e.clientX / innerWidth - .5) * 2;
+      my = (e.clientY / innerHeight - .5) * 2;
+    }, {passive:true});
+    drawStars();
+  } else {
+    cx.clearRect(0,0,W,H);
+    for (const s of stars){
+      cx.beginPath(); cx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      cx.fillStyle='rgba(244,245,250,.4)'; cx.fill();
+    }
+  }
+
+  /* ---------- Color Codex ---------- */
+  const NAMES = ['Tier I','Tier II','Tier III','Tier IV','Tier V','Tier VI',
+                 'Tier VII','Tier VIII','Tier IX','Tier X','Tier XI'];
+  const codex = document.getElementById('codex');
+  TIERS.forEach((v,i) => {
+    const d = document.createElement('div');
+    d.className = 'tier';
+    d.style.background = 'var(' + v + ')';
+    d.style.color = 'var(' + v + ')';
+    d.tabIndex = 0;
+    d.innerHTML = '<span>' + NAMES[i] + '</span>';
+    codex.appendChild(d);
+  });
+
+  /* ---------- spectrum rule (closing) ---------- */
+  const rule = document.getElementById('rule');
+  TIERS.forEach(v => {
+    const i = document.createElement('i');
+    i.style.background = 'var(' + v + ')';
+    rule.appendChild(i);
+  });
+
+  /* ---------- souls on chain ---------- */
+  const SOULS = [
+    {t:'--c3',  sig:'Player One · 3058 · 7C40 · 4'},
+    {t:'--c8',  sig:'minted · non-transferable'},
+    {t:'--c5',  sig:'minted · non-transferable'},
+    {t:'--c10', sig:'minted · non-transferable'},
+    {t:'--c4',  sig:'minted · non-transferable'},
+    {t:'--c6',  sig:'minted · non-transferable'},
+    {t:null,    sig:'never minted · lost to the void'}
+  ];
+  const soulRow = document.getElementById('souls');
+  SOULS.forEach(s => {
+    const d = document.createElement('div');
+    d.className = 'soul' + (s.t ? '' : ' void');
+    if (s.t) d.style.setProperty('--tone','var(' + s.t + ')');
+    d.setAttribute('data-sig', s.sig);
+    d.tabIndex = 0;
+    d.innerHTML = '<i></i>';
+    soulRow.appendChild(d);
+  });
+
+  /* ---------- specimen: layer index <-> artifact block ---------- */
+  const layerEls = [...document.querySelectorAll('.layer')];
+  function focusLayer(el){
+    layerEls.forEach(l => l.classList.remove('on'));
+    document.querySelectorAll('.blk').forEach(b => b.classList.remove('on'));
+    if (!el) return;
+    el.classList.add('on');
+    const blk = document.getElementById(el.dataset.blk);
+    if (blk) blk.classList.add('on');
+  }
+  layerEls.forEach(el => {
+    el.tabIndex = 0;
+    el.addEventListener('mouseenter', () => focusLayer(el));
+    el.addEventListener('focus', () => focusLayer(el));
+  });
+  const layerBox = document.getElementById('layers');
+  if (layerBox) layerBox.addEventListener('mouseleave', () => focusLayer(null));
+
+  /* ---------- deterministic signature scramble ---------- */
+  const GLYPHS = '0123456789ABCDEF';
+  const sigEls = document.querySelectorAll('.sig [data-target]');
+  let running = false;
+  function resolveSig(){
+    if (running || reduce){
+      if (reduce) sigEls.forEach(el => el.textContent = el.dataset.target);
+      return;
+    }
+    running = true;
+    const start = performance.now(), DUR = 1100;
+    function frame(now){
+      const p = Math.min(1, (now - start) / DUR);
+      sigEls.forEach(el => {
+        const target = el.dataset.target;
+        let out = '';
+        for (let i = 0; i < target.length; i++){
+          // each character locks in sequence — resolution, not randomness
+          const lockAt = (i + 1) / (target.length + 1);
+          out += (p >= lockAt) ? target[i]
+                               : GLYPHS[(Math.random()*16)|0];
+        }
+        el.textContent = out;
+      });
+      if (p < 1) requestAnimationFrame(frame);
+      else { sigEls.forEach(el => el.textContent = el.dataset.target); running = false; }
+    }
+    requestAnimationFrame(frame);
+  }
+  const sigbox = document.getElementById('sigbox');
+  sigbox.addEventListener('mouseenter', resolveSig);
+  sigbox.addEventListener('click', resolveSig);
+  sigbox.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); resolveSig(); }
+  });
+
+  /* ---------- pointer-tracked card glow ---------- */
+  document.querySelectorAll('[data-tilt]').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    }, {passive:true});
+  });
+
+  /* ---------- reveal on enter ---------- */
+  const revealer = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting){
+        const kids = [...en.target.querySelectorAll('.rv')];
+        kids.forEach((k,i) => setTimeout(() => k.classList.add('in'), reduce ? 0 : i*85));
+        revealer.unobserve(en.target);
+      }
+    });
+  }, {threshold:.16});
+  const slides = [...document.querySelectorAll('.slide')];
+  slides.forEach(s => revealer.observe(s));
+
+  /* ---------- HUD nav ---------- */
+  const hud = document.getElementById('hud'), counter = document.getElementById('counter');
+  slides.forEach((s,i) => {
+    const b = document.createElement('button');
+    b.style.setProperty('--tone', 'var(' + TIERS[i % TIERS.length] + ')');
+    b.setAttribute('aria-label', 'Go to ' + s.dataset.label);
+    b.title = s.dataset.label;
+    b.addEventListener('click', () => s.scrollIntoView({behavior: reduce ? 'auto' : 'smooth'}));
+    hud.appendChild(b);
+  });
+  const dots = [...hud.children];
+  function paint(i){
+    dots.forEach((d,j) => {
+      const on = j === i;
+      d.setAttribute('aria-current', on ? 'true' : 'false');
+      const col = cssv(TIERS[j % TIERS.length]);
+      d.style.background = on ? col : '#2A2A4C';
+      d.style.boxShadow = on ? '0 0 14px ' + col : 'none';
+    });
+    counter.textContent = String(i+1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
+  }
+  let current = 0;
+  const tracker = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting){
+        current = slides.indexOf(en.target);
+        paint(current);
+      }
+    });
+  }, {threshold:.5});
+  slides.forEach(s => tracker.observe(s));
+  paint(0);
+
+  /* ---------- keyboard ---------- */
+  addEventListener('keydown', e => {
+    const tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea') return;
+    let next = null;
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') next = current + 1;
+    if (e.key === 'ArrowUp'   || e.key === 'PageUp')   next = current - 1;
+    if (e.key === 'Home') next = 0;
+    if (e.key === 'End')  next = slides.length - 1;
+    if (next !== null && slides[next]){
+      e.preventDefault();
+      slides[next].scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+    }
+  });
+})();
+</script>
+</body>
+</html>
