@@ -588,6 +588,11 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
+        @media (max-width: 820px) {
+            .cards { grid-template-columns: 1fr !important; }
+            .cards-funnel { grid-template-columns: 1fr; }
+            .nav-right .nav-invest { display: none; }
+        }
 
         /* ─── COMMUNITY STEP 2 ─── */
         #community {
@@ -1335,9 +1340,9 @@
     <nav id="nav">
         <a href="/" class="nav-logo">THE FIRST SPARK</a>
         <div class="nav-right">
-            <a href="#origin-story" class="nav-invest">The Story</a>
-            <a href="affiliate-kit.html" class="nav-invest">Affiliate Kit</a>
-            <a href="#community" class="nav-invest">Free Community</a>
+            <a href="what-is-a-soul-map.html" class="nav-invest">What Is a Soul Map</a>
+            <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer" class="nav-invest">Freq Match</a>
+            <a href="#community" class="nav-invest">Community</a>
             <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="nav-cta">Soul Map · $22</a>
         </div>
     </nav>
@@ -1349,12 +1354,13 @@
         <div class="wrap wrap-hero">
             <div class="hero-center">
                 <h1 class="hero-question">
-                    What if your entire life was written in
-                    <span class="hero-em">code you never learned to read?</span>
+                    Your life is written in
+                    <span class="hero-em">code.</span>
                 </h1>
+                <p class="sec-sub" style="margin:0 auto 36px; text-align:center;">Read it. Match with others. Keep the map forever.</p>
                 <div class="hero-ctas">
-                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Decode My Soul Map</a>
-                    <a href="free-tools.html" class="btn-g">Explore The Free Tools</a>
+                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Get Your Soul Map · $22</a>
+                    <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer" class="btn-g">Use Freq Match →</a>
                 </div>
             </div>
             <div class="scroll-hint">Explore</div>
@@ -1363,26 +1369,16 @@
 
     <div class="divider-line"></div>
 
-    <!-- ORIGIN STORY -->
+    <!-- ORIGIN — one line + one fact -->
     <section id="origin-story">
         <div class="wrap">
-            <div class="origin-inner">
+            <div class="origin-inner" style="text-align:center;">
                 <div class="sec-label">◈ &nbsp; The Origin</div>
-                <h2 class="sec-title">It started with a code no one could read.</h2>
-
-                <div class="origin-body">
-                    <p>In 2020, my mother's murder — cold for 29 years — was finally cracked. <strong>I didn't solve it.</strong> Detectives did, using forensic DNA technology that could finally read what had been sitting in plain sight the whole time.</p>
-
-                    <p class="origin-line">The killer had been living across the street.</p>
-
-                    <p>That broke something open in me. If the truth could hide that long — encoded in data no one had the tools to read until the right technology arrived — what else is written in code we walk past every day? Our numbers. Our patterns. Our lives.</p>
-
-                    <p>I didn't start a psychic hotline. I started building. 60+ consciousness tools later, The First Spark exists to answer one question: <em>what if you could finally read your own code?</em></p>
-                </div>
-
-                <div class="origin-ctas">
-                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Decode My Soul Map</a>
-                    <a href="free-tools.html" class="btn-g">Explore The Free Tools</a>
+                <h2 class="sec-title">Truth sat in plain sight for 29 years.</h2>
+                <p class="sec-sub" style="margin:18px auto 0; text-align:center;">DNA cracked a cold case. Tools crack your code.</p>
+                <div class="origin-ctas" style="justify-content:center;">
+                    <a href="what-is-a-soul-map.html" class="btn-p">What Is a Soul Map →</a>
+                    <a href="free-tools.html" class="btn-g">Free Tools</a>
                 </div>
             </div>
         </div>
@@ -1390,32 +1386,36 @@
 
     <div class="divider-line"></div>
 
-    <!-- WHAT YOU'LL FIND -->
+    <!-- START HERE — 3 doors -->
     <section id="explore">
         <div class="wrap">
             <div class="sec-label">◈ &nbsp; Start Here</div>
-            <h2 class="sec-title">Soul Map First. Community Second.</h2>
-            <p class="sec-sub">One path, two steps. Claim your map, then join the free Sparkverse — included with every Founders Edition purchase.</p>
+            <h2 class="sec-title">Three doors. Pick one.</h2>
+            <p class="sec-sub">Headline products. No wall of text.</p>
 
-            <div class="cards-funnel">
-                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="card purple primary-funnel has-preview">
-                    <img src="/preview-soulmaps.svg" alt="Soul Maps Archive" class="card-preview">
-                    <div class="card-content">
-                        <div class="card-step">Step 1 · Primary</div>
-                        <div class="card-name">Founders Edition Soul Map</div>
-                        <div class="card-desc">Life Path, Expression, Soul Urge, Personality, and Personal Year — woven with astrology and your soul questions. Private URL. Yours to keep.</div>
-                        <div class="card-tag">$22 one-time · ~5 min delivery · Community included</div>
-                    </div>
+            <div class="cards" style="grid-template-columns:repeat(3,1fr);">
+                <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="card purple primary-funnel">
+                    <div class="card-step">Product</div>
+                    <div class="card-name">Soul Map</div>
+                    <div class="card-desc">Your numbers. Decoded.</div>
+                    <div class="card-tag">$22 · Keep forever</div>
                 </a>
-
-                <a href="#community" class="card gold">
-                    <div class="card-step">Step 2 · Included</div>
-                    <div class="card-icon">◈</div>
-                    <div class="card-name">Free Sparkverse Community</div>
-                    <div class="card-desc">Tools, rituals, ebooks, oracle pulls, and monthly drops. Unlocked with your Soul Map — or join free if you're exploring first.</div>
-                    <div class="card-tag">Free access · After your map</div>
+                <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer" class="card gold">
+                    <div class="card-step">Free tool</div>
+                    <div class="card-name">Freq Match</div>
+                    <div class="card-desc">Collide two soul maps. Get a score.</div>
+                    <div class="card-tag">Use it free →</div>
+                </a>
+                <a href="#community" class="card">
+                    <div class="card-step">Community</div>
+                    <div class="card-name">Sparkverse</div>
+                    <div class="card-desc">Tools, rituals, drops.</div>
+                    <div class="card-tag">Free to join</div>
                 </a>
             </div>
+            <p style="margin-top:28px; text-align:center;">
+                <a href="what-is-a-soul-map.html" style="font-size:.65em; letter-spacing:.18em; text-transform:uppercase; color:var(--spark); text-decoration:none; border-bottom:1px solid rgba(251,191,36,.35); padding-bottom:2px;">Full Soul Map explanation →</a>
+            </p>
         </div>
     </section>
 
@@ -1427,21 +1427,25 @@
             <div class="soul-callout">
                 <div class="soul-callout-left">
                     <div class="sec-label">◈ &nbsp; Featured</div>
-                    <div class="soul-edition-tag">Founders Edition Soul Map</div>
-                    <div class="soul-title">Your Numbers Decoded.</div>
-                    <p class="soul-desc">Every soul map is hand-decoded by KJP — your Life Path, Expression Number, Soul Urge, Personality, and Personal Year, woven together with astrology and the specific questions your soul is carrying right now. Every purchase includes free Sparkverse community access.</p>
-                    <div class="soul-meta">$22 &nbsp;·&nbsp; Founders Edition &nbsp;·&nbsp; yours to keep &nbsp;·&nbsp; Community included</div>
+                    <div class="soul-edition-tag">Founders Edition</div>
+                    <div class="soul-title">Your numbers. Decoded.</div>
+                    <p class="soul-desc">Life Path · Expression · Soul Urge · Personality · Astrology · Chinese Zodiac</p>
+                    <div class="soul-meta">$22 one-time · Private URL · Community included</div>
+                    <p style="margin-top:16px;">
+                        <a href="what-is-a-soul-map.html" style="font-size:.62em; letter-spacing:.14em; text-transform:uppercase; color:var(--cyan); text-decoration:none;">What is a Soul Map? →</a>
+                    </p>
                 </div>
                 <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
                     <div class="soul-price">$22</div>
-                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Claim Founders Edition →</a>
+                    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="btn-p">Get Mine →</a>
+                    <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer" class="btn-g">Freq Match</a>
                 </div>
             </div>
 
             <div class="map-spotlight">
-                <div class="sec-label">◈ &nbsp; Proof, Not Promises</div>
-                <h2 class="sec-title" style="margin-bottom:10px;">See Real Maps From The Archive</h2>
-                <p class="sec-sub" style="margin-bottom:28px;">A new trio featured every day — everyone in the archive gets the spotlight.</p>
+                <div class="sec-label">◈ &nbsp; Proof</div>
+                <h2 class="sec-title" style="margin-bottom:10px;">Real maps. Real archive.</h2>
+                <p class="sec-sub" style="margin-bottom:28px;">A new trio every day.</p>
                 <div id="mapSpotlight"></div>
             </div>
         </div>
@@ -1449,33 +1453,44 @@
 
     <div class="divider-line"></div>
 
-    <!-- STEP 2: FREE COMMUNITY -->
+    <!-- FREQ MATCH STRIP -->
+    <section id="freq-match" style="padding:72px 0;">
+        <div class="wrap" style="text-align:center;">
+            <div class="sec-label">◈ &nbsp; Free tool</div>
+            <h2 class="sec-title">Freq Match</h2>
+            <p class="sec-sub" style="margin:12px auto 28px; text-align:center;">Two birth dates. One compatibility score. Same code — or not.</p>
+            <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer" class="btn-p">Use Freq Match →</a>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- COMMUNITY -->
     <section id="community">
         <div class="wrap">
             <div class="community-step">
                 <div class="community-step-left">
-                    <div class="sec-label">◈ &nbsp; Step 2</div>
-                    <h2 class="community-step-title">Join The Free Sparkverse</h2>
-                    <p class="community-step-desc">Every Founders Edition Soul Map includes community access — tools, rituals, drops, and mapped souls building together. Already exploring? You can also join free while you decide on your map.</p>
-                    <div class="community-included">Included with Soul Map purchase · Free to join anytime</div>
+                    <div class="sec-label">◈ &nbsp; Community</div>
+                    <h2 class="community-step-title">Join free.</h2>
+                    <p class="community-step-desc">Tools · rituals · drops. Included with every Soul Map.</p>
+                    <div class="community-included">Free anytime</div>
                 </div>
-                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer" class="btn-g">Join Free Community →</a>
+                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer" class="btn-g">Join Sparkverse →</a>
             </div>
         </div>
     </section>
 
     <div class="divider-line"></div>
 
-    <!-- PRESS / CREDIBILITY -->
+    <!-- PRESS -->
     <section class="press-section">
         <div class="wrap">
-            <div class="sec-label">◈ &nbsp; The Story</div>
-            <h2 class="sec-title">Forged, Not Invented</h2>
-            <p class="sec-sub">In 2020, a 29-year cold case — her mother's murder — was finally cracked when forensic DNA technology identified the killer living across her street. She didn't solve it; detectives and the science did. But from that fracture, she built a consciousness technology platform: 60+ tools, a growing community, and a vision bigger than the pain.</p>
+            <div class="sec-label">◈ &nbsp; Credibility</div>
+            <h2 class="sec-title">Forged, not invented.</h2>
             <div class="press-highlights">
                 <div class="press-stat">
                     <div class="press-stat-value">60+</div>
-                    <div class="press-stat-label">Interactive Tools</div>
+                    <div class="press-stat-label">Tools</div>
                 </div>
                 <div class="press-stat">
                     <div class="press-stat-value">39</div>
@@ -1483,14 +1498,14 @@
                 </div>
                 <div class="press-stat">
                     <div class="press-stat-value">29 yrs</div>
-                    <div class="press-stat-label">Cold Case Cracked</div>
+                    <div class="press-stat-label">Cold Case</div>
                 </div>
                 <div class="press-stat">
-                    <div class="press-stat-value">2020</div>
-                    <div class="press-stat-label">Founded</div>
+                    <div class="press-stat-value">$22</div>
+                    <div class="press-stat-label">Soul Map</div>
                 </div>
             </div>
-            <a href="mailto:kate@thefirstspark.shop?subject=Press Inquiry" class="press-cta">Press Inquiries →</a>
+            <a href="mailto:kate@thefirstspark.shop?subject=Press Inquiry" class="press-cta">Press →</a>
         </div>
     </section>
 
@@ -1534,15 +1549,12 @@
             <a href="/" class="footer-logo">THE FIRST SPARK</a>
             <div class="footer-links">
                 <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer">Soul Map · $22</a>
+                <a href="what-is-a-soul-map.html">What Is a Soul Map</a>
+                <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Freq Match</a>
                 <a href="https://soul-maps.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Map Archive</a>
-                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer">Free Community</a>
+                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer">Community</a>
                 <a href="free-tools.html">Free Tools</a>
-                <a href="https://sparkverse.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Sparkverse</a>
-                <a href="https://see-your-frequency.thefirstspark.shop/" target="_blank" rel="noopener noreferrer">Quantum UUID</a>
-                <a href="selector-hub.html">Selector Model</a>
-                <a href="https://whop.com/checkout/plan_hW8GlMaVgyLCu" target="_blank" rel="noopener noreferrer">The Genesis · Novel</a>
-                <a href="spark-interns.html">Spark Interns</a>
-                <a href="investor-deck-v3.html">Invest</a>
+                <a href="investor-deck-v4.html">Invest</a>
                 <a href="privacy-policy.html">Privacy</a>
                 <a href="terms-of-service.html">Terms</a>
             </div>
