@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Google Search Console — Sitemap Index
+  ─────────────────────────────────────
+  Submit THIS file in Search Console:
+
+    https://thefirstspark.shop/sitemap-index.xml
+
+  Property: https://thefirstspark.shop
+  (Add frequency.thefirstspark.shop and soul-maps.thefirstspark.shop
+   as separate properties if you want those indexed under their own domains.)
+-->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://thefirstspark.shop/sitemap-core.xml</loc>
+    <lastmod>2026-07-25</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://thefirstspark.shop/sitemap-tools.xml</loc>
+    <lastmod>2026-07-25</lastmod>
+  </sitemap>
+</sitemapindex>

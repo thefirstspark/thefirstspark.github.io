@@ -1,11 +1,10 @@
-# robots.txt for The First Spark
-# Last updated: March 29, 2026
+# robots.txt — The First Spark
+# Last updated: 2026-07-25
 
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Google Search Console — submit the index:
+# https://thefirstspark.shop/sitemap-index.xml
+Sitemap: https://thefirstspark.shop/sitemap-index.xml
 Sitemap: https://thefirstspark.shop/sitemap.xml
-
-# Crawl-delay (optional, helps with server load)
-Crawl-delay: 1
