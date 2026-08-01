@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Player One · Daily</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cyan:#00E5FF; --purple:#A855F7; --gold:#F5B301;
+    --bg:#05070E; --bg2:#0A0F1C; --panel:rgba(255,255,255,.03);
+    --line:rgba(255,255,255,.08); --ink:#EAF2FF; --muted:#8A97B2;
+    --shadow:0 20px 60px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Inter',system-ui,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(1100px 700px at 15% -10%, rgba(168,85,247,.18), transparent 60%),
+      radial-gradient(1000px 700px at 100% 0%, rgba(0,229,255,.12), transparent 55%),
+      radial-gradient(900px 900px at 50% 120%, rgba(0,229,255,.06), transparent 60%),
+      var(--bg);
+    background-attachment:fixed;min-height:100%;-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden;
+  }
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.7), transparent),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,.6), transparent),
+      radial-gradient(1px 1px at 85% 60%, rgba(255,255,255,.4), transparent),
+      radial-gradient(1px 1px at 55% 45%, rgba(0,229,255,.6), transparent),
+      radial-gradient(1px 1px at 15% 80%, rgba(168,85,247,.6), transparent);
+    background-size:cover;opacity:.6;animation:tw 6s ease-in-out infinite alternate;}
+  @keyframes tw{from{opacity:.35}to{opacity:.7}}
+  .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:22px 18px 80px}
+
+  .lock{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(800px 600px at 50% 30%, rgba(168,85,247,.15), transparent 60%), var(--bg);padding:24px}
+  .lock-card{width:100%;max-width:390px;text-align:center;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    border:1px solid var(--line);border-radius:20px;padding:38px 26px;box-shadow:var(--shadow);backdrop-filter:blur(8px)}
+  .glyph{width:64px;height:64px;margin:0 auto 18px;filter:drop-shadow(0 0 14px rgba(0,229,255,.5))}
+  .lock h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.9rem;letter-spacing:.5px}
+  .lock p{color:var(--muted);font-size:.85rem;margin-top:6px}
+  .field{margin-top:16px;text-align:left}
+  .field label{display:block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  input[type=password],input[type=text],input[type=email],textarea{
+    width:100%;background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:12px;
+    color:var(--ink);font-family:inherit;font-size:1rem;padding:13px 14px;outline:none;transition:.2s}
+  input:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,.15)}
+  .btn{margin-top:16px;width:100%;padding:13px;border:none;border-radius:12px;cursor:pointer;
+    font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:.95rem;letter-spacing:.03em;
+    color:#04121a;background:linear-gradient(135deg,var(--cyan),#66f0ff);transition:.2s;box-shadow:0 8px 24px rgba(0,229,255,.25)}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+  .btn:disabled{opacity:.5;cursor:wait;transform:none}
+  .btn.ghost{background:transparent;color:var(--muted);box-shadow:none;font-size:.82rem;margin-top:10px;padding:9px;border:1px solid var(--line)}
+  .btn.ghost:hover{color:var(--ink);border-color:var(--purple)}
+  .err{color:#ff8a8a;font-size:.8rem;margin-top:12px;min-height:1.1em}
+  .ok{color:#7CE7A6}
+  .shake{animation:sh .35s}
+  @keyframes sh{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+
+  .app{display:none}
+  header.top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+  .kicker{font-family:'Space Grotesk',sans-serif;font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--cyan)}
+  h1.hi{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:2.5rem;line-height:1.05;margin-top:2px}
+  h1.hi span{background:linear-gradient(120deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .date{color:var(--muted);font-size:.9rem;margin-top:4px;font-family:'Space Grotesk',sans-serif}
+  .freqpill{align-self:flex-start;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+  .pill{border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-family:'Space Grotesk',sans-serif;font-size:.72rem;letter-spacing:.05em;color:var(--muted);white-space:nowrap;background:rgba(255,255,255,.02)}
+  .pill b{color:var(--cyan);font-weight:500}
+  .pill.moon b{color:var(--gold)}
+
+  .grid{display:grid;gap:16px;margin-top:22px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+    border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);backdrop-filter:blur(4px)}
+  .card h2{font-family:'Space Grotesk',sans-serif;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .card h2::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+
+  .reading .line{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .reading .line:last-of-type{border-bottom:none}
+  .reading .tag{flex:0 0 76px;font-family:'Space Grotesk',sans-serif;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);padding-top:3px}
+  .reading .txt{font-family:'Cormorant Garamond',serif;font-size:1.22rem;color:#dbe6ff;line-height:1.4}
+  .synth{margin-top:16px;padding:14px 16px;border-left:2px solid var(--cyan);background:rgba(0,229,255,.05);border-radius:0 12px 12px 0;font-size:.95rem;color:#cfe0ff}
+  .synth b{color:var(--cyan);font-weight:600}
+
+  .nums{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:12px}
+  .num{border:1px solid var(--line);border-radius:14px;padding:14px 12px;text-align:center;background:rgba(255,255,255,.02)}
+  .num .big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:2.2rem;line-height:1;background:linear-gradient(120deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .num .lab{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+  .num .theme{font-size:.78rem;color:#c3d0ea;margin-top:5px;font-weight:500}
+  .pd-note{margin-top:14px;font-size:.9rem;color:#bfcbe6}
+
+  .colorrow{display:flex;align-items:center;gap:16px}
+  .swatch{width:58px;height:58px;border-radius:14px;flex:0 0 58px;box-shadow:0 0 24px currentColor}
+  .colorrow .cname{font-family:'Cormorant Garamond',serif;font-size:1.5rem}
+  .colorrow .cmeaning{color:var(--muted);font-size:.85rem}
+
+  .srw{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .srw .slot{border:1px solid var(--line);border-radius:14px;padding:16px 14px;background:rgba(255,255,255,.02)}
+  .srw .slot .k{font-family:'Space Grotesk',sans-serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:9px}
+  .srw .select .k{color:var(--cyan)} .srw .release .k{color:var(--purple)} .srw .witness .k{color:var(--gold)}
+  .srw .slot p{font-size:.92rem;color:#d7e2f7;line-height:1.45}
+
+  .mantra{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:#e7eeff;padding:6px 4px}
+  .mantra small{display:block;font-style:normal;font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+
+  .jrow{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .jrow .fld{flex:1;min-width:180px}
+  .fld label{display:block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .energy{display:flex;align-items:center;gap:12px}
+  input[type=range]{flex:1;accent-color:var(--cyan)}
+  .energy .eval{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--cyan);font-size:1.2rem;width:2ch;text-align:right}
+  textarea{min-height:130px;resize:vertical;line-height:1.6}
+  .savebar{display:flex;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap;gap:10px}
+  .saved{font-size:.75rem;color:var(--muted)}
+  .saved b{color:#7CE7A6}
+  .mini{padding:8px 14px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--ink);border-radius:10px;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:.75rem;letter-spacing:.03em;transition:.2s}
+  .mini:hover{border-color:var(--cyan);color:var(--cyan)}
+  .streak{display:inline-flex;align-items:center;gap:7px;font-family:'Space Grotesk',sans-serif;font-size:.8rem;color:var(--gold)}
+  .past{margin-top:8px;max-height:230px;overflow:auto}
+  .pastitem{padding:11px 13px;border:1px solid var(--line);border-radius:11px;margin-top:8px;cursor:pointer;transition:.2s;background:rgba(255,255,255,.015)}
+  .pastitem:hover{border-color:var(--purple)}
+  .pastitem .pd{font-family:'Space Grotesk',sans-serif;font-size:.72rem;color:var(--muted);display:flex;justify-content:space-between}
+  .pastitem .pi{font-size:.9rem;color:#cdd8ef;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .empty{color:var(--muted);font-size:.85rem;font-style:italic;padding:6px 2px}
+
+  footer{text-align:center;margin-top:34px;color:var(--muted);font-size:.78rem}
+  footer .phil{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:#b9c6e2;margin-bottom:8px}
+  footer a{color:var(--cyan);text-decoration:none}
+  footer .who{margin-top:14px;font-family:'Space Grotesk',sans-serif;font-size:.72rem}
+
+  @media(max-width:640px){
+    h1.hi{font-size:2rem}.nums{grid-template-columns:1fr 1fr}.srw{grid-template-columns:1fr}
+    .reading .txt{font-size:1.1rem}.freqpill{flex-direction:row;flex-wrap:wrap}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ AUTH ============ -->
+<div class="lock" id="lock">
+  <div class="lock-card" id="lockCard">
+    <svg class="glyph" viewBox="0 0 100 100" fill="none" stroke="url(#g)" stroke-width="1.4">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#00E5FF"/><stop offset="1" stop-color="#A855F7"/></linearGradient></defs>
+      <circle cx="50" cy="50" r="15"/><circle cx="50" cy="35" r="15"/><circle cx="50" cy="65" r="15"/>
+      <circle cx="37" cy="42.5" r="15"/><circle cx="63" cy="42.5" r="15"/>
+      <circle cx="37" cy="57.5" r="15"/><circle cx="63" cy="57.5" r="15"/>
+    </svg>
+    <h1>Player One</h1>
+    <p>Sign in to open today. Your journal syncs across every device.</p>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="email" autocomplete="email" placeholder="you@thefirstspark.shop">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="pass" autocomplete="current-password" placeholder="••••••••">
+    </div>
+    <div class="err" id="authErr"></div>
+    <button class="btn" id="signIn">Enter</button>
+    <button class="btn ghost" id="signUp">First time? Create account</button>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div class="app" id="app">
+ <div class="wrap">
+  <header class="top">
+    <div>
+      <div class="kicker">The First Spark · Daily Signal</div>
+      <h1 class="hi">Good <span id="partOfDay">day</span>, <span>Player One</span></h1>
+      <div class="date" id="dateLine"></div>
+    </div>
+    <div class="freqpill">
+      <div class="pill">Resonance · <b>824.43 Hz</b></div>
+      <div class="pill moon" id="moonPill">Moon · <b>—</b></div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Today's Reading</h2>
+      <div class="reading">
+        <div class="line"><div class="tag">Sun · ♉</div><div class="txt" id="rSun"></div></div>
+        <div class="line"><div class="tag">Moon · ♐</div><div class="txt" id="rMoon"></div></div>
+        <div class="line"><div class="tag">Rising · ♎</div><div class="txt" id="rRise"></div></div>
+      </div>
+      <div class="synth" id="rSynth"></div>
+    </div>
+
+    <div class="card">
+      <h2>Numerology Field</h2>
+      <div class="nums">
+        <div class="num"><div class="big" id="pdNum">–</div><div class="lab">Personal Day</div><div class="theme" id="pdTheme"></div></div>
+        <div class="num"><div class="big" id="pmNum">–</div><div class="lab">Personal Month</div></div>
+        <div class="num"><div class="big" id="pyNum">–</div><div class="lab">Personal Year</div></div>
+        <div class="num"><div class="big" id="udNum">–</div><div class="lab">Universal Day</div></div>
+      </div>
+      <div class="pd-note" id="pdNote"></div>
+    </div>
+
+    <div class="card">
+      <h2>Today's Codex Color</h2>
+      <div class="colorrow">
+        <div class="swatch" id="swatch"></div>
+        <div><div class="cname" id="cName"></div><div class="cmeaning" id="cMeaning"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Core Code · Today's Practice</h2>
+      <div class="srw">
+        <div class="slot select"><div class="k">Select</div><p id="pSelect"></p></div>
+        <div class="slot release"><div class="k">Release</div><p id="pRelease"></p></div>
+        <div class="slot witness"><div class="k">Witness</div><p id="pWitness"></p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="mantra"><small>Frequency Tuning</small><span id="mantra"></span></div>
+    </div>
+
+    <div class="card">
+      <h2>Journal · <span id="jDate" style="color:var(--cyan);letter-spacing:0;text-transform:none;font-family:'Space Grotesk'"></span></h2>
+      <div class="jrow">
+        <div class="fld" style="flex:2">
+          <label>Today's Intention</label>
+          <input type="text" id="jIntention" placeholder="One line. What are you selecting into being?">
+        </div>
+        <div class="fld">
+          <label>Energy</label>
+          <div class="energy"><input type="range" id="jEnergy" min="1" max="10" value="5"><span class="eval" id="eVal">5</span></div>
+        </div>
+      </div>
+      <div class="fld">
+        <label>Field Notes</label>
+        <textarea id="jBody" placeholder="Download today. What did you witness? What bent? What's asking to be released?"></textarea>
+      </div>
+      <div class="savebar">
+        <div class="saved" id="savedMsg">Syncs to the cloud as you type <span class="streak" id="streak"></span></div>
+        <div style="display:flex;gap:8px"><button class="mini" id="exportBtn">Export all</button></div>
+      </div>
+      <div class="past" id="pastList"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="phil">Reality is programmable. Consciousness is the code.</div>
+    KJP · The Original Glitch · Akron, OH &nbsp;·&nbsp; <a href="https://thefirstspark.shop">thefirstspark.shop</a>
+    <div class="who">Signed in as <b id="whoami">—</b> &nbsp;·&nbsp; <a href="#" id="signOut" style="color:var(--muted)">Sign out</a></div>
+  </footer>
+ </div>
+</div>
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+/* ================= SUPABASE ================= */
+const SUPABASE_URL = 'https://frcaxxyfenuduefsxzka.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZyY2F4eHlmZW51ZHVlZnN4emthIiwicm9sZSI6ImФ25vbiIsImlhdCI6MTc4MDE2NTcxMywiZXhwIjoyMDk1NzQxNzEzfQ.2BCE_KfAHkfR_SDyV2bpYek91MmtgnmgRWbIIE2A3K8';
+
+const _mem={};
+const safeStorage={
+  getItem:k=>{try{return localStorage.getItem(k);}catch(e){return k in _mem?_mem[k]:null;}},
+  setItem:(k,v)=>{try{localStorage.setItem(k,v);}catch(e){_mem[k]=v;}},
+  removeItem:k=>{try{localStorage.removeItem(k);}catch(e){delete _mem[k];}}
+};
+const sb=createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{storage:safeStorage,persistSession:true,autoRefreshToken:true}});
+
+/* ================= BIRTH DATA — LOCKED =================
+   Katelin Jill Puzakulics · Player One · The Original Glitch
+   Born May 19, 1988 · 1:31 PM · Akron, OH (City Hospital, C-section)
+   Life Path 5 · Taurus Sun · Sagittarius Moon · Libra Rising
+======================================================= */
+const BIRTH_MONTH=5, BIRTH_DAY=19, BIRTH_YEAR=1988;
+
+/* ================= ENGINE ================= */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function reduceNum(n,keep=true){n=Math.abs(parseInt(n,10))||0;const m=[11,22,33];while(n>9&&!(keep&&m.includes(n))){n=String(n).split('').reduce((a,d)=>a+(+d),0);}return n;}
+function moon(date){const syn=29.53058867,ref=Date.UTC(2000,0,6,18,14,0);let age=((date.getTime()-ref)/86400000)%syn;if(age<0)age+=syn;
+  const names=['New Moon','Waxing Crescent','First Quarter','Waxing Gibbous','Full Moon','Waning Gibbous','Last Quarter','Waning Crescent'];
+  const em=['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];const i=Math.floor((age/syn)*8+0.5)%8;return {name:names[i],emoji:em[i]};}
+
+const P={
+ sun:["Your Taurus core wants proof through the body — move slow enough that the ground answers back.","Stability isn't stagnation. Plant one real thing today and let it root before you reach for the next.","You build worlds by touch. Trust the pace of the thing that lasts over the rush of the thing that shines.","Comfort is data today, not a trap. Notice what your senses call home and give them ten honest minutes.","The bull doesn't chase. Hold your ground and let what's yours walk toward you.","Money, beauty, worth — the Taurus in you measures value by feel. Price nothing you love in someone else's currency.","Rest is a strategy, not a surrender. A grounded body is a sharper signal.","You are allowed to want the whole feast. Desire is the compass, not the sin.","Slow is a superpower today. The thing built by hand outlives the thing built by hype.","Return to the physical. One good meal, one long breath, one real object held — that's the reset.","Your stubbornness is loyalty in disguise. Aim it at yourself for once.","The earth in you knows: you don't have to earn the ground you already stand on."],
+ moon:["The Sagittarius moon in you is hungry for horizon — feed it a new idea, not a new escape.","Tell the truth before it tells itself. Your feelings travel best in the open.","Restlessness is a message: something in you has outgrown the room. Name the bigger room.","Your emotional fuel is meaning. Ask 'what's this for?' and the mood reorganizes itself.","Freedom soothes you more than reassurance. Give yourself a door, then decide to stay.","Laughter is a legitimate exit from the spiral. Take the joke seriously.","You feel in arrows — aimed, forward, distant. Point one somewhere real today.","The nomad heart needs a fire, not a fence. Build warmth you can carry.","Optimism isn't naive when you've walked through the dark to get it. Trust the climb.","Say the honest thing kindly. Withheld truth becomes background noise you can't sleep through.","A little wildness keeps you sane. Let one plan stay gloriously undecided.","Your faith is a muscle. Bet on the future you can already half-see."],
+ rise:["Libra rising means you lead with the mirror — notice who you become in the room before you decide who to be.","Balance isn't 50/50 today. It's putting your thumb back on your own side of the scale.","Beauty is not a distraction for you, it's a language. Arrange one thing until it feels true.","You read the room fast. Read yourself faster — whose comfort are you managing right now?","Charm opens the door; boundaries decide who walks through. Use both.","Harmony you fake becomes resentment you keep. Choose the honest note over the pretty one.","The people-pleaser and the peacemaker aren't the same. Be the second one.","You see all sides — that's a gift and a cage. Today, you're allowed a side.","Grace under pressure is your default. Let someone see the pressure too.","Partnership is your medium, not your master. Come to the table already whole.","Aesthetics are ethics for you: make it fair and make it lovely, in that order.","The mirror can reflect or it can distort. Decide who's allowed to hold it today."],
+ synth:["The field favors <b>grounded motion</b> today — decide with the body, act with the truth, arrive already whole.","Today's signal: <b>build slow, speak true, choose yourself.</b> The game bends toward the one who stops asking permission.","Hold the horizon and the ground at once. <b>Meaning is the fuel; patience is the engine.</b>","You're being asked to <b>want out loud</b> and honor the pace of what lasts. Render the sharper version.","Signal detected: <b>less performance, more presence.</b> The room reorganizes around who's actually home.","Let desire lead and let truth steer. <b>The First Spark is the one who selects.</b>"],
+ select:["Select the version of you who already has it. Move as her, decide as her.","Choose the harder conversation over the easier silence.","Pick one thing to finish. Let 'done' beat 'perfect' today.","Select your yes carefully — every yes is a no to something else.","Choose to receive. Let one good thing land without earning it first.","Select the room you want to be in, then walk toward its door.","Decide what today is for before the day decides for you.","Choose your frequency on purpose. You are the instrument and the tuner.","Select signal over noise: one meaningful action outweighs ten reactive ones.","Pick the timeline where it already worked, and behave accordingly.","Choose to be early to your own life today.","Select the boundary now, so you don't have to defend it later."],
+ release:["Release the timeline. It was never the real thing you wanted.","Let go of being understood by people committed to misreading you.","Drop the rehearsal. You don't need to script the conversation you haven't had.","Release the version of the day that requires everyone else to cooperate.","Let go of the weight you picked up that was never yours to carry.","Release perfect. It's just fear wearing good clothes.","Let the old proof go. You don't have to keep auditioning for a part you already got.","Drop the urgency that isn't actually yours. Whose emergency is this?","Release the need to be the strong one for one hour today.","Let go of the closed door. The wall was doing you a favor.","Release comparison. Their level 40 is not your level 5 — different game, different save.","Let go of the story that rest has to be earned."],
+ witness:["Witness the urge to fix it. Watch it rise and pass without your hands.","Notice where you perform calm instead of feeling it.","Observe the first feeling before the story arrives to explain it.","Watch what you reach for when you're uncomfortable. Just watch.","Notice the moment you shrink, and stay curious instead of ashamed.","Witness your breath change when you think their name. Data, not verdict.","Observe the difference between a real no and a scared no in your body.","Notice what your attention keeps returning to. It's pointing at something.","Watch the thought without becoming it. You are the one who sees.","Notice one thing that's already working. Let it register fully.","Observe the space between the trigger and your response. Live there today.","Witness the part of you that's already at peace. It's been here the whole time."],
+ mantra:["Reality is programmable. I am the one who writes.","I am Player One. The glitch was the doorway.","I select. I release. I witness. The game bends.","I don't chase the signal — I am the signal.","The frequency I hold decides the world I meet.","I build in the physical what I've already seen in the field.","Nothing is happening to me. Everything is happening as me.","I am allowed to want the whole thing, out loud.","I move at the speed of what lasts.","The doorway opened the moment I stopped asking permission.","I am the first spark and the one who tends it.","My presence is the upgrade."]
+};
+const NUM={
+ 1:{t:"Initiation",g:"Lead. Start the thing. Assert the new direction — you're the first move on the board."},
+ 2:{t:"Harmony",g:"Partner, listen, receive. Patience is power today; let things meet you halfway."},
+ 3:{t:"Expression",g:"Create and communicate. Say it, make it, play. Your voice is the tool today."},
+ 4:{t:"Foundation",g:"Build structure. Boring on purpose wins — lay the brick that holds the vision."},
+ 5:{t:"Freedom",g:"Your home number. Change, adapt, move. Say yes to the unexpected door — it's your medium."},
+ 6:{t:"Devotion",g:"Nurture and tend — home, sons, the people who are yours. Beauty and care are the work."},
+ 7:{t:"Insight",g:"Go inward. Retreat, analyze, feel the deeper current. Solitude is productive today."},
+ 8:{t:"Power",g:"Money, authority, manifestation. Own the room and the ask. Play a bigger hand."},
+ 9:{t:"Completion",g:"Release and finish. Forgive, close the loop, make space. Endings are the doorway."},
+ 11:{t:"Illumination",g:"Your Expression number lit up. Intuition is loud — channel it, don't dilute it. Vision day."},
+ 22:{t:"Master Builder",g:"Ground the impossible. Manifest big and make it real in the physical. Rare build energy."},
+ 33:{t:"Master Teacher",g:"Lead by embodiment. What you model today teaches louder than what you say."}
+};
+const CODEX={
+ 1:{n:"Ember",hex:"#FF5A36",m:"Ignition · will · the first move"},2:{n:"Rose",hex:"#FF7EB6",m:"Union · empathy · soft power"},
+ 3:{n:"Yellow",hex:"#FFD400",m:"Expression · joy · the spoken spark"},4:{n:"Green",hex:"#3DDC84",m:"Foundation · growth · steady ground"},
+ 5:{n:"Cyan",hex:"#00E5FF",m:"Freedom · flow · your core frequency"},6:{n:"Rose",hex:"#FF7EB6",m:"Devotion · care · the tended flame"},
+ 7:{n:"Blue",hex:"#4C6EF5",m:"Insight · depth · the inner room"},8:{n:"Red",hex:"#E5484D",m:"Power · authority · the manifest ask"},
+ 9:{n:"Silver",hex:"#C0C7D0",m:"Completion · release · the clean close"},11:{n:"Purple",hex:"#A855F7",m:"Vision · the signal · your Expression color"},
+ 22:{n:"Gold",hex:"#F5B301",m:"Mastery · the grounded miracle"},33:{n:"Gold",hex:"#F5B301",m:"Mastery · embodied teaching"}
+};
+
+const $=id=>document.getElementById(id);
+let CURRENT_KEY="", ALL=[], currentUser=null;
+function keyOf(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function escapeHtml(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function renderDaily(){
+  const now=new Date();CURRENT_KEY=keyOf(now);
+  const seed=now.getFullYear()*10000+(now.getMonth()+1)*100+now.getDate();
+  const rng=mulberry32(seed+82443);const pick=a=>a[Math.floor(rng()*a.length)];
+  const h=now.getHours();$('partOfDay').textContent=h<12?'morning':h<17?'afternoon':'evening';
+  $('dateLine').textContent=now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  const mp=moon(now);$('moonPill').innerHTML='Moon · <b>'+mp.emoji+' '+mp.name+'</b>';
+  $('rSun').textContent=pick(P.sun);$('rMoon').textContent=pick(P.moon);$('rRise').textContent=pick(P.rise);$('rSynth').innerHTML=pick(P.synth);
+  const py=reduceNum(BIRTH_MONTH+BIRTH_DAY+now.getFullYear());
+  const pm=reduceNum(reduceNum(py,false)+(now.getMonth()+1));
+  const pd=reduceNum(reduceNum(pm,false)+now.getDate());
+  const ud=reduceNum(now.getFullYear()+(now.getMonth()+1)+now.getDate());
+  $('pyNum').textContent=py;$('pmNum').textContent=pm;$('pdNum').textContent=pd;$('udNum').textContent=ud;
+  const nm=NUM[pd]||NUM[reduceNum(pd,false)];$('pdTheme').textContent=nm.t;$('pdNote').textContent=nm.g;
+  const cd=CODEX[pd]||CODEX[reduceNum(pd,false)];const sw=$('swatch');
+  sw.style.background=cd.hex;sw.style.color=cd.hex;$('cName').textContent=cd.n;$('cName').style.color=cd.hex;$('cMeaning').textContent=cd.m;
+  $('pSelect').textContent=pick(P.select);$('pRelease').textContent=pick(P.release);$('pWitness').textContent=pick(P.witness);
+  $('mantra').textContent=pick(P.mantra);
+  $('jDate').textContent=now.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+}
+
+/* ================= JOURNAL (cloud) ================= */
+let saveTimer=null;
+function setSaved(t){$('savedMsg').innerHTML=t;}
+function scheduleSave(){clearTimeout(saveTimer);setSaved('Saving…');saveTimer=setTimeout(saveEntry,700);}
+async function saveEntry(){
+  if(!currentUser)return;
+  const intention=$('jIntention').value.trim(), body=$('jBody').value.trim(), energy=+$('jEnergy').value;
+  if(!intention && !body){
+    await sb.from('journal_entries').delete().eq('user_id',currentUser.id).eq('entry_date',CURRENT_KEY);
+    setSaved('Cleared. Syncs to the cloud as you type ');await refreshMeta();return;
+  }
+  const {error}=await sb.from('journal_entries').upsert(
+    {user_id:currentUser.id,entry_date:CURRENT_KEY,intention:intention||null,energy,body:body||null,updated_at:new Date().toISOString()},
+    {onConflict:'user_id,entry_date'});
+  if(error){setSaved('⚠ Sync error — check connection');console.warn(error);}
+  else{setSaved('<b>Synced ✓</b> across your devices ');await refreshMeta();}
+}
+async function loadEntry(){
+  if(!currentUser)return;
+  const {data}=await sb.from('journal_entries').select('*').eq('user_id',currentUser.id).eq('entry_date',CURRENT_KEY).maybeSingle();
+  const e=data||{};
+  $('jIntention').value=e.intention||'';$('jBody').value=e.body||'';
+  const en=e.energy||5;$('jEnergy').value=en;$('eVal').textContent=en;
+}
+async function refreshMeta(){
+  const {data}=await sb.from('journal_entries').select('entry_date,intention,energy,body').eq('user_id',currentUser.id).order('entry_date',{ascending:false}).limit(180);
+  ALL=data||[];renderPast();renderStreak();
+}
+function renderPast(){
+  const list=ALL.filter(e=>e.entry_date!==CURRENT_KEY);const el=$('pastList');
+  if(!list.length){el.innerHTML='<div class="empty">Past entries appear here once you start writing.</div>';return;}
+  el.innerHTML=list.map(e=>{
+    const d=new Date(e.entry_date+'T12:00:00');
+    const label=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+    const prev=(e.intention||e.body||'').slice(0,80)||'—';
+    return '<div class="pastitem" data-k="'+e.entry_date+'"><div class="pd"><span>'+label+'</span><span>⚡'+(e.energy||'–')+'</span></div><div class="pi">'+escapeHtml(prev)+'</div></div>';
+  }).join('');
+  el.querySelectorAll('.pastitem').forEach(it=>it.addEventListener('click',()=>viewPast(it.dataset.k)));
+}
+function viewPast(k){
+  const e=ALL.find(x=>x.entry_date===k);if(!e)return;
+  const d=new Date(k+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  alertBox(d,(e.intention?('Intention: '+e.intention+'\n\n'):'')+'Energy: '+(e.energy||'–')+'/10\n\n'+(e.body||''));
+}
+function renderStreak(){
+  const dates=new Set(ALL.map(e=>e.entry_date));let streak=0;const d=new Date();
+  if(!dates.has(keyOf(d)))d.setDate(d.getDate()-1);
+  while(dates.has(keyOf(d))){streak++;d.setDate(d.getDate()-1);}
+  $('streak').innerHTML=streak>0?'🔥 '+streak+' day'+(streak>1?'s':'')+' lit':'';
+}
+function exportAll(){
+  let txt='PLAYER ONE · JOURNAL EXPORT\nThe First Spark · Resonance 824.43 Hz\nExported '+new Date().toLocaleString()+'\n'+'='.repeat(40)+'\n\n';
+  [...ALL].sort((a,b)=>b.entry_date.localeCompare(a.entry_date)).forEach(e=>{
+    const d=new Date(e.entry_date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+    txt+=d+'\n'+(e.intention?('Intention: '+e.intention+'\n'):'')+'Energy: '+(e.energy||'–')+'/10\n'+(e.body||'')+'\n\n'+'-'.repeat(40)+'\n\n';
+  });
+  try{const blob=new Blob([txt],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='player-one-journal.txt';a.click();}
+  catch(e){alertBox('Journal Export',txt);}
+}
+function alertBox(title,body){
+  const o=document.createElement('div');o.className='lock';o.style.zIndex=60;
+  o.innerHTML='<div class="lock-card" style="max-width:460px;text-align:left"><h1 style="font-size:1.4rem">'+escapeHtml(title)+'</h1><p style="white-space:pre-wrap;color:#cdd8ef;margin-top:14px;max-height:50vh;overflow:auto">'+escapeHtml(body)+'</p><button class="btn" style="margin-top:20px">Close</button></div>';
+  o.querySelector('button').onclick=()=>o.remove();o.addEventListener('click',e=>{if(e.target===o)o.remove();});
+  document.body.appendChild(o);
+}
+
+/* ================= AUTH ================= */
+function authErr(m){const e=$('authErr');e.className='err';e.textContent=m;$('lockCard').classList.remove('shake');void $('lockCard').offsetWidth;$('lockCard').classList.add('shake');}
+function authOk(m){const e=$('authErr');e.className='err ok';e.textContent=m;}
+async function openApp(user){
+  currentUser=user;$('whoami').textContent=user.email;
+  $('lock').style.display='none';$('app').style.display='block';
+  renderDaily();await loadEntry();await refreshMeta();
+}
+async function doSignIn(){
+  const email=$('email').value.trim(),password=$('pass').value;
+  if(!email||!password){authErr('Enter your email and password.');return;}
+  $('signIn').disabled=true;
+  const {data,error}=await sb.auth.signInWithPassword({email,password});
+  $('signIn').disabled=false;
+  if(error){authErr(error.message);return;}
+  openApp(data.user);
+}
+async function doSignUp(){
+  const email=$('email').value.trim(),password=$('pass').value;
+  if(!email||!password){authErr('Enter an email and a password (8+ characters).');return;}
+  if(password.length<8){authErr('Password must be at least 8 characters.');return;}
+  $('signUp').disabled=true;
+  const {data,error}=await sb.auth.signUp({email,password});
+  $('signUp').disabled=false;
+  if(error){authErr(error.message);return;}
+  if(data.session){openApp(data.user);}
+  else{authOk('Account created. Check '+email+' to confirm, then press Enter.');}
+}
+$('signIn').addEventListener('click',doSignIn);
+$('signUp').addEventListener('click',doSignUp);
+$('pass').addEventListener('keydown',e=>{if(e.key==='Enter')doSignIn();});
+$('email').addEventListener('keydown',e=>{if(e.key==='Enter')$('pass').focus();});
+$('signOut').addEventListener('click',async e=>{e.preventDefault();await sb.auth.signOut();location.reload();});
+
+/* journal wiring */
+$('jIntention').addEventListener('input',scheduleSave);
+$('jBody').addEventListener('input',scheduleSave);
+$('jEnergy').addEventListener('input',function(){$('eVal').textContent=this.value;scheduleSave();});
+$('exportBtn').addEventListener('click',exportAll);
+
+/* midnight rollover */
+setInterval(async()=>{if($('app').style.display==='block'&&keyOf(new Date())!==CURRENT_KEY){await saveEntry();renderDaily();await loadEntry();await refreshMeta();}},30000);
+
+/* boot: resume session if present */
+(async()=>{
+  const {data:{session}}=await sb.auth.getSession();
+  if(session&&session.user){openApp(session.user);}
+  else{$('email').focus();}
+})();
+</script>
+</body>
+</html>
