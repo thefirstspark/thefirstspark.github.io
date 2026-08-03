@@ -262,7 +262,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 /* ================= SUPABASE ================= */
 const SUPABASE_URL = 'https://frcaxxyfenuduefsxzka.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZyY2F4eHlmZW51ZHVlZnN4emthIiwicm9sZSI6ImФ25vbiIsImlhdCI6MTc4MDE2NTcxMywiZXhwIjoyMDk1NzQxNzEzfQ.2BCE_KfAHkfR_SDyV2bpYek91MmtgnmgRWbIIE2A3K8';
+const SUPABASE_KEY = 'sb_publishable_Zz8bQS50IFuUhW2wdCTUYg_ej1FoqAr';
 
 const _mem={};
 const safeStorage={
@@ -437,7 +437,11 @@ async function doSignUp(){
   $('signUp').disabled=false;
   if(error){authErr(error.message);return;}
   if(data.session){openApp(data.user);}
-  else{authOk('Account created. Check '+email+' to confirm, then press Enter.');}
+  else{
+    const si=await sb.auth.signInWithPassword({email,password});
+    if(si.data&&si.data.session){openApp(si.data.user);}
+    else{authOk('Account created. Check '+email+' to confirm, then press Enter.');}
+  }
 }
 $('signIn').addEventListener('click',doSignIn);
 $('signUp').addEventListener('click',doSignUp);
