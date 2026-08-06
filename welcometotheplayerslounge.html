@@ -693,7 +693,7 @@
           <span class="font-serif italic text-4xl gold-text leading-none">3</span>
           <div>
             <h3 class="font-bold text-lg mb-1">Open the MVP Soul Map</h3>
-            <p class="text-sm text-bone/65">Let class meet curiosity. Start with the live map and see what your code reveals first. <a href="soul-map.html" class="text-gold hover:underline">Begin mapping →</a></p>
+            <p class="text-sm text-bone/65">Let class meet curiosity. Start with the live map and see what your code reveals first. <a href="#" id="beginMappingLink" class="text-gold hover:underline">Begin mapping →</a></p>
           </div>
         </li>
       </ol>
@@ -780,6 +780,8 @@
     });
     const bookBtn = document.getElementById('bookCallBtn');
     if (BOOK_CALL_URL && BOOK_CALL_URL !== '#') bookBtn.href = BOOK_CALL_URL;
+    const beginMappingLink = document.getElementById('beginMappingLink');
+    if (SOUL_MAP_URL && SOUL_MAP_URL !== '#') beginMappingLink.href = SOUL_MAP_URL;
 
     // ── personalize via ?name= URL param ─────────────────────
     (function personalize() {
