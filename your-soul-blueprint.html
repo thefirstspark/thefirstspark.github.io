@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#05060a" />
   <title>Your Soul Blueprint — Free Sparkverse Entry | The First Spark</title>
-  <meta name="description" content="Unlock your free Soul Blueprint and claim Sparkverse Free Tier. Your numbers. Your map. Your door into the living universe." />
+  <meta name="description" content="Unlock your free Soul Blueprint across black holes and cosmic realities. Free Sparkverse tier — your map through the event horizon." />
   <link rel="canonical" href="https://thefirstspark.shop/your-soul-blueprint.html" />
   <meta property="og:title" content="Your Soul Blueprint is waiting" />
-  <meta property="og:description" content="A free Soul Code + free Sparkverse entry. Stop guessing who you are. Read the map." />
+  <meta property="og:description" content="Black holes. Cosmic realities. A free Soul Code + free Sparkverse entry. Read the map past the event horizon." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://thefirstspark.shop/your-soul-blueprint.html" />
   <meta property="og:image" content="https://thefirstspark.shop/preview-soulmaps.png" />
@@ -101,6 +101,115 @@
       background:
         linear-gradient(180deg, rgba(5, 6, 10, 0.35) 0%, transparent 18%, transparent 72%, rgba(5, 6, 10, 0.85) 100%);
     }
+
+    #cosmos {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.95;
+    }
+
+    /* ── BLACK HOLE ORBS (decorative) ── */
+    .event-horizon {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 50% 50%,
+          #000 0%,
+          #000 38%,
+          rgba(20, 8, 40, 0.95) 42%,
+          rgba(157, 107, 255, 0.55) 48%,
+          rgba(255, 90, 31, 0.35) 56%,
+          rgba(255, 200, 87, 0.18) 64%,
+          transparent 74%);
+      box-shadow:
+        0 0 60px rgba(157, 107, 255, 0.35),
+        0 0 120px rgba(255, 90, 31, 0.15),
+        inset 0 0 40px rgba(0, 0, 0, 0.9);
+      animation: horizon-breathe 9s ease-in-out infinite alternate;
+    }
+
+    .event-horizon::before {
+      content: '';
+      position: absolute;
+      inset: -18%;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255, 200, 87, 0.0) 20deg,
+        rgba(255, 90, 31, 0.55) 70deg,
+        rgba(255, 200, 87, 0.75) 110deg,
+        rgba(183, 148, 255, 0.45) 160deg,
+        transparent 200deg,
+        rgba(125, 249, 255, 0.35) 260deg,
+        rgba(255, 90, 31, 0.4) 310deg,
+        transparent 360deg
+      );
+      filter: blur(6px);
+      animation: spin 14s linear infinite;
+      mix-blend-mode: screen;
+      opacity: 0.85;
+    }
+
+    .event-horizon::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 160%;
+      height: 42%;
+      transform: translate(-50%, -50%) rotateX(72deg);
+      border-radius: 50%;
+      background: conic-gradient(
+        from 90deg,
+        transparent,
+        rgba(255, 200, 87, 0.55),
+        rgba(255, 90, 31, 0.7),
+        rgba(183, 148, 255, 0.5),
+        transparent 70%
+      );
+      filter: blur(4px);
+      animation: disk-spin 8s linear infinite;
+      opacity: 0.9;
+      mix-blend-mode: screen;
+    }
+
+    .event-horizon.bh-a {
+      width: min(42vw, 340px);
+      height: min(42vw, 340px);
+      right: -6%;
+      top: 8%;
+      opacity: 0.72;
+    }
+
+    .event-horizon.bh-b {
+      width: min(28vw, 220px);
+      height: min(28vw, 220px);
+      left: -4%;
+      bottom: 18%;
+      opacity: 0.55;
+      animation-delay: -3s;
+    }
+
+    .event-horizon.bh-c {
+      width: min(18vw, 140px);
+      height: min(18vw, 140px);
+      left: 42%;
+      top: 62%;
+      opacity: 0.4;
+      animation-delay: -6s;
+    }
+
+    @keyframes horizon-breathe {
+      from { transform: scale(1); filter: brightness(0.95); }
+      to { transform: scale(1.06); filter: brightness(1.12); }
+    }
+
+    @keyframes disk-spin { to { transform: translate(-50%, -50%) rotateX(72deg) rotate(360deg); } }
 
     .page { position: relative; z-index: 5; }
 
@@ -781,6 +890,155 @@
       color: var(--ash);
     }
 
+    /* ── COSMIC REALITIES ── */
+    .realities {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .realities-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    @media (min-width: 860px) {
+      .realities-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .reality-card {
+      position: relative;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(420px 180px at 80% 0%, rgba(157, 107, 255, 0.14), transparent 60%),
+        linear-gradient(165deg, rgba(16, 19, 28, 0.96), rgba(5, 6, 10, 0.98));
+      padding: 24px 22px 22px;
+      min-height: 220px;
+      overflow: hidden;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .reality-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(125, 249, 255, 0.35);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(157, 107, 255, 0.12);
+    }
+
+    .reality-card .bh-mini {
+      position: absolute;
+      right: -28px;
+      top: -28px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%,
+          #000 0%,
+          #000 40%,
+          rgba(157, 107, 255, 0.5) 48%,
+          rgba(255, 90, 31, 0.28) 58%,
+          transparent 70%);
+      opacity: 0.7;
+      filter: blur(0.2px);
+      pointer-events: none;
+    }
+
+    .reality-card .bh-mini::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 150%;
+      height: 38%;
+      transform: translate(-50%, -50%) rotateX(68deg);
+      border-radius: 50%;
+      background: conic-gradient(from 80deg, transparent, rgba(255,200,87,0.6), rgba(255,90,31,0.55), transparent 65%);
+      filter: blur(2px);
+      animation: disk-spin 10s linear infinite;
+      mix-blend-mode: screen;
+    }
+
+    .reality-idx {
+      color: var(--plasma);
+      margin-bottom: 14px;
+    }
+
+    .reality-card h3 {
+      font-size: clamp(1.55rem, 2.6vw, 1.95rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      max-width: 14ch;
+      position: relative;
+    }
+
+    .reality-card p {
+      font-size: 1.12rem;
+      color: rgba(244, 237, 224, 0.72);
+      max-width: 28ch;
+      position: relative;
+    }
+
+    .singularity-banner {
+      margin-top: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 90, 31, 0.28);
+      background:
+        radial-gradient(700px 240px at 50% 120%, rgba(255, 90, 31, 0.18), transparent 55%),
+        radial-gradient(500px 200px at 20% 0%, rgba(157, 107, 255, 0.16), transparent 55%),
+        linear-gradient(160deg, rgba(16, 19, 28, 0.96), rgba(5, 6, 10, 0.98));
+      padding: 28px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .singularity-banner .core {
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%,
+          #000 0%,
+          #000 42%,
+          rgba(183, 148, 255, 0.65) 50%,
+          rgba(255, 200, 87, 0.35) 62%,
+          transparent 74%);
+      box-shadow: 0 0 40px rgba(157, 107, 255, 0.45), 0 0 80px rgba(255, 90, 31, 0.2);
+      position: relative;
+      animation: horizon-breathe 7s ease-in-out infinite alternate;
+    }
+
+    .singularity-banner .core::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 170%;
+      height: 40%;
+      transform: translate(-50%, -50%) rotateX(70deg);
+      border-radius: 50%;
+      background: conic-gradient(from 100deg, transparent, rgba(255,200,87,0.7), rgba(255,90,31,0.6), transparent 70%);
+      filter: blur(3px);
+      animation: disk-spin 7s linear infinite;
+      mix-blend-mode: screen;
+    }
+
+    .singularity-banner h3 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .singularity-banner p {
+      font-size: 1.18rem;
+      color: rgba(244, 237, 224, 0.72);
+      max-width: 42ch;
+      margin: 0 auto;
+    }
+
     /* ── QUOTE ── */
     .oracle {
       text-align: center;
@@ -901,23 +1159,31 @@
         transition-duration: 0.01ms !important;
       }
       .reveal { opacity: 1; transform: none; }
-      .atmosphere, .portal-ring { animation: none; }
+      .atmosphere, .portal-ring, .event-horizon, .event-horizon::before,
+      .event-horizon::after, .reality-card .bh-mini::after,
+      .singularity-banner .core, .singularity-banner .core::after { animation: none; }
     }
   </style>
 </head>
 <body>
   <div class="atmosphere" aria-hidden="true"></div>
   <canvas id="stars" aria-hidden="true"></canvas>
+  <canvas id="cosmos" aria-hidden="true"></canvas>
   <canvas id="sparks" aria-hidden="true"></canvas>
   <div class="veil" aria-hidden="true"></div>
 
   <div class="page">
+    <div class="event-horizon bh-a" aria-hidden="true"></div>
+    <div class="event-horizon bh-b" aria-hidden="true"></div>
+    <div class="event-horizon bh-c" aria-hidden="true"></div>
+
     <nav class="nav" aria-label="Primary">
       <a class="brand" href="https://thefirstspark.shop/">
         <img src="assets/images/logo.png" width="34" height="34" alt="The First Spark" />
         <span>The First Spark</span>
       </a>
       <div class="nav-actions">
+        <a class="nav-link" href="#cosmos-realities">Realities</a>
         <a class="nav-link" href="#blueprint">Blueprint</a>
         <a class="nav-link" href="#enter">Free Tier</a>
         <a class="nav-link" href="#ritual">Begin</a>
@@ -929,17 +1195,17 @@
       <div class="reveal">
         <div class="status mono">
           <span class="pulse" aria-hidden="true"></span>
-          Free entry open · Sparkverse
+          Event horizon open · Free entry
         </div>
-        <h1>Your soul already wrote the <em>blueprint</em>.</h1>
+        <h1>Past the black hole, your <em>blueprint</em> still holds.</h1>
         <p class="hero-lede">
-          You don’t need another feed. You need the map under your name —
-          then a door into the living universe that knows what to do with it.
+          Reality bends. Attention collapses. Cosmic realities stack.
+          You need the map under your name — then a door through the living universe.
         </p>
         <ul class="hero-points">
+          <li>Black-hole calm — exit the noise field, keep your signal</li>
           <li>Free Soul Blueprint — Life Path, Expression, Soul Urge, Sun Sign</li>
-          <li>Free Sparkverse tier — Lobby access, drops, tools, the room</li>
-          <li>No pitch deck fairytale. Real coordinates. Real entry.</li>
+          <li>Free Sparkverse tier — Lobby access across stacked realities</li>
         </ul>
         <div class="cta-row">
           <a class="btn btn-primary" href="soul-map.html" data-track="hero-soul">Reveal my Soul Blueprint</a>
@@ -992,17 +1258,58 @@
     <section class="oracle reveal" aria-label="Transmission">
       <blockquote>
         “Reality is programmable. Consciousness is the code.
-        Your blueprint is the first line.”
+        Black holes forget light. Your blueprint remembers you.”
       </blockquote>
-      <cite>The Selector Model · The First Spark</cite>
+      <cite>The Selector Model · Cosmic Realities · The First Spark</cite>
+    </section>
+
+    <section class="realities" id="cosmos-realities" aria-label="Cosmic realities">
+      <p class="section-label mono">000 — Cosmic Realities</p>
+      <h2 class="section-title reveal">Black holes. Stacked worlds. <em>One selector.</em></h2>
+      <p class="section-copy reveal">
+        You are not trapped in one feed-shaped universe. Cosmic realities braid —
+        physics, myth, relation, time. The blueprint is how you cross without dissolving.
+      </p>
+
+      <div class="realities-grid">
+        <article class="reality-card reveal">
+          <div class="bh-mini" aria-hidden="true"></div>
+          <p class="reality-idx mono">R01 · Event Horizon</p>
+          <h3>Where noise goes to die</h3>
+          <p>Black holes are not endings. They are filters. Drop the story that cannot survive gravity. Keep the code that can.</p>
+        </article>
+        <article class="reality-card reveal">
+          <div class="bh-mini" aria-hidden="true"></div>
+          <p class="reality-idx mono">R02 · Parallel Rooms</p>
+          <h3>Many realities. One name.</h3>
+          <p>Cosmic realities run concurrent — lobby, map, field, void. Your Soul Blueprint is the passport that still matches after the jump.</p>
+        </article>
+        <article class="reality-card reveal">
+          <div class="bh-mini" aria-hidden="true"></div>
+          <p class="reality-idx mono">R03 · Accretion Path</p>
+          <h3>What orbits becomes fuel</h3>
+          <p>Attention spirals. Tools ship. Community densifies. Free tier is the outer disk. The blueprint is the vector into the core.</p>
+        </article>
+      </div>
+
+      <div class="singularity-banner reveal">
+        <div class="core" aria-hidden="true"></div>
+        <p class="mono" style="color:var(--gold);margin-bottom:8px;">Singularity note</p>
+        <h3>Nothing escapes a black hole — <em>except intention.</em></h3>
+        <p>
+          Select the reality. Release the dead weight. Witness what remains.
+          That remainder is your Soul Blueprint — free, readable, usable.
+        </p>
+      </div>
     </section>
 
     <section id="blueprint">
       <p class="section-label mono">001 — The Blueprint</p>
       <h2 class="section-title reveal">Stop guessing. <em>Read the map.</em></h2>
       <p class="section-copy reveal">
-        A Soul Blueprint is not a horoscope costume. It’s your personal coordinate system —
-        numerology + chart language decoded into something you can actually use.
+        A Soul Blueprint is not a horoscope costume. It’s your personal coordinate system
+        across cosmic realities — numerology + chart language decoded into something you can actually use
+        when gravity gets loud.
       </p>
 
       <div class="paths">
@@ -1089,8 +1396,8 @@
 
     <section class="finale reveal">
       <p class="mono" style="color:var(--ember)">004 — Choose your door</p>
-      <h2>The map is free.<br />The room is free.<br /><em>The forgetting ends here.</em></h2>
-      <p>Two clicks. One identity. A universe that finally has your coordinates.</p>
+      <h2>The map is free.<br />The black hole is open.<br /><em>Cross into cosmic reality.</em></h2>
+      <p>Two clicks. One identity. Coordinates that survive the event horizon.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="soul-map.html" data-track="finale-soul">Get Soul Blueprint</a>
         <a class="btn btn-violet" href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" rel="noopener noreferrer" data-track="finale-free">Sparkverse Free Tier</a>
@@ -1194,8 +1501,9 @@
         setInterval(function () { showSlide(idx + 1); }, 4200);
       }
 
-      /* Starfield + sparks */
+      /* Starfield + black holes + cosmic dust */
       var stars = document.getElementById('stars');
+      var cosmos = document.getElementById('cosmos');
       var sparks = document.getElementById('sparks');
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1211,28 +1519,55 @@
       }
 
       var starCtx = sizeCanvas(stars);
+      var cosmosCtx = sizeCanvas(cosmos);
       var sparkCtx = sizeCanvas(sparks);
       var starPts = [];
       var sparkPts = [];
+      var holes = [];
+      var dust = [];
 
       function seedStars() {
         starPts = [];
-        var count = Math.floor((window.innerWidth * window.innerHeight) / 9000);
-        count = Math.max(60, Math.min(count, 180));
+        var count = Math.floor((window.innerWidth * window.innerHeight) / 7000);
+        count = Math.max(90, Math.min(count, 260));
         for (var i = 0; i < count; i++) {
           starPts.push({
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
-            r: Math.random() * 1.4 + 0.2,
-            a: Math.random() * 0.7 + 0.15,
-            s: Math.random() * 0.8 + 0.2
+            r: Math.random() * 1.5 + 0.15,
+            a: Math.random() * 0.75 + 0.12,
+            s: Math.random() * 0.9 + 0.2,
+            hue: Math.random() > 0.82 ? (Math.random() > 0.5 ? '183,148,255' : '125,249,255') : '244,237,224'
+          });
+        }
+      }
+
+      function seedHoles() {
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        holes = [
+          { x: w * 0.82, y: h * 0.22, r: Math.min(w, h) * 0.11, spin: 0.00055, phase: 0, pull: 0.018 },
+          { x: w * 0.12, y: h * 0.72, r: Math.min(w, h) * 0.07, spin: -0.0007, phase: 1.7, pull: 0.014 },
+          { x: w * 0.48, y: h * 0.55, r: Math.min(w, h) * 0.045, spin: 0.0009, phase: 3.1, pull: 0.01 }
+        ];
+      }
+
+      function seedDust() {
+        dust = [];
+        for (var i = 0; i < 90; i++) {
+          dust.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            r: Math.random() * 1.6 + 0.4,
+            a: Math.random() * 0.45 + 0.1,
+            hue: Math.random() > 0.55 ? '255,90,31' : (Math.random() > 0.5 ? '255,200,87' : '157,107,255')
           });
         }
       }
 
       function seedSparks() {
         sparkPts = [];
-        for (var i = 0; i < 28; i++) {
+        for (var i = 0; i < 36; i++) {
           sparkPts.push({
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
@@ -1250,10 +1585,131 @@
         for (var i = 0; i < starPts.length; i++) {
           var p = starPts[i];
           var tw = 0.55 + Math.sin(t * 0.0015 * p.s + i) * 0.45;
+          /* subtle lensing drift toward nearest hole */
+          var lx = p.x;
+          var ly = p.y;
+          if (holes.length) {
+            var h0 = holes[i % holes.length];
+            var dx = h0.x - p.x;
+            var dy = h0.y - p.y;
+            var dist = Math.sqrt(dx * dx + dy * dy) + 0.001;
+            var bend = Math.min(8, (h0.r * h0.r) / dist) * 0.08;
+            lx = p.x + (dx / dist) * bend;
+            ly = p.y + (dy / dist) * bend;
+          }
           starCtx.beginPath();
-          starCtx.fillStyle = 'rgba(244,237,224,' + (p.a * tw) + ')';
-          starCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          starCtx.fillStyle = 'rgba(' + p.hue + ',' + (p.a * tw) + ')';
+          starCtx.arc(lx, ly, p.r, 0, Math.PI * 2);
           starCtx.fill();
+        }
+      }
+
+      function drawBlackHole(ctx, hole, t) {
+        var pulse = 1 + Math.sin(t * 0.0012 + hole.phase) * 0.04;
+        var R = hole.r * pulse;
+        var ang = t * hole.spin;
+
+        /* soft gravitational glow */
+        var glow = ctx.createRadialGradient(hole.x, hole.y, R * 0.2, hole.x, hole.y, R * 3.2);
+        glow.addColorStop(0, 'rgba(0,0,0,0.0)');
+        glow.addColorStop(0.35, 'rgba(10,6,20,0.35)');
+        glow.addColorStop(0.55, 'rgba(157,107,255,0.12)');
+        glow.addColorStop(0.75, 'rgba(255,90,31,0.06)');
+        glow.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(hole.x, hole.y, R * 3.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        /* accretion disk */
+        ctx.save();
+        ctx.translate(hole.x, hole.y);
+        ctx.scale(1, 0.38);
+        ctx.rotate(ang);
+        var disk = ctx.createRadialGradient(0, 0, R * 0.55, 0, 0, R * 2.4);
+        disk.addColorStop(0, 'rgba(0,0,0,0)');
+        disk.addColorStop(0.35, 'rgba(255,200,87,0.05)');
+        disk.addColorStop(0.55, 'rgba(255,90,31,0.45)');
+        disk.addColorStop(0.72, 'rgba(183,148,255,0.35)');
+        disk.addColorStop(0.88, 'rgba(125,249,255,0.12)');
+        disk.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = disk;
+        ctx.beginPath();
+        ctx.arc(0, 0, R * 2.4, 0, Math.PI * 2);
+        ctx.fill();
+
+        /* hot ring */
+        ctx.strokeStyle = 'rgba(255,200,87,0.55)';
+        ctx.lineWidth = Math.max(1.5, R * 0.06);
+        ctx.shadowColor = 'rgba(255,90,31,0.8)';
+        ctx.shadowBlur = 18;
+        ctx.beginPath();
+        ctx.arc(0, 0, R * 1.35, 0.15, Math.PI * 1.55);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        ctx.restore();
+
+        /* photon ring */
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(183,148,255,0.35)';
+        ctx.lineWidth = 1.25;
+        ctx.arc(hole.x, hole.y, R * 1.08, 0, Math.PI * 2);
+        ctx.stroke();
+
+        /* event horizon core */
+        var core = ctx.createRadialGradient(hole.x, hole.y, 0, hole.x, hole.y, R);
+        core.addColorStop(0, '#000');
+        core.addColorStop(0.72, '#000');
+        core.addColorStop(0.88, 'rgba(20,8,40,0.95)');
+        core.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = core;
+        ctx.beginPath();
+        ctx.arc(hole.x, hole.y, R, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function drawCosmos(t) {
+        cosmosCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        /* faint reality bands */
+        for (var b = 0; b < 3; b++) {
+          var y = window.innerHeight * (0.22 + b * 0.28) + Math.sin(t * 0.0004 + b) * 18;
+          var band = cosmosCtx.createLinearGradient(0, y - 40, 0, y + 40);
+          band.addColorStop(0, 'rgba(125,249,255,0)');
+          band.addColorStop(0.5, b === 1 ? 'rgba(157,107,255,0.05)' : 'rgba(125,249,255,0.035)');
+          band.addColorStop(1, 'rgba(125,249,255,0)');
+          cosmosCtx.fillStyle = band;
+          cosmosCtx.fillRect(0, y - 40, window.innerWidth, 80);
+        }
+
+        for (var i = 0; i < holes.length; i++) {
+          drawBlackHole(cosmosCtx, holes[i], t);
+        }
+
+        /* dust spiraling into holes */
+        for (var d = 0; d < dust.length; d++) {
+          var p = dust[d];
+          var hole = holes[d % holes.length];
+          if (hole && !reduce) {
+            var dx = hole.x - p.x;
+            var dy = hole.y - p.y;
+            var dist = Math.sqrt(dx * dx + dy * dy) + 0.001;
+            var pull = hole.pull * (hole.r / dist);
+            var tx = -dy / dist;
+            var ty = dx / dist;
+            p.x += dx * pull * 0.35 + tx * (0.35 + pull * 8);
+            p.y += dy * pull * 0.35 + ty * (0.35 + pull * 8);
+            if (dist < hole.r * 0.85 || p.x < -40 || p.y < -40 || p.x > window.innerWidth + 40 || p.y > window.innerHeight + 40) {
+              var ang = Math.random() * Math.PI * 2;
+              var rad = hole.r * (2.2 + Math.random() * 2.8);
+              p.x = hole.x + Math.cos(ang) * rad;
+              p.y = hole.y + Math.sin(ang) * rad * 0.45;
+            }
+          }
+          cosmosCtx.beginPath();
+          cosmosCtx.fillStyle = 'rgba(' + p.hue + ',' + p.a + ')';
+          cosmosCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          cosmosCtx.fill();
         }
       }
 
@@ -1283,14 +1739,18 @@
       var raf = 0;
       function loop(t) {
         drawStars(t || 0);
+        drawCosmos(t || 0);
         if (!reduce) drawSparks();
         raf = requestAnimationFrame(loop);
       }
 
       function bootCanvas() {
         starCtx = sizeCanvas(stars);
+        cosmosCtx = sizeCanvas(cosmos);
         sparkCtx = sizeCanvas(sparks);
         seedStars();
+        seedHoles();
+        seedDust();
         seedSparks();
       }
 
@@ -1299,6 +1759,7 @@
         raf = requestAnimationFrame(loop);
       } else {
         drawStars(0);
+        drawCosmos(0);
       }
 
       var resizeTimer;
