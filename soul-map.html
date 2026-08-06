@@ -225,6 +225,26 @@
         .code-action-btn:hover:not(.gold) { border-color: var(--cyan); color: var(--cyan); }
         .code-action-btn.gold:hover { box-shadow: 0 4px 20px rgba(212,175,55,0.3); }
 
+        /* ── SIGIL ADD-ON ── */
+        #sigil-addon { text-align: center; }
+        #sigil-addon.hidden { display: none; }
+        .sigil-methods { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+        .sigil-method-btn {
+            padding: 10px 22px; background: transparent; border: 1px solid var(--dim);
+            color: var(--mid); font-family: var(--body); font-size: 10px;
+            letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+        }
+        .sigil-method-btn.active {
+            border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.08);
+        }
+        .sigil-canvas-wrap {
+            width: 280px; height: 280px; margin: 0 auto 28px;
+            background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%);
+            border: 1px solid var(--dim); padding: 16px;
+        }
+        #sigilAddonCanvas { width: 100%; height: 100%; }
+        .sigil-caption { font-size: 10px; color: var(--mid); letter-spacing: 1px; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+
         /* ── PIN MODAL ── */
         .pin-overlay {
             display: none; position: fixed; top:0;left:0;right:0;bottom:0;
@@ -483,6 +503,33 @@
             <button class="code-action-btn" onclick="shareCode()">Share</button>
             <button class="code-action-btn" onclick="openPinModal('public')">Register Public — $5</button>
             <button class="code-action-btn" onclick="openPinModal('private')">Register Private — $11</button>
+        </div>
+    </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<!-- ══ SIGIL ADD-ON ══ -->
+<section id="sigil-addon" class="hidden">
+    <div class="wrap">
+        <div class="section-header">
+            <div class="eyebrow">Add-On — Sigil For You</div>
+            <h2>Your Personal Sigil</h2>
+            <p>Your Soul Code has been distilled into a unique glyph. Charge it, save it, carry it as a visual anchor for your intention.</p>
+        </div>
+        <div class="sigil-methods">
+            <button class="sigil-method-btn active" data-sigil-method="letter" onclick="setSigilMethod('letter')">Letter</button>
+            <button class="sigil-method-btn" data-sigil-method="geometric" onclick="setSigilMethod('geometric')">Geometric</button>
+            <button class="sigil-method-btn" data-sigil-method="chaos" onclick="setSigilMethod('chaos')">Chaos</button>
+        </div>
+        <div class="sigil-canvas-wrap">
+            <canvas id="sigilAddonCanvas"></canvas>
+        </div>
+        <p class="sigil-caption" id="sigilCaption"></p>
+        <div class="code-actions">
+            <button class="code-action-btn gold" onclick="regenerateSigil()">Regenerate</button>
+            <button class="code-action-btn" onclick="downloadSigil()">Download</button>
+            <button class="code-action-btn" onclick="shareSigil()">Share</button>
         </div>
     </div>
 </section>
@@ -803,6 +850,9 @@ function handleGenerate(e) {
     `;
 
     section.scrollIntoView({ behavior: 'smooth' });
+
+    document.getElementById('sigil-addon').classList.remove('hidden');
+    generateSigilFromCode(birthName, currentCode);
 }
 
 // ═══════════════════════════════════════
@@ -817,6 +867,137 @@ function copyCode() {
         setTimeout(() => btn.textContent = orig, 2000);
     });
 }
+
+// ═══════════════════════════════════════
+// SIGIL ADD-ON
+// ═══════════════════════════════════════
+const sigilCanvas = document.getElementById('sigilAddonCanvas');
+const sigilCtx = sigilCanvas.getContext('2d');
+let sigilMethod = 'letter';
+let sigilIntention = '';
+
+const sigilLetterPos = {};
+'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach((l, i) => {
+    sigilLetterPos[l] = (i / 26) * Math.PI * 2 - Math.PI / 2;
+});
+
+function resizeSigilCanvas() {
+    const size = sigilCanvas.parentElement.clientWidth - 32;
+    sigilCanvas.width = size; sigilCanvas.height = size;
+}
+
+function drawSigilBase() {
+    sigilCtx.clearRect(0, 0, sigilCanvas.width, sigilCanvas.height);
+    sigilCtx.strokeStyle = 'rgba(139,92,246,0.15)';
+    sigilCtx.lineWidth = 1;
+    sigilCtx.beginPath();
+    sigilCtx.arc(sigilCanvas.width / 2, sigilCanvas.height / 2, sigilCanvas.width / 2 - 16, 0, Math.PI * 2);
+    sigilCtx.stroke();
+}
+
+function processSigilIntention(text) {
+    const vowels = 'aeiouAEIOU';
+    let result = text.toUpperCase().replace(/[^A-Z]/g, '');
+    result = result.split('').filter(c => !vowels.includes(c)).join('');
+    return [...new Set(result)].join('');
+}
+
+function drawSigil() {
+    if (!sigilIntention.trim()) return;
+    const letters = processSigilIntention(sigilIntention);
+    resizeSigilCanvas();
+    drawSigilBase();
+    if (letters.length < 2) return;
+    const cx = sigilCanvas.width / 2, cy = sigilCanvas.height / 2, r = sigilCanvas.width / 2 - 40;
+
+    if (sigilMethod === 'letter') {
+        const points = letters.split('').map(l => ({ x: cx + Math.cos(sigilLetterPos[l]) * r * 0.8, y: cy + Math.sin(sigilLetterPos[l]) * r * 0.8 }));
+        sigilCtx.strokeStyle = '#8b5cf6'; sigilCtx.lineWidth = 2; sigilCtx.lineCap = 'round';
+        sigilCtx.beginPath(); sigilCtx.moveTo(points[0].x, points[0].y);
+        points.slice(1).forEach(p => sigilCtx.lineTo(p.x, p.y));
+        sigilCtx.stroke();
+        points.forEach((p, i) => {
+            sigilCtx.fillStyle = i === 0 ? '#22d3ee' : (i === points.length - 1 ? '#d4af37' : '#8b5cf6');
+            sigilCtx.beginPath(); sigilCtx.arc(p.x, p.y, i === 0 || i === points.length - 1 ? 6 : 4, 0, Math.PI * 2); sigilCtx.fill();
+        });
+    } else if (sigilMethod === 'geometric') {
+        const n = Math.max(3, Math.min(letters.length + 2, 12));
+        const pts = Array.from({ length: n }, (_, i) => {
+            const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+            return { x: cx + Math.cos(a) * r * 0.7, y: cy + Math.sin(a) * r * 0.7 };
+        });
+        sigilCtx.strokeStyle = '#8b5cf6'; sigilCtx.lineWidth = 1.5;
+        sigilCtx.beginPath(); pts.forEach((p, i) => i === 0 ? sigilCtx.moveTo(p.x, p.y) : sigilCtx.lineTo(p.x, p.y)); sigilCtx.closePath(); sigilCtx.stroke();
+        sigilCtx.strokeStyle = '#d4af37';
+        letters.split('').forEach((l, i) => {
+            sigilCtx.beginPath(); sigilCtx.moveTo(pts[i % n].x, pts[i % n].y); sigilCtx.lineTo(pts[(l.charCodeAt(0) - 65) % n].x, pts[(l.charCodeAt(0) - 65) % n].y); sigilCtx.stroke();
+        });
+        sigilCtx.fillStyle = '#22d3ee'; sigilCtx.beginPath(); sigilCtx.arc(cx, cy, 8, 0, Math.PI * 2); sigilCtx.fill();
+    } else {
+        const seed = letters.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+        let si = 1;
+        const rand = (min, max) => { const x = Math.sin(seed * si++) * 10000; return min + (x - Math.floor(x)) * (max - min); };
+        sigilCtx.strokeStyle = '#8b5cf6'; sigilCtx.lineWidth = 2; sigilCtx.lineCap = 'round';
+        for (let s = 0; s < letters.length + 3; s++) {
+            sigilCtx.beginPath();
+            let x = cx + rand(-r * 0.5, r * 0.5), y = cy + rand(-r * 0.5, r * 0.5);
+            sigilCtx.moveTo(x, y);
+            for (let i = 0; i < rand(2, 5); i++) {
+                const nx = cx + rand(-r * 0.6, r * 0.6), ny = cy + rand(-r * 0.6, r * 0.6);
+                rand(0, 1) > 0.5 ? sigilCtx.lineTo(nx, ny) : sigilCtx.quadraticCurveTo((x + nx) / 2 + rand(-30, 30), (y + ny) / 2 + rand(-30, 30), nx, ny);
+                x = nx; y = ny;
+            }
+            sigilCtx.stroke();
+        }
+        sigilCtx.fillStyle = '#d4af37';
+        for (let i = 0; i < 3; i++) { sigilCtx.beginPath(); sigilCtx.arc(cx + rand(-r * 0.4, r * 0.4), cy + rand(-r * 0.4, r * 0.4), rand(3, 6), 0, Math.PI * 2); sigilCtx.fill(); }
+        sigilCtx.strokeStyle = '#22d3ee'; sigilCtx.lineWidth = 1.5;
+        sigilCtx.beginPath(); sigilCtx.ellipse(cx, cy, 15, 10, 0, 0, Math.PI * 2); sigilCtx.stroke();
+        sigilCtx.fillStyle = '#22d3ee'; sigilCtx.beginPath(); sigilCtx.arc(cx, cy, 4, 0, Math.PI * 2); sigilCtx.fill();
+    }
+}
+
+function generateSigilFromCode(birthName, code) {
+    sigilIntention = `I AM ${birthName} ${code.sunSign} ${code.lifePath}`;
+    document.getElementById('sigilCaption').textContent = `Distilled from your birth name and ${code.sunSign} · Life Path ${code.lifePath}.`;
+    drawSigil();
+}
+
+function setSigilMethod(method) {
+    sigilMethod = method;
+    document.querySelectorAll('.sigil-method-btn').forEach(b => b.classList.toggle('active', b.dataset.sigilMethod === method));
+    drawSigil();
+}
+
+function regenerateSigil() {
+    if (!currentCode) return;
+    drawSigil();
+}
+
+function downloadSigil() {
+    if (!sigilIntention.trim()) return;
+    const a = document.createElement('a');
+    a.download = 'my-sigil.png';
+    a.href = sigilCanvas.toDataURL();
+    a.click();
+}
+
+function shareSigil() {
+    if (!currentCode) return;
+    const text = `I generated a sigil from my Soul Code ${currentCode.code} ✦ Find yours at soul-map.thefirstspark.shop`;
+    sigilCanvas.toBlob(blob => {
+        const file = new File([blob], 'my-sigil.png', { type: 'image/png' });
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({ title: 'My Sigil', text, files: [file] });
+        } else if (navigator.share) {
+            navigator.share({ title: 'My Sigil', text, url: 'https://soul-map.thefirstspark.shop' });
+        } else {
+            navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
+        }
+    });
+}
+
+window.addEventListener('resize', () => { if (sigilIntention.trim()) drawSigil(); });
 
 function shareCode() {
     if (!currentCode) return;
