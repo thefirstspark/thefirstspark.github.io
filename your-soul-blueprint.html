@@ -1122,7 +1122,7 @@
 
       document.getElementById('year').textContent = String(new Date().getFullYear());
 
-      /* ── Track clicks ── */
+      /* Track clicks */
       function track(name, detail) {
         try {
           if (typeof gtag === 'function') {
@@ -1137,7 +1137,7 @@
         });
       });
 
-      /* ── Reveal on scroll ── */
+      /* Reveal on scroll */
       var revealEls = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (entries) {
@@ -1153,7 +1153,7 @@
         revealEls.forEach(function (el) { el.classList.add('is-in'); });
       }
 
-      /* ── Sticky bar after hero ── */
+      /* Sticky bar after hero */
       var sticky = document.getElementById('stickyBar');
       var hero = document.querySelector('.hero');
       if (sticky && hero && 'IntersectionObserver' in window) {
@@ -1167,12 +1167,12 @@
         sticky.classList.add('is-on');
       }
 
-      /* ── Media carousel ── */
+      /* Media carousel */
       var slides = [
-        { tag: '001 — Soul Map', title: 'Your private coordinates' },
-        { tag: '002 — Sparkverse', title: 'The living gateway' },
-        { tag: '003 — Universe', title: 'Home of the First Spark' },
-        { tag: '004 — Master Sigil', title: 'Desktop origin mark' }
+        { tag: '001 - Soul Map', title: 'Your private coordinates' },
+        { tag: '002 - Sparkverse', title: 'The living gateway' },
+        { tag: '003 - Universe', title: 'Home of the First Spark' },
+        { tag: '004 - Master Sigil', title: 'Desktop origin mark' }
       ];
       var imgs = document.querySelectorAll('#portalMedia img');
       var tagEl = document.getElementById('slideTag');
@@ -1187,14 +1187,14 @@
         });
         tagEl.textContent = slides[idx].tag;
         titleEl.textContent = slides[idx].title;
-        countEl.textContent = String(idx + 1).padStart(2, '0') + ' / 0' + slides.length;
+        countEl.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
       }
 
       if (imgs.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         setInterval(function () { showSlide(idx + 1); }, 4200);
       }
 
-      /* ── Starfield + sparks ── */
+      /* Starfield + sparks */
       var stars = document.getElementById('stars');
       var sparks = document.getElementById('sparks');
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1307,7 +1307,7 @@
         resizeTimer = setTimeout(bootCanvas, 120);
       });
 
-      /* ── Threshold form → personalized path ── */
+      /* Threshold form -> personalized path */
       var form = document.getElementById('thresholdForm');
       var note = document.getElementById('formNote');
       var submitBtn = document.getElementById('ritualSubmit');
@@ -1331,14 +1331,14 @@
           return;
         }
         if (!validEmail(email)) {
-          note.textContent = 'That email doesn’t look ready yet.';
+          note.textContent = "That email doesn't look ready yet.";
           note.className = 'form-note err';
           document.getElementById('soulEmail').focus();
           return;
         }
 
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Opening the door…';
+        submitBtn.textContent = 'Opening the door...';
         note.textContent = 'Blueprint first. Free tier next.';
         note.className = 'form-note ok';
 
@@ -1360,11 +1360,30 @@
           window.location.href = soul;
         }, 650);
 
-        /* Fallback link state if popup blocked */
+        /* Fallback link state if popup blocked - DOM nodes, no innerHTML */
         setTimeout(function () {
-          note.innerHTML = 'If a tab was blocked: <a href="' + FREE_TIER_URL + '" target="_blank" rel="noopener noreferrer">Free Tier</a> · <a href="' + soul + '">Blueprint</a> · <a href="' + welcome + '">Welcome</a>';
+          while (note.firstChild) note.removeChild(note.firstChild);
+          note.appendChild(document.createTextNode('If a tab was blocked: '));
+
+          function addLink(href, label, external) {
+            var a = document.createElement('a');
+            a.href = href;
+            a.textContent = label;
+            if (external) {
+              a.target = '_blank';
+              a.rel = 'noopener noreferrer';
+            }
+            note.appendChild(a);
+          }
+
+          addLink(FREE_TIER_URL, 'Free Tier', true);
+          note.appendChild(document.createTextNode(' | '));
+          addLink(soul, 'Blueprint', false);
+          note.appendChild(document.createTextNode(' | '));
+          addLink(welcome, 'Welcome', false);
+
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Unlock my path →';
+          submitBtn.textContent = 'Unlock my path ->';
         }, 1400);
       });
 
