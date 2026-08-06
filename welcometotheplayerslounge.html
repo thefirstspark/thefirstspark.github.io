@@ -424,15 +424,15 @@
           <p class="micro mt-4" style="color:#ff5a1f;">→ subscribe</p>
         </a>
 
-        <!-- 3: Tools + Templates -->
+        <!-- 3: MVP Soul Map -->
         <a href="#" class="access-link glass glass-hover rounded-2xl p-7 reveal block">
           <div class="flex items-center justify-between mb-5">
             <div class="tool-icon bg-plasma/10 border-plasma/30 text-plasma">⌬</div>
             <span class="badge-unlocked">unlocked</span>
           </div>
-          <h3 class="font-serif italic text-2xl text-plasma mb-2">Tools &amp; Templates</h3>
-          <p class="text-sm text-bone/65 leading-relaxed">The full Player toolkit — sigil generators, soul-map workflows, ritual scripts, ready to use.</p>
-          <p class="micro mt-4" style="color:#7df9ff;">→ open library</p>
+          <h3 class="font-serif italic text-2xl text-plasma mb-2">MVP Soul Map</h3>
+          <p class="text-sm text-bone/65 leading-relaxed">Start with your code. Open the live Soul Map MVP and follow your curiosity into what your numbers are already trying to show you.</p>
+          <p class="micro mt-4" style="color:#7df9ff;">→ begin the map</p>
         </a>
 
         <!-- 4: Weekly Live Calls -->
@@ -692,8 +692,8 @@
         <li class="glass glass-hover rounded-2xl p-6 flex items-start gap-5">
           <span class="font-serif italic text-4xl gold-text leading-none">3</span>
           <div>
-            <h3 class="font-bold text-lg mb-1">Crack open the codex</h3>
-            <p class="text-sm text-bone/65">Start with the Player Starter Pack. <a href="#" class="text-gold hover:underline">Browse codex →</a></p>
+            <h3 class="font-bold text-lg mb-1">Open the MVP Soul Map</h3>
+            <p class="text-sm text-bone/65">Let class meet curiosity. Start with the live map and see what your code reveals first. <a href="soul-map.html" class="text-gold hover:underline">Begin mapping →</a></p>
           </div>
         </li>
       </ol>
@@ -765,6 +765,7 @@
     // ╠═══════════════════════════════════════════════════════╣
     const BOOK_CALL_URL    = '#'; // calendly / tidycal etc.
     const PRIVATE_CHANNELS = '#'; // whop / discord deep link
+    const SOUL_MAP_URL     = 'soul-map.html'; // live soul map MVP
     const CODEX_URL        = '#'; // your codex / library page
     const DIRECT_LINE_URL  = '#'; // mailto:kate@thefirstspark.shop
     const SIGNALS_URL      = '#'; // newsletter / signals feed
@@ -773,7 +774,7 @@
 
     // wire links by index (order matches the cards above)
     const accessLinks = document.querySelectorAll('.access-link');
-    const urls = [PRIVATE_CHANNELS, SIGNALS_URL, CODEX_URL, CALLS_URL, CODEX_URL, DIRECT_LINE_URL];
+    const urls = [PRIVATE_CHANNELS, SIGNALS_URL, SOUL_MAP_URL, CALLS_URL, CODEX_URL, DIRECT_LINE_URL];
     accessLinks.forEach((a, i) => {
       if (urls[i] && urls[i] !== '#') a.href = urls[i];
     });
