@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#05060a" />
+  <title>Your Soul Blueprint — Free Sparkverse Entry | The First Spark</title>
+  <meta name="description" content="Unlock your free Soul Blueprint across black holes and cosmic realities. Free Sparkverse tier — your map through the event horizon." />
+  <link rel="canonical" href="https://thefirstspark.shop/your-soul-blueprint.html" />
+  <meta property="og:title" content="Your Soul Blueprint is waiting" />
+  <meta property="og:description" content="Black holes. Cosmic realities. A free Soul Code + free Sparkverse entry. Read the map past the event horizon." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://thefirstspark.shop/your-soul-blueprint.html" />
+  <meta property="og:image" content="https://thefirstspark.shop/preview-soulmaps.png" />
+  <meta property="og:site_name" content="The First Spark" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Your Soul Blueprint is waiting" />
+  <meta name="twitter:description" content="Free Soul Blueprint + free Sparkverse tier. Enter in under a minute." />
+  <meta name="twitter:image" content="https://thefirstspark.shop/preview-soulmaps.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SKL8XQ51ZH');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --void: #05060a;
+      --void-2: #0a0c14;
+      --void-3: #10131c;
+      --bone: #f4ede0;
+      --ember: #ff5a1f;
+      --gold: #ffc857;
+      --plasma: #7df9ff;
+      --violet: #b794ff;
+      --magnetic: #9d6bff;
+      --ash: #6b6a6e;
+      --line: rgba(244, 237, 224, 0.12);
+      --glow-violet: rgba(157, 107, 255, 0.35);
+      --glow-gold: rgba(255, 200, 87, 0.28);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--void);
+      color: var(--bone);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      line-height: 1.55;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── ATMOSPHERE ── */
+    .atmosphere {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(1100px 700px at 18% 8%, rgba(157, 107, 255, 0.22), transparent 58%),
+        radial-gradient(900px 620px at 88% 18%, rgba(255, 90, 31, 0.12), transparent 55%),
+        radial-gradient(800px 540px at 50% 100%, rgba(125, 249, 255, 0.08), transparent 55%),
+        radial-gradient(600px 400px at 70% 70%, rgba(255, 200, 87, 0.07), transparent 60%);
+      animation: drift 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(-2%, -1.5%, 0) scale(1.06); }
+    }
+
+    #stars, #sparks {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #stars { opacity: 0.9; }
+    #sparks { z-index: 2; }
+
+    .veil {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(5, 6, 10, 0.35) 0%, transparent 18%, transparent 72%, rgba(5, 6, 10, 0.85) 100%);
+    }
+
+    #cosmos {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.95;
+    }
+
+    /* ── BLACK HOLE ORBS (decorative) ── */
+    .event-horizon {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 50% 50%,
+          #000 0%,
+          #000 38%,
+          rgba(20, 8, 40, 0.95) 42%,
+          rgba(157, 107, 255, 0.55) 48%,
+          rgba(255, 90, 31, 0.35) 56%,
+          rgba(255, 200, 87, 0.18) 64%,
+          transparent 74%);
+      box-shadow:
+        0 0 60px rgba(157, 107, 255, 0.35),
+        0 0 120px rgba(255, 90, 31, 0.15),
+        inset 0 0 40px rgba(0, 0, 0, 0.9);
+      animation: horizon-breathe 9s ease-in-out infinite alternate;
+    }
+
+    .event-horizon::before {
+      content: '';
+      position: absolute;
+      inset: -18%;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255, 200, 87, 0.0) 20deg,
+        rgba(255, 90, 31, 0.55) 70deg,
+        rgba(255, 200, 87, 0.75) 110deg,
+        rgba(183, 148, 255, 0.45) 160deg,
+        transparent 200deg,
+        rgba(125, 249, 255, 0.35) 260deg,
+        rgba(255, 90, 31, 0.4) 310deg,
+        transparent 360deg
+      );
+      filter: blur(6px);
+      animation: spin 14s linear infinite;
+      mix-blend-mode: screen;
+      opacity: 0.85;
+    }
+
+    .event-horizon::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 160%;
+      height: 42%;
+      transform: translate(-50%, -50%) rotateX(72deg);
+      border-radius: 50%;
+      background: conic-gradient(
+        from 90deg,
+        transparent,
+        rgba(255, 200, 87, 0.55),
+        rgba(255, 90, 31, 0.7),
+        rgba(183, 148, 255, 0.5),
+        transparent 70%
+      );
+      filter: blur(4px);
+      animation: disk-spin 8s linear infinite;
+      opacity: 0.9;
+      mix-blend-mode: screen;
+    }
+
+    .event-horizon.bh-a {
+      width: min(42vw, 340px);
+      height: min(42vw, 340px);
+      right: -6%;
+      top: 8%;
+      opacity: 0.72;
+    }
+
+    .event-horizon.bh-b {
+      width: min(28vw, 220px);
+      height: min(28vw, 220px);
+      left: -4%;
+      bottom: 18%;
+      opacity: 0.55;
+      animation-delay: -3s;
+    }
+
+    .event-horizon.bh-c {
+      width: min(18vw, 140px);
+      height: min(18vw, 140px);
+      left: 42%;
+      top: 62%;
+      opacity: 0.4;
+      animation-delay: -6s;
+    }
+
+    @keyframes horizon-breathe {
+      from { transform: scale(1); filter: brightness(0.95); }
+      to { transform: scale(1.06); filter: brightness(1.12); }
+    }
+
+    @keyframes disk-spin { to { transform: translate(-50%, -50%) rotateX(72deg) rotate(360deg); } }
+
+    .page { position: relative; z-index: 5; }
+
+    /* ── TYPE ── */
+    .mono {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    em {
+      font-style: italic;
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    a { color: inherit; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(5, 6, 10, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--bone);
+    }
+
+    .brand img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 24px var(--glow-violet);
+    }
+
+    .brand span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-link {
+      display: none;
+      text-decoration: none;
+      color: var(--ash);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 8px 10px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover { color: var(--bone); }
+
+    @media (min-width: 720px) {
+      .nav-link { display: inline-block; }
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 14px 22px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      color: var(--void);
+      background: linear-gradient(135deg, var(--gold) 0%, var(--ember) 100%);
+      box-shadow: 0 10px 40px rgba(255, 90, 31, 0.28), 0 0 0 1px rgba(255, 200, 87, 0.25);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 14px 48px rgba(255, 90, 31, 0.42), 0 0 0 1px rgba(255, 200, 87, 0.45);
+    }
+
+    .btn-violet {
+      color: var(--void);
+      background: linear-gradient(135deg, var(--magnetic) 0%, var(--violet) 100%);
+      box-shadow: 0 10px 40px rgba(157, 107, 255, 0.3);
+    }
+
+    .btn-ghost {
+      color: var(--bone);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(183, 148, 255, 0.55);
+      color: var(--violet);
+    }
+
+    .btn-sm { padding: 10px 16px; font-size: 10px; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 48px 22px 28px;
+      display: grid;
+      gap: 36px;
+      align-items: center;
+    }
+
+    @media (min-width: 960px) {
+      .hero {
+        grid-template-columns: 1.05fr 0.95fr;
+        padding: 72px 28px 40px;
+        gap: 48px;
+      }
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 90, 31, 0.35);
+      background: rgba(255, 90, 31, 0.08);
+      color: var(--ember);
+      margin-bottom: 22px;
+    }
+
+    .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--ember);
+      box-shadow: 0 0 0 0 rgba(255, 90, 31, 0.55);
+      animation: pulse 1.8s ease-out infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 90, 31, 0.55); }
+      70% { box-shadow: 0 0 0 12px rgba(255, 90, 31, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 90, 31, 0); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 7.2vw, 5.4rem);
+      font-weight: 300;
+      line-height: 0.96;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      max-width: 12ch;
+    }
+
+    .hero-lede {
+      font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+      color: rgba(244, 237, 224, 0.72);
+      max-width: 34ch;
+      margin-bottom: 28px;
+    }
+
+    .hero-points {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .hero-points li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: rgba(244, 237, 224, 0.78);
+      font-size: 1.15rem;
+    }
+
+    .hero-points li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 0.85rem;
+      margin-top: 0.35em;
+      flex: none;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .fineprint {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+
+    .fineprint a {
+      color: var(--violet);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .fineprint a:hover { border-bottom-color: var(--violet); }
+
+    /* ── PORTAL / MEDIA CARD ── */
+    .portal-stage {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .portal-ring {
+      position: absolute;
+      inset: -8% -6%;
+      border-radius: 36px;
+      background:
+        conic-gradient(from 180deg at 50% 50%,
+          transparent 0deg,
+          rgba(183, 148, 255, 0.35) 40deg,
+          transparent 80deg,
+          rgba(255, 200, 87, 0.28) 140deg,
+          transparent 180deg,
+          rgba(125, 249, 255, 0.22) 240deg,
+          transparent 280deg,
+          rgba(255, 90, 31, 0.25) 320deg,
+          transparent 360deg);
+      filter: blur(18px);
+      opacity: 0.75;
+      animation: spin 18s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .portal-card {
+      position: relative;
+      z-index: 1;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(244, 237, 224, 0.14);
+      background: linear-gradient(160deg, rgba(16, 19, 28, 0.92), rgba(5, 6, 10, 0.96));
+      box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.55),
+        0 0 80px rgba(157, 107, 255, 0.12);
+    }
+
+    .portal-media {
+      position: relative;
+      aspect-ratio: 16 / 11;
+      overflow: hidden;
+      background: #080a12;
+    }
+
+    .portal-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.04);
+      transition: opacity 0.7s ease, transform 8s ease;
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+
+    .portal-media img.is-active {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .portal-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 35%, rgba(5, 6, 10, 0.88) 100%),
+        radial-gradient(circle at 50% 20%, rgba(183, 148, 255, 0.18), transparent 50%);
+      pointer-events: none;
+    }
+
+    .portal-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 16px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .portal-caption strong {
+      display: block;
+      font-size: 1.35rem;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    .portal-caption span {
+      color: var(--ash);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    .portal-body {
+      padding: 18px 18px 20px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .sigil-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .sigil {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 8px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .sigil b {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--plasma);
+      margin-bottom: 4px;
+    }
+
+    .sigil small {
+      color: var(--ash);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 22px;
+    }
+
+    @media (min-width: 960px) {
+      section { padding: 40px 28px; }
+    }
+
+    .section-label {
+      color: var(--violet);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 14px;
+      max-width: 18ch;
+    }
+
+    .section-copy {
+      font-size: 1.25rem;
+      color: rgba(244, 237, 224, 0.7);
+      max-width: 46ch;
+      margin-bottom: 28px;
+    }
+
+    /* ── PATH CARDS ── */
+    .paths {
+      display: grid;
+      gap: 16px;
+    }
+
+    @media (min-width: 860px) {
+      .paths { grid-template-columns: 1fr 1fr; }
+    }
+
+    .path-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(165deg, rgba(16, 19, 28, 0.95), rgba(5, 6, 10, 0.98));
+      padding: 26px 24px 24px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .path-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(183, 148, 255, 0.4);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4), 0 0 40px rgba(157, 107, 255, 0.1);
+    }
+
+    .path-card.featured {
+      border-color: rgba(255, 200, 87, 0.35);
+    }
+
+    .path-card.featured::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(600px 220px at 20% 0%, rgba(255, 200, 87, 0.12), transparent 60%);
+      pointer-events: none;
+    }
+
+    .path-kicker {
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .path-card h3 {
+      font-size: clamp(1.8rem, 3vw, 2.3rem);
+      font-weight: 400;
+      line-height: 1.05;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .path-card p {
+      font-size: 1.15rem;
+      color: rgba(244, 237, 224, 0.7);
+      margin-bottom: 20px;
+      max-width: 34ch;
+      position: relative;
+    }
+
+    .path-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .path-list li {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: rgba(244, 237, 224, 0.72);
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .path-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--violet);
+    }
+
+    .path-media {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      margin-bottom: 18px;
+      display: block;
+      position: relative;
+    }
+
+    /* ── RITUAL FORM ── */
+    .ritual {
+      border: 1px solid rgba(183, 148, 255, 0.28);
+      border-radius: 28px;
+      background:
+        radial-gradient(700px 280px at 10% 0%, rgba(157, 107, 255, 0.16), transparent 55%),
+        linear-gradient(160deg, rgba(16, 19, 28, 0.96), rgba(5, 6, 10, 0.98));
+      padding: 28px 22px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35), 0 0 60px rgba(157, 107, 255, 0.08);
+    }
+
+    @media (min-width: 860px) {
+      .ritual {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+        align-items: center;
+        padding: 36px;
+      }
+    }
+
+    .ritual h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin: 10px 0 12px;
+    }
+
+    .ritual p {
+      font-size: 1.2rem;
+      color: rgba(244, 237, 224, 0.7);
+      max-width: 36ch;
+    }
+
+    .ritual-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+
+    .field input {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(183, 148, 255, 0.28);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--bone);
+      padding: 14px 16px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .field input::placeholder { color: rgba(107, 106, 110, 0.9); }
+
+    .field input:focus {
+      border-color: rgba(255, 200, 87, 0.65);
+      box-shadow: 0 0 0 3px rgba(255, 200, 87, 0.12);
+    }
+
+    .form-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ash);
+      min-height: 16px;
+    }
+
+    .form-note.ok { color: #69c27d; }
+    .form-note.err { color: #ff6a3d; }
+    .form-note a {
+      color: var(--gold);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .form-note a:hover { color: var(--ember); }
+
+    .hp {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      height: 0;
+      width: 0;
+      overflow: hidden;
+    }
+
+    /* ── GALLERY ── */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    @media (min-width: 860px) {
+      .gallery { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .shot {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      aspect-ratio: 1 / 1;
+      background: #0a0c14;
+    }
+
+    .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .shot:hover img { transform: scale(1.06); }
+
+    .shot figcaption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 28px 12px 12px;
+      background: linear-gradient(180deg, transparent, rgba(5, 6, 10, 0.92));
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(244, 237, 224, 0.8);
+    }
+
+    /* ── PROOF STRIP ── */
+    .proof {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 22px 0;
+    }
+
+    @media (min-width: 760px) {
+      .proof { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .proof-item {
+      padding: 8px 10px;
+    }
+
+    .proof-item strong {
+      display: block;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .proof-item span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+
+    /* ── COSMIC REALITIES ── */
+    .realities {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .realities-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    @media (min-width: 860px) {
+      .realities-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .reality-card {
+      position: relative;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(420px 180px at 80% 0%, rgba(157, 107, 255, 0.14), transparent 60%),
+        linear-gradient(165deg, rgba(16, 19, 28, 0.96), rgba(5, 6, 10, 0.98));
+      padding: 24px 22px 22px;
+      min-height: 220px;
+      overflow: hidden;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .reality-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(125, 249, 255, 0.35);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(157, 107, 255, 0.12);
+    }
+
+    .reality-card .bh-mini {
+      position: absolute;
+      right: -28px;
+      top: -28px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%,
+          #000 0%,
+          #000 40%,
+          rgba(157, 107, 255, 0.5) 48%,
+          rgba(255, 90, 31, 0.28) 58%,
+          transparent 70%);
+      opacity: 0.7;
+      filter: blur(0.2px);
+      pointer-events: none;
+    }
+
+    .reality-card .bh-mini::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 150%;
+      height: 38%;
+      transform: translate(-50%, -50%) rotateX(68deg);
+      border-radius: 50%;
+      background: conic-gradient(from 80deg, transparent, rgba(255,200,87,0.6), rgba(255,90,31,0.55), transparent 65%);
+      filter: blur(2px);
+      animation: disk-spin 10s linear infinite;
+      mix-blend-mode: screen;
+    }
+
+    .reality-idx {
+      color: var(--plasma);
+      margin-bottom: 14px;
+    }
+
+    .reality-card h3 {
+      font-size: clamp(1.55rem, 2.6vw, 1.95rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      max-width: 14ch;
+      position: relative;
+    }
+
+    .reality-card p {
+      font-size: 1.12rem;
+      color: rgba(244, 237, 224, 0.72);
+      max-width: 28ch;
+      position: relative;
+    }
+
+    .singularity-banner {
+      margin-top: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 90, 31, 0.28);
+      background:
+        radial-gradient(700px 240px at 50% 120%, rgba(255, 90, 31, 0.18), transparent 55%),
+        radial-gradient(500px 200px at 20% 0%, rgba(157, 107, 255, 0.16), transparent 55%),
+        linear-gradient(160deg, rgba(16, 19, 28, 0.96), rgba(5, 6, 10, 0.98));
+      padding: 28px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .singularity-banner .core {
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%,
+          #000 0%,
+          #000 42%,
+          rgba(183, 148, 255, 0.65) 50%,
+          rgba(255, 200, 87, 0.35) 62%,
+          transparent 74%);
+      box-shadow: 0 0 40px rgba(157, 107, 255, 0.45), 0 0 80px rgba(255, 90, 31, 0.2);
+      position: relative;
+      animation: horizon-breathe 7s ease-in-out infinite alternate;
+    }
+
+    .singularity-banner .core::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 170%;
+      height: 40%;
+      transform: translate(-50%, -50%) rotateX(70deg);
+      border-radius: 50%;
+      background: conic-gradient(from 100deg, transparent, rgba(255,200,87,0.7), rgba(255,90,31,0.6), transparent 70%);
+      filter: blur(3px);
+      animation: disk-spin 7s linear infinite;
+      mix-blend-mode: screen;
+    }
+
+    .singularity-banner h3 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .singularity-banner p {
+      font-size: 1.18rem;
+      color: rgba(244, 237, 224, 0.72);
+      max-width: 42ch;
+      margin: 0 auto;
+    }
+
+    /* ── QUOTE ── */
+    .oracle {
+      text-align: center;
+      padding: 48px 22px 20px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .oracle blockquote {
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.25;
+      color: rgba(244, 237, 224, 0.9);
+    }
+
+    .oracle cite {
+      display: block;
+      margin-top: 18px;
+      font-style: normal;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+
+    /* ── FOOTER CTA ── */
+    .finale {
+      max-width: 900px;
+      margin: 20px auto 40px;
+      padding: 40px 22px 100px;
+      text-align: center;
+    }
+
+    .finale h2 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin: 12px 0 16px;
+    }
+
+    .finale p {
+      font-size: 1.25rem;
+      color: rgba(244, 237, 224, 0.7);
+      max-width: 34ch;
+      margin: 0 auto 26px;
+    }
+
+    .finale .cta-row { justify-content: center; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px;
+      text-align: center;
+      color: var(--ash);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    footer a {
+      color: var(--violet);
+      text-decoration: none;
+    }
+
+    /* ── STICKY BAR ── */
+    .sticky-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: linear-gradient(180deg, rgba(10, 12, 20, 0.55), rgba(5, 6, 10, 0.96));
+      border-top: 1px solid rgba(183, 148, 255, 0.28);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transform: translateY(110%);
+      transition: transform 0.35s ease;
+    }
+
+    .sticky-bar.is-on { transform: translateY(0); }
+
+    .sticky-bar p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-right: 4px;
+    }
+
+    .sticky-bar p strong { color: var(--gold); font-weight: 600; }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.is-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+      .atmosphere, .portal-ring, .event-horizon, .event-horizon::before,
+      .event-horizon::after, .reality-card .bh-mini::after,
+      .singularity-banner .core, .singularity-banner .core::after { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true"></div>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <canvas id="cosmos" aria-hidden="true"></canvas>
+  <canvas id="sparks" aria-hidden="true"></canvas>
+  <div class="veil" aria-hidden="true"></div>
+
+  <div class="page">
+    <div class="event-horizon bh-a" aria-hidden="true"></div>
+    <div class="event-horizon bh-b" aria-hidden="true"></div>
+    <div class="event-horizon bh-c" aria-hidden="true"></div>
+
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="https://thefirstspark.shop/">
+        <img src="assets/images/logo.png" width="34" height="34" alt="The First Spark" />
+        <span>The First Spark</span>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="#cosmos-realities">Realities</a>
+        <a class="nav-link" href="#blueprint">Blueprint</a>
+        <a class="nav-link" href="#enter">Free Tier</a>
+        <a class="nav-link" href="#ritual">Begin</a>
+        <a class="btn btn-primary btn-sm" href="soul-map.html" data-track="nav-soul">Get Blueprint</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="reveal">
+        <div class="status mono">
+          <span class="pulse" aria-hidden="true"></span>
+          Event horizon open · Free entry
+        </div>
+        <h1>Past the black hole, your <em>blueprint</em> still holds.</h1>
+        <p class="hero-lede">
+          Reality bends. Attention collapses. Cosmic realities stack.
+          You need the map under your name — then a door through the living universe.
+        </p>
+        <ul class="hero-points">
+          <li>Black-hole calm — exit the noise field, keep your signal</li>
+          <li>Free Soul Blueprint — Life Path, Expression, Soul Urge, Sun Sign</li>
+          <li>Free Sparkverse tier — Lobby access across stacked realities</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="soul-map.html" data-track="hero-soul">Reveal my Soul Blueprint</a>
+          <a class="btn btn-violet" href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" rel="noopener noreferrer" data-track="hero-free">Claim Free Tier →</a>
+        </div>
+        <p class="fineprint">
+          Under a minute · No card required ·
+          <a href="what-is-a-soul-map.html">What is a Soul Map?</a>
+        </p>
+      </div>
+
+      <div class="portal-stage reveal">
+        <div class="portal-ring" aria-hidden="true"></div>
+        <div class="portal-card">
+          <div class="portal-media" id="portalMedia" aria-label="Sparkverse and Soul Map previews">
+            <img class="is-active" src="preview-soulmaps.png" alt="Soul Map preview — personal blueprint" width="960" height="640" fetchpriority="high" />
+            <img src="preview-sparkverse.png" alt="Sparkverse gateway preview" width="960" height="516" />
+            <img src="og-home.png" alt="The First Spark home universe" width="960" height="504" />
+            <img src="master-image.png.png" alt="Master Spark sigil" width="1024" height="1024" />
+            <div class="portal-caption">
+              <div>
+                <span id="slideTag">001 — Soul Map</span>
+                <strong id="slideTitle">Your private coordinates</strong>
+              </div>
+              <span id="slideCount">01 / 04</span>
+            </div>
+          </div>
+          <div class="portal-body">
+            <div class="sigil-row" aria-hidden="true">
+              <div class="sigil"><b>L01</b><small>Physics</small></div>
+              <div class="sigil"><b>L02</b><small>Meta</small></div>
+              <div class="sigil"><b>L03</b><small>Relation</small></div>
+              <div class="sigil"><b>L04</b><small>Time</small></div>
+            </div>
+            <p class="fineprint" style="letter-spacing:0.18em;">Select · Release · Witness · Zero Point AZURA</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section aria-label="Proof">
+      <div class="proof reveal">
+        <div class="proof-item"><strong>Free</strong><span>Soul Blueprint</span></div>
+        <div class="proof-item"><strong>$0</strong><span>Sparkverse Tier</span></div>
+        <div class="proof-item"><strong>57+</strong><span>Tools Shipped</span></div>
+        <div class="proof-item"><strong>~60s</strong><span>To First Signal</span></div>
+      </div>
+    </section>
+
+    <section class="oracle reveal" aria-label="Transmission">
+      <blockquote>
+        “Reality is programmable. Consciousness is the code.
+        Black holes forget light. Your blueprint remembers you.”
+      </blockquote>
+      <cite>The Selector Model · Cosmic Realities · The First Spark</cite>
+    </section>
+
+    <section class="realities" id="cosmos-realities" aria-label="Cosmic realities">
+      <p class="section-label mono">000 — Cosmic Realities</p>
+      <h2 class="section-title reveal">Black holes. Stacked worlds. <em>One selector.</em></h2>
+      <p class="section-copy reveal">
+        You are not trapped in one feed-shaped universe. Cosmic realities braid —
+        physics, myth, relation, time. The blueprint is how you cross without dissolving.
+      </p>
+
+      <div class="realities-grid">
+        <article class="reality-card reveal">
+          <div class="bh-mini" aria-hidden="true"></div>
+          <p class="reality-idx mono">R01 · Event Horizon</p>
+          <h3>Where noise goes to die</h3>
+          <p>Black holes are not endings. They are filters. Drop the story that cannot survive gravity. Keep the code that can.</p>
+        </article>
+        <article class="reality-card reveal">
+          <div class="bh-mini" aria-hidden="true"></div>
+          <p class="reality-idx mono">R02 · Parallel Rooms</p>
+          <h3>Many realities. One name.</h3>
+          <p>Cosmic realities run concurrent — lobby, map, field, void. Your Soul Blueprint is the passport that still matches after the jump.</p>
+        </article>
+        <article class="reality-card reveal">
+          <div class="bh-mini" aria-hidden="true"></div>
+          <p class="reality-idx mono">R03 · Accretion Path</p>
+          <h3>What orbits becomes fuel</h3>
+          <p>Attention spirals. Tools ship. Community densifies. Free tier is the outer disk. The blueprint is the vector into the core.</p>
+        </article>
+      </div>
+
+      <div class="singularity-banner reveal">
+        <div class="core" aria-hidden="true"></div>
+        <p class="mono" style="color:var(--gold);margin-bottom:8px;">Singularity note</p>
+        <h3>Nothing escapes a black hole — <em>except intention.</em></h3>
+        <p>
+          Select the reality. Release the dead weight. Witness what remains.
+          That remainder is your Soul Blueprint — free, readable, usable.
+        </p>
+      </div>
+    </section>
+
+    <section id="blueprint">
+      <p class="section-label mono">001 — The Blueprint</p>
+      <h2 class="section-title reveal">Stop guessing. <em>Read the map.</em></h2>
+      <p class="section-copy reveal">
+        A Soul Blueprint is not a horoscope costume. It’s your personal coordinate system
+        across cosmic realities — numerology + chart language decoded into something you can actually use
+        when gravity gets loud.
+      </p>
+
+      <div class="paths">
+        <article class="path-card featured reveal">
+          <img class="path-media" src="preview-soulmaps.png" alt="Soul Map product preview" width="720" height="160" loading="lazy" />
+          <p class="path-kicker mono">Path A · Instant</p>
+          <h3>Get your free Soul Blueprint</h3>
+          <p>Generate your Soul Code — the four-part signature that names the pattern you’ve been living inside.</p>
+          <ul class="path-list">
+            <li>Life Path · Expression · Soul Urge · Sun Sign</li>
+            <li>Plain-language next-move energy</li>
+            <li>Keep the code. Share it. Build from it.</li>
+          </ul>
+          <a class="btn btn-primary" href="soul-map.html" data-track="path-soul">Open Soul Code Registry →</a>
+        </article>
+
+        <article class="path-card reveal" id="enter">
+          <img class="path-media" src="preview-sparkverse.png" alt="Sparkverse free tier preview" width="720" height="160" loading="lazy" />
+          <p class="path-kicker mono" style="color:var(--violet)">Path B · Free Tier</p>
+          <h3>Enter the Sparkverse Lobby</h3>
+          <p>Claim free membership. The Lobby is where drops, chat, builds, and the living room of the universe begin.</p>
+          <ul class="path-list">
+            <li>Free Whop tier — no card wall</li>
+            <li>Community signal + tool drops</li>
+            <li>Gateway into 57+ consciousness tools</li>
+          </ul>
+          <a class="btn btn-violet" href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" rel="noopener noreferrer" data-track="path-free">Join Free on Whop →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="ritual">
+      <div class="ritual reveal">
+        <div>
+          <p class="mono" style="color:var(--plasma)">002 — The Threshold Ritual</p>
+          <h2>Leave a name. Cross the <em>door</em>.</h2>
+          <p>
+            Type the name you answer to. We’ll light the path —
+            first your blueprint, then free tier entry into the Sparkverse.
+          </p>
+        </div>
+        <form class="ritual-form" id="thresholdForm" novalidate>
+          <div class="field">
+            <label for="soulName">Name you answer to</label>
+            <input id="soulName" name="name" type="text" autocomplete="given-name" placeholder="e.g. Alex" maxlength="48" required />
+          </div>
+          <div class="field">
+            <label for="soulEmail">Email for free-tier signal</label>
+            <input id="soulEmail" name="email" type="email" autocomplete="email" placeholder="you@email.com" required />
+          </div>
+          <label class="hp" for="website">Leave blank</label>
+          <input class="hp" id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          <button class="btn btn-primary" type="submit" id="ritualSubmit">Unlock my path →</button>
+          <p class="form-note" id="formNote" aria-live="polite">Free. No spam. Blueprint first, Lobby second.</p>
+        </form>
+      </div>
+    </section>
+
+    <section aria-label="Desktop media gallery">
+      <p class="section-label mono">003 — Media from the desk</p>
+      <h2 class="section-title reveal">The look of the <em>universe</em></h2>
+      <p class="section-copy reveal">
+        Real assets from the First Spark desk — Soul Maps, Sparkverse gateway, home universe, master sigil.
+      </p>
+      <div class="gallery">
+        <figure class="shot reveal">
+          <img src="preview-soulmaps.png" alt="Soul Maps preview art" loading="lazy" width="512" height="512" />
+          <figcaption>Soul Maps</figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <img src="preview-sparkverse.png" alt="Sparkverse preview art" loading="lazy" width="512" height="512" />
+          <figcaption>Sparkverse</figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <img src="og-home.png" alt="Home universe art" loading="lazy" width="512" height="512" />
+          <figcaption>Home Universe</figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <img src="master-image.png.png" alt="Master Spark image" loading="lazy" width="512" height="512" />
+          <figcaption>Master Sigil</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="finale reveal">
+      <p class="mono" style="color:var(--ember)">004 — Choose your door</p>
+      <h2>The map is free.<br />The black hole is open.<br /><em>Cross into cosmic reality.</em></h2>
+      <p>Two clicks. One identity. Coordinates that survive the event horizon.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="soul-map.html" data-track="finale-soul">Get Soul Blueprint</a>
+        <a class="btn btn-violet" href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" rel="noopener noreferrer" data-track="finale-free">Sparkverse Free Tier</a>
+        <a class="btn btn-ghost" href="welcometothesparkverse.html" data-track="finale-welcome">Peek the room</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        © <span id="year"></span> The First Spark ·
+        <a href="https://thefirstspark.shop/">Home</a> ·
+        <a href="free-tools.html">Free Tools</a> ·
+        <a href="privacy-policy.html">Privacy</a>
+      </p>
+    </footer>
+  </div>
+
+  <div class="sticky-bar" id="stickyBar" role="region" aria-label="Quick actions">
+    <p><strong>Free</strong> blueprint + tier</p>
+    <a class="btn btn-primary btn-sm" href="soul-map.html" data-track="sticky-soul">Blueprint</a>
+    <a class="btn btn-violet btn-sm" href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" rel="noopener noreferrer" data-track="sticky-free">Free Tier</a>
+  </div>
+
+  <script>
+    (function () {
+      var SOUL_URL = 'soul-map.html';
+      var FREE_TIER_URL = 'https://whop.com/sparkverse-511c/the-sparkverse-lobby/';
+      var WELCOME_URL = 'welcometothesparkverse.html';
+
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+
+      /* Track clicks */
+      function track(name, detail) {
+        try {
+          if (typeof gtag === 'function') {
+            gtag('event', name, detail || {});
+          }
+        } catch (e) { /* no-op */ }
+      }
+
+      document.querySelectorAll('[data-track]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          track('ad_cta_click', { cta: el.getAttribute('data-track') });
+        });
+      });
+
+      /* Reveal on scroll */
+      var revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        revealEls.forEach(function (el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('is-in'); });
+      }
+
+      /* Sticky bar after hero */
+      var sticky = document.getElementById('stickyBar');
+      var hero = document.querySelector('.hero');
+      if (sticky && hero && 'IntersectionObserver' in window) {
+        var stickyIo = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            sticky.classList.toggle('is-on', !entry.isIntersecting);
+          });
+        }, { threshold: 0.15 });
+        stickyIo.observe(hero);
+      } else if (sticky) {
+        sticky.classList.add('is-on');
+      }
+
+      /* Media carousel */
+      var slides = [
+        { tag: '001 - Soul Map', title: 'Your private coordinates' },
+        { tag: '002 - Sparkverse', title: 'The living gateway' },
+        { tag: '003 - Universe', title: 'Home of the First Spark' },
+        { tag: '004 - Master Sigil', title: 'Desktop origin mark' }
+      ];
+      var imgs = document.querySelectorAll('#portalMedia img');
+      var tagEl = document.getElementById('slideTag');
+      var titleEl = document.getElementById('slideTitle');
+      var countEl = document.getElementById('slideCount');
+      var idx = 0;
+
+      function showSlide(n) {
+        idx = n % slides.length;
+        imgs.forEach(function (img, i) {
+          img.classList.toggle('is-active', i === idx);
+        });
+        tagEl.textContent = slides[idx].tag;
+        titleEl.textContent = slides[idx].title;
+        countEl.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+      }
+
+      if (imgs.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setInterval(function () { showSlide(idx + 1); }, 4200);
+      }
+
+      /* Starfield + black holes + cosmic dust */
+      var stars = document.getElementById('stars');
+      var cosmos = document.getElementById('cosmos');
+      var sparks = document.getElementById('sparks');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function sizeCanvas(c) {
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        c.width = Math.floor(window.innerWidth * dpr);
+        c.height = Math.floor(window.innerHeight * dpr);
+        c.style.width = window.innerWidth + 'px';
+        c.style.height = window.innerHeight + 'px';
+        var ctx = c.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return ctx;
+      }
+
+      var starCtx = sizeCanvas(stars);
+      var cosmosCtx = sizeCanvas(cosmos);
+      var sparkCtx = sizeCanvas(sparks);
+      var starPts = [];
+      var sparkPts = [];
+      var holes = [];
+      var dust = [];
+
+      function seedStars() {
+        starPts = [];
+        var count = Math.floor((window.innerWidth * window.innerHeight) / 7000);
+        count = Math.max(90, Math.min(count, 260));
+        for (var i = 0; i < count; i++) {
+          starPts.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            r: Math.random() * 1.5 + 0.15,
+            a: Math.random() * 0.75 + 0.12,
+            s: Math.random() * 0.9 + 0.2,
+            hue: Math.random() > 0.82 ? (Math.random() > 0.5 ? '183,148,255' : '125,249,255') : '244,237,224'
+          });
+        }
+      }
+
+      function seedHoles() {
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        holes = [
+          { x: w * 0.82, y: h * 0.22, r: Math.min(w, h) * 0.11, spin: 0.00055, phase: 0, pull: 0.018 },
+          { x: w * 0.12, y: h * 0.72, r: Math.min(w, h) * 0.07, spin: -0.0007, phase: 1.7, pull: 0.014 },
+          { x: w * 0.48, y: h * 0.55, r: Math.min(w, h) * 0.045, spin: 0.0009, phase: 3.1, pull: 0.01 }
+        ];
+      }
+
+      function seedDust() {
+        dust = [];
+        for (var i = 0; i < 90; i++) {
+          dust.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            r: Math.random() * 1.6 + 0.4,
+            a: Math.random() * 0.45 + 0.1,
+            hue: Math.random() > 0.55 ? '255,90,31' : (Math.random() > 0.5 ? '255,200,87' : '157,107,255')
+          });
+        }
+      }
+
+      function seedSparks() {
+        sparkPts = [];
+        for (var i = 0; i < 36; i++) {
+          sparkPts.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: -Math.random() * 0.45 - 0.1,
+            r: Math.random() * 2 + 0.6,
+            hue: Math.random() > 0.5 ? '255,200,87' : '183,148,255',
+            life: Math.random()
+          });
+        }
+      }
+
+      function drawStars(t) {
+        starCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        for (var i = 0; i < starPts.length; i++) {
+          var p = starPts[i];
+          var tw = 0.55 + Math.sin(t * 0.0015 * p.s + i) * 0.45;
+          /* subtle lensing drift toward nearest hole */
+          var lx = p.x;
+          var ly = p.y;
+          if (holes.length) {
+            var h0 = holes[i % holes.length];
+            var dx = h0.x - p.x;
+            var dy = h0.y - p.y;
+            var dist = Math.sqrt(dx * dx + dy * dy) + 0.001;
+            var bend = Math.min(8, (h0.r * h0.r) / dist) * 0.08;
+            lx = p.x + (dx / dist) * bend;
+            ly = p.y + (dy / dist) * bend;
+          }
+          starCtx.beginPath();
+          starCtx.fillStyle = 'rgba(' + p.hue + ',' + (p.a * tw) + ')';
+          starCtx.arc(lx, ly, p.r, 0, Math.PI * 2);
+          starCtx.fill();
+        }
+      }
+
+      function drawBlackHole(ctx, hole, t) {
+        var pulse = 1 + Math.sin(t * 0.0012 + hole.phase) * 0.04;
+        var R = hole.r * pulse;
+        var ang = t * hole.spin;
+
+        /* soft gravitational glow */
+        var glow = ctx.createRadialGradient(hole.x, hole.y, R * 0.2, hole.x, hole.y, R * 3.2);
+        glow.addColorStop(0, 'rgba(0,0,0,0.0)');
+        glow.addColorStop(0.35, 'rgba(10,6,20,0.35)');
+        glow.addColorStop(0.55, 'rgba(157,107,255,0.12)');
+        glow.addColorStop(0.75, 'rgba(255,90,31,0.06)');
+        glow.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(hole.x, hole.y, R * 3.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        /* accretion disk */
+        ctx.save();
+        ctx.translate(hole.x, hole.y);
+        ctx.scale(1, 0.38);
+        ctx.rotate(ang);
+        var disk = ctx.createRadialGradient(0, 0, R * 0.55, 0, 0, R * 2.4);
+        disk.addColorStop(0, 'rgba(0,0,0,0)');
+        disk.addColorStop(0.35, 'rgba(255,200,87,0.05)');
+        disk.addColorStop(0.55, 'rgba(255,90,31,0.45)');
+        disk.addColorStop(0.72, 'rgba(183,148,255,0.35)');
+        disk.addColorStop(0.88, 'rgba(125,249,255,0.12)');
+        disk.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = disk;
+        ctx.beginPath();
+        ctx.arc(0, 0, R * 2.4, 0, Math.PI * 2);
+        ctx.fill();
+
+        /* hot ring */
+        ctx.strokeStyle = 'rgba(255,200,87,0.55)';
+        ctx.lineWidth = Math.max(1.5, R * 0.06);
+        ctx.shadowColor = 'rgba(255,90,31,0.8)';
+        ctx.shadowBlur = 18;
+        ctx.beginPath();
+        ctx.arc(0, 0, R * 1.35, 0.15, Math.PI * 1.55);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        ctx.restore();
+
+        /* photon ring */
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(183,148,255,0.35)';
+        ctx.lineWidth = 1.25;
+        ctx.arc(hole.x, hole.y, R * 1.08, 0, Math.PI * 2);
+        ctx.stroke();
+
+        /* event horizon core */
+        var core = ctx.createRadialGradient(hole.x, hole.y, 0, hole.x, hole.y, R);
+        core.addColorStop(0, '#000');
+        core.addColorStop(0.72, '#000');
+        core.addColorStop(0.88, 'rgba(20,8,40,0.95)');
+        core.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = core;
+        ctx.beginPath();
+        ctx.arc(hole.x, hole.y, R, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function drawCosmos(t) {
+        cosmosCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        /* faint reality bands */
+        for (var b = 0; b < 3; b++) {
+          var y = window.innerHeight * (0.22 + b * 0.28) + Math.sin(t * 0.0004 + b) * 18;
+          var band = cosmosCtx.createLinearGradient(0, y - 40, 0, y + 40);
+          band.addColorStop(0, 'rgba(125,249,255,0)');
+          band.addColorStop(0.5, b === 1 ? 'rgba(157,107,255,0.05)' : 'rgba(125,249,255,0.035)');
+          band.addColorStop(1, 'rgba(125,249,255,0)');
+          cosmosCtx.fillStyle = band;
+          cosmosCtx.fillRect(0, y - 40, window.innerWidth, 80);
+        }
+
+        for (var i = 0; i < holes.length; i++) {
+          drawBlackHole(cosmosCtx, holes[i], t);
+        }
+
+        /* dust spiraling into holes */
+        for (var d = 0; d < dust.length; d++) {
+          var p = dust[d];
+          var hole = holes[d % holes.length];
+          if (hole && !reduce) {
+            var dx = hole.x - p.x;
+            var dy = hole.y - p.y;
+            var dist = Math.sqrt(dx * dx + dy * dy) + 0.001;
+            var pull = hole.pull * (hole.r / dist);
+            var tx = -dy / dist;
+            var ty = dx / dist;
+            p.x += dx * pull * 0.35 + tx * (0.35 + pull * 8);
+            p.y += dy * pull * 0.35 + ty * (0.35 + pull * 8);
+            if (dist < hole.r * 0.85 || p.x < -40 || p.y < -40 || p.x > window.innerWidth + 40 || p.y > window.innerHeight + 40) {
+              var ang = Math.random() * Math.PI * 2;
+              var rad = hole.r * (2.2 + Math.random() * 2.8);
+              p.x = hole.x + Math.cos(ang) * rad;
+              p.y = hole.y + Math.sin(ang) * rad * 0.45;
+            }
+          }
+          cosmosCtx.beginPath();
+          cosmosCtx.fillStyle = 'rgba(' + p.hue + ',' + p.a + ')';
+          cosmosCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          cosmosCtx.fill();
+        }
+      }
+
+      function drawSparks() {
+        sparkCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        for (var i = 0; i < sparkPts.length; i++) {
+          var p = sparkPts[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life += 0.004;
+          if (p.y < -10 || p.x < -20 || p.x > window.innerWidth + 20 || p.life > 1) {
+            p.x = Math.random() * window.innerWidth;
+            p.y = window.innerHeight + 10;
+            p.life = 0;
+          }
+          var alpha = Math.sin(p.life * Math.PI) * 0.7;
+          sparkCtx.beginPath();
+          sparkCtx.fillStyle = 'rgba(' + p.hue + ',' + alpha + ')';
+          sparkCtx.shadowColor = 'rgba(' + p.hue + ',0.8)';
+          sparkCtx.shadowBlur = 12;
+          sparkCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          sparkCtx.fill();
+          sparkCtx.shadowBlur = 0;
+        }
+      }
+
+      var raf = 0;
+      function loop(t) {
+        drawStars(t || 0);
+        drawCosmos(t || 0);
+        if (!reduce) drawSparks();
+        raf = requestAnimationFrame(loop);
+      }
+
+      function bootCanvas() {
+        starCtx = sizeCanvas(stars);
+        cosmosCtx = sizeCanvas(cosmos);
+        sparkCtx = sizeCanvas(sparks);
+        seedStars();
+        seedHoles();
+        seedDust();
+        seedSparks();
+      }
+
+      bootCanvas();
+      if (!reduce) {
+        raf = requestAnimationFrame(loop);
+      } else {
+        drawStars(0);
+        drawCosmos(0);
+      }
+
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(bootCanvas, 120);
+      });
+
+      /* Threshold form -> personalized path */
+      var form = document.getElementById('thresholdForm');
+      var note = document.getElementById('formNote');
+      var submitBtn = document.getElementById('ritualSubmit');
+
+      function validEmail(v) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var hp = document.getElementById('website').value;
+        if (hp) return;
+
+        var name = (document.getElementById('soulName').value || '').trim();
+        var email = (document.getElementById('soulEmail').value || '').trim().toLowerCase();
+
+        if (!name || name.length < 2) {
+          note.textContent = 'Tell us the name you answer to.';
+          note.className = 'form-note err';
+          document.getElementById('soulName').focus();
+          return;
+        }
+        if (!validEmail(email)) {
+          note.textContent = "That email doesn't look ready yet.";
+          note.className = 'form-note err';
+          document.getElementById('soulEmail').focus();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Opening the door...';
+        note.textContent = 'Blueprint first. Free tier next.';
+        note.className = 'form-note ok';
+
+        try {
+          localStorage.setItem('spark_soul_name', name);
+          localStorage.setItem('spark_soul_email', email);
+          localStorage.setItem('spark_blueprint_ad_joined', '1');
+          localStorage.setItem('spark_blueprint_ad_at', String(Date.now()));
+        } catch (err) { /* private mode */ }
+
+        track('ad_threshold_submit', { method: 'ritual' });
+
+        var welcome = WELCOME_URL + '?name=' + encodeURIComponent(name);
+        var soul = SOUL_URL + (SOUL_URL.indexOf('?') > -1 ? '&' : '?') + 'name=' + encodeURIComponent(name);
+
+        /* Soft dual-path: open blueprint in-place, free tier in new tab */
+        setTimeout(function () {
+          window.open(FREE_TIER_URL, '_blank', 'noopener,noreferrer');
+          window.location.href = soul;
+        }, 650);
+
+        /* Fallback link state if popup blocked - DOM nodes, no innerHTML */
+        setTimeout(function () {
+          while (note.firstChild) note.removeChild(note.firstChild);
+          note.appendChild(document.createTextNode('If a tab was blocked: '));
+
+          function addLink(href, label, external) {
+            var a = document.createElement('a');
+            a.href = href;
+            a.textContent = label;
+            if (external) {
+              a.target = '_blank';
+              a.rel = 'noopener noreferrer';
+            }
+            note.appendChild(a);
+          }
+
+          addLink(FREE_TIER_URL, 'Free Tier', true);
+          note.appendChild(document.createTextNode(' | '));
+          addLink(soul, 'Blueprint', false);
+          note.appendChild(document.createTextNode(' | '));
+          addLink(welcome, 'Welcome', false);
+
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Unlock my path →';
+        }, 1400);
+      });
+
+      /* Prefill name from prior visits */
+      try {
+        var saved = localStorage.getItem('spark_soul_name');
+        if (saved) document.getElementById('soulName').value = saved;
+        var savedEmail = localStorage.getItem('spark_soul_email');
+        if (savedEmail) document.getElementById('soulEmail').value = savedEmail;
+      } catch (err) { /* no-op */ }
+    })();
+  </script>
+</body>
+</html>
