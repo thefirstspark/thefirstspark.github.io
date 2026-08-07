@@ -3,3 +3,4 @@
 *.docx
 Phone Link/
 NotebookLM/
+.agent_todos.db
