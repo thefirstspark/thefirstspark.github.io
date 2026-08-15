@@ -50,20 +50,20 @@ Other repos (for cross-repo awareness only; do not push there unless asked):
 
 ### Investor terms (must stay consistent)
 
-When touching **any** of: `invest.html`, `theraise.html`, `investor-deck-v2.html`, `investor-deck-v3.html`, `investor-deck-v4.html`, `selector-model-ip.html`, `tfs-valuation.html`, `tfs_investor_deck_v2.html`, `investor-call-companion.html`, or new investor materials — keep these figures aligned unless the user explicitly updates the raise:
+When touching **any** of: `invest.html`, `investor-deck-v3.html`, `investor-deck-v4.html`, `selector-model-ip.html`, `tfs-valuation.html`, `tfs_investor_deck_v2.html`, `investor-call-companion.html`, `earthship-expedition.html`, `prof.html`, `tfs-viral.html`, or new investor materials — keep these figures aligned unless the user explicitly updates the raise:
 
 | Term | Value |
 |------|-------|
-| Raise amount | **$200K** |
-| Equity offered | **20%** |
-| Pre-money | **$1M** (implied) |
+| Raise amount | **$250K** |
+| Valuation cap | **$2M** (post-money SAFE) |
+| Equity equivalent @ cap | **12.5%** |
 | Instrument | **SAFE Note (YC standard)** |
 | Verified asset range | **$107K – $197K** (May 2026 audit) |
 | Burn rate | **$0** |
 | Tools shipped | **57+** |
 | Status | **OPEN** |
 
-**Disregard superseded figures:** $40K raise; $62K–$108K asset range (Feb 2026).
+**Disregard superseded figures:** $40K raise; $62K–$108K asset range (Feb 2026); $200K raise / 20% equity / $800K–$1M valuations / $2M–$2.5M cap range (superseded Aug 2026).
 
 If you change one investor number, grep the repo and update the rest in the same PR.
 
