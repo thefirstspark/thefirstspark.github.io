@@ -8,7 +8,7 @@
     <meta property="og:title" content="Soul Code Registry | The First Spark">
     <meta property="og:description" content="Your Soul Code is a 4-part numerological signature. Generate yours free — SC:7-11-22-LEO">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://soul-map.thefirstspark.shop">
+    <meta property="og:url" content="https://thefirstspark.shop/soul-map.html">
     <meta property="og:image" content="https://thefirstspark.shop/og-archetype-quiz.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Soul Code Registry | The First Spark">
@@ -822,7 +822,7 @@ function shareCode() {
     if (!currentCode) return;
     const text = `My Soul Code is ${currentCode.code} ✦ Find yours at soul-map.thefirstspark.shop`;
     if (navigator.share) {
-        navigator.share({ title:'My Soul Code', text, url:'https://soul-map.thefirstspark.shop' });
+        navigator.share({ title:'My Soul Code', text, url:'https://thefirstspark.shop/soul-map.html' });
     } else {
         navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
     }
@@ -865,10 +865,11 @@ function confirmPin() {
     closePinModal();
     renderRegistry();
 
-    const url = pinTarget === 'public'
-        ? 'https://whop.com/checkout/plan_CODE_PUBLIC/'
-        : 'https://whop.com/checkout/plan_CODE_PRIVATE/';
-    window.open(url, '_blank');
+    // Code registration is free and local-only for now. It used to open a Whop
+    // checkout here, but plan_CODE_PUBLIC / plan_CODE_PRIVATE were never real
+    // plan IDs — so the code got registered and the buyer landed on a 404,
+    // looking paid without paying. Restore the window.open once those plans
+    // exist in Whop.
     gtag('event', 'code_registered', { type: pinTarget });
 
     document.getElementById('registry').scrollIntoView({ behavior: 'smooth' });
@@ -943,8 +944,15 @@ function verifyPin(id) {
 // ═══════════════════════════════════════
 // PRODUCTS
 // ═══════════════════════════════════════
+// The Soul Map is a flat $22 one-time Founders Edition fee. No recurring
+// billing, no subscriptions, no monthly or yearly updates — yours to keep.
+//
+// `live:true` means the checkout URL is a real Whop plan. Anything without it
+// is still a placeholder ID (plan_FAMILY, plan_SIGIL, …) that 404s at Whop, so
+// it is held back from the grid rather than shown as a dead button. To ship
+// one: create the plan in Whop, paste the real plan_ id, add live:true.
 const PRODUCTS = [
-    { name:'Base Soul Map',         desc:'Your complete Soul Code reading — Life Path, Expression, and Soul Urge decoded across all dimensions of your chart.',     price:'$22',  url:'https://whop.com/checkout/plan_anQKP3Pzf1cGm/', featured:true },
+    { name:'Base Soul Map',         desc:'Your complete Soul Code reading — Life Path, Expression, and Soul Urge decoded across all dimensions of your chart.',     price:'$22',  url:'https://whop.com/checkout/plan_anQKP3Pzf1cGm/', featured:true, live:true },
     { name:'Soul Code: Public',     desc:'Register your Soul Code in the public registry. Visible to all.',                                                         price:'$5',   url:'https://whop.com/checkout/plan_CODE_PUBLIC/' },
     { name:'Soul Code: Private',    desc:'Register privately with PIN protection. Only you can reveal it.',                                                          price:'$11',  url:'https://whop.com/checkout/plan_CODE_PRIVATE/' },
     { name:'Compatibility',         desc:'Compare two Soul Codes. Where you align, where you clash, and the deeper pattern beneath.',                               price:'$11',  url:'https://whop.com/checkout/plan_COMPAT/' },
@@ -952,12 +960,10 @@ const PRODUCTS = [
     { name:'Squad Sync',            desc:'Group Soul Code analysis for up to 6 people. Teams, covens, collectives.',                                                price:'$55',  url:'https://whop.com/checkout/plan_SQUAD/' },
     { name:'Personal Sigil',        desc:'Sacred geometry sigil generated from your Soul Code. Digital + printable.',                                               price:'$11',  url:'https://whop.com/checkout/plan_SIGIL/' },
     { name:'Print-Ready PDF',       desc:'Full Soul Map report formatted for print. Frame-worthy sacred document.',                                                 price:'$5',   url:'https://whop.com/checkout/plan_PRINT/' },
-    { name:'Yearly Update',         desc:'Annual Soul Code refresh as your personal year cycles shift.',                                                             price:'$7',   priceLabel:'/yr', url:'https://whop.com/checkout/plan_YEARLY/' },
-    { name:'Transit Alerts',        desc:'Monthly notifications when major transits activate your Soul Code numbers.',                                              price:'$3',   priceLabel:'/mo', url:'https://whop.com/checkout/plan_TRANSIT/' },
 ];
 
 function renderProducts() {
-    document.getElementById('productsGrid').innerHTML = PRODUCTS.map(p => `
+    document.getElementById('productsGrid').innerHTML = PRODUCTS.filter(p => p.live).map(p => `
         <div class="product-card ${p.featured ? 'featured' : ''}">
             ${p.featured ? '<div class="feat-badge">MOST POPULAR</div>' : ''}
             <h3>${p.name}</h3>
@@ -1109,15 +1115,15 @@ async function exportSoulMap() {
 }
 
 function shareSoulMap() {
-    const text='My Soul Map — inner landscape mapped. Build yours: https://soul-map.thefirstspark.shop';
-    if (navigator.share) navigator.share({title:'My Soul Map',text,url:'https://soul-map.thefirstspark.shop'});
+    const text='My Soul Map — inner landscape mapped. Build yours: https://thefirstspark.shop/soul-map.html';
+    if (navigator.share) navigator.share({title:'My Soul Map',text,url:'https://thefirstspark.shop/soul-map.html'});
     else navigator.clipboard.writeText(text).then(()=>alert('Copied!'));
 }
 function shareToTwitterSM() {
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('Mapped my soul landscape ✦ ')}&url=${encodeURIComponent('https://soul-map.thefirstspark.shop')}`, '_blank');
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('Mapped my soul landscape ✦ ')}&url=${encodeURIComponent('https://thefirstspark.shop/soul-map.html')}`, '_blank');
 }
 function shareToWhatsAppSM() {
-    window.open(`https://wa.me/?text=${encodeURIComponent('Mapped my soul landscape ✦ https://soul-map.thefirstspark.shop')}`, '_blank');
+    window.open(`https://wa.me/?text=${encodeURIComponent('Mapped my soul landscape ✦ https://thefirstspark.shop/soul-map.html')}`, '_blank');
 }
 
 // ═══════════════════════════════════════
