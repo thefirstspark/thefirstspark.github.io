@@ -820,7 +820,7 @@ function copyCode() {
 
 function shareCode() {
     if (!currentCode) return;
-    const text = `My Soul Code is ${currentCode.code} ✦ Find yours at soul-map.thefirstspark.shop`;
+    const text = `My Soul Code is ${currentCode.code} ✦ Find yours at thefirstspark.shop/soul-map.html`;
     if (navigator.share) {
         navigator.share({ title:'My Soul Code', text, url:'https://thefirstspark.shop/soul-map.html' });
     } else {
