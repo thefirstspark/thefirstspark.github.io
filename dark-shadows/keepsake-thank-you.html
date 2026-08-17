@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Received — Dark Shadows</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --void: #050509;
+    --bone: #e8e4dc;
+    --pale: #a8a8b8;
+    --gold: #d4a956;
+    --forge: #e8b071;
+    --whisper: rgba(232, 228, 220, 0.4);
+  }
+  body {
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+  }
+  .wrap { max-width: 560px; }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+  .mark {
+    width: 40px; height: 40px;
+    margin: 0 auto 3rem;
+    transform: rotate(45deg);
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 30px rgba(212, 169, 86, 0.5);
+    position: relative;
+  }
+  .mark::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    background: linear-gradient(135deg, var(--gold), var(--forge));
+  }
+  h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+  h1 .gild {
+    background: linear-gradient(135deg, var(--gold), var(--forge));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+  }
+  p { color: var(--pale); font-size: 1.1rem; margin-bottom: 1.4rem; }
+  p em { color: var(--bone); }
+  .quiet { color: var(--whisper); font-style: italic; font-size: 0.95rem; }
+  a.btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.9rem 2.2rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    transition: background .25s, color .25s;
+  }
+  a.btn:hover { background: var(--gold); color: var(--void); }
+  a.plain { color: var(--gold); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="tag">◆ Received ◆</div>
+    <div class="mark"></div>
+    <h1>The keepsake is <span class="gild">yours.</span></h1>
+    <p>Your copy of <em>Dark Shadows — Print Edition</em> is waiting in your Whop library, and a receipt is on its way to your email.</p>
+    <p class="quiet">Print it on paper you like. Keep it where you can reach it. The online passage stays free at <a class="plain" href="/dark-shadows/">thefirstspark.shop/dark-shadows</a> — for you, and for whoever you send there.</p>
+    <a class="btn" href="https://whop.com/orders/" target="_blank" rel="noopener noreferrer">Open My Whop Library</a>
+  </div>
+</body>
+</html>
