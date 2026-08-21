@@ -592,9 +592,9 @@
     <script>
         const CONFIG = {
             freeMessages: 3,
+            lobbyUrl: 'https://whop.com/sparkverse-511c/the-sparkverse-lobby/',
             soulMapUrl: 'https://whop.com/checkout/plan_anQKP3Pzf1cGm',
-            loungeUrl: 'https://whop.com/checkout/plan_okFWwlpgnc2bQ',
-            upgradeUrl: 'https://whop.com/sparkverse-511c/og-spark-lifetime-access/'
+            loungeUrl: 'https://whop.com/checkout/plan_okFWwlpgnc2bQ'
         };
 
         const RESPONSES = {
@@ -785,10 +785,10 @@ You don't have to take it all at once. What's the smallest piece of this you cou
             div.innerHTML =
                 '<div class="upgrade-prompt">' +
                     '<h4>The pool goes deeper</h4>' +
-                    '<p>You\'ve touched the surface. A Soul Map is the full reading — one page, made only for you.</p>' +
+                    '<p>You\'ve touched the surface. Sparked Access is free — the Lobby, the tools, the rest of the field.</p>' +
                     '<div class="upgrade-actions">' +
-                        '<a class="upgrade-btn" href="' + CONFIG.soulMapUrl + '" target="_blank" rel="noopener">Soul Map — $22</a>' +
-                        '<a class="upgrade-btn ghost" href="' + CONFIG.loungeUrl + '" target="_blank" rel="noopener">Lounge · 3-day trial</a>' +
+                        '<a class="upgrade-btn" href="' + CONFIG.lobbyUrl + '" target="_blank" rel="noopener">Free Sparked Access</a>' +
+                        '<a class="upgrade-btn ghost" href="' + CONFIG.soulMapUrl + '" target="_blank" rel="noopener">Soul Map — $22</a>' +
                     '</div>' +
                 '</div>';
             chatArea.appendChild(div);
