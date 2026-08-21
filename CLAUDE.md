@@ -31,22 +31,22 @@ Other repos use different defaults:
 
 ---
 
-## 💼 Current Investor Terms (as of May 2026)
+## 💼 Current Investor Terms (as of August 2026)
 
-These figures must be CONSISTENT across `invest.html`, `theraise.html`, `investor-deck-v2.html`, `selector-model-ip.html`, and any future investor materials:
+These figures must be CONSISTENT across `invest.html`, `investor-deck-v3.html`, `investor-deck-v4.html`, `investor-call-companion.html`, `selector-model-ip.html`, `tfs-valuation.html`, `tfs_investor_deck_v2.html`, `earthship-expedition.html`, `prof.html`, `tfs-viral.html`, and any future investor materials:
 
 | Term | Value |
 |------|-------|
-| Raise Amount | $200K |
-| Equity Offered | 20% |
-| Pre-Money Valuation | $1M (implied) |
+| Raise Amount | $250K |
+| Valuation Cap | $2M (post-money SAFE) |
+| Equity Equivalent @ Cap | 12.5% |
 | Instrument | SAFE Note (YC standard) |
 | Verified Asset Range | $107K – $197K (May 2026 audit) |
 | Burn Rate | $0 |
 | Tools Shipped | 57+ |
 | Status | OPEN |
 
-**Earlier figures to disregard:** $40K raise (very old), $62K–$108K asset range (Feb 2026, superseded by May audit which added Selector Model IP + Sora + Zora + Soul Map Engine).
+**Earlier figures to disregard:** $40K raise (very old); $62K–$108K asset range (Feb 2026, superseded by May audit); $200K raise, 20% equity, $800K pre / $1M post valuations, $2M–$2.5M cap range (all superseded Aug 2026 by $250K on a flat $2M cap).
 
 ---
 
@@ -56,8 +56,8 @@ These figures must be CONSISTENT across `invest.html`, `theraise.html`, `investo
 |------|---------|
 | `index.html` | Homepage / Universe |
 | `invest.html` | Short investor pitch (entry point) |
-| `theraise.html` | Full deal terms + asset inventory |
-| `investor-deck-v2.html` | Full slide deck |
+| `investor-deck-v4.html` | Full slide deck (current; v2 is a redirect stub → v3, v3 superseded) |
+| `tfs-valuation.html` | Deal terms + valuation analysis |
 | `selector-model-ip.html` | Proprietary framework / moat page (May 2026) |
 | `trinity.html` | Founding mythology |
 | `selector-hub.html` | Selector Command Center |
@@ -145,5 +145,5 @@ Reference framework in product copy, investor materials, and tool design:
 
 ---
 
-**Last updated:** May 15, 2026
+**Last updated:** August 15, 2026
 **Maintained by:** Claude (Anthropic) + KJP

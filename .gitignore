@@ -3,4 +3,36 @@
 *.docx
 Phone Link/
 NotebookLM/
+
+# Agent/DB artifacts
 .agent_todos.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Secrets & customer data — never commit
+.env
+.env.*
+soul-maps/.env
+soul-maps/subscribers.json
+
+# OS junk
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Editor/temp
+*.swp
+*~
+*.tmp
+*.bak
+*.orig
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+dark-shadows/print-edition.html
