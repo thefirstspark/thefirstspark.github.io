@@ -317,6 +317,65 @@
             font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
             text-align: center; text-decoration: none; cursor: pointer; transition: box-shadow 0.2s;
         }
+        .map-upsell {
+            max-width: 640px;
+            margin: 8px auto 36px;
+            padding: 28px 24px 26px;
+            border: 1px solid var(--gold);
+            background: linear-gradient(180deg, rgba(212,175,55,0.08), rgba(10,10,15,0.4));
+            text-align: center;
+        }
+        .map-upsell h3 {
+            font-family: var(--heading);
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            color: #e8e8f0;
+            margin: 8px 0 12px;
+        }
+        .map-upsell p {
+            color: var(--mid);
+            font-size: 12px;
+            line-height: 1.8;
+            max-width: 460px;
+            margin: 0 auto 22px;
+        }
+        .map-upsell .upsell-btns {
+            display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+        }
+        .sticky-buy {
+            display: none;
+            position: fixed;
+            left: 0; right: 0; bottom: 0;
+            z-index: 250;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
+            background: rgba(10,10,15,0.94);
+            border-top: 1px solid rgba(212,175,55,0.35);
+            backdrop-filter: blur(12px);
+        }
+        .sticky-buy.show { display: flex; }
+        .sticky-buy span {
+            font-size: 10px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+        .sticky-buy a {
+            flex-shrink: 0;
+            padding: 12px 18px;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: var(--black);
+            font-family: var(--body);
+            font-size: 10px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+        @media (max-width: 600px) {
+            .sticky-buy span { font-size: 9px; letter-spacing: 0.08em; }
+        }
+        body:has(#stickyBuy.show) { padding-bottom: 72px; }
         .prod-buy:hover { box-shadow: 0 4px 24px rgba(212,175,55,0.35); }
         .prod-buy.ghost {
             background: transparent; border: 1px solid var(--dim); color: var(--mid);
@@ -431,8 +490,8 @@
         <h1>Soul Code<br>Registry</h1>
         <p class="hero-tagline">YOUR NUMEROLOGICAL FINGERPRINT<br>LIFE PATH · EXPRESSION · SOUL URGE · SUN SIGN</p>
         <div class="hero-btns">
-            <button class="btn-gold" onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">Generate My Code</button>
-            <button class="btn-ghost" onclick="document.getElementById('registry').scrollIntoView({behavior:'smooth'})">Browse Registry</button>
+            <button class="btn-gold" onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">Generate My Code — Free</button>
+            <a class="btn-ghost" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm">Get Soul Map · $22</a>
         </div>
         <div class="scroll-cue">SCROLL</div>
     </div>
@@ -478,11 +537,18 @@
         <div class="code-display" id="codeDisplay"></div>
         <div class="code-breakdown" id="codeBreakdown"></div>
         <div class="number-meanings" id="numberMeanings"></div>
+        <div class="map-upsell">
+            <div class="eyebrow">Those are the numbers</div>
+            <h3>The Soul Map is the reading</h3>
+            <p>What they mean for your decisions, relationships, and next move. One private page, built from this code. $22 once. Yours forever.</p>
+            <div class="upsell-btns">
+                <a class="btn-gold" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" onclick="gtag('event','begin_checkout',{item:'soul_map',from:'code_reveal'})">Get your Soul Map — $22</a>
+                <a class="btn-ghost" href="what-is-a-soul-map.html">See what's in it</a>
+            </div>
+        </div>
         <div class="code-actions">
-            <button class="code-action-btn gold" onclick="copyCode()">Copy Code</button>
+            <button class="code-action-btn" onclick="copyCode()">Copy Code</button>
             <button class="code-action-btn" onclick="shareCode()">Share</button>
-            <button class="code-action-btn" onclick="openPinModal('public')">Register Public — $5</button>
-            <button class="code-action-btn" onclick="openPinModal('private')">Register Private — $11</button>
         </div>
     </div>
 </section>
@@ -513,7 +579,7 @@
         <div class="section-header">
             <div class="eyebrow">Step 03 — Go Deeper</div>
             <h2>Unlock Your Map</h2>
-            <p>Your Soul Code is the key. These readings decode what the numbers mean for your specific path.</p>
+            <p>The generator gave you the numbers. The Soul Map is the full reading — a private page you keep forever.</p>
         </div>
         <div class="products-grid" id="productsGrid"></div>
     </div>
@@ -803,6 +869,9 @@ function handleGenerate(e) {
     `;
 
     section.scrollIntoView({ behavior: 'smooth' });
+    const bar = document.getElementById('stickyBuy');
+    if (bar) bar.classList.add('show');
+    if (typeof gtag === 'function') gtag('event', 'soul_code_generated');
 }
 
 // ═══════════════════════════════════════
@@ -952,25 +1021,18 @@ function verifyPin(id) {
 // it is held back from the grid rather than shown as a dead button. To ship
 // one: create the plan in Whop, paste the real plan_ id, add live:true.
 const PRODUCTS = [
-    { name:'Base Soul Map',         desc:'Your complete Soul Code reading — Life Path, Expression, and Soul Urge decoded across all dimensions of your chart.',     price:'$22',  url:'https://whop.com/checkout/plan_anQKP3Pzf1cGm/', featured:true, live:true },
-    { name:'Soul Code: Public',     desc:'Register your Soul Code in the public registry. Visible to all.',                                                         price:'$5',   url:'https://whop.com/checkout/plan_CODE_PUBLIC/' },
-    { name:'Soul Code: Private',    desc:'Register privately with PIN protection. Only you can reveal it.',                                                          price:'$11',  url:'https://whop.com/checkout/plan_CODE_PRIVATE/' },
-    { name:'Compatibility',         desc:'Compare two Soul Codes. Where you align, where you clash, and the deeper pattern beneath.',                               price:'$11',  url:'https://whop.com/checkout/plan_COMPAT/' },
-    { name:'Family Constellation',  desc:'Map your family system. Ancestral patterns, inherited codes, karmic threads.',                                            price:'$33',  url:'https://whop.com/checkout/plan_FAMILY/' },
-    { name:'Squad Sync',            desc:'Group Soul Code analysis for up to 6 people. Teams, covens, collectives.',                                                price:'$55',  url:'https://whop.com/checkout/plan_SQUAD/' },
-    { name:'Personal Sigil',        desc:'Sacred geometry sigil generated from your Soul Code. Digital + printable.',                                               price:'$11',  url:'https://whop.com/checkout/plan_SIGIL/' },
-    { name:'Print-Ready PDF',       desc:'Full Soul Map report formatted for print. Frame-worthy sacred document.',                                                 price:'$5',   url:'https://whop.com/checkout/plan_PRINT/' },
+    { name:'Soul Map — Founders Edition', desc:'The full reading of your code — Life Path, Expression, Soul Urge, Personality, natal astrology, Chinese zodiac. One private page. Yours forever.', price:'$22', url:'https://whop.com/checkout/plan_anQKP3Pzf1cGm', featured:true, live:true },
 ];
 
 function renderProducts() {
     document.getElementById('productsGrid').innerHTML = PRODUCTS.filter(p => p.live).map(p => `
         <div class="product-card ${p.featured ? 'featured' : ''}">
-            ${p.featured ? '<div class="feat-badge">MOST POPULAR</div>' : ''}
+            ${p.featured ? '<div class="feat-badge">THE MAP</div>' : ''}
             <h3>${p.name}</h3>
             <p class="prod-desc">${p.desc}</p>
             <div class="price">${p.price}${p.priceLabel ? `<small>${p.priceLabel}</small>` : ''}</div>
-            <a class="prod-buy${p.featured ? '' : ' ghost'}" href="${p.url}" target="_blank"
-               onclick="gtag('event','product_click',{product:'${p.name}'})">Get Access</a>
+            <a class="prod-buy${p.featured ? '' : ' ghost'}" href="${p.url}"
+               onclick="gtag('event','begin_checkout',{product:'${p.name}'})">Get yours — $22</a>
         </div>
     `).join('');
 }
@@ -1145,5 +1207,9 @@ if (aspects.length === 0) {
     renderAspects(); drawSoulMap();
 }
 </script>
+<div class="sticky-buy" id="stickyBuy">
+    <span>Those are the numbers. The map is the reading.</span>
+    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" onclick="gtag('event','begin_checkout',{from:'sticky'})">Get Soul Map · $22</a>
+</div>
 </body>
 </html>
