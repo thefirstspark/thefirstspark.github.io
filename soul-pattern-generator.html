@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soul Pattern — The First Spark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#08081A; --deep:#10102A; --panel:#14142F;
+  --ink:#E8E4F5; --mist:#8B87C8; --dim:#55527E;
+  --spark:#F2A623; --spark-hi:#FCDE5A; --ember:#E8593C;
+  --line:#26264A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--void);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh}
+body{display:flex;flex-direction:column;align-items:center;padding:0 20px 60px}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0}
+header{text-align:center;padding:52px 0 8px;position:relative;z-index:1}
+.brand{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--spark);font-weight:400}
+h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,6vw,54px);line-height:1.05;margin-top:14px}
+h1 em{font-style:italic;color:var(--spark-hi)}
+.sub{color:var(--mist);font-size:15px;margin-top:12px;max-width:460px;line-height:1.65}
+main{display:grid;grid-template-columns:320px minmax(0,1fr);gap:36px;max-width:1060px;width:100%;margin-top:40px;position:relative;z-index:1}
+@media(max-width:860px){main{grid-template-columns:1fr}}
+.intake{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;align-self:start}
+.intake h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;margin-bottom:4px}
+.intake p{color:var(--mist);font-size:13px;line-height:1.6;margin-bottom:22px}
+label{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);margin:18px 0 7px}
+input[type=text],input[type=date]{width:100%;background:var(--deep);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:12px 13px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:300;color-scheme:dark;min-height:46px}
+input:focus{outline:2px solid var(--spark);outline-offset:1px;border-color:transparent}
+.hint{font-size:11.5px;color:var(--dim);margin-top:6px;line-height:1.5}
+.err{font-size:12.5px;color:var(--ember);margin-top:8px;display:none}
+.gen{width:100%;margin-top:26px;background:var(--spark);color:#1A1102;border:none;border-radius:8px;padding:14px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .12s}
+.gen:hover{background:var(--spark-hi)}
+.gen:active{transform:scale(.985)}
+.gen:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.readout{margin-top:24px;border-top:1px solid var(--line);padding-top:18px;display:none}
+.readout.show{display:block}
+.ro-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;gap:12px}
+.ro-k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);white-space:nowrap}
+.ro-v{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);text-align:right}
+.ro-chain{font-size:12px;color:var(--dim);text-align:right;letter-spacing:.04em}
+.debts{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
+.debt-badge{font-size:11px;letter-spacing:.1em;border:1px solid var(--spark);color:var(--spark);border-radius:999px;padding:4px 11px}
+.no-debt{font-size:12px;color:var(--dim);font-style:italic}
+.stage{display:flex;flex-direction:column;align-items:center;min-width:0}
+.frame{width:100%;max-width:640px;aspect-ratio:1;background:radial-gradient(circle at 50% 46%,#131332 0%,var(--void) 72%);border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:background .5s}
+.frame.paper{background:#FBF9F4}
+.frame svg{width:92%;height:92%}
+.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:var(--dim);font-size:14px;text-align:center;padding:30px}
+.empty .seed{width:7px;height:7px;border-radius:50%;background:var(--spark);opacity:.9}
+@media (prefers-reduced-motion:no-preference){.empty .seed{animation:breathe 2.6s ease-in-out infinite}}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.9);opacity:.35}}
+.modes{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;justify-content:center}
+.mode-btn,.dl-btn{background:var(--panel);border:1px solid var(--line);color:var(--mist);border-radius:8px;padding:9px 16px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:400;cursor:pointer;transition:all .18s}
+.mode-btn:hover,.dl-btn:hover{color:var(--ink);border-color:var(--mist)}
+.mode-btn.on{background:var(--deep);color:var(--spark);border-color:var(--spark)}
+.mode-btn:focus-visible,.dl-btn:focus-visible{outline:2px solid var(--spark);outline-offset:2px}
+.dls{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center}
+.legend{max-width:640px;width:100%;margin-top:30px;border-top:1px solid var(--line);padding-top:22px;display:none;position:relative;z-index:1}
+.legend.show{display:block}
+.legend h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:20px;margin-bottom:14px;text-align:center}
+.leg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px 22px;font-size:13px;color:var(--mist);line-height:1.55}
+.leg-grid b{color:var(--ink);font-weight:400}
+.pal-name{text-align:center;margin-top:18px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--spark-hi)}
+.upsell{max-width:640px;width:100%;margin-top:26px;background:var(--panel);border:1px solid var(--spark);border-radius:16px;padding:24px 26px;text-align:center;display:none}
+.upsell.show{display:block}
+.upsell h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px}
+.upsell p{color:var(--mist);font-size:13.5px;line-height:1.6;margin:8px 0 16px}
+.upsell a{display:inline-block;background:var(--spark);color:#1A1102;border-radius:8px;padding:12px 26px;font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:background .2s}
+.upsell a:hover{background:var(--spark-hi)}
+.overlay{position:fixed;inset:0;background:rgba(4,4,14,.8);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.overlay.show{display:flex}
+.modal{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;max-width:380px;width:100%;text-align:center}
+.modal h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;margin-bottom:8px}
+.modal p{color:var(--mist);font-size:13px;line-height:1.6;margin-bottom:16px}
+.modal input{width:100%;background:var(--deep);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:12px;font-family:'Outfit',sans-serif;font-size:16px;margin-bottom:12px;text-align:center}
+.modal .row{display:flex;gap:8px}
+.modal button{flex:1;border-radius:8px;padding:12px;font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer}
+.modal .primary{background:var(--spark);color:#1A1102;border:none;font-weight:500}
+.modal .primary:hover{background:var(--spark-hi)}
+.modal .ghost{background:none;color:var(--mist);border:1px solid var(--line)}
+.modal .merr{color:var(--ember);font-size:12px;margin-bottom:10px;display:none}
+footer{margin-top:44px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);position:relative;z-index:1}
+footer a{color:var(--mist);text-decoration:none}
+@media(max-width:600px){
+  body{padding:0 14px 44px}
+  header{padding:34px 0 4px}
+  .sub{font-size:13.5px}
+  main{gap:26px;margin-top:26px}
+  .intake{padding:22px 18px}
+  .gen{padding:16px;font-size:14.5px}
+  .modes{width:100%;max-width:640px}
+  .mode-btn{flex:1;padding:13px 10px;font-size:13.5px}
+  .dls{width:100%;max-width:640px}
+  .dl-btn{flex:1;min-width:96px;padding:13px 10px;font-size:13.5px}
+  .legend{padding-top:18px;margin-top:24px}
+  .leg-grid{grid-template-columns:1fr;gap:10px}
+  footer{margin-top:32px}
+}
+</style>
+</head>
+<body>
+<svg class="stars" width="100%" height="100%" aria-hidden="true">
+<circle cx="6%" cy="12%" r="1" fill="#8B87C8" opacity=".5"/><circle cx="14%" cy="64%" r="1.2" fill="#8B87C8" opacity=".35"/><circle cx="9%" cy="88%" r=".8" fill="#8B87C8" opacity=".45"/><circle cx="90%" cy="18%" r="1.1" fill="#8B87C8" opacity=".5"/><circle cx="95%" cy="52%" r=".9" fill="#8B87C8" opacity=".35"/><circle cx="86%" cy="80%" r="1.2" fill="#8B87C8" opacity=".4"/><circle cx="50%" cy="5%" r=".8" fill="#8B87C8" opacity=".4"/><circle cx="72%" cy="8%" r="1" fill="#8B87C8" opacity=".3"/><circle cx="28%" cy="7%" r=".9" fill="#8B87C8" opacity=".35"/>
+</svg>
+
+<header>
+  <div class="brand">The First Spark</div>
+  <h1>Your soul has a <em>pattern</em>.</h1>
+  <p class="sub">Two numbers were written into you at birth — one by your name, one by your date. Together they draw a geometry that belongs to no one else.</p>
+</header>
+
+<main>
+  <section class="intake" aria-label="Enter your birth details">
+    <h2>The inscription</h2>
+    <p>Entered exactly as given at birth. The pattern is deterministic — the same soul always draws the same shape.</p>
+    <label for="bname">Full birth name</label>
+    <input type="text" id="bname" autocomplete="off" spellcheck="false" placeholder="As it appears on your birth certificate">
+    <div class="hint">All given names and surname. Suffixes (Jr, III) are left off.</div>
+    <label for="bdate">Birth date</label>
+    <input type="date" id="bdate">
+    <div class="err" id="err">Enter your full birth name and birth date first.</div>
+    <button class="gen" id="go">Reveal my pattern</button>
+    <div class="readout" id="readout">
+      <div class="ro-row"><span class="ro-k">Life path</span><span><span class="ro-v" id="lp-v"></span><div class="ro-chain" id="lp-c"></div></span></div>
+      <div class="ro-row"><span class="ro-k">Expression</span><span><span class="ro-v" id="ex-v"></span><div class="ro-chain" id="ex-c"></div></span></div>
+      <div class="debts" id="debts"></div>
+    </div>
+  </section>
+
+  <section class="stage" aria-label="Your soul pattern">
+    <div class="frame" id="frame">
+      <div class="empty" id="empty"><div class="seed"></div><div>Your pattern waits, unformed.<br>Give it your name and your day.</div></div>
+      <svg id="art" viewBox="0 0 800 800" role="img" aria-label="Generated soul pattern mandala" style="display:none"></svg>
+    </div>
+    <div class="modes" role="group" aria-label="Display mode">
+      <button class="mode-btn on" id="m-illum" onclick="setMode('illum')">Illuminated</button>
+      <button class="mode-btn" id="m-bloom" onclick="setMode('bloom')">Bloom</button>
+      <button class="mode-btn" id="m-aura" onclick="setMode('aura')">Aura</button>
+      <button class="mode-btn" id="m-paper" onclick="setMode('paper')">Coloring page</button>
+    </div>
+    <div class="dls">
+      <button class="dl-btn" onclick="withGate(sharePattern)">Share</button>
+      <button class="dl-btn" onclick="withGate(dlPNG)">Download PNG</button>
+      <button class="dl-btn" onclick="withGate(dlWallpaper)">Wallpaper</button>
+      <button class="dl-btn" onclick="withGate(dlSVG)">Download SVG</button>
+      <button class="dl-btn" id="hd-btn" onclick="openUnlock()">Unlock HD &#10022;</button>
+    </div>
+  </section>
+</main>
+
+<div class="legend" id="legend">
+  <h3>How to read your pattern</h3>
+  <div class="leg-grid">
+    <div><b>Three outer circles</b> — the three Realms that hold every soul.</div>
+    <div><b>Twelve-fold symmetry</b> — the wheel of twelve Archetypes, turning beneath everything you do.</div>
+    <div><b>Four gates</b> — the four domains of the Selector, marking the cardinal directions of choice.</div>
+    <div><b>The woven rings</b> — your Expression. Their number is your capacity; their density, the equipment you carry.</div>
+    <div><b>The inner star</b> — your Life Path. Its points count the road you were given to walk.</div>
+    <div><b>Your light</b> — not the Road alone. Road and Vessel, met together, are what the pattern is colored by.</div>
+    <div><b>Amber breaks</b> — karmic debt, where the weave was left deliberately open. What is unclosed can be released.</div>
+  </div>
+  <div class="pal-name" id="pal-name"></div>
+</div>
+
+<div class="upsell" id="upsell">
+  <h3>This is the shape. The map is the meaning.</h3>
+  <p>Your Soul Map reads every layer of this pattern — your road, your equipment, your debts and how to release them — in six sections written for you alone.</p>
+  <a id="map-link" href="https://thefirstspark.shop" target="_blank" rel="noopener">Get your Soul Map &mdash; $22</a>
+</div>
+
+<div class="overlay" id="gate-overlay">
+  <div class="modal">
+    <h3>Where should your pattern go?</h3>
+    <p>Enter your email and your downloads unlock. We send spark, never spam.</p>
+    <div class="merr" id="gate-err">Enter a valid email first.</div>
+    <input type="email" id="gate-email" placeholder="you@example.com" autocomplete="email">
+    <div class="row">
+      <button class="ghost" onclick="closeGate()">Not now</button>
+      <button class="primary" onclick="submitGate()">Unlock downloads</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="hd-overlay">
+  <div class="modal">
+    <h3>Illuminate in full</h3>
+    <p>HD removes the watermark and doubles export resolution for printing. Get your unlock code at <a href="https://thefirstspark.shop" target="_blank" rel="noopener" style="color:var(--spark)">thefirstspark.shop</a>, then enter it here.</p>
+    <div class="merr" id="hd-err">That code isn't recognized.</div>
+    <input type="text" id="hd-code" placeholder="SPARK-XXXX" autocomplete="off" spellcheck="false">
+    <div class="row">
+      <button class="ghost" onclick="closeUnlock()">Later</button>
+      <button class="primary" onclick="submitUnlock()">Unlock</button>
+    </div>
+  </div>
+</div>
+
+<footer><a href="https://thefirstspark.shop">thefirstspark.shop</a></footer>
+
+<script>
+"use strict";
+/* ---------- config: set these before going live ---------- */
+const SOUL_MAP_URL="https://thefirstspark.shop";
+const GATE_ENDPOINT="";
+const UNLOCK_CODES=["SPARK-1111","SPARK-FIRSTLIGHT"];
+let hdUnlocked=false,gateDone=false,pendingAction=null;
+try{hdUnlocked=localStorage.getItem("tfs-hd")==="1";gateDone=localStorage.getItem("tfs-gate")==="1";}catch(e){}
+/* ---------- numerology core ---------- */
+function letterVal(ch){const c=ch.toUpperCase().charCodeAt(0);if(c<65||c>90)return 0;return((c-65)%9)+1;}
+function digitSum(n){return String(n).split("").reduce((a,d)=>a+(+d),0);}
+const MASTERS=[11,22,33],DEBTS=[13,14,16,19];
+function reduceTrack(n,inter){
+  while(n>9&&!MASTERS.includes(n)){inter.push(n);n=digitSum(n);}
+  return n;
+}
+function lifePath(y,m,d,inter){
+  if(DEBTS.includes(d))inter.push(d);
+  if(DEBTS.includes(m))inter.push(m);
+  const mr=reduceTrack(m,inter),dr=reduceTrack(d,inter),yr=reduceTrack(y,inter);
+  const tot=mr+dr+yr;inter.push(tot);
+  return reduceTrack(tot,inter);
+}
+function expression(name,inter){
+  let s=0;for(const ch of name)s+=letterVal(ch);
+  return reduceTrack(s,inter);
+}
+function partDebtPool(name){
+  const pool=[];
+  for(const p of name.trim().split(/\s+/).filter(Boolean)){
+    let s=0;for(const ch of p)s+=letterVal(ch);
+    if(DEBTS.includes(s))pool.push(s);
+    reduceTrack(s,pool);
+  }
+  return pool;
+}
+function findDebts(inter){return [...new Set(inter.filter(n=>DEBTS.includes(n)))];}
+function tierFromLP(lp){if(lp===11)return 9;if(lp===22||lp===33)return 10;return lp-1;}
+function radiantNumber(lp,ex){
+  const inter=[];
+  return reduceTrack(lp+ex,inter);
+}
+function tierFromRadiant(r){if(r===11)return 9;if(r===22||r===33)return 10;return r-1;}
+/* ---------- deterministic seed ---------- */
+function fnv(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+/* ---------- palettes: eleven tiers of the codex ---------- */
+const PALETTES=[
+ {name:"Tier I · Ember",c:["#E8593C","#F2A623","#8C2F1B","#FCDE5A"]},
+ {name:"Tier II · Dawn",c:["#F0997B","#D85A30","#4A1B0C","#F5C4B3"]},
+ {name:"Tier III · Gold Vein",c:["#F2A623","#FCDE5A","#854F0B","#FAC775"]},
+ {name:"Tier IV · Verdant Gate",c:["#97C459","#5DCAA5","#27500A","#C0DD97"]},
+ {name:"Tier V · Tide Glass",c:["#5DCAA5","#1D9E75","#04342C","#9FE1CB"]},
+ {name:"Tier VI · Still Water",c:["#85B7EB","#378ADD","#0C447C","#B5D4F4"]},
+ {name:"Tier VII · Violet Hour",c:["#AFA9EC","#7F77DD","#3C3489","#CECBF6"]},
+ {name:"Tier VIII · Rose Ash",c:["#ED93B1","#D4537E","#72243E","#F5C4B3"]},
+ {name:"Tier IX · Pearl Gate",c:["#F1EFE8","#FAC775","#854F0B","#FCDE5A"]},
+ {name:"Tier X · Moonsilver",c:["#D3D1C7","#B4B2A9","#444441","#F1EFE8"]},
+ {name:"Tier XI · First Light",c:["#FCDE5A","#F2A623","#E8593C","#FBF3D9"]}
+];
+/* ---------- drawing ---------- */
+const NS="http://www.w3.org/2000/svg";
+let currentSoul=null,mode="illum";
+function polar(cx,cy,r,a){return[cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e;}
+function petalPath(cx,cy,r0,r1,a,spread){
+  const[ix,iy]=polar(cx,cy,r0,a),[tx,ty]=polar(cx,cy,r1,a);
+  const[c1x,c1y]=polar(cx,cy,(r0+r1)/2,a-spread),[c2x,c2y]=polar(cx,cy,(r0+r1)/2,a+spread);
+  return`M ${ix} ${iy} Q ${c1x} ${c1y} ${tx} ${ty} Q ${c2x} ${c2y} ${ix} ${iy} Z`;
+}
+function spiralPath(cx,cy,rMax,turns){
+  let d="",steps=44;
+  for(let i=0;i<=steps;i++){const t=i/steps,a=t*turns*2*Math.PI-Math.PI/2,r=rMax*(1-t*0.82);
+    const[x,y]=polar(cx,cy,r,a);d+=(i===0?"M":"L")+` ${x.toFixed(1)} ${y.toFixed(1)} `;}
+  return d;
+}
+function draw(soul){
+  const svg=document.getElementById("art");
+  svg.innerHTML="";
+  svg.style.opacity="";svg.style.transition="";
+  if(mode==="aura"){drawAura(soul,svg);return;}
+  const dark=(mode!=="paper");
+  const bloom=(mode==="bloom");
+  const pal=PALETTES[soul.tier].c;
+  const C=dark?{a:pal[0],b:pal[1],c:pal[3],deep:pal[2],faint:"rgba(139,135,200,.35)",debt:"#F2A623"}
+              :{a:"#1B1B1B",b:"#1B1B1B",c:"#1B1B1B",deep:"#1B1B1B",faint:"rgba(27,27,27,.45)",debt:"#1B1B1B"};
+  const sw=dark?1.4:2.2;
+  const rng=mulberry32(soul.seed);
+  const cx=400,cy=400;
+  const paths=[];
+  function P(tag,attrs){const e=el(tag,attrs,svg);paths.push(e);return e;}
+  /* three realm circles */
+  const realmR=[382,366,352];
+  realmR.forEach((r,i)=>{
+    const gapSector=(soul.lpDebt&&i===0)?soul.debtSector:-1;
+    if(gapSector<0){P("circle",{cx,cy,r,fill:"none",stroke:i===1?C.b:C.faint,"stroke-width":i===1?sw:sw*0.6});}
+    else{
+      const a0=gapSector*Math.PI/6+0.16,a1=a0+2*Math.PI-0.32;
+      const[x0,y0]=polar(cx,cy,r,a0),[x1,y1]=polar(cx,cy,r,a1);
+      P("path",{d:`M ${x0} ${y0} A ${r} ${r} 0 1 1 ${x1} ${y1}`,fill:"none",stroke:C.faint,"stroke-width":sw*0.6});
+      const[kx,ky]=polar(cx,cy,r,gapSector*Math.PI/6);
+      P("path",{d:spiralPath(kx,ky,15,2.4),fill:"none",stroke:C.debt,"stroke-width":sw,"stroke-linecap":"round"});
+    }
+  });
+  /* twelve archetype spokes */
+  for(let k=0;k<12;k++){
+    const a=k*Math.PI/6-Math.PI/2;
+    const[x0,y0]=polar(cx,cy,338,a),[x1,y1]=polar(cx,cy,320,a);
+    P("line",{x1:x0,y1:y0,x2:x1,y2:y1,stroke:C.b,"stroke-width":sw,"stroke-linecap":"round"});
+  }
+  /* four selector gates */
+  for(let k=0;k<4;k++){
+    const a=k*Math.PI/2-Math.PI/2;const[gx,gy]=polar(cx,cy,366,a);const s=11;
+    P("path",{d:`M ${gx} ${gy-s} L ${gx+s} ${gy} L ${gx} ${gy+s} L ${gx-s} ${gy} Z`,
+      fill:dark?(bloom?C.b:C.deep):"none","fill-opacity":bloom?0.75:1,stroke:C.a,"stroke-width":sw});
+  }
+  /* expression rings */
+  const ringN=Math.min(soul.ex>9?9:soul.ex,9)+(soul.ex>9?2:0);
+  const rIn=118,rOut=305,styles=["petals","dots","scallop","spikes","weave"];
+  for(let i=0;i<ringN;i++){
+    const r=rIn+(i+0.5)*(rOut-rIn)/ringN;
+    const band=(rOut-rIn)/ringN*0.44;
+    const style=styles[Math.floor(rng()*styles.length)];
+    const mult=[12,24,36][Math.floor(rng()*3)];
+    const depth=i/(ringN-1||1);
+    const shadeCol=depth<0.34?C.deep:(depth<0.72?[C.a,C.b][Math.floor(rng()*2)]:C.c);
+    const col=shadeCol;
+    const isKnot=(soul.exDebt&&i===Math.floor(ringN/2));
+    const rot=rng()*Math.PI/6;
+    for(let k=0;k<mult;k++){
+      const a=k*2*Math.PI/mult+rot;
+      if(isKnot&&k===0){
+        const[kx,ky]=polar(cx,cy,r,a);
+        P("path",{d:spiralPath(kx,ky,band+6,2.2),fill:"none",stroke:C.debt,"stroke-width":sw,"stroke-linecap":"round"});
+        continue;
+      }
+      if(style==="petals"){
+        P("path",{d:petalPath(cx,cy,r-band,r+band,a,0.55/(mult/12)),fill:(bloom||(dark&&rng()<0.35))?col:"none",
+          "fill-opacity":bloom?0.55:(dark?0.16:0),stroke:col,"stroke-width":bloom?sw*0.35:sw*0.85});
+      }else if(style==="dots"){
+        const[x,y]=polar(cx,cy,r,a);
+        P("circle",{cx:x,cy:y,r:band*0.38,fill:(bloom||(dark&&rng()<0.5))?col:"none","fill-opacity":bloom?0.7:(dark?0.3:0),stroke:col,"stroke-width":bloom?sw*0.35:sw*0.8});
+      }else if(style==="scallop"){
+        const a2=a+2*Math.PI/mult;const[x0,y0]=polar(cx,cy,r,a);const[x1,y1]=polar(cx,cy,r,a2);
+        P("path",{d:`M ${x0} ${y0} A ${r*0.14} ${r*0.14} 0 0 1 ${x1} ${y1}`,fill:"none",stroke:col,"stroke-width":sw*0.8});
+      }else if(style==="spikes"){
+        const[x0,y0]=polar(cx,cy,r-band,a),[x1,y1]=polar(cx,cy,r+band,a);
+        P("line",{x1:x0,y1:y0,x2:x1,y2:y1,stroke:col,"stroke-width":sw*0.8,"stroke-linecap":"round"});
+      }else{
+        const a2=a+2*Math.PI/mult;
+        const[x0,y0]=polar(cx,cy,r-band,a),[x1,y1]=polar(cx,cy,r+band,a2);
+        P("line",{x1:x0,y1:y0,x2:x1,y2:y1,stroke:col,"stroke-width":sw*0.7,"stroke-linecap":"round"});
+      }
+    }
+    if(style!=="scallop"&&rng()<0.6){
+      P("circle",{cx,cy,r:r-band-3,fill:"none",stroke:C.faint,"stroke-width":sw*0.5});
+    }
+  }
+  /* life path star */
+  const pts=soul.lp>9?11:soul.lp;
+  const layers=soul.lp===22?2:(soul.lp===33?3:1);
+  for(let L=0;L<layers;L++){
+    const ro=92-L*14,ri=40-L*6;
+    if(pts===1){
+      P("circle",{cx,cy,r:ro*0.5,fill:"none",stroke:C.a,"stroke-width":sw*1.2});
+      P("line",{x1:cx,y1:cy-ro,x2:cx,y2:cy-ro*0.5,stroke:C.a,"stroke-width":sw*1.2,"stroke-linecap":"round"});
+    }else if(pts===2){
+      P("circle",{cx:cx-ro*0.3,cy,r:ro*0.55,fill:"none",stroke:C.a,"stroke-width":sw});
+      P("circle",{cx:cx+ro*0.3,cy,r:ro*0.55,fill:"none",stroke:C.a,"stroke-width":sw});
+    }else{
+      let d="";
+      for(let k=0;k<pts*2;k++){
+        const r=k%2===0?ro:ri,a=k*Math.PI/pts-Math.PI/2;
+        const[x,y]=polar(cx,cy,r,a);d+=(k===0?"M":"L")+` ${x.toFixed(1)} ${y.toFixed(1)} `;
+      }
+      P("path",{d:d+"Z",fill:dark?(bloom?C.a:C.deep):"none","fill-opacity":bloom?0.6:(dark?0.35:0),stroke:C.a,"stroke-width":sw*1.15,"stroke-linejoin":"round"});
+    }
+  }
+  /* the spark */
+  P("circle",{cx,cy,r:13,fill:"none",stroke:C.b,"stroke-width":sw});
+  P("circle",{cx,cy,r:5,fill:dark?"#FCDE5A":"none",stroke:dark?"none":C.a,"stroke-width":sw});
+  /* mark */
+  const mk=el("text",{x:400,y:788,"text-anchor":"middle","font-size":"15",
+    fill:dark?"rgba(139,135,200,.55)":"rgba(27,27,27,.4)","letter-spacing":"3","font-family":"Outfit, sans-serif"},svg);
+  mk.textContent="THEFIRSTSPARK.SHOP";
+  /* inscribe animation */
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+    const hv=paths.length>420||window.innerWidth<600;
+    paths.forEach((p,i)=>{
+      if(p.tagName==="text")return;
+      p.setAttribute("pathLength","1");
+      p.style.strokeDasharray="1";
+      p.style.strokeDashoffset="1";
+      p.style.transition=`stroke-dashoffset ${hv?0.55:0.9}s ease ${Math.min(i*(hv?0.005:0.012),hv?1.1:2.2)}s`;
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{p.style.strokeDashoffset="0";}));
+    });
+  }
+}
+/* ---------- flow ---------- */
+function drawAura(soul,svg){
+  const pal=PALETTES[soul.tier].c;
+  const rng=mulberry32(soul.seed^0x5EED);
+  const defs=el("defs",{},svg);
+  const g=el("radialGradient",{id:"aura-g",cx:"50%",cy:"50%",r:"50%"},defs);
+  function stop(off,col,op){el("stop",{offset:off+"%","stop-color":col,"stop-opacity":op},g);}
+  const ringN=Math.min(soul.ex>9?9:soul.ex,9)+(soul.ex>9?2:0);
+  stop(0,"#FCDE5A",1);stop(5.5,"#FCDE5A",0.85);
+  const cols=[pal[0],pal[1],pal[3],pal[2]];
+  const inner=11,outer=84,span=outer-inner;
+  for(let i=0;i<ringN;i++){
+    const mid=inner+span*(i+0.5)/ringN;
+    stop(mid,cols[i%cols.length],0.88);
+  }
+  if(soul.exDebt)stop(inner+span*0.5,"#F2A623",1);
+  if(soul.lpDebt)stop(outer+3,"#F2A623",0.85);
+  stop(96,"#0B0B22",0);
+  el("circle",{cx:400,cy:400,r:392,fill:"url(#aura-g)"},svg);
+  for(let i=0;i<3;i++){
+    const a=rng()*2*Math.PI,d=40+rng()*90;
+    el("circle",{cx:400+d*Math.cos(a),cy:400+d*Math.sin(a),r:150+rng()*140,
+      fill:cols[i%cols.length],"fill-opacity":0.10},svg);
+  }
+  const lpHalos=soul.lp>9?11:soul.lp;
+  for(let i=0;i<lpHalos;i++){
+    el("circle",{cx:400,cy:400,r:330+i*(58/Math.max(lpHalos,1)),fill:"none",
+      stroke:"#FCDE5A","stroke-width":1,"stroke-opacity":0.14},svg);
+  }
+  const mk=el("text",{x:400,y:788,"text-anchor":"middle","font-size":"15",
+    fill:"rgba(139,135,200,.55)","letter-spacing":"3","font-family":"Outfit, sans-serif"},svg);
+  mk.textContent="THEFIRSTSPARK.SHOP";
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+    svg.style.opacity="0";svg.style.transition="opacity 1.8s ease";
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{svg.style.opacity="1";}));
+  }
+}
+function chainText(inter,fin){
+  const uniq=inter.filter((v,i)=>inter.indexOf(v)===i);
+  return uniq.length?uniq.join(" → ")+" → "+fin:String(fin);
+}
+function generate(){
+  const name=document.getElementById("bname").value.trim();
+  const dateV=document.getElementById("bdate").value;
+  const err=document.getElementById("err");
+  if(!name||!dateV||!/[A-Za-z]/.test(name)){err.style.display="block";return;}
+  err.style.display="none";
+  const[y,m,d]=dateV.split("-").map(Number);
+  const lpI=[],exI=[];
+  const lp=lifePath(y,m,d,lpI);
+  const ex=expression(name,exI);
+  const lpDebts=findDebts(lpI),exDebts=findDebts([...exI,...partDebtPool(name)]);
+  const seed=fnv(name.toLowerCase().replace(/\s+/g," ")+"|"+dateV);
+  const radiant=radiantNumber(lp,ex);
+  const tier=tierFromRadiant(radiant);
+  currentSoul={lp,ex,radiant,lpDebt:lpDebts.length>0,exDebt:exDebts.length>0,
+    debtSector:seed%12,seed,tier};
+  document.getElementById("lp-v").textContent=lp;
+  document.getElementById("lp-c").textContent=chainText(lpI,lp);
+  document.getElementById("ex-v").textContent=ex;
+  document.getElementById("ex-c").textContent=chainText(exI,ex);
+  const db=document.getElementById("debts");db.innerHTML="";
+  const all=[...new Set([...lpDebts.map(n=>n+" · life path"),...exDebts.map(n=>n+" · expression")])];
+  if(all.length){all.forEach(t=>{const s=document.createElement("span");s.className="debt-badge";s.textContent="Karmic debt "+t;db.appendChild(s);});}
+  else{const s=document.createElement("span");s.className="no-debt";s.textContent="No karmic debt carried — the weave is closed.";db.appendChild(s);}
+  document.getElementById("readout").classList.add("show");
+  document.getElementById("empty").style.display="none";
+  const svg=document.getElementById("art");svg.style.display="block";
+  document.getElementById("legend").classList.add("show");
+  document.getElementById("upsell").classList.add("show");
+  document.getElementById("map-link").href=SOUL_MAP_URL;
+  document.getElementById("pal-name").textContent="Your light: "+PALETTES[currentSoul.tier].name+" — Road "+currentSoul.lp+" met by Vessel "+currentSoul.ex+" (Radiant "+currentSoul.radiant+")";
+  draw(currentSoul);
+  if(window.innerWidth<860)document.getElementById("frame").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function reDraw(){if(currentSoul)draw(currentSoul);}
+function setMode(m){
+  mode=m;
+  document.getElementById("m-illum").classList.toggle("on",m==="illum");
+  document.getElementById("m-bloom").classList.toggle("on",m==="bloom");
+  document.getElementById("m-aura").classList.toggle("on",m==="aura");
+  document.getElementById("m-paper").classList.toggle("on",m==="paper");
+  document.getElementById("frame").classList.toggle("paper",m==="paper");
+  if(currentSoul)draw(currentSoul);
+}
+function serialize(){
+  const svg=document.getElementById("art").cloneNode(true);
+  svg.setAttribute("xmlns",NS);
+  const bg=document.createElementNS(NS,"rect");
+  bg.setAttribute("width","800");bg.setAttribute("height","800");
+  bg.setAttribute("fill",mode==="paper"?"#FFFFFF":"#0B0B22");
+  svg.insertBefore(bg,svg.firstChild);
+  svg.querySelectorAll("*").forEach(n=>{n.style.transition="";n.style.strokeDashoffset="";n.style.strokeDasharray="";n.removeAttribute("pathLength");});
+  if(hdUnlocked)svg.querySelectorAll("text").forEach(t=>t.remove());
+  return new XMLSerializer().serializeToString(svg);
+}
+function dlSVG(){
+  if(!currentSoul)return;
+  const blob=new Blob([serialize()],{type:"image/svg+xml"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download="soul-pattern-"+(mode==="paper"?"coloring":mode)+".svg";a.click();
+}
+function pngBlob(cb){
+  const img=new Image();
+  img.onload=()=>{
+    const S=hdUnlocked?3200:1600;
+    const c=document.createElement("canvas");c.width=S;c.height=S;
+    c.getContext("2d").drawImage(img,0,0,S,S);
+    c.toBlob(cb,"image/png");
+  };
+  img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(serialize());
+}
+function dlPNG(){
+  if(!currentSoul)return;
+  pngBlob(b=>{
+    const a=document.createElement("a");a.href=URL.createObjectURL(b);
+    a.download="soul-pattern-"+(mode==="paper"?"coloring":mode)+".png";a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+  });
+}
+function sharePattern(){
+  if(!currentSoul)return;
+  pngBlob(b=>{
+    const f=new File([b],"soul-pattern.png",{type:"image/png"});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){
+      navigator.share({files:[f],title:"My Soul Pattern",text:"My soul pattern — thefirstspark.shop"}).catch(()=>{});
+    }else{dlPNG();}
+  });
+}
+function withGate(fn){
+  if(!currentSoul)return;
+  if(gateDone||!GATE_ENDPOINT){fn();return;}
+  pendingAction=fn;
+  document.getElementById("gate-overlay").classList.add("show");
+}
+function closeGate(){document.getElementById("gate-overlay").classList.remove("show");pendingAction=null;}
+function submitGate(){
+  const em=document.getElementById("gate-email").value.trim();
+  const err=document.getElementById("gate-err");
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){err.style.display="block";return;}
+  err.style.display="none";
+  try{fetch(GATE_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:"soul-pattern"})});}catch(e){}
+  gateDone=true;try{localStorage.setItem("tfs-gate","1");}catch(e){}
+  document.getElementById("gate-overlay").classList.remove("show");
+  if(pendingAction){const f=pendingAction;pendingAction=null;f();}
+}
+function openUnlock(){
+  if(hdUnlocked)return;
+  document.getElementById("hd-overlay").classList.add("show");
+}
+function closeUnlock(){document.getElementById("hd-overlay").classList.remove("show");}
+function markUnlocked(){
+  hdUnlocked=true;try{localStorage.setItem("tfs-hd","1");}catch(e){}
+  const b=document.getElementById("hd-btn");
+  b.textContent="HD unlocked \u2726";b.style.color="var(--spark)";b.style.borderColor="var(--spark)";b.onclick=null;
+}
+function submitUnlock(){
+  const code=document.getElementById("hd-code").value.trim().toUpperCase();
+  const err=document.getElementById("hd-err");
+  if(!UNLOCK_CODES.includes(code)){err.style.display="block";return;}
+  err.style.display="none";
+  markUnlocked();
+  closeUnlock();
+}
+function dlWallpaper(){
+  if(!currentSoul)return;
+  const img=new Image();
+  img.onload=()=>{
+    const W=1080,H=1920,c=document.createElement("canvas");c.width=W;c.height=H;
+    const ctx=c.getContext("2d");
+    ctx.fillStyle="#0B0B22";ctx.fillRect(0,0,W,H);
+    const size=Math.min(W,H)*0.92,x=(W-size)/2,y=(H-size)/2-60;
+    ctx.drawImage(img,x,y,size,size);
+    ctx.fillStyle="rgba(232,228,245,.9)";ctx.textAlign="center";
+    ctx.font="500 34px Outfit, sans-serif";
+    ctx.fillText("Tier "+["I","II","III","IV","V","VI","VII","VIII","IX","X","XI"][currentSoul.tier]+" \u00B7 "+PALETTES[currentSoul.tier].name.split("\u00B7")[1].trim(),W/2,y+size+90);
+    ctx.fillStyle="rgba(139,135,200,.7)";ctx.font="300 24px Outfit, sans-serif";
+    ctx.letterSpacing="6px";
+    ctx.fillText(hdUnlocked?"":"THEFIRSTSPARK.SHOP",W/2,H-70);
+    c.toBlob(b=>{
+      const a=document.createElement("a");a.href=URL.createObjectURL(b);
+      a.download="soul-pattern-wallpaper.png";a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+    },"image/png");
+  };
+  img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(serialize());
+}
+if(hdUnlocked)markUnlocked();
+document.getElementById("go").addEventListener("click",generate);
+document.getElementById("bdate").addEventListener("keydown",e=>{if(e.key==="Enter")generate();});
+document.getElementById("bname").addEventListener("input",()=>{document.getElementById("err").style.display="none";});
+</script>
+</body>
+</html>
