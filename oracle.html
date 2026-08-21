@@ -168,6 +168,23 @@
         }
         .back-link:hover { color: var(--gold); }
 
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .map-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,200,87,0.35);
+            padding-bottom: 1px;
+            transition: color 0.25s, border-color 0.25s;
+        }
+        .map-link:hover { color: var(--bone); border-color: var(--bone); }
         .status-pill {
             display: inline-flex;
             align-items: center;
@@ -501,6 +518,33 @@
             transform: translateY(-1px);
             box-shadow: 0 8px 24px var(--glow-ember);
         }
+        .whisper {
+            display: block;
+            margin-top: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ash);
+            text-decoration: none;
+        }
+        .whisper:hover { color: var(--gold); }
+        .seed {
+            margin-top: 0.85rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--line);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ash);
+            line-height: 1.6;
+        }
+        .seed a {
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,200,87,0.35);
+        }
 
         .free-counter {
             text-align: center;
@@ -542,7 +586,10 @@
         <header class="oracle-header">
             <div class="nav-row">
                 <a class="back-link" href="index.html">← Spark</a>
-                <span class="status-pill"><span class="status-dot"></span> Field open</span>
+                <div class="header-right">
+                    <a class="map-link" href="what-is-a-soul-map.html?from=oracle">Soul Map</a>
+                    <span class="status-pill"><span class="status-dot"></span> Field open</span>
+                </div>
             </div>
 
             <svg class="oracle-seal" viewBox="0 0 200 250" aria-hidden="true">
@@ -592,9 +639,9 @@
     <script>
         const CONFIG = {
             freeMessages: 3,
-            lobbyUrl: 'https://whop.com/sparkverse-511c/the-sparkverse-lobby/',
+            explainerUrl: 'what-is-a-soul-map.html?from=oracle',
             soulMapUrl: 'https://whop.com/checkout/plan_anQKP3Pzf1cGm',
-            loungeUrl: 'https://whop.com/checkout/plan_okFWwlpgnc2bQ'
+            lobbyUrl: 'https://whop.com/sparkverse-511c/the-sparkverse-lobby/'
         };
 
         const RESPONSES = {
@@ -780,23 +827,30 @@ You don't have to take it all at once. What's the smallest piece of this you cou
         }
 
         function showUpgrade() {
+            addMessage('oracle', `That's the edge of a surface reading. What you felt is the Oracle matching a pattern in the moment you brought.
+
+A Soul Map is the same work, built from <em>your</em> birth name and date — a page about you, made only for you, that stays.
+
+I don't sell. I point. The map is the next layer.`);
+
             const div = document.createElement('div');
             div.className = 'message message-oracle';
             div.innerHTML =
                 '<div class="upgrade-prompt">' +
-                    '<h4>The pool goes deeper</h4>' +
-                    '<p>You\'ve touched the surface. Sparked Access is free — the Lobby, the tools, the rest of the field.</p>' +
+                    '<h4>Read you, not just this moment</h4>' +
+                    '<p>See what a Soul Map actually is — then claim yours for $22 if it lands.</p>' +
                     '<div class="upgrade-actions">' +
-                        '<a class="upgrade-btn" href="' + CONFIG.lobbyUrl + '" target="_blank" rel="noopener">Free Sparked Access</a>' +
-                        '<a class="upgrade-btn ghost" href="' + CONFIG.soulMapUrl + '" target="_blank" rel="noopener">Soul Map — $22</a>' +
+                        '<a class="upgrade-btn" href="' + CONFIG.explainerUrl + '">What is a Soul Map?</a>' +
+                        '<a class="upgrade-btn ghost" href="' + CONFIG.soulMapUrl + '" target="_blank" rel="noopener">Get yours — $22</a>' +
                     '</div>' +
+                    '<a class="whisper" href="' + CONFIG.lobbyUrl + '" target="_blank" rel="noopener">or stay free · Sparked Access</a>' +
                 '</div>';
             chatArea.appendChild(div);
             chatArea.scrollTop = chatArea.scrollHeight;
 
             chatInput.disabled = true;
             sendBtn.disabled = true;
-            chatInput.placeholder = 'The field holds here…';
+            chatInput.placeholder = 'The map is the next layer…';
             document.querySelector('.quick-actions').style.display = 'none';
             freeCounter.textContent = '';
         }
@@ -832,8 +886,11 @@ You don't have to take it all at once. What's the smallest piece of this you cou
 
         function deliver(text) {
             const response = getResponse(text);
-            if (response && response.html) addMessage('oracle', response.html, true);
-            else addMessage('oracle', response);
+            const seed = (messageCount === 2)
+                ? '<p class="seed">The Oracle reads this moment. A Soul Map reads <a href="' + CONFIG.explainerUrl + '">you</a>.</p>'
+                : '';
+            if (response && response.html) addMessage('oracle', response.html + seed, true);
+            else addMessage('oracle', formatOracle(response) + seed, true);
         }
 
         function sendMessage(text) {

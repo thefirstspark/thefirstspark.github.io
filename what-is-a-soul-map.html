@@ -332,6 +332,22 @@
       position: relative; z-index: 1;
     }
     footer a { color: var(--cyan); text-decoration: none; }
+
+    .from-oracle {
+      display: none;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--spark);
+      border-bottom: 1px solid var(--border);
+      background: rgba(251,191,36,.06);
+      position: relative;
+      z-index: 1;
+    }
+    .from-oracle.show { display: block; }
+    .from-oracle a { color: var(--cyan); text-decoration: none; }
   </style>
 </head>
 <body>
@@ -346,6 +362,8 @@
       <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" target="_blank" rel="noopener noreferrer" class="nav-cta">Get Map · $22</a>
     </div>
   </nav>
+
+  <p class="from-oracle" id="fromOracle">You just left the Oracle. This is the full map of you — then claim it for $22.</p>
 
   <header class="hero wrap">
     <p class="kicker">Full explanation</p>
@@ -636,5 +654,11 @@
       <a href="https://soul-maps.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Archive</a>
     </p>
   </footer>
+  <script>
+    if (/from=oracle/.test(location.search)) {
+      var bar = document.getElementById('fromOracle');
+      if (bar) bar.classList.add('show');
+    }
+  </script>
 </body>
 </html>
