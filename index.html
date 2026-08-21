@@ -878,6 +878,12 @@
             margin-bottom: 8px;
         }
 
+        /* Ember variant — Book Zero / novel callout */
+        .soul-callout.ember { border-color: rgba(255,106,61,.35); background: rgba(255,106,61,.04); }
+        .soul-callout.ember .soul-title { color: #FF6A3D; text-shadow: none; }
+        .soul-callout.ember .soul-edition-tag { color: rgba(255,106,61,.6); }
+        .soul-callout.ember .soul-meta { color: rgba(255,106,61,.5); }
+
         /* ─── MAP SPOTLIGHT (rotating archive) ─── */
         .map-spotlight {
             padding: 70px 0 40px;
@@ -1011,6 +1017,25 @@
         .press-cta:hover {
             background: rgba(251,191,36,.08);
             border-color: var(--spark);
+        }
+
+        /* ─── INVESTOR BAND ─── */
+        .invest-band {
+            padding: 64px 0;
+            border-top: 1px solid rgba(139,92,246,.18);
+            border-bottom: 1px solid rgba(139,92,246,.18);
+            background: rgba(139,92,246,.04);
+        }
+        .invest-band-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .invest-band-left { flex: 1; min-width: 280px; }
+        @media (max-width: 640px) {
+            .invest-band-left .sec-title { font-size: clamp(1.2rem, 5vw, 1.6rem); }
         }
 
         /* ─── FEATURED IN ─── */
@@ -1398,6 +1423,8 @@
             <a href="what-is-a-soul-map.html" class="nav-invest">What Is a Soul Map</a>
             <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer" class="nav-invest">Freq Match</a>
             <a href="#community" class="nav-invest">Community</a>
+            <a href="#the-work" class="nav-invest">The Work</a>
+            <a href="invest.html" class="nav-invest">Invest</a>
             <a href="map.html" class="nav-cta">Soul Map · $22</a>
         </div>
     </nav>
@@ -1538,6 +1565,53 @@
 
     <div class="divider-line"></div>
 
+    <!-- THE WORK — novel + project ecosystem -->
+    <section id="the-work">
+        <div class="wrap">
+            <div class="soul-callout ember">
+                <div class="soul-callout-left">
+                    <div class="sec-label">◈ &nbsp; The Memoir</div>
+                    <div class="soul-edition-tag">Book Zero · Written From The Road</div>
+                    <div class="soul-title">Before The Spark.</div>
+                    <p class="soul-desc">My mother's killer lived across the street. I solved her 1991 cold case in 2020. Now I'm writing the origin file from a solar camper — chapters posted as they're written.</p>
+                    <div class="soul-meta">The true story behind Two Fires, One Match</div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
+                    <a href="book-zero-tour.html#waitlist" class="btn-p" style="background:#FF6A3D;">Join Chapter Waitlist →</a>
+                    <a href="book-zero-tour.html" class="btn-g">Read Book Zero →</a>
+                </div>
+            </div>
+
+            <div class="map-spotlight">
+                <div class="sec-label">◈ &nbsp; Beyond Soul Maps</div>
+                <h2 class="sec-title" style="margin-bottom:10px;">More of the work.</h2>
+                <p class="sec-sub" style="margin-bottom:28px;">57+ tools. One framework underneath all of it.</p>
+                <div class="cards" style="grid-template-columns:repeat(3,1fr);">
+                    <a href="selector-model-ip.html" class="card purple">
+                        <div class="card-icon">◈</div>
+                        <div class="card-name">Selector Model</div>
+                        <div class="card-desc">The proprietary four-layer framework powering every tool in the ecosystem.</div>
+                        <div class="card-tag">The engine →</div>
+                    </a>
+                    <a href="ecosystem-map.html" class="card cyan">
+                        <div class="card-icon">✦</div>
+                        <div class="card-name">Ecosystem Map</div>
+                        <div class="card-desc">Every tool, every revenue stream, the whole build — mapped in one place.</div>
+                        <div class="card-tag">See the map →</div>
+                    </a>
+                    <a href="archetype-discovery.html" class="card gold">
+                        <div class="card-icon">◆</div>
+                        <div class="card-name">Archetype Quiz</div>
+                        <div class="card-desc">6 questions. Find your Player Class in the Sparkverse. Free.</div>
+                        <div class="card-tag">Take it free →</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
     <!-- PRESS -->
     <section class="press-section">
         <div class="wrap">
@@ -1599,6 +1673,40 @@
             <p style="text-align:center; margin-top:14px;">
                 <a href="earthship-expedition.html" style="font-family:'Orbitron',sans-serif; font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--spark); text-decoration:none; border-bottom:1px solid rgba(251,191,36,.3); padding-bottom:2px;">Earthship Expedition · Sponsor The Rig →</a>
             </p>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- INVESTORS -->
+    <section id="investors" class="invest-band">
+        <div class="wrap">
+            <div class="invest-band-inner">
+                <div class="invest-band-left">
+                    <div class="sec-label">◈ &nbsp; For Investors</div>
+                    <h2 class="sec-title">Raising $250K to scale what's already live.</h2>
+                    <p class="sec-sub" style="margin-bottom:0;">Zero burn rate. 57+ tools shipped. SAFE note, YC standard. Status: open.</p>
+                </div>
+                <a href="invest.html" class="btn-p">See The Raise →</a>
+            </div>
+            <div class="press-highlights" style="margin-top:36px;">
+                <div class="press-stat">
+                    <div class="press-stat-value">$250K</div>
+                    <div class="press-stat-label">Raise Amount</div>
+                </div>
+                <div class="press-stat">
+                    <div class="press-stat-value">12.5%</div>
+                    <div class="press-stat-label">Equity (SAFE, $2M Cap)</div>
+                </div>
+                <div class="press-stat">
+                    <div class="press-stat-value">$107K&ndash;$197K</div>
+                    <div class="press-stat-label">Verified Assets</div>
+                </div>
+                <div class="press-stat">
+                    <div class="press-stat-value">57+</div>
+                    <div class="press-stat-label">Tools Shipped</div>
+                </div>
+            </div>
         </div>
     </section>
 
