@@ -635,6 +635,76 @@
             text-transform: uppercase;
             color: rgba(251,191,36,.5);
         }
+
+        .nav-sv {
+            font-size: .62em;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .nav-sv:hover { color: var(--white); }
+
+        #sparkverse-world {
+            padding: 72px 0;
+        }
+        .sv-world {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            border: 1px solid rgba(34,211,238,.22);
+            background: radial-gradient(ellipse at 30% 40%, rgba(88,28,135,.28), rgba(5,5,8,.4) 55%);
+            padding: 36px 32px;
+        }
+        .sv-world-copy .sec-title { margin-bottom: 12px; }
+        .sv-world-stage {
+            position: relative;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sv-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(167,139,250,.22);
+            animation: sv-spin linear infinite;
+        }
+        .sv-ring-rev { animation-name: sv-spin-rev; }
+        .sv-planet {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border-radius: 50%;
+        }
+        .sv-core {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #ffd27d, #ff6a3d 55%, #7c3aed 100%);
+            box-shadow: 0 0 28px rgba(255,106,61,.5), 0 0 48px rgba(124,58,237,.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .42rem;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: #0a0a12;
+            z-index: 1;
+        }
+        @keyframes sv-spin { to { transform: rotate(360deg); } }
+        @keyframes sv-spin-rev { to { transform: rotate(-360deg); } }
+        @media (max-width: 820px) {
+            .sv-world { grid-template-columns: 1fr; padding: 28px 20px; }
+            .sv-world-stage { height: 220px; order: -1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .sv-ring, .sv-ring-rev { animation: none !important; }
+        }
         .path-tier {
             font-size: .48em;
             letter-spacing: .22em;
@@ -1400,7 +1470,7 @@
             <a href="what-is-a-soul-map.html" class="nav-invest">What Is a Soul Map</a>
             <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer" class="nav-invest">Freq Match</a>
             <a href="/dark-shadows/" class="nav-invest">Dark Shadows</a>
-            <a href="#community" class="nav-invest">Community</a>
+            <a href="https://sparkverse.thefirstspark.shop/" target="_blank" rel="noopener noreferrer" class="nav-sv">Sparkverse</a>
             <a href="map.html" class="nav-cta">Soul Map · $22</a>
         </div>
     </nav>
@@ -1418,7 +1488,7 @@
                 <p class="sec-sub" style="margin:0 auto 36px; text-align:center;">A Soul Map is a personalized numerology + astrology reading built from your name and birth date — live at your own private link in about 5 minutes. $22 once. Yours forever.</p>
                 <div class="hero-ctas">
                     <a href="map.html" class="btn-p">Get Your Soul Map · $22</a>
-                    <a href="what-is-a-soul-map.html" class="btn-g">What's a Soul Map? →</a>
+                    <a href="https://sparkverse.thefirstspark.shop/" target="_blank" rel="noopener noreferrer" class="btn-g">Enter Sparkverse →</a>
                 </div>
             </div>
             <div class="scroll-hint">Explore</div>
@@ -1450,7 +1520,7 @@
         <div class="wrap">
             <div class="sec-label">◈ &nbsp; Start Here</div>
             <h2 class="sec-title">Three doors. Pick one.</h2>
-            <p class="sec-sub">Get your map, test your match, or join the community — every door leads back to your code.</p>
+            <p class="sec-sub">Get your map, test your match, or enter the live world — every door leads back to your code.</p>
 
             <div class="cards" style="grid-template-columns:repeat(3,1fr);">
                 <a href="map.html" class="card purple primary-funnel">
@@ -1465,11 +1535,11 @@
                     <div class="card-desc">Collide two soul maps. Get a score.</div>
                     <div class="card-tag">Use it free →</div>
                 </a>
-                <a href="#community" class="card cyan">
-                    <div class="card-step">Community</div>
+                <a href="https://sparkverse.thefirstspark.shop/" target="_blank" rel="noopener noreferrer" class="card cyan">
+                    <div class="card-step">The world</div>
                     <div class="card-name">Sparkverse</div>
-                    <div class="card-desc">Tools, rituals, drops.</div>
-                    <div class="card-tag">Free to join</div>
+                    <div class="card-desc">Navigate the cosmos. Every tool lives here.</div>
+                    <div class="card-tag">Enter →</div>
                 </a>
             </div>
             <p style="margin-top:28px; text-align:center;">
@@ -1524,17 +1594,49 @@
 
     <div class="divider-line"></div>
 
+    <!-- SPARKVERSE WORLD -->
+    <section id="sparkverse-world">
+        <div class="wrap">
+            <a href="https://sparkverse.thefirstspark.shop/" target="_blank" rel="noopener noreferrer" class="sv-world" style="text-decoration:none; color:inherit;">
+                <div class="sv-world-copy">
+                    <div class="sec-label">◈ &nbsp; The live world</div>
+                    <h2 class="sec-title">Sparkverse</h2>
+                    <p class="sec-sub" style="margin-bottom:24px;">Navigate the cosmos of consciousness. Core, Lumina, the Forge, the Void — every tool in one sky.</p>
+                    <span class="btn-p" style="display:inline-flex;">Enter the Sparkverse →</span>
+                </div>
+                <div class="sv-world-stage" aria-hidden="true">
+                    <div class="sv-ring" style="width:90px;height:90px;animation-duration:18s;">
+                        <span class="sv-planet" style="width:9px;height:9px;margin:-4.5px 0 0 -4.5px;background:#ff9f1c;box-shadow:0 0 10px #ff9f1c;transform:translateY(-45px);"></span>
+                        <span class="sv-planet" style="width:8px;height:8px;margin:-4px 0 0 -4px;background:#26e4d8;box-shadow:0 0 10px #26e4d8;transform:rotate(180deg) translateY(-45px);"></span>
+                    </div>
+                    <div class="sv-ring sv-ring-rev" style="width:140px;height:140px;animation-duration:26s;">
+                        <span class="sv-planet" style="width:9px;height:9px;margin:-4.5px 0 0 -4.5px;background:#a78bfa;box-shadow:0 0 10px #a78bfa;transform:rotate(40deg) translateY(-70px);"></span>
+                        <span class="sv-planet" style="width:8px;height:8px;margin:-4px 0 0 -4px;background:#3dff6e;box-shadow:0 0 10px #3dff6e;transform:rotate(200deg) translateY(-70px);"></span>
+                    </div>
+                    <div class="sv-ring" style="width:190px;height:190px;animation-duration:34s;">
+                        <span class="sv-planet" style="width:8px;height:8px;margin:-4px 0 0 -4px;background:#ff6b9d;box-shadow:0 0 10px #ff6b9d;transform:rotate(70deg) translateY(-95px);"></span>
+                        <span class="sv-planet" style="width:7px;height:7px;margin:-3.5px 0 0 -3.5px;background:#22d3ee;box-shadow:0 0 10px #22d3ee;transform:rotate(160deg) translateY(-95px);"></span>
+                        <span class="sv-planet" style="width:7px;height:7px;margin:-3.5px 0 0 -3.5px;background:#fbbf24;box-shadow:0 0 10px #fbbf24;transform:rotate(280deg) translateY(-95px);"></span>
+                    </div>
+                    <div class="sv-core">Core</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
     <!-- COMMUNITY -->
     <section id="community">
         <div class="wrap">
             <div class="community-step">
                 <div class="community-step-left">
                     <div class="sec-label">◈ &nbsp; Community</div>
-                    <h2 class="community-step-title">Join free.</h2>
-                    <p class="community-step-desc">Tools · rituals · drops. Included with every Soul Map.</p>
+                    <h2 class="community-step-title">Join the Lobby.</h2>
+                    <p class="community-step-desc">Chat, rituals, drops. Free — included with every Soul Map.</p>
                     <div class="community-included">Free anytime</div>
                 </div>
-                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer" class="btn-g">Join Sparkverse →</a>
+                <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" rel="noopener noreferrer" class="btn-g">Join free →</a>
             </div>
         </div>
     </section>
@@ -1615,8 +1717,9 @@
                 <a href="map.html">Soul Map · $22</a>
                 <a href="what-is-a-soul-map.html">What Is a Soul Map</a>
                 <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Freq Match</a>
+                <a href="https://sparkverse.thefirstspark.shop/" target="_blank" rel="noopener noreferrer">Sparkverse</a>
                 <a href="https://soul-maps.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Map Archive</a>
-                <a href="https://whop.com/sparkverse-511c/spark-acces/" target="_blank" rel="noopener noreferrer">Community</a>
+                <a href="https://whop.com/sparkverse-511c/the-sparkverse-lobby/" target="_blank" rel="noopener noreferrer">Lobby</a>
                 <a href="https://bio-link-blond.vercel.app" target="_blank" rel="noopener noreferrer">All Links</a>
                 <a href="free-tools.html">Free Tools</a>
                 <a href="invest.html">Invest</a>
