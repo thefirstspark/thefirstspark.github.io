@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Shop — The First Spark</title>
+    <meta name="description" content="Instruments, not merch. Workbooks, protocols, bundles, and readings from The First Spark — instant digital delivery, yours forever.">
+    <link rel="canonical" href="https://thefirstspark.shop/shop.html">
+    <link rel="icon" href="/favicon.ico">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="The Shop — The First Spark">
+    <meta property="og:description" content="Instruments, not merch. Workbooks, protocols, bundles, and readings — instant digital delivery, yours forever.">
+    <meta property="og:url" content="https://thefirstspark.shop/shop.html">
+    <meta property="og:image" content="https://thefirstspark.shop/og-home.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Whop Pixel -->
+    <script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_0xcayhWXVnKO9y");whop.track("page");</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --void: #05060a;
+            --void-2: #0a0c14;
+            --bone: #f4ede0;
+            --ember: #ff5a1f;
+            --gold: #ffc857;
+            --plasma: #7df9ff;
+            --violet: #b794ff;
+            --ash: #6b6a6e;
+            --line: rgba(244, 237, 224, 0.12);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--void);
+            color: var(--bone);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: .35em;
+            text-transform: uppercase;
+        }
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* NAV */
+        nav {
+            position: sticky; top: 0; z-index: 50;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 28px;
+            background: rgba(5, 6, 10, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+        }
+        nav a { text-decoration: none; }
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; letter-spacing: .4em; color: var(--bone);
+        }
+        .nav-links { display: flex; gap: 26px; align-items: center; }
+        .nav-links a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+            color: var(--ash); transition: color .2s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a.cta {
+            color: var(--void); background: var(--gold);
+            padding: 8px 14px; border-radius: 2px;
+        }
+        .nav-links a.cta:hover { background: var(--ember); color: var(--bone); }
+
+        /* HEADER */
+        header { padding: 96px 0 64px; text-align: center; }
+        .sec-label { color: var(--ember); margin-bottom: 22px; }
+        .sec-label::before {
+            content: ''; display: inline-block; width: 7px; height: 7px;
+            border-radius: 50%; background: var(--ember); margin-right: 12px;
+            vertical-align: 1px; animation: pulse 2.4s infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+        h1 {
+            font-size: clamp(2.6rem, 6vw, 4.4rem);
+            font-weight: 300; line-height: 1.1; margin-bottom: 20px;
+        }
+        h1 em { font-style: italic; color: var(--gold); }
+        .header-sub {
+            font-size: 1.25rem; color: var(--ash);
+            max-width: 560px; margin: 0 auto;
+        }
+        .header-sub a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(255,200,87,.35); }
+
+        /* SECTIONS */
+        section { padding: 48px 0 72px; }
+        .section-head {
+            display: flex; align-items: baseline; gap: 18px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 14px; margin-bottom: 36px;
+        }
+        .section-head .num { color: var(--ember); }
+        .section-head h2 {
+            font-size: 1.9rem; font-weight: 300; font-style: italic;
+        }
+
+        /* PRODUCT GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+        }
+        @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+        .product {
+            display: flex; flex-direction: column;
+            background: var(--void-2);
+            padding: 30px 26px 26px;
+            text-decoration: none; color: var(--bone);
+            transition: background .25s;
+            position: relative;
+        }
+        .product:hover { background: #10131f; }
+        .product .kind { color: var(--ash); margin-bottom: 16px; }
+        .product .new {
+            position: absolute; top: 30px; right: 26px;
+            color: var(--ember);
+        }
+        .product h3 {
+            font-size: 1.55rem; font-weight: 400; line-height: 1.2;
+            margin-bottom: 10px;
+        }
+        .product h3 em { font-style: italic; color: var(--gold); }
+        .product p {
+            font-size: 1.05rem; color: var(--ash); flex-grow: 1;
+            margin-bottom: 22px;
+        }
+        .product .row {
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid var(--line); padding-top: 16px;
+        }
+        .product .price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px; letter-spacing: .1em; color: var(--bone);
+        }
+        .product .price small { color: var(--ash); font-size: 10px; }
+        .product .go {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+            color: var(--gold);
+        }
+        .product:hover .go { color: var(--ember); }
+
+        /* FREE STRIP */
+        .free-strip {
+            border: 1px solid var(--line);
+            padding: 30px 28px;
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 20px; flex-wrap: wrap;
+        }
+        .free-strip .txt { font-size: 1.15rem; color: var(--ash); }
+        .free-strip .txt strong { color: var(--bone); font-weight: 400; }
+        .free-strip a.btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+            color: var(--void); background: var(--gold);
+            padding: 12px 20px; text-decoration: none; border-radius: 2px;
+            white-space: nowrap;
+        }
+        .free-strip a.btn:hover { background: var(--ember); color: var(--bone); }
+
+        .delivery-note {
+            text-align: center; color: var(--ash);
+            font-size: .95rem; margin-top: 40px;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 40px 0 56px; text-align: center;
+        }
+        footer .mono { color: var(--ash); }
+        footer a { color: var(--gold); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav>
+        <a href="/" class="nav-logo">THE FIRST SPARK</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/dark-shadows/">Dark Shadows</a>
+            <a href="https://sparkverse.thefirstspark.shop/" target="_blank" rel="noopener noreferrer">Sparkverse</a>
+            <a href="map.html" class="cta">Soul Map · $22</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="wrap">
+            <div class="sec-label mono">The Shop</div>
+            <h1>Instruments, <em>not merch.</em></h1>
+            <p class="header-sub">Every item below is digital, delivered instantly, and yours forever. Checkout is secure via Whop — card, Apple&nbsp;Pay, or crypto.</p>
+        </div>
+    </header>
+
+    <section id="new">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="num mono">001</span>
+                <h2>Just dropped</h2>
+            </div>
+            <div class="grid">
+                <a class="product" href="https://whop.com/checkout/plan_CrdQjQTmpyv9Q">
+                    <span class="new mono">New</span>
+                    <div class="kind mono">Interactive App</div>
+                    <h3>The Pattern Key — <em>Frequency Journal</em></h3>
+                    <p>A daily frequency journal you own outright — one self-contained app that runs entirely in your browser. No account. No subscription. Your data never leaves your device.</p>
+                    <div class="row"><span class="price">$22 <small>· once</small></span><span class="go">Get it →</span></div>
+                </a>
+                <a class="product" href="https://whop.com/checkout/plan_olxu91Sf5xUZ6">
+                    <span class="new mono">New</span>
+                    <div class="kind mono">Bundle</div>
+                    <h3>Sigilcraft <em>System Bundle</em></h3>
+                    <p>The complete system: the Sigilcraft workbook — your first 10 sigils — plus the companion guide. Intention, in ink. The full method in one bundle.</p>
+                    <div class="row"><span class="price">$33 <small>· once</small></span><span class="go">Get it →</span></div>
+                </a>
+                <a class="product" href="https://whop.com/checkout/plan_U9QOoYunRt4hZ">
+                    <span class="new mono">New</span>
+                    <div class="kind mono">Protocol · PDF</div>
+                    <h3>7-Day <em>Starter Protocol</em></h3>
+                    <p>Seven days. One clear action a day. The fastest on-ramp into the work — a printable protocol that takes you from static to signal.</p>
+                    <div class="row"><span class="price">$7.77 <small>· once</small></span><span class="go">Get it →</span></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalog">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="num mono">002</span>
+                <h2>The catalog</h2>
+            </div>
+            <div class="grid">
+                <a class="product" href="map.html">
+                    <div class="kind mono">Reading</div>
+                    <h3>Soul Map — <em>Founders Edition</em></h3>
+                    <p>Your numbers, decoded. A personalized numerology + astrology reading built from your name and birth date, live at your own private link in about 5 minutes.</p>
+                    <div class="row"><span class="price">$22 <small>· once</small></span><span class="go">Get yours →</span></div>
+                </a>
+                <a class="product" href="https://whop.com/checkout/plan_PAVoGUlPeFZgG">
+                    <div class="kind mono">Book · PDF</div>
+                    <h3>Dark Shadows — <em>Print Edition</em></h3>
+                    <p>The five-chapter passage through grief, formatted to print and keep. The full series is free to read online — this is the edition you hold.</p>
+                    <div class="row"><span class="price">$11.11 <small>· once</small></span><span class="go">Get it →</span></div>
+                </a>
+                <a class="product" href="https://whop.com/checkout/plan_fKwR6rSqXS4X5">
+                    <div class="kind mono">Novel</div>
+                    <h3>THE FIRST SPARK: <em>Genesis</em></h3>
+                    <p>The novel where the whole universe begins. The origin story of the Sparkverse — reality is programmable, and someone just found the console.</p>
+                    <div class="row"><span class="price">$11.11 <small>· once</small></span><span class="go">Get it →</span></div>
+                </a>
+                <a class="product" href="https://whop.com/checkout/plan_c25a7JjHbpeFF">
+                    <div class="kind mono">Tool</div>
+                    <h3>Karma Debugger — <em>Control Center</em></h3>
+                    <p>Trace the pattern. Patch the loop. A control center for finding the repeating code in your life and rewriting it on purpose.</p>
+                    <div class="row"><span class="price">$6.99 <small>· once</small></span><span class="go">Get it →</span></div>
+                </a>
+                <a class="product" href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer">
+                    <div class="kind mono">Tool · Free to try</div>
+                    <h3>Frequency Match <em>Pro</em></h3>
+                    <p>Collide two soul maps and get a compatibility score. Try it free — go Pro for unlimited matches.</p>
+                    <div class="row"><span class="price">$4.99<small>/mo</small></span><span class="go">Try it →</span></div>
+                </a>
+                <a class="product" href="https://whop.com/checkout/plan_okFWwlpgnc2bQ">
+                    <div class="kind mono">Membership</div>
+                    <h3>The Players <em>Lounge</em></h3>
+                    <p>The inner circle. Live drops, member-only tools, and the room where the next things ship first. First 3 days free.</p>
+                    <div class="row"><span class="price">$33<small>/mo · 3-day free trial</small></span><span class="go">Enter →</span></div>
+                </a>
+            </div>
+
+            <p class="delivery-note">All digital. All instant. Every checkout is handled by Whop — you'll get access the moment payment clears.</p>
+        </div>
+    </section>
+
+    <section id="free">
+        <div class="wrap">
+            <div class="free-strip">
+                <div class="txt"><strong>Not ready to buy?</strong> The SparkVerse Lobby is free — step in, look around, meet the sparks.</div>
+                <a class="btn" href="https://whop.com/checkout/plan_GdMjwOncpn0Ap">Join free →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">
+            <p class="mono">THE FIRST SPARK · KATE'S PAINT LLC</p>
+            <p style="margin-top:14px; color:var(--ash);">Questions before you buy? <a href="mailto:kate@thefirstspark.shop">kate@thefirstspark.shop</a></p>
+        </div>
+    </footer>
+</body>
+</html>
