@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Shop — The First Spark</title>
-    <meta name="description" content="Instruments, not merch. Workbooks, protocols, bundles, and readings from The First Spark — instant digital delivery, yours forever.">
+    <title>The Item Shop — The First Spark</title>
+    <meta name="description" content="The Item Shop of the Sparkverse. Journals, sigils, protocols, readings — every item digital, delivered the second you buy, yours forever.">
     <link rel="canonical" href="https://thefirstspark.shop/shop.html">
     <link rel="icon" href="/favicon.ico">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="The Shop — The First Spark">
-    <meta property="og:description" content="Instruments, not merch. Workbooks, protocols, bundles, and readings — instant digital delivery, yours forever.">
+    <meta property="og:title" content="The Item Shop — The First Spark">
+    <meta property="og:description" content="Gear up, player. Every item digital, instant, yours forever.">
     <meta property="og:url" content="https://thefirstspark.shop/shop.html">
     <meta property="og:image" content="https://thefirstspark.shop/og-home.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -23,182 +23,336 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
-            --void: #05060a;
-            --void-2: #0a0c14;
-            --bone: #f4ede0;
-            --ember: #ff5a1f;
-            --gold: #ffc857;
-            --plasma: #7df9ff;
-            --violet: #b794ff;
-            --ash: #6b6a6e;
-            --line: rgba(244, 237, 224, 0.12);
+            --void:   #050508;
+            --panel:  #0b0b14;
+            --spark:  #fbbf24;
+            --nebula: #8b5cf6;
+            --cyan:   #22d3ee;
+            --pink:   #ec4899;
+            --ember:  #fb923c;
+            --white:  rgba(255,255,255,0.92);
+            --dim:    rgba(255,255,255,0.58);
+            --dimmer: rgba(255,255,255,0.1);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         html { scroll-behavior: smooth; }
         body {
             background: var(--void);
-            color: var(--bone);
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 300;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Space Mono', 'Courier New', monospace;
+            color: var(--white);
+            overflow-x: hidden;
         }
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: .35em;
-            text-transform: uppercase;
-        }
-        .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-        /* NAV */
+        /* ── SKY ── */
+        .sky {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background:
+                radial-gradient(ellipse 70% 45% at 50% -8%, rgba(139,92,246,.32), transparent 62%),
+                radial-gradient(ellipse 42% 30% at 82% 2%, rgba(236,72,153,.14), transparent 60%),
+                radial-gradient(ellipse 40% 28% at 12% 6%, rgba(34,211,238,.10), transparent 60%);
+        }
+        .stars, .stars2 {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image:
+                radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,.7), transparent),
+                radial-gradient(1px 1px at 38% 8%,  rgba(255,255,255,.5), transparent),
+                radial-gradient(1.5px 1.5px at 61% 30%, rgba(255,255,255,.6), transparent),
+                radial-gradient(1px 1px at 79% 12%, rgba(255,255,255,.65), transparent),
+                radial-gradient(1px 1px at 91% 40%, rgba(255,255,255,.4), transparent),
+                radial-gradient(1.5px 1.5px at 24% 55%, rgba(255,255,255,.45), transparent),
+                radial-gradient(1px 1px at 48% 72%, rgba(255,255,255,.5), transparent),
+                radial-gradient(1px 1px at 70% 62%, rgba(255,255,255,.35), transparent),
+                radial-gradient(1px 1px at 8% 84%,  rgba(255,255,255,.4), transparent),
+                radial-gradient(1.5px 1.5px at 88% 82%, rgba(255,255,255,.45), transparent);
+            animation: twinkle 5s ease-in-out infinite;
+        }
+        .stars2 {
+            background-image:
+                radial-gradient(1px 1px at 20% 35%, rgba(251,191,36,.55), transparent),
+                radial-gradient(1px 1px at 55% 18%, rgba(34,211,238,.5), transparent),
+                radial-gradient(1px 1px at 83% 55%, rgba(139,92,246,.6), transparent),
+                radial-gradient(1px 1px at 33% 88%, rgba(236,72,153,.45), transparent),
+                radial-gradient(1px 1px at 65% 92%, rgba(251,191,36,.4), transparent);
+            animation-delay: 2.5s;
+        }
+        @keyframes twinkle { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
+
+        main, nav, footer { position: relative; z-index: 1; }
+        .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── NAV ── */
         nav {
-            position: sticky; top: 0; z-index: 50;
+            position: sticky; top: 0; z-index: 60;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 18px 28px;
-            background: rgba(5, 6, 10, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--line);
+            padding: 16px 28px;
+            background: rgba(5,5,8,.78);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--dimmer);
         }
         nav a { text-decoration: none; }
         .nav-logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px; letter-spacing: .4em; color: var(--bone);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700; font-size: .72rem; letter-spacing: .32em;
+            color: var(--white);
         }
-        .nav-links { display: flex; gap: 26px; align-items: center; }
+        .nav-links { display: flex; gap: 22px; align-items: center; }
         .nav-links a {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
-            color: var(--ash); transition: color .2s;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .58rem; letter-spacing: .2em; text-transform: uppercase;
+            color: var(--dim); transition: color .2s;
         }
-        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover { color: var(--spark); }
         .nav-links a.cta {
-            color: var(--void); background: var(--gold);
-            padding: 8px 14px; border-radius: 2px;
+            color: #050508; background: var(--spark);
+            padding: 9px 16px; border-radius: 4px; font-weight: 700;
         }
-        .nav-links a.cta:hover { background: var(--ember); color: var(--bone); }
+        .nav-links a.cta:hover { background: #fcd34d; color: #050508; }
+        @media (max-width: 700px) { .nav-links a:not(.cta) { display: none; } }
 
-        /* HEADER */
-        header { padding: 96px 0 64px; text-align: center; }
-        .sec-label { color: var(--ember); margin-bottom: 22px; }
-        .sec-label::before {
-            content: ''; display: inline-block; width: 7px; height: 7px;
-            border-radius: 50%; background: var(--ember); margin-right: 12px;
-            vertical-align: 1px; animation: pulse 2.4s infinite;
+        /* ── HERO ── */
+        header { padding: 84px 0 30px; text-align: center; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .58rem; letter-spacing: .32em; text-transform: uppercase;
+            color: var(--spark);
+            border: 1px solid rgba(251,191,36,.35);
+            padding: 8px 18px; border-radius: 100px;
+            background: rgba(251,191,36,.06);
+            margin-bottom: 30px;
         }
-        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+        .hero-badge .dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--spark);
+            box-shadow: 0 0 10px var(--spark);
+            animation: pulse 2.2s infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
         h1 {
-            font-size: clamp(2.6rem, 6vw, 4.4rem);
-            font-weight: 300; line-height: 1.1; margin-bottom: 20px;
+            font-size: clamp(2.3rem, 6.5vw, 4.2rem);
+            font-weight: 700; line-height: 1.08;
+            letter-spacing: -.01em;
+            margin-bottom: 20px;
         }
-        h1 em { font-style: italic; color: var(--gold); }
-        .header-sub {
-            font-size: 1.25rem; color: var(--ash);
-            max-width: 560px; margin: 0 auto;
+        h1 .grad {
+            background: linear-gradient(110deg, var(--spark), var(--pink) 55%, var(--nebula));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
         }
-        .header-sub a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(255,200,87,.35); }
+        .hero-sub {
+            color: var(--dim); font-size: .95rem; line-height: 1.75;
+            max-width: 520px; margin: 0 auto;
+        }
+        .hero-chips {
+            display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+            margin-top: 28px;
+        }
+        .chip {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .52rem; letter-spacing: .22em; text-transform: uppercase;
+            color: var(--dim);
+            border: 1px solid var(--dimmer);
+            padding: 7px 14px; border-radius: 100px;
+        }
+        .chip b { color: var(--cyan); font-weight: 400; }
 
-        /* SECTIONS */
-        section { padding: 48px 0 72px; }
-        .section-head {
-            display: flex; align-items: baseline; gap: 18px;
-            border-bottom: 1px solid var(--line);
-            padding-bottom: 14px; margin-bottom: 36px;
+        /* ── SECTIONS ── */
+        section { padding: 54px 0 10px; }
+        .shelf-label {
+            display: flex; align-items: center; gap: 16px;
+            margin-bottom: 30px;
         }
-        .section-head .num { color: var(--ember); }
-        .section-head h2 {
-            font-size: 1.9rem; font-weight: 300; font-style: italic;
+        .shelf-label h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .72rem; font-weight: 700;
+            letter-spacing: .34em; text-transform: uppercase;
+            color: var(--white); white-space: nowrap;
+        }
+        .shelf-label .tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .5rem; letter-spacing: .2em;
+            color: var(--void); background: var(--spark);
+            padding: 4px 10px; border-radius: 3px; font-weight: 700;
+        }
+        .shelf-label::after {
+            content: ''; flex: 1; height: 1px;
+            background: linear-gradient(90deg, var(--dimmer), transparent);
         }
 
-        /* PRODUCT GRID */
-        .grid {
+        /* ── ITEM CARDS ── */
+        .shelf {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--line);
-            border: 1px solid var(--line);
+            gap: 22px;
         }
-        @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
-        .product {
+        @media (max-width: 940px) { .shelf { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 620px) { .shelf { grid-template-columns: 1fr; } }
+
+        .item {
+            --aura: var(--spark);
+            --aura-soft: rgba(251,191,36,.14);
+            position: relative;
             display: flex; flex-direction: column;
-            background: var(--void-2);
-            padding: 30px 26px 26px;
-            text-decoration: none; color: var(--bone);
-            transition: background .25s;
+            background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0)) , var(--panel);
+            border: 1px solid var(--dimmer);
+            border-radius: 16px;
+            padding: 28px 24px 22px;
+            text-decoration: none; color: var(--white);
+            transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+        }
+        .item:hover {
+            transform: translateY(-6px);
+            border-color: var(--aura);
+            box-shadow: 0 14px 44px var(--aura-soft), 0 0 0 1px var(--aura) inset;
+        }
+        .item.gold   { --aura: var(--spark);  --aura-soft: rgba(251,191,36,.16); }
+        .item.violet { --aura: var(--nebula); --aura-soft: rgba(139,92,246,.18); }
+        .item.cyan   { --aura: var(--cyan);   --aura-soft: rgba(34,211,238,.15); }
+        .item.pink   { --aura: var(--pink);   --aura-soft: rgba(236,72,153,.16); }
+        .item.ember  { --aura: var(--ember);  --aura-soft: rgba(251,146,60,.16); }
+
+        .item .stamp {
+            position: absolute; top: 16px; right: 16px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .48rem; letter-spacing: .22em; font-weight: 700;
+            color: var(--void); background: var(--aura);
+            padding: 4px 9px; border-radius: 3px;
+        }
+        .slot {
+            width: 92px; height: 92px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px;
+            background: radial-gradient(circle at 50% 42%, var(--aura-soft), transparent 72%);
+            border: 1px solid var(--dimmer);
             position: relative;
         }
-        .product:hover { background: #10131f; }
-        .product .kind { color: var(--ash); margin-bottom: 16px; }
-        .product .new {
-            position: absolute; top: 30px; right: 26px;
-            color: var(--ember);
+        .slot::after {
+            content: '';
+            position: absolute; inset: -1px; border-radius: 50%;
+            border: 1px dashed var(--aura);
+            opacity: .35;
+            animation: spin 24s linear infinite;
         }
-        .product h3 {
-            font-size: 1.55rem; font-weight: 400; line-height: 1.2;
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .slot svg {
+            width: 44px; height: 44px;
+            stroke: var(--aura); fill: none;
+            stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+            filter: drop-shadow(0 0 8px var(--aura-soft));
+        }
+        .item:hover .slot svg { filter: drop-shadow(0 0 14px var(--aura)); }
+
+        .item .kind {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .5rem; letter-spacing: .26em; text-transform: uppercase;
+            color: var(--dim);
             margin-bottom: 10px;
         }
-        .product h3 em { font-style: italic; color: var(--gold); }
-        .product p {
-            font-size: 1.05rem; color: var(--ash); flex-grow: 1;
+        .item h3 {
+            font-size: 1.05rem; font-weight: 700; line-height: 1.35;
+            color: var(--aura);
+            margin-bottom: 10px;
+        }
+        .item p {
+            font-size: .78rem; line-height: 1.7; color: var(--dim);
+            flex-grow: 1;
             margin-bottom: 22px;
         }
-        .product .row {
+        .item .buy-row {
             display: flex; justify-content: space-between; align-items: center;
-            border-top: 1px solid var(--line); padding-top: 16px;
+            border-top: 1px solid var(--dimmer);
+            padding-top: 16px;
         }
-        .product .price {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px; letter-spacing: .1em; color: var(--bone);
+        .item .price {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700; font-size: .92rem;
+            color: var(--spark);
         }
-        .product .price small { color: var(--ash); font-size: 10px; }
-        .product .go {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
-            color: var(--gold);
+        .item .price small {
+            display: block;
+            font-family: 'Space Mono', monospace;
+            font-weight: 400; font-size: .58rem; color: var(--dim);
+            margin-top: 3px;
         }
-        .product:hover .go { color: var(--ember); }
+        .item .buy {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .56rem; font-weight: 700;
+            letter-spacing: .18em; text-transform: uppercase;
+            color: var(--void); background: var(--spark);
+            padding: 10px 16px; border-radius: 5px;
+            transition: background .2s, box-shadow .2s;
+        }
+        .item:hover .buy { background: #fcd34d; box-shadow: 0 0 18px rgba(251,191,36,.4); }
 
-        /* FREE STRIP */
-        .free-strip {
-            border: 1px solid var(--line);
-            padding: 30px 28px;
-            display: flex; justify-content: space-between; align-items: center;
-            gap: 20px; flex-wrap: wrap;
+        .instant-note {
+            text-align: center; color: var(--dim);
+            font-size: .72rem; line-height: 1.7;
+            margin: 44px auto 0; max-width: 480px;
         }
-        .free-strip .txt { font-size: 1.15rem; color: var(--ash); }
-        .free-strip .txt strong { color: var(--bone); font-weight: 400; }
-        .free-strip a.btn {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
-            color: var(--void); background: var(--gold);
-            padding: 12px 20px; text-decoration: none; border-radius: 2px;
+        .instant-note b { color: var(--spark); font-weight: 700; }
+
+        /* ── SIDE QUEST ── */
+        .side-quest {
+            margin-top: 60px;
+            border: 1px solid rgba(139,92,246,.4);
+            border-radius: 16px;
+            background:
+                radial-gradient(ellipse 60% 120% at 12% 50%, rgba(139,92,246,.16), transparent 65%),
+                var(--panel);
+            padding: 30px 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 22px; flex-wrap: wrap;
+        }
+        .side-quest .sq-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .52rem; letter-spacing: .28em; text-transform: uppercase;
+            color: var(--nebula); margin-bottom: 10px;
+        }
+        .side-quest .sq-text { font-size: .82rem; color: var(--dim); line-height: 1.7; max-width: 560px; }
+        .side-quest .sq-text b { color: var(--white); }
+        .side-quest a.btn {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .58rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+            color: var(--void); background: var(--spark);
+            padding: 13px 22px; border-radius: 5px; text-decoration: none;
             white-space: nowrap;
         }
-        .free-strip a.btn:hover { background: var(--ember); color: var(--bone); }
+        .side-quest a.btn:hover { background: #fcd34d; box-shadow: 0 0 22px rgba(251,191,36,.4); }
 
-        .delivery-note {
-            text-align: center; color: var(--ash);
-            font-size: .95rem; margin-top: 40px;
-        }
-
-        /* FOOTER */
+        /* ── FOOTER ── */
         footer {
-            border-top: 1px solid var(--line);
-            padding: 40px 0 56px; text-align: center;
+            margin-top: 70px;
+            border-top: 1px solid var(--dimmer);
+            padding: 38px 0 54px; text-align: center;
         }
-        footer .mono { color: var(--ash); }
-        footer a { color: var(--gold); text-decoration: none; }
+        footer .f-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .62rem; font-weight: 700; letter-spacing: .32em;
+            color: var(--white); text-decoration: none;
+        }
+        footer p { color: var(--dim); font-size: .72rem; margin-top: 14px; }
+        footer a { color: var(--spark); text-decoration: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .stars, .stars2, .slot::after, .hero-badge .dot { animation: none; }
+            .item, .item:hover { transform: none; transition: none; }
+        }
     </style>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
+    <div class="sky" aria-hidden="true"></div>
+    <div class="stars" aria-hidden="true"></div>
+    <div class="stars2" aria-hidden="true"></div>
 
     <nav>
         <a href="/" class="nav-logo">THE FIRST SPARK</a>
@@ -210,108 +364,167 @@
         </div>
     </nav>
 
-    <header>
-        <div class="wrap">
-            <div class="sec-label mono">The Shop</div>
-            <h1>Instruments, <em>not merch.</em></h1>
-            <p class="header-sub">Every item below is digital, delivered instantly, and yours forever. Checkout is secure via Whop — card, Apple&nbsp;Pay, or crypto.</p>
-        </div>
-    </header>
+    <main>
+        <header>
+            <div class="wrap">
+                <div class="hero-badge"><span class="dot"></span>The Item Shop · Open All Night</div>
+                <h1>Gear up, <span class="grad">player.</span></h1>
+                <p class="hero-sub">Journals, sigils, protocols, readings. Every item is digital — delivered the second you buy, yours forever.</p>
+                <div class="hero-chips">
+                    <span class="chip"><b>⚡</b> Instant delivery</span>
+                    <span class="chip"><b>∞</b> Yours forever</span>
+                    <span class="chip"><b>◈</b> Secure checkout via Whop</span>
+                </div>
+            </div>
+        </header>
 
-    <section id="new">
-        <div class="wrap">
-            <div class="section-head">
-                <span class="num mono">001</span>
-                <h2>Just dropped</h2>
+        <section id="new">
+            <div class="wrap">
+                <div class="shelf-label">
+                    <h2>New Stock</h2>
+                    <span class="tag">Just Dropped</span>
+                </div>
+                <div class="shelf">
+                    <a class="item gold" href="https://whop.com/checkout/plan_CrdQjQTmpyv9Q">
+                        <span class="stamp">NEW</span>
+                        <div class="slot" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="4.5"/><path d="M11.2 11.2 20 20"/><path d="M16.5 16.5 19 14"/><path d="M18.5 18.5 21 16"/></svg>
+                        </div>
+                        <div class="kind">Interactive App</div>
+                        <h3>The Pattern Key — Frequency Journal</h3>
+                        <p>Log the signal daily and watch the pattern surface. One self-contained app, 100% on your device. No account. No cloud. One file, yours forever.</p>
+                        <div class="buy-row">
+                            <span class="price">$22<small>one-time</small></span>
+                            <span class="buy">Buy Now</span>
+                        </div>
+                    </a>
+                    <a class="item violet" href="https://whop.com/checkout/plan_olxu91Sf5xUZ6">
+                        <span class="stamp">NEW</span>
+                        <div class="slot" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M12 3 7 17h10L12 3z"/><path d="M7 8.5h10"/><circle cx="12" cy="20" r="1.6"/></svg>
+                        </div>
+                        <div class="kind">3-PDF Bundle</div>
+                        <h3>The Sigilcraft System Bundle</h3>
+                        <p>Symbols are compressed intention — learn to write in them. The complete 41-page guide, the workbook, and the companion guide for daily practice.</p>
+                        <div class="buy-row">
+                            <span class="price">$33<small>one-time</small></span>
+                            <span class="buy">Buy Now</span>
+                        </div>
+                    </a>
+                    <a class="item cyan" href="https://whop.com/checkout/plan_U9QOoYunRt4hZ">
+                        <span class="stamp">NEW</span>
+                        <div class="slot" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M13 2 5 14h6l-1 8 8-12h-6l1-8z"/></svg>
+                        </div>
+                        <div class="kind">Print-Ready PDF</div>
+                        <h3>The 7-Day Starter Protocol</h3>
+                        <p>Reality is editable code — these are the commands. Seven days, three checkpoints a day: boot, run, save. Print it and run the week.</p>
+                        <div class="buy-row">
+                            <span class="price">$7.77<small>one-time</small></span>
+                            <span class="buy">Buy Now</span>
+                        </div>
+                    </a>
+                </div>
             </div>
-            <div class="grid">
-                <a class="product" href="https://whop.com/checkout/plan_CrdQjQTmpyv9Q">
-                    <span class="new mono">New</span>
-                    <div class="kind mono">Interactive App</div>
-                    <h3>The Pattern Key — <em>Frequency Journal</em></h3>
-                    <p>A daily frequency journal you own outright — one self-contained app that runs entirely in your browser. No account. No subscription. Your data never leaves your device.</p>
-                    <div class="row"><span class="price">$22 <small>· once</small></span><span class="go">Get it →</span></div>
-                </a>
-                <a class="product" href="https://whop.com/checkout/plan_olxu91Sf5xUZ6">
-                    <span class="new mono">New</span>
-                    <div class="kind mono">Bundle</div>
-                    <h3>Sigilcraft <em>System Bundle</em></h3>
-                    <p>The complete system: the Sigilcraft workbook — your first 10 sigils — plus the companion guide. Intention, in ink. The full method in one bundle.</p>
-                    <div class="row"><span class="price">$33 <small>· once</small></span><span class="go">Get it →</span></div>
-                </a>
-                <a class="product" href="https://whop.com/checkout/plan_U9QOoYunRt4hZ">
-                    <span class="new mono">New</span>
-                    <div class="kind mono">Protocol · PDF</div>
-                    <h3>7-Day <em>Starter Protocol</em></h3>
-                    <p>Seven days. One clear action a day. The fastest on-ramp into the work — a printable protocol that takes you from static to signal.</p>
-                    <div class="row"><span class="price">$7.77 <small>· once</small></span><span class="go">Get it →</span></div>
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="catalog">
-        <div class="wrap">
-            <div class="section-head">
-                <span class="num mono">002</span>
-                <h2>The catalog</h2>
-            </div>
-            <div class="grid">
-                <a class="product" href="map.html">
-                    <div class="kind mono">Reading</div>
-                    <h3>Soul Map — <em>Founders Edition</em></h3>
-                    <p>Your numbers, decoded. A personalized numerology + astrology reading built from your name and birth date, live at your own private link in about 5 minutes.</p>
-                    <div class="row"><span class="price">$22 <small>· once</small></span><span class="go">Get yours →</span></div>
-                </a>
-                <a class="product" href="https://whop.com/checkout/plan_PAVoGUlPeFZgG">
-                    <div class="kind mono">Book · PDF</div>
-                    <h3>Dark Shadows — <em>Print Edition</em></h3>
-                    <p>The five-chapter passage through grief, formatted to print and keep. The full series is free to read online — this is the edition you hold.</p>
-                    <div class="row"><span class="price">$11.11 <small>· once</small></span><span class="go">Get it →</span></div>
-                </a>
-                <a class="product" href="https://whop.com/checkout/plan_fKwR6rSqXS4X5">
-                    <div class="kind mono">Novel</div>
-                    <h3>THE FIRST SPARK: <em>Genesis</em></h3>
-                    <p>The novel where the whole universe begins. The origin story of the Sparkverse — reality is programmable, and someone just found the console.</p>
-                    <div class="row"><span class="price">$11.11 <small>· once</small></span><span class="go">Get it →</span></div>
-                </a>
-                <a class="product" href="https://whop.com/checkout/plan_c25a7JjHbpeFF">
-                    <div class="kind mono">Tool</div>
-                    <h3>Karma Debugger — <em>Control Center</em></h3>
-                    <p>Trace the pattern. Patch the loop. A control center for finding the repeating code in your life and rewriting it on purpose.</p>
-                    <div class="row"><span class="price">$6.99 <small>· once</small></span><span class="go">Get it →</span></div>
-                </a>
-                <a class="product" href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer">
-                    <div class="kind mono">Tool · Free to try</div>
-                    <h3>Frequency Match <em>Pro</em></h3>
-                    <p>Collide two soul maps and get a compatibility score. Try it free — go Pro for unlimited matches.</p>
-                    <div class="row"><span class="price">$4.99<small>/mo</small></span><span class="go">Try it →</span></div>
-                </a>
-                <a class="product" href="https://whop.com/checkout/plan_okFWwlpgnc2bQ">
-                    <div class="kind mono">Membership</div>
-                    <h3>The Players <em>Lounge</em></h3>
-                    <p>The inner circle. Live drops, member-only tools, and the room where the next things ship first. First 3 days free.</p>
-                    <div class="row"><span class="price">$33<small>/mo · 3-day free trial</small></span><span class="go">Enter →</span></div>
-                </a>
-            </div>
+        <section id="catalog">
+            <div class="wrap">
+                <div class="shelf-label">
+                    <h2>All Items</h2>
+                </div>
+                <div class="shelf">
+                    <a class="item violet" href="map.html">
+                        <div class="slot" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="1.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="16.5" cy="7.5" r="1"/><circle cx="7" cy="15.5" r="1"/></svg>
+                        </div>
+                        <div class="kind">Personal Reading</div>
+                        <h3>Soul Map — Founders Edition</h3>
+                        <p>Every number you were born with, decoded. Built from your name and birth date, live at your own private link in about 5 minutes.</p>
+                        <div class="buy-row">
+                            <span class="price">$22<small>one-time</small></span>
+                            <span class="buy">Get Yours</span>
+                        </div>
+                    </a>
+                    <a class="item pink" href="https://whop.com/checkout/plan_PAVoGUlPeFZgG">
+                        <div class="slot" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a7 7 0 0 0 9.5 9.5z"/></svg>
+                        </div>
+                        <div class="kind">Book · PDF</div>
+                        <h3>Dark Shadows — Print Edition</h3>
+                        <p>The five-chapter passage through grief, formatted to print and keep. The series is free to read online — this is the edition you hold.</p>
+                        <div class="buy-row">
+                            <span class="price">$11.11<small>one-time</small></span>
+                            <span class="buy">Buy Now</span>
+                        </div>
+                    </a>
+                    <a class="item ember" href="https://whop.com/checkout/plan_fKwR6rSqXS4X5">
+                        <div class="slot" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M4 20V5.5A1.5 1.5 0 0 1 5.5 4H20v13H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 2h14v-3"/><path d="M12 8c1.8 1.2 1.8 3.4 0 5-1.8-1.6-1.8-3.8 0-5z"/></svg>
+                        </div>
+                        <div class="kind">The Novel</div>
+                        <h3>THE FIRST SPARK: Genesis</h3>
+                        <p>Where the whole universe begins. Reality is programmable — and someone just found the console. The origin story of the Sparkverse.</p>
+                        <div class="buy-row">
+                            <span class="price">$11.11<small>one-time</small></span>
+                            <span class="buy">Buy Now</span>
+                        </div>
+                    </a>
+                    <a class="item cyan" href="https://whop.com/checkout/plan_c25a7JjHbpeFF">
+                        <div class="slot" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="m8 9-2.5 3L8 15M16 9l2.5 3L16 15M13 8l-2 8"/></svg>
+                        </div>
+                        <div class="kind">Control Center</div>
+                        <h3>Karma Debugger</h3>
+                        <p>Trace the pattern. Patch the loop. Find the repeating code in your life and rewrite it on purpose.</p>
+                        <div class="buy-row">
+                            <span class="price">$6.99<small>one-time</small></span>
+                            <span class="buy">Buy Now</span>
+                        </div>
+                    </a>
+                    <a class="item pink" href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer">
+                        <div class="slot" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M2 12h3l2-5 3 10 3-14 3 12 2-3h4"/></svg>
+                        </div>
+                        <div class="kind">Tool · Free to Try</div>
+                        <h3>Frequency Match Pro</h3>
+                        <p>Two birth dates. One compatibility score. Same code — or not. Try it free, go Pro for unlimited matches.</p>
+                        <div class="buy-row">
+                            <span class="price">$4.99<small>per month</small></span>
+                            <span class="buy">Try Free</span>
+                        </div>
+                    </a>
+                    <a class="item gold" href="https://whop.com/checkout/plan_okFWwlpgnc2bQ">
+                        <div class="slot" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M3 18l2.5-9L10 13l2-8 2 8 4.5-4L21 18z"/><path d="M3 21h18"/></svg>
+                        </div>
+                        <div class="kind">Membership</div>
+                        <h3>The Players Lounge</h3>
+                        <p>The inner circle. Live drops, member-only tools, and the room where the next things ship first.</p>
+                        <div class="buy-row">
+                            <span class="price">$33<small>/mo · first 3 days free</small></span>
+                            <span class="buy">Start Trial</span>
+                        </div>
+                    </a>
+                </div>
 
-            <p class="delivery-note">All digital. All instant. Every checkout is handled by Whop — you'll get access the moment payment clears.</p>
-        </div>
-    </section>
+                <p class="instant-note">Every checkout is handled by <b>Whop</b> — card, Apple Pay, or crypto. Access lands the moment payment clears.</p>
 
-    <section id="free">
-        <div class="wrap">
-            <div class="free-strip">
-                <div class="txt"><strong>Not ready to buy?</strong> The SparkVerse Lobby is free — step in, look around, meet the sparks.</div>
-                <a class="btn" href="https://whop.com/checkout/plan_GdMjwOncpn0Ap">Join free →</a>
+                <div class="side-quest">
+                    <div>
+                        <div class="sq-label">◈ Side Quest · Free</div>
+                        <div class="sq-text"><b>Not ready to buy?</b> The SparkVerse Lobby is free — chat, rituals, drops. Step in, look around, meet the sparks.</div>
+                    </div>
+                    <a class="btn" href="https://whop.com/checkout/plan_GdMjwOncpn0Ap">Join Free →</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <div class="wrap">
-            <p class="mono">THE FIRST SPARK · KATE'S PAINT LLC</p>
-            <p style="margin-top:14px; color:var(--ash);">Questions before you buy? <a href="mailto:kate@thefirstspark.shop">kate@thefirstspark.shop</a></p>
+            <a href="/" class="f-logo">THE FIRST SPARK</a>
+            <p>Questions before you buy? <a href="mailto:kate@thefirstspark.shop">kate@thefirstspark.shop</a></p>
         </div>
     </footer>
 </body>
