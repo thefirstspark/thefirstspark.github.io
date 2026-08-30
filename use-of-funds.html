@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050508">
+    <title>Use of Funds — The $250K Plan | The First Spark</title>
+    <meta name="description" content="Where the $250K goes: a standalone AI model trained on the Spark canon, the first paid advertising in company history, and the exact milestones each dollar buys.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://thefirstspark.shop/use-of-funds.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thefirstspark.shop/use-of-funds.html">
+    <meta property="og:title" content="Use of Funds — The $250K Plan | The First Spark">
+    <meta property="og:description" content="Every dollar mapped. A standalone AI model, first paid acquisition, and 18 months of milestones. SAFE · $2M cap · YC standard.">
+    <meta property="og:image" content="https://thefirstspark.shop/og-home.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Use of Funds — The $250K Plan | The First Spark">
+    <meta name="twitter:description" content="Every dollar mapped. A standalone AI model, first paid acquisition, and 18 months of milestones.">
+    <meta name="twitter:image" content="https://thefirstspark.shop/og-home.png">
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --void:   #050508;
+            --spark:  #fbbf24;
+            --nebula: #8b5cf6;
+            --cyan:   #22d3ee;
+            --white:  rgba(255,255,255,0.92);
+            --dim:    rgba(255,255,255,0.58);
+            --dimmer: rgba(255,255,255,0.1);
+            --hot-pink: #ec4899;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--void);
+            font-family: 'Space Mono', 'Courier New', monospace;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ─── COSMOS BACKGROUND ─── */
+        .cosmos-stars {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-repeat: repeat;
+            background-size: 340px 340px;
+            background-image:
+                radial-gradient(1px 1px at 24% 18%, rgba(255,255,255,.9), transparent),
+                radial-gradient(1px 1px at 68% 42%, rgba(125,249,255,.8), transparent),
+                radial-gradient(1.4px 1.4px at 41% 77%, rgba(255,255,255,.85), transparent),
+                radial-gradient(1px 1px at 85% 23%, rgba(255,255,255,.7), transparent),
+                radial-gradient(1px 1px at 12% 62%, rgba(183,148,255,.8), transparent),
+                radial-gradient(1.2px 1.2px at 55% 9%, rgba(255,255,255,.75), transparent),
+                radial-gradient(1px 1px at 91% 71%, rgba(255,255,255,.7), transparent),
+                radial-gradient(1px 1px at 33% 38%, rgba(255,255,255,.6), transparent);
+            opacity: .55;
+            animation: starTwinkle 7s ease-in-out infinite;
+        }
+        .cosmos-stars-2 {
+            background-size: 500px 500px;
+            background-image:
+                radial-gradient(1.6px 1.6px at 15% 55%, rgba(255,255,255,.95), transparent),
+                radial-gradient(1px 1px at 78% 15%, rgba(255,255,255,.7), transparent),
+                radial-gradient(1.8px 1.8px at 52% 84%, rgba(125,249,255,.9), transparent),
+                radial-gradient(1px 1px at 37% 27%, rgba(255,255,255,.65), transparent),
+                radial-gradient(1.4px 1.4px at 88% 60%, rgba(251,191,36,.7), transparent);
+            opacity: .7;
+            animation: starTwinkle 5s ease-in-out .8s infinite;
+        }
+        @keyframes starTwinkle {
+            0%, 100% { opacity: .35; }
+            50%      { opacity: .8; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .cosmos-stars { animation: none !important; }
+        }
+
+        .cosmos-aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+        .aurora-blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .45; }
+        .aurora-blob.b1 { width: 58vmax; height: 58vmax; top: -18vmax; left: -12vmax; background: radial-gradient(circle, rgba(139,92,246,.55), transparent 62%); }
+        .aurora-blob.b2 { width: 50vmax; height: 50vmax; bottom: -20vmax; right: -14vmax; background: radial-gradient(circle, rgba(34,211,238,.42), transparent 62%); }
+        .aurora-blob.b3 { width: 40vmax; height: 40vmax; top: 30%; left: 55%; background: radial-gradient(circle, rgba(251,191,36,.2), transparent 62%); }
+
+        .cosmos-veil {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 100% 80% at 50% 40%, transparent 0%, rgba(5, 5, 8, 0.55) 100%),
+                rgba(5, 5, 8, 0.34);
+        }
+
+        /* ─── LAYOUT ─── */
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ─── NAV ─── */
+        #nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 20px 36px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background .4s, border-color .4s;
+            border-bottom: 1px solid transparent;
+        }
+        #nav.scrolled {
+            background: rgba(5,5,8,.95);
+            backdrop-filter: blur(20px);
+            border-color: rgba(251,191,36,.1);
+        }
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: .9rem;
+            letter-spacing: .2em;
+            text-decoration: none;
+            color: var(--spark);
+            text-shadow: 0 0 20px rgba(251,191,36,.4);
+        }
+        .nav-right { display: flex; align-items: center; gap: 28px; }
+        .nav-invest {
+            font-size: .58em;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--dim);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .nav-invest:hover { color: var(--white); }
+        .nav-cta {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .6rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            padding: 10px 22px;
+            border: 1px solid var(--spark);
+            color: var(--spark);
+            text-decoration: none;
+            transition: background .2s, color .2s, box-shadow .2s;
+        }
+        .nav-cta:hover { background: var(--spark); color: var(--void); }
+        @media (max-width: 720px) {
+            .nav-right .nav-invest { display: none; }
+        }
+
+        /* ─── BUTTONS ─── */
+        .btn-p {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .65rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            padding: 16px 34px;
+            background: var(--spark);
+            color: var(--void);
+            text-decoration: none;
+            transition: transform .2s, box-shadow .2s;
+            display: inline-block;
+        }
+        .btn-p:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(251,191,36,.45); }
+        .btn-g {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .65rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            padding: 15px 34px;
+            border: 1px solid var(--dimmer);
+            color: var(--dim);
+            text-decoration: none;
+            transition: border-color .2s, color .2s;
+            display: inline-block;
+        }
+        .btn-g:hover { border-color: var(--nebula); color: var(--white); }
+
+        .divider-line {
+            position: relative;
+            z-index: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--nebula), var(--spark), transparent);
+            opacity: .35;
+        }
+
+        /* ─── SECTIONS ─── */
+        section {
+            padding: 90px 0;
+            position: relative;
+            z-index: 1;
+            scroll-margin-top: 88px;
+        }
+        .sec-label {
+            font-size: .55em;
+            letter-spacing: .45em;
+            text-transform: uppercase;
+            color: var(--spark);
+            opacity: .65;
+            margin-bottom: 14px;
+        }
+        .sec-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+            font-weight: 900;
+            letter-spacing: .06em;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+        .sec-sub {
+            font-size: .82em;
+            color: var(--dim);
+            line-height: 1.8;
+            max-width: 560px;
+        }
+
+        /* ─── HERO ─── */
+        #hero {
+            min-height: 88vh;
+            display: flex;
+            align-items: center;
+            padding-top: 140px;
+        }
+        .hero-center { text-align: center; max-width: 760px; margin: 0 auto; }
+        .hero-amount {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: clamp(3rem, 10vw, 6rem);
+            letter-spacing: .04em;
+            line-height: 1;
+            color: var(--spark);
+            text-shadow: 0 0 60px rgba(251,191,36,.35);
+            margin-bottom: 18px;
+        }
+        .hero-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(.85rem, 2.2vw, 1.2rem);
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .terms-strip {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0;
+            border: 1px solid var(--dimmer);
+            margin: 44px auto 0;
+            max-width: 720px;
+        }
+        .term-cell {
+            flex: 1 1 110px;
+            padding: 18px 14px;
+            border-right: 1px solid var(--dimmer);
+            text-align: center;
+        }
+        .term-cell:last-child { border-right: none; }
+        .term-cell .t-label {
+            font-size: .5em;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--dim);
+            margin-bottom: 8px;
+        }
+        .term-cell .t-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            color: var(--white);
+        }
+        .term-cell .t-value.open { color: var(--cyan); }
+        @media (max-width: 720px) {
+            .term-cell { flex: 1 1 50%; border-bottom: 1px solid var(--dimmer); }
+        }
+
+        /* ─── ALLOCATION ─── */
+        .alloc-bar {
+            display: flex;
+            height: 34px;
+            border: 1px solid var(--dimmer);
+            margin: 48px 0 10px;
+            overflow: hidden;
+        }
+        .alloc-bar span { display: block; height: 100%; }
+        .alloc-bar .a-model   { width: 48%; background: var(--spark); }
+        .alloc-bar .a-ads     { width: 28%; background: var(--nebula); }
+        .alloc-bar .a-plat    { width: 12%; background: var(--cyan); }
+        .alloc-bar .a-ops     { width: 8%;  background: var(--hot-pink); }
+        .alloc-bar .a-cont    { width: 4%;  background: rgba(255,255,255,.28); }
+
+        .alloc-rows { margin-top: 26px; }
+        .alloc-row {
+            display: grid;
+            grid-template-columns: 18px 1fr auto auto;
+            gap: 16px;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--dimmer);
+        }
+        .alloc-row:last-child { border-bottom: none; }
+        .a-dot { width: 12px; height: 12px; }
+        .a-dot.d-model { background: var(--spark); }
+        .a-dot.d-ads   { background: var(--nebula); }
+        .a-dot.d-plat  { background: var(--cyan); }
+        .a-dot.d-ops   { background: var(--hot-pink); }
+        .a-dot.d-cont  { background: rgba(255,255,255,.28); }
+        .a-name { font-size: .78em; letter-spacing: .06em; }
+        .a-name small { display: block; font-size: .82em; color: var(--dim); margin-top: 4px; letter-spacing: .03em; }
+        .a-amt {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: .85rem;
+            letter-spacing: .06em;
+        }
+        .a-pct { font-size: .62em; color: var(--dim); letter-spacing: .1em; min-width: 42px; text-align: right; }
+        @media (max-width: 600px) {
+            .alloc-row { grid-template-columns: 14px 1fr auto; }
+            .a-pct { display: none; }
+        }
+
+        /* ─── LINE-ITEM TABLES ─── */
+        .line-items {
+            border: 1px solid var(--dimmer);
+            margin-top: 36px;
+        }
+        .line-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 20px;
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--dimmer);
+        }
+        .line-item:last-child { border-bottom: none; }
+        .li-name { font-size: .74em; letter-spacing: .05em; }
+        .li-name small { display: block; color: var(--dim); margin-top: 5px; font-size: .86em; line-height: 1.6; }
+        .li-amt {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: .8rem;
+            white-space: nowrap;
+        }
+        .li-amt.c-spark  { color: var(--spark); }
+        .li-amt.c-nebula { color: var(--nebula); }
+
+        .sec-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 22px;
+            background: rgba(251,191,36,.05);
+            border: 1px solid rgba(251,191,36,.2);
+            border-top: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+        .sec-total.t-nebula {
+            background: rgba(139,92,246,.06);
+            border-color: rgba(139,92,246,.25);
+        }
+
+        .body-copy {
+            font-size: .8em;
+            color: var(--dim);
+            line-height: 1.9;
+            max-width: 640px;
+            margin-top: 22px;
+        }
+        .body-copy strong { color: var(--white); font-weight: 700; }
+        .body-copy em { color: var(--spark); font-style: normal; }
+
+        /* ─── MILESTONES ─── */
+        .milestones { margin-top: 44px; border-left: 1px solid rgba(251,191,36,.3); }
+        .milestone {
+            position: relative;
+            padding: 0 0 42px 34px;
+        }
+        .milestone:last-child { padding-bottom: 0; }
+        .milestone::before {
+            content: '';
+            position: absolute;
+            left: -6px; top: 4px;
+            width: 11px; height: 11px;
+            background: var(--void);
+            border: 2px solid var(--spark);
+            border-radius: 50%;
+        }
+        .m-when {
+            font-size: .55em;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--spark);
+            margin-bottom: 8px;
+        }
+        .m-what {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .9rem;
+            font-weight: 700;
+            letter-spacing: .05em;
+            margin-bottom: 8px;
+        }
+        .m-detail { font-size: .74em; color: var(--dim); line-height: 1.8; max-width: 560px; }
+
+        /* ─── TRACTION ─── */
+        .traction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1px;
+            background: var(--dimmer);
+            border: 1px solid var(--dimmer);
+            margin-top: 44px;
+        }
+        .traction-cell {
+            background: var(--void);
+            padding: 30px 22px;
+            text-align: center;
+        }
+        .traction-cell .tr-num {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: .04em;
+            color: var(--spark);
+            margin-bottom: 10px;
+        }
+        .traction-cell .tr-label {
+            font-size: .58em;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--dim);
+            line-height: 1.7;
+        }
+
+        /* ─── FAQ ─── */
+        .faq-item {
+            border: 1px solid var(--dimmer);
+            padding: 26px 28px;
+            margin-top: 16px;
+        }
+        .faq-q {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .82rem;
+            font-weight: 700;
+            letter-spacing: .05em;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        .faq-a { font-size: .74em; color: var(--dim); line-height: 1.9; }
+
+        /* ─── CTA ─── */
+        #ask {
+            text-align: center;
+            background: rgba(251,191,36,.03);
+            border-top: 1px solid rgba(251,191,36,.1);
+            border-bottom: 1px solid rgba(251,191,36,.1);
+        }
+        .ask-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 36px;
+        }
+        .ask-contact {
+            margin-top: 30px;
+            font-size: .68em;
+            color: var(--dim);
+            letter-spacing: .06em;
+            line-height: 2;
+        }
+        .ask-contact a { color: var(--spark); text-decoration: none; border-bottom: 1px solid rgba(251,191,36,.35); padding-bottom: 1px; }
+
+        .legal-note {
+            font-size: .58em;
+            color: rgba(255,255,255,.3);
+            line-height: 1.9;
+            letter-spacing: .04em;
+            max-width: 720px;
+            margin: 60px auto 0;
+            text-align: center;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            position: relative;
+            z-index: 1;
+            padding: 50px 0 36px;
+            text-align: center;
+            border-top: 1px solid var(--dimmer);
+        }
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: .85rem;
+            letter-spacing: .2em;
+            color: var(--spark);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 14px;
+            opacity: .7;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            font-size: .55em;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.2);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .footer-links a:hover { color: var(--dim); }
+        .footer-copy {
+            font-size: .55em;
+            color: rgba(255,255,255,.12);
+            letter-spacing: .15em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="cosmos-stars" aria-hidden="true"></div>
+    <div class="cosmos-stars cosmos-stars-2" aria-hidden="true"></div>
+    <div class="cosmos-aurora" aria-hidden="true">
+        <span class="aurora-blob b1"></span>
+        <span class="aurora-blob b2"></span>
+        <span class="aurora-blob b3"></span>
+    </div>
+    <div class="cosmos-veil" aria-hidden="true"></div>
+
+    <!-- NAV -->
+    <nav id="nav">
+        <a href="/" class="nav-logo">THE FIRST SPARK</a>
+        <div class="nav-right">
+            <a href="invest.html" class="nav-invest">Invest</a>
+            <a href="investor-deck-v4.html" class="nav-invest">Deck</a>
+            <a href="tfs-valuation.html" class="nav-invest">Valuation</a>
+            <a href="mailto:kate@thefirstspark.shop?subject=SAFE%20Investment%20—%20The%20First%20Spark" class="nav-cta">Request the Deck</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="wrap">
+            <div class="hero-center">
+                <div class="sec-label">◈ &nbsp; Use of Funds</div>
+                <div class="hero-amount">$250,000</div>
+                <div class="hero-tag">Every dollar mapped.</div>
+                <p class="sec-sub" style="margin: 0 auto; text-align: center;">The First Spark is raising $250K on a post-money SAFE. This page is the whole plan — where the money goes, what it builds, and when. No mystery lines. No "general corporate purposes."</p>
+
+                <div class="terms-strip">
+                    <div class="term-cell">
+                        <div class="t-label">Raise</div>
+                        <div class="t-value">$250K</div>
+                    </div>
+                    <div class="term-cell">
+                        <div class="t-label">Instrument</div>
+                        <div class="t-value">SAFE · YC Std</div>
+                    </div>
+                    <div class="term-cell">
+                        <div class="t-label">Valuation Cap</div>
+                        <div class="t-value">$2M Post</div>
+                    </div>
+                    <div class="term-cell">
+                        <div class="t-label">Equity @ Cap</div>
+                        <div class="t-value">12.5%</div>
+                    </div>
+                    <div class="term-cell">
+                        <div class="t-label">Status</div>
+                        <div class="t-value open">OPEN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- ALLOCATION -->
+    <section id="allocation">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; 001 — The Breakdown</div>
+            <h2 class="sec-title">Where $250K goes.</h2>
+            <p class="sec-sub">Two priorities carry 76% of the raise: a standalone AI model we own outright, and the first paid advertising in company history. Everything else keeps those two moving.</p>
+
+            <div class="alloc-bar" role="img" aria-label="Allocation: AI model 48%, advertising 28%, platform 12%, legal and ops 8%, contingency 4%">
+                <span class="a-model"></span>
+                <span class="a-ads"></span>
+                <span class="a-plat"></span>
+                <span class="a-ops"></span>
+                <span class="a-cont"></span>
+            </div>
+
+            <div class="alloc-rows">
+                <div class="alloc-row">
+                    <div class="a-dot d-model"></div>
+                    <div class="a-name">Standalone AI Model<small>Owned weights, trained on the Spark canon</small></div>
+                    <div class="a-amt">$120,000</div>
+                    <div class="a-pct">48%</div>
+                </div>
+                <div class="alloc-row">
+                    <div class="a-dot d-ads"></div>
+                    <div class="a-name">Advertising &amp; Growth<small>First paid acquisition — test, kill, scale</small></div>
+                    <div class="a-amt">$70,000</div>
+                    <div class="a-pct">28%</div>
+                </div>
+                <div class="alloc-row">
+                    <div class="a-dot d-plat"></div>
+                    <div class="a-name">Platform &amp; Product<small>Infrastructure, checkout flow, tooling</small></div>
+                    <div class="a-amt">$30,000</div>
+                    <div class="a-pct">12%</div>
+                </div>
+                <div class="alloc-row">
+                    <div class="a-dot d-ops"></div>
+                    <div class="a-name">Legal, Ops &amp; Accounting<small>SAFE counsel, filings, books</small></div>
+                    <div class="a-amt">$20,000</div>
+                    <div class="a-pct">8%</div>
+                </div>
+                <div class="alloc-row">
+                    <div class="a-dot d-cont"></div>
+                    <div class="a-name">Contingency<small>Compute prices move — this absorbs it</small></div>
+                    <div class="a-amt">$10,000</div>
+                    <div class="a-pct">4%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- THE MODEL -->
+    <section id="model">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; 002 — The Model · $120K</div>
+            <h2 class="sec-title">Not an API wrapper. A model we own.</h2>
+            <p class="body-copy">Every AI product you've seen in this space is a thin skin over someone else's model. That's not what this is. <strong>$120K trains a standalone model — owned weights, fine-tuned on the Spark canon:</strong> six years of original frameworks, 57+ shipped tools, the Selector Model, and a soul-map corpus that exists nowhere else on the internet.</p>
+            <p class="body-copy">That corpus is the moat. Anyone can rent an API. <em>Nobody else can train on this body of work.</em> When the model answers, it answers from the canon — because it was built from it.</p>
+
+            <div class="line-items">
+                <div class="line-item">
+                    <div class="li-name">Fine-tuning compute<small>Training runs on an open-weight base model — multiple passes, not one shot</small></div>
+                    <div class="li-amt c-spark">$55,000</div>
+                </div>
+                <div class="line-item">
+                    <div class="li-name">Canon data curation &amp; corpus engineering<small>Structuring six years of frameworks, tools, and maps into training data</small></div>
+                    <div class="li-amt c-spark">$20,000</div>
+                </div>
+                <div class="line-item">
+                    <div class="li-name">Inference hosting — first 12 months<small>Serving the model to members from day one of launch</small></div>
+                    <div class="li-amt c-spark">$30,000</div>
+                </div>
+                <div class="line-item">
+                    <div class="li-name">Evaluation, safety &amp; red-team passes<small>The model ships tested, not hoped-for</small></div>
+                    <div class="li-amt c-spark">$15,000</div>
+                </div>
+            </div>
+            <div class="sec-total"><span>Model Total</span><span>$120,000</span></div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- ADVERTISING -->
+    <section id="advertising">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; 003 — Advertising · $70K</div>
+            <h2 class="sec-title">First paid dollar in company history.</h2>
+            <p class="body-copy">Every sale to date has been <strong>100% organic</strong> — zero ad spend, zero burn. That proves the products convert. What it doesn't prove is how far they scale, and $70K answers that question with discipline: <em>test small, kill losers weekly, scale only what returns.</em></p>
+            <p class="body-copy">The $22 Soul Map is the spearhead — a low-friction, instant-delivery product that gives fast, honest feedback on cost per acquisition. Winners feed the funnel into Sparkverse membership and the model launch.</p>
+
+            <div class="line-items">
+                <div class="line-item">
+                    <div class="li-name">Channel testing — paid social, 6 months<small>Meta, TikTok, YouTube — small daily budgets across creatives until the data picks winners</small></div>
+                    <div class="li-amt c-nebula">$30,000</div>
+                </div>
+                <div class="line-item">
+                    <div class="li-name">Scaling proven creatives<small>Budget concentrates on what the testing phase proves out</small></div>
+                    <div class="li-amt c-nebula">$25,000</div>
+                </div>
+                <div class="line-item">
+                    <div class="li-name">Creative production<small>Video, motion, and static ad assets in the brand's own visual language</small></div>
+                    <div class="li-amt c-nebula">$10,000</div>
+                </div>
+                <div class="line-item">
+                    <div class="li-name">Creator collaborations<small>Aligned creators in the consciousness and tools space</small></div>
+                    <div class="li-amt c-nebula">$5,000</div>
+                </div>
+            </div>
+            <div class="sec-total t-nebula"><span>Advertising Total</span><span>$70,000</span></div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- SUPPORTING LINES -->
+    <section id="supporting">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; 004 — The Support Lines · $60K</div>
+            <h2 class="sec-title">What keeps the machine running.</h2>
+
+            <div class="line-items">
+                <div class="line-item">
+                    <div class="li-name">Platform &amp; product — $30K<small>Hosting and infrastructure across the site network, checkout and delivery flow hardening, and the tooling that lets one founder ship like a team</small></div>
+                    <div class="li-amt">$30,000</div>
+                </div>
+                <div class="line-item">
+                    <div class="li-name">Legal, ops &amp; accounting — $20K<small>SAFE counsel and filings, bookkeeping, business software — the unglamorous work done right</small></div>
+                    <div class="li-amt">$20,000</div>
+                </div>
+                <div class="line-item">
+                    <div class="li-name">Contingency — $10K<small>GPU and compute pricing is volatile. This line means the model milestone doesn't slip when the market moves</small></div>
+                    <div class="li-amt">$10,000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- MILESTONES -->
+    <section id="milestones">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; 005 — The Timeline</div>
+            <h2 class="sec-title">What $250K buys in 18 months.</h2>
+            <p class="sec-sub">Checkpoints, not promises. Each one is verifiable when it ships.</p>
+
+            <div class="milestones">
+                <div class="milestone">
+                    <div class="m-when">Months 1–3</div>
+                    <div class="m-what">Canon corpus assembled. Base model selected.</div>
+                    <div class="m-detail">Six years of frameworks, tools, and maps structured into training data. Legal closed, books clean, data pipeline running.</div>
+                </div>
+                <div class="milestone">
+                    <div class="m-when">Months 4–6</div>
+                    <div class="m-what">First fine-tune live to members.</div>
+                    <div class="m-detail">The model answers from inside Sparkverse — members are the first testing ground, and their usage shapes the next training pass.</div>
+                </div>
+                <div class="milestone">
+                    <div class="m-when">Months 7–9</div>
+                    <div class="m-what">Standalone model launches as a product. Paid testing begins.</div>
+                    <div class="m-detail">Public launch with its own access tiers. Advertising enters the six-month testing phase across channels.</div>
+                </div>
+                <div class="milestone">
+                    <div class="m-when">Months 10–15</div>
+                    <div class="m-what">Scale what works.</div>
+                    <div class="m-detail">Winning channels and creatives take the scaling budget. Model improves on real usage data no competitor has.</div>
+                </div>
+                <div class="milestone">
+                    <div class="m-when">Months 16–18</div>
+                    <div class="m-what">Model v2. Revenue tells the next story.</div>
+                    <div class="m-detail">Second training generation ships. The numbers from this window set the terms of whatever comes next.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- TRACTION -->
+    <section id="traction">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; 006 — Already Built</div>
+            <h2 class="sec-title">This funds acceleration, not existence.</h2>
+            <p class="sec-sub">The platform runs at zero burn today. The raise doesn't keep the lights on — the lights are already on.</p>
+
+            <div class="traction-grid">
+                <div class="traction-cell">
+                    <div class="tr-num">57+</div>
+                    <div class="tr-label">Tools Shipped &amp; Live</div>
+                </div>
+                <div class="traction-cell">
+                    <div class="tr-num">$0</div>
+                    <div class="tr-label">Monthly Burn Rate</div>
+                </div>
+                <div class="traction-cell">
+                    <div class="tr-num">$107K–$197K</div>
+                    <div class="tr-label">Verified Asset Range<br>(May 2026 Audit)</div>
+                </div>
+                <div class="traction-cell">
+                    <div class="tr-num">100%</div>
+                    <div class="tr-label">Organic Sales to Date</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; 007 — Straight Answers</div>
+            <h2 class="sec-title">The questions worth asking.</h2>
+
+            <div class="faq-item">
+                <div class="faq-q">What if the round doesn't fill completely?</div>
+                <div class="faq-a">The plan degrades in priority order, not proportionally. The model ships first — it's the moat. Advertising scales to whatever remains. A partial raise slows the timeline; it doesn't change the destination. Burn stays at zero either way.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Why train a standalone model instead of using an API?</div>
+                <div class="faq-a">An API wrapper is a feature anyone can copy in a weekend, priced at someone else's margin, living at someone else's mercy. Owned weights trained on a proprietary corpus are an asset — one that appreciates with every member interaction and can't be replicated without the canon.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What exactly am I buying with a SAFE?</div>
+                <div class="faq-a">A YC-standard post-money SAFE at a $2M valuation cap — your investment converts to equity at the cap (12.5% for the full $250K) or better when a priced round happens. Full terms are in the deck and deal documents. Ask for them.</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <!-- THE ASK -->
+    <section id="ask">
+        <div class="wrap">
+            <div class="sec-label">◈ &nbsp; 008 — The Ask</div>
+            <h2 class="sec-title" style="max-width: 640px; margin-left: auto; margin-right: auto;">The canon exists. The tools are live.<br>The model is the next move.</h2>
+            <p class="sec-sub" style="margin: 0 auto; text-align: center;">$250K on a $2M cap. Every dollar mapped on this page. If the plan holds up under your questions, let's talk.</p>
+
+            <div class="ask-ctas">
+                <a href="mailto:kate@thefirstspark.shop?subject=SAFE%20Investment%20—%20The%20First%20Spark" class="btn-p">Request the Deck</a>
+                <a href="tfs-valuation.html" class="btn-g">See the Valuation →</a>
+            </div>
+
+            <div class="ask-contact">
+                Katelin Puzakulics — Founder<br>
+                <a href="mailto:kate@thefirstspark.shop">kate@thefirstspark.shop</a> &nbsp;·&nbsp; (330) 807-5509 &nbsp;·&nbsp; Akron, Ohio
+            </div>
+
+            <p class="legal-note">This page is a summary for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy securities. Any offer will be made only through definitive transaction documents to qualified investors. Allocations are good-faith estimates and may be adjusted as conditions require. Forward-looking statements involve risk and are not guarantees of future performance.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="wrap">
+            <a href="/" class="footer-logo">THE FIRST SPARK</a>
+            <div class="footer-links">
+                <a href="invest.html">Invest</a>
+                <a href="investor-deck-v4.html">Deck</a>
+                <a href="tfs-valuation.html">Valuation</a>
+                <a href="selector-model-ip.html">The IP</a>
+                <a href="/">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="privacy-policy.html">Privacy</a>
+                <a href="terms-of-service.html">Terms</a>
+            </div>
+            <div class="footer-copy">© 2026 The First Spark &nbsp;·&nbsp; Built by Katelin &nbsp;·&nbsp; Akron, Ohio</div>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        }, { passive: true });
+    </script>
+    <script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_0xcayhWXVnKO9y");whop.track("page");</script>
+</body>
+</html>
