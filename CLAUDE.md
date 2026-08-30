@@ -33,7 +33,7 @@ Other repos use different defaults:
 
 ## 💼 Current Investor Terms (as of August 2026)
 
-These figures must be CONSISTENT across `invest.html`, `investor-deck-v3.html`, `investor-deck-v4.html`, `investor-call-companion.html`, `selector-model-ip.html`, `tfs-valuation.html`, `tfs_investor_deck_v2.html`, `earthship-expedition.html`, `prof.html`, `tfs-viral.html`, and any future investor materials:
+These figures must be CONSISTENT across `invest.html`, `use-of-funds.html`, `investor-deck-v3.html`, `investor-deck-v4.html`, `investor-call-companion.html`, `selector-model-ip.html`, `tfs-valuation.html`, `tfs_investor_deck_v2.html`, `earthship-expedition.html`, `prof.html`, `tfs-viral.html`, and any future investor materials:
 
 | Term | Value |
 |------|-------|
@@ -56,7 +56,8 @@ These figures must be CONSISTENT across `invest.html`, `investor-deck-v3.html`, 
 |------|---------|
 | `index.html` | Homepage / Universe |
 | `invest.html` | Short investor pitch (entry point) |
-| `investor-deck-v4.html` | Full slide deck (current; v2 is a redirect stub → v3, v3 superseded) |
+| `investor-deck-v4.html` | Full slide deck (current; v2 is a redirect stub → v4, v3 superseded) |
+| `use-of-funds.html` | $250K allocation breakdown (added Aug 2026) |
 | `tfs-valuation.html` | Deal terms + valuation analysis |
 | `selector-model-ip.html` | Proprietary framework / moat page (May 2026) |
 | `trinity.html` | Founding mythology |
