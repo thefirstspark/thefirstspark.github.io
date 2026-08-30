@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Google Search Console — Sitemap Index
-  ─────────────────────────────────────
-  Submit THIS file in Search Console:
+  Master sitemap index for The First Spark network.
+  Submit this file in Google Search Console as a Domain property:
 
+    sc-domain:thefirstspark.shop
     https://thefirstspark.shop/sitemap-index.xml
 
-  Property: https://thefirstspark.shop
-  (Add frequency.thefirstspark.shop and soul-maps.thefirstspark.shop
-   as separate properties if you want those indexed under their own domains.)
+  That property covers the apex and every live subdomain.
 -->
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>https://thefirstspark.shop/sitemap-core.xml</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-30</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://thefirstspark.shop/sitemap-tools.xml</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-30</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://thefirstspark.shop/sitemap-stories.xml</loc>
+    <lastmod>2026-08-30</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://thefirstspark.shop/sitemap-network.xml</loc>
+    <lastmod>2026-08-30</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://links.thefirstspark.shop/sitemap.xml</loc>
+    <lastmod>2026-08-30</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://soul-maps.thefirstspark.shop/sitemap.xml</loc>
+    <lastmod>2026-08-30</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://sigilcraft.thefirstspark.shop/sitemap.xml</loc>
+    <lastmod>2026-08-30</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://sparkverse.thefirstspark.shop/sitemap.xml</loc>
+    <lastmod>2026-08-30</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://frequency.thefirstspark.shop/sitemap.xml</loc>
+    <lastmod>2026-08-30</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://rituals.thefirstspark.shop/sitemap.xml</loc>
+    <lastmod>2026-08-30</lastmod>
   </sitemap>
 </sitemapindex>
