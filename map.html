@@ -6,6 +6,14 @@
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
+  <!-- GA4 direct (events only — page_view stays with GTM) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SKL8XQ51ZH', { send_page_view: false });
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#05060a">
@@ -275,17 +283,17 @@
       <div class="price-note">once · no subscription</div>
     </div>
     <div class="cta-row">
-      <a class="btn btn-p" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm">Get your Soul Map</a>
-      <a class="btn btn-g" href="soul-map.html">See my numbers free first</a>
+      <a class="btn btn-p" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" data-track="map_hero_checkout">Get your Soul Map</a>
+      <a class="btn btn-g" href="soul-map.html" data-track="map_hero_free_preview">See my numbers free first</a>
     </div>
-    <p class="fine">Live URL in about 5 minutes · birth date + full name · <a href="what-is-a-soul-map.html" style="color:var(--ash);">What's in it →</a></p>
+    <p class="fine">Live URL in about 5 minutes · birth date + full name · <a href="what-is-a-soul-map.html" data-track="map_hero_explainer" style="color:var(--ash);">What's in it →</a></p>
   </header>
 
   <div class="wrap preview">
-    <a href="https://soul-maps.thefirstspark.shop/KJP51988.html" target="_blank" rel="noopener noreferrer">
+    <a href="https://soul-maps.thefirstspark.shop/KJP51988.html" target="_blank" rel="noopener noreferrer" data-track="map_sample_image">
       <img src="preview-soulmaps.png" alt="Example Soul Map — yours is built from your birth details" width="1120" height="720">
     </a>
-    <p class="cap">Example map · yours is generated from your data, not a template with a name swap · <a href="https://soul-maps.thefirstspark.shop/KJP51988.html" target="_blank" rel="noopener noreferrer" style="color:var(--gold);">open a real one →</a></p>
+    <p class="cap">Example map · yours is generated from your data, not a template with a name swap · <a href="https://soul-maps.thefirstspark.shop/KJP51988.html" target="_blank" rel="noopener noreferrer" data-track="map_sample_link" style="color:var(--gold);">open a real one →</a></p>
   </div>
 
   <section class="block wrap">
@@ -364,9 +372,9 @@
     <h2>Stop circling. Read the code.</h2>
     <p class="lede" style="margin: 0 auto 24px;">One payment. One page. Made only for you.</p>
     <div class="cta-row" style="justify-content:center;">
-      <a class="btn btn-p" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm">Get your Soul Map — $22</a>
+      <a class="btn btn-p" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" data-track="map_final_checkout">Get your Soul Map — $22</a>
     </div>
-    <p class="fine"><a href="soul-map.html" style="color:var(--ash);">Preview your numbers free first →</a></p>
+    <p class="fine"><a href="soul-map.html" data-track="map_final_free_preview" style="color:var(--ash);">Preview your numbers free first →</a></p>
   </section>
 
   <footer>
@@ -376,7 +384,19 @@
 
   <div class="sticky">
     <span>Soul Map · $22 once</span>
-    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm">Get yours</a>
+    <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" data-track="map_sticky_checkout">Get yours</a>
   </div>
+
+  <script>
+  /* Funnel click tracking — elements opt in via data-track */
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('[data-track]');
+    if (!el || !window.gtag) return;
+    gtag('event', 'funnel_click', {
+      link_id: el.getAttribute('data-track'),
+      page: location.pathname
+    });
+  });
+  </script>
 </body>
 </html>

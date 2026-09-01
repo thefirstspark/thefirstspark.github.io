@@ -9,6 +9,14 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
     <!-- End Google Tag Manager -->
+    <!-- GA4 direct (events only — page_view stays with GTM) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SKL8XQ51ZH', { send_page_view: false });
+    </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1489,10 +1497,10 @@
                 <p class="sec-sub" style="margin:0 auto 12px; text-align:center;">A Soul Map is a personal reading of who you are and what you're built for — calculated from your birth name and date, delivered as your own private page you keep forever.</p>
                 <p class="sec-sub" style="margin:0 auto 36px; text-align:center;">The pattern you keep repeating. The work that fits your wiring. What to focus on right now. $22 once.</p>
                 <div class="hero-ctas">
-                    <a href="map.html" class="btn-p">Get Your Soul Map · $22</a>
-                    <a href="https://soul-maps.thefirstspark.shop/KJP51988.html" target="_blank" rel="noopener noreferrer" class="btn-g">See a real one →</a>
+                    <a href="map.html" class="btn-p" data-track="hero_buy">Get Your Soul Map · $22</a>
+                    <a href="https://soul-maps.thefirstspark.shop/KJP51988.html" target="_blank" rel="noopener noreferrer" class="btn-g" data-track="hero_sample_map">See a real one →</a>
                 </div>
-                <p style="margin:22px auto 0; text-align:center; font-size:.68em; letter-spacing:.08em; color:var(--dim);">Not sure yet? <a href="soul-map.html" style="color:var(--spark); text-decoration:none; border-bottom:1px solid rgba(251,191,36,.35); padding-bottom:2px;">Preview your numbers free →</a></p>
+                <p style="margin:22px auto 0; text-align:center; font-size:.68em; letter-spacing:.08em; color:var(--dim);">Not sure yet? <a href="soul-map.html" data-track="hero_free_preview" style="color:var(--spark); text-decoration:none; border-bottom:1px solid rgba(251,191,36,.35); padding-bottom:2px;">Preview your numbers free →</a></p>
             </div>
             <div class="scroll-hint">Explore</div>
         </div>
@@ -1509,8 +1517,8 @@
                 <p class="sec-sub" style="margin:18px auto 0; text-align:center;">In 2020, DNA cracked a 29-year cold case — by reading what had been there all along. The First Spark was built on that same instinct: your code is already written. These tools read it.</p>
                 <p style="margin:22px auto 0; text-align:center; font-size:.72em; letter-spacing:.06em; color:var(--dim);">Carrying something heavy? <a href="/dark-shadows/" style="color:var(--spark); text-decoration:none; border-bottom:1px solid rgba(251,191,36,.35); padding-bottom:2px;">Dark Shadows</a> — a free five-chapter passage through grief. No email. No catch.</p>
                 <div class="origin-ctas" style="justify-content:center;">
-                    <a href="map.html" class="btn-p">Get Your Soul Map · $22</a>
-                    <a href="what-is-a-soul-map.html" class="btn-g">What's a Soul Map?</a>
+                    <a href="map.html" class="btn-p" data-track="origin_buy">Get Your Soul Map · $22</a>
+                    <a href="what-is-a-soul-map.html" class="btn-g" data-track="origin_explainer">What's a Soul Map?</a>
                 </div>
             </div>
         </div>
@@ -1526,7 +1534,7 @@
             <p class="sec-sub">Get your map, test your match, or enter the live world — every door leads back to your code.</p>
 
             <div class="cards" style="grid-template-columns:repeat(3,1fr);">
-                <a href="map.html" class="card purple primary-funnel">
+                <a href="map.html" class="card purple primary-funnel" data-track="doors_soul_map">
                     <div class="card-step">Product</div>
                     <div class="card-name">Soul Map</div>
                     <div class="card-desc">Your numbers. Decoded.</div>
@@ -1569,12 +1577,12 @@
                 </div>
                 <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
                     <div class="soul-price">$22</div>
-                    <a href="map.html" class="btn-p">Get Mine →</a>
+                    <a href="map.html" class="btn-p" data-track="featured_buy">Get Mine →</a>
                     <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer" class="btn-g">Freq Match</a>
                 </div>
             </div>
 
-            <a href="https://soul-maps.thefirstspark.shop/KJP51988.html" target="_blank" rel="noopener noreferrer" style="display:block; max-width:860px; margin:32px auto 0; text-decoration:none;">
+            <a href="https://soul-maps.thefirstspark.shop/KJP51988.html" target="_blank" rel="noopener noreferrer" data-track="featured_sample_map" style="display:block; max-width:860px; margin:32px auto 0; text-decoration:none;">
                 <img src="preview-soulmaps.png" alt="A real Soul Map page — yours is generated from your birth details" width="1120" height="720" loading="lazy" style="width:100%; height:auto; display:block; border:1px solid rgba(255,255,255,.14); border-radius:12px;">
                 <span style="display:block; text-align:center; margin-top:12px; font-size:.62em; letter-spacing:.14em; text-transform:uppercase; color:var(--dim);">This is the product — a live page, not a PDF. Open the founder's actual map →</span>
             </a>
@@ -2403,6 +2411,18 @@
             });
         }
     })();
+    </script>
+
+    <script>
+    /* Funnel click tracking — elements opt in via data-track */
+    document.addEventListener('click', function(e) {
+        var el = e.target.closest('[data-track]');
+        if (!el || !window.gtag) return;
+        gtag('event', 'funnel_click', {
+            link_id: el.getAttribute('data-track'),
+            page: location.pathname
+        });
+    });
     </script>
 
 </body>
