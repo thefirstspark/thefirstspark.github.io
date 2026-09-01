@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Soul Pattern — The First Spark</title>
+<title>Soul Pattern Generator — The First Spark</title>
+<meta name="description" content="Type your name and birthday. Watch your soul pattern weave itself live — rings for your Expression, a star for your Life Path, amber breaks where karmic debt left the weave open. Free, instant, downloadable.">
+<link rel="canonical" href="https://thefirstspark.shop/soul-pattern-generator.html">
+<meta property="og:title" content="Your soul has a pattern. See it weave.">
+<meta property="og:description" content="Name + birthday → your unique soul geometry, drawn live. Free. No email. Download it, wear it, collide it with someone else's.">
+<meta property="og:url" content="https://thefirstspark.shop/soul-pattern-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://thefirstspark.shop/preview-soulmaps.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -58,6 +66,9 @@ input:focus{outline:2px solid var(--spark);outline-offset:1px;border-color:trans
 .mode-btn:hover,.dl-btn:hover{color:var(--ink);border-color:var(--mist)}
 .mode-btn.on{background:var(--deep);color:var(--spark);border-color:var(--spark)}
 .mode-btn:focus-visible,.dl-btn:focus-visible{outline:2px solid var(--spark);outline-offset:2px}
+a.dl-btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.dl-btn.collide{border-color:var(--spark);color:var(--spark)}
+.dl-btn.collide:hover{background:var(--deep);color:var(--spark-hi);border-color:var(--spark-hi)}
 .dls{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center}
 .legend{max-width:640px;width:100%;margin-top:30px;border-top:1px solid var(--line);padding-top:22px;display:none;position:relative;z-index:1}
 .legend.show{display:block}
@@ -117,7 +128,7 @@ footer a{color:var(--mist);text-decoration:none}
 <main>
   <section class="intake" aria-label="Enter your birth details">
     <h2>The inscription</h2>
-    <p>Entered exactly as given at birth. The pattern is deterministic — the same soul always draws the same shape.</p>
+    <p>Entered exactly as given at birth. The pattern weaves itself live as you type — the same soul always draws the same shape.</p>
     <label for="bname">Full birth name</label>
     <input type="text" id="bname" autocomplete="off" spellcheck="false" placeholder="As it appears on your birth certificate">
     <div class="hint">All given names and surname. Suffixes (Jr, III) are left off.</div>
@@ -145,10 +156,14 @@ footer a{color:var(--mist);text-decoration:none}
     </div>
     <div class="dls">
       <button class="dl-btn" onclick="withGate(sharePattern)">Share</button>
+      <button class="dl-btn" id="copy-btn" onclick="copyLink()">Copy link</button>
       <button class="dl-btn" onclick="withGate(dlPNG)">Download PNG</button>
-      <button class="dl-btn" onclick="withGate(dlWallpaper)">Wallpaper</button>
+      <button class="dl-btn" onclick="withGate(dlWallpaper)">Story 1080&times;1920</button>
       <button class="dl-btn" onclick="withGate(dlSVG)">Download SVG</button>
       <button class="dl-btn" id="hd-btn" onclick="openUnlock()">Unlock HD &#10022;</button>
+    </div>
+    <div class="dls">
+      <a class="dl-btn collide" href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener">&#9889; Collide patterns with someone</a>
     </div>
   </section>
 </main>
@@ -170,7 +185,7 @@ footer a{color:var(--mist);text-decoration:none}
 <div class="upsell" id="upsell">
   <h3>This is the shape. The map is the meaning.</h3>
   <p>Your Soul Map reads every layer of this pattern — your road, your equipment, your debts and how to release them — in six sections written for you alone.</p>
-  <a id="map-link" href="https://thefirstspark.shop" target="_blank" rel="noopener">Get your Soul Map &mdash; $22</a>
+  <a id="map-link" href="https://soul-maps.thefirstspark.shop" target="_blank" rel="noopener">Get your Soul Map &mdash; $22</a>
 </div>
 
 <div class="overlay" id="gate-overlay">
@@ -204,7 +219,8 @@ footer a{color:var(--mist);text-decoration:none}
 <script>
 "use strict";
 /* ---------- config: set these before going live ---------- */
-const SOUL_MAP_URL="https://thefirstspark.shop";
+const SOUL_MAP_URL="https://soul-maps.thefirstspark.shop";
+const WATERMARK="THEFIRSTSPARK.SHOP · @THEREALFIRSTSPARK";
 const GATE_ENDPOINT="";
 const UNLOCK_CODES=["SPARK-1111","SPARK-FIRSTLIGHT"];
 let hdUnlocked=false,gateDone=false,pendingAction=null;
@@ -383,9 +399,9 @@ function draw(soul){
   P("circle",{cx,cy,r:13,fill:"none",stroke:C.b,"stroke-width":sw});
   P("circle",{cx,cy,r:5,fill:dark?"#FCDE5A":"none",stroke:dark?"none":C.a,"stroke-width":sw});
   /* mark */
-  const mk=el("text",{x:400,y:788,"text-anchor":"middle","font-size":"15",
+  const mk=el("text",{x:400,y:788,"text-anchor":"middle","font-size":"14",
     fill:dark?"rgba(139,135,200,.55)":"rgba(27,27,27,.4)","letter-spacing":"3","font-family":"Outfit, sans-serif"},svg);
-  mk.textContent="THEFIRSTSPARK.SHOP";
+  mk.textContent=WATERMARK;
   /* inscribe animation */
   if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
     const hv=paths.length>420||window.innerWidth<600;
@@ -428,9 +444,9 @@ function drawAura(soul,svg){
     el("circle",{cx:400,cy:400,r:330+i*(58/Math.max(lpHalos,1)),fill:"none",
       stroke:"#FCDE5A","stroke-width":1,"stroke-opacity":0.14},svg);
   }
-  const mk=el("text",{x:400,y:788,"text-anchor":"middle","font-size":"15",
+  const mk=el("text",{x:400,y:788,"text-anchor":"middle","font-size":"14",
     fill:"rgba(139,135,200,.55)","letter-spacing":"3","font-family":"Outfit, sans-serif"},svg);
-  mk.textContent="THEFIRSTSPARK.SHOP";
+  mk.textContent=WATERMARK;
   if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
     svg.style.opacity="0";svg.style.transition="opacity 1.8s ease";
     requestAnimationFrame(()=>requestAnimationFrame(()=>{svg.style.opacity="1";}));
@@ -440,11 +456,11 @@ function chainText(inter,fin){
   const uniq=inter.filter((v,i)=>inter.indexOf(v)===i);
   return uniq.length?uniq.join(" → ")+" → "+fin:String(fin);
 }
-function generate(){
+function generate(quiet){
   const name=document.getElementById("bname").value.trim();
   const dateV=document.getElementById("bdate").value;
   const err=document.getElementById("err");
-  if(!name||!dateV||!/[A-Za-z]/.test(name)){err.style.display="block";return;}
+  if(!name||!dateV||!/[A-Za-z]/.test(name)){if(!quiet)err.style.display="block";return;}
   err.style.display="none";
   const[y,m,d]=dateV.split("-").map(Number);
   const lpI=[],exI=[];
@@ -472,7 +488,7 @@ function generate(){
   document.getElementById("map-link").href=SOUL_MAP_URL;
   document.getElementById("pal-name").textContent="Your light: "+PALETTES[currentSoul.tier].name+" — Road "+currentSoul.lp+" met by Vessel "+currentSoul.ex+" (Radiant "+currentSoul.radiant+")";
   draw(currentSoul);
-  if(window.innerWidth<860)document.getElementById("frame").scrollIntoView({behavior:"smooth",block:"start"});
+  if(!quiet&&window.innerWidth<860)document.getElementById("frame").scrollIntoView({behavior:"smooth",block:"start"});
 }
 function reDraw(){if(currentSoul)draw(currentSoul);}
 function setMode(m){
@@ -495,11 +511,17 @@ function serialize(){
   if(hdUnlocked)svg.querySelectorAll("text").forEach(t=>t.remove());
   return new XMLSerializer().serializeToString(svg);
 }
+function fileBase(){
+  const raw=document.getElementById("bname").value.trim().split(/\s+/)[0]||"Soul";
+  const first=raw.replace(/[^A-Za-z]/g,"")||"Soul";
+  const cap=first.charAt(0).toUpperCase()+first.slice(1).toLowerCase();
+  return"Soul-Pattern-"+cap+"-LP"+(currentSoul?currentSoul.lp:"");
+}
 function dlSVG(){
   if(!currentSoul)return;
   const blob=new Blob([serialize()],{type:"image/svg+xml"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);
-  a.download="soul-pattern-"+(mode==="paper"?"coloring":mode)+".svg";a.click();
+  a.download=fileBase()+(mode==="paper"?"-coloring":"")+".svg";a.click();
 }
 function pngBlob(cb){
   const img=new Image();
@@ -515,16 +537,16 @@ function dlPNG(){
   if(!currentSoul)return;
   pngBlob(b=>{
     const a=document.createElement("a");a.href=URL.createObjectURL(b);
-    a.download="soul-pattern-"+(mode==="paper"?"coloring":mode)+".png";a.click();
+    a.download=fileBase()+(mode==="paper"?"-coloring":"")+".png";a.click();
     setTimeout(()=>URL.revokeObjectURL(a.href),4000);
   });
 }
 function sharePattern(){
   if(!currentSoul)return;
   pngBlob(b=>{
-    const f=new File([b],"soul-pattern.png",{type:"image/png"});
+    const f=new File([b],fileBase()+".png",{type:"image/png"});
     if(navigator.canShare&&navigator.canShare({files:[f]})){
-      navigator.share({files:[f],title:"My Soul Pattern",text:"My soul pattern — thefirstspark.shop"}).catch(()=>{});
+      navigator.share({files:[f],title:"My Soul Pattern",text:"My soul pattern — weave yours free: "+patternLink()}).catch(()=>{});
     }else{dlPNG();}
   });
 }
@@ -577,19 +599,52 @@ function dlWallpaper(){
     ctx.fillText("Tier "+["I","II","III","IV","V","VI","VII","VIII","IX","X","XI"][currentSoul.tier]+" \u00B7 "+PALETTES[currentSoul.tier].name.split("\u00B7")[1].trim(),W/2,y+size+90);
     ctx.fillStyle="rgba(139,135,200,.7)";ctx.font="300 24px Outfit, sans-serif";
     ctx.letterSpacing="6px";
-    ctx.fillText(hdUnlocked?"":"THEFIRSTSPARK.SHOP",W/2,H-70);
+    ctx.fillText(hdUnlocked?"":WATERMARK,W/2,H-70);
     c.toBlob(b=>{
       const a=document.createElement("a");a.href=URL.createObjectURL(b);
-      a.download="soul-pattern-wallpaper.png";a.click();
+      a.download=fileBase()+"-story.png";a.click();
       setTimeout(()=>URL.revokeObjectURL(a.href),4000);
     },"image/png");
   };
   img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(serialize());
 }
+/* ---------- shareable pattern links ---------- */
+function patternLink(){
+  const name=document.getElementById("bname").value.trim();
+  const dateV=document.getElementById("bdate").value;
+  return location.origin+location.pathname+"?n="+encodeURIComponent(name)+"&d="+dateV;
+}
+function copyLink(){
+  if(!currentSoul)return;
+  const btn=document.getElementById("copy-btn");
+  const done=()=>{const t=btn.textContent;btn.textContent="Copied ✓";btn.style.color="var(--spark)";
+    setTimeout(()=>{btn.textContent=t;btn.style.color="";},1800);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(patternLink()).then(done).catch(()=>{prompt("Copy your pattern link:",patternLink());});}
+  else prompt("Copy your pattern link:",patternLink());
+}
+/* ---------- weave live as you type ---------- */
+let weaveT=null;
+function liveWeave(){
+  document.getElementById("err").style.display="none";
+  clearTimeout(weaveT);
+  weaveT=setTimeout(()=>generate(true),450);
+}
 if(hdUnlocked)markUnlocked();
-document.getElementById("go").addEventListener("click",generate);
-document.getElementById("bdate").addEventListener("keydown",e=>{if(e.key==="Enter")generate();});
-document.getElementById("bname").addEventListener("input",()=>{document.getElementById("err").style.display="none";});
+document.getElementById("go").addEventListener("click",()=>generate(false));
+document.getElementById("bdate").addEventListener("keydown",e=>{if(e.key==="Enter")generate(false);});
+document.getElementById("bname").addEventListener("input",liveWeave);
+document.getElementById("bdate").addEventListener("input",liveWeave);
+document.getElementById("bdate").addEventListener("change",liveWeave);
+/* auto-generate from a shared link: ?n=Name&d=YYYY-MM-DD */
+(function(){
+  const p=new URLSearchParams(location.search);
+  const n=p.get("n"),d=p.get("d");
+  if(n&&d&&/^\d{4}-\d{2}-\d{2}$/.test(d)){
+    document.getElementById("bname").value=n;
+    document.getElementById("bdate").value=d;
+    generate(true);
+  }
+})();
 </script>
 </body>
 </html>
