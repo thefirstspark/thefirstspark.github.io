@@ -1,10 +1,17 @@
-# robots.txt — The First Spark
-# Last updated: 2026-07-25
+# robots.txt — The First Spark network
+# Last updated: 2026-08-30
+#
+# Submit the index in Search Console (Domain property sc-domain:thefirstspark.shop):
+# https://thefirstspark.shop/sitemap-index.xml
 
 User-agent: *
 Allow: /
 
-# Google Search Console — submit the index:
-# https://thefirstspark.shop/sitemap-index.xml
 Sitemap: https://thefirstspark.shop/sitemap-index.xml
 Sitemap: https://thefirstspark.shop/sitemap.xml
+Sitemap: https://links.thefirstspark.shop/sitemap.xml
+Sitemap: https://soul-maps.thefirstspark.shop/sitemap.xml
+Sitemap: https://sigilcraft.thefirstspark.shop/sitemap.xml
+Sitemap: https://sparkverse.thefirstspark.shop/sitemap.xml
+Sitemap: https://frequency.thefirstspark.shop/sitemap.xml
+Sitemap: https://rituals.thefirstspark.shop/sitemap.xml

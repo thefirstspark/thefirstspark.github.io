@@ -1,94 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Echo Chamber - TheFirstSpark Prototype</title>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-SKL8XQ51ZH');
-    </script>
-    <style>
-        body { font-family: Arial, sans-serif; background: #000; color: #fff; text-align: center; padding: 20px; }
-        #chamber { width: 400px; height: 400px; margin: 20px auto; border: 1px solid #fff; }
-        input, button { margin: 10px; padding: 10px; }
-        #output { margin-top: 20px; }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_0xcayhWXVnKO9y");whop.track("page");</script>
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+  ttq.load('DABS2BBC77U98E0UJH30');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quantum Echo Chamber — The First Spark</title>
+  <meta name="description" content="Name what you are calling in. The chamber turns those words into a color, a tone, and a path number you can feel — the same phrase always returns the same echo." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=VT323&display=swap" rel="stylesheet" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SKL8XQ51ZH');
+  </script>
+  <style>
+    :root {
+      --void: #030308;
+      --indigo: #1a1033;
+      --teal: #00ffcc;
+      --gold: #f4c430;
+      --spark: #ff6a1a;
+      --magenta: #ff2d95;
+      --ink: #e8f6ff;
+      --mute: rgba(232,246,255,.55);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; background: var(--void); color: var(--ink); }
+    body {
+      font-family: 'VT323', monospace;
+      overflow-x: hidden;
+      background:
+        radial-gradient(1200px 600px at 50% -10%, rgba(26,16,51,.9), transparent 60%),
+        radial-gradient(800px 500px at 80% 110%, rgba(255,45,149,.12), transparent 50%),
+        radial-gradient(700px 400px at 10% 90%, rgba(0,255,204,.08), transparent 50%),
+        var(--void);
+    }
+    .stars {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        radial-gradient(1px 1px at 12% 22%, #fff, transparent),
+        radial-gradient(1px 1px at 78% 18%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 44% 64%, #cfe, transparent),
+        radial-gradient(1px 1px at 91% 72%, #fff, transparent),
+        radial-gradient(1px 1px at 6% 81%, #fff, transparent),
+        radial-gradient(1.2px 1.2px at 63% 41%, #fd8, transparent);
+      background-size: 100% 100%;
+      opacity: .35;
+    }
+    .wrap {
+      position: relative; z-index: 1;
+      max-width: 720px; margin: 0 auto;
+      padding: 2.2rem 1.25rem 4rem;
+      text-align: center;
+    }
+    .eyebrow {
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: .42em;
+      font-size: .62rem;
+      color: var(--teal);
+      text-transform: uppercase;
+      opacity: .75;
+      margin-bottom: .85rem;
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.7rem, 6vw, 2.7rem);
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-shadow: 0 0 18px rgba(0,255,204,.35), 0 0 40px rgba(255,106,26,.18);
+      animation: glitch 6s infinite alternate;
+    }
+    @keyframes glitch {
+      0%,90%,100% { transform: translate(0); }
+      92% { transform: translate(-1px, 1px); }
+      96% { transform: translate(1px, -1px); }
+    }
+    .lede {
+      font-size: 1.25rem;
+      color: var(--mute);
+      margin: .85rem auto 1.6rem;
+      max-width: 34rem;
+      line-height: 1.35;
+    }
+    #chamber {
+      width: min(100%, 420px);
+      aspect-ratio: 1;
+      margin: 0 auto 1.4rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid rgba(0,255,204,.28);
+      box-shadow:
+        0 0 0 8px rgba(3,3,8,.6),
+        0 0 40px rgba(0,255,204,.18),
+        inset 0 0 60px rgba(0,0,0,.55);
+      background: #000;
+    }
+    #chamber canvas { display: block; width: 100% !important; height: 100% !important; }
+    .console {
+      display: flex; gap: .55rem; flex-wrap: wrap;
+      justify-content: center; align-items: stretch;
+      margin-bottom: 1.2rem;
+    }
+    input[type="text"] {
+      flex: 1 1 240px;
+      min-width: 0;
+      background: rgba(10,8,22,.75);
+      border: 1px solid rgba(0,255,204,.28);
+      color: var(--ink);
+      font-family: 'VT323', monospace;
+      font-size: 1.25rem;
+      padding: .7rem .9rem;
+      border-radius: 999px;
+      outline: none;
+      letter-spacing: .03em;
+    }
+    input[type="text"]:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 18px rgba(244,196,48,.18);
+    }
+    button.echo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      background: linear-gradient(120deg, var(--gold), var(--spark));
+      color: #120800;
+      border: 0;
+      border-radius: 999px;
+      padding: .85rem 1.15rem;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 0 22px rgba(255,106,26,.28);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    button.echo:hover { transform: scale(1.04); box-shadow: 0 0 32px rgba(244,196,48,.45); }
+    button.echo:disabled { opacity: .55; cursor: wait; transform: none; }
+    #output {
+      min-height: 6.5rem;
+      padding: 1.1rem 1.2rem 1.25rem;
+      border: 1px solid rgba(0,255,204,.16);
+      background: rgba(8,6,18,.55);
+      border-radius: 18px;
+      text-align: left;
+    }
+    #output .awaiting {
+      color: var(--mute); text-align: center; font-size: 1.15rem;
+    }
+    .aff-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: .58rem;
+      letter-spacing: .28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: .35rem;
+    }
+    .affirmation {
+      font-size: 1.45rem;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 0 12px rgba(0,255,204,.25);
+    }
+    .meta {
+      display: flex; flex-wrap: wrap; gap: .55rem .9rem;
+      margin-top: .85rem;
+      font-size: 1.05rem;
+      color: var(--mute);
+    }
+    .meta b { color: var(--teal); font-weight: 400; }
+    .history {
+      margin-top: 1.4rem;
+      text-align: left;
+    }
+    .history h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: .62rem;
+      letter-spacing: .28em;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: .55rem;
+    }
+    .echo-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .35rem .7rem;
+      padding: .45rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: 1.08rem;
+    }
+    .swatch {
+      width: 14px; height: 14px; border-radius: 50%;
+      margin-top: .28rem;
+      box-shadow: 0 0 8px currentColor;
+    }
+    .echo-row small { color: var(--mute); display: block; }
+    footer {
+      margin-top: 2rem;
+      font-size: .95rem;
+      color: var(--mute);
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-shadow: 0 0 12px var(--gold); }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_0xcayhWXVnKO9y");whop.track("page");</script>
 </head>
 <body>
-    <h1>Quantum Echo Chamber</h1>
-    <p>Enter your intention below to generate a quantum echo.</p>
-    
-    <input type="text" id="intention" placeholder="e.g., I seek abundance">
-    <button onclick="generateEcho()">Echo Intention</button>
-    
-    <div id="chamber"></div>
-    <div id="output"></div>
-    
-    <script>
-        // Setup Three.js scene for visuals
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(400, 400);
-        document.getElementById('chamber').appendChild(renderer.domElement);
-        
-        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
-        const knot = new THREE.Mesh(geometry, material);
-        scene.add(knot);
-        camera.position.z = 50;
-        
-        function animate() {
-            requestAnimationFrame(animate);
-            knot.rotation.x += 0.01;
-            knot.rotation.y += 0.01;
-            renderer.render(scene, camera);
-        }
-        animate();
-        
-        // Audio setup
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        
-        function generateTone(frequency, duration) {
-            const oscillator = audioCtx.createOscillator();
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-            oscillator.connect(audioCtx.destination);
-            oscillator.start();
-            setTimeout(() => oscillator.stop(), duration * 1000);
-        }
-        
-        // Main function to process intention
-        function generateEcho() {
-            const intention = document.getElementById('intention').value.trim();
-            if (!intention) return alert('Enter an intention!');
-            
-            // Simple "AI" processing: evolve intention (in real version, integrate with NLP API)
-            const themes = intention.toLowerCase().split(' ').filter(word => word.length > 3);
-            const quantumAffirmation = `I am entangled with infinite ${themes[0] || 'possibilities'}.`;
-            
-            // Visual echo: change color based on input
-            const color = intention.length % 2 === 0 ? 0xff0000 : 0x0000ff;
-            knot.material.color.setHex(color);
-            
-            // Audio echo: play binaural beat (simplified)
-            generateTone(440, 2); // Left ear tone
-            setTimeout(() => generateTone(450, 2), 100); // Right ear offset for beat
-            
-            // Text output
-            document.getElementById('output').innerHTML = `
-                <h2>Quantum Affirmation:</h2>
-                <p>${quantumAffirmation}</p>
-                <p>Echo Strength: ${Math.round(Math.random() * 100)}% (Track over sessions)</p>
-            `;
-        }
-    </script>
+  <div class="stars"></div>
+  <main class="wrap">
+    <div class="eyebrow">Instrument of Awakening</div>
+    <h1>QUANTUM ECHO CHAMBER</h1>
+    <p class="lede">Write the sentence you are living toward. The chamber does not invent a fortune. It reads the shape of your words and hands back a color, a standing tone, and a path number. Same sentence, same echo — every time. That is how you know it is yours.</p>
+
+    <div id="chamber" aria-hidden="true"></div>
+
+    <form class="console" id="echo-form">
+      <input type="text" id="intention" maxlength="120" autocomplete="off" placeholder="I remember I already have the key…" />
+      <button class="echo" type="submit" id="echo-btn">Send into the chamber</button>
+    </form>
+
+    <div id="output">
+      <p class="awaiting">Nothing has been spoken yet. The knot is idle. When you send a sentence, it will change color and sing the tone that belongs to those words.</p>
+    </div>
+
+    <section class="history" id="history-wrap" hidden>
+      <h2>What you have already sent</h2>
+      <div id="history-list"></div>
+    </section>
+
+    <footer>
+      Kept on this device only · <a href="https://thefirstspark.shop">thefirstspark.shop</a>
+      · <a href="/">back to the lobby</a>
+    </footer>
+  </main>
+
+  <script>
+    const KEY = 'tfs_echo_chamber_v1';
+    const PALETTE = [0x00ffcc, 0xf4c430, 0xff6a1a, 0xff2d95, 0x7aa2ff, 0xc0ff9a, 0xffe08a];
+
+    function hashString(str) {
+      let h = 2166136261;
+      for (let i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return h >>> 0;
+    }
+
+    function reduceDigits(n) {
+      n = Math.abs(n);
+      while (n > 9 && n !== 11 && n !== 22 && n !== 33) {
+        n = String(n).split('').reduce((a, d) => a + Number(d), 0);
+      }
+      return n;
+    }
+
+    function derive(intention) {
+      const raw = intention.trim();
+      const h = hashString(raw.toLowerCase());
+      const color = PALETTE[h % PALETTE.length];
+      const freq = 220 + (h % 37) * 8;
+      const beat = 4 + (h % 9);
+      const path = reduceDigits(h);
+      const words = raw.split(/\s+/).filter(w => w.replace(/[^a-zA-Z]/g, '').length > 2);
+      const seed = (words[words.length - 1] || 'presence').replace(/[^a-zA-Z]/g, '').toLowerCase() || 'presence';
+      const cap = seed.charAt(0).toUpperCase() + seed.slice(1);
+      const templates = [
+        'You named ' + seed + '. The field was already holding it. Wear the tone until the outer world catches up.',
+        cap + ' is not coming toward you. It is the frequency you just admitted you are.',
+        'The chamber heard ' + seed + ' and answered in kind. Do not add more words. Let this one ring.',
+        'You do not chase ' + seed + '. You stop leaking it. This color is the reminder.',
+        'Standing wave locked on ' + seed + '. Same sentence tomorrow will prove it was never random.'
+      ];
+      return {
+        raw,
+        color,
+        hex: '#' + color.toString(16).padStart(6, '0'),
+        freq,
+        beat,
+        path,
+        affirmation: templates[h % templates.length],
+        at: new Date().toISOString()
+      };
+    }
+
+    const host = document.getElementById('chamber');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const size = Math.min(host.clientWidth || 420, 420);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(size, size);
+    renderer.setClearColor(0x000000, 1);
+    host.appendChild(renderer.domElement);
+    camera.position.z = 42;
+
+    const knotGeo = new THREE.TorusKnotGeometry(10, 2.6, 180, 24);
+    const knotMat = new THREE.MeshBasicMaterial({
+      color: 0x00ffcc,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.72
+    });
+    const knot = new THREE.Mesh(knotGeo, knotMat);
+    scene.add(knot);
+
+    const innerGeo = new THREE.IcosahedronGeometry(4.2, 1);
+    const innerMat = new THREE.MeshBasicMaterial({
+      color: 0xf4c430,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.55
+    });
+    const core = new THREE.Mesh(innerGeo, innerMat);
+    scene.add(core);
+
+    const sparkGeo = new THREE.BufferGeometry();
+    const sparkCount = 180;
+    const sparkPos = new Float32Array(sparkCount * 3);
+    for (let i = 0; i < sparkCount; i++) {
+      const r = 16 + Math.random() * 14;
+      const t = Math.random() * Math.PI * 2;
+      const p = Math.acos(2 * Math.random() - 1);
+      sparkPos[i * 3] = r * Math.sin(p) * Math.cos(t);
+      sparkPos[i * 3 + 1] = r * Math.sin(p) * Math.sin(t);
+      sparkPos[i * 3 + 2] = r * Math.cos(p);
+    }
+    sparkGeo.setAttribute('position', new THREE.BufferAttribute(sparkPos, 3));
+    const sparks = new THREE.Points(
+      sparkGeo,
+      new THREE.PointsMaterial({ color: 0xffe08a, size: 0.35, transparent: true, opacity: 0.7 })
+    );
+    scene.add(sparks);
+
+    let spinBoost = 1;
+    function animate() {
+      requestAnimationFrame(animate);
+      knot.rotation.x += 0.004 * spinBoost;
+      knot.rotation.y += 0.007 * spinBoost;
+      core.rotation.y -= 0.012 * spinBoost;
+      core.rotation.z += 0.006 * spinBoost;
+      sparks.rotation.y += 0.002;
+      spinBoost += (1 - spinBoost) * 0.03;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      const s = Math.min(host.clientWidth || 420, 420);
+      renderer.setSize(s, s);
+    });
+
+    let audioCtx = null;
+    function ensureAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function playEcho(freq, beat, duration) {
+      const ctx = ensureAudio();
+      const now = ctx.currentTime;
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.0001, now);
+      master.gain.exponentialRampToValueAtTime(0.09, now + 0.08);
+      master.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+      master.connect(ctx.destination);
+      [freq, freq + beat].forEach((f, i) => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = i === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(f, now);
+        g.gain.value = i === 0 ? 1 : 0.45;
+        osc.connect(g);
+        g.connect(master);
+        osc.start(now);
+        osc.stop(now + duration);
+      });
+    }
+
+    function loadHistory() {
+      try { return JSON.parse(localStorage.getItem(KEY)) || []; }
+      catch { return []; }
+    }
+    function saveHistory(list) {
+      localStorage.setItem(KEY, JSON.stringify(list.slice(0, 24)));
+    }
+
+    function renderHistory(list) {
+      const wrap = document.getElementById('history-wrap');
+      const box = document.getElementById('history-list');
+      if (!list.length) { wrap.hidden = true; return; }
+      wrap.hidden = false;
+      box.innerHTML = list.map(e => `
+        <div class="echo-row">
+          <span class="swatch" style="background:${e.hex};color:${e.hex}"></span>
+          <div>
+            ${escapeHtml(e.raw)}
+            <small>${e.freq} Hz · path ${e.path} · ${new Date(e.at).toLocaleString()}</small>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function renderOutput(echo) {
+      document.getElementById('output').innerHTML = `
+        <div class="aff-label">The chamber answers</div>
+        <p class="affirmation">${escapeHtml(echo.affirmation)}</p>
+        <div class="meta">
+          <span>Tone <b>${echo.freq} Hz</b></span>
+          <span>Beat <b>+${echo.beat}</b></span>
+          <span>Path <b>${echo.path}</b></span>
+          <span>Color <b>${echo.hex}</b></span>
+        </div>
+      `;
+    }
+
+    const form = document.getElementById('echo-form');
+    const input = document.getElementById('intention');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) { input.focus(); return; }
+      const echo = derive(text);
+      knotMat.color.setHex(echo.color);
+      innerMat.color.setHex(echo.color === 0xf4c430 ? 0x00ffcc : 0xf4c430);
+      sparks.material.color.setHex(echo.color);
+      spinBoost = 4.2;
+      playEcho(echo.freq, echo.beat, 2.4);
+      renderOutput(echo);
+      const list = loadHistory();
+      list.unshift(echo);
+      saveHistory(list);
+      renderHistory(list);
+      if (window.gtag) gtag('event', 'echo_intention', { path: echo.path });
+    });
+
+    renderHistory(loadHistory());
+  </script>
 </body>
 </html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+  ttq.load('DABS2BBC77U98E0UJH30');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌀 SPARKVERSE · Sonic Spiral</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0a0f;
+            color: #e8e3f0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #f7c948, #ff7eb3, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        .sub {
+            font-size: 0.8rem;
+            color: #8882a0;
+            letter-spacing: 3px;
+            margin-bottom: 22px;
+        }
+
+        .sound-indicator {
+            font-size: 0.7rem;
+            color: #6a5f8a;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sound-indicator .pulse {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4a3a6a;
+            transition: 0.2s;
+        }
+
+        .sound-indicator .pulse.active {
+            background: #f7c948;
+            box-shadow: 0 0 20px rgba(247, 201, 72, 0.6);
+            animation: pulse 0.6s ease-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 520px;
+            max-width: 100%;
+            aspect-ratio: 1/1;
+            margin: 0 auto 24px;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 50%;
+            box-shadow: 0 0 80px rgba(167, 139, 250, 0.12);
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        .info-panel {
+            background: rgba(18, 16, 28, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 20px 28px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .info-panel .name {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 2px;
+        }
+
+        .info-panel .glyph-big {
+            font-size: 2.4rem;
+            display: block;
+            margin: 4px 0 2px;
+        }
+
+        .info-panel .tagline {
+            font-size: 0.95rem;
+            color: #b8b0d0;
+            font-style: italic;
+        }
+
+        .info-panel .realm-badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 5px 16px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: #1e1a2e;
+            border: 1px solid #3a3450;
+        }
+
+        .info-panel .core-code {
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 0.75rem;
+        }
+
+        .core-code span {
+            background: #13101f;
+            padding: 4px 14px;
+            border-radius: 30px;
+            border: 1px solid #2a2540;
+        }
+
+        .core-code .select { color: #6fcf97; }
+        .core-code .release { color: #f28b82; }
+        .core-code .witness { color: #7aa9ff; }
+
+        .spiral-progress {
+            margin-top: 14px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #25203a;
+            transition: 0.3s;
+            border: 1px solid #3a3450;
+        }
+
+        .dot.active {
+            background: #f7c948;
+            border-color: #f7c948;
+            box-shadow: 0 0 14px rgba(247, 201, 72, 0.5);
+            transform: scale(1.25);
+        }
+
+        .dot.visited {
+            background: #6f5f9a;
+            border-color: #8a7ab0;
+        }
+
+        .controls {
+            margin-top: 14px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .controls button {
+            background: #1e1a2e;
+            border: 1px solid #3a3450;
+            color: #c8c0e0;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .controls button:hover {
+            background: #2a2540;
+            border-color: #6a5f8a;
+        }
+
+        .hint {
+            margin-top: 12px;
+            font-size: 0.7rem;
+            color: #5f5a78;
+            letter-spacing: 0.5px;
+        }
+
+        .hint em {
+            color: #a89fc0;
+            font-style: normal;
+        }
+
+        @media (max-width: 540px) {
+            .info-panel { padding: 16px; }
+            .info-panel .name { font-size: 1.5rem; }
+            .core-code { gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🌀 SPARKVERSE</h1>
+    <div class="sub">SONIC SPIRAL · 12 TONES</div>
+
+    <div class="sound-indicator">
+        <span>🔊</span>
+        <span class="pulse" id="soundPulse"></span>
+        <span id="soundLabel">ready</span>
+    </div>
+
+    <div class="wheel-container">
+        <canvas id="wheelCanvas" width="600" height="600"></canvas>
+    </div>
+
+    <div class="info-panel" id="infoPanel">
+        <span class="glyph-big" id="glyphDisplay">🔥</span>
+        <div class="name" id="nameDisplay">Phoenix</div>
+        <div class="tagline" id="taglineDisplay">"I rise from the fire"</div>
+        <div class="realm-badge" id="realmDisplay">■ PHYSICS · SELECT</div>
+        <div class="core-code">
+            <span class="select">🟢 SELECT</span>
+            <span class="release">🔴 RELEASE</span>
+            <span class="witness">🔵 WITNESS</span>
+        </div>
+        <div class="spiral-progress" id="spiralDots"></div>
+        <div class="controls">
+            <button id="playBtn">▶ PLAY TONE</button>
+            <button id="resetBtn">↺ RESET</button>
+        </div>
+        <div class="hint">🖱️ click wheel · <em>→ / space</em> next · <em>R</em> reset</div>
+    </div>
+
+    <script>
+        // ---- AUDIO ENGINE ----
+        class SonicArchetype {
+            constructor() {
+                this.ctx = null;
+                this.initialized = false;
+            }
+
+            init() {
+                if (this.initialized) return;
+                this.ctx = new(window.AudioContext || window.webkitAudioContext)();
+                this.initialized = true;
+            }
+
+            // each archetype gets a unique sonic signature
+            play(archetypeId) {
+                this.init();
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+
+                const now = this.ctx.currentTime;
+
+                // base frequency: 220Hz + id * 18Hz (spiral upward)
+                const baseFreq = 220 + archetypeId * 18;
+                // add a little randomness per play for organic feel
+                const detune = (Math.random() - 0.5) * 6;
+
+                // ---- MAIN TONE ----
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+
+                // waveform varies by archetype
+                const waveTypes = ['sine', 'triangle', 'sawtooth', 'square'];
+                const wave = waveTypes[archetypeId % 4];
+                osc.type = wave;
+
+                // frequency with slight detune
+                osc.frequency.setValueAtTime(baseFreq + detune, now);
+                // subtle vibrato
+                const vibrato = this.ctx.createOscillator();
+                vibrato.frequency.setValueAtTime(5, now);
+                const vibratoGain = this.ctx.createGain();
+                vibratoGain.gain.setValueAtTime(4, now);
+                vibrato.connect(vibratoGain);
+                vibratoGain.connect(osc.frequency);
+                vibrato.start(now);
+                vibrato.stop(now + 1.2);
+
+                // ADSR envelope
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(0.25, now + 0.04);
+                gain.gain.exponentialRampToValueAtTime(0.12, now + 0.5);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc.start(now);
+                osc.stop(now + 1.2);
+
+                // ---- HARMONIC (fifth above) ----
+                const osc2 = this.ctx.createOscillator();
+                const gain2 = this.ctx.createGain();
+                osc2.type = 'sine';
+                osc2.frequency.setValueAtTime(baseFreq * 1.5 + detune * 0.7, now);
+                gain2.gain.setValueAtTime(0, now);
+                gain2.gain.linearRampToValueAtTime(0.08, now + 0.06);
+                gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+
+                osc2.connect(gain2);
+                gain2.connect(this.ctx.destination);
+                osc2.start(now);
+                osc2.stop(now + 0.9);
+
+                // ---- TONE "GLYPH" (short noise burst for texture) ----
+                if (archetypeId % 3 === 0) {
+                    const bufferSize = this.ctx.sampleRate * 0.04;
+                    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / bufferSize * 6);
+                    }
+                    const noise = this.ctx.createBufferSource();
+                    noise.buffer = buffer;
+                    const ng = this.ctx.createGain();
+                    ng.gain.setValueAtTime(0.06, now);
+                    ng.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+                    noise.connect(ng);
+                    ng.connect(this.ctx.destination);
+                    noise.start(now);
+                }
+
+                // ---- VISUAL PULSE ----
+                const pulse = document.getElementById('soundPulse');
+                pulse.classList.remove('active');
+                void pulse.offsetWidth; // reflow
+                pulse.classList.add('active');
+
+                const label = document.getElementById('soundLabel');
+                const names = ['Phoenix', 'Trickster', 'Oracle', 'Sovereign', 'Conduit', 'Mirror',
+                    'Ember', 'Fracture', 'Wanderer', 'Maker', 'Cipher', 'Crystal'
+                ];
+                label.textContent = '♪ ' + names[archetypeId];
+
+                setTimeout(() => {
+                    pulse.classList.remove('active');
+                }, 700);
+            }
+        }
+
+        const sonic = new SonicArchetype();
+
+        // ---- DATA ----
+        const archetypes = [{
+            id: 0,
+            name: 'Phoenix',
+            glyph: '🔥',
+            tagline: '"I rise from the fire"',
+            realm: '■ PHYSICS · SELECT',
+            color: '#f28b82'
+        }, {
+            id: 1,
+            name: 'Trickster',
+            glyph: '🃏',
+            tagline: '"I flip the game"',
+            realm: '◆ METAPHYSICS · RELEASE',
+            color: '#f7c948'
+        }, {
+            id: 2,
+            name: 'Oracle',
+            glyph: '👁️',
+            tagline: '"I see beyond"',
+            realm: '● RELATIONAL · WITNESS',
+            color: '#7aa9ff'
+        }, {
+            id: 3,
+            name: 'Sovereign',
+            glyph: '👑',
+            tagline: '"I claim my throne"',
+            realm: '▲ TEMPORAL · NAVIGATE',
+            color: '#b39ddb'
+        }, {
+            id: 4,
+            name: 'Conduit',
+            glyph: '⚡',
+            tagline: '"I channel the flow"',
+            realm: '■ PHYSICS · SELECT',
+            color: '#4dd0e1'
+        }, {
+            id: 5,
+            name: 'Mirror',
+            glyph: '🪞',
+            tagline: '"I reflect truth"',
+            realm: '● RELATIONAL · WITNESS',
+            color: '#f06292'
+        }, {
+            id: 6,
+            name: 'Ember',
+            glyph: '🔥',
+            tagline: '"I hold the spark"',
+            realm: '◆ METAPHYSICS · RELEASE',
+            color: '#ff8a65'
+        }, {
+            id: 7,
+            name: 'Fracture',
+            glyph: '💥',
+            tagline: '"I break to rebuild"',
+            realm: '▲ TEMPORAL · NAVIGATE',
+            color: '#ce93d8'
+        }, {
+            id: 8,
+            name: 'Wanderer',
+            glyph: '🧭',
+            tagline: '"I roam the unknown"',
+            realm: '● RELATIONAL · WITNESS',
+            color: '#81d4fa'
+        }, {
+            id: 9,
+            name: 'Maker',
+            glyph: '🛠️',
+            tagline: '"I craft reality"',
+            realm: '■ PHYSICS · SELECT',
+            color: '#a5d6a7'
+        }, {
+            id: 10,
+            name: 'Cipher',
+            glyph: '🔐',
+            tagline: '"I decode the pattern"',
+            realm: '◆ METAPHYSICS · RELEASE',
+            color: '#90caf9'
+        }, {
+            id: 11,
+            name: 'Crystal',
+            glyph: '💎',
+            tagline: '"I resonate pure"',
+            realm: '▲ TEMPORAL · NAVIGATE',
+            color: '#ef9a9a'
+        }];
+
+        const spiralOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+
+        // ---- STATE ----
+        let currentIndex = 0;
+        let visited = new Set();
+
+        const canvas = document.getElementById('wheelCanvas');
+        const ctx = canvas.getContext('2d');
+        const W = 600,
+            H = 600,
+            cx = 300,
+            cy = 300;
+        const outerR = 270,
+            innerR = 40;
+        const total = archetypes.length;
+
+        // ---- DRAW ----
+        function drawWheel(highlightIdx) {
+            ctx.clearRect(0, 0, W, H);
+
+            const grad = ctx.createRadialGradient(cx, cy, 10, cx, cy, outerR + 30);
+            grad.addColorStop(0, '#1e1a2e');
+            grad.addColorStop(1, '#0b0a0f');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(cx, cy, outerR + 30, 0, Math.PI * 2);
+            ctx.fill();
+
+            for (let i = 0; i < total; i++) {
+                const idx = spiralOrder[i];
+                const arc = archetypes[idx];
+                const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
+                const nextAngle = ((i + 1) / total) * Math.PI * 2 - Math.PI / 2;
+
+                const t = i / (total - 1);
+                const r = outerR - t * (outerR - innerR);
+                const nextR = outerR - ((i + 1) / (total - 1)) * (outerR - innerR);
+
+                ctx.beginPath();
+                ctx.moveTo(cx + r * Math.cos(angle), cy + r * Math.sin(angle));
+                ctx.arc(cx, cy, r, angle, nextAngle);
+                ctx.arc(cx, cy, nextR, nextAngle, angle, true);
+                ctx.closePath();
+
+                const isActive = (i === highlightIdx);
+                const isVisited = visited.has(idx);
+
+                let fill = arc.color + '40';
+                if (isActive) fill = arc.color + 'cc';
+                else if (isVisited) fill = arc.color + '80';
+
+                ctx.fillStyle = fill;
+                ctx.fill();
+
+                ctx.strokeStyle = isActive ? '#ffffff' : '#2a2540';
+                ctx.lineWidth = isActive ? 2.5 : 0.8;
+                ctx.stroke();
+
+                const midAngle = (angle + nextAngle) / 2;
+                const labelR = (r + nextR) / 2;
+                const gx = cx + labelR * Math.cos(midAngle);
+                const gy = cy + labelR * Math.sin(midAngle);
+
+                ctx.font = (isActive ? '26px' : '18px') + ' sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.shadowColor = isActive ? 'rgba(255,255,255,0.3)' : 'transparent';
+                ctx.shadowBlur = 12;
+                ctx.fillStyle = isActive ? '#ffffff' : '#c8c0e0';
+                ctx.fillText(arc.glyph, gx, gy);
+                ctx.shadowBlur = 0;
+
+                const labelR2 = (r + nextR) / 2 + 32;
+                const lx = cx + labelR2 * Math.cos(midAngle);
+                const ly = cy + labelR2 * Math.sin(midAngle);
+                ctx.font = '8px sans-serif';
+                ctx.fillStyle = isActive ? '#ffffff' : '#6f5f8a';
+                ctx.fillText(arc.name, lx, ly);
+            }
+
+            const grad2 = ctx.createRadialGradient(cx, cy, 2, cx, cy, innerR);
+            grad2.addColorStop(0, '#f7c948');
+            grad2.addColorStop(1, '#a78bfa');
+            ctx.beginPath();
+            ctx.arc(cx, cy, innerR, 0, Math.PI * 2);
+            ctx.fillStyle = grad2;
+            ctx.fill();
+            ctx.font = '24px sans-serif';
+            ctx.fillStyle = '#0b0a0f';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🌀', cx, cy);
+
+            ctx.beginPath();
+            ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(167,139,250,0.12)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+
+        // ---- UPDATE UI ----
+        function updateUI(index, playSound = true) {
+            const idx = spiralOrder[index];
+            const arc = archetypes[idx];
+
+            document.getElementById('glyphDisplay').textContent = arc.glyph;
+            document.getElementById('nameDisplay').textContent = arc.name;
+            document.getElementById('taglineDisplay').textContent = arc.tagline;
+            document.getElementById('realmDisplay').textContent = arc.realm;
+
+            const dotContainer = document.getElementById('spiralDots');
+            dotContainer.innerHTML = '';
+            for (let i = 0; i < total; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                const id = spiralOrder[i];
+                if (i === index) dot.classList.add('active');
+                else if (visited.has(id)) dot.classList.add('visited');
+                dotContainer.appendChild(dot);
+            }
+
+            drawWheel(index);
+
+            if (playSound) {
+                sonic.play(idx);
+            }
+        }
+
+        // ---- NEXT ----
+        function nextArchetype() {
+            visited.add(spiralOrder[currentIndex]);
+            currentIndex = (currentIndex + 1) % total;
+            updateUI(currentIndex, true);
+        }
+
+        // ---- RESET ----
+        function resetWheel() {
+            visited.clear();
+            currentIndex = 0;
+            visited.add(spiralOrder[0]);
+            updateUI(0, true);
+        }
+
+        // ---- CLICK ----
+        function handleClick(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+
+            let clientX, clientY;
+            if (e.touches) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+                e.preventDefault();
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+
+            const mx = (clientX - rect.left) * scaleX;
+            const my = (clientY - rect.top) * scaleY;
+
+            const dx = mx - cx,
+                dy = my - cy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist > outerR + 10) return;
+
+            let angle = Math.atan2(dy, dx);
+            if (angle < -Math.PI / 2) angle += Math.PI * 2;
+            let idx = Math.floor(((angle + Math.PI / 2) / (Math.PI * 2)) * total);
+            if (idx >= total) idx = total - 1;
+
+            visited.add(spiralOrder[currentIndex]);
+            currentIndex = idx;
+            visited.add(spiralOrder[currentIndex]);
+            updateUI(currentIndex, true);
+        }
+
+        // ---- EVENTS ----
+        canvas.addEventListener('click', handleClick);
+        canvas.addEventListener('touchstart', handleClick, { passive: false });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextArchetype();
+            }
+            if (e.key === 'r' || e.key === 'R') {
+                resetWheel();
+            }
+        });
+
+        document.getElementById('playBtn').addEventListener('click', () => {
+            const idx = spiralOrder[currentIndex];
+            sonic.play(idx);
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', resetWheel);
+
+        // ---- INIT ----
+        visited.add(spiralOrder[0]);
+        updateUI(0, true);
+
+        // click anywhere to init audio context (required by browsers)
+        document.addEventListener('click', () => {
+            sonic.init();
+        }, { once: true });
+
+        console.log('🌀 SPARKVERSE · Sonic Spiral active');
+        console.log('🎵 each archetype has a unique tone');
+        console.log('🖱️ click · → / space · R reset');
+    </script>
+
+</body>
+</html>
