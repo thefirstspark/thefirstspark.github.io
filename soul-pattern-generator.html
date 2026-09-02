@@ -346,9 +346,12 @@ function draw(soul){
     const col=shadeCol;
     const isKnot=(soul.exDebt&&i===Math.floor(ringN/2));
     const rot=rng()*Math.PI/6;
+    /* Vessel knot sits in its own sector (DL-010): mult is always a multiple of 12,
+       so step knotK starts exactly at sector*30deg; rot (<30deg) keeps it inside that span. */
+    const knotK=soul.vesselSector*(mult/12);
     for(let k=0;k<mult;k++){
       const a=k*2*Math.PI/mult+rot;
-      if(isKnot&&k===0){
+      if(isKnot&&k===knotK){
         const[kx,ky]=polar(cx,cy,r,a);
         P("path",{d:spiralPath(kx,ky,band+6,2.2),fill:"none",stroke:C.debt,"stroke-width":sw,"stroke-linecap":"round"});
         continue;
@@ -467,11 +470,15 @@ function generate(quiet){
   const lp=lifePath(y,m,d,lpI);
   const ex=expression(name,exI);
   const lpDebts=findDebts(lpI),exDebts=findDebts([...exI,...partDebtPool(name)]);
-  const seed=fnv(name.toLowerCase().replace(/\s+/g," ")+"|"+dateV);
+  const normName=name.toLowerCase().replace(/\s+/g," ");
+  const seed=fnv(normName+"|"+dateV);
+  /* Road knot sector hashes name|date (the Road is date-born). The Vessel is name-born,
+     so its knot sector hashes the name alone — independent of the Road, may land in any quadrant. */
+  const vesselSector=fnv("vessel|"+normName)%12;
   const radiant=radiantNumber(lp,ex);
   const tier=tierFromRadiant(radiant);
   currentSoul={lp,ex,radiant,lpDebt:lpDebts.length>0,exDebt:exDebts.length>0,
-    debtSector:seed%12,seed,tier};
+    debtSector:seed%12,vesselSector,seed,tier};
   document.getElementById("lp-v").textContent=lp;
   document.getElementById("lp-c").textContent=chainText(lpI,lp);
   document.getElementById("ex-v").textContent=ex;
