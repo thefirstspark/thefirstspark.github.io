@@ -1587,11 +1587,9 @@
                 <span style="display:block; text-align:center; margin-top:12px; font-size:.62em; letter-spacing:.14em; text-transform:uppercase; color:var(--dim);">This is the product — a live page, not a PDF. Open the founder's actual map →</span>
             </a>
 
-            <div class="map-spotlight">
+            <div class="map-spotlight" style="text-align:center; padding:48px 0 8px;">
                 <div class="sec-label">◈ &nbsp; Proof</div>
-                <h2 class="sec-title" style="margin-bottom:10px;">Real maps. Real archive.</h2>
-                <p class="sec-sub" style="margin-bottom:28px;">A new trio every day.</p>
-                <div id="mapSpotlight"></div>
+                <a href="https://soul-maps.thefirstspark.shop/" target="_blank" rel="noopener noreferrer" class="btn-g" data-track="featured_archive">Browse the Soul Map Archive →</a>
             </div>
         </div>
     </section>
@@ -2351,7 +2349,6 @@
     <script>
     var heroProofEl = document.getElementById('heroProof');
     if (heroProofEl) SoulMapRotation.renderHeroProof(heroProofEl);
-    SoulMapRotation.renderSpotlight(document.getElementById('mapSpotlight'), { count: 3 });
 
     (function initHeroMotion() {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
