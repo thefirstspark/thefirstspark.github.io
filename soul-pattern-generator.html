@@ -167,6 +167,7 @@ footer a{color:var(--mist);text-decoration:none}
       <button class="mode-btn" id="m-paper" onclick="setMode('paper')">Coloring page</button>
     </div>
     <div class="dls">
+      <button class="dl-btn" onclick="emailPattern()">Email me</button>
       <button class="dl-btn" onclick="withGate(sharePattern)">Share</button>
       <button class="dl-btn" id="copy-btn" onclick="copyLink()">Copy link</button>
       <button class="dl-btn" onclick="withGate(dlPNG)">Download PNG</button>
@@ -203,12 +204,12 @@ footer a{color:var(--mist);text-decoration:none}
 <div class="overlay" id="gate-overlay">
   <div class="modal">
     <h3>Where should your pattern go?</h3>
-    <p>Enter your email and your downloads unlock. We send spark, never spam.</p>
+    <p>We email you a permanent link to this exact pattern and unlock downloads. Spark, never spam.</p>
     <div class="merr" id="gate-err">Enter a valid email first.</div>
     <input type="email" id="gate-email" placeholder="you@example.com" autocomplete="email">
     <div class="row">
       <button class="ghost" onclick="closeGate()">Not now</button>
-      <button class="primary" onclick="submitGate()">Unlock downloads</button>
+      <button class="primary" onclick="submitGate()">Send it &amp; unlock</button>
     </div>
   </div>
 </div>
@@ -233,7 +234,7 @@ footer a{color:var(--mist);text-decoration:none}
 /* ---------- config: set these before going live ---------- */
 const SOUL_MAP_URL="https://soul-maps.thefirstspark.shop";
 const WATERMARK="THEFIRSTSPARK.SHOP · @THEREALFIRSTSPARK";
-const GATE_ENDPOINT="";
+const GATE_ENDPOINT="https://links.thefirstspark.shop/api/subscribe";
 const UNLOCK_CODES=["SPARK-1111","SPARK-FIRSTLIGHT"];
 let hdUnlocked=false,gateDone=false,pendingAction=null;
 try{hdUnlocked=localStorage.getItem("tfs-hd")==="1";gateDone=localStorage.getItem("tfs-gate")==="1";}catch(e){}
@@ -576,12 +577,24 @@ function withGate(fn){
   document.getElementById("gate-overlay").classList.add("show");
 }
 function closeGate(){document.getElementById("gate-overlay").classList.remove("show");pendingAction=null;}
+let wantEmail=false;
+function emailPattern(){
+  if(!currentSoul)return;
+  pendingAction=null;wantEmail=true;
+  try{const saved=localStorage.getItem("tfs-email");if(saved)document.getElementById("gate-email").value=saved;}catch(e){}
+  document.getElementById("gate-overlay").classList.add("show");
+}
 function submitGate(){
   const em=document.getElementById("gate-email").value.trim();
   const err=document.getElementById("gate-err");
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){err.style.display="block";return;}
   err.style.display="none";
-  try{fetch(GATE_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:em,source:"soul-pattern"})});}catch(e){}
+  const payload={email:em,source:"soul-pattern",want_email:wantEmail||!gateDone,
+    name:document.getElementById("bname").value.trim(),dob:document.getElementById("bdate").value};
+  wantEmail=false;
+  try{fetch(GATE_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).catch(function(){});}catch(e){}
+  try{localStorage.setItem("tfs-email",em);}catch(e){}
+  const cb=document.getElementById("copy-btn");if(cb){const t=cb.textContent;cb.textContent="Sent to your inbox ✦";setTimeout(function(){cb.textContent=t;},2600);}
   gateDone=true;try{localStorage.setItem("tfs-gate","1");}catch(e){}
   document.getElementById("gate-overlay").classList.remove("show");
   if(pendingAction){const f=pendingAction;pendingAction=null;f();}

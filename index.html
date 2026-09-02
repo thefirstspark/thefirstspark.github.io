@@ -1421,6 +1421,15 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             margin-bottom: 14px;
             opacity: .7;
         }
+        .spark-signup { max-width: 520px; margin: 0 auto 34px; text-align: center; }
+        .spark-signup .ss-label { font-family: 'Orbitron', sans-serif; font-size: .55rem; letter-spacing: .3em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
+        .spark-signup .ss-copy { font-size: .8rem; color: var(--dim); margin-bottom: 16px; line-height: 1.6; }
+        .spark-signup form { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .spark-signup input { flex: 1 1 220px; max-width: 320px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.14); color: var(--white); font-family: 'Space Mono', monospace; font-size: .82rem; padding: 12px 14px; border-radius: 999px; outline: none; }
+        .spark-signup input:focus { border-color: var(--spark); box-shadow: 0 0 0 1px var(--spark) inset; }
+        .spark-signup button { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; background: var(--spark); color: var(--void); border: 0; padding: 12px 22px; border-radius: 999px; cursor: pointer; box-shadow: 0 0 20px rgba(251,191,36,.3); }
+        .spark-signup button:disabled { opacity: .6; cursor: default; }
+        .spark-signup .ss-msg { font-size: .72rem; margin-top: 10px; min-height: 1.2em; color: var(--spark); }
         .footer-links {
             display: flex;
             justify-content: center;
@@ -1753,6 +1762,15 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <footer>
         <div class="wrap">
             <a href="/" class="footer-logo">THE FIRST SPARK</a>
+            <div class="spark-signup">
+                <div class="ss-label">The Drop</div>
+                <div class="ss-copy">One email when something ships. A new tool, a chapter, a map spotlight. No schedule, no filler.</div>
+                <form id="spark-signup-form" novalidate>
+                    <input type="email" name="email" id="spark-signup-email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">
+                    <button type="submit">Get the drops</button>
+                </form>
+                <div class="ss-msg" id="spark-signup-msg" role="status"></div>
+            </div>
             <div class="footer-links">
                 <a href="ecosystem.html">Start Here</a>
                 <a href="map.html">Soul Map · $22</a>
@@ -2449,5 +2467,20 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     });
     </script>
 
+<script>
+    (function(){
+      var f=document.getElementById('spark-signup-form');if(!f)return;
+      var inp=document.getElementById('spark-signup-email'),msg=document.getElementById('spark-signup-msg'),btn=f.querySelector('button');
+      f.addEventListener('submit',function(e){
+        e.preventDefault();var em=(inp.value||'').trim();
+        if(!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(em)){msg.textContent='Enter a valid email first.';return;}
+        btn.disabled=true;msg.textContent='Sending…';
+        fetch('https://links.thefirstspark.shop/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'homepage',want_email:true})})
+          .then(function(r){return r.json();})
+          .then(function(d){if(d&&d.ok){msg.textContent='Check your inbox. Your first spark is on its way.';inp.value='';try{localStorage.setItem('tfs-email',em);}catch(x){}}else{msg.textContent='That did not go through. Try again in a minute.';btn.disabled=false;}})
+          .catch(function(){msg.textContent='That did not go through. Try again in a minute.';btn.disabled=false;});
+      });
+    })();
+    </script>
 </body>
 </html>
