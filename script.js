@@ -2,7 +2,7 @@
 function navigateTo(destination) {
     switch(destination) {
         case 'players':
-            window.location.href = 'players.html';
+            window.location.href = 'playerslounge/';
             break;
         case 'invest':
             window.location.href = 'invest.html';
@@ -90,9 +90,9 @@ function toggleHelp() {
 // Signup function
 function signup(tier) {
     const whopLinks = {
-        'free': 'https://whop.com/sparkverse-511c/spark-acces/',
-        'player': 'https://whop.com/sparkverse-511c/spark-acces/',
-        'og': 'https://whop.com/sparkverse-511c/spark-acces/'
+        'free': 'https://whop.com/sparkverse-511c/spark-access/',
+        'player': 'https://whop.com/sparkverse-511c/spark-access/',
+        'og': 'https://whop.com/sparkverse-511c/spark-access/'
     };
 
     window.location.href = whopLinks[tier];
