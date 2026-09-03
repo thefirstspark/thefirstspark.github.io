@@ -1,5 +1,7 @@
 # CLAUDE.md — The First Spark Repo Operating Manual
 
+**Read `SITE_CONSTITUTION.md` first.** Shared rulebook for all TFS properties; this file adds main-site specifics.
+
 **Read this before every action. Source of truth for Claude pushing to this repo.**
 
 ---
@@ -69,52 +71,15 @@ When updating one investor page, ensure figures still match across all of them.
 
 ## 🎨 Brand & Design System
 
-**Voice:**
-- Direct, declarative, no fluff
-- Italic emphasis on power words (em tags styled gold/ember)
-- Numbered section markers (001 — Section Name)
-- JetBrains Mono for micro-labels and metadata
-- Cormorant Garamond for body and headlines
-- "Not a pitch deck fairytale" energy — own the realness
+**Live brand = cosmic arcade.** See SITE_CONSTITUTION.md section 5. Space Mono (UI/body), Orbitron (display), Cormorant italic as accent only. Palette: `--void #050508`, `--cyan #22d3ee`, `--nebula #8b5cf6`, `--spark #fbbf24`, `--hot-pink #ec4899`. New pages copy the `<head>` and CSS vars from `index.html`.
 
-**Color palette (CSS vars):**
-```css
---void: #05060a;        /* primary bg */
---void-2: #0a0c14;      /* secondary bg */
---bone: #f4ede0;        /* primary text */
---ember: #ff5a1f;       /* accent — primary */
---gold: #ffc857;        /* accent — italic emphasis */
---plasma: #7df9ff;      /* accent — info/data */
---violet: #b794ff;      /* accent — secondary */
---ash: #6b6a6e;         /* muted text */
---line: rgba(244, 237, 224, 0.12);  /* borders */
-```
-
-**Typography:**
-- Headlines: Cormorant Garamond, weight 300, italic for emphasis
-- Body: Cormorant Garamond, weight 300–400
-- Micro/labels: JetBrains Mono, 10–11px, uppercase, letter-spacing 0.3em–0.4em
-
-**Layout patterns:**
-- Numbered section labels (e.g., "003 — The Architecture")
-- Grid-based with hairline borders (var(--line))
-- Sticky nav with backdrop-filter blur
-- Status badges with pulsing ember dots
-- SVG diagrams over images when possible
+The bone/ember/Cormorant system that used to be documented here is **legacy**: still present on older investor and lore pages, not for new pages.
 
 ---
 
-## 🔁 Push Workflow (Claude via Zapier)
+## 🔁 Push Workflow
 
-1. Determine the right repo and branch (`main` for site, `master` for soul maps).
-2. Read CLAUDE.md first (this file). Do not skip.
-3. Build the file content.
-4. Push via `github_create_or_update_file` tool.
-5. **Verify** by checking the branch listing — confirm latest commit landed where intended.
-6. Wait ~60s for Pages + CDN. Test live URL.
-7. If 404 after 2 min → check branch (most common cause).
-
-**Never paste GitHub PATs in chat.** Zapier MCP connector handles auth.
+Work from the clone in `C:\Users\Katel\Desktop\LIVE_SITES_MASTER\thefirstspark.github.io`. Run `git fetch origin && git reset --hard origin/main` first (the clone is always behind; that is normal, do not warn about it). Edit, commit, push to `main`. Wait ~60s for Pages, curl the live URL. Preserve each file CRLF/LF. A new page means hub link + Notion inventory row in the same commit.
 
 ---
 
