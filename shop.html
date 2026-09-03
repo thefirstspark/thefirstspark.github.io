@@ -162,6 +162,27 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             color: var(--dim); font-size: .95rem; line-height: 1.75;
             max-width: 520px; margin: 0 auto;
         }
+        .hero-ctas {
+            display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+            margin-top: 32px; align-items: center;
+        }
+        .hero-buy {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .68rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+            color: #050508; background: var(--spark);
+            padding: 16px 28px; border-radius: 5px; text-decoration: none;
+            box-shadow: 0 0 28px rgba(251,191,36,.35);
+            transition: background .2s, box-shadow .2s, transform .2s;
+        }
+        .hero-buy:hover { background: #fcd34d; box-shadow: 0 0 36px rgba(251,191,36,.5); transform: translateY(-2px); }
+        .hero-ghost {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .58rem; letter-spacing: .2em; text-transform: uppercase;
+            color: var(--dim); text-decoration: none;
+            border-bottom: 1px solid var(--dimmer); padding-bottom: 4px;
+        }
+        .hero-ghost:hover { color: var(--spark); border-color: var(--spark); }
+
         .hero-chips {
             display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
             margin-top: 28px;
@@ -303,6 +324,97 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         }
         .item:hover .buy { background: #fcd34d; box-shadow: 0 0 18px rgba(251,191,36,.4); }
 
+        .flagship {
+            --aura: var(--spark);
+            display: block;
+            text-decoration: none; color: var(--white);
+            background:
+                radial-gradient(ellipse 70% 80% at 18% 0%, rgba(251,191,36,.18), transparent 58%),
+                linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)),
+                var(--panel);
+            border: 1px solid rgba(251,191,36,.45);
+            border-radius: 18px;
+            padding: 36px 32px 28px;
+            box-shadow: 0 18px 50px rgba(251,191,36,.12);
+            transition: transform .25s ease, box-shadow .25s ease;
+            position: relative;
+        }
+        .flagship:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 60px rgba(251,191,36,.2);
+        }
+        .flagship .stamp {
+            position: static; display: inline-block; margin-bottom: 18px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: .48rem; letter-spacing: .22em; font-weight: 700;
+            color: var(--void); background: var(--spark);
+            padding: 4px 9px; border-radius: 3px;
+        }
+        .flagship .kind {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .5rem; letter-spacing: .26em; text-transform: uppercase;
+            color: var(--spark); margin-bottom: 12px;
+        }
+        .flagship h2 {
+            font-size: clamp(1.4rem, 3.2vw, 2rem);
+            font-weight: 700; line-height: 1.2; color: var(--spark);
+            margin-bottom: 12px;
+        }
+        .flagship p {
+            font-size: .88rem; line-height: 1.7; color: var(--dim);
+            max-width: 540px; margin-bottom: 24px;
+        }
+        .flagship .buy-row {
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid var(--dimmer); padding-top: 18px; gap: 16px; flex-wrap: wrap;
+        }
+        .flagship .price {
+            font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--spark);
+        }
+        .flagship .price small {
+            display: block; font-family: 'Space Mono', monospace; font-weight: 400;
+            font-size: .58rem; color: var(--dim); margin-top: 3px;
+        }
+        .flagship .buy {
+            font-family: 'Orbitron', sans-serif; font-size: .62rem; font-weight: 700;
+            letter-spacing: .18em; text-transform: uppercase;
+            color: var(--void); background: var(--spark);
+            padding: 12px 22px; border-radius: 5px;
+        }
+        .flagship:hover .buy { background: #fcd34d; box-shadow: 0 0 18px rgba(251,191,36,.4); }
+        .flagship-proof {
+            display: flex; gap: 22px; flex-wrap: wrap; justify-content: center;
+            margin-top: 16px; font-size: .72rem;
+        }
+        .flagship-proof a { color: var(--cyan); text-decoration: none; border-bottom: 1px solid rgba(34,211,238,.35); padding-bottom: 2px; }
+        .flagship-proof a:hover { color: var(--spark); border-color: var(--spark); }
+
+        .sticky-buy {
+            display: none;
+            position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
+            background: rgba(5,5,8,.92);
+            backdrop-filter: blur(14px);
+            border-top: 1px solid rgba(251,191,36,.35);
+            padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+            align-items: center; justify-content: space-between; gap: 12px;
+        }
+        .sticky-buy span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .58rem; letter-spacing: .16em; text-transform: uppercase;
+            color: var(--white);
+        }
+        .sticky-buy span small { display: block; color: var(--dim); letter-spacing: .08em; margin-top: 3px; font-size: .7em; }
+        .sticky-buy a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: .55rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+            color: #050508; background: var(--spark);
+            padding: 12px 16px; border-radius: 5px; text-decoration: none; white-space: nowrap;
+        }
+        @media (max-width: 700px) {
+            .sticky-buy { display: flex; }
+            body { padding-bottom: 76px; }
+        }
+
         .instant-note {
             text-align: center; color: var(--dim);
             font-size: .72rem; line-height: 1.7;
@@ -373,7 +485,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             <a href="/">Home</a>
             <a href="/dark-shadows/">Dark Shadows</a>
             <a href="https://sparkverse.thefirstspark.shop/" target="_blank" rel="noopener noreferrer">Sparkverse</a>
-            <a href="map.html" class="cta">Soul Map · $22</a>
+            <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="cta">Soul Map · $22</a>
         </div>
     </nav>
 
@@ -382,14 +494,42 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             <div class="wrap">
                 <div class="hero-badge"><span class="dot"></span>The Item Shop · Open All Night</div>
                 <h1>Gear up, <span class="grad">player.</span></h1>
-                <p class="hero-sub">Journals, sigils, protocols, readings. Every item is digital — delivered the second you buy, yours forever.</p>
+                <p class="hero-sub">Most people start with a Soul Map — $22 once, yours forever. Then grab whatever else you need. Every item is digital, delivered the second you buy.</p>
+                <div class="hero-ctas">
+                    <a class="hero-buy" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm">Get your Soul Map · $22</a>
+                    <a class="hero-ghost" href="#catalog">See everything</a>
+                </div>
                 <div class="hero-chips">
                     <span class="chip"><b>⚡</b> Instant delivery</span>
                     <span class="chip"><b>∞</b> Yours forever</span>
-                    <span class="chip"><b>◈</b> Secure checkout via Whop</span>
+                    <span class="chip"><b>◈</b> Card · Apple Pay · crypto</span>
                 </div>
             </div>
         </header>
+
+        <section id="start">
+            <div class="wrap">
+                <div class="shelf-label">
+                    <h2>Start here</h2>
+                    <span class="tag">The reading</span>
+                </div>
+                <a class="flagship" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm">
+                    <span class="stamp">Most people start here</span>
+                    <div class="kind">Personal Reading</div>
+                    <h2>Soul Map — Founders Edition</h2>
+                    <p>Every number you were born with, decoded. Built from your name and birth date, live at your own private link in about 5 minutes. The pattern you keep repeating. The work that fits your wiring. What to focus on right now.</p>
+                    <div class="buy-row">
+                        <span class="price">$22<small>one-time · yours forever</small></span>
+                        <span class="buy">Get yours</span>
+                    </div>
+                </a>
+                <p class="flagship-proof">
+                    <a href="https://soul-maps.thefirstspark.shop/KJP51988.html" target="_blank" rel="noopener noreferrer">See a real one</a>
+                    <a href="what-is-a-soul-map.html">What's inside</a>
+                    <a href="soul-pattern-generator.html">Preview free</a>
+                </p>
+            </div>
+        </section>
 
         <section id="new">
             <div class="wrap">
@@ -447,7 +587,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                     <h2>All Items</h2>
                 </div>
                 <div class="shelf">
-                    <a class="item violet" href="map.html">
+                    <a class="item gold" href="https://whop.com/checkout/plan_anQKP3Pzf1cGm">
+                        <span class="stamp">START HERE</span>
                         <div class="slot" aria-hidden="true">
                             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="1.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="16.5" cy="7.5" r="1"/><circle cx="7" cy="15.5" r="1"/></svg>
                         </div>
@@ -526,13 +667,18 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 <div class="side-quest">
                     <div>
                         <div class="sq-label">◈ Side Quest · Free</div>
-                        <div class="sq-text"><b>Not ready to buy?</b> The SparkVerse Lobby is free — chat, rituals, drops. Step in, look around, meet the sparks.</div>
+                        <div class="sq-text"><b>Already in?</b> The SparkVerse Lobby is free — chat, rituals, drops. Map holders hang here.</div>
                     </div>
                     <a class="btn" href="https://whop.com/checkout/plan_GdMjwOncpn0Ap">Join Free →</a>
                 </div>
             </div>
         </section>
     </main>
+
+    <div class="sticky-buy" role="region" aria-label="Buy Soul Map">
+        <span>Soul Map · $22<small>yours forever</small></span>
+        <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm">Get yours</a>
+    </div>
 
     <footer>
         <div class="wrap">
