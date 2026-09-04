@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+  ttq.load('DABS2BBC77U98E0UJH30');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+<!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
+    <!-- End Google Tag Manager -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The First Spark Framework — Seven Layers, One Spark</title>
+<meta name="description" content="The system behind every Soul Map: seven layers from Thesis to Numerology, the Engine that runs them, and what the stack produces. The public framework reference.">
+<meta property="og:title" content="The First Spark Framework — Seven Layers, One Spark">
+<meta property="og:description" content="Every Soul Map, pattern and reading comes out of one stack. This is what each layer is, what it governs, and where the lines are drawn.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thefirstspark.shop/framework.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@OGplayerone">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --void:#050508; --spark:#fbbf24; --nebula:#8b5cf6; --cyan:#22d3ee; --hot-pink:#ec4899; --green:#34d399;
+  --white:#f5f5f7; --dim:rgba(255,255,255,.55); --dimmer:rgba(255,255,255,.28); --line:rgba(255,255,255,.08);
+  --panel:rgba(255,255,255,.03); --panel2:rgba(10,10,18,.78);
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--white);font-family:'Space Mono','Courier New',monospace;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.orb{font-family:'Orbitron',sans-serif;letter-spacing:.14em;text-transform:uppercase}
+a{color:inherit}
+strong{color:var(--white);font-weight:700}
+em{font-style:normal;color:var(--spark)}
+code{font-family:'Space Mono',monospace;font-size:.85em;color:var(--cyan);background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);padding:.05em .4em;border-radius:4px}
+/* backdrop */
+.aurora{position:fixed;inset:-20%;z-index:0;pointer-events:none;filter:blur(60px);opacity:.55;
+  background:radial-gradient(40% 35% at 20% 25%,rgba(139,92,246,.35),transparent 70%),radial-gradient(35% 30% at 80% 20%,rgba(34,211,238,.25),transparent 70%),radial-gradient(45% 35% at 60% 85%,rgba(236,72,153,.22),transparent 70%),radial-gradient(30% 30% at 30% 80%,rgba(251,191,36,.18),transparent 70%);
+  animation:drift 40s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(3%,-2%) rotate(3deg)}}
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.stars i{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:tw 3.5s infinite}
+@keyframes tw{0%,100%{opacity:.12}50%{opacity:.75}}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 20px}
+/* nav */
+nav.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;gap:14px;flex-wrap:wrap}
+nav.top .brand{font-size:.72rem;color:var(--spark);text-decoration:none;font-weight:700}
+nav.top .links{display:flex;gap:18px;flex-wrap:wrap}
+nav.top .links a{font-size:.6rem;color:var(--dim);text-decoration:none}
+nav.top .links a:hover{color:var(--white)}
+/* hero */
+.hero{text-align:center;padding:56px 0 30px}
+.kicker{font-size:.62rem;color:var(--cyan);margin-bottom:18px}
+.hero h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(1.7rem,4.6vw,3.2rem);letter-spacing:.04em;line-height:1.15}
+.hero h1 em{color:var(--spark);text-shadow:0 0 28px rgba(251,191,36,.45)}
+.hero .one{max-width:760px;margin:22px auto 0;font-size:.98rem;color:var(--white)}
+.meta-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 26px;margin-top:26px;font-size:.62rem;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;font-family:'Orbitron',sans-serif}
+.meta-strip b{color:var(--spark);font-weight:700;margin-right:.35em}
+/* layout */
+.shell{display:grid;grid-template-columns:230px minmax(0,1fr);gap:34px;align-items:start;margin-top:30px}
+.rail{position:sticky;top:18px;background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:18px 16px;backdrop-filter:blur(10px)}
+.rail .rl{font-size:.5rem;letter-spacing:.3em;color:var(--dimmer);margin:6px 0 8px}
+.rail .rl + .rl{margin-top:16px}
+.rail a{display:grid;grid-template-columns:2rem 1fr;gap:.4rem;align-items:baseline;padding:.42rem .5rem;border-radius:8px;text-decoration:none;color:var(--dim);font-size:.72rem;border-left:2px solid transparent;transition:.2s}
+.rail a .lv{font-family:'Orbitron',sans-serif;font-size:.55rem;letter-spacing:.1em;color:var(--dimmer)}
+.rail a:hover{color:var(--white);background:var(--panel)}
+.rail a.on{color:var(--white);background:var(--panel);border-left-color:var(--spark)}
+.rail a.on .lv{color:var(--spark)}
+/* stack figure */
+.sec-num{font-size:.6rem;color:var(--dimmer);letter-spacing:.3em;margin-bottom:8px}
+.sec-title{font-family:'Orbitron',sans-serif;font-weight:700;font-size:clamp(1.05rem,2.4vw,1.5rem);letter-spacing:.08em;text-transform:uppercase}
+.sec-sub{color:var(--dim);font-size:.86rem;max-width:720px;margin-top:8px}
+.stackfig{display:grid;gap:8px;margin-top:22px}
+.plate{display:grid;grid-template-columns:3rem minmax(9rem,14rem) 1fr auto;gap:14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;text-decoration:none;color:inherit;transition:.25s;position:relative;overflow:hidden;--c:var(--spark)}
+.plate::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);opacity:var(--o,1);box-shadow:0 0 12px var(--c)}
+.plate:hover{border-color:color-mix(in srgb,var(--c) 55%,transparent);transform:translateY(-2px);box-shadow:0 0 26px color-mix(in srgb,var(--c) 22%,transparent)}
+.plate .lv{font-family:'Orbitron',sans-serif;font-size:.6rem;letter-spacing:.14em;color:var(--c)}
+.plate .nm{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.06em}
+.plate .rl{font-size:.74rem;color:var(--dim)}
+.plate .ct{font-family:'Orbitron',sans-serif;font-size:.55rem;letter-spacing:.16em;color:var(--c);white-space:nowrap;text-transform:uppercase}
+/* layers */
+.layer{padding:54px 0 10px;border-bottom:1px solid var(--line);scroll-margin-top:16px;--c:var(--spark)}
+.layer:last-of-type{border-bottom:none}
+.layer-head{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;align-items:baseline}
+.layer-lv{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.2em;color:var(--c);text-shadow:0 0 14px color-mix(in srgb,var(--c) 60%,transparent)}
+.layer h2{font-family:'Orbitron',sans-serif;font-weight:700;font-size:clamp(1.1rem,2.6vw,1.65rem);letter-spacing:.06em;line-height:1.2}
+.layer-role{grid-column:2;font-size:.6rem;color:var(--dim);letter-spacing:.2em;text-transform:uppercase;font-family:'Orbitron',sans-serif;margin-top:4px}
+.body{font-size:.9rem;color:rgba(255,255,255,.82);max-width:70ch;margin-top:20px;display:grid;gap:14px}
+/* spec grid */
+.spec{margin-top:22px;border:1px solid var(--line);border-radius:12px;background:var(--panel);display:grid;grid-template-columns:minmax(8rem,13rem) minmax(0,1fr);overflow:hidden}
+.spec dt,.spec dd{padding:.65rem 1rem;border-bottom:1px solid var(--line)}
+.spec dt{font-family:'Orbitron',sans-serif;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);background:rgba(255,255,255,.02);border-right:1px solid var(--line)}
+.spec dd{font-size:.8rem;color:rgba(255,255,255,.82)}
+.spec dd:last-of-type,.spec dt:last-of-type{border-bottom:none}
+/* cycle */
+.cycle{display:grid;gap:10px;margin-top:22px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.step{background:var(--panel);border:1px solid color-mix(in srgb,var(--c) 35%,transparent);border-radius:14px;padding:16px;background:linear-gradient(180deg,color-mix(in srgb,var(--c) 9%,transparent),transparent)}
+.step .n{font-family:'Orbitron',sans-serif;font-size:.55rem;letter-spacing:.24em;color:var(--c)}
+.step h4{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.06em;margin:.5rem 0 .5rem}
+.step p{font-size:.76rem;color:var(--dim);line-height:1.55}
+/* table */
+.tablewrap{overflow-x:auto;margin-top:22px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:.78rem}
+caption{text-align:left;padding:.7rem 1rem;font-family:'Orbitron',sans-serif;font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--line)}
+th,td{text-align:left;padding:.6rem 1rem;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-family:'Orbitron',sans-serif;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);font-weight:500;white-space:nowrap;background:rgba(255,255,255,.02)}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-family:'Orbitron',sans-serif;font-weight:700;color:var(--spark)}
+td .carrier{font-family:'Orbitron',sans-serif;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(34,211,238,.3);border-radius:999px;padding:2px 9px}
+td .carrier.v{color:var(--nebula);border-color:rgba(139,92,246,.4)}
+/* ruling */
+.ruling{margin-top:22px;border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-left:3px solid var(--c);border-radius:0 14px 14px 0;background:color-mix(in srgb,var(--c) 7%,transparent);padding:14px 18px;max-width:72ch;box-shadow:0 0 30px color-mix(in srgb,var(--c) 8%,transparent)}
+.ruling .id{font-family:'Orbitron',sans-serif;font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:var(--c)}
+.ruling p{font-size:.84rem;color:rgba(255,255,255,.82);margin-top:.5rem;line-height:1.6}
+/* products */
+.products{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:22px}
+.product{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;position:relative}
+.product .tag{font-family:'Orbitron',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:var(--cyan)}
+.product h4{font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:.06em;margin:.5rem 0 .4rem}
+.product .price{color:var(--spark);font-family:'Orbitron',sans-serif;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase}
+.product p{font-size:.82rem;color:var(--dim);line-height:1.55;margin-top:.7rem}
+.modes{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.mode{font-size:.62rem;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--dim)}
+.go{display:inline-block;margin-top:18px;background:var(--spark);color:var(--void);text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;padding:11px 20px;border-radius:999px;box-shadow:0 0 22px rgba(251,191,36,.35)}
+.go:hover{filter:brightness(1.08)}
+.go.ghost{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.25);box-shadow:none}
+/* cta + footer */
+.cta{text-align:center;padding:60px 0 30px}
+.cta a{display:inline-block;margin:6px;background:var(--spark);color:var(--void);text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;padding:13px 24px;border-radius:999px;box-shadow:0 0 24px rgba(251,191,36,.35)}
+.cta a.ghost{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.25);box-shadow:none}
+footer{text-align:center;padding:30px 0 40px;font-size:.66rem;color:var(--dim);border-top:1px solid var(--line);margin-top:30px}
+footer a{color:var(--spark);text-decoration:none}
+footer p+p{margin-top:6px}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;gap:20px}
+  .rail{position:static}
+  .rail .list{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  .plate{grid-template-columns:3rem 1fr;gap:6px 14px}
+  .plate .rl,.plate .ct{grid-column:2}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_0xcayhWXVnKO9y");whop.track("page");</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+<div class="aurora"></div>
+<div class="stars" id="stars"></div>
+<div class="wrap">
+<nav class="top">
+  <a class="brand orb" href="/">The First Spark</a>
+  <div class="links orb">
+    <a href="ecosystem.html">Start Here</a>
+    <a href="map.html">Soul Map · $22</a>
+    <a href="core-canon.html">Canon</a>
+    <a href="shop.html">Shop</a>
+    <a href="free-tools.html">Free Tools</a>
+    <a href="https://links.thefirstspark.shop" target="_blank" rel="noopener noreferrer">All Links</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="kicker orb">Framework Reference · The system behind the Soul Map</div>
+  <h1>Seven layers, <em>one spark</em>.</h1>
+  <p class="one">Everything The First Spark makes, every Soul Map, every pattern, every reading, comes out of a single stack. Each layer answers one question, inherits from the layer above it, and hands something specific to the layer below. This page is the public reference: what each layer is, what it governs, and where the lines between them are drawn.</p>
+  <div class="meta-strip">
+    <span><b>7</b> layers</span>
+    <span><b>4</b> Selector domains</span>
+    <span><b>12</b> archetypes</span>
+    <span><b>3</b> realms</span>
+    <span><b>11</b> color tiers</span>
+    <span><b>1</b> product</span>
+  </div>
+</section>
+
+<div class="shell">
+  <aside class="rail" aria-label="Framework layers">
+    <div class="rl orb">The Stack</div>
+    <div class="list">
+      <a href="#thesis"><span class="lv">L0</span><span>Thesis</span></a>
+      <a href="#selector"><span class="lv">L1</span><span>Selector Model</span></a>
+      <a href="#core-code"><span class="lv">L2</span><span>KJP Core Code</span></a>
+      <a href="#archetypes"><span class="lv">L3</span><span>The 12 Archetypes</span></a>
+      <a href="#realms"><span class="lv">L4</span><span>The 3 Realms</span></a>
+      <a href="#codex"><span class="lv">L5</span><span>Color Codex</span></a>
+      <a href="#numerology"><span class="lv">L6</span><span>Numerology</span></a>
+    </div>
+    <div class="rl orb">Beyond the stack</div>
+    <div class="list">
+      <a href="#engine"><span class="lv">—</span><span>The Engine</span></a>
+      <a href="#products"><span class="lv">—</span><span>What it produces</span></a>
+    </div>
+  </aside>
+
+  <main>
+    <section id="stack">
+      <div class="sec-num orb">00 · The stack, top to bottom</div>
+      <h2 class="sec-title">One stack, seven layers</h2>
+      <p class="sec-sub">Tap a layer to jump to it. The bar on the left deepens as the stack gets closer to the numbers.</p>
+      <div class="stackfig">
+        <a class="plate" href="#thesis" style="--c:var(--spark);--o:.35"><span class="lv">L0</span><span class="nm">Thesis</span><span class="rl">The claim everything below inherits from</span><span class="ct">root</span></a>
+        <a class="plate" href="#selector" style="--c:var(--spark);--o:.5"><span class="lv">L1</span><span class="nm">Selector Model</span><span class="rl">The four domains experience is sorted into</span><span class="ct">4 domains</span></a>
+        <a class="plate" href="#core-code" style="--c:var(--spark);--o:.65"><span class="lv">L2</span><span class="nm">KJP Core Code</span><span class="rl">Witness → Release → Select, the operating cycle</span><span class="ct">3 verbs</span></a>
+        <a class="plate" href="#archetypes" style="--c:var(--nebula);--o:.8"><span class="lv">L3</span><span class="nm">The 12 Archetypes</span><span class="rl">Four to a verb, each with a gift and a shadow</span><span class="ct">12 · 4/4/4</span></a>
+        <a class="plate" href="#realms" style="--c:var(--nebula);--o:.9"><span class="lv">L4</span><span class="nm">The 3 Realms</span><span class="rl">The three grounds a pattern can be read against</span><span class="ct">3 realms</span></a>
+        <a class="plate" href="#codex" style="--c:var(--hot-pink)"><span class="lv">L5</span><span class="nm">Color Codex</span><span class="rl">Eleven tiers of light, permanent, never re-cast</span><span class="ct">11 tiers</span></a>
+        <a class="plate" href="#numerology" style="--c:var(--cyan)"><span class="lv">L6</span><span class="nm">Numerology</span><span class="rl">The Road and the Vessel, and the debts they carry</span><span class="ct">2 inputs</span></a>
+      </div>
+    </section>
+
+    <!-- L0 -->
+    <section class="layer" id="thesis" style="--c:var(--spark)">
+      <div class="layer-head">
+        <div class="layer-lv">L0</div>
+        <div><h2>Thesis</h2><div class="layer-role">Root layer · inherited by every layer below</div></div>
+      </div>
+      <div class="body">
+        <p>The Thesis is the one claim the whole system rests on. It is not a technique or a chart. It is the statement that makes every layer beneath it coherent: <strong>reality is programmable, and consciousness is the code.</strong> Nothing lower in the stack may contradict it, and any ruling that would is rejected at the Thesis rather than patched further down.</p>
+        <p>It also sets the register. The canon is written in <strong>the telling</strong>, an account rather than an assertion, and read through what we call the <strong>Sim Lens</strong>, a computational voice that describes the system as a system. Neither register claims the other is wrong. They are two ways of reading the same structure.</p>
+      </div>
+    </section>
+
+    <!-- L1 -->
+    <section class="layer" id="selector" style="--c:var(--spark)">
+      <div class="layer-head">
+        <div class="layer-lv">L1</div>
+        <div><h2>The Selector Model</h2><div class="layer-role">4 domains · quadrants of the wheel</div></div>
+      </div>
+      <div class="body">
+        <p>The Selector Model divides lived experience into <strong>four domains</strong>: <strong>Physics</strong>, <strong>Metaphysical</strong>, <strong>Relational</strong> and <strong>Temporal</strong>. They are the system's coarsest sort. Before an archetype, before a number, before a color, an experience belongs to a domain. On the archetype wheel the four domains are the four quadrants, which is what lets structures from different layers point at the same region without collapsing into each other.</p>
+        <p>Domains describe <em>where</em> work is felt. They never name <em>who</em> is doing it. That distinction is what keeps the archetype layer and the number layer independent.</p>
+      </div>
+      <dl class="spec">
+        <dt>Count</dt><dd>4 · Physics (L01) · Metaphysical (L02) · Relational (L03) · Temporal (L04)</dd>
+        <dt>Geometry</dt><dd>One domain per quadrant of the archetype wheel</dd>
+        <dt>Populated by</dt><dd>3 archetypes per quadrant (12 total)</dd>
+        <dt>Referenced by</dt><dd>Karmic conditions, via the knot sector. <code>sector = floor(n / 3)</code> maps a debt to the quadrant whose domain the work is most felt in</dd>
+        <dt>Resolution limit</dt><dd>Domain level only. Never resolves to a single archetype</dd>
+      </dl>
+      <div class="ruling">
+        <div class="id">DL-010 · the firewall</div>
+        <p>A karmic debt can say <em>which domain</em> its work lives in. It can never say <em>which archetype</em> you are. Numbers and archetypes are kept on opposite sides of a firewall, and the knot sector is deliberately built to stop at the domain.</p>
+      </div>
+    </section>
+
+    <!-- L2 -->
+    <section class="layer" id="core-code" style="--c:var(--spark)">
+      <div class="layer-head">
+        <div class="layer-lv">L2</div>
+        <div><h2>The KJP Core Code</h2><div class="layer-role">3 verbs · the cycle everything runs on</div></div>
+      </div>
+      <div class="body">
+        <p>Three verbs, in order, run continuously. They are the system's smallest working unit: the motion a person is always somewhere inside of, and the sequence the Engine reverses when it is read as a life rather than as a construction.</p>
+      </div>
+      <div class="cycle">
+        <div class="step"><div class="n">01 · Witness</div><h4>You see it</h4><p>The pattern becomes visible as a pattern. Not as fate, not as fault. Nothing can be worked with until it has been witnessed.</p></div>
+        <div class="step"><div class="n">02 · Release</div><h4>You put it down</h4><p>The witnessed thing stops being load-bearing. Release is the hinge of the cycle: the Mirror belongs here, and the wheel's balance depends on it.</p></div>
+        <div class="step"><div class="n">03 · Select</div><h4>You choose again</h4><p>With the weight down, a choice is actually available. Select feeds straight back into Witness. The cycle has no terminal state.</p></div>
+      </div>
+      <div class="ruling">
+        <div class="id">DL-001 · Mirror = Release</div>
+        <p>Resolved 16 Aug 2026. The Mirror sits under <em>Release</em>, not Select. This preserves the <em>4 / 4 / 4</em> distribution of archetypes across the three verbs and keeps the two-bridge rule intact. The archetype wheel is being redrawn to match, and the earlier "discovered resonance / crossover" narrative is retired.</p>
+      </div>
+    </section>
+
+    <!-- L3 -->
+    <section class="layer" id="archetypes" style="--c:var(--nebula)">
+      <div class="layer-head">
+        <div class="layer-lv">L3</div>
+        <div><h2>The 12 Archetypes</h2><div class="layer-role">12 figures · four to each verb · gift and shadow</div></div>
+      </div>
+      <div class="body">
+        <p>Twelve archetypes distribute evenly across the Core Code, <strong>four to Witness, four to Release, four to Select</strong>, and sit on the wheel inside the Selector domains. Each one carries two faces: a <strong>gift</strong>, the capacity it grants when it is being lived cleanly, and a <strong>shadow</strong>, the same capacity turned against its holder.</p>
+        <p>The gift and the shadow are not two archetypes. They are one archetype seen from either side of a release.</p>
+      </div>
+      <dl class="spec">
+        <dt>Count</dt><dd>12</dd>
+        <dt>Distribution</dt><dd>4 / 4 / 4 across Witness, Release, Select</dd>
+        <dt>Each carries</dt><dd>One gift, one shadow</dd>
+        <dt>Placed on</dt><dd>The archetype wheel, within Selector domains</dd>
+        <dt>Never derived from</dt><dd>Life Path, Expression, or any numerological value</dd>
+        <dt>Find yours</dt><dd><a href="engine.html">Run the Engine</a>, two minutes, no input but choices</dd>
+      </dl>
+    </section>
+
+    <!-- L4 -->
+    <section class="layer" id="realms" style="--c:var(--nebula)">
+      <div class="layer-head">
+        <div class="layer-lv">L4</div>
+        <div><h2>The 3 Realms</h2><div class="layer-role">3 grounds · the context a pattern is read against</div></div>
+      </div>
+      <div class="body">
+        <p>Three realms sit between the archetypes and the light. Where the Selector Model sorts experience and the archetypes name its figures, the realms supply the ground a reading is set against. The same archetype does not mean the same thing in all three.</p>
+      </div>
+      <dl class="spec">
+        <dt>Count</dt><dd>3</dd>
+        <dt>Position in stack</dt><dd>Below archetypes, above the Color Codex</dd>
+      </dl>
+    </section>
+
+    <!-- L5 -->
+    <section class="layer" id="codex" style="--c:var(--hot-pink)">
+      <div class="layer-head">
+        <div class="layer-lv">L5</div>
+        <div><h2>The Color Codex</h2><div class="layer-role">11 tiers · permanent light, seasonal weather</div></div>
+      </div>
+      <div class="body">
+        <p>Every person has one <strong>native light</strong>: a single tier of the eleven-tier Codex. It is permanent. It is not re-cast each year, it is not earned, and it is the sole palette from which that person's Soul Pattern is drawn.</p>
+        <p>The Personal Year is real, but it is not identity. It is <strong>the season</strong>: the year's light, weather rather than self. It belongs in written and annual readings only and is never rendered onto the pattern. Master numbers remain <strong>visitations</strong>, not tiers.</p>
+      </div>
+      <dl class="spec">
+        <dt>Tiers</dt><dd>11 · <a href="https://soul-maps.thefirstspark.shop/color-codex.html" target="_blank" rel="noopener noreferrer">open the Codex ↗</a></dd>
+        <dt>Derived from</dt><dd>The <strong>Radiant Number</strong>: Life Path and Expression summed, then reduced together <code>reduce(LP + EX)</code></dd>
+        <dt>Mutability</dt><dd>None. A person's color never changes.</dd>
+        <dt>Rendered on pattern</dt><dd>Native light only</dd>
+        <dt>Season (Personal Year)</dt><dd>Written and annual readings only. Never rendered</dd>
+        <dt>Master numbers</dt><dd>Visitations, not tiers</dd>
+      </dl>
+      <div class="ruling">
+        <div class="id">DL-008 v1.1 · The Light and the Season</div>
+        <p>A person's color never changes. The native light is permanent identity and the only palette the pattern draws from. The Personal Year is reframed as <em>the season</em>, the year's light, weather and not identity, and never touches the rendered pattern.</p>
+      </div>
+      <div class="ruling">
+        <div class="id">DL-009 · Radiant Number</div>
+        <p>Color is no longer derived from Life Path alone. It comes from Life Path and Expression summed and reduced together, so <em>different roads can share a light</em>. That is what made sense of people with different Life Paths reading as the same color. The tier table and tier names are unchanged; only the input formula moved.</p>
+      </div>
+    </section>
+
+    <!-- L6 -->
+    <section class="layer" id="numerology" style="--c:var(--cyan)">
+      <div class="layer-head">
+        <div class="layer-lv">L6</div>
+        <div><h2>Numerology</h2><div class="layer-role">2 inputs · 4 debts · 8 conditions</div></div>
+      </div>
+      <div class="body">
+        <p>Two values are computed, and only two. The <strong>Life Path</strong> comes from the birth date: the <em>Road</em>, the circumstance a person arrives into. The <strong>Expression</strong> comes from the full birth name: the <em>Vessel</em>, the capacity they arrive with. Together, reduced, they give the Radiant Number that sets the color tier.</p>
+        <p>Four <strong>karmic debts</strong>, 13, 14, 16 and 19, are checked, and checked against the Life Path and Expression only. Because each debt can arrive by either carrier, there are eight karmic conditions in total, and the carrier changes what the debt means: a debt on the Road is something met, a debt on the Vessel is something held.</p>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <caption>The eight karmic conditions</caption>
+          <thead><tr><th>Debt</th><th>Carrier</th><th>Computed from</th><th>Reads as</th></tr></thead>
+          <tbody>
+            <tr><td class="num">13</td><td><span class="carrier">Road</span></td><td>Birth date → Life Path</td><td>Met in circumstance</td></tr>
+            <tr><td class="num">13</td><td><span class="carrier v">Vessel</span></td><td>Full birth name → Expression</td><td>Held as capacity</td></tr>
+            <tr><td class="num">14</td><td><span class="carrier">Road</span></td><td>Birth date → Life Path</td><td>Met in circumstance</td></tr>
+            <tr><td class="num">14</td><td><span class="carrier v">Vessel</span></td><td>Full birth name → Expression</td><td>Held as capacity</td></tr>
+            <tr><td class="num">16</td><td><span class="carrier">Road</span></td><td>Birth date → Life Path</td><td>Met in circumstance</td></tr>
+            <tr><td class="num">16</td><td><span class="carrier v">Vessel</span></td><td>Full birth name → Expression</td><td>Held as capacity</td></tr>
+            <tr><td class="num">19</td><td><span class="carrier">Road</span></td><td>Birth date → Life Path</td><td>Met in circumstance</td></tr>
+            <tr><td class="num">19</td><td><span class="carrier v">Vessel</span></td><td>Full birth name → Expression</td><td>Held as capacity</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <dl class="spec">
+        <dt>Life Path</dt><dd>From birth date · the <strong>Road</strong></dd>
+        <dt>Expression</dt><dd>From full birth name · the <strong>Vessel</strong></dd>
+        <dt>Radiant Number</dt><dd><code>reduce(LifePath + Expression)</code> → Color Codex tier</dd>
+        <dt>Debts checked</dt><dd>13, 14, 16, 19 · on Life Path and Expression only</dd>
+        <dt>Conditions</dt><dd>8 (4 debts × 2 carriers)</dd>
+        <dt>Domain of a debt</dt><dd>Named by knot sector, at domain level only (see L1)</dd>
+        <dt>Try it</dt><dd><a href="karma-calculator.html">Karma calculator</a> · <a href="numbers.html">Your numbers</a></dd>
+      </dl>
+    </section>
+
+    <!-- Engine -->
+    <section class="layer" id="engine" style="--c:var(--green)">
+      <div class="layer-head">
+        <div class="layer-lv">—</div>
+        <div><h2>The Engine</h2><div class="layer-role">5 movements · the stack told as a sequence</div></div>
+      </div>
+      <div class="body">
+        <p>The stack describes what the parts are. The Engine describes what they <em>do</em>, in order: five movements from approach to emergence. Read forwards, it is how a pattern is made. Read backwards, through the Core Code, it is how a life is lived.</p>
+      </div>
+      <div class="cycle">
+        <div class="step"><div class="n">Movement I</div><h4>Approach</h4><p>Something arrives at the system and is met.</p></div>
+        <div class="step"><div class="n">Movement II</div><h4>Inscription</h4><p>It is written in. Name and date become value.</p></div>
+        <div class="step"><div class="n">Movement III</div><h4>Refraction</h4><p>The single value splits into light.</p></div>
+        <div class="step"><div class="n">Movement IV</div><h4>Wheel &amp; Gates</h4><p>The light is placed: quadrant, sector, threshold.</p></div>
+        <div class="step"><div class="n">Movement V</div><h4>Emergence</h4><p>The pattern stands, and can be seen.</p></div>
+      </div>
+      <div class="ruling">
+        <div class="id">The reversal</div>
+        <p>Living is the Engine run backwards. Where construction moves approach → emergence, a person moves <em>emergence → approach</em>, one Witness–Release–Select turn at a time.</p>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="layer" id="products" style="--c:var(--spark)">
+      <div class="layer-head">
+        <div class="layer-lv">—</div>
+        <div><h2>What the framework produces</h2><div class="layer-role">One product, one generator</div></div>
+      </div>
+      <div class="body">
+        <p>The stack exists to make two things. Everything above is the reason they can be trusted to say the same thing twice.</p>
+      </div>
+      <div class="products">
+        <div class="product">
+          <div class="tag">The product</div>
+          <h4>The Soul Map</h4>
+          <div class="price">$22 · once · 6 sections</div>
+          <p>A personalized reading built from your birth date and full birth name, drawing on every layer of the stack. Six sections, fixed schema. The same inputs always produce the same map.</p>
+          <a class="go" href="map.html">Get your Soul Map · $22</a>
+        </div>
+        <div class="product">
+          <div class="tag">The generator</div>
+          <h4>The Soul Pattern</h4>
+          <div class="price">Free · deterministic mandala</div>
+          <p>Your pattern, drawn from your birth name and date. Rings deepen toward the spark at the center and lighten toward the boundary. A deliberate rule, not scatter. Style varies ring to ring; the palette never leaves your native light.</p>
+          <div class="modes"><span class="mode">illuminated</span><span class="mode">bloom</span><span class="mode">aura</span><span class="mode">coloring page</span></div>
+          <a class="go ghost" href="soul-pattern-generator.html">Weave your pattern free</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="cta">
+  <a href="core-canon.html">Read the full Canon</a>
+  <a class="ghost" href="ecosystem.html">See the whole ecosystem</a>
+</div>
+
+<footer>
+  <p>The First Spark Inc. · Canon current to the Consolidated Master Document v1.1. Decision-log references (DL-000) point to the canon decision log.</p>
+  <p>This is a reference to the framework's structure, not a reading. A reading is a Soul Map.</p>
+  <p><a href="https://thefirstspark.shop">thefirstspark.shop</a> · <a href="mailto:kate@thefirstspark.shop">kate@thefirstspark.shop</a></p>
+</footer>
+</div>
+
+<script>
+(()=>{const s=document.getElementById('stars');let h='';for(let i=0;i<140;i++){h+=`<i style="left:${Math.random()*100}%;top:${Math.random()*100}%;width:${(Math.random()*1.6+.5).toFixed(1)}px;height:${(Math.random()*1.6+.5).toFixed(1)}px;animation-delay:${(Math.random()*4).toFixed(1)}s"></i>`}s.innerHTML=h})();
+(()=>{
+  const links=[...document.querySelectorAll('.rail a')];const map={};
+  links.forEach(a=>{const el=document.getElementById(a.getAttribute('href').slice(1));if(el)map[el.id]=a});
+  if(!('IntersectionObserver' in window))return;
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.remove('on'));map[e.target.id].classList.add('on')}})},{rootMargin:'-10% 0px -70% 0px',threshold:0});
+  Object.keys(map).forEach(id=>io.observe(document.getElementById(id)));
+})();
+</script>
+</body>
+</html>
