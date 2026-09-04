@@ -177,7 +177,7 @@
     function getReferralLink(path) {
         const data = getReferralData();
         const base = 'https://thefirstspark.shop';
-        const page = path || '/discover.html';
+        const page = path || 'archetype-discovery.html';
         return `${base}${page}?ref=${data.myCode}`;
     }
 
