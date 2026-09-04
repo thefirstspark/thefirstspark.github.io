@@ -13,145 +13,259 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 }(window, document, 'ttq');
 </script>
 <!-- TikTok Pixel Code End -->
+<!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
+    <!-- End Google Tag Manager -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Soul Pattern Generator — The First Spark</title>
-<meta name="description" content="Type your name and birthday. Watch your soul pattern weave itself live — rings for your Expression, a star for your Life Path, amber breaks where karmic debt left the weave open. Free, instant, downloadable.">
+<meta name="description" content="Type your name and birthday. Watch your soul pattern weave itself live: rings for your Expression, a star for your Life Path, your native light from the Color Codex, amber breaks where karmic debt left the weave open. Free, instant, downloadable.">
 <link rel="canonical" href="https://thefirstspark.shop/soul-pattern-generator.html">
 <meta property="og:title" content="Your soul has a pattern. See it weave.">
-<meta property="og:description" content="Name + birthday → your unique soul geometry, drawn live. Free. No email. Download it, wear it, collide it with someone else's.">
+<meta property="og:description" content="Name + birthday → your unique soul geometry, drawn live from the First Spark Framework. Free. No email. Download it, wear it, collide it with someone else's.">
 <meta property="og:url" content="https://thefirstspark.shop/soul-pattern-generator.html">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://thefirstspark.shop/preview-soulmaps.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@OGplayerone">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --void:#08081A; --deep:#10102A; --panel:#14142F;
-  --ink:#E8E4F5; --mist:#8B87C8; --dim:#55527E;
-  --spark:#F2A623; --spark-hi:#FCDE5A; --ember:#E8593C;
-  --line:#26264A;
-}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{background:var(--void);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh}
-body{display:flex;flex-direction:column;align-items:center;padding:0 20px 60px}
-.stars{position:fixed;inset:0;pointer-events:none;z-index:0}
-header{text-align:center;padding:52px 0 8px;position:relative;z-index:1}
-.brand{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--spark);font-weight:400}
-h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,6vw,54px);line-height:1.05;margin-top:14px}
-h1 em{font-style:italic;color:var(--spark-hi)}
-.sub{color:var(--mist);font-size:15px;margin-top:12px;max-width:460px;line-height:1.65}
-main{display:grid;grid-template-columns:320px minmax(0,1fr);gap:36px;max-width:1060px;width:100%;margin-top:40px;position:relative;z-index:1}
-@media(max-width:860px){main{grid-template-columns:1fr}}
-.intake{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;align-self:start}
-.intake h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;margin-bottom:4px}
-.intake p{color:var(--mist);font-size:13px;line-height:1.6;margin-bottom:22px}
-label{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);margin:18px 0 7px}
-input[type=text],input[type=date]{width:100%;background:var(--deep);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:12px 13px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:300;color-scheme:dark;min-height:46px}
+:root{
+  --void:#050508; --spark:#fbbf24; --nebula:#8b5cf6; --cyan:#22d3ee; --hot-pink:#ec4899; --green:#34d399;
+  --white:#f5f5f7; --dim:rgba(255,255,255,.55); --dimmer:rgba(255,255,255,.28); --line:rgba(255,255,255,.08);
+  --panel:rgba(255,255,255,.03); --panel2:rgba(10,10,18,.78); --deep:rgba(255,255,255,.05);
+  --ember:#E8593C;
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--white);font-family:'Space Mono','Courier New',monospace;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh}
+.orb{font-family:'Orbitron',sans-serif;letter-spacing:.14em;text-transform:uppercase}
+a{color:inherit}
+strong{color:var(--white);font-weight:700}
+em{font-style:normal;color:var(--spark)}
+code{font-family:'Space Mono',monospace;font-size:.85em;color:var(--cyan);background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);padding:.05em .4em;border-radius:4px}
+/* backdrop */
+.aurora{position:fixed;inset:-20%;z-index:0;pointer-events:none;filter:blur(60px);opacity:.55;
+  background:radial-gradient(40% 35% at 20% 25%,rgba(139,92,246,.35),transparent 70%),radial-gradient(35% 30% at 80% 20%,rgba(34,211,238,.25),transparent 70%),radial-gradient(45% 35% at 60% 85%,rgba(236,72,153,.22),transparent 70%),radial-gradient(30% 30% at 30% 80%,rgba(251,191,36,.18),transparent 70%);
+  animation:drift 40s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(3%,-2%) rotate(3deg)}}
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.stars i{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:tw 3.5s infinite}
+@keyframes tw{0%,100%{opacity:.12}50%{opacity:.75}}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 20px 60px}
+/* nav */
+nav.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;gap:14px;flex-wrap:wrap}
+nav.top .brand{font-size:.72rem;color:var(--spark);text-decoration:none;font-weight:700}
+nav.top .links{display:flex;gap:18px;flex-wrap:wrap}
+nav.top .links a{font-size:.6rem;color:var(--dim);text-decoration:none}
+nav.top .links a:hover{color:var(--white)}
+/* hero */
+header.hero{text-align:center;padding:46px 0 10px}
+.kicker{font-size:.62rem;color:var(--cyan);margin-bottom:18px}
+.hero h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(1.7rem,4.6vw,3.2rem);letter-spacing:.04em;line-height:1.15}
+.hero h1 em{color:var(--spark);text-shadow:0 0 28px rgba(251,191,36,.45)}
+.hero .sub{max-width:700px;margin:22px auto 0;font-size:.95rem;color:var(--white)}
+.hero .not{max-width:640px;margin:12px auto 0;font-size:.8rem;color:var(--dim)}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:22px}
+.chip{font-family:'Orbitron',sans-serif;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:6px 12px;text-decoration:none;background:var(--panel)}
+.chip:hover{color:var(--white);border-color:rgba(255,255,255,.3)}
+.chip b{color:var(--c,var(--spark));font-weight:700;margin-right:.5em}
+/* main grid */
+main{display:grid;grid-template-columns:340px minmax(0,1fr);gap:30px;margin-top:34px;align-items:start}
+@media(max-width:900px){main{grid-template-columns:1fr}}
+.intake{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:26px;backdrop-filter:blur(10px);position:relative}
+.intake::before{content:"";position:absolute;inset:0;border-radius:16px;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(251,191,36,.25),0 0 40px rgba(251,191,36,.08)}
+.ptag{font-family:'Orbitron',sans-serif;font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:var(--spark)}
+.intake h2{font-family:'Orbitron',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.06em;margin-top:8px}
+.intake p{color:var(--dim);font-size:.78rem;line-height:1.6;margin:10px 0 6px}
+label{display:block;font-family:'Orbitron',sans-serif;font-size:.5rem;letter-spacing:.26em;text-transform:uppercase;color:var(--dim);margin:18px 0 7px}
+input[type=text],input[type=date]{width:100%;background:var(--deep);border:1px solid var(--line);border-radius:10px;color:var(--white);padding:12px 13px;font-family:'Space Mono',monospace;font-size:15px;color-scheme:dark;min-height:46px}
 input:focus{outline:2px solid var(--spark);outline-offset:1px;border-color:transparent}
-.hint{font-size:11.5px;color:var(--dim);margin-top:6px;line-height:1.5}
-.err{font-size:12.5px;color:var(--ember);margin-top:8px;display:none}
-.gen{width:100%;margin-top:26px;background:var(--spark);color:#1A1102;border:none;border-radius:8px;padding:14px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .12s}
-.gen:hover{background:var(--spark-hi)}
+.hint{font-size:.68rem;color:var(--dimmer);margin-top:6px;line-height:1.5}
+.err{font-size:.74rem;color:var(--ember);margin-top:8px;display:none}
+.gen{width:100%;margin-top:24px;background:var(--spark);color:var(--void);border:none;border-radius:999px;padding:13px;font-family:'Orbitron',sans-serif;font-size:.64rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;box-shadow:0 0 22px rgba(251,191,36,.35);transition:filter .2s,transform .12s}
+.gen:hover{filter:brightness(1.08)}
 .gen:active{transform:scale(.985)}
-.gen:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.readout{margin-top:24px;border-top:1px solid var(--line);padding-top:18px;display:none}
+.gen:focus-visible{outline:2px solid var(--white);outline-offset:2px}
+/* readout */
+.readout{margin-top:24px;border-top:1px solid var(--line);padding-top:16px;display:none}
 .readout.show{display:block}
+.ro-lay{font-family:'Orbitron',sans-serif;font-size:.5rem;letter-spacing:.28em;text-transform:uppercase;color:var(--c,var(--cyan));margin:14px 0 8px;display:flex;align-items:center;gap:8px}
+.ro-lay::after{content:"";flex:1;height:1px;background:var(--line)}
+.ro-lay a{color:inherit;text-decoration:none;border-bottom:1px solid transparent}
+.ro-lay a:hover{border-bottom-color:currentColor}
 .ro-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;gap:12px}
-.ro-k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);white-space:nowrap}
-.ro-v{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);text-align:right}
-.ro-chain{font-size:12px;color:var(--dim);text-align:right;letter-spacing:.04em}
-.debts{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
-.debt-badge{font-size:11px;letter-spacing:.1em;border:1px solid var(--spark);color:var(--spark);border-radius:999px;padding:4px 11px}
-.no-debt{font-size:12px;color:var(--dim);font-style:italic}
+.ro-k{font-size:.66rem;letter-spacing:.06em;color:var(--dim);white-space:nowrap}
+.ro-k small{display:block;font-size:.58rem;color:var(--dimmer);letter-spacing:0}
+.ro-v{font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.ro-v.small{font-size:.68rem;font-weight:500;letter-spacing:.04em}
+.ro-chain{font-size:.66rem;color:var(--dimmer);text-align:right;letter-spacing:.02em}
+.sw{width:14px;height:14px;border-radius:50%;display:inline-block;box-shadow:0 0 10px rgba(255,255,255,.25);flex:none}
+.debts{margin-top:10px;display:flex;flex-wrap:wrap;gap:7px}
+.debt-badge{font-family:'Orbitron',sans-serif;font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid rgba(34,211,238,.4);color:var(--cyan);border-radius:999px;padding:4px 11px}
+.debt-badge.v{border-color:rgba(139,92,246,.5);color:var(--nebula)}
+.no-debt{font-size:.7rem;color:var(--dimmer)}
+.debt-note{font-size:.68rem;color:var(--dim);line-height:1.55;margin-top:10px}
+/* stage */
 .stage{display:flex;flex-direction:column;align-items:center;min-width:0}
-.frame{width:100%;max-width:640px;aspect-ratio:1;background:radial-gradient(circle at 50% 46%,#131332 0%,var(--void) 72%);border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:background .5s}
+.frame{width:100%;max-width:640px;aspect-ratio:1;background:radial-gradient(circle at 50% 46%,rgba(139,92,246,.12) 0%,var(--void) 72%);border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:background .5s;box-shadow:0 0 60px rgba(139,92,246,.08)}
 .frame.paper{background:#FBF9F4}
 .frame svg{width:92%;height:92%}
-.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:var(--dim);font-size:14px;text-align:center;padding:30px}
-.empty .seed{width:7px;height:7px;border-radius:50%;background:var(--spark);opacity:.9}
+.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:var(--dim);font-size:.82rem;text-align:center;padding:30px}
+.empty .seed{width:8px;height:8px;border-radius:50%;background:var(--spark);box-shadow:0 0 18px var(--spark)}
 @media (prefers-reduced-motion:no-preference){.empty .seed{animation:breathe 2.6s ease-in-out infinite}}
 @keyframes breathe{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.9);opacity:.35}}
 .modes{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap;justify-content:center}
-.mode-btn,.dl-btn{background:var(--panel);border:1px solid var(--line);color:var(--mist);border-radius:8px;padding:9px 16px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:400;cursor:pointer;transition:all .18s}
-.mode-btn:hover,.dl-btn:hover{color:var(--ink);border-color:var(--mist)}
-.mode-btn.on{background:var(--deep);color:var(--spark);border-color:var(--spark)}
+.mode-btn,.dl-btn{background:var(--panel);border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:9px 16px;font-family:'Orbitron',sans-serif;font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .18s}
+.mode-btn:hover,.dl-btn:hover{color:var(--white);border-color:rgba(255,255,255,.3)}
+.mode-btn.on{background:var(--white);color:var(--void);border-color:var(--white)}
 .mode-btn:focus-visible,.dl-btn:focus-visible{outline:2px solid var(--spark);outline-offset:2px}
 a.dl-btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
-.dl-btn.collide{border-color:var(--spark);color:var(--spark)}
-.dl-btn.collide:hover{background:var(--deep);color:var(--spark-hi);border-color:var(--spark-hi)}
+.dl-btn.collide{border-color:rgba(251,191,36,.5);color:var(--spark)}
+.dl-btn.collide:hover{background:rgba(251,191,36,.08);border-color:var(--spark)}
 .dls{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center}
-.legend{max-width:640px;width:100%;margin-top:30px;border-top:1px solid var(--line);padding-top:22px;display:none;position:relative;z-index:1}
+.mode-note{max-width:640px;font-size:.68rem;color:var(--dimmer);text-align:center;margin-top:14px;line-height:1.6}
+/* sections */
+.sec{padding:54px 0 10px}
+.sec-num{font-size:.6rem;color:var(--dimmer);letter-spacing:.3em;margin-bottom:8px}
+.sec-title{font-family:'Orbitron',sans-serif;font-weight:700;font-size:clamp(1.05rem,2.4vw,1.5rem);letter-spacing:.08em;text-transform:uppercase}
+.sec-sub{color:var(--dim);font-size:.86rem;max-width:720px;margin-top:8px}
+/* legend */
+.legend{display:none}
 .legend.show{display:block}
-.legend h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:20px;margin-bottom:14px;text-align:center}
-.leg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px 22px;font-size:13px;color:var(--mist);line-height:1.55}
-.leg-grid b{color:var(--ink);font-weight:400}
-.pal-name{text-align:center;margin-top:18px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--spark-hi)}
-.upsell{max-width:640px;width:100%;margin-top:26px;background:var(--panel);border:1px solid var(--spark);border-radius:16px;padding:24px 26px;text-align:center;display:none}
+.leg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:22px}
+.leg{border:1px solid color-mix(in srgb,var(--c) 35%,transparent);border-radius:14px;padding:16px;background:linear-gradient(180deg,color-mix(in srgb,var(--c) 8%,transparent),transparent);display:grid;gap:6px;text-decoration:none;color:inherit;transition:.25s;align-content:start}
+.leg:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--c) 70%,transparent);box-shadow:0 0 26px color-mix(in srgb,var(--c) 18%,transparent)}
+.leg .ln{font-family:'Orbitron',sans-serif;font-size:.5rem;letter-spacing:.26em;text-transform:uppercase;color:var(--c)}
+.leg .lq{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.05em}
+.leg .li{font-size:.76rem;color:var(--dim);line-height:1.55}
+.leg .lu{font-size:.74rem;color:var(--white);line-height:1.5}
+.leg .lu:empty{display:none}
+.pal-name{text-align:center;margin-top:22px;font-family:'Orbitron',sans-serif;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--spark)}
+/* tier strip */
+.tier-strip{display:none;margin-top:20px}
+.tier-strip.show{display:block}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:8px;margin-top:12px}
+.tier{border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center;background:var(--panel);opacity:.55;transition:.25s}
+.tier i{display:block;width:26px;height:26px;border-radius:50%;margin:0 auto 8px}
+.tier b{display:block;font-family:'Orbitron',sans-serif;font-size:.55rem;letter-spacing:.2em;color:var(--dim)}
+.tier span{display:block;font-size:.62rem;color:var(--dim);margin-top:3px;line-height:1.3}
+.tier.on{opacity:1;border-color:rgba(255,255,255,.35);box-shadow:0 0 22px rgba(255,255,255,.08)}
+.tier.on b,.tier.on span{color:var(--white)}
+/* rules */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:22px}
+.rule{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+.rule .ct{font-family:'Orbitron',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:var(--c,var(--cyan))}
+.rule h3{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.05em;margin-top:8px}
+.rule p{font-size:.8rem;color:var(--dim);line-height:1.6;margin-top:8px}
+.rule a{color:var(--spark);text-decoration:none;border-bottom:1px solid rgba(251,191,36,.35)}
+/* upsell */
+.upsell{margin-top:40px;background:var(--panel2);border:1px solid rgba(251,191,36,.4);border-radius:16px;padding:28px;text-align:center;display:none;box-shadow:0 0 50px rgba(251,191,36,.08);backdrop-filter:blur(10px)}
 .upsell.show{display:block}
-.upsell h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px}
-.upsell p{color:var(--mist);font-size:13.5px;line-height:1.6;margin:8px 0 16px}
-.upsell a{display:inline-block;background:var(--spark);color:#1A1102;border-radius:8px;padding:12px 26px;font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:background .2s}
-.upsell a:hover{background:var(--spark-hi)}
-.overlay{position:fixed;inset:0;background:rgba(4,4,14,.8);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.upsell h3{font-family:'Orbitron',sans-serif;font-weight:700;font-size:clamp(1rem,2.2vw,1.35rem);letter-spacing:.06em;margin-top:8px}
+.upsell p{color:var(--dim);font-size:.84rem;line-height:1.6;margin:10px auto 0;max-width:640px}
+.sections{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:18px auto 0;max-width:820px;text-align:left}
+.sections div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.7rem;color:var(--dim)}
+.sections div b{display:block;font-family:'Orbitron',sans-serif;font-size:.5rem;letter-spacing:.24em;color:var(--spark);margin-bottom:4px}
+.upsell a.go{display:inline-block;margin-top:20px;background:var(--spark);color:var(--void);border-radius:999px;padding:13px 26px;font-family:'Orbitron',sans-serif;font-size:.64rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;box-shadow:0 0 24px rgba(251,191,36,.35)}
+.upsell a.go:hover{filter:brightness(1.08)}
+.upsell .fine{font-size:.66rem;color:var(--dimmer);margin-top:12px}
+/* modals */
+.overlay{position:fixed;inset:0;background:rgba(4,4,14,.82);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
 .overlay.show{display:flex}
-.modal{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;max-width:380px;width:100%;text-align:center}
-.modal h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;margin-bottom:8px}
-.modal p{color:var(--mist);font-size:13px;line-height:1.6;margin-bottom:16px}
-.modal input{width:100%;background:var(--deep);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:12px;font-family:'Outfit',sans-serif;font-size:16px;margin-bottom:12px;text-align:center}
+.modal{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:28px;max-width:400px;width:100%;text-align:center;backdrop-filter:blur(10px)}
+.modal h3{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.06em;margin-bottom:8px}
+.modal p{color:var(--dim);font-size:.78rem;line-height:1.6;margin-bottom:16px}
+.modal p a{color:var(--spark)}
+.modal input{width:100%;background:var(--deep);border:1px solid var(--line);border-radius:10px;color:var(--white);padding:12px;font-family:'Space Mono',monospace;font-size:15px;margin-bottom:12px;text-align:center;color-scheme:dark}
 .modal .row{display:flex;gap:8px}
-.modal button{flex:1;border-radius:8px;padding:12px;font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer}
-.modal .primary{background:var(--spark);color:#1A1102;border:none;font-weight:500}
-.modal .primary:hover{background:var(--spark-hi)}
-.modal .ghost{background:none;color:var(--mist);border:1px solid var(--line)}
-.modal .merr{color:var(--ember);font-size:12px;margin-bottom:10px;display:none}
-footer{margin-top:44px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);position:relative;z-index:1}
-footer a{color:var(--mist);text-decoration:none}
+.modal button{flex:1;border-radius:999px;padding:12px;font-family:'Orbitron',sans-serif;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.modal .primary{background:var(--spark);color:var(--void);border:none;font-weight:700}
+.modal .primary:hover{filter:brightness(1.08)}
+.modal .ghost{background:none;color:var(--dim);border:1px solid var(--line)}
+.modal .merr{color:var(--ember);font-size:.72rem;margin-bottom:10px;display:none}
+/* cta + footer */
+.cta{text-align:center;padding:50px 0 20px}
+.cta a{display:inline-block;margin:6px;background:var(--spark);color:var(--void);text-decoration:none;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;padding:13px 24px;border-radius:999px;box-shadow:0 0 24px rgba(251,191,36,.35)}
+.cta a.ghost{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.25);box-shadow:none}
+footer{text-align:center;padding:30px 0 10px;font-size:.66rem;color:var(--dim);border-top:1px solid var(--line);margin-top:30px}
+footer a{color:var(--spark);text-decoration:none}
+footer p+p{margin-top:6px}
 @media(max-width:600px){
-  body{padding:0 14px 44px}
-  header{padding:34px 0 4px}
-  .sub{font-size:13.5px}
-  main{gap:26px;margin-top:26px}
+  header.hero{padding:30px 0 4px}
+  main{gap:22px;margin-top:24px}
   .intake{padding:22px 18px}
-  .gen{padding:16px;font-size:14.5px}
-  .modes{width:100%;max-width:640px}
-  .mode-btn{flex:1;padding:13px 10px;font-size:13.5px}
-  .dls{width:100%;max-width:640px}
-  .dl-btn{flex:1;min-width:96px;padding:13px 10px;font-size:13.5px}
-  .legend{padding-top:18px;margin-top:24px}
-  .leg-grid{grid-template-columns:1fr;gap:10px}
-  footer{margin-top:32px}
+  .gen{padding:15px}
+  .modes,.dls{width:100%}
+  .mode-btn{flex:1;padding:12px 8px}
+  .dl-btn{flex:1;min-width:96px;padding:12px 8px}
+  .leg-grid{grid-template-columns:1fr}
 }
+@media (prefers-reduced-motion:reduce){.aurora,.stars i{animation:none!important}}
 </style>
 <script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_0xcayhWXVnKO9y");whop.track("page");</script>
 </head>
 <body>
-<svg class="stars" width="100%" height="100%" aria-hidden="true">
-<circle cx="6%" cy="12%" r="1" fill="#8B87C8" opacity=".5"/><circle cx="14%" cy="64%" r="1.2" fill="#8B87C8" opacity=".35"/><circle cx="9%" cy="88%" r=".8" fill="#8B87C8" opacity=".45"/><circle cx="90%" cy="18%" r="1.1" fill="#8B87C8" opacity=".5"/><circle cx="95%" cy="52%" r=".9" fill="#8B87C8" opacity=".35"/><circle cx="86%" cy="80%" r="1.2" fill="#8B87C8" opacity=".4"/><circle cx="50%" cy="5%" r=".8" fill="#8B87C8" opacity=".4"/><circle cx="72%" cy="8%" r="1" fill="#8B87C8" opacity=".3"/><circle cx="28%" cy="7%" r=".9" fill="#8B87C8" opacity=".35"/>
-</svg>
+<!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+<div class="aurora"></div>
+<div class="stars" id="stars"></div>
+<div class="wrap">
+<nav class="top">
+  <a class="brand orb" href="/">The First Spark</a>
+  <div class="links orb">
+    <a href="ecosystem.html">Start Here</a>
+    <a href="framework.html">Framework</a>
+    <a href="map.html">Soul Map · $22</a>
+    <a href="shop.html">Shop</a>
+    <a href="free-tools.html">Free Tools</a>
+    <a href="https://links.thefirstspark.shop" target="_blank" rel="noopener noreferrer">All Links</a>
+  </div>
+</nav>
 
-<header>
-  <div class="brand">The First Spark</div>
+<header class="hero">
+  <div class="kicker orb">Free preview · drawn live from the First Spark Framework</div>
   <h1>Your soul has a <em>pattern</em>.</h1>
-  <p class="sub">Two numbers were written into you at birth — one by your name, one by your date. Together they draw a geometry that belongs to no one else.</p>
+  <p class="sub">Two numbers were written into you at birth: one by your name, one by your date. The Framework turns them into a single light and a geometry that belongs to no one else. It weaves live as you type.</p>
+  <p class="not">No account, no email, no randomness. The same name and date always draw the same pattern, because every line below comes from a rule you can read.</p>
+  <div class="chips">
+    <a class="chip" href="framework.html#numerology" style="--c:var(--cyan)"><b>L6</b>Numerology · Road &amp; Vessel</a>
+    <a class="chip" href="framework.html#codex" style="--c:var(--hot-pink)"><b>L5</b>Color Codex · your light</a>
+    <a class="chip" href="framework.html#realms" style="--c:var(--nebula)"><b>L4</b>3 Realms</a>
+    <a class="chip" href="framework.html#archetypes" style="--c:var(--nebula)"><b>L3</b>12 Archetypes</a>
+    <a class="chip" href="framework.html#selector" style="--c:var(--spark)"><b>L1</b>4 Selector gates</a>
+  </div>
 </header>
 
 <main>
   <section class="intake" aria-label="Enter your birth details">
+    <div class="ptag">Movement II · Inscription</div>
     <h2>The inscription</h2>
-    <p>Entered exactly as given at birth. The pattern weaves itself live as you type — the same soul always draws the same shape.</p>
-    <label for="bname">Full birth name</label>
+    <p>Name and date become value. Enter both exactly as given at birth. The pattern weaves itself as you type.</p>
+    <label for="bname">Full birth name · the Vessel</label>
     <input type="text" id="bname" autocomplete="off" spellcheck="false" placeholder="As it appears on your birth certificate">
-    <div class="hint">All given names and surname. Suffixes (Jr, III) are left off.</div>
-    <label for="bdate">Birth date</label>
+    <div class="hint">All given names and surname. Suffixes (Jr, III) are left off. This becomes your Expression number.</div>
+    <label for="bdate">Birth date · the Road</label>
     <input type="date" id="bdate">
+    <div class="hint">This becomes your Life Path number.</div>
     <div class="err" id="err">Enter your full birth name and birth date first.</div>
     <button class="gen" id="go">Reveal my pattern</button>
     <div class="readout" id="readout">
-      <div class="ro-row"><span class="ro-k">Life path</span><span><span class="ro-v" id="lp-v"></span><div class="ro-chain" id="lp-c"></div></span></div>
-      <div class="ro-row"><span class="ro-k">Expression</span><span><span class="ro-v" id="ex-v"></span><div class="ro-chain" id="ex-c"></div></span></div>
+      <div class="ro-lay" style="--c:var(--cyan)"><a href="framework.html#numerology">L6 · Numerology</a></div>
+      <div class="ro-row"><span class="ro-k">Life Path<small>the Road · from your date</small></span><span><span class="ro-v" id="lp-v"></span><div class="ro-chain" id="lp-c"></div></span></div>
+      <div class="ro-row"><span class="ro-k">Expression<small>the Vessel · from your name</small></span><span><span class="ro-v" id="ex-v"></span><div class="ro-chain" id="ex-c"></div></span></div>
+      <div class="ro-row"><span class="ro-k">Radiant Number<small>Road + Vessel, reduced together</small></span><span><span class="ro-v" id="rad-v"></span><div class="ro-chain" id="rad-c"></div></span></div>
+      <div class="ro-lay" style="--c:var(--hot-pink)"><a href="framework.html#codex">L5 · Color Codex</a></div>
+      <div class="ro-row"><span class="ro-k">Your light<small>permanent · never re-cast</small></span><span class="ro-v small"><i class="sw" id="tier-sw"></i><span id="tier-v"></span></span></div>
+      <div class="ro-lay" style="--c:var(--cyan)"><a href="framework.html#numerology">Karmic conditions</a></div>
       <div class="debts" id="debts"></div>
+      <div class="debt-note" id="debt-note"></div>
     </div>
   </section>
 
@@ -166,6 +280,7 @@ footer a{color:var(--mist);text-decoration:none}
       <button class="mode-btn" id="m-aura" onclick="setMode('aura')">Aura</button>
       <button class="mode-btn" id="m-paper" onclick="setMode('paper')">Coloring page</button>
     </div>
+    <p class="mode-note">Four ways to see one pattern. Illuminated is the line drawing. Bloom fills it. Aura melts the same rings into light. Coloring page strips the color so you can lay your own light down. The geometry never changes between them.</p>
     <div class="dls">
       <button class="dl-btn" onclick="emailPattern()">Email me</button>
       <button class="dl-btn" onclick="withGate(sharePattern)">Share</button>
@@ -181,24 +296,55 @@ footer a{color:var(--mist);text-decoration:none}
   </section>
 </main>
 
-<div class="legend" id="legend">
-  <h3>How to read your pattern</h3>
+<section class="sec legend" id="legend">
+  <div class="sec-num orb">01 · How to read your pattern</div>
+  <h2 class="sec-title">Every line is a layer</h2>
+  <p class="sec-sub">The pattern is the Framework drawn from the outside in. Each element below belongs to one layer of the stack. Tap a card to read that layer in full.</p>
   <div class="leg-grid">
-    <div><b>Three outer circles</b> — the three Realms that hold every soul.</div>
-    <div><b>Twelve-fold symmetry</b> — the wheel of twelve Archetypes, turning beneath everything you do.</div>
-    <div><b>Four gates</b> — the four domains of the Selector, marking the cardinal directions of choice.</div>
-    <div><b>The woven rings</b> — your Expression. Their number is your capacity; their density, the equipment you carry.</div>
-    <div><b>The inner star</b> — your Life Path. Its points count the road you were given to walk.</div>
-    <div><b>Your light</b> — not the Road alone. Road and Vessel, met together, are what the pattern is colored by.</div>
-    <div><b>Amber breaks</b> — karmic debt, where the weave was left deliberately open. What is unclosed can be released.</div>
+    <a class="leg" href="framework.html#realms" style="--c:var(--nebula)"><div class="ln">L4 · The 3 Realms</div><div class="lq">Three outer circles</div><div class="li">The three grounds a pattern can be read against. The same archetype does not mean the same thing in all three.</div></a>
+    <a class="leg" href="framework.html#archetypes" style="--c:var(--nebula)"><div class="ln">L3 · The 12 Archetypes</div><div class="lq">Twelve spokes</div><div class="li">The archetype wheel, four figures to each verb of the Core Code. The pattern shows the whole wheel and never your seat: numbers cannot name an archetype. To find yours, run the Engine.</div></a>
+    <a class="leg" href="framework.html#selector" style="--c:var(--spark)"><div class="ln">L1 · Selector Model</div><div class="lq">Four gates</div><div class="li">The four domains experience is sorted into: Physics, Metaphysical, Relational, Temporal. One per quadrant of the wheel.</div></a>
+    <a class="leg" href="framework.html#numerology" style="--c:var(--cyan)"><div class="ln">L6 · Expression · the Vessel</div><div class="lq">The woven rings</div><div class="li">Your full birth name, reduced. Their number is your capacity; their density, the equipment you arrived with.</div><div class="lu" id="leg-rings"></div></a>
+    <a class="leg" href="framework.html#numerology" style="--c:var(--cyan)"><div class="ln">L6 · Life Path · the Road</div><div class="lq">The inner star</div><div class="li">Your birth date, reduced. Its points count the road you were given to walk. Master numbers 22 and 33 layer the star.</div><div class="lu" id="leg-star"></div></a>
+    <a class="leg" href="framework.html#codex" style="--c:var(--hot-pink)"><div class="ln">L5 · Color Codex</div><div class="lq">Your light</div><div class="li">Not the Road alone. Road and Vessel summed and reduced together give the Radiant Number, and the Radiant Number picks one of eleven tiers. That tier is the only palette the pattern is allowed to use.</div><div class="lu" id="leg-light"></div></a>
+    <a class="leg" href="framework.html#numerology" style="--c:var(--cyan)"><div class="ln">L6 · Karmic conditions</div><div class="lq">Amber breaks</div><div class="li">Debts 13, 14, 16 and 19, checked on the Road and the Vessel only. A Road debt breaks the outer circle: something met. A Vessel debt knots a ring: something held. The knot sits in a domain sector and stops there (DL-010).</div><div class="lu" id="leg-breaks"></div></a>
+    <a class="leg" href="framework.html#thesis" style="--c:var(--spark)"><div class="ln">L0 · Thesis</div><div class="lq">The spark at the center</div><div class="li">Every pattern ends at the same point. Reality is programmable; consciousness is the code. Everything else on the page inherits from here.</div></a>
   </div>
   <div class="pal-name" id="pal-name"></div>
-</div>
+  <div class="tier-strip" id="tier-strip">
+    <div class="sec-num orb" style="margin-top:8px">The eleven lights · yours is lit</div>
+    <div class="tiers" id="tiers"></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-num orb">02 · Why it is the same every time</div>
+  <h2 class="sec-title">Rules, not randomness</h2>
+  <p class="sec-sub">A reading you can trust has to say the same thing twice. These are the rules the generator follows, and the page they come from.</p>
+  <div class="rules">
+    <div class="rule" style="--c:var(--cyan)"><div class="ct">L6 · Two inputs, only two</div><h3>Life Path and Expression</h3><p>The date gives the Road. The name gives the Vessel. Nothing else is computed here, and no other position is checked for debt. <a href="framework.html#numerology">The numerology layer →</a></p></div>
+    <div class="rule" style="--c:var(--hot-pink)"><div class="ct">L5 · DL-009 · Radiant Number</div><h3>Different roads can share a light</h3><p>Color is <code>reduce(LP + EX)</code>, not Life Path alone. Two people with different Life Paths can read as the same color, and that is by design. <a href="framework.html#codex">The Color Codex →</a></p></div>
+    <div class="rule" style="--c:var(--hot-pink)"><div class="ct">L5 · DL-008 · The Light and the Season</div><h3>Your color never changes</h3><p>The native light is permanent identity. The Personal Year is the season, weather rather than self, and it is never rendered onto the pattern. What you see here is you, not this year. <a href="framework.html#codex">Read the ruling →</a></p></div>
+    <div class="rule" style="--c:var(--spark)"><div class="ct">L1 · DL-010 · The firewall</div><h3>Numbers never name an archetype</h3><p>A debt can say which domain its work lives in. It can never say which of the twelve you are. That is why the pattern shows the wheel and the gates, but no seat. <a href="engine.html">Find your seat in the Engine →</a></p></div>
+    <div class="rule" style="--c:var(--green)"><div class="ct">The Engine · 5 movements</div><h3>Approach → Emergence</h3><p>You approached. Your name and date were inscribed. The value refracted into light. The light was placed on the wheel. The pattern emerged. Living is the same Engine run backwards. <a href="framework.html#engine">The Engine →</a></p></div>
+    <div class="rule" style="--c:var(--spark)"><div class="ct">Deterministic by design</div><h3>Same inputs, same pattern</h3><p>Ring styles, spacing and knot placement are seeded from your name and date, so a shared link redraws your exact pattern anywhere. Change one letter and the weave changes. <a href="framework.html">The whole framework →</a></p></div>
+  </div>
+</section>
 
 <div class="upsell" id="upsell">
-  <h3>This is the shape. The map is the meaning.</h3>
-  <p>Your Soul Map reads every layer of this pattern — your road, your equipment, your debts and how to release them — in six sections written for you alone.</p>
-  <a id="map-link" href="https://soul-maps.thefirstspark.shop" target="_blank" rel="noopener">Get your Soul Map &mdash; $22</a>
+  <div class="ptag">This is the shape. The map is the meaning.</div>
+  <h3>Your Soul Map reads every layer of this pattern</h3>
+  <p>The generator shows you the geometry. The Soul Map is the written reading behind it: your Road, your Vessel, your light, your debts and how to release them, in six sections written for you alone. Same inputs, same map, delivered as your own private page you keep forever, and it mints your Soul Card ID.</p>
+  <div class="sections">
+    <div><b>Road</b>What the Life Path asks of you</div>
+    <div><b>Vessel</b>What the Expression equips you with</div>
+    <div><b>Light</b>Your tier in the Codex, and why</div>
+    <div><b>Debts</b>Each condition, by name, and its release</div>
+    <div><b>Pattern</b>The loop you keep repeating</div>
+    <div><b>Release</b>Witness → Release → Select, applied to you</div>
+  </div>
+  <a id="map-link" class="go" href="map.html">Get your Soul Map · $22</a>
+  <div class="fine">One-time. Includes your Soul Card ID for Freq Match.</div>
 </div>
 
 <div class="overlay" id="gate-overlay">
@@ -217,7 +363,7 @@ footer a{color:var(--mist);text-decoration:none}
 <div class="overlay" id="hd-overlay">
   <div class="modal">
     <h3>Illuminate in full</h3>
-    <p>HD removes the watermark and doubles export resolution for printing. Get your unlock code at <a href="https://thefirstspark.shop" target="_blank" rel="noopener" style="color:var(--spark)">thefirstspark.shop</a>, then enter it here.</p>
+    <p>HD removes the watermark and doubles export resolution for printing. Get your unlock code at <a href="shop.html">the shop</a>, then enter it here.</p>
     <div class="merr" id="hd-err">That code isn't recognized.</div>
     <input type="text" id="hd-code" placeholder="SPARK-XXXX" autocomplete="off" spellcheck="false">
     <div class="row">
@@ -227,12 +373,22 @@ footer a{color:var(--mist);text-decoration:none}
   </div>
 </div>
 
-<footer><a href="https://thefirstspark.shop">thefirstspark.shop</a></footer>
+<div class="cta">
+  <a href="framework.html">Read the framework</a>
+  <a class="ghost" href="ecosystem.html">See the whole ecosystem</a>
+</div>
 
+<footer>
+  <p>The First Spark · Kate's Paint LLC · Akron, Ohio</p>
+  <p>A pattern is the shape. A reading is a Soul Map. <a href="https://thefirstspark.shop">thefirstspark.shop</a> · <a href="mailto:kate@thefirstspark.shop">kate@thefirstspark.shop</a></p>
+</footer>
+</div>
+
+<script>(()=>{const s=document.getElementById('stars');let h='';for(let i=0;i<140;i++){h+=`<i style="left:${Math.random()*100}%;top:${Math.random()*100}%;width:${(Math.random()*1.6+.5).toFixed(1)}px;height:${(Math.random()*1.6+.5).toFixed(1)}px;animation-delay:${(Math.random()*4).toFixed(1)}s"></i>`}s.innerHTML=h})();</script>
 <script>
 "use strict";
 /* ---------- config: set these before going live ---------- */
-const SOUL_MAP_URL="https://soul-maps.thefirstspark.shop";
+const SOUL_MAP_URL="map.html";
 const WATERMARK="THEFIRSTSPARK.SHOP · @THEREALFIRSTSPARK";
 const GATE_ENDPOINT="https://links.thefirstspark.shop/api/subscribe";
 const UNLOCK_CODES=["SPARK-1111","SPARK-FIRSTLIGHT"];
@@ -416,7 +572,7 @@ function draw(soul){
   P("circle",{cx,cy,r:5,fill:dark?"#FCDE5A":"none",stroke:dark?"none":C.a,"stroke-width":sw});
   /* mark */
   const mk=el("text",{x:400,y:788,"text-anchor":"middle","font-size":"14",
-    fill:dark?"rgba(139,135,200,.55)":"rgba(27,27,27,.4)","letter-spacing":"3","font-family":"Outfit, sans-serif"},svg);
+    fill:dark?"rgba(139,135,200,.55)":"rgba(27,27,27,.4)","letter-spacing":"3","font-family":"'Space Mono', monospace"},svg);
   mk.textContent=WATERMARK;
   /* inscribe animation */
   if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
@@ -461,7 +617,7 @@ function drawAura(soul,svg){
       stroke:"#FCDE5A","stroke-width":1,"stroke-opacity":0.14},svg);
   }
   const mk=el("text",{x:400,y:788,"text-anchor":"middle","font-size":"14",
-    fill:"rgba(139,135,200,.55)","letter-spacing":"3","font-family":"Outfit, sans-serif"},svg);
+    fill:"rgba(139,135,200,.55)","letter-spacing":"3","font-family":"'Space Mono', monospace"},svg);
   mk.textContent=WATERMARK;
   if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
     svg.style.opacity="0";svg.style.transition="opacity 1.8s ease";
@@ -497,16 +653,21 @@ function generate(quiet){
   document.getElementById("ex-v").textContent=ex;
   document.getElementById("ex-c").textContent=chainText(exI,ex);
   const db=document.getElementById("debts");db.innerHTML="";
-  const all=[...new Set([...lpDebts.map(n=>n+" · life path"),...exDebts.map(n=>n+" · expression")])];
-  if(all.length){all.forEach(t=>{const s=document.createElement("span");s.className="debt-badge";s.textContent="Karmic debt "+t;db.appendChild(s);});}
-  else{const s=document.createElement("span");s.className="no-debt";s.textContent="No karmic debt carried — the weave is closed.";db.appendChild(s);}
+  const all=[...new Set([...lpDebts.map(n=>n+"|Road"),...exDebts.map(n=>n+"|Vessel")])].map(s=>s.split("|"));
+  if(all.length){all.forEach(([n,c])=>{const s=document.createElement("span");s.className="debt-badge"+(c==="Vessel"?" v":"");s.textContent="Debt "+n+" · "+c;db.appendChild(s);});}
+  else{const s=document.createElement("span");s.className="no-debt";s.textContent="No karmic debt carried. The weave is closed.";db.appendChild(s);}
+  const dn=document.getElementById("debt-note");
+  if(all.length){const road=all.some(a=>a[1]==="Road"),ves=all.some(a=>a[1]==="Vessel");
+    dn.textContent=(road?"A debt on the Road is something met in circumstance; it opens the outer realm circle. ":"")+(ves?"A debt on the Vessel is something held as capacity; it knots one of the woven rings. ":"")+"The knot's sector names the domain the work lives in, never an archetype.";}
+  else dn.textContent="Four debts are checked (13, 14, 16, 19) against the Life Path and Expression only.";
   document.getElementById("readout").classList.add("show");
   document.getElementById("empty").style.display="none";
   const svg=document.getElementById("art");svg.style.display="block";
   document.getElementById("legend").classList.add("show");
   document.getElementById("upsell").classList.add("show");
   document.getElementById("map-link").href=SOUL_MAP_URL;
-  document.getElementById("pal-name").textContent="Your light: "+PALETTES[currentSoul.tier].name+" — Road "+currentSoul.lp+" met by Vessel "+currentSoul.ex+" (Radiant "+currentSoul.radiant+")";
+  document.getElementById("pal-name").textContent="Your light: "+PALETTES[currentSoul.tier].name+" · Road "+currentSoul.lp+" met by Vessel "+currentSoul.ex+" · Radiant "+currentSoul.radiant;
+  frameworkReadout(currentSoul);
   draw(currentSoul);
   if(!quiet&&window.innerWidth<860)document.getElementById("frame").scrollIntoView({behavior:"smooth",block:"start"});
 }
@@ -667,6 +828,28 @@ document.getElementById("bdate").addEventListener("keydown",e=>{if(e.key==="Ente
 document.getElementById("bname").addEventListener("input",liveWeave);
 document.getElementById("bdate").addEventListener("input",liveWeave);
 document.getElementById("bdate").addEventListener("change",liveWeave);
+
+/* ---------- framework readout (L6 → L5) ---------- */
+const ROMAN=["I","II","III","IV","V","VI","VII","VIII","IX","X","XI"];
+(function renderTiers(){
+  const w=document.getElementById("tiers");if(!w)return;
+  PALETTES.forEach((p,i)=>{const d=document.createElement("div");d.className="tier";d.id="tier-"+i;
+    d.innerHTML='<i style="background:linear-gradient(135deg,'+p.c[0]+','+p.c[1]+' 55%,'+p.c[3]+')"></i><b>'+ROMAN[i]+'</b><span>'+p.name.split("· ")[1]+'</span>';w.appendChild(d);});
+})();
+function frameworkReadout(s){
+  const p=PALETTES[s.tier];
+  document.getElementById("rad-v").textContent=s.radiant;
+  document.getElementById("rad-c").textContent=s.lp+" + "+s.ex+" = "+(s.lp+s.ex)+(s.lp+s.ex!==s.radiant?" → "+s.radiant:"");
+  document.getElementById("tier-v").textContent="Tier "+ROMAN[s.tier]+" · "+p.name.split("· ")[1];
+  document.getElementById("tier-sw").style.background="linear-gradient(135deg,"+p.c[0]+","+p.c[1]+" 55%,"+p.c[3]+")";
+  document.querySelectorAll(".tier").forEach((t,i)=>t.classList.toggle("on",i===s.tier));
+  const ringN=Math.min(s.ex>9?9:s.ex,9)+(s.ex>9?2:0);
+  document.getElementById("leg-rings").textContent=ringN+" woven ring"+(ringN===1?"":"s")+" for Expression "+s.ex+(s.ex>9?" (a master number adds two)":"")+".";
+  document.getElementById("leg-star").textContent=(s.lp>9?"An eleven-point star":"A "+s.lp+"-point star")+" for Life Path "+s.lp+(s.lp===22?", drawn twice":s.lp===33?", drawn three times":"")+".";
+  document.getElementById("leg-light").textContent="Your light is "+p.name+": Radiant "+s.radiant+", from Road "+s.lp+" and Vessel "+s.ex+". It never changes.";
+  document.getElementById("leg-breaks").textContent=(s.lpDebt||s.exDebt)?((s.lpDebt?"The outer realm circle is broken (Road debt). ":"")+(s.exDebt?"One ring carries an amber knot (Vessel debt). ":"")):"Your weave is closed: no amber breaks.";
+  const ts=document.getElementById("tier-strip");if(ts)ts.classList.add("show");
+}
 /* auto-generate from a shared link: ?n=Name&d=YYYY-MM-DD */
 (function(){
   const p=new URLSearchParams(location.search);
