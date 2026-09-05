@@ -74,7 +74,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --void: #050508;
@@ -171,7 +171,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       background-clip: text;
     }
     .lede {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: 'Space Mono', monospace;
       font-size: clamp(1.2rem, 2.5vw, 1.5rem);
       color: var(--dim);
       max-width: 520px;
@@ -214,8 +214,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       margin-bottom: 14px;
     }
     .one-liner {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.25rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 1.00rem;
       color: var(--dim);
       margin-bottom: 28px;
       max-width: 560px;
@@ -252,8 +252,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       line-height: 1.7;
     }
     .card .num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 1.60rem;
       font-weight: 700;
       color: var(--spark);
       line-height: 1;
@@ -302,8 +302,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       background: var(--card);
     }
     .step .n {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 1.44rem;
       color: var(--nebula);
       margin-bottom: 6px;
     }
@@ -317,15 +317,14 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     .step .d { font-size: .7rem; color: var(--dim); }
 
     .quote {
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: 'Orbitron', sans-serif;
       font-size: 1.4rem;
-      font-style: italic;
+      
       color: var(--spark);
       border-left: 2px solid var(--cyan);
       padding-left: 20px;
       margin: 8px 0 0;
-      line-height: 1.4;
-    }
+      line-height: 1.4; letter-spacing: .05em;}
 
     .final {
       text-align: center;
@@ -393,6 +392,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       text-decoration: none;
     }
     body { padding-bottom: 64px; }
+      .row .key small{display:block;font-family:'Orbitron',sans-serif;font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-top:4px;font-weight:400}
+    .row .key small.l5{color:#ec4899}.row .key small.l2{color:var(--spark)}.row .key small.t{color:#34d399}
   </style>
 <script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_0xcayhWXVnKO9y");whop.track("page");</script>
 </head>
@@ -405,6 +406,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       <a href="/">Home</a>
       <a href="/archetype-discovery.html">Archetype Quiz</a>
       <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Freq Match</a>
+      <a href="/framework.html">Framework</a>
+      <a href="/soul-pattern-generator.html">Preview Free</a>
       <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="nav-cta">Get Map · $22</a>
     </div>
   </nav>
@@ -417,7 +420,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <p class="lede">A private page that turns your birth data into a readable coordinate system — not a horoscope, not a vibe check.</p>
     <div class="cta-row">
       <a href="https://whop.com/checkout/plan_anQKP3Pzf1cGm" class="btn-p">Get Yours · $22</a>
-      <a href="https://soul-maps.thefirstspark.shop" target="_blank" rel="noopener noreferrer" class="btn-g">See Real Maps →</a>
+      <a href="/soul-pattern-generator.html" class="btn-g">Weave your pattern free →</a>
     </div>
   </header>
 
@@ -466,72 +469,72 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <div class="wrap">
       <p class="label">◈ What's inside</p>
       <h2>Every map covers these layers.</h2>
-      <p class="one-liner">46+ data points across three traditions — one readable document.</p>
+      <p class="one-liner">46+ data points across three traditions, one readable document. Each row is tagged with where it sits in the <a href="/framework.html" style="color:var(--spark);text-decoration:none;border-bottom:1px solid rgba(251,191,36,.35)">First Spark Framework</a>.</p>
 
       <div class="stack">
         <div class="row">
-          <div class="key">Life Path</div>
+          <div class="key">Life Path<small>L6 · the Road</small></div>
           <div class="val"><strong>Your primary frequency.</strong> The main lesson and direction of this lifetime, calculated from your full birth date.</div>
         </div>
         <div class="row">
-          <div class="key">Expression</div>
+          <div class="key">Expression<small>L6 · the Vessel</small></div>
           <div class="val"><strong>How you transmit.</strong> The energy others experience when you show up — calculated from the letters in your full birth name.</div>
         </div>
         <div class="row">
-          <div class="key">Soul Urge</div>
+          <div class="key">Soul Urge<small>L6 · Numerology</small></div>
           <div class="val"><strong>What drives you underneath.</strong> The private want that steers decisions even when you don't name it. From the vowels in your name.</div>
         </div>
         <div class="row">
-          <div class="key">Personality</div>
+          <div class="key">Personality<small>L6 · Numerology</small></div>
           <div class="val"><strong>What others receive first.</strong> The outer shell — how the world reads you before it knows you. From the consonants in your name.</div>
         </div>
         <div class="row">
-          <div class="key">Birthday</div>
+          <div class="key">Birthday<small>L6 · Numerology</small></div>
           <div class="val"><strong>Your gift frequency.</strong> The number of the day you arrived — a native talent that was online before you had language for it.</div>
         </div>
         <div class="row">
-          <div class="key">Maturity</div>
+          <div class="key">Maturity<small>L6 · Numerology</small></div>
           <div class="val"><strong>Your evolved self.</strong> The arc that comes online more fully in midlife — Life Path + Expression blended into a long-game number.</div>
         </div>
         <div class="row">
-          <div class="key">Hidden Passion</div>
+          <div class="key">Hidden Passion<small>L6 · Numerology</small></div>
           <div class="val"><strong>The unconscious engine.</strong> The number that shows up most in your name — the drive that leaks sideways if you don't channel it on purpose.</div>
         </div>
         <div class="row">
-          <div class="key">Karmic Lessons</div>
+          <div class="key">Karmic Lessons<small>L6 · Karmic</small></div>
           <div class="val"><strong>What you came to learn.</strong> Numbers missing from your name — the skills this lifetime is here to install, not avoid.</div>
         </div>
         <div class="row">
-          <div class="key">Pinnacles</div>
+          <div class="key">Pinnacles<small class="t">Timeline</small></div>
           <div class="val"><strong>Four life phases.</strong> Major themes across early years, building years, midlife, and late life — so you know what season you're in.</div>
         </div>
         <div class="row">
-          <div class="key">Challenges</div>
+          <div class="key">Challenges<small class="t">Timeline</small></div>
           <div class="val"><strong>What you're here to master.</strong> Friction points that keep recycling until you learn the move. Named so you can stop fighting the wrong enemy.</div>
         </div>
         <div class="row">
-          <div class="key">Personal Year</div>
-          <div class="val"><strong>This year's weather.</strong> A 1–9 cycle that tells you whether this is a seed year, build year, harvest year, or release year.</div>
+          <div class="key">Personal Year<small class="l5">L5 · the season</small></div>
+          <div class="val"><strong>This year's weather.</strong> A 1–9 cycle that tells you whether this is a seed year, build year, harvest year, or release year. The season, not the self: your numbers and your light do not change with it.</div>
         </div>
         <div class="row">
-          <div class="key">12-Month Map</div>
+          <div class="key">12-Month Map<small class="l5">L5 · the season</small></div>
           <div class="val"><strong>Month-by-month focus.</strong> Each calendar month gets a number and a plain directive — what to prioritize right now.</div>
         </div>
         <div class="row">
-          <div class="key">Natal Chart</div>
+          <div class="key">Natal Chart<small class="t">Celestial</small></div>
           <div class="val"><strong>Celestial coordinates.</strong> Sun, Moon, rising (when time is known), key planets, houses, and aspects — not fluff, placement as syntax.</div>
         </div>
         <div class="row">
-          <div class="key">Chinese Zodiac</div>
+          <div class="key">Chinese Zodiac<small class="t">Celestial</small></div>
           <div class="val"><strong>Animal + element.</strong> Your Eastern signature layered under the Western chart — another axis on the same coordinate system.</div>
         </div>
         <div class="row">
-          <div class="key">Soul Synthesis</div>
+          <div class="key">Soul Synthesis<small class="l2">L2 · Core Code</small></div>
           <div class="val"><strong>The whole triangle in plain English.</strong> How Life Path, Expression, and Soul Urge run together as one engine — plus what to watch for (debugging notes).</div>
         </div>
         <div class="row">
-          <div class="key">Color Codex</div>
-          <div class="val"><strong>Your map color.</strong> A visual identity tier tied to the proprietary Color Codex — how your map sits in the larger archive.</div>
+          <div class="key">Color Codex<small class="l5">L5 · your light</small></div>
+          <div class="val"><strong>Your native light.</strong> One of eleven tiers, set by your Radiant Number: Life Path and Expression summed and reduced together. Permanent, never re-cast, and the only palette your free Soul Pattern is drawn from.</div>
         </div>
       </div>
       <div class="cta-row" style="margin-top:32px; justify-content:flex-start;">
@@ -695,6 +698,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     <p>The First Spark · For self-reflection. Not medical or financial advice.</p>
     <p style="margin-top:10px;">
       <a href="/">Home</a> ·
+      <a href="/framework.html">Framework</a> ·
       <a href="/archetype-discovery.html">Archetype Quiz</a> ·
       <a href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Freq Match</a> ·
       <a href="https://soul-maps.thefirstspark.shop" target="_blank" rel="noopener noreferrer">Archive</a>
