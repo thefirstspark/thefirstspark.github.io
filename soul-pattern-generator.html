@@ -306,13 +306,13 @@ footer p+p{margin-top:6px}
     <a class="leg" href="framework.html#selector" style="--c:var(--spark)"><div class="ln">L1 · Selector Model</div><div class="lq">Four gates</div><div class="li">The four domains experience is sorted into: Physics, Metaphysical, Relational, Temporal. One per quadrant of the wheel.</div></a>
     <a class="leg" href="framework.html#numerology" style="--c:var(--cyan)"><div class="ln">L6 · Expression · the Vessel</div><div class="lq">The woven rings</div><div class="li">Your full birth name, reduced. Their number is your capacity; their density, the equipment you arrived with.</div><div class="lu" id="leg-rings"></div></a>
     <a class="leg" href="framework.html#numerology" style="--c:var(--cyan)"><div class="ln">L6 · Life Path · the Road</div><div class="lq">The inner star</div><div class="li">Your birth date, reduced. Its points count the road you were given to walk. Master numbers 22 and 33 layer the star.</div><div class="lu" id="leg-star"></div></a>
-    <a class="leg" href="framework.html#codex" style="--c:var(--hot-pink)"><div class="ln">L5 · Color Codex</div><div class="lq">Your light</div><div class="li">Not the Road alone. Road and Vessel summed and reduced together give the Radiant Number, and the Radiant Number picks one of eleven tiers. That tier is the only palette the pattern is allowed to use.</div><div class="lu" id="leg-light"></div></a>
+    <a class="leg" href="framework.html#codex" style="--c:var(--hot-pink)"><div class="ln">L5 · Color Codex</div><div class="lq">Your light</div><div class="li">Not the Road alone. Road and Vessel summed and reduced together give the Radiant Number, and the Radiant Number picks one of nine tiers. That tier is the only palette the pattern is allowed to use. Master numbers (11, 22, 33) are a tint, not a tier: their reduced light pulled toward white, Moonsilvered, with the master ring.</div><div class="lu" id="leg-light"></div></a>
     <a class="leg" href="framework.html#numerology" style="--c:var(--cyan)"><div class="ln">L6 · Karmic conditions</div><div class="lq">Amber breaks</div><div class="li">Debts 13, 14, 16 and 19, checked on the Road and the Vessel only. A Road debt breaks the outer circle: something met. A Vessel debt knots a ring: something held. The knot sits in a domain sector and stops there (DL-010).</div><div class="lu" id="leg-breaks"></div></a>
     <a class="leg" href="framework.html#thesis" style="--c:var(--spark)"><div class="ln">L0 · Thesis</div><div class="lq">The spark at the center</div><div class="li">Every pattern ends at the same point. Reality is programmable; consciousness is the code. Everything else on the page inherits from here.</div></a>
   </div>
   <div class="pal-name" id="pal-name"></div>
   <div class="tier-strip" id="tier-strip">
-    <div class="sec-num orb" style="margin-top:8px">The eleven lights · yours is lit</div>
+    <div class="sec-num orb" style="margin-top:8px">The nine lights · yours is lit</div>
     <div class="tiers" id="tiers"></div>
   </div>
 </section>
@@ -430,11 +430,15 @@ function radiantNumber(lp,ex){
   const inter=[];
   return reduceTrack(lp+ex,inter);
 }
-function tierFromRadiant(r){if(r===11)return 9;if(r===22||r===33)return 10;return r-1;}
+function tierFromRadiant(r){if(r===11)return 1;if(r===22)return 3;if(r===33)return 5;return r-1;}
+function isMaster(r){return r===11||r===22||r===33;}
+/* Masters are a tint, not a tier: reduced light pulled 35% toward white (Moonsilver). Ruled 2026-09-05. */
+function tintHex(h){const n=parseInt(h.slice(1),16);const t=c=>Math.round(c+(255-c)*0.35);return "#"+[(n>>16)&255,(n>>8)&255,n&255].map(c=>t(c).toString(16).padStart(2,"0")).join("");}
+function palFor(s){const p=PALETTES[s.tier];return s.master?{name:p.name,c:p.c.map(tintHex)}:p;}
 /* ---------- deterministic seed ---------- */
 function fnv(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-/* ---------- palettes: eleven tiers of the codex ---------- */
+/* ---------- palettes: nine tiers of the codex ---------- */
 const PALETTES=[
  {name:"Tier I · Ember",c:["#E8593C","#F2A623","#8C2F1B","#FCDE5A"]},
  {name:"Tier II · Dawn",c:["#F0997B","#D85A30","#4A1B0C","#F5C4B3"]},
@@ -444,9 +448,7 @@ const PALETTES=[
  {name:"Tier VI · Still Water",c:["#85B7EB","#378ADD","#0C447C","#B5D4F4"]},
  {name:"Tier VII · Violet Hour",c:["#AFA9EC","#7F77DD","#3C3489","#CECBF6"]},
  {name:"Tier VIII · Rose Ash",c:["#ED93B1","#D4537E","#72243E","#F5C4B3"]},
- {name:"Tier IX · Pearl Gate",c:["#F1EFE8","#FAC775","#854F0B","#FCDE5A"]},
- {name:"Tier X · Moonsilver",c:["#D3D1C7","#B4B2A9","#444441","#F1EFE8"]},
- {name:"Tier XI · First Light",c:["#FCDE5A","#F2A623","#E8593C","#FBF3D9"]}
+ {name:"Tier IX · Pearl Gate",c:["#F1EFE8","#FAC775","#854F0B","#FCDE5A"]}
 ];
 /* ---------- drawing ---------- */
 const NS="http://www.w3.org/2000/svg";
@@ -471,7 +473,7 @@ function draw(soul){
   if(mode==="aura"){drawAura(soul,svg);return;}
   const dark=(mode!=="paper");
   const bloom=(mode==="bloom");
-  const pal=PALETTES[soul.tier].c;
+  const pal=palFor(soul).c;
   const C=dark?{a:pal[0],b:pal[1],c:pal[3],deep:pal[2],faint:"rgba(139,135,200,.35)",debt:"#F2A623"}
               :{a:"#1B1B1B",b:"#1B1B1B",c:"#1B1B1B",deep:"#1B1B1B",faint:"rgba(27,27,27,.45)",debt:"#1B1B1B"};
   const sw=dark?1.4:2.2;
@@ -591,7 +593,7 @@ function draw(soul){
 }
 /* ---------- flow ---------- */
 function drawAura(soul,svg){
-  const pal=PALETTES[soul.tier].c;
+  const pal=palFor(soul).c;
   const rng=mulberry32(soul.seed^0x5EED);
   const defs=el("defs",{},svg);
   const g=el("radialGradient",{id:"aura-g",cx:"50%",cy:"50%",r:"50%"},defs);
@@ -649,7 +651,7 @@ function generate(quiet){
   const radiant=radiantNumber(lp,ex);
   const tier=tierFromRadiant(radiant);
   currentSoul={lp,ex,radiant,lpDebt:lpDebts.length>0,exDebt:exDebts.length>0,
-    debtSector:seed%12,vesselSector,seed,tier};
+    debtSector:seed%12,vesselSector,seed,tier,master:isMaster(radiant)};
   document.getElementById("lp-v").textContent=lp;
   document.getElementById("lp-c").textContent=chainText(lpI,lp);
   document.getElementById("ex-v").textContent=ex;
@@ -668,7 +670,7 @@ function generate(quiet){
   document.getElementById("legend").classList.add("show");
   document.getElementById("upsell").classList.add("show");
   document.getElementById("map-link").href=SOUL_MAP_URL;
-  document.getElementById("pal-name").textContent="Your light: "+PALETTES[currentSoul.tier].name+" · Road "+currentSoul.lp+" met by Vessel "+currentSoul.ex+" · Radiant "+currentSoul.radiant;
+  document.getElementById("pal-name").textContent="Your light: "+PALETTES[currentSoul.tier].name+(currentSoul.master?" · Master "+currentSoul.radiant+" · Moonsilver":"")+" · Road "+currentSoul.lp+" met by Vessel "+currentSoul.ex+" · Radiant "+currentSoul.radiant;
   frameworkReadout(currentSoul);
   draw(currentSoul);
   if(!quiet&&window.innerWidth<860)document.getElementById("frame").scrollIntoView({behavior:"smooth",block:"start"});
@@ -791,7 +793,7 @@ function dlWallpaper(){
     ctx.drawImage(img,x,y,size,size);
     ctx.fillStyle="rgba(232,228,245,.9)";ctx.textAlign="center";
     ctx.font="500 34px Outfit, sans-serif";
-    ctx.fillText("Tier "+["I","II","III","IV","V","VI","VII","VIII","IX","X","XI"][currentSoul.tier]+" \u00B7 "+PALETTES[currentSoul.tier].name.split("\u00B7")[1].trim(),W/2,y+size+90);
+    ctx.fillText("Tier "+["I","II","III","IV","V","VI","VII","VIII","IX"][currentSoul.tier]+" \u00B7 "+PALETTES[currentSoul.tier].name.split("\u00B7")[1].trim()+(currentSoul.master?" · Moonsilver":""),W/2,y+size+90);
     ctx.fillStyle="rgba(139,135,200,.7)";ctx.font="300 24px Outfit, sans-serif";
     ctx.letterSpacing="6px";
     ctx.fillText(hdUnlocked?"":WATERMARK,W/2,H-70);
@@ -832,17 +834,17 @@ document.getElementById("bdate").addEventListener("input",liveWeave);
 document.getElementById("bdate").addEventListener("change",liveWeave);
 
 /* ---------- framework readout (L6 → L5) ---------- */
-const ROMAN=["I","II","III","IV","V","VI","VII","VIII","IX","X","XI"];
+const ROMAN=["I","II","III","IV","V","VI","VII","VIII","IX"];
 (function renderTiers(){
   const w=document.getElementById("tiers");if(!w)return;
   PALETTES.forEach((p,i)=>{const d=document.createElement("div");d.className="tier";d.id="tier-"+i;
     d.innerHTML='<i style="background:linear-gradient(135deg,'+p.c[0]+','+p.c[1]+' 55%,'+p.c[3]+')"></i><b>'+ROMAN[i]+'</b><span>'+p.name.split("· ")[1]+'</span>';w.appendChild(d);});
 })();
 function frameworkReadout(s){
-  const p=PALETTES[s.tier];
+  const p=palFor(s);
   document.getElementById("rad-v").textContent=s.radiant;
   document.getElementById("rad-c").textContent=s.lp+" + "+s.ex+" = "+(s.lp+s.ex)+(s.lp+s.ex!==s.radiant?" → "+s.radiant:"");
-  document.getElementById("tier-v").textContent="Tier "+ROMAN[s.tier]+" · "+p.name.split("· ")[1];
+  document.getElementById("tier-v").textContent="Tier "+ROMAN[s.tier]+" · "+p.name.split("· ")[1]+(s.master?" · Master "+s.radiant+" · Moonsilver":"");
   document.getElementById("tier-sw").style.background="linear-gradient(135deg,"+p.c[0]+","+p.c[1]+" 55%,"+p.c[3]+")";
   document.querySelectorAll(".tier").forEach((t,i)=>t.classList.toggle("on",i===s.tier));
   const ringN=Math.min(s.ex>9?9:s.ex,9)+(s.ex>9?2:0);
