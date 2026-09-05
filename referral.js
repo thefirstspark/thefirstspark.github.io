@@ -177,7 +177,7 @@
     function getReferralLink(path) {
         const data = getReferralData();
         const base = 'https://thefirstspark.shop';
-        const page = path || 'archetype-discovery.html';
+        const page = path || 'soul-pattern-generator.html';
         return `${base}${page}?ref=${data.myCode}`;
     }
 
