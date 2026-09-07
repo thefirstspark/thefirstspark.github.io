@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Soul Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--void:#050508;--spark:#fbbf24;--nebula:#8b5cf6;--cyan:#22d3ee;--green:#34d399;--ember:#E8593C;
+  --white:#f5f5f7;--dim:rgba(255,255,255,.55);--dimmer:rgba(255,255,255,.28);--line:rgba(255,255,255,.08);
+  --panel2:rgba(10,10,18,.78);--deep:rgba(255,255,255,.05)}
+body{background:var(--void);color:var(--white);font-family:'Space Mono','Courier New',monospace;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+.orb{font-family:'Orbitron',sans-serif;letter-spacing:.14em;text-transform:uppercase}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:24px 20px 80px}
+header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+header h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:.08em}
+header h1 em{color:var(--spark);font-style:normal}
+header .who{font-size:.62rem;color:var(--dimmer);letter-spacing:.14em;text-transform:uppercase}
+.panel{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:20px}
+.rows{display:flex;flex-direction:column;gap:8px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 170px 34px;gap:8px;align-items:center}
+input[type=text],input[type=date],textarea{width:100%;background:var(--deep);border:1px solid var(--line);border-radius:9px;color:var(--white);padding:10px 12px;font-family:'Space Mono',monospace;font-size:14px;color-scheme:dark}
+input:focus,textarea:focus{outline:2px solid var(--spark);outline-offset:1px;border-color:transparent}
+.x{background:none;border:1px solid var(--line);color:var(--dim);border-radius:8px;height:38px;cursor:pointer;font-size:16px}
+.x:hover{color:var(--ember);border-color:var(--ember)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}
+button.b{background:none;border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:8px 14px;font-family:'Orbitron',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+button.b:hover{color:var(--white);border-color:rgba(255,255,255,.35)}
+button.b.go{background:var(--spark);color:var(--void);border-color:var(--spark);font-weight:700;padding:10px 20px}
+button.b.go:hover{filter:brightness(1.08)}
+button.b.on{color:var(--spark);border-color:var(--spark)}
+.sp{flex:1}
+details{margin-top:14px;font-size:.72rem;color:var(--dim)}
+details summary{cursor:pointer;color:var(--dimmer);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-family:'Orbitron',sans-serif}
+textarea{margin-top:8px;min-height:90px;resize:vertical}
+.groups{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.groups button{font-size:.5rem}
+.status{font-size:.68rem;color:var(--dimmer);margin-top:10px;min-height:1em}
+.status.err{color:var(--ember)}
+/* results */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-top:26px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card .frame{aspect-ratio:1;border-radius:10px;background:radial-gradient(circle at 50% 46%,rgba(139,92,246,.12) 0%,var(--void) 72%);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card .frame.paper{background:#FBF9F4}
+.card svg{width:94%;height:94%}
+.card svg text{display:none}
+.card h3{font-family:'Orbitron',sans-serif;font-size:.86rem;letter-spacing:.06em;font-weight:700;overflow-wrap:anywhere}
+.card .dob{font-size:.66rem;color:var(--dimmer)}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.num{background:var(--deep);border:1px solid var(--line);border-radius:8px;padding:7px 8px;text-align:center}
+.num b{display:block;font-family:'Orbitron',sans-serif;font-size:1.05rem;color:var(--white)}
+.num span{font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dimmer)}
+.light{display:flex;align-items:center;gap:8px;font-size:.7rem;color:var(--dim)}
+.light i{width:14px;height:14px;border-radius:50%;flex:none;box-shadow:0 0 10px rgba(255,255,255,.25)}
+.chain{font-size:.62rem;color:var(--dimmer);line-height:1.5}
+.debts{display:flex;flex-wrap:wrap;gap:6px}
+.badge{font-family:'Orbitron',sans-serif;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(34,211,238,.4);color:var(--cyan);border-radius:999px;padding:3px 9px}
+.badge.v{border-color:rgba(139,92,246,.5);color:var(--nebula)}
+.badge.none{border-color:var(--line);color:var(--dimmer)}
+.acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.acts a,.acts button{font-family:'Orbitron',sans-serif;font-size:.48rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:5px 10px;background:none;cursor:pointer;text-decoration:none}
+.acts a:hover,.acts button:hover{color:var(--white);border-color:rgba(255,255,255,.35)}
+/* collide */
+.collide{margin-top:26px}
+.collide h2{font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
+.pairs{display:flex;flex-wrap:wrap;gap:8px}
+.pairs a{font-size:.66rem;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--dim)}
+.pairs a:hover{color:var(--white);border-color:var(--cyan)}
+.pairs a b{color:var(--white);font-weight:400}
+@media(max-width:640px){.row{grid-template-columns:1fr 1fr 34px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>SOUL <em>DESK</em></h1>
+  <div class="who">private · no gates · same rules as the public generator</div>
+</header>
+
+<div class="panel">
+  <div class="rows" id="rows"></div>
+  <div class="bar">
+    <button class="b" onclick="addRow()">+ Add person</button>
+    <button class="b" onclick="clearRows()">Clear</button>
+    <span class="sp"></span>
+    <button class="b go" onclick="weaveAll()">Weave them all</button>
+  </div>
+  <div class="bar" style="margin-top:10px">
+    <span style="font-size:.56rem;color:var(--dimmer);letter-spacing:.16em;text-transform:uppercase">Mode</span>
+    <button class="b on" id="m-illum" onclick="setModeAll('illum')">Illuminated</button>
+    <button class="b" id="m-bloom" onclick="setModeAll('bloom')">Bloom</button>
+    <button class="b" id="m-aura" onclick="setModeAll('aura')">Aura</button>
+    <button class="b" id="m-paper" onclick="setModeAll('paper')">Coloring page</button>
+    <span class="sp"></span>
+    <button class="b" onclick="downloadAll()">Download all PNG</button>
+    <button class="b" onclick="copyDeskLink()" id="deskcopy">Copy link to this set</button>
+  </div>
+  <details>
+    <summary>Paste a list · saved groups</summary>
+    <textarea id="paste" placeholder="One per line: Name, YYYY-MM-DD&#10;Kate Example, 1990-04-12&#10;Devon Example, 1988-11-03"></textarea>
+    <div class="bar" style="margin-top:8px">
+      <button class="b" onclick="importPaste()">Add these</button>
+      <span class="sp"></span>
+      <input type="text" id="gname" placeholder="Group name (Family, Us…)" style="max-width:220px">
+      <button class="b" onclick="saveGroup()">Save group</button>
+    </div>
+    <div class="groups" id="groups"></div>
+  </details>
+  <div class="status" id="status"></div>
+</div>
+
+<div class="grid" id="grid"></div>
+<div class="collide" id="collide" style="display:none">
+  <h2>Collide any two</h2>
+  <div class="pairs" id="pairs"></div>
+</div>
+</div>
+
+<script>
+"use strict";
+/* ---------- rows ---------- */
+const rowsEl=document.getElementById("rows");
+function addRow(name,date){
+  const r=document.createElement("div");r.className="row";
+  r.innerHTML='<input type="text" placeholder="Full birth name" autocomplete="off" spellcheck="false"><input type="date"><button class="x" title="Remove">×</button>';
+  r.children[0].value=name||"";r.children[1].value=date||"";
+  r.children[2].onclick=()=>{r.remove();if(!rowsEl.children.length)addRow();persist();};
+  r.children[0].addEventListener("input",persist);r.children[1].addEventListener("change",persist);
+  r.children[1].addEventListener("keydown",e=>{if(e.key==="Enter")weaveAll();});
+  rowsEl.appendChild(r);
+  return r;
+}
+function people(){
+  return [...rowsEl.children].map(r=>({name:r.children[0].value.trim().replace(/\s+/g," "),date:r.children[1].value}))
+    .filter(p=>p.name&&/[A-Za-z]/.test(p.name)&&/^\d{4}-\d{2}-\d{2}$/.test(p.date));
+}
+function clearRows(){rowsEl.innerHTML="";addRow();addRow();persist();document.getElementById("grid").innerHTML="";document.getElementById("collide").style.display="none";}
+function persist(){
+  try{localStorage.setItem("tfs-desk-rows",JSON.stringify([...rowsEl.children].map(r=>[r.children[0].value,r.children[1].value])));}catch(e){}
+}
+function importPaste(){
+  const t=document.getElementById("paste").value;let n=0;
+  t.split(/\r?\n/).forEach(line=>{
+    const m=line.match(/^\s*(.+?)\s*[,;\t|]\s*(\d{4}-\d{2}-\d{2})\s*$/)||line.match(/^\s*(.+?)\s+(\d{4}-\d{2}-\d{2})\s*$/);
+    if(m){addRow(m[1],m[2]);n++;}
+  });
+  [...rowsEl.children].forEach(r=>{if(!r.children[0].value&&!r.children[1].value&&rowsEl.children.length>1)r.remove();});
+  document.getElementById("paste").value="";persist();
+  say(n?n+" added.":"Nothing matched. Use: Name, YYYY-MM-DD");
+}
+/* ---------- groups (saved in this browser) ---------- */
+function groupsLoad(){try{return JSON.parse(localStorage.getItem("tfs-desk-groups")||"{}");}catch(e){return{};}}
+function groupsSave(g){try{localStorage.setItem("tfs-desk-groups",JSON.stringify(g));}catch(e){}}
+function saveGroup(){
+  const nm=document.getElementById("gname").value.trim();const ps=people();
+  if(!nm||!ps.length){say("Name the group and fill at least one person.",true);return;}
+  const g=groupsLoad();g[nm]=ps;groupsSave(g);renderGroups();say("Saved “"+nm+"”.");
+}
+function loadGroup(nm){
+  const g=groupsLoad();if(!g[nm])return;rowsEl.innerHTML="";g[nm].forEach(p=>addRow(p.name,p.date));persist();weaveAll();
+}
+function delGroup(nm){const g=groupsLoad();delete g[nm];groupsSave(g);renderGroups();}
+function renderGroups(){
+  const w=document.getElementById("groups");w.innerHTML="";
+  Object.keys(groupsLoad()).sort().forEach(nm=>{
+    const b=document.createElement("button");b.className="b";b.textContent=nm;b.onclick=()=>loadGroup(nm);w.appendChild(b);
+    const d=document.createElement("button");d.className="b";d.textContent="×";d.title="Delete group";d.onclick=()=>{if(confirm("Delete group “"+nm+"”?"))delGroup(nm);};w.appendChild(d);
+  });
+}
+function say(t,err){const s=document.getElementById("status");s.textContent=t;s.className="status"+(err?" err":"");}
+
+/* ---------- engine: pulled live from the public generator so canon stays in sync ---------- */
+let TARGET_SVG=null,engineReady=false;
+async function loadEngine(){
+  const res=await fetch("soul-pattern-generator.html",{cache:"no-cache"});
+  const html=await res.text();
+  const start=html.indexOf("/* ---------- config: set these before going live");
+  const end=html.indexOf("function chainText(");
+  if(start<0||end<0)throw new Error("engine markers not found in soul-pattern-generator.html");
+  let code=html.slice(start,end);
+  const before=code;
+  code=code.replace('const svg=document.getElementById("art");','const svg=TARGET_SVG;');
+  if(code===before)throw new Error("draw() target patch failed");
+  const s=document.createElement("script");s.textContent=code;document.head.appendChild(s);
+  if(typeof draw!=="function"||typeof lifePath!=="function")throw new Error("engine did not expose draw/lifePath");
+  engineReady=true;
+}
+const ROMAN=["I","II","III","IV","V","VI","VII","VIII","IX"];
+function chain(inter,fin){const u=inter.filter((v,i)=>inter.indexOf(v)===i);return u.length?u.join(" → ")+" → "+fin:String(fin);}
+function soulFor(p){
+  const[y,m,d]=p.date.split("-").map(Number);
+  const lpI=[],exI=[];
+  const lp=lifePath(y,m,d,lpI),ex=expression(p.name,exI);
+  const lpDebts=findDebts(lpI),exDebts=findDebts([...exI,...partDebtPool(p.name)]);
+  const normName=p.name.toLowerCase().replace(/\s+/g," ");
+  const seed=fnv(normName+"|"+p.date);
+  const vesselSector=fnv("vessel|"+normName)%12;
+  const radiant=radiantNumber(lp,ex),tier=tierFromRadiant(radiant);
+  return{name:p.name,date:p.date,lp,ex,radiant,tier,master:isMaster(radiant),seed,vesselSector,
+    debtSector:seed%12,lpDebt:lpDebts.length>0,exDebt:exDebts.length>0,lpDebts,exDebts,lpChain:chain(lpI,lp),exChain:chain(exI,ex)};
+}
+/* ---------- render ---------- */
+const NSX="http://www.w3.org/2000/svg";
+let souls=[];
+function drawInto(s,idx){
+  TARGET_SVG=s.svg;draw(s);
+  /* aura mode: the engine hardcodes one gradient id; give each card its own so they don't share the first one's colors */
+  s.svg.querySelectorAll('[id="aura-g"]').forEach(g=>{g.id="aura-g-"+idx;});
+  s.svg.querySelectorAll('[fill="url(#aura-g)"]').forEach(c=>c.setAttribute("fill","url(#aura-g-"+idx+")"));
+}
+function setModeAll(m){
+  mode=m;
+  ["illum","bloom","aura","paper"].forEach(k=>document.getElementById("m-"+k).classList.toggle("on",k===m));
+  document.querySelectorAll(".card .frame").forEach(f=>f.classList.toggle("paper",m==="paper"));
+  souls.forEach((s,i)=>drawInto(s,i));
+}
+async function weaveAll(){
+  const ps=people();
+  if(!ps.length){say("Add at least one name and birthday.",true);return;}
+  if(!engineReady){say("Loading the engine…");try{await loadEngine();}catch(e){say("Engine failed: "+e.message,true);return;}}
+  say("");
+  const grid=document.getElementById("grid");grid.innerHTML="";souls=[];
+  ps.forEach(p=>{
+    const s=soulFor(p);const pal=palFor(s);
+    const card=document.createElement("div");card.className="card";
+    const frame=document.createElement("div");frame.className="frame"+(mode==="paper"?" paper":"");
+    const svg=document.createElementNS(NSX,"svg");svg.setAttribute("viewBox","0 0 800 800");frame.appendChild(svg);
+    card.appendChild(frame);
+    const dt=new Date(s.date+"T12:00:00").toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"});
+    const debtsHtml=(s.lpDebts.length||s.exDebts.length)
+      ?[...s.lpDebts.map(n=>'<span class="badge">Debt '+n+' · Road</span>'),...s.exDebts.map(n=>'<span class="badge v">Debt '+n+' · Vessel</span>')].join("")
+      :'<span class="badge none">No karmic debt · weave closed</span>';
+    const pubLink="soul-pattern-generator.html?n="+encodeURIComponent(s.name)+"&d="+s.date;
+    card.insertAdjacentHTML("beforeend",
+      '<h3>'+esc(s.name)+'</h3><div class="dob">'+dt+'</div>'+
+      '<div class="nums"><div class="num"><b>'+s.lp+'</b><span>Road · LP</span></div><div class="num"><b>'+s.ex+'</b><span>Vessel · EX</span></div><div class="num"><b>'+s.radiant+'</b><span>Radiant</span></div></div>'+
+      '<div class="light"><i style="background:linear-gradient(135deg,'+pal.c[0]+','+pal.c[1]+' 55%,'+pal.c[3]+')"></i>Tier '+ROMAN[s.tier]+' · '+esc(pal.name.split("· ")[1])+(s.master?' · Master '+s.radiant+' · Moonsilver':'')+'</div>'+
+      '<div class="chain">Road '+esc(s.lpChain)+'<br>Vessel '+esc(s.exChain)+'<br>Radiant '+s.lp+' + '+s.ex+' = '+(s.lp+s.ex)+(s.lp+s.ex!==s.radiant?' → '+s.radiant:'')+'</div>'+
+      '<div class="debts">'+debtsHtml+'</div>'+
+      '<div class="acts"><button data-a="png">PNG 3200</button><button data-a="svg">SVG</button><button data-a="story">Story 1080×1920</button><a href="'+pubLink+'" target="_blank" rel="noopener">Public page</a></div>');
+    card.querySelector('[data-a=png]').onclick=()=>dlPNGFor(s);
+    card.querySelector('[data-a=svg]').onclick=()=>dlSVGFor(s);
+    card.querySelector('[data-a=story]').onclick=()=>dlStoryFor(s);
+    grid.appendChild(card);
+    s.svg=svg;souls.push(s);
+    drawInto(s,souls.length-1);
+  });
+  renderPairs();
+  history.replaceState(null,"",deskLink(true));
+}
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function renderPairs(){
+  const w=document.getElementById("pairs");w.innerHTML="";
+  const box=document.getElementById("collide");
+  if(souls.length<2){box.style.display="none";return;}
+  box.style.display="block";
+  for(let i=0;i<souls.length;i++)for(let j=i+1;j<souls.length;j++){
+    const a=souls[i],b=souls[j];
+    const href="https://frequency.thefirstspark.shop/?n1="+encodeURIComponent(a.name)+"&d1="+a.date+"&n2="+encodeURIComponent(b.name)+"&d2="+b.date;
+    const l=document.createElement("a");l.href=href;l.target="_blank";l.rel="noopener";
+    l.innerHTML="<b>"+esc(first(a.name))+"</b> × <b>"+esc(first(b.name))+"</b>";w.appendChild(l);
+  }
+}
+function first(n){return n.split(" ")[0];}
+/* ---------- export (no watermark, HD) ---------- */
+function serializeFor(s){
+  const svg=s.svg.cloneNode(true);
+  svg.setAttribute("xmlns",NSX);svg.setAttribute("width","800");svg.setAttribute("height","800");
+  const bg=document.createElementNS(NSX,"rect");bg.setAttribute("width","800");bg.setAttribute("height","800");
+  bg.setAttribute("fill",mode==="paper"?"#FFFFFF":"#0B0B22");svg.insertBefore(bg,svg.firstChild);
+  svg.querySelectorAll("*").forEach(n=>{n.style.transition="";n.style.strokeDashoffset="";n.style.strokeDasharray="";n.style.opacity="";n.removeAttribute("pathLength");});
+  svg.querySelectorAll("text").forEach(t=>t.remove());
+  svg.style.opacity="";
+  return new XMLSerializer().serializeToString(svg);
+}
+function baseFor(s){const f=(s.name.split(/\s+/)[0]||"Soul").replace(/[^A-Za-z]/g,"")||"Soul";return"Soul-Pattern-"+f.charAt(0).toUpperCase()+f.slice(1).toLowerCase()+"-LP"+s.lp+(mode==="paper"?"-coloring":mode==="aura"?"-aura":mode==="bloom"?"-bloom":"");}
+function save(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),6000);}
+function dlSVGFor(s){save(new Blob([serializeFor(s)],{type:"image/svg+xml"}),baseFor(s)+".svg");}
+function pngFor(s,size,cb){
+  const img=new Image();
+  img.onload=()=>{const c=document.createElement("canvas");c.width=size;c.height=size;c.getContext("2d").drawImage(img,0,0,size,size);c.toBlob(cb,"image/png");};
+  img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(serializeFor(s));
+}
+function dlPNGFor(s){return new Promise(res=>pngFor(s,3200,b=>{save(b,baseFor(s)+".png");res();}));}
+function dlStoryFor(s){
+  const img=new Image();
+  img.onload=()=>{
+    const W=1080,H=1920,c=document.createElement("canvas");c.width=W;c.height=H;const ctx=c.getContext("2d");
+    ctx.fillStyle=mode==="paper"?"#FFFFFF":"#0B0B22";ctx.fillRect(0,0,W,H);
+    const size=W*0.92,x=(W-size)/2,y=(H-size)/2-60;ctx.drawImage(img,x,y,size,size);
+    const pal=palFor(s);
+    ctx.fillStyle=mode==="paper"?"#1B1B1B":"rgba(232,228,245,.9)";ctx.textAlign="center";ctx.font="700 30px Orbitron, sans-serif";
+    ctx.fillText(s.name.toUpperCase(),W/2,y+size+80);
+    ctx.font="500 26px 'Space Mono', monospace";ctx.fillStyle=mode==="paper"?"#444":"rgba(139,135,200,.85)";
+    ctx.fillText("Tier "+ROMAN[s.tier]+" · "+pal.name.split("· ")[1]+(s.master?" · Moonsilver":"")+" · Road "+s.lp+" · Vessel "+s.ex+" · Radiant "+s.radiant,W/2,y+size+124);
+    c.toBlob(b=>save(b,baseFor(s)+"-story.png"),"image/png");
+  };
+  img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(serializeFor(s));
+}
+async function downloadAll(){
+  if(!souls.length){say("Weave first.",true);return;}
+  for(const s of souls){await dlPNGFor(s);await new Promise(r=>setTimeout(r,500));}
+  say(souls.length+" PNGs sent to your downloads.");
+}
+/* ---------- shareable set link ---------- */
+function deskLink(relative){
+  const ps=people().map(p=>p.name+"|"+p.date).join(";");
+  const q=ps?"?p="+encodeURIComponent(ps):"";
+  return(relative?location.pathname:location.origin+location.pathname)+q;
+}
+function copyDeskLink(){
+  const b=document.getElementById("deskcopy"),t=b.textContent;
+  const done=()=>{b.textContent="Copied ✓";setTimeout(()=>b.textContent=t,1600);};
+  const l=deskLink(false);
+  if(navigator.clipboard)navigator.clipboard.writeText(l).then(done).catch(()=>prompt("Copy:",l));else prompt("Copy:",l);
+}
+/* ---------- boot ---------- */
+(function(){
+  renderGroups();
+  const q=new URLSearchParams(location.search).get("p");
+  let seeded=false;
+  if(q){q.split(";").forEach(pair=>{const[n,d]=pair.split("|");if(n&&/^\d{4}-\d{2}-\d{2}$/.test(d||"")){addRow(n,d);seeded=true;}});}
+  if(!seeded){try{const saved=JSON.parse(localStorage.getItem("tfs-desk-rows")||"[]");saved.forEach(([n,d])=>addRow(n,d));}catch(e){}}
+  if(!rowsEl.children.length){addRow();addRow();}
+  loadEngine().catch(e=>say("Engine failed: "+e.message,true));
+  if(seeded)setTimeout(weaveAll,300);
+})();
+</script>
+</body>
+</html>
