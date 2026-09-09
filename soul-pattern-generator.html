@@ -19,6 +19,14 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
+<!-- Google Analytics 4 (page_view fired by GTM) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SKL8XQ51ZH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SKL8XQ51ZH', { send_page_view: false });
+</script>
     <!-- End Google Tag Manager -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -345,7 +353,7 @@ footer p+p{margin-top:6px}
     <div><b>07</b>Advanced Analysis: timing, trajectory, Arcana Trinity</div>
     <div><b>08</b>The Impossible Code: blueprint and checkpoints</div>
   </div>
-  <a id="map-link" class="go" href="map.html">Get your Soul Map · $22</a>
+  <a id="map-link" class="go" href="map.html" data-track="gen_map_cta">Get your Soul Map · $22</a>
   <div class="fine">One-time. Includes your Soul Card ID for Freq Match.</div>
 </div>
 
@@ -864,6 +872,14 @@ function frameworkReadout(s){
     generate(true);
   }
 })();
+</script>
+<script>
+/* Funnel click tracking — elements opt in via data-track */
+document.addEventListener('click', function(e) {
+  var el = e.target.closest('[data-track]');
+  if (!el || !window.gtag) return;
+  gtag('event', 'funnel_click', { link_id: el.getAttribute('data-track'), page: location.pathname });
+});
 </script>
 </body>
 </html>
