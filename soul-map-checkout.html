@@ -148,6 +148,21 @@
         .err { display: none; font-size: .68rem; color: var(--bad); margin-top: 6px; }
         .err.show { display: block; }
 
+        .label-text { display: block; font-size: .78rem; letter-spacing: .02em; color: var(--ink); margin-bottom: 6px; line-height: 1.5; }
+        .verbs { display: grid; gap: 8px; }
+        .verb {
+            display: flex; gap: 12px; align-items: flex-start; cursor: pointer;
+            background: #0b0b12; border: 1px solid var(--line); border-radius: 8px;
+            padding: 12px 13px; margin: 0; transition: border-color .15s, background .15s;
+        }
+        .verb:hover { border-color: rgba(251,191,36,.4); }
+        .verb input { width: auto; margin-top: 3px; accent-color: var(--spark); flex: 0 0 auto; }
+        .verb-body { display: block; }
+        .verb-body b { display: block; font-size: .8rem; font-weight: 700; line-height: 1.45; }
+        .verb-body small { display: block; font-size: .66rem; color: var(--mute); margin-top: 3px; line-height: 1.5; }
+        .verb:has(input:checked) { border-color: var(--spark); background: rgba(251,191,36,.06); }
+        .verbs.invalid .verb { border-color: var(--bad); }
+
         .summary { position: sticky; top: 76px; }
         .summary .photo {
             border-radius: 10px; overflow: hidden; background: #050508;
@@ -309,14 +324,24 @@
                         <input type="text" id="birth_hospital" name="birth_hospital" placeholder="e.g. Summa Health" maxlength="120">
                     </div>
 
-                    <div class="field">
-                        <label for="soul_questions">Your soul questions <span class="opt">· optional</span></label>
-                        <textarea id="soul_questions" name="soul_questions" placeholder="What are you trying to understand? What pattern keeps showing up?" maxlength="2000"></textarea>
-                    </div>
-
-                    <div class="field" style="margin-bottom:0">
-                        <label for="interests">Passions &amp; pulls <span class="opt">· optional</span></label>
-                        <textarea id="interests" name="interests" placeholder="What lights you up? Music, nature, building things, animals, writing, code…" maxlength="2000"></textarea>
+                    <div class="field verb-field" style="margin-bottom:0">
+                        <span class="label-text" id="verb-label" tabindex="-1">When something in your life stops working, what do you actually do first?</span>
+                        <div class="hint" style="margin:0 0 10px">One honest answer. This is how your archetype is found — the numbers give the domain, this gives the motion.</div>
+                        <div class="verbs" role="radiogroup" aria-labelledby="verb-label">
+                            <label class="verb">
+                                <input type="radio" name="selector_verb" value="SELECT">
+                                <span class="verb-body"><b>I decide and build the next thing.</b><small>I move by choosing. Waiting feels worse than being wrong.</small></span>
+                            </label>
+                            <label class="verb">
+                                <input type="radio" name="selector_verb" value="RELEASE">
+                                <span class="verb-body"><b>I end it, before I know what comes next.</b><small>I move by letting go. Dead structures need to fall.</small></span>
+                            </label>
+                            <label class="verb">
+                                <input type="radio" name="selector_verb" value="WITNESS">
+                                <span class="verb-body"><b>I step back and watch until I can see what is really happening.</b><small>I move by perceiving. Acting blind is the real mistake.</small></span>
+                            </label>
+                        </div>
+                        <div class="err" id="err-selector_verb">Pick the one that is actually true, not the one you wish were.</div>
                     </div>
                 </form>
 
@@ -413,6 +438,9 @@
     function showErr(key) { qs(key === 'dob' ? 'dob-input' : key).classList.add('invalid'); qs('err-' + key).classList.add('show'); }
     function clearErr(key) { qs(key === 'dob' ? 'dob-input' : key).classList.remove('invalid'); qs('err-' + key).classList.remove('show'); }
     ['name', 'email', 'city'].forEach(function (k) { qs(k).addEventListener('input', function () { clearErr(k); }); });
+    form.querySelectorAll('input[name="selector_verb"]').forEach(function (r) {
+        r.addEventListener('change', function () { form.querySelector('.verbs').classList.remove('invalid'); qs('err-selector_verb').classList.remove('show'); });
+    });
 
     function readIntake() {
         updateDob();
@@ -424,6 +452,9 @@
         if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email)) { showErr('email'); ok = false; first = first || 'email'; }
         if (!dobHidden.value) { showErr('dob'); ok = false; first = first || 'dob-input'; }
         if (city.length < 2) { showErr('city'); ok = false; first = first || 'city'; }
+        var verbEl = form.querySelector('input[name="selector_verb"]:checked');
+        var verb = verbEl ? verbEl.value : null;
+        if (!verb) { form.querySelector('.verbs').classList.add('invalid'); qs('err-selector_verb').classList.add('show'); ok = false; first = first || 'verb-label'; }
         if (!ok) {
             setStatus('Fill in the highlighted fields first — the map is built from them.', 'bad');
             qs(first).focus();
@@ -438,8 +469,7 @@
             city: city,
             country: 'US',
             birth_hospital: qs('birth_hospital').value.trim() || null,
-            soul_questions: qs('soul_questions').value.trim() || null,
-            interests: qs('interests').value.trim() || null
+            selector_verb: verb
         };
     }
 
