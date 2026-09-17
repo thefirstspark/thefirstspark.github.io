@@ -30,7 +30,7 @@
     function renderHeroProof(container, options) {
         if (!container) return;
         const maps = global.SOUL_MAP_ROTATION || [];
-        const checkoutUrl = options.checkoutUrl || 'https://whop.com/checkout/plan_anQKP3Pzf1cGm';
+        const checkoutUrl = options.checkoutUrl || 'https://thefirstspark.shop/soul-map-checkout.html';
         const { featured } = getFeaturedMaps(maps, 1, options.date);
         const map = featured[0];
         const chips = map ? descToChips(map.desc) : ['Life Path 5', 'Expression 11', 'Soul Urge 7', 'Taurus/Gemini'];
@@ -84,7 +84,7 @@
         const archiveUrl = options.archiveUrl || (BASE.replace(/\/$/, '') + '/');
         const showMeta = options.showRotationMeta !== false;
         const showArchiveLink = options.showArchiveLink !== false;
-        const checkoutUrl = options.checkoutUrl || 'https://whop.com/checkout/plan_anQKP3Pzf1cGm';
+        const checkoutUrl = options.checkoutUrl || 'https://thefirstspark.shop/soul-map-checkout.html';
         const cards = featured.map(function (map) {
             return (
                 '<div class="map-spotlight-card">' +
