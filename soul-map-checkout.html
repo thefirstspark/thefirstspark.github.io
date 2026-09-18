@@ -100,8 +100,10 @@
             align-items: start;
         }
         @media (max-width: 860px) {
-            .grid { grid-template-columns: 1fr; }
-            .summary { order: -1; }
+            .grid { grid-template-columns: 1fr; gap: 18px; margin-top: 24px; }
+            /* Phones: form first, then the pay card. Never sticky — a pinned card covered the form. */
+            .summary { position: static; order: 0; }
+            .summary .photo { display: none; }
         }
 
         .card {
@@ -573,7 +575,10 @@
         if (q.free) {
             claimBtn.classList.add('show');
             buttonsEl.classList.add('hidden');
-            setStatus('Gift code accepted. Fill in your coordinates and claim the map — no payment needed.', 'wait');
+            setStatus('Gift code accepted. Fill in your coordinates above, then tap "Claim my free Soul Map" — no payment needed.', 'wait');
+            if (window.matchMedia('(max-width: 860px)').matches && !qs('name').value.trim()) {
+                setTimeout(function () { qs('name').scrollIntoView({ behavior: 'smooth', block: 'start' }); qs('name').focus({ preventScroll: true }); }, 250);
+            }
         } else {
             claimBtn.classList.remove('show');
             buttonsEl.classList.remove('hidden');
