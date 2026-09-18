@@ -187,7 +187,35 @@
         }
         .includes li::before { content: '◆'; position: absolute; left: 0; color: var(--spark); font-size: .55rem; top: 5px; }
 
+        .promo-toggle {
+            display: inline-block; background: none; border: 0; padding: 0; cursor: pointer;
+            font-family: 'Space Mono', monospace; font-size: .7rem; color: var(--mute);
+            border-bottom: 1px solid var(--line); margin: 0 0 14px;
+        }
+        .promo-toggle:hover { color: var(--spark); border-color: var(--spark); }
+        .promo { display: none; gap: 8px; margin-bottom: 14px; }
+        .promo.show { display: flex; }
+        .promo input { text-transform: uppercase; letter-spacing: .08em; }
+        .promo button {
+            flex: 0 0 auto; cursor: pointer;
+            font-family: 'Orbitron', sans-serif; font-size: .55rem; font-weight: 700; letter-spacing: .12em;
+            text-transform: uppercase; color: var(--ink); background: transparent;
+            border: 1px solid var(--line); border-radius: 8px; padding: 0 14px;
+        }
+        .promo button:hover { border-color: var(--spark); color: var(--spark); }
+        .line-item.discount { color: var(--cyan); }
+        .line-item.discount small { color: var(--mute); }
+        .claim {
+            display: none; width: 100%; cursor: pointer;
+            font-family: 'Orbitron', sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .14em;
+            text-transform: uppercase; color: #08080d; background: var(--spark);
+            border: 0; border-radius: 6px; padding: 16px 18px; margin-top: 8px;
+        }
+        .claim.show { display: block; }
+        .claim:hover { background: #fcd34d; }
+        .claim[disabled] { opacity: .6; cursor: wait; }
         #paypal-buttons { min-height: 150px; margin-top: 8px; }
+        #paypal-buttons.hidden { display: none; }
         .pp-note {
             text-align: center; font-size: .66rem; color: var(--mute);
             line-height: 1.6; margin-top: 12px;
@@ -286,7 +314,7 @@
                 <form class="card" id="intake" novalidate>
                     <div class="card-tag">◆ Step 1 · Your coordinates</div>
                     <h2>Who is this map for?</h2>
-                    <p class="lede">Every detail sharpens the signal. Name and date of birth build the map. Everything else is optional and makes it more precise.</p>
+                    <p class="lede">Every detail sharpens the signal. Name, date of birth, and one honest answer build the map. Time and place make it more precise.</p>
 
                     <div class="field">
                         <label for="name">Full birth name</label>
@@ -354,6 +382,10 @@
                         <span>Soul Map<small>private page · built from your code</small></span>
                         <span>$22.00</span>
                     </div>
+                    <div class="line-item discount" id="discount-row" style="display:none">
+                        <span>Code <b id="discount-code"></b><small id="discount-note"></small></span>
+                        <span id="discount-amt"></span>
+                    </div>
                     <div class="line-item total">
                         <span>Total<small>USD · one-time · no subscription</small></span>
                         <span id="total">$22.00</span>
@@ -365,6 +397,12 @@
                         <li>Delivered by email in about 3 minutes</li>
                     </ul>
 
+                    <button type="button" class="promo-toggle" id="promo-toggle">Have a code?</button>
+                    <form class="promo" id="promo" novalidate>
+                        <input type="text" id="promo-input" placeholder="CODE" maxlength="40" autocomplete="off" spellcheck="false" aria-label="Promo code">
+                        <button type="submit">Apply</button>
+                    </form>
+                    <button type="button" class="claim" id="claim">Claim my free Soul Map</button>
                     <div id="paypal-buttons"><div class="loading">Loading secure checkout</div></div>
                     <div class="status" id="status" role="status" aria-live="polite"></div>
                     <p class="pp-note"><b>PayPal, Pay Later, or any debit / credit card.</b><br>No PayPal account needed for card. Your details go straight to PayPal — we never see your card number.</p>
@@ -497,12 +535,79 @@
                 name: res.name, email: res.email, url: res.url, order: res.order_id, ts: new Date().toISOString()
             }));
         } catch (_) {}
+        var paid = promo.price !== null ? parseFloat(promo.price) : parseFloat(fullPrice);
         track('purchase', {
-            transaction_id: res.order_id, value: 22, currency: 'USD', payment_type: 'paypal',
-            items: [{ item_id: 'soul_map', item_name: 'Soul Map', price: 22, quantity: 1 }]
+            transaction_id: res.order_id, value: paid, currency: 'USD',
+            payment_type: promo.free ? 'gift_code' : 'paypal', coupon: promo.code || undefined,
+            items: [{ item_id: 'soul_map', item_name: 'Soul Map', price: paid, quantity: 1 }]
         });
         track('soul_map_purchase_completed', { event_category: 'conversion', event_label: 'Soul Map Purchase (PayPal)' });
     }
+
+    /* ---- Promo codes ---- */
+    var promo = { code: null, price: null, free: false };
+    var fullPrice = '22.00';
+    var promoForm = qs('promo'), promoInput = qs('promo-input'), claimBtn = qs('claim');
+
+    qs('promo-toggle').addEventListener('click', function () {
+        promoForm.classList.toggle('show');
+        if (promoForm.classList.contains('show')) promoInput.focus();
+    });
+
+    function applyPromo(q) {
+        if (!q || !q.valid) {
+            promo = { code: null, price: null, free: false };
+            qs('discount-row').style.display = 'none';
+            qs('total').textContent = '$' + fullPrice;
+            claimBtn.classList.remove('show');
+            buttonsEl.classList.remove('hidden');
+            return;
+        }
+        promo = { code: q.code, price: q.price, free: !!q.free };
+        var off = (parseFloat(fullPrice) - parseFloat(q.price)).toFixed(2);
+        qs('discount-code').textContent = q.code;
+        qs('discount-note').textContent = q.free ? 'gift · this map is on us' : (q.percent ? q.percent + '% off' : 'discount');
+        qs('discount-amt').textContent = '-$' + off;
+        qs('discount-row').style.display = '';
+        qs('total').textContent = '$' + q.price;
+        if (q.free) {
+            claimBtn.classList.add('show');
+            buttonsEl.classList.add('hidden');
+            setStatus('Gift code accepted. Fill in your coordinates and claim the map — no payment needed.', 'wait');
+        } else {
+            claimBtn.classList.remove('show');
+            buttonsEl.classList.remove('hidden');
+            setStatus('Code applied. Pay the discounted total below.', 'wait');
+        }
+        track('promo_applied', { code: q.code, free: !!q.free });
+    }
+
+    promoForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var code = promoInput.value.trim().toUpperCase();
+        if (!code) { applyPromo(null); setStatus(''); return; }
+        setStatus('Checking code…', 'wait');
+        post('/paypal/quote', { code: code }).then(function (q) {
+            if (!q.valid) { applyPromo(null); setStatus('That code isn\'t valid. Check the spelling, or email kate@thefirstspark.shop.', 'bad'); return; }
+            applyPromo(q);
+        }).catch(function () { setStatus('Couldn\'t check that code right now. Try again in a moment.', 'bad'); });
+    });
+
+    claimBtn.addEventListener('click', function () {
+        if (!promo.free) return;
+        setStatus('');
+        var intake = readIntake();
+        if (!intake) return;
+        claimBtn.disabled = true; claimBtn.textContent = 'Decoding…';
+        track('begin_checkout', { item: 'soul_map', from: 'gift_code', code: promo.code });
+        post('/paypal/redeem', { code: promo.code, intake: intake }).then(function (j) {
+            if (!j.success) throw new Error(j.error || 'Could not redeem the code');
+            showDone(j, intake);
+        }).catch(function (err) {
+            claimBtn.disabled = false; claimBtn.textContent = 'Claim my free Soul Map';
+            setStatus(err.message || 'Something went wrong. Email kate@thefirstspark.shop and we\'ll sort it by hand.', 'bad');
+        });
+    });
 
     /* ---- PayPal ---- */
     var intakeForOrder = null;
@@ -519,7 +624,8 @@
                 return actions.resolve();
             },
             createOrder: function () {
-                return post('/paypal/create-order', intakeForOrder).then(function (j) {
+                var payload = Object.assign({}, intakeForOrder, promo.code ? { promo_code: promo.code } : {});
+                return post('/paypal/create-order', payload).then(function (j) {
                     if (!j.success || !j.id) throw new Error(j.error || 'Could not start the order');
                     return j.id;
                 });
@@ -560,7 +666,7 @@
         .then(function (r) { return r.json(); })
         .then(function (cfg) {
             if (!cfg.configured || !cfg.client_id) throw new Error('not configured');
-            if (cfg.price) qs('total').textContent = '$' + cfg.price;
+            if (cfg.price) { fullPrice = cfg.price; qs('total').textContent = '$' + cfg.price; }
             loadSdk(cfg);
         })
         .catch(function () {
