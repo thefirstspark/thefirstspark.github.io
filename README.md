@@ -207,8 +207,8 @@ Edit `main.css` CSS variables at the top (lines 15-30)
 ## Important Links to Preserve
 
 ### Whop Storefronts (Membership CTAs):
-- Free Lobby: `https://whop.com/sparkverse-511c/the-sparkverse-lobby/`
-- Players Lounge: `https://whop.com/sparkverse-511c/the-players-lounge/`
+- Free Lobby: `https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f`
+- Players Lounge: `https://thefirstspark.shop/playerslounge/`
 - OG Spark: `https://whop.com/sparkverse-511c/og-spark-lifetime-access/`
 
 ### External Links:

@@ -90,9 +90,9 @@ function toggleHelp() {
 // Signup function
 function signup(tier) {
     const whopLinks = {
-        'free': 'https://whop.com/sparkverse-511c/spark-access/',
-        'player': 'https://whop.com/sparkverse-511c/spark-access/',
-        'og': 'https://whop.com/sparkverse-511c/spark-access/'
+        'free': 'https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f',
+        'player': 'https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f',
+        'og': 'https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f'
     };
 
     window.location.href = whopLinks[tier];
