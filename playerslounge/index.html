@@ -317,7 +317,17 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             font-size: 0.8rem;
             color: var(--text-secondary);
         }
-    </style>
+            .plan-toggle { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }
+        .plan { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer;
+                border: 1px solid var(--border); border-radius: 8px; padding: 14px 22px; min-width: 150px; color: var(--text-secondary); }
+        .plan input { position: absolute; opacity: 0; pointer-events: none; }
+        .plan span { font-size: 1.05rem; color: var(--text-primary); }
+        .plan b { font-size: 1.5rem; font-weight: 400; }
+        .plan small { font-size: .78rem; }
+        .plan.on { border-color: var(--text-primary); background: var(--bg-secondary); }
+        #lounge-paypal { max-width: 360px; margin: 0 auto 14px; min-height: 60px; }
+        #lounge-status.bad { color: #e08a8a; }
+</style>
 <script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_0xcayhWXVnKO9y");whop.track("page");</script>
 </head>
 <body>
@@ -483,21 +493,91 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             </p>
         </section>
 
-        <!-- CTA -->
-        <div class="cta-section">
-            <p class="price">$22</p>
-            <p class="price-note">One-time access. Lifetime use.</p>
+        <!-- CTA · PayPal subscription -->
+        <div class="cta-section" id="join">
+            <p class="section-header" style="margin-bottom:18px">Membership</p>
+            <div class="plan-toggle" role="radiogroup" aria-label="Billing">
+                <label class="plan on" id="plan-monthly-l"><input type="radio" name="plan" value="monthly" checked><span><b>$11</b> / month</span><small>cancel any time</small></label>
+                <label class="plan" id="plan-annual-l"><input type="radio" name="plan" value="annual"><span><b>$99</b> / year</span><small>three months free</small></label>
+            </div>
             <p class="includes">
-                Private Notion workspace with the full operating system<br>
-                Downloadable HTML version for offline use<br>
-                The Between-Moves journaling framework
+                The full Selector Model, Soul Contracts, Temporal Mechanics<br>
+                Daily Press Start runs and Save Rings<br>
+                Direct line to KJP · lives in a private Notion room
             </p>
-            <a href="https://whop.com/checkout/plan_okFWwlpgnc2bQ" class="cta-button">Enter The Lounge</a>
-            <p class="guarantee">Instant access after purchase.</p>
+            <div id="lounge-paypal"><p class="guarantee">Loading secure checkout…</p></div>
+            <p class="guarantee" id="lounge-status">PayPal or any card. Instant access by email. No account to create here.</p>
+        </div>
+
+        <div class="cta-section" id="joined" style="display:none">
+            <p class="section-header" style="margin-bottom:18px">You're in</p>
+            <p class="price" style="font-size:1.6rem">Welcome to the Lounge.</p>
+            <p class="includes">Your room is open. Bookmark it — this is where the work happens.<br>A welcome email with the same link is on its way to <span id="joined-email"></span>.</p>
+            <a class="cta-button" id="joined-link" href="#" target="_blank" rel="noopener">Enter The Lounge</a>
+            <p class="guarantee">Billing runs through PayPal. Cancel any time from your PayPal account.</p>
         </div>
 
         <p class="trademark">Players Lounge™ · A First Spark Creation</p>
 
     </div>
+<script>
+(function () {
+    var ENGINE = 'https://web-production-1ec7a.up.railway.app';
+    var plans = null, cfg = null, current = 'monthly', buttons = null;
+    var host = document.getElementById('lounge-paypal'), status = document.getElementById('lounge-status');
+    function say(t, bad) { status.textContent = t; status.className = 'guarantee' + (bad ? ' bad' : ''); }
+    function track(ev, p) { try { if (typeof gtag === 'function') gtag('event', ev, p || {}); else if (window.dataLayer) window.dataLayer.push(Object.assign({ event: ev }, p || {})); } catch (_) {} }
+    function post(path, body) {
+        return fetch(ENGINE + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(function (r) { return r.json(); });
+    }
+    document.querySelectorAll('input[name="plan"]').forEach(function (r) {
+        r.addEventListener('change', function () {
+            current = r.value;
+            document.querySelectorAll('.plan').forEach(function (l) { l.classList.toggle('on', l.querySelector('input').value === current); });
+            render();
+        });
+    });
+    function render() {
+        if (!window.paypal || !plans || !plans[current]) return;
+        host.innerHTML = '';
+        if (buttons && buttons.close) { try { buttons.close(); } catch (_) {} }
+        buttons = paypal.Buttons({
+            style: { layout: 'vertical', color: 'black', shape: 'rect', label: 'subscribe', tagline: false },
+            createSubscription: function (data, actions) {
+                track('begin_checkout', { item: 'players_lounge', plan: current });
+                return actions.subscription.create({ plan_id: plans[current].id, application_context: { brand_name: 'The First Spark', shipping_preference: 'NO_SHIPPING', user_action: 'SUBSCRIBE_NOW' } });
+            },
+            onApprove: function (data) {
+                say('Confirming your membership…');
+                return post('/paypal/lounge/activated', { subscriptionID: data.subscriptionID }).then(function (j) {
+                    if (!j.success) throw new Error(j.error || 'Could not confirm');
+                    document.getElementById('joined-email').textContent = j.email || 'your inbox';
+                    document.getElementById('joined-link').href = j.lounge_url;
+                    document.getElementById('join').style.display = 'none';
+                    document.getElementById('joined').style.display = '';
+                    document.getElementById('joined').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    track('purchase', { transaction_id: data.subscriptionID, value: parseFloat(plans[current].price), currency: 'USD', items: [{ item_id: 'players_lounge_' + current, item_name: 'Players Lounge', price: parseFloat(plans[current].price), quantity: 1 }] });
+                }).catch(function (e) { say('PayPal approved the subscription but we could not confirm it. Email kate@thefirstspark.shop with your PayPal receipt and we will open the door by hand.', true); console.error(e); });
+            },
+            onCancel: function () { say('No worries. The door is here when you are ready.'); },
+            onError: function (e) { console.error('[paypal]', e); say('Something interrupted checkout. Nothing was charged. Try again or email kate@thefirstspark.shop.', true); }
+        });
+        buttons.render('#lounge-paypal');
+    }
+    fetch(ENGINE + '/paypal/lounge/config').then(function (r) { return r.json(); }).then(function (c) {
+        cfg = c; plans = c.plans || {};
+        if (!c.configured || !plans.monthly) throw new Error('not configured');
+        if (!plans.annual) document.getElementById('plan-annual-l').style.display = 'none';
+        var sc = document.createElement('script');
+        sc.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(c.client_id) + '&vault=true&intent=subscription&components=buttons&disable-funding=venmo,paylater';
+        sc.onload = render;
+        sc.onerror = function () { say('PayPal did not load. Disable ad blockers for this page or try another browser.', true); };
+        document.head.appendChild(sc);
+    }).catch(function () {
+        host.innerHTML = '';
+        say('Membership checkout is opening soon. Email kate@thefirstspark.shop to be let in early.', true);
+    });
+})();
+</script>
 </body>
 </html>
