@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Sparkverse — free · The First Spark</title>
+    <meta name="description" content="Free membership home: the game manual, the daily Press Start ritual, the free library, the community. One email, no account.">
+    <link rel="canonical" href="https://thefirstspark.shop/join.html">
+    <link rel="icon" href="/favicon.ico">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Join the Sparkverse — free">
+    <meta property="og:description" content="Your free membership home. One email, no account.">
+    <meta property="og:url" content="https://thefirstspark.shop/join.html">
+    <meta property="og:image" content="https://thefirstspark.shop/shop/soul-map-orbit.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --void:#08080d; --panel:#101018; --spark:#fbbf24; --cyan:#22d3ee; --nebula:#8b5cf6; --ink:#e8e4d8; --mute:#9c978b; --bad:#f87171; --line:rgba(232,228,216,.10); }
+        body { background: var(--void); color: var(--ink); font-family: 'Space Mono','Courier New',monospace; min-height: 100vh; display: flex; flex-direction: column; }
+        a { color: inherit; }
+        :focus-visible { outline: 2px solid var(--spark); outline-offset: 3px; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 22px; border-bottom: 1px solid var(--line); background: rgba(8,8,13,.88); }
+        .nav-logo { font-family: 'Orbitron',sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .28em; text-decoration: none; }
+        .nav-links a { font-family: 'Orbitron',sans-serif; font-size: .55rem; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--mute); margin-left: 18px; }
+        .nav-links a:hover { color: var(--spark); }
+        main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 22px 70px; }
+        .card { width: 100%; max-width: 560px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 34px 30px 30px; }
+        .tag { font-family: 'Orbitron',sans-serif; font-size: .58rem; letter-spacing: .22em; text-transform: uppercase; color: var(--spark); margin-bottom: 14px; }
+        h1 { font-family: 'Orbitron',sans-serif; font-size: clamp(1.4rem,3.6vw,1.9rem); font-weight: 700; letter-spacing: .03em; line-height: 1.25; margin-bottom: 12px; }
+        .lede { color: var(--mute); font-size: .86rem; line-height: 1.7; margin-bottom: 22px; }
+        ul.what { list-style: none; margin: 0 0 24px; }
+        ul.what li { font-size: .78rem; color: var(--mute); line-height: 1.6; padding-left: 16px; position: relative; margin-bottom: 5px; }
+        ul.what li::before { content: '◆'; position: absolute; left: 0; top: 5px; font-size: .55rem; color: var(--spark); }
+        label { display: block; font-size: .7rem; letter-spacing: .06em; margin-bottom: 7px; }
+        label .opt { color: var(--mute); }
+        input { width: 100%; background: #0b0b12; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); font-family: inherit; font-size: .9rem; padding: 13px 14px; }
+        input:focus { border-color: var(--spark); outline: none; }
+        input.invalid { border-color: var(--bad); }
+        .field { margin-bottom: 14px; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
+        button.go { width: 100%; cursor: pointer; margin-top: 6px; font-family: 'Orbitron',sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #08080d; background: var(--spark); border: 0; border-radius: 6px; padding: 16px 18px; }
+        button.go:hover { background: #fcd34d; }
+        button.go[disabled] { opacity: .6; cursor: wait; }
+        .msg { font-size: .72rem; color: var(--mute); margin-top: 12px; min-height: 1em; line-height: 1.5; }
+        .msg.bad { color: var(--bad); }
+        .fine { font-size: .66rem; color: var(--mute); margin-top: 16px; line-height: 1.6; }
+        .fine a { color: var(--mute); }
+        /* success */
+        #done { display: none; text-align: center; }
+        #done.show { display: block; }
+        .mark { font-size: 2rem; color: var(--spark); margin-bottom: 12px; }
+        .doors { display: grid; gap: 10px; margin: 22px 0 8px; }
+        .door { display: block; text-decoration: none; text-align: left; background: #0b0b12; border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; transition: border-color .15s; }
+        .door:hover { border-color: var(--spark); }
+        .door b { display: block; font-family: 'Orbitron',sans-serif; font-size: .72rem; letter-spacing: .06em; margin-bottom: 4px; }
+        .door small { display: block; font-size: .72rem; color: var(--mute); line-height: 1.5; }
+        .door.primary { border-color: var(--spark); background: rgba(251,191,36,.06); }
+        footer { border-top: 1px solid var(--line); padding: 22px 0 40px; text-align: center; color: var(--mute); font-size: .72rem; }
+        footer a { color: var(--spark); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <nav>
+        <a href="/" class="nav-logo">THE FIRST SPARK</a>
+        <div class="nav-links"><a href="/ecosystem.html">Start here</a><a href="/shop.html">Shop</a></div>
+    </nav>
+
+    <main>
+        <div class="card">
+            <div id="gate">
+                <div class="tag">◆ Free membership</div>
+                <h1>Join the Sparkverse.</h1>
+                <p class="lede">One email. No account, no password, no card. Your seat opens the moment you send it.</p>
+                <ul class="what">
+                    <li><b style="color:var(--ink);font-weight:400">Sparked Access</b>, the free membership home: game manual, daily Press Start, free library</li>
+                    <li>The Discord, where people say hi with their Life Path</li>
+                    <li>One email when something ships. No schedule, no filler</li>
+                </ul>
+                <form id="f" novalidate>
+                    <div class="row">
+                        <div class="field">
+                            <label for="name">First name <span class="opt">· optional</span></label>
+                            <input type="text" id="name" autocomplete="given-name" maxlength="60" placeholder="Player One">
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" autocomplete="email" required maxlength="254" placeholder="you@example.com">
+                        </div>
+                    </div>
+                    <button type="submit" class="go" id="go">Enter the Sparkverse</button>
+                    <div class="msg" id="msg" role="status" aria-live="polite"></div>
+                </form>
+                <p class="fine">Already in? Enter the same email and the doors open again. <a href="/privacy-policy.html">Privacy</a>.</p>
+            </div>
+
+            <div id="done">
+                <div class="mark">✦</div>
+                <div class="tag">◆ You're in</div>
+                <h1>Your seat is open.</h1>
+                <p class="lede">Two doors. Bookmark the first one, it's your home. We also emailed both links to <strong id="done-email" style="color:var(--ink)"></strong>.</p>
+                <div class="doors">
+                    <a class="door primary" href="https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f" target="_blank" rel="noopener" id="door-home"><b>→ Open Sparked Access</b><small>Game manual, daily Press Start, free library. Your free membership home.</small></a>
+                    <a class="door" href="https://discord.gg/s9zajfnE7" target="_blank" rel="noopener" id="door-discord"><b>→ Join the Discord</b><small>Say hi with your Life Path. Don't know it yet? <span style="color:var(--cyan)">Weave your pattern free</span> first.</small></a>
+                    <a class="door" href="/soul-pattern-generator.html" id="door-pattern"><b>→ Weave your Soul Pattern</b><small>Name and birth date in, your pattern and three numbers out. Free, no account.</small></a>
+                </div>
+                <p class="fine">When you want the full practice, the <a href="/playerslounge/" style="color:var(--spark)">Players Lounge</a> is $11 a month. No rush.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer><a href="/">The First Spark</a> · Reality is programmable. Consciousness is the code.</footer>
+
+<script>
+(function () {
+    var API = 'https://links.thefirstspark.shop/api/subscribe';
+    var f = document.getElementById('f'), email = document.getElementById('email'), name = document.getElementById('name'), go = document.getElementById('go'), msg = document.getElementById('msg');
+    var params = new URLSearchParams(location.search);
+    var source = (params.get('src') || 'join-free').replace(/[^a-z0-9_-]/gi, '').slice(0, 40) || 'join-free';
+    function track(ev, p) { try { if (typeof gtag === 'function') gtag('event', ev, p || {}); else if (window.dataLayer) window.dataLayer.push(Object.assign({ event: ev }, p || {})); } catch (_) {} }
+    function done(em) {
+        document.getElementById('done-email').textContent = em;
+        document.getElementById('gate').style.display = 'none';
+        document.getElementById('done').classList.add('show');
+    }
+    try { var saved = localStorage.getItem('tfs-email'); if (saved) email.value = saved; } catch (_) {}
+    f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var em = email.value.trim().toLowerCase();
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(em)) { email.classList.add('invalid'); msg.textContent = 'Enter a valid email first.'; msg.className = 'msg bad'; email.focus(); return; }
+        email.classList.remove('invalid'); go.disabled = true; msg.textContent = 'Opening your seat…'; msg.className = 'msg';
+        fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: em, name: name.value.trim() || undefined, source: source, want_email: true }) })
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                if (!d || !d.ok) throw new Error((d && d.error) || 'failed');
+                try { localStorage.setItem('tfs-email', em); } catch (_) {}
+                track('email_capture', { source: source, status: d.status });
+                track('sign_up', { method: 'email', source: source });
+                done(em);
+            })
+            .catch(function () { msg.textContent = 'That did not go through. Try again in a minute, or email kate@thefirstspark.shop.'; msg.className = 'msg bad'; go.disabled = false; });
+    });
+})();
+</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
   if (document.getElementById('spark-lobby-cta')) return;
   if (sessionStorage.getItem('spark-lobby-cta-dismissed') === '1') return;
 
-  var LOBBY_URL = 'https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f';
+  var LOBBY_URL = 'https://thefirstspark.shop/join.html';
   var TOOLS_URL = 'https://thefirstspark.shop/free-tools.html';
 
   var style = document.createElement('style');

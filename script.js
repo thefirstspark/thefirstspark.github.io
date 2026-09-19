@@ -90,9 +90,9 @@ function toggleHelp() {
 // Signup function
 function signup(tier) {
     const whopLinks = {
-        'free': 'https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f',
-        'player': 'https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f',
-        'og': 'https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f'
+        'free': 'https://thefirstspark.shop/join.html',
+        'player': 'https://thefirstspark.shop/join.html',
+        'og': 'https://thefirstspark.shop/join.html'
     };
 
     window.location.href = whopLinks[tier];
