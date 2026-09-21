@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hub — your home in the Sparkverse · The First Spark</title>
+    <meta name="description" content="One page for everyone in the Sparkverse. What you have, how to open it, where to ask for help. No account needed to use this page.">
+    <link rel="canonical" href="https://thefirstspark.shop/hub.html">
+    <link rel="icon" href="/favicon.ico">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="The Hub — The First Spark">
+    <meta property="og:description" content="Bookmark this. It is the menu for the Sparkverse: free membership, Soul Maps, the Players Lounge, and how to get help.">
+    <meta property="og:url" content="https://thefirstspark.shop/hub.html">
+    <meta property="og:image" content="https://thefirstspark.shop/shop/soul-map-orbit.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-K4TKPMG9');</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --void: #08080d;
+            --panel: #101018;
+            --spark: #fbbf24;
+            --cyan: #22d3ee;
+            --nebula: #8b5cf6;
+            --ink: #e8e4d8;
+            --mute: #9c978b;
+            --line: rgba(232,228,216,.12);
+        }
+        html { scroll-behavior: smooth; }
+        body { background: var(--void); color: var(--ink); font-family: 'Space Mono','Courier New',monospace; font-size: 1.05rem; line-height: 1.65; }
+        a { color: inherit; }
+        :focus-visible { outline: 3px solid var(--spark); outline-offset: 3px; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 22px; border-bottom: 1px solid var(--line); background: rgba(8,8,13,.92); position: sticky; top: 0; z-index: 20; }
+        .nav-logo { font-family: 'Orbitron',sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .28em; text-decoration: none; }
+        .nav-links { display: flex; gap: 16px; flex-wrap: wrap; }
+        .nav-links a { font-family: 'Orbitron',sans-serif; font-size: .55rem; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--mute); }
+        .nav-links a:hover { color: var(--spark); }
+        .wrap { max-width: 760px; margin: 0 auto; padding: 36px 22px 80px; }
+        .tag { font-family: 'Orbitron',sans-serif; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--spark); margin-bottom: 12px; }
+        h1 { font-family: 'Orbitron',sans-serif; font-size: clamp(1.7rem,5vw,2.4rem); font-weight: 700; letter-spacing: .02em; line-height: 1.2; margin-bottom: 14px; }
+        h2 { font-family: 'Orbitron',sans-serif; font-size: 1.05rem; letter-spacing: .04em; margin: 0 0 10px; }
+        .lede { color: var(--mute); margin-bottom: 28px; max-width: 42em; }
+        .jump { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 40px; }
+        .jump a { display: inline-block; text-decoration: none; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; font-size: .85rem; min-height: 48px; line-height: 1.3; }
+        .jump a:hover { border-color: var(--spark); }
+        .jump a b { display: block; font-family: 'Orbitron',sans-serif; font-size: .62rem; letter-spacing: .08em; color: var(--spark); margin-bottom: 2px; }
+        section { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 26px 22px 24px; margin-bottom: 18px; }
+        section.primary { border-color: rgba(251,191,36,.45); background: rgba(251,191,36,.05); }
+        ol.steps { margin: 8px 0 0 0; padding: 0; list-style: none; }
+        ol.steps li { display: grid; grid-template-columns: 2.2rem 1fr; gap: 12px; margin-bottom: 16px; }
+        ol.steps .n { font-family: 'Orbitron',sans-serif; color: var(--spark); font-size: 1.2rem; }
+        .btn { display: inline-block; text-decoration: none; font-family: 'Orbitron',sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #08080d; background: var(--spark); border-radius: 6px; padding: 16px 20px; margin: 8px 8px 0 0; min-height: 48px; }
+        .btn:hover { background: #fcd34d; }
+        .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+        .btn.ghost:hover { border-color: var(--spark); color: var(--spark); }
+        .got { margin: 12px 0 0; }
+        .got li { margin: 0 0 8px 1.1em; color: var(--mute); }
+        .got b { color: var(--ink); font-weight: 400; }
+        .note { font-size: .88rem; color: var(--mute); margin-top: 14px; }
+        .help { font-size: 1.05rem; }
+        .help a { color: var(--spark); }
+        footer { text-align: center; color: var(--mute); font-size: .8rem; padding: 8px 0 40px; }
+        footer a { color: var(--spark); text-decoration: none; }
+        @media (max-width: 520px) {
+            body { font-size: 1rem; }
+            .jump a { flex: 1 1 100%; }
+            nav { flex-direction: column; align-items: flex-start; gap: 10px; }
+        }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    </style>
+</head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4TKPMG9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <nav>
+        <a href="/" class="nav-logo">THE FIRST SPARK</a>
+        <div class="nav-links">
+            <a href="#start">Start</a>
+            <a href="#bought">Purchases</a>
+            <a href="#talk">Talk</a>
+            <a href="#library">Library</a>
+            <a href="#help">Help</a>
+        </div>
+    </nav>
+
+    <div class="wrap">
+        <div class="tag">◆ Bookmark this page</div>
+        <h1>You are home.</h1>
+        <p class="lede">This is the Hub. One page. No password. Use it on a phone, a tablet, or a computer. If you get lost anywhere else, come back here.</p>
+
+        <div class="jump" aria-label="Jump to your section">
+            <a href="#start"><b>Free</b>I just joined</a>
+            <a href="#map"><b>Soul Map · $22</b>I bought a reading</a>
+            <a href="#lounge"><b>Lounge · $11/mo</b>I joined the Players Lounge</a>
+            <a href="#shop"><b>Shop</b>I bought something else</a>
+        </div>
+
+        <section id="start" class="primary">
+            <div class="tag">Start here</div>
+            <h2>Three steps. Then you are in.</h2>
+            <ol class="steps">
+                <li><span class="n">1</span><div><b>Bookmark this page.</b> In your browser: the star, or the menu item that says Bookmark. This is the menu. You do not need an account to open it.</div></li>
+                <li><span class="n">2</span><div><b>See your pattern, if you want.</b> Type your full birth name and birth date. It draws itself. Free. No account. <a href="/soul-pattern-generator.html" style="color:var(--cyan)">Open the pattern tool</a>.</div></li>
+                <li><span class="n">3</span><div><b>Say hello, if you want.</b> The Discord is a group chat. You may need a free Discord account the first time. That is a different website. It is optional. <a href="#talk" style="color:var(--cyan)">How to join the chat</a>.</div></li>
+            </ol>
+            <p class="note">Free membership is already yours if you gave an email on the join page. There is nothing else to unlock.</p>
+        </section>
+
+        <section id="bought">
+            <div class="tag">If you paid</div>
+            <h2>What you bought, and how to open it</h2>
+            <p class="lede" style="margin-bottom:18px">Every purchase lands in the email you used at checkout, from <a href="mailto:kate@thefirstspark.shop" style="color:var(--spark)">kate@thefirstspark.shop</a>. Check spam if you do not see it in a few minutes.</p>
+
+            <div id="map">
+                <h2>Soul Map · $22 once</h2>
+                <p>You bought a private page written about you. It does not expire. It is not an app you log into. It is a web page with your name on it, yours to keep.</p>
+                <ul class="got">
+                    <li><b>What you should see:</b> the pattern you keep repeating, the work that fits you, what to focus on now.</li>
+                    <li><b>How to open it:</b> the email we sent has the link. Click it. Bookmark that page too.</li>
+                    <li><b>Lost the email?</b> Open the archive and look for your initials. Maps look like KJP51988 — initials plus a date code.</li>
+                </ul>
+                <a class="btn" href="https://soul-maps.thefirstspark.shop/archive.html" target="_blank" rel="noopener">Find my map in the archive</a>
+                <a class="btn ghost" href="/what-is-a-soul-map.html">What is inside a Soul Map</a>
+                <a class="btn ghost" href="https://soul-maps.thefirstspark.shop/KJP51988.html" target="_blank" rel="noopener">See a real one</a>
+            </div>
+
+            <div id="lounge" style="margin-top:28px; padding-top:22px; border-top:1px solid var(--line);">
+                <h2>Players Lounge · $11 a month</h2>
+                <p>You bought a private room. After PayPal, we email the door. That email link is the Lounge. Bookmark it.</p>
+                <ul class="got">
+                    <li><b>What you get:</b> the full practice, daily Press Start, a direct line to Kate. New tools land here first.</li>
+                    <li><b>How to open it:</b> inbox, subject about the Players Lounge. Click the link we sent. You do not create a password on this site.</li>
+                    <li><b>How to cancel:</b> in your PayPal account, not on this website. You can stop any time.</li>
+                </ul>
+                <a class="btn" href="/playerslounge/">Lounge page · billing</a>
+                <p class="note">If you paid and have no email after 15 minutes, write Kate with the email you used at PayPal.</p>
+            </div>
+
+            <div id="shop" style="margin-top:28px; padding-top:22px; border-top:1px solid var(--line);">
+                <h2>Anything else from the shop</h2>
+                <p>Books, the Pattern Key, Sigilcraft, the 7-Day Protocol, Karma Debugger. These are files or pages, delivered to your email when payment clears.</p>
+                <ul class="got">
+                    <li><b>Keep the receipt email.</b> That is your copy.</li>
+                    <li><b>Frequency Match</b> is free to try. Pro is optional, $4.99 a month.</li>
+                </ul>
+                <a class="btn ghost" href="/shop.html">Open the shop</a>
+                <a class="btn ghost" href="https://frequency.thefirstspark.shop" target="_blank" rel="noopener">Try Frequency Match</a>
+            </div>
+        </section>
+
+        <section id="talk">
+            <div class="tag">Talk to people</div>
+            <h2>The Discord (optional)</h2>
+            <p>This is a group chat for the Sparkverse. You do not need it to use your Soul Map, your tools, or this Hub.</p>
+            <ol class="steps">
+                <li><span class="n">1</span><div>Click the yellow button below. A new tab opens.</div></li>
+                <li><span class="n">2</span><div>If you do not have Discord, it will ask you to make a free account. That is normal. Pick any name you like.</div></li>
+                <li><span class="n">3</span><div>When you are in, say hi. If you know your Life Path (a number from your birth date), you can mention it. If you do not, skip it.</div></li>
+            </ol>
+            <a class="btn" href="https://discord.gg/sAysXgrqcX" target="_blank" rel="noopener">Open the Discord</a>
+            <p class="note">If the invite says it expired, email Kate. Do not hunt for a new link on Google.</p>
+        </section>
+
+        <section id="library">
+            <div class="tag">The library</div>
+            <h2>Read and play, no purchase required</h2>
+            <ul class="got">
+                <li><b>Free tools</b> — pattern, numbers, oracle, sigils. <a href="/free-tools.html" style="color:var(--cyan)">Open free tools</a></li>
+                <li><b>How the system works</b> — the Selector Model. <a href="/selector-model-ip.html" style="color:var(--cyan)">Read the engine</a></li>
+                <li><b>Stories</b> — Dark Shadows is free to read. <a href="/dark-shadows/" style="color:var(--cyan)">Start chapter one</a></li>
+                <li><b>The notebook</b> — game manual, daily Press Start, extra pages. This opens a different site called Notion. You can read it without signing up. If it asks you to log in, close it and stay on this Hub. <a href="https://app.notion.com/p/thefirstspark/Sparked-Access-home-cf65e039120f827cbf4f810fb6da848f" target="_blank" rel="noopener" style="color:var(--cyan)">Open the notebook</a></li>
+            </ul>
+        </section>
+
+        <section id="help">
+            <div class="tag">Help</div>
+            <h2>Stuck? Write Kate.</h2>
+            <p class="help">Email <a href="mailto:kate@thefirstspark.shop">kate@thefirstspark.shop</a>. Say what you bought (or that you joined free) and the email you used. She will send the right link.</p>
+            <a class="btn" href="mailto:kate@thefirstspark.shop">Email Kate</a>
+            <a class="btn ghost" href="/join.html">Join free · one email</a>
+        </section>
+    </div>
+
+    <footer><a href="/">The First Spark</a> · Reality is programmable. Consciousness is the code.</footer>
+</body>
+</html>
