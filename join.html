@@ -108,11 +108,11 @@
                 <div class="mark">✦</div>
                 <div class="tag">◆ You're in</div>
                 <h1>Your seat is open.</h1>
-                <p class="lede">Bookmark the Hub, it's your home. We emailed the doors to <strong id="done-email" style="color:var(--ink)"></strong>.</p>
+                <p class="lede">Your planets are open. We emailed the doors to <strong id="done-email" style="color:var(--ink)"></strong>.</p>
                 <div class="doors">
-                    <a class="door primary" href="/hub.html" id="door-home"><b>→ Open the Hub</b><small>One page: what you have, how to open it, where to get help. Bookmark this.</small></a>
+                    <a class="door primary" href="https://sparkverse.thefirstspark.shop/" id="door-home"><b>→ Enter the Sparkverse</b><small>The world map. Every planet is a room. Same email to sign in.</small></a>
+                    <a class="door" href="/hub.html" id="door-hub"><b>→ Open the Hub</b><small>What you bought, how to open it, where to get help.</small></a>
                     <a class="door" href="https://discord.gg/sAysXgrqcX" target="_blank" rel="noopener" id="door-discord"><b>→ Join the Discord</b><small>Say hi with your Life Path. Don't know it yet? <span style="color:var(--cyan)">Weave your pattern free</span> first.</small></a>
-                    <a class="door" href="/soul-pattern-generator.html" id="door-pattern"><b>→ Weave your Soul Pattern</b><small>Name and birth date in, your pattern and three numbers out. Free, no account.</small></a>
                 </div>
                 <p class="fine">When you want the full practice, the <a href="/playerslounge/" style="color:var(--spark)">Players Lounge</a> is $11 a month. No rush.</p>
             </div>
@@ -144,6 +144,7 @@
             .then(function (d) {
                 if (!d || !d.ok) throw new Error((d && d.error) || 'failed');
                 try { localStorage.setItem('tfs-email', em); } catch (_) {}
+                try { document.cookie = 'tfs-email=' + encodeURIComponent(em) + '; domain=.thefirstspark.shop; path=/; max-age=31536000; secure; samesite=lax'; } catch (_) {}
                 track('email_capture', { source: source, status: d.status });
                 track('sign_up', { method: 'email', source: source });
                 done(em);
