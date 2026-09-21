@@ -91,8 +91,8 @@ function toggleHelp() {
 function signup(tier) {
     const whopLinks = {
         'free': 'https://thefirstspark.shop/join.html',
-        'player': 'https://thefirstspark.shop/join.html',
-        'og': 'https://thefirstspark.shop/join.html'
+        'player': 'https://thefirstspark.shop/playerslounge/',
+        'og': 'https://thefirstspark.shop/shop.html'
     };
 
     window.location.href = whopLinks[tier];
