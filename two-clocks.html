@@ -49,6 +49,28 @@
         h1 span { color:var(--spark); }
         .lede { font-size:15px; line-height:1.7; color:var(--dim); max-width:680px; margin-bottom:36px; }
         .lede strong { color:var(--white); font-weight:400; }
+        .figure { margin:0 0 38px; }
+        .tc-wrap { display:grid; grid-template-columns:minmax(0,420px) minmax(0,1fr); gap:34px; align-items:center; }
+        @media (max-width:860px){ .tc-wrap { grid-template-columns:1fr; gap:22px; } }
+        .tc-svg { width:100%; display:block; }
+        .tc-svg [stroke] { vector-effect:non-scaling-stroke; }
+        .tc-bands circle { fill:none; stroke:rgba(139,92,246,.22); }
+        .tc-spokes line { stroke:rgba(255,255,255,.13); }
+        .tc-num text { fill:rgba(255,255,255,.34); font-family:'Space Mono',monospace; font-size:13px; text-anchor:middle; }
+        .tc-rose circle { fill:none; stroke:rgba(34,211,238,.26); }
+        .tc-weave path { fill:none; stroke:rgba(255,255,255,.14); }
+        .tc-gon path { fill:none; stroke:rgba(255,255,255,.2); }
+        .tc-star path { fill:none; stroke:rgba(255,255,255,.55); }
+        .tc-ring circle { fill:none; stroke:rgba(251,191,36,.5); }
+        .tc-ring circle + circle { stroke:rgba(251,191,36,.2); }
+        .tc-mark circle { fill:var(--void); stroke:rgba(34,211,238,.5); }
+        .tc-mark text { fill:var(--cyan); font-family:'Space Mono',monospace; font-size:13px; text-anchor:middle; }
+        .tc-legend { counter-reset:tc; list-style:none; }
+        .tc-legend li { counter-increment:tc; position:relative; padding-left:36px; margin-bottom:15px; font-size:13px; line-height:1.62; color:var(--dim); }
+        .tc-legend li:last-child { margin-bottom:0; }
+        .tc-legend li::before { content:counter(tc); position:absolute; left:0; top:0; width:23px; height:23px; border:1px solid rgba(34,211,238,.4); border-radius:50%; color:var(--cyan); font-size:11px; display:grid; place-items:center; }
+        .tc-legend b { color:var(--white); font-weight:400; }
+        .tc-cap { margin-top:20px; font-size:12px; line-height:1.6; letter-spacing:.04em; color:rgba(255,255,255,.44); }
         .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px; }
         @media (max-width:720px){ .grid2 { grid-template-columns:1fr; } }
         .card { border:1px solid var(--dimmer); border-radius:12px; padding:22px; background:linear-gradient(160deg, rgba(255,255,255,.04), rgba(255,255,255,.01)); }
@@ -91,6 +113,40 @@
         <span class="kicker">Selector protocol · public</span>
         <h1>Two clocks.<br><span>One body.</span></h1>
         <p class="lede"><strong>The birth date cannot be renamed.</strong> That is the inner clock — Life Path, day number, the line you walk this year. <strong>The name you answer to can slip.</strong> That is the outer clock — Expression of the worn name, the mailbox. Run every name span separately. A name change retunes the right column only.</p>
+        <figure class="figure">
+            <div class="tc-wrap">
+                <svg class="tc-svg" viewBox="0 0 720 720" role="img" aria-labelledby="tcT tcD">
+                <title id="tcT">The Two Clocks cutaway</title>
+                <desc id="tcD">Concentric diagram: a white-hot centre for the inner clock set by the birth date, a twelve-fold woven star for how it facets, a gold ring for the outer clock of the worn name, twelve spokes for the cosmic line, and faint outer bands for Personal Year weather and the pair field.</desc>
+                <defs>
+                <radialGradient id="tcCore"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset=".16" stop-color="#fff" stop-opacity=".92"/><stop offset=".34" stop-color="#fbbf24" stop-opacity=".62"/><stop offset=".72" stop-color="#fbbf24" stop-opacity=".12"/><stop offset="1" stop-color="#fbbf24" stop-opacity="0"/></radialGradient>
+                <radialGradient id="tcHaze"><stop offset=".62" stop-color="#8b5cf6" stop-opacity="0"/><stop offset=".88" stop-color="#8b5cf6" stop-opacity=".09"/><stop offset="1" stop-color="#22d3ee" stop-opacity=".05"/></radialGradient>
+                </defs>
+                <circle cx="360" cy="360" r="316" fill="url(#tcHaze)"/>
+                <g class="tc-bands"><circle cx="360" cy="360" r="242"/><circle cx="360" cy="360" r="264"/><circle cx="360" cy="360" r="286"/><circle cx="360" cy="360" r="306"/></g>
+                <g class="tc-spokes"><line x1="360" y1="256" x2="360" y2="60"/><line x1="412" y1="269.93" x2="510" y2="100.19"/><line x1="450.07" y1="308" x2="619.81" y2="210"/><line x1="464" y1="360" x2="660" y2="360"/><line x1="450.07" y1="412" x2="619.81" y2="510"/><line x1="412" y1="450.07" x2="510" y2="619.81"/><line x1="360" y1="464" x2="360" y2="660"/><line x1="308" y1="450.07" x2="210" y2="619.81"/><line x1="269.93" y1="412" x2="100.19" y2="510"/><line x1="256" y1="360" x2="60" y2="360"/><line x1="269.93" y1="308" x2="100.19" y2="210"/><line x1="308" y1="269.93" x2="210" y2="100.19"/></g>
+                <g class="tc-num"><text x="522" y="82.91">1</text><text x="640.59" y="201.5">2</text><text x="684" y="363.5">3</text><text x="640.59" y="525.5">4</text><text x="522" y="644.09">5</text><text x="360" y="687.5">6</text><text x="198" y="644.09">7</text><text x="79.41" y="525.5">8</text><text x="36" y="363.5">9</text><text x="79.41" y="201.5">10</text><text x="198" y="82.91">11</text><text x="360" y="39.5">12</text></g>
+                <g class="tc-rose"><circle cx="360" cy="276" r="84"/><circle cx="402" cy="287.25" r="84"/><circle cx="432.75" cy="318" r="84"/><circle cx="444" cy="360" r="84"/><circle cx="432.75" cy="402" r="84"/><circle cx="402" cy="432.75" r="84"/><circle cx="360" cy="444" r="84"/><circle cx="318" cy="432.75" r="84"/><circle cx="287.25" cy="402" r="84"/><circle cx="276" cy="360" r="84"/><circle cx="287.25" cy="318" r="84"/><circle cx="318" cy="287.25" r="84"/></g>
+                <g class="tc-weave"><path d="M360,184L536,360L360,536L184,360Z M448,207.58L512.42,448L272,512.42L207.58,272Z M512.42,272L448,512.42L207.58,448L272,207.58Z"/></g>
+                <g class="tc-gon"><path d="M360,184L448,207.58L512.42,272L536,360L512.42,448L448,512.42L360,536L272,512.42L207.58,448L184,360L207.58,272L272,207.58Z"/></g>
+                <g class="tc-star"><path d="M360,184L448,512.42L207.58,272L536,360L207.58,448L448,207.58L360,536L272,207.58L512.42,448L184,360L512.42,272L272,512.42Z"/></g>
+                <g class="tc-ring"><circle cx="360" cy="360" r="196"/><circle cx="360" cy="360" r="203"/></g>
+                <circle cx="360" cy="360" r="70" fill="url(#tcCore)"/>
+                <circle cx="360" cy="360" r="2.6" fill="#fff"/>
+                <g class="tc-mark"><circle cx="303.89" cy="305.82" r="12"/><text x="303.89" y="309.82">1</text></g><g class="tc-mark"><circle cx="302.14" cy="241.36" r="12"/><text x="302.14" y="245.36">2</text></g><g class="tc-mark"><circle cx="373.67" cy="164.48" r="12"/><text x="373.67" y="168.48">3</text></g><g class="tc-mark"><circle cx="500.92" cy="151.08" r="12"/><text x="500.92" y="155.08">4</text></g><g class="tc-mark"><circle cx="628.42" cy="217.28" r="12"/><text x="628.42" y="221.28">5</text></g>
+                </svg>
+                <div>
+                    <ol class="tc-legend">
+                        <li><b>The centre.</b> The spark that does not take a new name — birth date, Life Path, the lesson the body signed. Never rewritten.</li>
+                        <li><b>The woven star.</b> How that spark facets: day number, the compounds kept whole (11, 13, 14, 16, 19), the instrument in the hand. Same fire, many edges.</li>
+                        <li><b>The ring.</b> The worn address — Expression of the name you actually answer to. The mailbox. Move this ring and delivery changes; the centre does not.</li>
+                        <li><b>The twelve spokes.</b> The cosmic line. Age read on a twelve-face — which room of the year you are standing in.</li>
+                        <li><b>The outer bands.</b> Personal Year weather, and the pair-field. Heat in the rooms. Colour around the clock, not a new clock.</li>
+                    </ol>
+                    <figcaption class="tc-cap">This is the picture of the law, not of a life. The engine is the rings — the tenant is never printed on them.</figcaption>
+                </div>
+            </div>
+        </figure>
         <div class="grid2">
             <div class="card">
                 <h2>Inner clock · date</h2>
