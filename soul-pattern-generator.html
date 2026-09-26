@@ -403,6 +403,15 @@ footer p+p{margin-top:6px}
 const SOUL_MAP_URL="map.html";
 const WATERMARK="THEFIRSTSPARK.SHOP · @THEREALFIRSTSPARK";
 const GATE_ENDPOINT="https://links.thefirstspark.shop/api/subscribe";
+/* One anonymous "generator_run" per page load, on the first rendered pattern (live typing re-renders, so never per draw). No PII. */
+const TRACK_ENDPOINT="https://links.thefirstspark.shop/api/track";let runTracked=false;
+function trackRun(){
+  if(runTracked)return;runTracked=true;
+  let src="";try{src=new URLSearchParams(location.search).get("utm_source")||"";}catch(e){}
+  const body=JSON.stringify({event:"generator_run",src:src});
+  try{if(navigator.sendBeacon&&navigator.sendBeacon(TRACK_ENDPOINT,new Blob([body],{type:"text/plain"})))return;}catch(e){}
+  try{fetch(TRACK_ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain"},body:body,keepalive:true}).catch(function(){});}catch(e){}
+}
 const UNLOCK_CODES=["SPARK-1111","SPARK-FIRSTLIGHT"];
 let hdUnlocked=false,gateDone=false,pendingAction=null;
 try{hdUnlocked=localStorage.getItem("tfs-hd")==="1";gateDone=localStorage.getItem("tfs-gate")==="1";}catch(e){}
@@ -708,6 +717,7 @@ function generate(quiet){
   document.getElementById("pal-name").textContent="Your light: "+PALETTES[currentSoul.tier].name+(currentSoul.master?" · Master "+currentSoul.radiant+" · Moonsilver":"")+" · Road "+currentSoul.lp+" met by Vessel "+currentSoul.ex+" · Radiant "+currentSoul.radiant;
   frameworkReadout(currentSoul);
   draw(currentSoul);
+  trackRun();
   if(!quiet&&window.innerWidth<860)document.getElementById("frame").scrollIntoView({behavior:"smooth",block:"start"});
 }
 function reDraw(){if(currentSoul)draw(currentSoul);}
