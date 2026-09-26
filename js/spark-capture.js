@@ -7,11 +7,17 @@
  * Posts to the list API (Supabase tfs_subscribers via bio-link). Remembers the email in
  * localStorage `tfs-email` (same key the homepage footer + generator gate use) so a
  * visitor who already signed up sees a quiet "you're on the list" instead of a form.
+ *
+ * Slide-in: every page that loads this script also gets a small bottom-right card after the
+ * visitor scrolls past ~50%. Skipped if already subscribed, dismissed in the last 14 days,
+ * an inline block is on screen, or on checkout paths. Opt out: <body data-spark-slidein="off">.
  */
 (function () {
   var API = 'https://links.thefirstspark.shop/api/subscribe';
   var nodes = document.querySelectorAll('[data-spark-capture]');
-  if (!nodes.length) return;
+  var NO_SLIDE = /^\/(map|soul-map-checkout|join|checkout[^/]*)(\.html)?$/;
+  var slideOn = !(document.body && document.body.getAttribute('data-spark-slidein') === 'off') && !NO_SLIDE.test(location.pathname);
+  if (!nodes.length && !slideOn) return;
 
   var css = [
     '.sc{--sc-spark:var(--spark,#fbbf24);--sc-ink:var(--ink,#e8e4d8);--sc-mute:var(--mute,#9c978b);--sc-line:rgba(232,228,216,.12);',
@@ -30,7 +36,14 @@
     '.sc-msg{font-size:.72rem;color:var(--sc-mute);margin:10px 0 0;min-height:1em;line-height:1.5}.sc-msg.ok{color:var(--sc-spark)}.sc-msg.bad{color:#f87171}',
     '.sc-done{font-size:.78rem;color:var(--sc-mute)}.sc-done b{color:var(--sc-spark);font-weight:400}.sc-done a{color:var(--sc-mute);text-decoration:underline;cursor:pointer;margin-left:6px}',
     '.sc.bar{max-width:none;background:transparent;border:0;border-top:1px solid var(--sc-line);border-radius:0;padding:18px 0 0;margin:24px 0 0}',
-    '.sc.bar .sc-copy{margin-bottom:10px}'
+    '.sc.bar .sc-copy{margin-bottom:10px}',
+    '.sc-slide{position:fixed;right:18px;bottom:18px;z-index:9990;width:340px;max-width:calc(100vw - 24px);margin:0;background:#0d0d15;',
+    'box-shadow:0 18px 50px rgba(0,0,0,.55);transform:translateY(24px);opacity:0;transition:transform .35s ease,opacity .35s ease;padding-right:36px}',
+    '.sc-slide.in{transform:none;opacity:1}',
+    '.sc-x{position:absolute;top:8px;right:8px;width:30px;height:30px;border:0;background:transparent;color:var(--sc-mute);font-size:1.1rem;line-height:1;cursor:pointer;border-radius:6px}',
+    '.sc-x:hover{color:var(--sc-ink);background:rgba(255,255,255,.06)}',
+    '@media (max-width:560px){.sc-slide{right:12px;left:12px;bottom:12px;width:auto;max-width:none}}',
+    '@media (prefers-reduced-motion:reduce){.sc-slide{transition:none}}'
   ].join('');
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
 
@@ -44,7 +57,7 @@
   function remember(e) { try { localStorage.setItem('tfs-email', e); } catch (_) {} }
   function forget() { try { localStorage.removeItem('tfs-email'); } catch (_) {} }
 
-  nodes.forEach(function (el, i) {
+  function mount(el, i) {
     var source = el.getAttribute('data-source') || (location.pathname.replace(/^\/|\.html$/g, '') || 'home');
     var label = el.getAttribute('data-label') || 'The Drop';
     var copy = el.getAttribute('data-copy') || 'One email when something ships. A new tool, a chapter, a map spotlight. No schedule, no filler.';
@@ -90,5 +103,47 @@
 
     var have = saved();
     if (have && /@/.test(have)) renderDone(have); else renderForm();
-  });
+  }
+  nodes.forEach(mount);
+
+  if (!slideOn || /@/.test(saved())) return;
+  var DISMISS_KEY = 'tfs-slidein-dismissed', COOLDOWN = 14 * 864e5;
+  try { if (Date.now() - (+localStorage.getItem(DISMISS_KEY) || 0) < COOLDOWN) return; } catch (_) {}
+
+  function inlineVisible() {
+    for (var k = 0; k < nodes.length; k++) {
+      var r = nodes[k].getBoundingClientRect();
+      if (r.bottom > 0 && r.top < innerHeight) return true;
+    }
+    return false;
+  }
+  function onScroll() {
+    var doc = document.documentElement, max = doc.scrollHeight - innerHeight;
+    if (max < 400 || scrollY / max < 0.5 || inlineVisible()) return;
+    removeEventListener('scroll', onScroll);
+    show();
+  }
+  function show() {
+    var page = location.pathname.replace(/^\/|\.html$/g, '') || 'home';
+    var box = document.createElement('div');
+    box.setAttribute('data-source', 'slidein:' + page);
+    box.setAttribute('data-copy', 'Get one email when something new ships. A tool, a chapter, a map spotlight. That’s it.');
+    box.className = 'sc-slide';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-label', 'Join the email list');
+    document.body.appendChild(box);
+    mount(box, 'slide');
+    var x = document.createElement('button');
+    x.className = 'sc-x'; x.type = 'button'; x.setAttribute('aria-label', 'Close'); x.innerHTML = '&times;';
+    x.addEventListener('click', function () {
+      try { localStorage.setItem(DISMISS_KEY, String(Date.now())); } catch (_) {}
+      track('email_slidein_dismiss', { source: 'slidein:' + page });
+      box.classList.remove('in');
+      setTimeout(function () { box.remove(); }, 400);
+    });
+    box.appendChild(x);
+    void box.offsetWidth; box.classList.add('in');
+    track('email_slidein_show', { source: 'slidein:' + page });
+  }
+  addEventListener('scroll', onScroll, { passive: true });
 })();
